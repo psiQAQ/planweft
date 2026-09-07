@@ -28,6 +28,7 @@
 | R-17 [MADR：用 Markdown 记录重要决定](https://adr.github.io/madr/) | Oliver Kopp、Olaf Zimmermann 等 / MADR | [固定版本 About MADR 正文与完整模板中文译文；网站导航和徽章不复制](madr.md) | MIT OR CC0-1.0；本译文选择 CC0-1.0，保留出处 | 已收录；本次补充 |
 | R-18 [GitHub：记录可复现的问题](https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/quickstart) | GitHub | [页面正文完整中文译文；截图改为文字说明](github-reproduction.md) | CC BY 4.0；github/docs 文档许可 | 已收录；本次补充 |
 | R-19 [Agent Skills 规范：渐进加载的文件结构](https://agentskills.io/specification) | Agent Skills maintainers | [规范页面正文完整中文译文；保留代码示例](agent-skills-spec.md) | CC BY 4.0；agentskills/docs 目录独立许可，代码另计 | 已收录；会话资料 |
+| R-20 [Codex 非交互运行](https://learn.chatgpt.com/docs/non-interactive-mode) | OpenAI | [中文要点摘要](codex-non-interactive.md) | 未确认全文翻译授权；访问 2026-09-07 | 已收录；容器交接实验 |
 
 ## 项目：固定版本参考
 
