@@ -1,0 +1,36 @@
+[submodule ".submodule/OthmanAdi/planning-with-files"]
+	path = .submodule/OthmanAdi/planning-with-files
+	url = https://github.com/OthmanAdi/planning-with-files.git
+[submodule ".submodule/rtoma/agent-markdown-memory-bank-protocol"]
+	path = .submodule/rtoma/agent-markdown-memory-bank-protocol
+	url = https://github.com/rtoma/agent-markdown-memory-bank-protocol.git
+[submodule ".submodule/Fission-AI/OpenSpec"]
+	path = .submodule/Fission-AI/OpenSpec
+	url = https://github.com/Fission-AI/OpenSpec.git
+[submodule ".submodule/obra/superpowers"]
+	path = .submodule/obra/superpowers
+	url = https://github.com/obra/superpowers.git
+[submodule ".submodule/vanzan01/cursor-memory-bank"]
+	path = .submodule/vanzan01/cursor-memory-bank
+	url = https://github.com/vanzan01/cursor-memory-bank.git
+[submodule ".submodule/anthropics/skills"]
+	path = .submodule/anthropics/skills
+	url = https://github.com/anthropics/skills.git
+[submodule ".submodule/github/spec-kit"]
+	path = .submodule/github/spec-kit
+	url = https://github.com/github/spec-kit.git
+[submodule ".submodule/google-labs-code/design.md"]
+	path = .submodule/google-labs-code/design.md
+	url = https://github.com/google-labs-code/design.md.git
+[submodule ".submodule/google-labs-code/stitch-skills"]
+	path = .submodule/google-labs-code/stitch-skills
+	url = https://github.com/google-labs-code/stitch-skills.git
+[submodule ".submodule/dyoshikawa/rulesync"]
+	path = .submodule/dyoshikawa/rulesync
+	url = https://github.com/dyoshikawa/rulesync.git
+[submodule ".submodule/earendil-works/pi"]
+	path = .submodule/earendil-works/pi
+	url = https://github.com/earendil-works/pi.git
+[submodule ".submodule/adr/madr"]
+	path = .submodule/adr/madr
+	url = https://github.com/adr/madr.git
