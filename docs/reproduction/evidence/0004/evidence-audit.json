@@ -1,0 +1,7 @@
+{
+  "credential_pattern_findings": [],
+  "scope": "limited pattern scan; raw files never include an intentional auth copy",
+  "trial_model_retries": 0,
+  "trial_manual_interventions": 0,
+  "acceptance_fixture_corrections": 1
+}

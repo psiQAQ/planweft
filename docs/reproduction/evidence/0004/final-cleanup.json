@@ -1,0 +1,11 @@
+{
+  "archived_raw_files_verified": 146,
+  "temporary_review_and_raw_output_removed": true,
+  "temporary_validation_files_removed": true,
+  "raw_archive_retained": true,
+  "remaining_labeled_containers": {
+    "paired-1ab23f3f2f09": [],
+    "paired-final-20260908": []
+  },
+  "fixed_image_preserved": true
+}

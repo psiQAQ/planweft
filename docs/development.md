@@ -2,7 +2,7 @@
 
 ## 开始和接续工作
 
-先读 [规格](specs/0001-document-management.md) 与 [当前计划](plans/0003-project-docs-plugin.md)。按任务查 [资料索引](reference/README.md)，无需逐次通读所有文章和子模块。项目状态以计划为入口；规格描述目标行为，ADR 记录重要决定，reproduction 记录已观察到的结果。
+先读 [规格](specs/0001-document-management.md) 与 [当前计划](plans/0004-paired-maintenance-trial.md)。按任务查 [资料索引](reference/README.md)，无需逐次通读所有文章和子模块。项目状态以计划为入口；规格描述目标行为，ADR 记录重要决定，reproduction 记录已观察到的结果。
 
 ## 设计、实施、审查
 

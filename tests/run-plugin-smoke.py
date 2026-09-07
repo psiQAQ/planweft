@@ -51,14 +51,33 @@ def write_files(work, files):
         p.write_text(data, encoding='utf-8')
 
 
-def main():
+def positive_int(value):
+    try:
+        result = int(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError('must be a positive integer') from exc
+    if result <= 0:
+        raise argparse.ArgumentTypeError('must be a positive integer')
+    return result
+
+
+def parse_args(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--model', required=True)
     parser.add_argument('--image', default='agent-memory-lab/codex:local')
-    parser.add_argument('--cases', nargs='+', default=list(CASES))
-    parser.add_argument('--timeout', type=int, default=360)
-    args = parser.parse_args()
+    parser.add_argument('--cases', nargs='+', default=list(CASES),
+                        choices=[*CASES, 'repo-copy'])
+    parser.add_argument('--timeout', type=positive_int, default=360)
+    args = parser.parse_args(argv)
+    duplicates = sorted({name for name in args.cases if args.cases.count(name) > 1})
+    if duplicates:
+        parser.error('--cases contains duplicate scenario name(s): ' + ', '.join(duplicates))
+    return args
+
+
+def main(argv=None):
+    args = parse_args(argv)
     # Refuse overwrite so reruns cannot erase earlier observations.
     args.output.mkdir(parents=True, exist_ok=False)
     before_containers = set(run(['docker', 'ps', '-aq']).stdout.split())

@@ -1,0 +1,154 @@
+[
+  {
+    "sample": "edaf048d",
+    "arm": "A",
+    "implementation": {
+      "role": "implementation",
+      "timeout_limit": 900,
+      "exit_code": 0,
+      "wall_seconds": 205.154,
+      "usage": [
+        {
+          "input_tokens": 715152,
+          "cached_input_tokens": 653568,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 9872,
+          "reasoning_output_tokens": 4018
+        }
+      ]
+    },
+    "reader": {
+      "role": "reader",
+      "timeout_limit": 300,
+      "exit_code": 0,
+      "wall_seconds": 57.452,
+      "usage": [
+        {
+          "input_tokens": 147351,
+          "cached_input_tokens": 111360,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2089,
+          "reasoning_output_tokens": 839
+        }
+      ]
+    },
+    "plugin_unchanged": true,
+    "fixture_preserved": true,
+    "reader_source_unchanged": true,
+    "independent_contract_passed": true
+  },
+  {
+    "sample": "08a618d4",
+    "arm": "B",
+    "implementation": {
+      "role": "implementation",
+      "timeout_limit": 900,
+      "exit_code": 0,
+      "wall_seconds": 169.874,
+      "usage": [
+        {
+          "input_tokens": 577807,
+          "cached_input_tokens": 527104,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 7317,
+          "reasoning_output_tokens": 2565
+        }
+      ]
+    },
+    "reader": {
+      "role": "reader",
+      "timeout_limit": 300,
+      "exit_code": 0,
+      "wall_seconds": 62.067,
+      "usage": [
+        {
+          "input_tokens": 132890,
+          "cached_input_tokens": 98048,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2318,
+          "reasoning_output_tokens": 855
+        }
+      ]
+    },
+    "plugin_unchanged": true,
+    "fixture_preserved": true,
+    "reader_source_unchanged": true,
+    "independent_contract_passed": true
+  },
+  {
+    "sample": "4ce1f058",
+    "arm": "B",
+    "implementation": {
+      "role": "implementation",
+      "timeout_limit": 900,
+      "exit_code": 0,
+      "wall_seconds": 174.192,
+      "usage": [
+        {
+          "input_tokens": 466993,
+          "cached_input_tokens": 421888,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 8368,
+          "reasoning_output_tokens": 3182
+        }
+      ]
+    },
+    "reader": {
+      "role": "reader",
+      "timeout_limit": 300,
+      "exit_code": 0,
+      "wall_seconds": 74.997,
+      "usage": [
+        {
+          "input_tokens": 249945,
+          "cached_input_tokens": 209920,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 3057,
+          "reasoning_output_tokens": 1005
+        }
+      ]
+    },
+    "plugin_unchanged": true,
+    "fixture_preserved": true,
+    "reader_source_unchanged": true,
+    "independent_contract_passed": true
+  },
+  {
+    "sample": "50aa8b68",
+    "arm": "A",
+    "implementation": {
+      "role": "implementation",
+      "timeout_limit": 900,
+      "exit_code": 0,
+      "wall_seconds": 452.146,
+      "usage": [
+        {
+          "input_tokens": 965623,
+          "cached_input_tokens": 879104,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 10769,
+          "reasoning_output_tokens": 3565
+        }
+      ]
+    },
+    "reader": {
+      "role": "reader",
+      "timeout_limit": 300,
+      "exit_code": 0,
+      "wall_seconds": 54.122,
+      "usage": [
+        {
+          "input_tokens": 101136,
+          "cached_input_tokens": 69632,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2061,
+          "reasoning_output_tokens": 732
+        }
+      ]
+    },
+    "plugin_unchanged": true,
+    "fixture_preserved": true,
+    "reader_source_unchanged": true,
+    "independent_contract_passed": true
+  }
+]
