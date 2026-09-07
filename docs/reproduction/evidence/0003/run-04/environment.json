@@ -1,0 +1,15 @@
+{
+  "label": "plugin-00640478ab75",
+  "image": "sha256:aa46e31c71577eb37c1e1d856427d9d159ddd5a41aa92472af722838b1c3a159",
+  "model": "gpt-5.6-terra",
+  "baseline": "4041f467b91e3628d826c729ec12972edc77af92",
+  "runner_sha256": "0283f1b6588bb710e45b91bb1163315dc54386e47ba1e0a3ed37c96c786002ef",
+  "distribution_sha256": {
+    ".agents/plugins/marketplace.json": "5969d4408f83cf5fafb9ecbf153b45daaf3b8887280df3b6f8092eb0d94a2243",
+    "plugins/program-design/.codex-plugin/plugin.json": "32b4e04e26e0262eca50e6823c22f49a061285f8fb3497d29dc66a34597d72c9",
+    "plugins/program-design/README.md": "96afaa7b454c892b73963c41989b5d9c5e948f90e09d93dbda5896fcd1bea44e",
+    "plugins/program-design/skills/project-docs/SKILL.md": "4c1700c75673811b01b3f3943311a5afacbe02250eb3fe4620d943437b84ebd9",
+    "plugins/program-design/skills/project-docs/agents/openai.yaml": "267c6efff9a2cd2543ea7d26db5c81b1c45d8645e790666b56bc62ea0f811565",
+    "plugins/program-design/skills/project-docs/references/evidence.md": "f714a1fcb351eed748fbe160cc30b2ed8a614269b745bf20fdc2c68b60bb6a70"
+  }
+}

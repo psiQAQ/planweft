@@ -10,6 +10,8 @@ Skill 以含 name 和 description 的 SKILL.md 为入口，可带脚本、参考
 
 原文定位：How ChatGPT and Codex use skills；Where Codex loads local skills；Distribute skills with plugins。
 
+可选 agents/openai.yaml 的 allow_implicit_invocation 默认 true；false 禁止隐式匹配，仍可显式调用。原文 `Best practices` 建议先使用指令，只有需要确定性行为或外部工具时才添加脚本，并通过实际提示测试触发范围。
+
 ## 本仓库解读
 
 只保留真正影响决策的指导。自动匹配不是必然触发的保证，Skill 数量与脚本需求在后续行为试验后确定。

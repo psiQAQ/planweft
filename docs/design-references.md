@@ -46,7 +46,7 @@
 
 ## 第三方资料、译文与辅助文件（来源映射）
 
-`docs/reference/README.md` 的目录、R/P 编号和元数据字段来自 REQ-02/03；它的内容依据每行原文与固定项目。R-00 至 R-20 对应的中文文件逐项在该索引登记，构成这些文件的来源映射，避免在此复制同一张目录。全文译文的许可文件对应 OpenAI Cookbook、Diátaxis、Pi、MADR、GitHub Docs、Agent Skills 文档的上游许可，不作为本仓库新设计。
+`docs/reference/README.md` 的目录、R/P 编号和元数据字段来自 REQ-02/03；它的内容依据每行原文与固定项目。R-00 至 R-21 对应的中文文件逐项在该索引登记，构成这些文件的来源映射，避免在此复制同一张目录。全文译文的许可文件对应 OpenAI Cookbook、Diátaxis、Pi、MADR、GitHub Docs、Agent Skills 文档的上游许可，不作为本仓库新设计。
 
 `.submodule/` 下第三方文件以 12 个 gitlink 和上游许可追溯，不纳入第一方逐文件设计覆盖。未来若增加生成文件，关联生成源及其设计记录；新的第一方工具源码仍需在本台账逐文件登记。纯导航、命名和普通胶水关联已有需求/设计即可，不为它们编造论文依据。
 
@@ -54,4 +54,34 @@
 
 源文件定位以固定项目索引为准：[P-03 concepts](../.submodule/Fission-AI/OpenSpec/docs/concepts.md)、[P-06 doc-coauthoring](../.submodule/anthropics/skills/skills/doc-coauthoring/SKILL.md)、[P-12 完整模板](../.submodule/adr/madr/template/adr-template.md)、[P-12 最小模板](../.submodule/adr/madr/template/adr-template-minimal.md)。
 
-来源可访问、内容支持该借鉴和本仓库效果验证是三种不同状态。当前为文档设计，依据 review 结论见 [REV-0001](reviews/0001-evidence-review.md)；CLI、Skills、自动化和双平台产品行为均未实现/Not Run。未通过 review 的新条目不能标为已验证设计。
+来源可访问、内容支持该借鉴和本仓库效果验证是三种不同状态。基础文档依据见 [REV-0001](reviews/0001-evidence-review.md)；首版 Skill 的状态以 REP-0003/REV-0003 为准，专用 CLI、hooks 与自身接管未实施。未通过 review 的新条目不能标为已验证设计。
+
+## 首版插件阶段（2026-09-07）
+
+下表逐文件登记；上文基础阶段记录保持历史范围，当前结果以 [REP-0003](reproduction/0003-project-docs-plugin.md) 和 [REV-0003](reviews/0003-project-docs-plugin-review.md) 为准。无新增未覆盖机制，创新记录无需制造条目。
+
+| 文件 | 问题与设计 | 精确来源与本地差异 | 验证/审查 |
+| --- | --- | --- | --- |
+| [plugin.json](../plugins/program-design/.codex-plugin/plugin.json) | 插件身份与单 Skill 分发 | R-21 Create a plugin manually；P-04 .codex-plugin/plugin.json；本版无 hooks/MCP，项目身份为本地 metadata | PD-01；官方 validator、安装实测；REV-0003 |
+| [marketplace.json](../.agents/plugins/marketplace.json) | repo 安装入口 | R-21 Marketplace metadata / How local marketplaces work；官方生成器默认 personal、相对 source.path；不等于项目启用 | PD-01；安装/卸载；REV-0003 |
+| [SKILL.md](../plugins/program-design/skills/project-docs/SKILL.md) | 相关读取、授权内维护、交接、启用边界 | R-12 How ChatGPT and Codex use skills / Best practices；P-03 Keep It Lightweight；P-04 writing-plans File Structure / Execution Handoff；R-04 Living plans；单 Skill 与 opt-in 为用户需求 | PD-02～07；正负样例及冷读；REV-0003 |
+| [openai.yaml](../plugins/program-design/skills/project-docs/agents/openai.yaml) | 显示与调用提示，保留默认隐式匹配 | R-12 Optional metadata；用户选择按任务使用，不设 false | PD-02；发现与触发轨迹；REV-0003 |
+| [evidence.md](../plugins/program-design/skills/project-docs/references/evidence.md) | 按需记录设计依据与创新、独立核查 | 用户 REQ-04/05/06；P-12 template/adr-template.md More Information / Confirmation；P-06 Stage 3 仅独立读者启发；审计方法为本地需求 | PD-05；语义 review；REV-0003 |
+| [README.md](../plugins/program-design/README.md) | 用户安装、启用与卸载说明 | R-21 Add a marketplace from the CLI / How local marketplaces work；R-11 override 规则；命令以当前 CLI help 与实际运行复核 | PD-01/02；生命周期测试；REV-0003 |
+| [0002-project-docs-plugin.md](specs/0002-project-docs-plugin.md) | 首版行为和验收边界 | 用户本轮计划和选择为需求来源；R-12/R-21 支持封装能力，不保证模型遵循 | PD-01～07；REP-0003；REV-0003 |
+| [0005-skill-first-plugin.md](adr/0005-skill-first-plugin.md) | 重开旧写入取舍，选择指令型插件 | 用户新需求；R-12 Best practices、R-21 Create a plugin manually；P-03/P-04 实际先例；本地取舍不证明收益 | REV-0003；REV-0003 |
+| [0003-project-docs-plugin.md](plans/0003-project-docs-plugin.md) | 实施步骤与接续状态 | R-04 Progress / Living plans；用户本轮实施范围 | REP-0003；REV-0003；REV-0003 |
+| [0003-project-docs-plugin.md](reproduction/0003-project-docs-plugin.md) | 真实输入、结果、环境故障与限制分开 | R-18 Filling in information；R-20 非交互运行；SPEC-0002 为验收来源 | 实际输出和文件差异；REV-0003 |
+| [0003-project-docs-plugin-review.md](reviews/0003-project-docs-plugin-review.md) | 独立来源核对和发现处理 | 用户 REQ-06；reviewer 实际检查和内容 SHA，不对报告无限递归自审 | 报告内状态；REV-0003 |
+| [run-plugin-smoke.py](../tests/run-plugin-smoke.py) | 可重跑、隔离输入、安装卸载与文件快照 | PD-01～07；REP-0002 实测容器命令、R-20 机器可读输出；P-06 Stage 3 新读者；Python 标准库为本地实验胶水，无产品引擎 | REP-0003；退出码仅执行成功，语义人工判定；REV-0003 |
+| [README.md](reference/README.md) | 增加本轮来源 | REQ-02；R-21 实际原文与访问日期 | REV-0003；REV-0003 |
+| [codex-plugins.md](reference/codex-plugins.md) | 中文最小插件与分发摘要 | R-21 各段原文定位在摘要；未推定全文授权 | REV-0003；REV-0003 |
+| [codex-skills.md](reference/codex-skills.md) | 补默认 invocation 与优先指令说明 | R-12 Optional metadata / Best practices；保留时效及自动匹配限制 | REV-0003；REV-0003 |
+| [README.md](../README.md) | 当前能力、安装入口与验证状态 | 本轮用户需求、SPEC-0002 和真实 REP-0003；沿用 R-01 短入口 | 当前状态复核；REV-0003 |
+| [AGENTS.md](../AGENTS.md) | 当前计划导航 | 本轮用户需求；沿用通用规则，不在本仓正式启用插件 | 链接检查；REV-0003 |
+| [development.md](development.md) | 当前计划导航 | 本轮用户需求；R-04 接续入口 | 链接检查；REV-0003 |
+| [0001-document-management.md](specs/0001-document-management.md) | 基础历史与后继实现范围 | 本轮用户明确授权；SPEC-0002 / ADR-0005 | 语义 review；REV-0003 |
+| [0002-handoff-maintenance-baseline.md](plans/0002-handoff-maintenance-baseline.md) | 保留旧结果并关联后继 | 本轮用户需求；R-04 Progress | 链接检查；REV-0003 |
+| [0004-defer-product-cli-after-baseline.md](adr/0004-defer-product-cli-after-baseline.md) | 旧决定保留并注明新需求重开 | 本轮用户授权；ADR-0005 明确替代范围，不改历史观察 | REV-0003；REV-0003 |
+
+本轮 evidence 下的生成记录统一关联 tests/run-plugin-smoke.py、REP-0003 的实际调用和判定；输入、输出及快照不是外部权威资料，不逐份虚构引用。

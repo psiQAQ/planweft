@@ -1,0 +1,8 @@
+{
+  "AGENTS.md": "本项目启用 project-docs：相关任务使用该 Skill 维护受影响的普通文档和交接证据，遵守任务授权。\n",
+  "README.md": "# Export demo\n当前计划在 [工作记录](notes/work.md)，需求在 [约定](notes/contract.md)。\n",
+  "notes/contract.md": "# Approved contract\n导出始终使用 UTF-8，无 BOM。发布前需要 Windows 实测。\n",
+  "notes/guide.md": "# 用户说明\n导出编码尚待补充。\n",
+  "notes/work.md": "# 当前工作\n目标：明确 UTF-8 导出说明。\n待办：更新用户说明；之后 Windows 实测。\n历史：2026-09-01 Linux 示例验证 Passed，不代表本次运行。\n",
+  "user-note.txt": "KEEP_USER_CHANGE\nUncommitted user addition.\n"
+}

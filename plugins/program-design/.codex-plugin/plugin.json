@@ -1,0 +1,23 @@
+{
+  "name": "program-design",
+  "version": "0.1.0",
+  "description": "Task-relevant Markdown maintenance and evidence-backed handoffs",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Program Design",
+    "shortDescription": "Maintain project documents and handoff evidence",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use $project-docs to continue this project from its documents."
+    ],
+    "developerName": "Program Design contributors",
+    "longDescription": "Read task-relevant project documents, maintain affected Markdown and preserve evidence for the next session."
+  },
+  "author": {
+    "name": "Program Design contributors"
+  }
+}

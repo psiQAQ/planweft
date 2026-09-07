@@ -1,0 +1,29 @@
+{
+  "unrelated": {
+    "exit_code": 0
+  },
+  "unenabled": {
+    "exit_code": 0
+  },
+  "enabled": {
+    "exit_code": 0
+  },
+  "readonly": {
+    "exit_code": 0
+  },
+  "conflict": {
+    "exit_code": 0
+  },
+  "evidence-gap": {
+    "exit_code": 0
+  },
+  "blank": {
+    "exit_code": 0
+  },
+  "repo-copy": {
+    "exit_code": 0
+  },
+  "handoff": {
+    "exit_code": 0
+  }
+}

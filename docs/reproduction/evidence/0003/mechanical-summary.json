@@ -1,0 +1,56 @@
+{
+  "blank": {
+    "changed": [
+      "docs/specs/local-text-export.md"
+    ],
+    "read_installed_skill": true,
+    "installation_and_removal_checks": "Passed"
+  },
+  "conflict": {
+    "changed": [],
+    "read_installed_skill": true,
+    "installation_and_removal_checks": "Passed"
+  },
+  "enabled": {
+    "changed": [
+      "notes/guide.md",
+      "notes/work.md"
+    ],
+    "read_installed_skill": true,
+    "installation_and_removal_checks": "Passed"
+  },
+  "evidence-gap": {
+    "changed": [
+      "notes/work.md"
+    ],
+    "read_installed_skill": true,
+    "installation_and_removal_checks": "Passed"
+  },
+  "handoff": {
+    "changed": [],
+    "read_installed_skill": true,
+    "installation_and_removal_checks": "Passed"
+  },
+  "readonly": {
+    "changed": [],
+    "read_installed_skill": true,
+    "installation_and_removal_checks": "Passed"
+  },
+  "repo-copy": {
+    "changed": [],
+    "read_installed_skill": true,
+    "installation_and_removal_checks": "Passed"
+  },
+  "unenabled": {
+    "changed": [
+      "README.md"
+    ],
+    "read_installed_skill": false,
+    "installation_and_removal_checks": "Passed"
+  },
+  "unrelated": {
+    "changed": [],
+    "read_installed_skill": false,
+    "installation_and_removal_checks": "Passed"
+  }
+}

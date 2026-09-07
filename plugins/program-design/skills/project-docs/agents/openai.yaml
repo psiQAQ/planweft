@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Docs"
+  short_description: "Maintain project documentation and handoff evidence"
+  default_prompt: "Use $project-docs to continue this project from its documents."
