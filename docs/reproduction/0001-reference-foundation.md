@@ -1,15 +1,15 @@
 # REP-0001：参考资料与文档基础验证
 
-日期：2026-09-07；环境：Linux，Git 与系统 Python 3 可用。工作目录为本仓库根目录。本文区分实际执行与预期；产品工具尚不存在。
+日期：2026-09-07；环境：Linux、Git 2.53.0、系统 Python 3.14.4，无额外包。工作目录为本仓库根目录；基础提交为 `7b45c64f711952512a1dca19d67df3b0e565ca83`。本文区分实际执行与预期；产品工具尚不存在。
 
 ## 检查项
 
 | 编号 | 操作与预期 | 当前结果 |
 | --- | --- | --- |
-| V-01 | R-00～R-19 均有明确去向、中文文件、出处和范围；审查引用是否支持主张 | 待独立 review |
-| V-02 | 第一方 Markdown 的本地文件链接有效，Git diff 无格式错误 | 待执行最终检查 |
-| V-03 | 12 个 gitlink、`.gitmodules`、checkout 与索引 SHA 一致；上游 checkout 无改动；书籍未收录 | 子模块已添加，最终复核待执行 |
-| V-04 | 根目录无个人 override，个人差异稿入库，组合说明符合官方替代语义 | 静态检查待执行；真实宿主加载 Not Run |
+| V-01 | R-00～R-19 均有明确去向、中文文件、出处和范围；审查引用是否支持主张 | Passed；独立核查两会话 32 个可见相关 URL 均有去向；6 份正文/章节译文及其余摘要通过内容核对，见 REV-0001 |
+| V-02 | 第一方 Markdown 的本地文件链接有效，Git diff 无格式错误 | Passed；收尾后 34 份 Markdown、146 处本地文件链接，缺失目标 0；暂存差异检查修正许可行尾空白后通过 |
+| V-03 | 12 个 gitlink、`.gitmodules`、checkout 与索引 SHA 一致；上游 checkout 无改动；书籍未收录 | Passed（当前 checkout）；12 项一致且干净，基础提交仅 54 项（含 12 个 gitlink），无书籍；全新恢复结果见下方 |
+| V-04 | 根目录无个人 override，个人差异稿入库，组合说明符合官方替代语义 | Passed（静态）；根目录无 override，个人文件已提交；真实宿主加载 Not Run |
 
 ## 可重复的基本检查
 
@@ -93,8 +93,34 @@ raise SystemExit(bool(errors))
 PY
 ```
 
+## 执行结果与恢复验证
+
+上述内联 Python 检查已实际执行，基础提交上的输出为：
+
+```text
+{'markdown_files': 34, 'local_links_checked': 143, 'submodules': 12, 'errors': []}
+```
+
+首次对全部新文件暂存后，`git diff --cached --check` 报告 Diátaxis 许可副本的 6 处行尾空白（Failed）；移除这些格式空白、保留许可文字并标明处理后，重新暂存检查为 Passed。仅看尚未收录文件时的空 diff 不足以完成检查。
+
+全新临时克隆恢复验证 **Passed**。在 Linux 从本地基础提交克隆主仓，再从各 GitHub HTTPS 地址下载子模块；未复用原子模块目录或对象缓存。实际步骤如下（从本仓库根开始）：
+
+```bash
+task_source=$PWD
+task_restore=$(mktemp -d)
+git clone --no-local "$task_source" "$task_restore/repository"
+git -C "$task_restore/repository" checkout --detach 7b45c64f711952512a1dca19d67df3b0e565ca83
+git -C "$task_restore/repository" -c protocol.file.allow=never submodule update --init --depth 1 --jobs 4
+git -C "$task_restore/repository" submodule status
+git -C "$task_restore/repository" status --porcelain
+```
+
+实际 12/12 子模块恢复成功，状态均为空格前缀、无改动；在新克隆中执行上述 Python 检查仍为 34 份 Markdown、143 个本地文件链接、12 个固定版本、错误 0。该结果证明访问日可从上游恢复这些 commit，不保证上游永远保留仓库。测试仅初始化一层，没有运行第三方脚本。
+
+填入最终 review、计划和验证结果后，新增 3 处报告链接；工作区再次执行静态检查为 34 份 Markdown、146 个本地文件链接、12 个固定版本、错误 0。子模块和实质设计文件与基础提交相同。
+
 ## 验证限制
 
 尚未安装本仓库的任何工具、Skill 或 hook，也未运行参考项目的安装脚本和测试。Linux/Windows 产品兼容、模型行为对照、真实个人 override 加载和自管理迁移均为 **Not Run**；这些不属于本阶段已实现能力。外部文章读取成功只说明访问成功，内容依据由独立 review 判断。
 
-本记录在最终检查后补入执行输出摘要，不将预期结果填写为 Passed。
+本记录中的 Passed 限于相应检查范围；具体依据审查及处理结果见 [REV-0001](../reviews/0001-evidence-review.md)。
