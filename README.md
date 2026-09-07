@@ -9,12 +9,13 @@
 | 需求 | 入口 |
 | --- | --- |
 | 理解产品目标与当前范围 | [产品规格](docs/specs/0001-document-management.md) |
-| 接续本阶段工作 | [首版插件计划](docs/plans/0003-project-docs-plugin.md)；[基础阶段记录](docs/plans/0001-reference-foundation.md) |
+| 接续本阶段工作 | [配对维护试用与下一步](docs/plans/0004-paired-maintenance-trial.md)；[首版插件计划](docs/plans/0003-project-docs-plugin.md) |
 | 阅读文章与参考实现 | [资料索引](docs/reference/README.md) |
 | 核查某个文件为什么这样设计 | [引用台账](docs/design-references.md) |
 | 查看未被先例覆盖的想法 | [创新记录](docs/innovations.md) |
 | 了解开发和审查方式 | [开发约定](docs/development.md) |
-| 查看实际验证及限制 | [行为验证记录](docs/reproduction/0002-handoff-maintenance-baseline.md)；[基础检查记录](docs/reproduction/0001-reference-foundation.md) |
+| 运行入口校验的离线回归 | [测试说明](tests/README.md) |
+| 查看实际验证及限制 | [配对试用及入口修复](docs/reproduction/0004-paired-maintenance-trial.md)；[行为验证记录](docs/reproduction/0002-handoff-maintenance-baseline.md)；[基础检查记录](docs/reproduction/0001-reference-foundation.md) |
 
 ## 获取参考项目
 

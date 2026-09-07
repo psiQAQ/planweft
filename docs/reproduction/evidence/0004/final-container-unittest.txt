@@ -1,0 +1,9 @@
+test_duplicate_case_is_rejected_before_side_effects (test_run_plugin_smoke.ArgumentValidationTest.test_duplicate_case_is_rejected_before_side_effects) ... ok
+test_non_positive_timeout_is_rejected_before_side_effects (test_run_plugin_smoke.ArgumentValidationTest.test_non_positive_timeout_is_rejected_before_side_effects) ... ok
+test_unknown_and_internal_cases_are_rejected_before_side_effects (test_run_plugin_smoke.ArgumentValidationTest.test_unknown_and_internal_cases_are_rejected_before_side_effects) ... ok
+test_valid_case_selection_and_timeout_parse (test_run_plugin_smoke.ArgumentValidationTest.test_valid_case_selection_and_timeout_parse) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.006s
+
+OK

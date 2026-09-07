@@ -1,0 +1,7 @@
+{
+  "remaining_test_containers": [],
+  "original_containers_preserved": true,
+  "temporary_workspace_removed": true,
+  "image_preserved": true,
+  "auth_copies": "container tmpfs; removed with experiment containers"
+}

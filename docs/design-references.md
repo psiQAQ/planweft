@@ -85,3 +85,33 @@
 | [0004-defer-product-cli-after-baseline.md](adr/0004-defer-product-cli-after-baseline.md) | 旧决定保留并注明新需求重开 | 本轮用户授权；ADR-0005 明确替代范围，不改历史观察 | REV-0003；REV-0003 |
 
 本轮 evidence 下的生成记录统一关联 tests/run-plugin-smoke.py、REP-0003 的实际调用和判定；输入、输出及快照不是外部权威资料，不逐份虚构引用。
+
+## 定向阅读与配对试用（本轮工作区）
+
+需求来源：用户确认的“定向阅读与真实维护任务对照试用”计划；插件冻结 0.1.0。以下文件的验证状态以 REP-0004、REV-0004 为准，实验准备不代表模型试用已经通过。
+
+| 本仓库目标文件 | 问题、实际来源及定位 | 借鉴与本地差异 | 验证 / 审查 |
+| --- | --- | --- | --- |
+| [试用计划](plans/0004-paired-maintenance-trial.md) | P-01 `docs/evals.md` 的 Test 5 / Reproducing；用户配对条件 | 冻结输入、按内容验收，限制两对样本结论；不沿用上游分数或目录评分 | REV-0004 预审、REP-0004 |
+| [阅读比较](reproduction/0004-reading-comparison.md) | R-01 仓库知识；P-03 Progressive Rigor；R-05 Incremental progress；P-06 Stage 3；P-01 评分限制；R-22 | 逐问题说明借鉴和验证，不把概念启发当本地效果 | REV-0004 原文核查 |
+| [试用结果](reproduction/0004-paired-maintenance-trial.md) | 用户保留完整轨迹要求；R-18 预期/实际；P-01 实验限制 | 分开记录代码、文档、冷读、时间和用量，不合成总分 | 实际运行证据；REV-0004 |
+| [审查报告](reviews/0004-comparison-review.md) | 用户专职 reviewer 要求；P-06 独立读者仅作启发 | 外部依据审查与模型冷读分开；不冒充插件自动委派 | 报告范围与处理结果 |
+| [配对运行器](../tests/experiments/run-maintenance-comparison.py) | 用户 ABBA、隔离、八会话与清理要求；既有 `tests/run-plugin-smoke.py` 的 CLI 插件生命周期 | 一次实验脚本，固定基线/提示/资源、容器 tmpfs 认证、禁用多 Agent；非产品运行时 | 预审、manifest、真实轨迹与 cleanup.json |
+| [实施提示](../tests/experiments/maintenance-task.txt) | 用户入口行为需求与环境边界 | 仅给任务和共同材料，不给评分器或实现答案；保留原治理 | 运行前冻结；REV-0004 |
+| [冷读提示](../tests/experiments/cold-read-task.txt) | P-06 Stage 3 Reader Testing；用户冷读需求 | 不带旧聊天，要求定位和执行已有验证；统一无插件 | 四次 reader 轨迹；REV-0004 |
+| [独立入口验收器](../tests/experiments/check-entry-contract.py) | 用户非法输入/副作用/handoff 合同；R-22 Exiting methods | 标准库替身走 argv/main 边界；不依赖修复采用特定函数，源码审查补充替身边界 | 基线、临时正确补丁与 handoff 变异自检；REV-0004 |
+
+新增 R-22 中文摘要按上游 argparse 文档登记在参考索引；该文件及索引为来源材料/导航，不产生新的产品机制。实验生成的 JSON、日志与差异统一关联配对运行器及冻结输入，不逐份重复外部引用。
+
+用户在本轮实验启动后补充要求研究 planning-with-files 插件；[插件比较摘要](reference/planning-with-files-plugin.md) 关联 P-01 固定 manifest、实际 Skill、hooks 描述与操作测试。这里只增加来源与取舍分析，不作为已采用 hooks/恢复引擎的设计依据；冻结实验输入不变。独立核查见 REV-0004。
+
+### 入口修复的最终整合
+
+| 本仓库目标文件 | 实际设计及问题 | 精确依据与本地差异 | 验证 / 审查 |
+| --- | --- | --- | --- |
+| [run-plugin-smoke.py](../tests/run-plugin-smoke.py) | 解析阶段拒绝未知/重复场景和非正超时，副作用延后；保留 handoff 调度 | R-22 `choices`、`type`、`Exiting methods`；用户 PLAN-0004 合同；选取匿名样本 08a618d4 的标准库实现，未采用额外 handoff 抽取 | 主机/容器离线测试；独立 13/13；REV-0004 |
+| [test_run_plugin_smoke.py](../tests/test_run_plugin_smoke.py) | 原脚本没有参数边界回归 | 用户标准库 mock、无真实 Docker/认证要求；选取 08a618d4 产物，验证错误退出与未调用副作用，不宣称其自身覆盖完整调度 | 4 项 unittest；独立 grader 补 help/default/handoff；REV-0004 |
+| [测试说明](../tests/README.md) | 新会话需发现离线验证和真实运行边界 | 用户使用说明及交接要求；R-22 错误语义；R-08 操作指南分类；参数以实际源码为准 | 冷读发现用于整理；最终命令实跑与链接检查；该说明未另做冷读；REV-0004 |
+| [证据说明](reproduction/evidence/0004/README.md) | 完整轨迹体积大但须可恢复，不能只保存成功结论 | 用户保留全量输入/轨迹/失败与清理要求；P-01 `Reproducing` 的材料限制作为反面核对；tar/gzip 只用于保存生成证据，不是产品数据格式 | 146 个原始文件逐 SHA 回查；REV-0004 |
+
+README、AGENTS 和 development 本轮仅补当前计划/测试/结果导航，沿用原入口依据并关联用户当前任务；PLAN-0004、REP-0004 和 REV-0004 保留真实结果与明确限制。参考索引补 R-22 和既有 P-01 的插件入口。没有新增产品机制或创新声明。

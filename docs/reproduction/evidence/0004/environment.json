@@ -1,0 +1,26 @@
+{
+  "baseline": "a5f072e5bca0f27c33264ce4562fd08c4ffbbd18",
+  "image": "sha256:aa46e31c71577eb37c1e1d856427d9d159ddd5a41aa92472af722838b1c3a159",
+  "model": "gpt-5.6-terra",
+  "label": "paired-1ab23f3f2f09",
+  "order": [
+    "edaf048d",
+    "08a618d4",
+    "4ce1f058",
+    "50aa8b68"
+  ],
+  "cpus": 2,
+  "memory": "4g",
+  "worker_timeout": 900,
+  "reader_timeout": 300,
+  "manual_interventions": 0,
+  "retries": 0,
+  "frozen_inputs": {
+    "tests/experiments/run-maintenance-comparison.py": "50f026e6e5f46521e68c329f95c22207485598b5c92e4b0c89c0893eb17bfd6d",
+    "tests/experiments/check-entry-contract.py": "4ef56e636f7bd3ca3fd8f86a596a0dc9edd7d60b861ef20170c28eec4cd2a44b",
+    "tests/experiments/maintenance-task.txt": "5201920a69dd410a5bee8563d4230134a36fda19ccbc01efd7d776bf31ca2aab",
+    "tests/experiments/cold-read-task.txt": "b54830ba19ac6ed8f495b354f448d3e034fdc440094b57d5f74a4c2fa71427e9",
+    "docs/plans/0004-paired-maintenance-trial.md": "272479fde7e3a446129ba14fb3ebd71cc97d7180ac4a47c87b5b020780ba116f",
+    "docs/reference/python-argparse.md": "603bd813cdb603a8c437ff2a87cf7882f6ff25117d2cd86b0b1392d7fc865935"
+  }
+}
