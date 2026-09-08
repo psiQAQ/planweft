@@ -1,0 +1,1250 @@
+test_auxiliary_command_files_are_namespaced_and_explicit (test_pwf_distribution.PackageContractTest.test_auxiliary_command_files_are_namespaced_and_explicit) ... ok
+test_codex_has_one_automatic_main_skill_and_its_own_hooks (test_pwf_distribution.PackageContractTest.test_codex_has_one_automatic_main_skill_and_its_own_hooks) ... ok
+test_codex_windows_dispatch_references_packaged_launcher (test_pwf_distribution.PackageContractTest.test_codex_windows_dispatch_references_packaged_launcher) ... ok
+test_every_bundle_retains_license_provenance_and_evidence (test_pwf_distribution.PackageContractTest.test_every_bundle_retains_license_provenance_and_evidence) ... ok
+test_opencode_tools_are_namespaced_and_package_retains_attribution (test_pwf_distribution.PackageContractTest.test_opencode_tools_are_namespaced_and_package_retains_attribution) ... ok
+test_pi_package_entries_and_registered_commands_are_local (test_pwf_distribution.PackageContractTest.test_pi_package_entries_and_registered_commands_are_local) ... ok
+test_platform_inventory_and_archive_integrity (test_pwf_distribution.PackageContractTest.test_platform_inventory_and_archive_integrity) ... ok
+test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) ... 
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='.agents/skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='claude', path='scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='claude', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='claude', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='claude', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='claude', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='claude', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='claude', path='skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='.codebuddy/skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codex', path='scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codex', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codex', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codex', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codex', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codex', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codex', path='skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='.continue/skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='copilot', path='scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='copilot', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='copilot', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='copilot', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='copilot', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='copilot', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='copilot', path='skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='.cursor/skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='.factory/skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='.gemini/skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='.hermes/skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='.kiro/skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='.mastracode/skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='.opencode/skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='skills/project-docs/scripts/plan-doctor.sh') ... FAIL
+  test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='pi', path='scripts/plan-doctor.sh') ... FAIL
+test_attested_plan_injects_and_changed_bytes_are_refused (test_pwf_distribution.PackagedRuntimeTest.test_attested_plan_injects_and_changed_bytes_are_refused) ... ok
+test_codex_dispatch_emits_native_context_from_unicode_install_path (test_pwf_distribution.PackagedRuntimeTest.test_codex_dispatch_emits_native_context_from_unicode_install_path) ... ok
+test_default_initialization_is_advisory_and_preserves_existing_records (test_pwf_distribution.PackagedRuntimeTest.test_default_initialization_is_advisory_and_preserves_existing_records) ... ok
+test_disabled_hooks_do_not_mutate_existing_plan_or_write_new_project_files (test_pwf_distribution.PackagedRuntimeTest.test_disabled_hooks_do_not_mutate_existing_plan_or_write_new_project_files) ... ok
+test_expanded_templates_keep_upstream_phase_semantics (test_pwf_distribution.PackagedRuntimeTest.test_expanded_templates_keep_upstream_phase_semantics) ... ok
+test_named_initialization_resolves_its_plan_not_root (test_pwf_distribution.PackagedRuntimeTest.test_named_initialization_resolves_its_plan_not_root) ... ok
+test_no_plan_hooks_are_silent_and_do_not_create_project_state (test_pwf_distribution.PackagedRuntimeTest.test_no_plan_hooks_are_silent_and_do_not_create_project_state) ... ok
+test_repeated_posttool_nudges_are_deduplicated_per_turn (test_pwf_distribution.PackagedRuntimeTest.test_repeated_posttool_nudges_are_deduplicated_per_turn) ... ok
+test_wrong_explicit_selector_refuses_recovery_and_status_write (test_pwf_distribution.PackagedRuntimeTest.test_wrong_explicit_selector_refuses_recovery_and_status_write) ... ok
+test_duplicate_case_is_rejected_before_side_effects (test_run_plugin_smoke.ArgumentValidationTest.test_duplicate_case_is_rejected_before_side_effects) ... ok
+test_non_positive_timeout_is_rejected_before_side_effects (test_run_plugin_smoke.ArgumentValidationTest.test_non_positive_timeout_is_rejected_before_side_effects) ... ok
+test_unknown_and_internal_cases_are_rejected_before_side_effects (test_run_plugin_smoke.ArgumentValidationTest.test_unknown_and_internal_cases_are_rejected_before_side_effects) ... ok
+test_valid_case_selection_and_timeout_parse (test_run_plugin_smoke.ArgumentValidationTest.test_valid_case_selection_and_timeout_parse) ... ok
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='.agents/skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='agents', path='skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='claude', path='scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='claude', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='claude', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='claude', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='claude', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='claude', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='claude', path='skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='.codebuddy/skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codebuddy', path='skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codex', path='scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codex', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codex', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codex', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codex', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codex', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='codex', path='skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='.continue/skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='continue', path='skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='copilot', path='scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='copilot', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='copilot', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='copilot', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='copilot', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='copilot', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='copilot', path='skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='.cursor/skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='cursor', path='skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='.factory/skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='factory', path='skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='.gemini/skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='gemini', path='skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='.hermes/skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='hermes', path='skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='.kiro/skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='kiro', path='skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='.mastracode/skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='mastracode', path='skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='.opencode/skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='skills/i18n/project-docs-ar/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='skills/i18n/project-docs-de/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='skills/i18n/project-docs-es/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='skills/i18n/project-docs-zh/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='skills/i18n/project-docs-zht/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='opencode', path='skills/project-docs/scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+======================================================================
+FAIL: test_runtime_and_skill_fallbacks_do_not_call_original_plugin (test_pwf_distribution.PackageContractTest.test_runtime_and_skill_fallbacks_do_not_call_original_plugin) (host='pi', path='scripts/plan-doctor.sh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/psi/workspace/program-design/tests/test_pwf_distribution.py", line 134, in test_runtime_and_skill_fallbacks_do_not_call_original_plugin
+    self.assertTrue('planning-with-files' not in text,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'original plugin identity remains in a runtime/install surface')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : original plugin identity remains in a runtime/install surface
+
+----------------------------------------------------------------------
+Ran 21 tests in 4.001s
+
+FAILED (failures=102)

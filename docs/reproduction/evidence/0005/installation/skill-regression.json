@@ -1,0 +1,98 @@
+[
+  {
+    "source": "baseline",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_skill_frontmatter_valid.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log": "baseline-test_skill_frontmatter_valid.log"
+  },
+  {
+    "source": "baseline",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_skill_md_version_parity.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log": "baseline-test_skill_md_version_parity.log"
+  },
+  {
+    "source": "baseline",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_plugin_skill_surface.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log": "baseline-test_plugin_skill_surface.log"
+  },
+  {
+    "source": "migrated",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_skill_frontmatter_valid.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log": "migrated-test_skill_frontmatter_valid.log"
+  },
+  {
+    "source": "migrated",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_skill_md_version_parity.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log": "migrated-test_skill_md_version_parity.log"
+  },
+  {
+    "source": "migrated",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_plugin_skill_surface.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log": "migrated-test_plugin_skill_surface.log"
+  }
+]

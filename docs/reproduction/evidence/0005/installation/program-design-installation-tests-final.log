@@ -1,0 +1,9 @@
+test_each_platform_has_its_documented_installation_entries (test_pwf_installation.InstallationContractTest.test_each_platform_has_its_documented_installation_entries) ... ok
+test_gemini_disabled_commands_work_in_chinese_and_space_project_path (test_pwf_installation.InstallationContractTest.test_gemini_disabled_commands_work_in_chinese_and_space_project_path) ... ok
+test_installation_surfaces_do_not_advertise_unpublished_sources (test_pwf_installation.InstallationContractTest.test_installation_surfaces_do_not_advertise_unpublished_sources) ... ok
+test_opencode_loader_matches_the_documented_local_build (test_pwf_installation.InstallationContractTest.test_opencode_loader_matches_the_documented_local_build) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.255s
+
+OK

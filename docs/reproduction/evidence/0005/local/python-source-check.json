@@ -1,0 +1,11 @@
+{
+  "status": "Passed",
+  "method": "compile without import or pyc writes",
+  "files": {
+    "scripts/build-plugin.py": "cee21bab04e953cf8d6396ea529b8078d9c7427606e06db797bdb10eb71f0399",
+    "scripts/import-pwf.py": "ce84b946883f51d187cc519ce5c33c7a07a1eae92dd92ad99313b14230e05322",
+    "scripts/run-upstream-tests.py": "7083be93482a2c1f87242ae2236d62221d892de54c833d82f84688b7e7970038",
+    "tests/run-pwf-smoke.py": "18c89629c801b9a067191698cf7e0d940e420166c89722af4cff2c8e6569fdf0",
+    "tests/test_pwf_distribution.py": "94d4500b70b454463941bbf9351edbd812f96af081e784be64d77637da2e387d"
+  }
+}

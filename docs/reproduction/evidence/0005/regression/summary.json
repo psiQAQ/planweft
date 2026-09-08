@@ -1,0 +1,66 @@
+{
+  "status": "Passed in explicit GNU mkdir environment; native uutils concurrent directory locking failed",
+  "upstream_commit": "0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7",
+  "baseline_full_gnu": {
+    "passed": 721,
+    "skipped": 63,
+    "subtests_passed": 798,
+    "seconds": 103.18
+  },
+  "migrated_full_gnu": {
+    "passed": 721,
+    "skipped": 63,
+    "subtests_passed": 851,
+    "seconds": 102.38
+  },
+  "final_skill_only_delta": {
+    "files_changed": 18,
+    "all_are_SKILL_md": true,
+    "targeted_passed": 30,
+    "subtests_passed": 127
+  },
+  "pi": {
+    "passed": 54,
+    "test_files": 3
+  },
+  "opencode": {
+    "passed": 34,
+    "test_files": 2,
+    "typecheck": "Passed",
+    "build": "Passed"
+  },
+  "node_evidence_reuse": {
+    "source_files_compared": 19,
+    "all_hashes_equal": true,
+    "origin": "runner-migrated-final",
+    "reason": "Only Hermes test fixture and Skill text changed after Node execution."
+  },
+  "native_uutils_0_8_0": {
+    "minimal_probe_both_success": 16,
+    "rounds": 100,
+    "gnu_control_both_success": 0,
+    "phase_repeats_baseline_failures": 3,
+    "phase_repeats_migrated_failures": 3,
+    "phase_repeats_each": 20
+  },
+  "gnu_mkdir_9_7": {
+    "phase_baseline_failures": 0,
+    "phase_migrated_failures": 0,
+    "phase_repeats_each": 20,
+    "sha256": "518ac216220b425875ec7af76bb750c6eadcdc05b1b25de66f86f7bbef6c9588"
+  },
+  "limitations": [
+    "Default native uutils 0.8.0 mkdir cannot be claimed to support reliable concurrent phase updates in this environment.",
+    "Windows, macOS and real interactive hosts are outside this regression subtask; platform skips are retained.",
+    "Pi defines no upstream typecheck/build command.",
+    "Historical failures and environment adjustments are retained rather than overwritten."
+  ],
+  "initial_attempt_notes": [
+    "Initial uv default cache was read-only; isolated UV cache and Python install directory were used.",
+    "Initial restricted npm installs were interrupted after unavailable network; successful lockfile installs and tests required approved network execution.",
+    "First pytest had 20 environment failures from read-only HOME cache and python absent from PATH; writable XDG_CACHE_HOME plus venv PATH resolved them.",
+    "Earlier possible hook-scalar regression was disproved: it was canonical Skill identity misclassification in transformed tests.",
+    "A final no-script Hermes test fixture assumed bundled inject-plan.sh absent; adaptation now verifies both bundled fallback and a genuinely isolated missing-script case."
+  ],
+  "distribution_manifest_sha256": "cc02d5ac19095b1500044007cab582969690bb7a192b9a0170359c54ee6368b6"
+}

@@ -1,0 +1,9 @@
+test_all_parity_skill_md_share_canonical_version (test_skill_md_version_parity.SkillMdVersionParityTests.test_all_parity_skill_md_share_canonical_version) ... ok
+test_canonical_version_extractable (test_skill_md_version_parity.SkillMdVersionParityTests.test_canonical_version_extractable) ... ok
+test_citation_cff_matches_canonical_version (test_skill_md_version_parity.SkillMdVersionParityTests.test_citation_cff_matches_canonical_version) ... ok
+test_plugin_manifests_match_canonical_version (test_skill_md_version_parity.SkillMdVersionParityTests.test_plugin_manifests_match_canonical_version) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.002s
+
+OK

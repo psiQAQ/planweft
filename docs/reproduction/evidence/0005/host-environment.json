@@ -1,0 +1,48 @@
+{
+  "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+  "os_release": "PRETTY_NAME=\"Ubuntu 26.04.1 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"26.04\"\nVERSION=\"26.04.1 LTS (Resolute Raccoon)\"\nVERSION_CODENAME=resolute\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=resolute\nLOGO=ubuntu-logo\n",
+  "hosts": {
+    "codex": "/home/psi/.npm-global/bin/codex",
+    "claude": null,
+    "pi": null,
+    "opencode": null,
+    "hermes": null,
+    "gemini": null,
+    "pwsh": null,
+    "powershell": null
+  },
+  "python": {
+    "exit_code": 0,
+    "stdout": "Python 3.14.4",
+    "stderr": ""
+  },
+  "git": {
+    "exit_code": 0,
+    "stdout": "git version 2.53.0",
+    "stderr": ""
+  },
+  "bash": {
+    "exit_code": 0,
+    "stdout": "GNU bash, version 5.3.9(1)-release (x86_64-pc-linux-gnu)",
+    "stderr": ""
+  },
+  "node": {
+    "exit_code": 0,
+    "stdout": "v22.22.1",
+    "stderr": ""
+  },
+  "npm": {
+    "exit_code": 0,
+    "stdout": "9.2.0",
+    "stderr": ""
+  },
+  "codex": {
+    "exit_code": 0,
+    "stdout": "codex-cli 0.153.4",
+    "stderr": "WARNING: proceeding, even though we could not create PATH aliases: Read-only file system (os error 30)\n"
+  },
+  "limits": [
+    "PATH presence only; no claim to exhaustive machine installation census",
+    "No Windows or macOS runtime was available to this task"
+  ]
+}

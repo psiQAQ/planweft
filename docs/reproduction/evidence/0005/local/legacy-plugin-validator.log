@@ -1,0 +1,3 @@
+Plugin validation failed:
+- plugin.json field `hooks` is not accepted by plugin validation
+- skill `i18n` is missing `SKILL.md`

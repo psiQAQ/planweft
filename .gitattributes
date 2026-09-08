@@ -6,3 +6,6 @@
 *.bat -text whitespace=cr-at-eol
 *.zip -text
 *.tar.gz -text
+
+# Captured evidence must retain its exact bytes, including diagnostic whitespace.
+docs/reproduction/evidence/** -text -whitespace

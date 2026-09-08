@@ -1,0 +1,9 @@
+test_every_skill_has_frontmatter_and_description (test_skill_frontmatter_valid.SkillFrontmatterTests.test_every_skill_has_frontmatter_and_description) ... ok
+test_files_found (test_skill_frontmatter_valid.SkillFrontmatterTests.test_files_found) ... ok
+test_frontmatter_parses_as_yaml (test_skill_frontmatter_valid.SkillFrontmatterTests.test_frontmatter_parses_as_yaml) ... ok
+test_unquoted_description_has_no_colon_space (test_skill_frontmatter_valid.SkillFrontmatterTests.test_unquoted_description_has_no_colon_space) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.031s
+
+OK
