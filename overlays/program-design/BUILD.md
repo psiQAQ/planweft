@@ -14,3 +14,9 @@ These files are local extension sources, not another Skill implementation. The b
 10. Release preparation writes a new output directory outside the checkout only; `--previous-release` continues the prior generated branch history. Repository URL and npm scope must be supplied together when remote coordinates are requested. The regular build supplies repository marketplace files; release preparation packs Pi/OpenCode npm archives and Gemini/Hermes branch-root payloads. Without an actual repository URL and npm identity, document local use and missing publication configuration. Do not push, publish, install a host plugin or change user configuration as part of building or preparing.
 
 Verify all installed reference links, descriptions and fragment counts; run parser tests against expanded templates; verify the exact file inventory, bytes and executable modes of directories and catalog targets. Check npm file allowlists and precompiled entries. Distinguish these checks from actual Agent behavior and installation/update validation.
+
+## Public documentation sources
+
+Maintain each public document in Chinese and English. Edit installation text only in `install/INSTALL.md` and `install/INSTALL.en.md`; the builder generates `docs/installation.md`, `docs/installation.en.md` and each platform's matching INSTALL pair. The repository mirrors adapt relative navigation, while installed copies remain self-contained. Both are included in `--verify`; unrelated files in docs are preserved.
+
+The README pair in this overlay supplies package introductions. The repository's README pair provides the broader project overview, comparison and attribution; `docs/platforms.md` / `platforms.en.md` explain cross-platform design. Root documentation is not a runtime dependency. Pi/OpenCode npm packages include both README and INSTALL languages, and OpenCode's compilation manifest is refreshed when its packaging inputs change.

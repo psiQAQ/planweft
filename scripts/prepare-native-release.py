@@ -59,7 +59,7 @@ def npm_archive(builder, source, npm_dir, env):
             if name in files:
                 raise ValueError('Duplicate npm member: ' + name)
             files[name] = (archive.extractfile(item).read(), item.mode)
-    for required in ['LICENSE', 'UPSTREAM.json', 'package.json', 'INSTALL.md']:
+    for required in ['LICENSE', 'UPSTREAM.json', 'package.json', 'README.en.md', 'INSTALL.md', 'INSTALL.en.md']:
         if required not in files:
             raise ValueError('npm archive missing ' + required)
     package = json.loads(files['package.json'][0])

@@ -41,7 +41,9 @@
     "!extensions/program-design/package-lock.json",
     "LICENSE",
     "UPSTREAM.json",
+    "README.en.md",
     "INSTALL.md",
+    "INSTALL.en.md",
     "references/"
   ],
   "peerDependencies": {

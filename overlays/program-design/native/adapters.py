@@ -66,7 +66,8 @@ def portable_skills(files, version):
 
 def shared(files, version):
     return portable_skills(subset(files, ['skills', 'scripts', 'templates',
-                                         'README.md', 'INSTALL.md', 'LICENSE', 'UPSTREAM.json']), version)
+                                         'README.md', 'README.en.md', 'INSTALL.md', 'INSTALL.en.md',
+                                         'LICENSE', 'UPSTREAM.json']), version)
 
 
 def add_bridge(files):
@@ -197,7 +198,8 @@ def opencode(files, version, description):
     payload = json.loads(result['package.json'][0])
     payload.update(version=version, description=description)
     payload['files'] = ['dist/', 'skills/', 'commands/',
-                        'README.md', 'INSTALL.md', 'BUILD.json', 'LICENSE', 'UPSTREAM.json']
+                        'README.md', 'README.en.md', 'INSTALL.md', 'INSTALL.en.md',
+                        'BUILD.json', 'LICENSE', 'UPSTREAM.json']
     # Release compilation belongs to the builder. Consumers of the generated
     # npm package use the verified dist files without running lifecycle builds.
     payload['scripts'].pop('prepublishOnly', None)

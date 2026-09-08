@@ -422,17 +422,26 @@ def distributions(tree, upstream, compiled=True):
         if host == 'hermes':
             for name in ['LICENSE', 'UPSTREAM.json']:
                 files['.hermes/plugins/program-design/' + name] = files[name]
-        readme = (OVERLAY / 'README.md').read_text() if (OVERLAY / 'README.md').exists() else DESCRIPTION
-        files['README.md'] = (('# Program Design ' + VERSION + ' — ' + host + '\n\n' + readme).encode(), 0o644)
-        install = OVERLAY / 'install/INSTALL.md'
-        if install.exists():
-            files['INSTALL.md'] = (('> 当前安装包：**' + host + '**。请选择本文对应宿主的章节；'
-                                   '其余章节用于说明平台差异。\n\n').encode()
-                                   + install.read_bytes(), 0o644)
+        for suffix in ['', '.en']:
+            notice = ('> Package: **' + host + '**. Use this host\'s installation section.'
+                      if suffix else '> 当前安装包：**' + host + '**。请选择本文对应宿主的安装章节。')
+            for name, source in [('README' + suffix + '.md', OVERLAY / ('README' + suffix + '.md')),
+                                 ('INSTALL' + suffix + '.md', OVERLAY / 'install' / ('INSTALL' + suffix + '.md'))]:
+                # Keep the source language switch first; do not prepend a
+                # second title or link to documents outside the installed pack.
+                text = source.read_text()
+                if name.startswith('README'):
+                    # Overlay sources are also readable in the repository;
+                    # their install/ links become flat within installed packs.
+                    text = text.replace('](install/INSTALL.md)', '](INSTALL.md)')
+                    text = text.replace('](install/INSTALL.en.md)', '](INSTALL.en.md)')
+                navigation, _, body = text.partition('\n')
+                files[name] = ((navigation + '\n\n' + notice + '\n\n' + body.lstrip()).encode(), 0o644)
         # npm only packs files declared in its allowlist: make attribution ship too.
         if host == 'pi':
             payload = json.loads(files['package.json'][0])
-            payload['files'] = list(dict.fromkeys([*payload.get('files', []), 'LICENSE', 'UPSTREAM.json', 'INSTALL.md', 'references/']))
+            payload['files'] = list(dict.fromkeys([*payload.get('files', []), 'LICENSE', 'UPSTREAM.json',
+                                                  'README.en.md', 'INSTALL.md', 'INSTALL.en.md', 'references/']))
             files['package.json'] = (json.dumps(payload, indent=2).encode() + b'\n', 0o644)
         if host == 'opencode':
             prefix = '.opencode/packages/opencode-program-design/'
@@ -454,6 +463,24 @@ def distributions(tree, upstream, compiled=True):
 def inventory(files):
     return {name: {'sha256': sha(data), 'executable': bool(mode & 0o111)}
             for name, (data, mode) in sorted(files.items())}
+
+
+def public_installation_files():
+    """Repository guides and installed guides share the same reviewed source."""
+    result = {}
+    for suffix in ['', '.en']:
+        source = OVERLAY / 'install' / ('INSTALL' + suffix + '.md')
+        text = source.read_text().replace('](INSTALL.md)', '](installation.md)')
+        text = text.replace('](INSTALL.en.md)', '](installation.en.md)')
+        navigation, _, body = text.partition('\n')
+        context = ('Project overview: [中文](../README.md) / [English](../README.en.md) · '
+                   'Cross-platform design: [中文](platforms.md) / [English](platforms.en.md)'
+                   if suffix else '项目介绍：[中文](../README.md) / [English](../README.en.md) · '
+                   '跨平台设计：[中文](platforms.md) / [English](platforms.en.md)')
+        generated = '<!-- Generated from overlays/program-design/install/' + source.name + '; edit the source. -->'
+        result['installation' + suffix + '.md'] = (
+            (navigation + '\n\n' + context + '\n\n' + generated + '\n\n' + body.lstrip()).encode(), 0o644)
+    return result
 
 
 def tree_digest(files):
@@ -651,6 +678,7 @@ def main():
     manifest = {'manifest.json': (json.dumps(index, indent=2, sort_keys=True).encode() + b'\n', 0o644)}
     differences['manifest'] = write_files(manifest, ROOT / 'dist', args.verify)
     differences['marketplaces'] = write_files(catalogs, ROOT, args.verify)
+    differences['public-docs'] = write_files(public_installation_files(), ROOT / 'docs', args.verify)
     # Only retire our previous named platform distributions, never vendor or
     # evidence archives, nor unrelated files placed next to generated outputs.
     differences['retired-archives'] = []

@@ -26,7 +26,7 @@
     },
     "package.json": {
       "executable": false,
-      "sha256": "15cdc9a06b60130ef12e2918237731cce5587a8284e42a4236e7855e5b38dfc5"
+      "sha256": "803b05f212b20f5297cf2af0e094a13d2330973259eb816e7a18fbbe2e6d842f"
     },
     "src/core.ts": {
       "executable": false,
@@ -41,5 +41,5 @@
       "sha256": "29abb8649f73c66d5b5f807103a8d591a878cc1ce2fe959ead50a4e7805950ca"
     }
   },
-  "source_sha256": "014ce47af2cc4f5d30a4d8af318789f000f9d7f45ea1b9cdf977aada958299e5"
+  "source_sha256": "fc268015f59cf5bda720be9846bcb026427bd01153765e4d17d86ee66d090498"
 }

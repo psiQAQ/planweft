@@ -1,7 +1,7 @@
 {
   "platforms": {
     "agents": {
-      "file_count": 285,
+      "file_count": 287,
       "files": {
         ".agents/skills/project-docs/LICENSE": {
           "executable": false,
@@ -147,17 +147,25 @@
           "executable": false,
           "sha256": "168cb152e53e68a800c6db6d2b6af9c9a00874e55e838becfc195f39c8d3822f"
         },
+        "INSTALL.en.md": {
+          "executable": false,
+          "sha256": "0be8c791ff460709dd516b530e78abed86ad01ea6a0604db7bec4924c0c9fa42"
+        },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "2e1a5e03901455afdd2bcb57e63090da6e2b8babe521134afa367c3bef9b94a8"
+          "sha256": "8de57a47c991ed6cd199e3795364eeb4a04b59e2ebb1e10c765854fb541e508b"
         },
         "LICENSE": {
           "executable": false,
           "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84"
         },
+        "README.en.md": {
+          "executable": false,
+          "sha256": "c2238bd5121fe51cc0e9cf6a5c372df682f1f5d24ae796a58271678744154eea"
+        },
         "README.md": {
           "executable": false,
-          "sha256": "433572ebf8db6157c610eb04f32b7df70830964b8caad0d85d076691e03f0b8b"
+          "sha256": "7808c57c94fcda14f8ff587e0b1e179088363b1428308118f275cf711e874d4b"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -1145,10 +1153,10 @@
         }
       },
       "path": "agents/program-design",
-      "sha256": "d79255c335fc1c30c615fd459e98e1711049989e768fb9307a26619f9cbabb6b"
+      "sha256": "cb3c1db82ffebfff34912bd786c21de687121b0fce3ac65315a7df0363d0e9da"
     },
     "claude": {
-      "file_count": 266,
+      "file_count": 268,
       "files": {
         ".claude-plugin/marketplace.json": {
           "executable": false,
@@ -1158,17 +1166,25 @@
           "executable": false,
           "sha256": "31f1bdb219a74d54a4a4585affc89f54760ac307f6c2a53f73d868f5815c2826"
         },
+        "INSTALL.en.md": {
+          "executable": false,
+          "sha256": "75f2e39b06bd3286777a9609faf1c81c2b759340cc7b84855ed5ec0a295c6ee9"
+        },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "3b5ba9b83d4c6c3babfcc6ff05740544bbce838c832d658b9fbd691659e7eee7"
+          "sha256": "f58790941a758e9022c29c3131a1ce752c4bbf7a15b081618e098b2b8a76d349"
         },
         "LICENSE": {
           "executable": false,
           "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84"
         },
+        "README.en.md": {
+          "executable": false,
+          "sha256": "eeb58dbb4b0d23c9bb195be2231785916bcbe9e09b5e033a18749ec6f6c1e2b6"
+        },
         "README.md": {
           "executable": false,
-          "sha256": "f5f3724e8f2eb1668fa1a19d3f5427021369ccb691a261ca1e114a256cdd2b4c"
+          "sha256": "b42b1d70095a5b644eaf56cf2b3a731c91da9d1a256423f5a61b558584624983"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -2216,26 +2232,34 @@
         }
       },
       "path": "claude/program-design",
-      "sha256": "d5b14b5644b60712d70b5322dc293cca3379f116c331181a1f9dbe0c722cc19e"
+      "sha256": "a88b27f87337061547801118ff18dd1938bbb12a9177f798ae1d6292f40751b9"
     },
     "codebuddy": {
-      "file_count": 250,
+      "file_count": 252,
       "files": {
         ".codebuddy-plugin/plugin.json": {
           "executable": false,
           "sha256": "18520961c957fcf03a098f9cc2b8f5aafb5d813342bd1457b951c98002241716"
         },
+        "INSTALL.en.md": {
+          "executable": false,
+          "sha256": "f318d7feb17ef988a61d81fec6a4b9026c14026c10f4c259dda39864473b10eb"
+        },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "46caab0c9517930b1e86ea7e19ec8a9a0fc7ea6c28208cd9a83d410e7894cffd"
+          "sha256": "a3893e630a477938f832973e7c1dd0724dc9cf95990020008efc33c730c13a95"
         },
         "LICENSE": {
           "executable": false,
           "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84"
         },
+        "README.en.md": {
+          "executable": false,
+          "sha256": "cb850d4670d6e753037ec2b220ac418d5a8a04d90e08cc3c53d85029b04fb574"
+        },
         "README.md": {
           "executable": false,
-          "sha256": "a771a2594f26a4615c5ff3f191f383b6f9af00cac5b051d835a20f841d90da60"
+          "sha256": "9c6415537c6a1bf62c6cac5051d3b8bad74f2ad59e2153b3d3380d77c5b6b10d"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -3223,10 +3247,10 @@
         }
       },
       "path": "codebuddy/program-design",
-      "sha256": "171e332b6ddf7d450adf7b2c81425447fbfaa70b90c85a9f4689bc0034134436"
+      "sha256": "277159e8f9879460fb2571a26fae0d6534f17d5e7aa74a8c35d6e0abb0fcf49b"
     },
     "codex": {
-      "file_count": 274,
+      "file_count": 276,
       "files": {
         ".agents/plugins/marketplace.json": {
           "executable": false,
@@ -3300,17 +3324,25 @@
           "executable": false,
           "sha256": "583e09f2652375686ff27a2871212caa5f43ae3dd8e97f2b7664f7670ee46c08"
         },
+        "INSTALL.en.md": {
+          "executable": false,
+          "sha256": "120ec848a41a3ce95dd552ce077f3c2322066df4ac90b5b1251018a2f9b267a2"
+        },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "6d9117682e38f824ff379ea8388fbb61d3abab7831dc83ded406668af1061a28"
+          "sha256": "629645ceaa3018df2b0d105f2f5a280bc4f68a693999a031329f61c5de9c9a35"
         },
         "LICENSE": {
           "executable": false,
           "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84"
         },
+        "README.en.md": {
+          "executable": false,
+          "sha256": "d82f6f520cdfd3f544811d8c8712c8653da0e5460514cfb6b04854b5f1110b4f"
+        },
         "README.md": {
           "executable": false,
-          "sha256": "730498bf9b17b846b2a913c2ae635d6eb8fee1b66cb6365d57870286112d32ca"
+          "sha256": "b40f5e562228161bb36dd0b85f3bff5ecf4848133a108c90886e15a24bb6764f"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -4326,10 +4358,10 @@
         }
       },
       "path": "codex/program-design",
-      "sha256": "03ccc32fed320e97d4bca796c55e13eb9effac866a3a29bd48e197c07de4a8b5"
+      "sha256": "5b2d21d39ba68c17e1d960d05316909f95f7d5fdeafbd4134f4a3806695941eb"
     },
     "continue": {
-      "file_count": 286,
+      "file_count": 288,
       "files": {
         ".continue/prompts/pd-plan.prompt": {
           "executable": false,
@@ -4479,17 +4511,25 @@
           "executable": false,
           "sha256": "168cb152e53e68a800c6db6d2b6af9c9a00874e55e838becfc195f39c8d3822f"
         },
+        "INSTALL.en.md": {
+          "executable": false,
+          "sha256": "66f3cf6a522e7e0a29c80e09deeaa531cf044507cd0d2c15081e1c01f109d293"
+        },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "82e2534d9a6c0e6049dc0ff4980fac7c61136d9383f26c4818101da88a08ff29"
+          "sha256": "2bd8a5861ef6965cf2793fcc31aa955e68ff8ff0c0b28a5189748eb9b91a3f95"
         },
         "LICENSE": {
           "executable": false,
           "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84"
         },
+        "README.en.md": {
+          "executable": false,
+          "sha256": "5acd80967cabb231acbd2a6b156dee61faba1dda95f6ca0d3d144b5c0ab3e2b6"
+        },
         "README.md": {
           "executable": false,
-          "sha256": "cbd63f24f2597313bb76a0f138cb0157cff4ddadf778a39b11ddac9468a42902"
+          "sha256": "4bf648b55af988c8ac61876aab5bb5ceb339b62977f6075bd2c5b849fdb3ca22"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -5477,22 +5517,30 @@
         }
       },
       "path": "continue/program-design",
-      "sha256": "ece3210960f74056c5c8c63f96e149849f47c1fe5fafc653a0fbbebaf12813ec"
+      "sha256": "e6aa7f8f4d68907ca2b1870b4ff89f8ab1ef1ec42b770d858d75d807e7f610b0"
     },
     "copilot": {
-      "file_count": 252,
+      "file_count": 254,
       "files": {
+        "INSTALL.en.md": {
+          "executable": false,
+          "sha256": "019d61cfb1d38e5035259461946455f3c30a844b4cc6ba79fdc951b03806411c"
+        },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "fa07b52fc6334d5e66acd97a52dbaeb5fa2cdfb6fa122110ab79441afe3d93fc"
+          "sha256": "b4f528651ae07942ce393598a909d2a278cf442845829c23d294be055085518f"
         },
         "LICENSE": {
           "executable": false,
           "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84"
         },
+        "README.en.md": {
+          "executable": false,
+          "sha256": "70220544dcf7ee9322cb2eafeecd780f96a52b94ac6ec0ea39a06065b3599c04"
+        },
         "README.md": {
           "executable": false,
-          "sha256": "fbce2ac6f835a101799e9f1fb9e6a22b38f1d6788dc16f95119409206df62832"
+          "sha256": "c129ff61504cf24d03baec1b56e99ef4ca8a21ac0d78eb30bddfcbdb8f6c7d7c"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -6492,26 +6540,34 @@
         }
       },
       "path": "copilot/program-design",
-      "sha256": "8b6f834c181ba2d28ad14f67208d28c3e72e80881995b70e9a5d10182749e96d"
+      "sha256": "6ea4adff217f60a8e1c0a6733c16d14e21b3d6349da275acb36de115028ec938"
     },
     "cursor": {
-      "file_count": 252,
+      "file_count": 254,
       "files": {
         ".cursor-plugin/plugin.json": {
           "executable": false,
           "sha256": "93c7dc23b6dfdef7fbee90d00ea0c227f8088af47c704f584384777e538d3e11"
         },
+        "INSTALL.en.md": {
+          "executable": false,
+          "sha256": "190a0f851d49f0d4ed22ab090b7f4a14a0fe18f84cba4ce6eca97a9460603611"
+        },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "bd861c66eb0635464a234537ed71eeba3b3d5c9ff50a82d0678750030fd91968"
+          "sha256": "5aaebacbbdbff7076284172b95c882e04bd1c9dd01a2b30f73306b37bb49acfb"
         },
         "LICENSE": {
           "executable": false,
           "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84"
         },
+        "README.en.md": {
+          "executable": false,
+          "sha256": "965b395859753aa4a14b54273abe51601354c34d4fa7888d6737a951c417f3e3"
+        },
         "README.md": {
           "executable": false,
-          "sha256": "9f9740258b17b31d828ef51e6f4e5f96d0a74b0f652c02bc61aed060d3c7a65f"
+          "sha256": "5e8eb53afe66f3d4b163444c23cfc7c8ddc2f5f4c610af7d3a798bce1efacf65"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -7507,26 +7563,34 @@
         }
       },
       "path": "cursor/program-design",
-      "sha256": "e28d431ca231b4c736f85410ecc3d5ed98ebaaf537adf7386505a5e7840d542a"
+      "sha256": "f16b8d5c06e9e44bf8b17a36df487a715f1392bdd78ef850bb45f7c29896db1b"
     },
     "factory": {
-      "file_count": 250,
+      "file_count": 252,
       "files": {
         ".factory-plugin/plugin.json": {
           "executable": false,
           "sha256": "18520961c957fcf03a098f9cc2b8f5aafb5d813342bd1457b951c98002241716"
         },
+        "INSTALL.en.md": {
+          "executable": false,
+          "sha256": "3eec8af328c55f3e9e7802ad009d8d1b1cedfe97b9085309ef0ab6fd8e8e1bda"
+        },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "3aa6483a3663f157e2e6872c87fb087a0d45b29d1b0cd042b95571bac3e96191"
+          "sha256": "c32f6ddeb02aeb5d335a009fbe1ca1f587cd5da1b6c62204af3770fe5efccf03"
         },
         "LICENSE": {
           "executable": false,
           "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84"
         },
+        "README.en.md": {
+          "executable": false,
+          "sha256": "3dc5135485d3adf877275b5fadf785fa206a0ceee226dc1a32fb711add25e489"
+        },
         "README.md": {
           "executable": false,
-          "sha256": "b3b78352b4bbfcb7b65751cd06938326668fc16edc72dff69998dc7e5bb7b7e3"
+          "sha256": "b4225f216a6a555e28a135a1757fbdfcb871f956472b2ad39de8b9030ab938c3"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -8514,22 +8578,30 @@
         }
       },
       "path": "factory/program-design",
-      "sha256": "d14bb441e286817f28ae82892034efb88b81124e384d4569fc1b7772481e8c07"
+      "sha256": "8f77df72b70a9df95a0ad4f65ac9f1d211d8b47ea3785fd30bfb9078fcee94b6"
     },
     "gemini": {
-      "file_count": 254,
+      "file_count": 256,
       "files": {
+        "INSTALL.en.md": {
+          "executable": false,
+          "sha256": "74abf4013b4c20143b506e1d0c9ad4f9a95f1dfc15833acf4db60d7b1f60196f"
+        },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "245b1ea33cdf90319982863c56ec6dfc4f077c6f1e1069d0e4b3216b625170c7"
+          "sha256": "0758b68bd02ed18737135d69972d2d8cf89f56be4dc2a3c1bab1640589ede9d3"
         },
         "LICENSE": {
           "executable": false,
           "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84"
         },
+        "README.en.md": {
+          "executable": false,
+          "sha256": "5d62127377f5480248a7fc94da8f9f45e818db94fbbf5a60d4e41fe3b6f12beb"
+        },
         "README.md": {
           "executable": false,
-          "sha256": "e6560111b584887fb647a3198feefe6dd9771d082420c981e51deeeca0baf83f"
+          "sha256": "951c9bd418d54a0def0d17eb88baf9a484821b669d11e71647bcccdc06ced38c"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -9537,22 +9609,30 @@
         }
       },
       "path": "gemini/program-design",
-      "sha256": "03839dbf2e164d91999a897b95e714fb7fb8cb7a07f0986b94889f7d839145b2"
+      "sha256": "7fdd3c93f319c4dd5d7d2b91393ce377d7a12b5c634ec0cf3ab8a9552a06a41a"
     },
     "hermes": {
-      "file_count": 259,
+      "file_count": 261,
       "files": {
+        "INSTALL.en.md": {
+          "executable": false,
+          "sha256": "e07284824da9d8fac0df51971ba866311c2d27e267c466091eb9f1f375b974a9"
+        },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "d2c6b5be0e2641526eefae7728d372827efdf9f41c25fef779c8878365e6f1ec"
+          "sha256": "eea9d7835c73483932bb8f5d07580ea8c2abeef874eb17bb0675b4482c1b4bf1"
         },
         "LICENSE": {
           "executable": false,
           "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84"
         },
+        "README.en.md": {
+          "executable": false,
+          "sha256": "1190d242e8a056da3b2bcf4c97f064c73f44d9e5c156bb9dfb3e2cf59e3e27e4"
+        },
         "README.md": {
           "executable": false,
-          "sha256": "4ed489c9c35a77474a267e305f74bc229cac2afaddce1e36f8e6ffacc8987cd9"
+          "sha256": "088856e7b00b7159f0563c732a496b01c32402a8383fb330a5a8cd0cdeca7eab"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -10580,22 +10660,30 @@
         }
       },
       "path": "hermes/program-design",
-      "sha256": "85a9b28f3abdbc09e3461cc324b817256e61e82753249e87272b271a9b2855b6"
+      "sha256": "1143193ba203a46e8fc4a38a891beac49452fb5b296cf75a87cc51d62bd9c675"
     },
     "kiro": {
-      "file_count": 262,
+      "file_count": 264,
       "files": {
+        "INSTALL.en.md": {
+          "executable": false,
+          "sha256": "bb8fa1dbecbfca425111408b42297c93b430bb35265efbc4ac760ca8e01a66e7"
+        },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "056371d7ac69b431f08e416af7920864a39b7cb8cd1be0fdfd59548c54dc342a"
+          "sha256": "991c31490738dec92830b95fd3e8c4571f8e843c676f556a0c8a7e35417b2f67"
         },
         "LICENSE": {
           "executable": false,
           "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84"
         },
+        "README.en.md": {
+          "executable": false,
+          "sha256": "67cb1cbcd08faf944d947436a0f191fb1e6270c3d13e7b81fe179944475b2fc8"
+        },
         "README.md": {
           "executable": false,
-          "sha256": "05d311bd1265106b266f6e6bf36909f8c8e4079706d3278d717aaad0ceff089a"
+          "sha256": "23edb9ccc16fa7a5933711ff101fbb89dcb4e245541337ba4ee8319a394df8b5"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -11635,10 +11723,10 @@
         }
       },
       "path": "kiro/program-design",
-      "sha256": "30e2c85ae92c8e5a9dd5294b64ebbd014a3308071cfd5a421160a980859bb336"
+      "sha256": "c91bde2f6937918934537181ef2c2a8e870006f3bbf2fa58b4fc536cea66ddeb"
     },
     "mastracode": {
-      "file_count": 288,
+      "file_count": 290,
       "files": {
         ".mastracode/hooks.json": {
           "executable": false,
@@ -11796,17 +11884,25 @@
           "executable": false,
           "sha256": "168cb152e53e68a800c6db6d2b6af9c9a00874e55e838becfc195f39c8d3822f"
         },
+        "INSTALL.en.md": {
+          "executable": false,
+          "sha256": "d9a15ef9af0349428d3b114bcc9387d0733355eeb334f149bae67735fe5af134"
+        },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "790281e7a9b8ff4bd1e2c0002b83049f0c760ebcd4104ec18b2848f2dd6f065c"
+          "sha256": "56ef254360e5fc1f6d6e6794b649e9c276821dd99f01da79e7f604cac570dc27"
         },
         "LICENSE": {
           "executable": false,
           "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84"
         },
+        "README.en.md": {
+          "executable": false,
+          "sha256": "b094b6658a8c657c900e42963ecba67032a9741a3043ef580d144eec78b447f1"
+        },
         "README.md": {
           "executable": false,
-          "sha256": "8c9e5c539aabdbfe0e327597ce2fa257540e7c81456d1d4471310a55783bd5c8"
+          "sha256": "418d324970b99921b1e4d26e3745652b364a9c5e44a1cb9dbc13dbbbdb07aa29"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -12794,26 +12890,34 @@
         }
       },
       "path": "mastracode/program-design",
-      "sha256": "47d76a4ecb47938f016f0e1aac5c30df55510ed2f5ab0ac7c80adb611aa3e3da"
+      "sha256": "8a45069aada88d6058df0bd779a3266818396d731dabc7a5fe8044ea255a8a0e"
     },
     "opencode": {
-      "file_count": 262,
+      "file_count": 264,
       "files": {
         "BUILD.json": {
           "executable": false,
-          "sha256": "de8db943ce4ab99c0c6bfa4f2439a071b87e46b8c47f8ccf54a25840c7d4e0bd"
+          "sha256": "690ed181fe93753f7cdff33f938463ceeb66ee5e35db279d94bc817e35f1efbb"
+        },
+        "INSTALL.en.md": {
+          "executable": false,
+          "sha256": "eca7a43c585ca0d1fb48a0d52c15cf8d08ad49c11ad8de56b641727a5a7c59b0"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "10861fdb273ff62309206814769454e98f71858486f20b5bdb465ded83a3ca3c"
+          "sha256": "b486768f6c72144cbd300a68ffe0f947c1738ab943331e15872f950efa9d9f06"
         },
         "LICENSE": {
           "executable": false,
           "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84"
         },
+        "README.en.md": {
+          "executable": false,
+          "sha256": "c515f54314f04556350f8463b44740227da1509e1461dce1f1a48ea6d0e08c89"
+        },
         "README.md": {
           "executable": false,
-          "sha256": "d5961bd75664dc48e566ba19c605476081b51a21e5fd5797b9923c491cd26024"
+          "sha256": "375ec4b2524393ebc45435442d00934cc2cfbb1a4417809b03621a1a2b9f567f"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -12853,7 +12957,7 @@
         },
         "package.json": {
           "executable": false,
-          "sha256": "15cdc9a06b60130ef12e2918237731cce5587a8284e42a4236e7855e5b38dfc5"
+          "sha256": "803b05f212b20f5297cf2af0e094a13d2330973259eb816e7a18fbbe2e6d842f"
         },
         "scripts/attest-plan.ps1": {
           "executable": false,
@@ -13849,22 +13953,30 @@
         }
       },
       "path": "opencode/program-design",
-      "sha256": "01a1d4db84d0fd9434a34bd440cf2e0efb012e6b3985ccb61eb606e4946531de"
+      "sha256": "c9e5120867e4e770ba402613de2187c12b5e5d114e4cfcd43392f158faa6dafe"
     },
     "pi": {
-      "file_count": 48,
+      "file_count": 50,
       "files": {
+        "INSTALL.en.md": {
+          "executable": false,
+          "sha256": "893c3b1830b03865fee2f82b8381d94784341cb2a17bce8ee9586022c2d6320e"
+        },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "f01625a69a7ea6f4b0763999af43085adb0167e3861ee60c54186faefda973b1"
+          "sha256": "2f3125e1c8e1e22fb928c75a6fd01290e676b27ff592283295315f07a4feb4a5"
         },
         "LICENSE": {
           "executable": false,
           "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84"
         },
+        "README.en.md": {
+          "executable": false,
+          "sha256": "c0062994556c3fe77c306c95eb3f4e858ff47d8713f8e93a7f602b87715af37b"
+        },
         "README.md": {
           "executable": false,
-          "sha256": "1ab2f685b511acbaf9460d2f13ea2cb10ae44066f51065946850477e0cec6087"
+          "sha256": "65928a2f98f52213e7a807aaf6c3515a844ce9c190f1a504ed31bba50a456788"
         },
         "SKILL.md": {
           "executable": false,
@@ -13912,7 +14024,7 @@
         },
         "package.json": {
           "executable": false,
-          "sha256": "07e93a832cd40961bd2fa588637cfe37f00904498bca078bbf2d5e4c3a672425"
+          "sha256": "cea60012bcf7b43be56761a4e11b0e0e0a895485d3dbd8791dd598b3fcfbd34c"
         },
         "reference.md": {
           "executable": false,
@@ -14048,7 +14160,7 @@
         }
       },
       "path": "pi/program-design",
-      "sha256": "22509c4aa153f4d406612926eb5794b7be59ae7d9b7611e3f1fc2ca373e7d862"
+      "sha256": "4d4a22e0e0d90cbcfa7acf9771b11b23299e45a0a3feef4aa87aded036cd0cd3"
     }
   },
   "product": "program-design",
