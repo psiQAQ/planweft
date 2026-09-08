@@ -1,0 +1,54 @@
+{
+  "name": "planweft",
+  "version": "0.4.0-rc.1",
+  "description": "Persistent file planning and task-relevant project documentation. Use for multi-step implementation, documented work and handoffs; maintain requirements, decisions and observed evidence as needed. Reading, diagnosis and host plan mode remain read-only. No project opt-in is required; respect applicable project rules. Hooks inject selected project context; session history access is explicit. Optional host-aware continuation; no network upload path.",
+  "keywords": [
+    "pi-package",
+    "pi-skill",
+    "planning",
+    "manus",
+    "agent",
+    "agent-skills",
+    "claude-code",
+    "claude-skills",
+    "coding-agent",
+    "context-engineering",
+    "session-recovery",
+    "long-running-agents"
+  ],
+  "pi": {
+    "skills": [
+      "SKILL.md"
+    ],
+    "extensions": [
+      "extensions/planweft/index.ts"
+    ]
+  },
+  "scripts": {
+    "prepack": "node scripts/verify-shell-line-endings.mjs"
+  },
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "examples.md",
+    "reference.md",
+    "scripts/",
+    "templates/",
+    "extensions/",
+    "!**/node_modules",
+    "!**/__pycache__",
+    "!**/*.pyc",
+    "!extensions/planweft/package-lock.json",
+    "LICENSE",
+    "UPSTREAM.json",
+    "README.en.md",
+    "INSTALL.md",
+    "INSTALL.en.md",
+    "references/"
+  ],
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "author": "PlanWeft contributors; derived from Ahmad Adi / PWF",
+  "license": "MIT"
+}

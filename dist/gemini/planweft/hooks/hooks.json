@@ -1,0 +1,52 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "name": "planweft-sessionstart",
+            "type": "command",
+            "command": "python3 -I -B \"${extensionPath}/hooks/native-hook.py\" gemini SessionStart",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "BeforeAgent": [
+      {
+        "hooks": [
+          {
+            "name": "planweft-beforeagent",
+            "type": "command",
+            "command": "python3 -I -B \"${extensionPath}/hooks/native-hook.py\" gemini BeforeAgent",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "hooks": [
+          {
+            "name": "planweft-aftertool",
+            "type": "command",
+            "command": "python3 -I -B \"${extensionPath}/hooks/native-hook.py\" gemini AfterTool",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "PreCompress": [
+      {
+        "hooks": [
+          {
+            "name": "planweft-precompress",
+            "type": "command",
+            "command": "python3 -I -B \"${extensionPath}/hooks/native-hook.py\" gemini PreCompress",
+            "timeout": 10000
+          }
+        ]
+      }
+    ]
+  }
+}

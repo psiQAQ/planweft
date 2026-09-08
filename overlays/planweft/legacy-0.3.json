@@ -1,0 +1,28 @@
+{
+  "product": "program-design",
+  "version": "0.3.0",
+  "platforms": {
+    "agents": "cb3c1db82ffebfff34912bd786c21de687121b0fce3ac65315a7df0363d0e9da",
+    "claude": "a88b27f87337061547801118ff18dd1938bbb12a9177f798ae1d6292f40751b9",
+    "codebuddy": "277159e8f9879460fb2571a26fae0d6534f17d5e7aa74a8c35d6e0abb0fcf49b",
+    "codex": "5b2d21d39ba68c17e1d960d05316909f95f7d5fdeafbd4134f4a3806695941eb",
+    "continue": "e6aa7f8f4d68907ca2b1870b4ff89f8ab1ef1ec42b770d858d75d807e7f610b0",
+    "copilot": "6ea4adff217f60a8e1c0a6733c16d14e21b3d6349da275acb36de115028ec938",
+    "cursor": "f16b8d5c06e9e44bf8b17a36df487a715f1392bdd78ef850bb45f7c29896db1b",
+    "factory": "8f77df72b70a9df95a0ad4f65ac9f1d211d8b47ea3785fd30bfb9078fcee94b6",
+    "gemini": "7fdd3c93f319c4dd5d7d2b91393ce377d7a12b5c634ec0cf3ab8a9552a06a41a",
+    "hermes": "1143193ba203a46e8fc4a38a891beac49452fb5b296cf75a87cc51d62bd9c675",
+    "kiro": "c91bde2f6937918934537181ef2c2a8e870006f3bbf2fa58b4fc536cea66ddeb",
+    "mastracode": "8a45069aada88d6058df0bd779a3266818396d731dabc7a5fe8044ea255a8a0e",
+    "opencode": "c9e5120867e4e770ba402613de2187c12b5e5d114e4cfcd43392f158faa6dafe",
+    "pi": "4d4a22e0e0d90cbcfa7acf9771b11b23299e45a0a3feef4aa87aded036cd0cd3"
+  },
+  "catalogs": {
+    ".agents/plugins/marketplace.json": "89fbe95a1c5d492365027ce4b15fab06464759492485a3fcbde1ff2e57213a5a",
+    ".claude-plugin/marketplace.json": "367de0409243de75013b8a8eddaf2e3ef9d25efcdb3f09e47377c23355e087ed",
+    ".cursor-plugin/marketplace.json": "7d0663c105e6d312694e6424e353f75f29829d0c656edd5ced3de561ff402fc6",
+    ".github/plugin/marketplace.json": "82bb36b05672d55b9005d27398d8ee68f1959e8d154587b0718b00e2db9bbd0f",
+    ".factory-plugin/marketplace.json": "ec7c8537418efa96fd42acf11dd1aa3b693af1804ed46584a5e78bfa44d74c29",
+    ".codebuddy-plugin/marketplace.json": "c74281556fde6e5955c4dd0c52925bf90f543bd7b5c9e2909adde3c22684a805"
+  }
+}

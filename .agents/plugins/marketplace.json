@@ -1,14 +1,14 @@
 {
-  "name": "program-design",
+  "name": "planweft",
   "interface": {
-    "displayName": "Program Design"
+    "displayName": "PlanWeft"
   },
   "plugins": [
     {
-      "name": "program-design",
+      "name": "planweft",
       "source": {
         "source": "local",
-        "path": "./dist/codex/program-design"
+        "path": "./dist/codex/planweft"
       },
       "policy": {
         "installation": "AVAILABLE",
