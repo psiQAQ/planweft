@@ -1,10 +1,35 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
+## 0.4.0 候选验证
+
+单 npm 包提供安装器、Pi 资源和 OpenCode V1 入口。四核心宿主的 Linux 本地原生生命周期已通过；真实模型和远端安装仍是独立门槛。其余十个平台保留实现，在 0.4.0 标为实验性。Windows/macOS 安装器 CI 已配置、尚未执行。[发布：中文](releasing.md) / [English](releasing.en.md)。下方 0.3.0 证据继续作为历史记录。
+
 # 跨平台设计
 
-Program Design 0.3.0 将同一套文件规划与文档协作规则，生成适合 14 个宿主的独立分发目录。共享的是工作流和状态协议；安装入口、事件格式、缓存、信任与续跑能力沿用各宿主的原生机制。
+PlanWeft 0.4.0 将同一套文件规划与文档协作规则，生成适合 14 个宿主的独立分发目录。共享的是工作流和状态协议；安装入口、事件格式、缓存、信任与续跑能力沿用各宿主的原生机制。
 
 项目目标与设计来源见项目介绍：[简体中文](../README.md) | [English](../README.en.md)。安装、更新、回退和卸载步骤见安装指南：[简体中文](installation.md) | [English](installation.en.md)。本页说明平台结构与能力边界，不重复安装操作步骤。
+
+| 平台 | 静态检查 | 协议检查 | 原生生命周期（Linux） | 模型维护（Linux） |
+| --- | --- | --- | --- | --- |
+| Codex | Passed | Passed | Passed | Passed |
+| Claude Code | Passed | Passed | Passed | Not Run |
+| Pi | Passed | Passed | Passed | Not Run |
+| OpenCode V1 | Passed | Passed | Passed | Not Run |
+| Cursor | Passed | Passed | Not Run | Not Run |
+| Copilot CLI | Passed | Passed | Not Run | Not Run |
+| Gemini CLI | Passed | Passed | Not Run | Not Run |
+| Hermes | Passed | Passed | Not Run | Not Run |
+| Factory | Passed | Not Run | Not Run | Not Run |
+| CodeBuddy | Passed | Not Run | Not Run | Not Run |
+| Kiro | Passed | Not Run | Not Run | Not Run |
+| Continue | Passed | Not Run | Not Run | Not Run |
+| Mastra Code | Passed | Not Run | Not Run | Not Run |
+| Agents | Passed | Not Run | Not Run | Not Run |
+
+远端 npm/Git 生命周期及 Windows/macOS 真实宿主尚待单独记录。Pi RPC 与 OpenCode debug 是实际宿主加载，不是模型调用；非核心宿主的 0.3.0 安装结果不冒充 0.4.0 实测。
+
+Codex 模型场景使用隔离容器及显式的 hook trust bypass；该结果证明已审查 hooks 的运行行为，不代表默认交互式信任确认流程已通过。
 
 ## 一份来源，生成多种原生目录
 
@@ -13,12 +38,12 @@ Program Design 0.3.0 将同一套文件规划与文档协作规则，生成适�
 | 层次 | 位置 | 职责 |
 | --- | --- | --- |
 | 固定来源 | `vendor/planning-with-files/` | 原始源码归档、逐文件清单、来源与 MIT 许可，不直接修补归档 |
-| 共享扩展 | `overlays/program-design/` | 文档协作规则、模板、产品身份与安装资源 |
-| 原生适配 | `overlays/program-design/native/` | 宿主 manifest、事件桥接、组件布局与安装资源定位 |
-| 预编译资源 | `overlays/program-design/opencode-compiled/` | 绑定源码摘要的 OpenCode V1 编译结果；维护者编译，安装者使用成品 |
+| 共享扩展 | `overlays/planweft/` | 文档协作规则、模板、产品身份与安装资源 |
+| 原生适配 | `overlays/planweft/native/` | 宿主 manifest、事件桥接、组件布局与安装资源定位 |
+| 预编译资源 | `overlays/planweft/opencode-compiled/` | 绑定源码摘要的 OpenCode V1 编译结果；维护者编译，安装者使用成品 |
 | 生成器 | `scripts/build-plugin.py` | 应用身份映射及补丁，生成全部平台目录、六种 catalog 和内容清单 |
-| 分发 | `dist/<host>/program-design/` | 自包含安装源；各包保留 `LICENSE`、`UPSTREAM.json` 和所需运行资源 |
-| 兼容镜像 | `plugins/program-design/` | 0.3.x 保留的 Codex 生成镜像，与 `dist/codex/program-design/` 一致 |
+| 分发 | `dist/<host>/planweft/` | 自包含安装源；各包保留 `LICENSE`、`UPSTREAM.json` 和所需运行资源 |
+| 兼容镜像 | `plugins/planweft/` | 继续保留的 Codex 生成镜像，与 `dist/codex/planweft/` 一致 |
 
 维护者修改生成源后重新构建，不分别手改平台副本。`dist/manifest.json` 记录产品版本、上游提交、平台路径、逐文件摘要、执行位和整体摘要。`--verify` 只读检查缺失、多余、内容与执行位漂移。生成器仅清理明确管理的产物，并保留根 catalog 中不属于本插件的条目。
 
@@ -28,16 +53,16 @@ PWF 的根目录隐藏文件夹承载了它的多个平台适配。本仓把共�
 
 ## 六种 marketplace 独立发现
 
-以下路径相对于仓库根，catalog 的 `name` 元数据均为 `program-design`。它们使用各宿主自己的 schema；注册其中一种不会替其他宿主注册。没有通用根 `marketplace.json`，以免发现优先级选中另一平台的包。
+以下路径相对于仓库根，catalog 的 `name` 元数据均为 `planweft`。它们使用各宿主自己的 schema；注册其中一种不会替其他宿主注册。没有通用根 `marketplace.json`，以免发现优先级选中另一平台的包。
 
 | 宿主 | 仓库发现入口 | 指向的目录 |
 | --- | --- | --- |
-| Codex | `.agents/plugins/marketplace.json` | `dist/codex/program-design/` |
-| Claude Code | `.claude-plugin/marketplace.json` | `dist/claude/program-design/` |
-| Cursor | `.cursor-plugin/marketplace.json` | `dist/cursor/program-design/` |
-| Copilot CLI | `.github/plugin/marketplace.json` | `dist/copilot/program-design/` |
-| Factory / Droid | `.factory-plugin/marketplace.json` | `dist/factory/program-design/` |
-| CodeBuddy | `.codebuddy-plugin/marketplace.json` | `dist/codebuddy/program-design/` |
+| Codex | `.agents/plugins/marketplace.json` | `dist/codex/planweft/` |
+| Claude Code | `.claude-plugin/marketplace.json` | `dist/claude/planweft/` |
+| Cursor | `.cursor-plugin/marketplace.json` | `dist/cursor/planweft/` |
+| Copilot CLI | `.github/plugin/marketplace.json` | `dist/copilot/planweft/` |
+| Factory / Droid | `.factory-plugin/marketplace.json` | `dist/factory/planweft/` |
+| CodeBuddy | `.codebuddy-plugin/marketplace.json` | `dist/codebuddy/planweft/` |
 
 实际注册 ID 以宿主列表为准：Droid 的注册名还取决于来源目录、仓库和 pin，不能直接从 JSON 的 `name` 推断。Git marketplace 发布必须同时包含 catalog 和被引用的目录；单独托管 JSON 不会让相对路径文件自动可下载。Cursor 使用原生 UI，不能由 catalog 的存在推导出通用管理 CLI。
 
@@ -66,7 +91,7 @@ PWF 的根目录隐藏文件夹承载了它的多个平台适配。本仓把共�
 
 脚本、模板和语言资源从实际安装的插件或 Skill 目录解析；任务记录从目标项目解析。安装缓存不是项目目录，插件更新也不承担项目状态迁移。原生适配使用宿主给出的包根或等价定位方式，例如 Cursor 的 `CURSOR_PLUGIN_ROOT`、Copilot 的 `PLUGIN_ROOT`、Gemini 的 `${extensionPath}` 和 OpenCode 的 `import.meta.url`。
 
-主入口保持 `project-docs`，辅助命令使用 `pd-`，OpenCode 工具使用 `pd_`。Codex/Claude 保留其支持的语言入口布局与调用策略；采用可移植 Skill 布局的平台把语言变体放入主 Skill 的 `references/language-variants/`，用 `GUIDE.md` 作为显式读取资源，避免递归扫描重复发现主 Skill。Pi 同样携带语言资源；复制完整主 Skill 时，这些资源必须一起保留。
+主入口保持 `project-docs`，辅助命令使用 `pw-`，OpenCode 工具使用 `pw_`。Codex/Claude 保留其支持的语言入口布局与调用策略；采用可移植 Skill 布局的平台把语言变体放入主 Skill 的 `references/language-variants/`，用 `GUIDE.md` 作为显式读取资源，避免递归扫描重复发现主 Skill。Pi 同样携带语言资源；复制完整主 Skill 时，这些资源必须一起保留。
 
 运行时保留 `PLAN_ID`、`PWF_*`、`PLANNING_DISABLED` 及 PWF 磁盘协议；Kiro 延续 `.kiro/plan` 平台布局。三文件、attestation、ledger 和长期文档不由安装器删除或改写。自动恢复只读取项目文件；会话历史读取仍要求显式调用。多 Agent 沿用一个计划 owner、worker 各自记录的规则，独立任务绑定不同计划或 worktree；本插件使用宿主已有 Agent 能力，不增加统一调度服务。
 
@@ -112,7 +137,7 @@ Pi 把 Skill 与 Extension 打进同一个包。OpenCode 的插件和独立 Skil
 | Codex 0.153.4 | Passed，真实 `skills/list` | Passed | Passed，重新安装完成更新 | Passed，真实 exec + 本地合成响应验证信任、注入、新会话恢复与禁用 |
 | Claude Code 2.1.263 | Passed，结构与继承 hook 协议 | Passed | Passed；卸载后可留 orphan cache | Not Run，未认证模型会话 |
 | Pi 0.85.1 | Passed，Extension 54 tests | Passed，实际 npm tarball | Passed | Not Run，未在模型会话验证 Extension 激活 |
-| OpenCode V1 1.18.29 | Passed，真实 debug 发现三项 `pd_` 工具及唯一主 Skill | Passed | Passed，本地包与新进程 | Passed，debug 加载并直接执行工具；模型调用与会话内 reload 为 Not Run |
+| OpenCode V1 1.18.29 | Passed，真实 debug 发现三项 `pw_` 工具及唯一主 Skill | Passed | Passed，本地包与新进程 | Passed，debug 加载并直接执行工具；模型调用与会话内 reload 为 Not Run |
 | Gemini CLI 0.58.0 | Passed，四事件脚本协议 | Passed | Passed，保留信任/安装确认 | Not Run，未认证模型会话 |
 | Copilot CLI 1.0.83 | Passed，原生输出协议 | Passed | Passed；本地源原位加载，卸载禁用发现，源目录保留 | Not Run，未认证模型会话 |
 | CodeBuddy 2.147.0 | Passed，Skill/catalog | Passed | Passed；卸载后可留 orphan cache | Not Run，未认证模型会话 |

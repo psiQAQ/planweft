@@ -60,7 +60,7 @@ This release provides `dist/<host>/planweft/` directly and does not generate ZIP
 
 In the examples, `/abs/repo` is the source repository root, `/abs/package` is the selected `dist/<host>/planweft` directory, and `/abs/project` is the target project. Replace them with actual absolute paths. The repository contains six host-specific marketplace catalogs, all named `planweft`. **Register `/abs/repo` as the marketplace source.** A platform directory is the plugin payload and cannot universally serve as a marketplace. A standalone package supports separate directory registration only if it actually contains its own catalog.
 
-These instructions describe the delivered interfaces and official capabilities; they do not imply that every host or operating system has passed live testing. Actual validation results are recorded separately. No verified public Git or npm release address is currently provided. `REPOSITORY_URL`, `OWNER/REPO` and `@scope/...` are parameters that can be replaced with usable addresses only after publication.
+These instructions describe the delivered interfaces and official capabilities; they do not imply that every host or operating system has passed live testing. Actual validation results are recorded separately. The publication target is `https://github.com/psiQAQ/planweft` and the only npm name is `planweft`. Git commands require the corresponding branch to have been pushed; npm commands require the named version to exist. Replace `REPOSITORY_URL` or `OWNER/REPO` with that repository only once its contents are available.
 
 ## Before installation and when updating
 
@@ -135,16 +135,16 @@ pi list
 
 `-l` writes the project's `.pi/settings.json`; omitting it writes the user's `~/.pi/agent/settings.json`. A local path records a reference without copying files, so keep the source directory. After updating that directory, use `/reload` or restart. Remove a project installation with `pi remove -l /abs/repo/dist/pi/planweft`; omit `-l` for a user installation.
 
-After npm publication, use the actual scope:
+After publication, use the single unscoped package:
 
 ```bash
 pi install -l npm:planweft@0.4.0-rc.1
 pi install -l npm:planweft@NEW_VERSION
 # Remove the project installation:
-pi remove -l npm:planweft@0.4.0-rc.1
+pi remove -l npm:planweft@NEW_VERSION
 ```
 
-Pin a version with `npm:planweft@0.4.0-rc.1@VERSION`; upgrade by running `pi install -l` again with the new version. In the current official CLI, bare `pi update` updates Pi itself, while `pi update --extensions` updates packages; a targeted update is shown above. Pi handles dependencies for npm and Git installations. A local package does not require users to run development tests. [Official packages](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/packages.md)
+Pin a version with `npm:planweft@VERSION`; upgrade by running `pi install -l` again with the new version. In the current official CLI, bare `pi update` updates Pi itself, while `pi update --extensions` updates packages; a targeted update is shown above. Pi handles dependencies for npm and Git installations. A local package does not require users to run development tests. [Official packages](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/packages.md)
 
 After loading, check `/skill:project-docs` and `/pw-plan-status`. Only explicit `/pw-plan-execute` enables injection and the execution loop; `/pw-plan-execute reset` restores passive behavior. The configuration key remains `planningWithFiles`. `PWF_MODE` supports `auto`, `parity`, `cache-safe` and `notify`; execution loops retain the platform's limitations.
 

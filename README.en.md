@@ -1,10 +1,12 @@
 [简体中文](README.md) | [English](README.en.md)
 
-# Program Design
+> PlanWeft 0.4.0-rc.1 is a release candidate. Stable 0.4.0 requires live acceptance on Codex, Claude Code, Pi and OpenCode. See the [release checklist](docs/releasing.en.md) / [中文](docs/releasing.md).
+
+# PlanWeft
 
 **Keep an agent's progress, design rationale and validation results in the project so later sessions and collaborators can continue the work.**
 
-Program Design is a file-based planning and project documentation plugin for coding agents. It uses **planning-with-files (PWF) v3.17.0** as its pinned runtime and adds selective documentation maintenance, design-evidence checks and verifiable handoffs to the default planning and recovery workflow.
+PlanWeft is a file-based planning and project documentation plugin for coding agents. It uses **planning-with-files (PWF) v3.17.0** as its pinned runtime and adds selective documentation maintenance, design-evidence checks and verifiable handoffs to the default planning and recovery workflow.
 
 It is intended for feature development, maintenance, investigations and design work that span sessions: continuing the current task while retaining confirmed requirements, significant decisions and observed validation. Small changes maintain only the necessary records, following the project's existing layout and rules.
 
@@ -46,9 +48,9 @@ These practices depend on the agent reading and following the Skill correctly. T
 
 This comparison uses the fixed versions actually consulted by this repository. It describes focus and influence, without ranking performance. Links point to the original material.
 
-| Approach | Primary focus | Influence on Program Design and differences |
+| Approach | Primary focus | Influence on PlanWeft and differences |
 | --- | --- | --- |
-| **Program Design** | Task state, durable documents, design evidence and handoffs across sessions | Combines the approaches below on a PWF runtime, with generated host distributions; comparative effectiveness has not been established |
+| **PlanWeft** | Task state, durable documents, design evidence and handoffs across sessions | Combines the approaches below on a PWF runtime, with generated host distributions; comparative effectiveness has not been established |
 | [PWF v3.17.0](https://github.com/OthmanAdi/planning-with-files/blob/0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7/skills/planning-with-files/SKILL.md) | Three-file task memory, recovery, hooks and planning controls | Direct runtime and state-protocol base; selective documentation maintenance and evidence/handoff checks become part of the default workflow. PWF already advises keeping durable knowledge separately |
 | [OpenSpec](https://github.com/Fission-AI/OpenSpec/blob/e062b9572be933564ba3899d059377dfa1393e32/docs/concepts.md) | Behavior specifications, change proposals, design, tasks, delta specs and archiving | Informs the separation of intended behavior, design and tasks, and rigor proportional to risk; its schema and delta-merge engine are not integrated |
 | [Superpowers](https://github.com/obra/superpowers/blob/b36e0829c6d0140e93cfef2ca599b1b07d4a7797/skills/writing-plans/SKILL.md) | Executable small-task plans with files, tests and execution handoffs | Informs resumable plans and thin host adapters; its full required Skill chain is not adopted, nor is one TDD workflow imposed |
@@ -61,12 +63,12 @@ PWF's [after-completion guidance](https://github.com/OthmanAdi/planning-with-fil
 
 This project contributes the concrete workflow integration and engineering:
 
-- **Default documentation workflow:** the [workflow overlay](overlays/program-design/workflow.md) brings existing-document maintenance, precise sources, approved-requirement protection, validation status and independent handoffs into `project-docs`.
+- **Default documentation workflow:** the [workflow overlay](overlays/planweft/workflow.md) brings existing-document maintenance, precise sources, approved-requirement protection, validation status and independent handoffs into `project-docs`.
 - **Traceable builds and distribution:** a pinned upstream snapshot, local overlays and the [generator](scripts/build-plugin.py) produce host directories. Per-file content and executable-bit digests detect drift while maintaining one product identity.
-- **Host adapters and release preparation:** the [native adapter layer](overlays/program-design/native/adapters.py) handles installed-asset paths, event protocols and discovery differences. The [release preparation tool](scripts/prepare-native-release.py) produces native npm artifacts and Git release trees with the plugin at the root.
+- **Host adapters and release preparation:** the [native adapter layer](overlays/planweft/native/adapters.py) handles installed-asset paths, event protocols and discovery differences. The [release preparation tool](scripts/prepare-native-release.py) produces native npm artifacts and Git release trees with the plugin at the root.
 - **Validation tied to installed contents:** evidence records installed files, added/changed/deleted resources during updates, rollback, uninstall and project-document protection, separating script protocols, host loading and model behavior.
 
-“Original implementation” here means extensions and integration written for this repository. It does not claim to have invented file-based planning, ADRs, fresh-reader testing or generated distributions, nor to have established identical behavior or effectiveness across hosts. Runtime inheritance and local differences are traceable in the [patch inventory (engineering record, Chinese)](overlays/program-design/PATCHES.md); methodological novelty is considered separately in the [innovation record (engineering record, Chinese)](docs/innovations.md).
+“Original implementation” here means extensions and integration written for this repository. It does not claim to have invented file-based planning, ADRs, fresh-reader testing or generated distributions, nor to have established identical behavior or effectiveness across hosts. Runtime inheritance and local differences are traceable in the [patch inventory (engineering record, Chinese)](overlays/planweft/PATCHES.md); methodological novelty is considered separately in the [innovation record (engineering record, Chinese)](docs/innovations.md).
 
 ## Current delivery and boundaries
 

@@ -1,10 +1,12 @@
 [简体中文](README.md) | [English](README.en.md)
 
-# Program Design
+> PlanWeft 0.4.0-rc.1 为候选版；稳定 0.4.0 须通过 Codex、Claude Code、Pi、OpenCode 真实验收。见[发布清单：中文](docs/releasing.md) / [English](docs/releasing.en.md)。
+
+# PlanWeft
 
 **让 Agent 的任务进展、设计理由和验证结果留在项目里，供后续会话和协作者接续。**
 
-Program Design 是面向编程 Agent 的文件规划与项目文档协作插件。它以 **planning-with-files（PWF）v3.17.0** 为固定运行底座，在任务规划与恢复流程中，默认加入按需文档维护、设计依据检查和可复核交接。
+PlanWeft 是面向编程 Agent 的文件规划与项目文档协作插件。它以 **planning-with-files（PWF）v3.17.0** 为固定运行底座，在任务规划与恢复流程中，默认加入按需文档维护、设计依据检查和可复核交接。
 
 它适合需要跨会话完成的功能开发、维护、调查和设计工作：既要继续当前任务，也要保留已经确认的需求、重要决定与实际验证。小改动只维护必要资料，沿用项目已有目录和规则。
 
@@ -46,9 +48,9 @@ Program Design 是面向编程 Agent 的文件规划与项目文档协作插件�
 
 以下比较针对本仓实际参考的固定版本，展示关注点与借鉴关系，不作性能排名。链接指向对应原始资料。
 
-| 方案 | 主要关注点 | Program Design 的借鉴与差异 |
+| 方案 | 主要关注点 | PlanWeft 的借鉴与差异 |
 | --- | --- | --- |
-| **Program Design** | 跨会话的任务状态、长期文档、设计依据与交接 | 在 PWF 底座上整合下列方法，并提供按宿主生成的分发；尚未证明效果优于其他方案 |
+| **PlanWeft** | 跨会话的任务状态、长期文档、设计依据与交接 | 在 PWF 底座上整合下列方法，并提供按宿主生成的分发；尚未证明效果优于其他方案 |
 | [PWF v3.17.0](https://github.com/OthmanAdi/planning-with-files/blob/0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7/skills/planning-with-files/SKILL.md) | 三文件任务工作记忆、恢复、hooks 和计划控制 | 直接移植运行时与状态协议，将按需文档维护、依据与交接检查融入默认工作流；PWF 本身也建议长期知识另存 |
 | [OpenSpec](https://github.com/Fission-AI/OpenSpec/blob/e062b9572be933564ba3899d059377dfa1393e32/docs/concepts.md) | 行为规格、变更提案、设计、任务、增量规格与归档 | 借鉴目标行为、设计与任务的分工，以及与风险相称的严谨度；未集成其 schema 或增量合并引擎 |
 | [Superpowers](https://github.com/obra/superpowers/blob/b36e0829c6d0140e93cfef2ca599b1b07d4a7797/skills/writing-plans/SKILL.md) | 包含文件、测试和执行交接的可执行小任务计划 | 借鉴可接续计划及宿主薄适配；未移植其整套必需 Skill 链，也不统一强制 TDD 流程 |
@@ -61,12 +63,12 @@ PWF 的[任务完成后指导](https://github.com/OthmanAdi/planning-with-files/
 
 本项目的贡献在于具体的工作流整合和工程实现：
 
-- **默认文档协作流程**：把已有文档维护、准确来源、批准需求保护、验证状态和独立交接接入 `project-docs`，形成统一的[工作流扩展](overlays/program-design/workflow.md)。
+- **默认文档协作流程**：把已有文档维护、准确来源、批准需求保护、验证状态和独立交接接入 `project-docs`，形成统一的[工作流扩展](overlays/planweft/workflow.md)。
 - **可追溯构建与分发**：固定上游快照、本地 overlays 和[生成器](scripts/build-plugin.py)共同生成平台目录；用逐文件内容与执行位摘要检测漂移，维护统一产品身份。
-- **宿主适配与发布准备**：[原生适配层](overlays/program-design/native/adapters.py)处理安装资产定位、事件协议和发现差异；[发布准备工具](scripts/prepare-native-release.py)生成 npm 原生产物及包根 Git 发布树。
+- **宿主适配与发布准备**：[原生适配层](overlays/planweft/native/adapters.py)处理安装资产定位、事件协议和发现差异；[发布准备工具](scripts/prepare-native-release.py)生成 npm 原生产物及包根 Git 发布树。
 - **与安装内容对应的验证**：记录真实安装文件、更新增改删、回退、卸载和项目文档保护，区分脚本协议、宿主加载与模型行为。
 
-这里的“原创实现”指本仓库编写的扩展与组合贡献，不表示首创文件规划、ADR、冷读测试或生成分发，也不表示已经证明所有平台行为或任务效果一致。运行时继承与本地差异可按[补丁清单（工程记录，中文）](overlays/program-design/PATCHES.md)追溯；方法新颖性按[创新记录（工程记录，中文）](docs/innovations.md)单独判断。
+这里的“原创实现”指本仓库编写的扩展与组合贡献，不表示首创文件规划、ADR、冷读测试或生成分发，也不表示已经证明所有平台行为或任务效果一致。运行时继承与本地差异可按[补丁清单（工程记录，中文）](overlays/planweft/PATCHES.md)追溯；方法新颖性按[创新记录（工程记录，中文）](docs/innovations.md)单独判断。
 
 ## 当前交付与使用边界
 

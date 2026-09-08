@@ -8,7 +8,7 @@
 
 ## 插件源码与生成分发
 
-`vendor/planning-with-files/` 保存 PWF v3.17.0 原始归档、逐文件清单和许可；`overlays/program-design/` 保存本地规则与模板。`scripts/build-plugin.py` 负责统一身份映射、明确的运行时补丁和确定性分发。平台原生包装维护于 `overlays/program-design/native/`。不要手改 `plugins/program-design/`、`dist/<host>/program-design/` 或六个生成 catalog；当前构建不生成 ZIP。
+`vendor/planning-with-files/` 保存 PWF v3.17.0 原始归档、逐文件清单和许可；`overlays/planweft/` 保存本地规则与模板。`scripts/build-plugin.py` 负责统一身份映射、明确的运行时补丁和确定性分发。平台原生包装维护于 `overlays/planweft/native/`。不要手改 `plugins/planweft/`、`dist/<host>/planweft/` 或六个生成 catalog；当前构建不生成 ZIP。
 
 修改源后运行构建，再执行 `--verify` 与受影响的离线回归。变更身份映射、hook 或模板解析时，需要原始/迁移上游回归比较；不能删改失败断言来换取通过。详细命令见 [测试说明](../tests/README.md)，固定版本更新、导入及补丁边界见 [上游维护](upstream-maintenance.md)。
 
@@ -16,7 +16,7 @@
 
 普通 `python3 scripts/build-plugin.py` 与 `--verify` 使用标准库和固定输入，保持离线。修改 OpenCode 源码时，维护者先运行 `python3 scripts/compile-opencode.py --install` 更新与 source hash 绑定的预编译文件；`--check --install` 在临时目录按现有锁文件复编译核对，不修改业务项目依赖。用户安装预编译 V1 包不需要执行这一步。
 
-发布准备使用 `python3 scripts/prepare-native-release.py --output NEW_DIRECTORY`，输出须在仓库外且尚不存在，`--previous-release` 可沿用旧发布历史；可选真实 `--repository-url` 与 `--npm-scope` 必须成对提供。输出应包含可审阅目录与清单；生成成功不等于 Git 分支已推送、npm 已发布或市场已上架。远端写入、发布和个人安装分别按授权执行。验证至少区分 catalog 发现、插件安装/缓存、更新回滚、会话加载、Skill 实际读取、hooks 信任与执行；历史 0.2.0 报告保持原样。
+发布准备使用 `python3 scripts/prepare-native-release.py --output NEW_DIRECTORY`，输出须在仓库外且尚不存在，`--previous-release` 可沿用旧发布历史；`--repository-url` 明确发布源；仅输出一个 `planweft` npm 包，不再接受 `--npm-scope`。`--release` 要求干净提交。输出应包含可审阅目录与清单；生成成功不等于 Git 分支已推送、npm 已发布或市场已上架。远端写入、发布和个人安装分别按授权执行。验证至少区分 catalog 发现、插件安装/缓存、更新回滚、会话加载、Skill 实际读取、hooks 信任与执行；历史 0.2.0 报告保持原样。
 
 ## 设计、实施、审查
 
@@ -49,6 +49,8 @@ subagent 不可用时记录本阶段依据审查为 Not Run，并继续不依赖
 
 项目介绍是 [README 中文](../README.md) / [English](../README.en.md)；安装指南是 [中文](installation.md) / [English](installation.en.md)；跨平台设计是 [中文](platforms.md) / [English](platforms.en.md)。公开文档从首行提供语言切换，引用这些文档时并列两种语言；内部规格、计划、原始证据保留其语言并明确标注。
 
-安装正文的唯一编辑源为 `overlays/program-design/install/INSTALL.md` 和 `INSTALL.en.md`，由 build-plugin.py 同时生成 docs/installation 两份指南和各平台包内 INSTALL。包内 README 的来源同样在 overlays，并提供中英版本。不要分别编辑 docs 中的安装镜像或 dist 中的副本；`--verify` 会拒绝其漂移。中英安装命令块保持一致，语言表达与能力范围还需人工/独立 review，不能只靠文本测试判断翻译质量。
+安装正文的唯一编辑源为 `overlays/planweft/install/INSTALL.md` 和 `INSTALL.en.md`，由 build-plugin.py 同时生成 docs/installation 两份指南和各平台包内 INSTALL。包内 README 的来源同样在 overlays，并提供中英版本。不要分别编辑 docs 中的安装镜像或 dist 中的副本；`--verify` 会拒绝其漂移。中英安装命令块保持一致，语言表达与能力范围还需人工/独立 review，不能只靠文本测试判断翻译质量。
 
 npm 包的 files 清单必须保留 README.en.md 与 INSTALL.en.md；OpenCode package.json 属于已绑定的编译输入，修改清单后仍要刷新编译绑定并确认 JavaScript 没有意外变化。纯说明文档调整按差异运行链接、构建、打包与相关契约检查，不把历史真实宿主运行自动改标为本次实测。
+
+0.4.0 更名与统一安装器见 [SPEC-0005](specs/0005-planweft-release.md)、[ADR-0008](adr/0008-single-npm-installer.md) 和 [PLAN-0008](plans/0008-planweft-release.md)。安装器入口为 bin/planweft.mjs 与 lib/installer.mjs；测试使用 node tests/installer.test.mjs。发布说明：[中文](releasing.md) / [English](releasing.en.md)。

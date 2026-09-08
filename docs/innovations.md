@@ -23,3 +23,9 @@
 2026-09-07，围绕常规决策记录和复现文档检索 `site:adr.github.io architecture decision records`、`site.github.com architecture decision record references related decisions`、`site:docs.github.com issue forms steps reproduce expected behavior`。实际打开 MADR 官网/模板、ADR 官方目录和 GitHub Issues quickstart，发现已有合适先例，已收录为 R-17/R-18 与 P-12，因此没有新建创新机制。查询结果仅作为线索，最终依据定位到原始文档或固定源码。
 
 基础阶段曾将来源指纹、写入锁、自动安装列为待设计能力，当时没有全面检索或实施。后续 0.2.0/0.3.0 实际采用了上游 attestation、固定来源与文件摘要、宿主原生安装渠道；具体范围以对应规格和复现记录为准。这些实现不使早期候选自动成为获批创新；新增机制仍按上述流程核查。
+
+## 0.4.0 安装器组合设计
+
+已检索 Vercel Skills installer/lock、Pi packages、OpenCode V1 plugins 和 npm trusted publishing。
+本地扩展为一个包承载多入口，并将 host/scope 市场身份、依赖完整性与逐步失败收据组合；
+链接、内容摘要、staging 和原生包管理均是已有机制，不作首创主张。依据见 ADR-0008 与引用台账。

@@ -9,7 +9,7 @@
         },
         ".agents/skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "c986d78605063dfa5958cd8683c5c04f2adabbc29e0fdd2a792c48534090c1c5"
+          "sha256": "505223eb0b06b7d2a54a761b05889e42b26adb8e8d9d1fda4fa53eb72819e7f4"
         },
         ".agents/skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -149,11 +149,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "71df711a369c4d63fe71ee215bd412e839047a9e8511c45e70ea6e108a4c6036"
+          "sha256": "7c25e0c9723ed29339ba604bdb24a256860107c46f597d5b9cf0453cc80d1b8f"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "0fd82ea3c394eb0728efea70bb6e74a66f8b411d20e5c86cc08438ad3104c7ba"
+          "sha256": "e04e542b5f46acf6eb4427a3d8f4f3fe6a9fb9e84b38817217427b9abafb6a80"
         },
         "LICENSE": {
           "executable": false,
@@ -269,7 +269,7 @@
         },
         "skills/i18n/project-docs-ar/SKILL.md": {
           "executable": false,
-          "sha256": "a3257762ffd14e36423e8402beb4515a70c0e008481c924d0e4581333b2f1c17"
+          "sha256": "4be49a4fa288e4b5f7de097345e568ca5a8681f1f5491403c60bfb0a503c6867"
         },
         "skills/i18n/project-docs-ar/UPSTREAM.json": {
           "executable": false,
@@ -413,7 +413,7 @@
         },
         "skills/i18n/project-docs-de/SKILL.md": {
           "executable": false,
-          "sha256": "e2d3c11aa4f122123bbee5b42e68bd20d45ae3f15cce25e66bc2f133e5fce975"
+          "sha256": "053f73ea743ff0b00f73c5b20ccee27ad761b4fc6c05f8253a7b6db1068b8a28"
         },
         "skills/i18n/project-docs-de/UPSTREAM.json": {
           "executable": false,
@@ -557,7 +557,7 @@
         },
         "skills/i18n/project-docs-es/SKILL.md": {
           "executable": false,
-          "sha256": "272d937a478d0838f83f917987268008d8ffed1097bc6d7c9324c363f16e4f25"
+          "sha256": "e9b0789c7e257e4c8bd19cac05e8e280f42a076dd960ae415b8677b8ab0e40bf"
         },
         "skills/i18n/project-docs-es/UPSTREAM.json": {
           "executable": false,
@@ -701,7 +701,7 @@
         },
         "skills/i18n/project-docs-zh/SKILL.md": {
           "executable": false,
-          "sha256": "4254267c12e676d6aa28ddf0122fc61c4f609851512f2f71f09c53ed91c2c1e4"
+          "sha256": "79c4a318636bca2b703872729092cd64d47f9b6a201e8029f5c8cc742147f9c5"
         },
         "skills/i18n/project-docs-zh/UPSTREAM.json": {
           "executable": false,
@@ -845,7 +845,7 @@
         },
         "skills/i18n/project-docs-zht/SKILL.md": {
           "executable": false,
-          "sha256": "8fd4ac764c32ca788d769160fa22a83aeb04ed3dc90dfac46bb3ad2d2ef27060"
+          "sha256": "517334ab0ea864620825cd78af1b41164a68033f70b5c00e349792e08067d9dc"
         },
         "skills/i18n/project-docs-zht/UPSTREAM.json": {
           "executable": false,
@@ -989,7 +989,7 @@
         },
         "skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "df49d08ef1522be4488c73710be50ad1cbe1016b45710c7cfefa0cb1b0e473a9"
+          "sha256": "7dd139b644fc5a9ed8ab40056a4b9d6edf41b7dc7da94c6d24985b3dc03340aa"
         },
         "skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -1153,7 +1153,7 @@
         }
       },
       "path": "agents/planweft",
-      "sha256": "fbe6ad0f35bb8584333b2dc00b3e7560fdea1a984239bb0c359252b2323b33af"
+      "sha256": "daaff09f45faf87375942c5c699d22da99caedf3e54d747383ba392db3097e18"
     },
     "claude": {
       "file_count": 268,
@@ -1168,11 +1168,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "3fcfd00fc6c625dada8e1ebe4db51e7c0c056b45c61002ddf64e491d19092ab7"
+          "sha256": "592974e47807d3b687b0cc07186b7225b23399786111aee1d0e0a1b9f65281c9"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "b2ac09fb258dffae1b4735a571ee1342376d0e553216e40dab2fc793fd9ed041"
+          "sha256": "cd9ed63ca953875739c4f2de7d8096a23320b24503c8ca286edab5455096a0c7"
         },
         "LICENSE": {
           "executable": false,
@@ -1348,7 +1348,7 @@
         },
         "skills/i18n/project-docs-ar/SKILL.md": {
           "executable": false,
-          "sha256": "a3257762ffd14e36423e8402beb4515a70c0e008481c924d0e4581333b2f1c17"
+          "sha256": "4be49a4fa288e4b5f7de097345e568ca5a8681f1f5491403c60bfb0a503c6867"
         },
         "skills/i18n/project-docs-ar/UPSTREAM.json": {
           "executable": false,
@@ -1492,7 +1492,7 @@
         },
         "skills/i18n/project-docs-de/SKILL.md": {
           "executable": false,
-          "sha256": "e2d3c11aa4f122123bbee5b42e68bd20d45ae3f15cce25e66bc2f133e5fce975"
+          "sha256": "053f73ea743ff0b00f73c5b20ccee27ad761b4fc6c05f8253a7b6db1068b8a28"
         },
         "skills/i18n/project-docs-de/UPSTREAM.json": {
           "executable": false,
@@ -1636,7 +1636,7 @@
         },
         "skills/i18n/project-docs-es/SKILL.md": {
           "executable": false,
-          "sha256": "272d937a478d0838f83f917987268008d8ffed1097bc6d7c9324c363f16e4f25"
+          "sha256": "e9b0789c7e257e4c8bd19cac05e8e280f42a076dd960ae415b8677b8ab0e40bf"
         },
         "skills/i18n/project-docs-es/UPSTREAM.json": {
           "executable": false,
@@ -1780,7 +1780,7 @@
         },
         "skills/i18n/project-docs-zh/SKILL.md": {
           "executable": false,
-          "sha256": "4254267c12e676d6aa28ddf0122fc61c4f609851512f2f71f09c53ed91c2c1e4"
+          "sha256": "79c4a318636bca2b703872729092cd64d47f9b6a201e8029f5c8cc742147f9c5"
         },
         "skills/i18n/project-docs-zh/UPSTREAM.json": {
           "executable": false,
@@ -1924,7 +1924,7 @@
         },
         "skills/i18n/project-docs-zht/SKILL.md": {
           "executable": false,
-          "sha256": "8fd4ac764c32ca788d769160fa22a83aeb04ed3dc90dfac46bb3ad2d2ef27060"
+          "sha256": "517334ab0ea864620825cd78af1b41164a68033f70b5c00e349792e08067d9dc"
         },
         "skills/i18n/project-docs-zht/UPSTREAM.json": {
           "executable": false,
@@ -2068,7 +2068,7 @@
         },
         "skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "df49d08ef1522be4488c73710be50ad1cbe1016b45710c7cfefa0cb1b0e473a9"
+          "sha256": "7dd139b644fc5a9ed8ab40056a4b9d6edf41b7dc7da94c6d24985b3dc03340aa"
         },
         "skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -2232,7 +2232,7 @@
         }
       },
       "path": "claude/planweft",
-      "sha256": "ce6fbc84149ce7dfe7daa8a92dae31f8fffe34129cdb2397f6ccd51cdc3ab858"
+      "sha256": "0b2fd91450e8fc3c36a74b01f89dfe77e5a9d7afc2a10367539a66d0ad88f729"
     },
     "codebuddy": {
       "file_count": 252,
@@ -2243,11 +2243,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "411c4e9c92b1b6d194b4e2a10e41ae6e80a7a874fbc316d33ba5f1e1c105495c"
+          "sha256": "db052540ce14216a3d579f82de12cfc8cea6ee6e9ae999bc912f2d2b5d90eeb4"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "d3f72cb39095093832af2f178db316198e270669fe584a44ca4783eeee3b5173"
+          "sha256": "e88a9a2b3973d42426a4a9e9227bd6439e86b3bddf39d1ba1bebbaf4eab73dfa"
         },
         "LICENSE": {
           "executable": false,
@@ -2363,7 +2363,7 @@
         },
         "skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "b297b5aa911dfd56c2403470ea99c0196f2405cd2141b80da184feaff70c33d1"
+          "sha256": "3b371e047803155df9948b9a0b3c586d1ba9f9356490aa460432aaa0cef3ec1f"
         },
         "skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -2387,7 +2387,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md": {
           "executable": false,
-          "sha256": "23b7af8c9dbc0db26624f0243e80556e6a14d5b84dd43019e5b563457fd02739"
+          "sha256": "90d9f7b076559684912fc4254e78f9675576f6b9ff7f527a6243f5e93348715b"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/LICENSE": {
           "executable": false,
@@ -2531,7 +2531,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/GUIDE.md": {
           "executable": false,
-          "sha256": "240e21cb422b9cc81bd5c0fe605cc132df0567e25ff03eb050271c29c9dbc29d"
+          "sha256": "ad3de7518e56a88e17dc0a856277ffc166eaf35f6bf2fcc23a4b36cb1c57ff39"
         },
         "skills/project-docs/references/language-variants/project-docs-de/LICENSE": {
           "executable": false,
@@ -2675,7 +2675,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/GUIDE.md": {
           "executable": false,
-          "sha256": "91987a77d23b290637f2b9bf509d392266d55d56c728e2c6483ba07e6b9ccdf8"
+          "sha256": "283c700e8e185aadaba340008ca4644c2583bcf9b1e2b44967d4d7f9a06d8205"
         },
         "skills/project-docs/references/language-variants/project-docs-es/LICENSE": {
           "executable": false,
@@ -2819,7 +2819,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md": {
           "executable": false,
-          "sha256": "5f465311f55fc100adc63facf4ce056e2b0fa874d0968a6a88476230c483d997"
+          "sha256": "012a93b97a42de839195d2db037e4244dbf2df5d3b897196a05372d5791b464d"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/LICENSE": {
           "executable": false,
@@ -2963,7 +2963,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md": {
           "executable": false,
-          "sha256": "092f2dc65ff983480277e5e4925e111a1b779eb726f055f6924429f087a05f8e"
+          "sha256": "0552e644848e88490e944f3756e18112fe4d126611bd4e0c3b8407d468e34083"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/LICENSE": {
           "executable": false,
@@ -3247,7 +3247,7 @@
         }
       },
       "path": "codebuddy/planweft",
-      "sha256": "a949245b35a31ebf8bbdf772e534268e6548356ed6de598bb3e5e3220db33461"
+      "sha256": "040ad1694e9544823e8b5084fc38dbdabdc215e8154dda70a4f88330fa323abc"
     },
     "codex": {
       "file_count": 276,
@@ -3326,11 +3326,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "942de559716bb3c1ee79d8ce785ea497a8074276780713133b4d4db1e1c699ea"
+          "sha256": "48d7335cd681d985e68b02609134bc6e3d902b6a6fd53cbaa32dd61fd1e33984"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "4e1022531610fe6bdfc466b5857fa854fcc5d5afc61a3f6c44ec585ad618a17d"
+          "sha256": "584f4d8b3efd752e76c9288fee9cd351d4e9e8bcaa8a5a16c5bf3d2f776b3b73"
         },
         "LICENSE": {
           "executable": false,
@@ -3450,7 +3450,7 @@
         },
         "skills/i18n/project-docs-ar/SKILL.md": {
           "executable": false,
-          "sha256": "a3257762ffd14e36423e8402beb4515a70c0e008481c924d0e4581333b2f1c17"
+          "sha256": "4be49a4fa288e4b5f7de097345e568ca5a8681f1f5491403c60bfb0a503c6867"
         },
         "skills/i18n/project-docs-ar/UPSTREAM.json": {
           "executable": false,
@@ -3598,7 +3598,7 @@
         },
         "skills/i18n/project-docs-de/SKILL.md": {
           "executable": false,
-          "sha256": "e2d3c11aa4f122123bbee5b42e68bd20d45ae3f15cce25e66bc2f133e5fce975"
+          "sha256": "053f73ea743ff0b00f73c5b20ccee27ad761b4fc6c05f8253a7b6db1068b8a28"
         },
         "skills/i18n/project-docs-de/UPSTREAM.json": {
           "executable": false,
@@ -3746,7 +3746,7 @@
         },
         "skills/i18n/project-docs-es/SKILL.md": {
           "executable": false,
-          "sha256": "272d937a478d0838f83f917987268008d8ffed1097bc6d7c9324c363f16e4f25"
+          "sha256": "e9b0789c7e257e4c8bd19cac05e8e280f42a076dd960ae415b8677b8ab0e40bf"
         },
         "skills/i18n/project-docs-es/UPSTREAM.json": {
           "executable": false,
@@ -3894,7 +3894,7 @@
         },
         "skills/i18n/project-docs-zh/SKILL.md": {
           "executable": false,
-          "sha256": "4254267c12e676d6aa28ddf0122fc61c4f609851512f2f71f09c53ed91c2c1e4"
+          "sha256": "79c4a318636bca2b703872729092cd64d47f9b6a201e8029f5c8cc742147f9c5"
         },
         "skills/i18n/project-docs-zh/UPSTREAM.json": {
           "executable": false,
@@ -4042,7 +4042,7 @@
         },
         "skills/i18n/project-docs-zht/SKILL.md": {
           "executable": false,
-          "sha256": "8fd4ac764c32ca788d769160fa22a83aeb04ed3dc90dfac46bb3ad2d2ef27060"
+          "sha256": "517334ab0ea864620825cd78af1b41164a68033f70b5c00e349792e08067d9dc"
         },
         "skills/i18n/project-docs-zht/UPSTREAM.json": {
           "executable": false,
@@ -4190,7 +4190,7 @@
         },
         "skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "030cdcb0ae50962cf9614f7e077793ca2fdce532fd07a13c01b9320599f03641"
+          "sha256": "b72cab8c580e95ad9f1a723c3086d13c2a53e0a7364797e6400e9e1aeb82cff5"
         },
         "skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -4358,7 +4358,7 @@
         }
       },
       "path": "codex/planweft",
-      "sha256": "760467e65c0f500815b27f49a9a5755633e0c5500e27bd3ebe0dfea1c88f13a4"
+      "sha256": "728628cf4af5c9ce2d35fdd46f7c5bbacfa7abda4eaf6a32ac0d2f89c6eabfa6"
     },
     "continue": {
       "file_count": 288,
@@ -4373,7 +4373,7 @@
         },
         ".continue/skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "f08b15310447500cfd36c85a62586e12dc84b4243c2126c3bc1913d7207c4fda"
+          "sha256": "d968fb5fa41a881772e3a5aad733653d3e60a012ee06352818c753f73498f9e1"
         },
         ".continue/skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -4513,11 +4513,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "49cc144a962730b3bc73e435758e5bb062947f136b88aef726db7bf625d38924"
+          "sha256": "b3c394059480f1eb0cb13cce499a11144a6e1fede7c635b9eb3be6839f77938b"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "90e2f14b6b17e9b679f8f448dcd82d16cb92043b4965317d4d061f0b3c6f39bc"
+          "sha256": "9d04f663d4c752241bcf85e9eb4c40518a61aea67dcdb8a3b8eb0be43017d118"
         },
         "LICENSE": {
           "executable": false,
@@ -4633,7 +4633,7 @@
         },
         "skills/i18n/project-docs-ar/SKILL.md": {
           "executable": false,
-          "sha256": "a3257762ffd14e36423e8402beb4515a70c0e008481c924d0e4581333b2f1c17"
+          "sha256": "4be49a4fa288e4b5f7de097345e568ca5a8681f1f5491403c60bfb0a503c6867"
         },
         "skills/i18n/project-docs-ar/UPSTREAM.json": {
           "executable": false,
@@ -4777,7 +4777,7 @@
         },
         "skills/i18n/project-docs-de/SKILL.md": {
           "executable": false,
-          "sha256": "e2d3c11aa4f122123bbee5b42e68bd20d45ae3f15cce25e66bc2f133e5fce975"
+          "sha256": "053f73ea743ff0b00f73c5b20ccee27ad761b4fc6c05f8253a7b6db1068b8a28"
         },
         "skills/i18n/project-docs-de/UPSTREAM.json": {
           "executable": false,
@@ -4921,7 +4921,7 @@
         },
         "skills/i18n/project-docs-es/SKILL.md": {
           "executable": false,
-          "sha256": "272d937a478d0838f83f917987268008d8ffed1097bc6d7c9324c363f16e4f25"
+          "sha256": "e9b0789c7e257e4c8bd19cac05e8e280f42a076dd960ae415b8677b8ab0e40bf"
         },
         "skills/i18n/project-docs-es/UPSTREAM.json": {
           "executable": false,
@@ -5065,7 +5065,7 @@
         },
         "skills/i18n/project-docs-zh/SKILL.md": {
           "executable": false,
-          "sha256": "4254267c12e676d6aa28ddf0122fc61c4f609851512f2f71f09c53ed91c2c1e4"
+          "sha256": "79c4a318636bca2b703872729092cd64d47f9b6a201e8029f5c8cc742147f9c5"
         },
         "skills/i18n/project-docs-zh/UPSTREAM.json": {
           "executable": false,
@@ -5209,7 +5209,7 @@
         },
         "skills/i18n/project-docs-zht/SKILL.md": {
           "executable": false,
-          "sha256": "8fd4ac764c32ca788d769160fa22a83aeb04ed3dc90dfac46bb3ad2d2ef27060"
+          "sha256": "517334ab0ea864620825cd78af1b41164a68033f70b5c00e349792e08067d9dc"
         },
         "skills/i18n/project-docs-zht/UPSTREAM.json": {
           "executable": false,
@@ -5353,7 +5353,7 @@
         },
         "skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "df49d08ef1522be4488c73710be50ad1cbe1016b45710c7cfefa0cb1b0e473a9"
+          "sha256": "7dd139b644fc5a9ed8ab40056a4b9d6edf41b7dc7da94c6d24985b3dc03340aa"
         },
         "skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -5517,18 +5517,18 @@
         }
       },
       "path": "continue/planweft",
-      "sha256": "42b2ac86a352af6018831de8bc9aa9569cc7196c736c766eaef4bad625937f9d"
+      "sha256": "b67b59cdc8c7e4eb6e37fc6f1910177d2f66c9c9190e5e63f1b6b71291611ad7"
     },
     "copilot": {
       "file_count": 254,
       "files": {
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "058df1dc55a17b481ec44640a3e7bb42edcaa738bc72753bc3c47836f772fdec"
+          "sha256": "4f9d012b86d3bdb5a9aeb4f025a9b60a93a425d842633f550d54c2b1f64bfc5a"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "d4add65bff06f868235fcc11c2ab6b4e41ec60c6d8f43a83eaaa20f06a556aef"
+          "sha256": "57b110253bce417dc71000ab565a098326027a0025f2117b9bbe96e9c04601b2"
         },
         "LICENSE": {
           "executable": false,
@@ -5656,7 +5656,7 @@
         },
         "skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "b297b5aa911dfd56c2403470ea99c0196f2405cd2141b80da184feaff70c33d1"
+          "sha256": "3b371e047803155df9948b9a0b3c586d1ba9f9356490aa460432aaa0cef3ec1f"
         },
         "skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -5680,7 +5680,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md": {
           "executable": false,
-          "sha256": "23b7af8c9dbc0db26624f0243e80556e6a14d5b84dd43019e5b563457fd02739"
+          "sha256": "90d9f7b076559684912fc4254e78f9675576f6b9ff7f527a6243f5e93348715b"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/LICENSE": {
           "executable": false,
@@ -5824,7 +5824,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/GUIDE.md": {
           "executable": false,
-          "sha256": "240e21cb422b9cc81bd5c0fe605cc132df0567e25ff03eb050271c29c9dbc29d"
+          "sha256": "ad3de7518e56a88e17dc0a856277ffc166eaf35f6bf2fcc23a4b36cb1c57ff39"
         },
         "skills/project-docs/references/language-variants/project-docs-de/LICENSE": {
           "executable": false,
@@ -5968,7 +5968,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/GUIDE.md": {
           "executable": false,
-          "sha256": "91987a77d23b290637f2b9bf509d392266d55d56c728e2c6483ba07e6b9ccdf8"
+          "sha256": "283c700e8e185aadaba340008ca4644c2583bcf9b1e2b44967d4d7f9a06d8205"
         },
         "skills/project-docs/references/language-variants/project-docs-es/LICENSE": {
           "executable": false,
@@ -6112,7 +6112,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md": {
           "executable": false,
-          "sha256": "5f465311f55fc100adc63facf4ce056e2b0fa874d0968a6a88476230c483d997"
+          "sha256": "012a93b97a42de839195d2db037e4244dbf2df5d3b897196a05372d5791b464d"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/LICENSE": {
           "executable": false,
@@ -6256,7 +6256,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md": {
           "executable": false,
-          "sha256": "092f2dc65ff983480277e5e4925e111a1b779eb726f055f6924429f087a05f8e"
+          "sha256": "0552e644848e88490e944f3756e18112fe4d126611bd4e0c3b8407d468e34083"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/LICENSE": {
           "executable": false,
@@ -6540,7 +6540,7 @@
         }
       },
       "path": "copilot/planweft",
-      "sha256": "09dab46827b6a5991f6b606bd984303031a06afa1f91f1a16ca697efdc10f68e"
+      "sha256": "ad342a182170ac6aa11c9819c41ef9d23c2a7b68affe374d46c5b0325321e736"
     },
     "cursor": {
       "file_count": 254,
@@ -6551,11 +6551,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "fdc48b7aaa42f6c0d06e90375f6d6b22cd8404f2d4c9b0ccbc27ed53ae09872d"
+          "sha256": "95274081c5924c9e930b754b23188b055e58f99af41697a7ef1788fe20a02835"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "60504427d4c2e69b96e87447980259543e24227ff6e6f1976b9a060a8904f65d"
+          "sha256": "84296636a3d011599131ddbc0e6b7c391cc15a579a370e68f494eca35546737a"
         },
         "LICENSE": {
           "executable": false,
@@ -6679,7 +6679,7 @@
         },
         "skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "b297b5aa911dfd56c2403470ea99c0196f2405cd2141b80da184feaff70c33d1"
+          "sha256": "3b371e047803155df9948b9a0b3c586d1ba9f9356490aa460432aaa0cef3ec1f"
         },
         "skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -6703,7 +6703,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md": {
           "executable": false,
-          "sha256": "23b7af8c9dbc0db26624f0243e80556e6a14d5b84dd43019e5b563457fd02739"
+          "sha256": "90d9f7b076559684912fc4254e78f9675576f6b9ff7f527a6243f5e93348715b"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/LICENSE": {
           "executable": false,
@@ -6847,7 +6847,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/GUIDE.md": {
           "executable": false,
-          "sha256": "240e21cb422b9cc81bd5c0fe605cc132df0567e25ff03eb050271c29c9dbc29d"
+          "sha256": "ad3de7518e56a88e17dc0a856277ffc166eaf35f6bf2fcc23a4b36cb1c57ff39"
         },
         "skills/project-docs/references/language-variants/project-docs-de/LICENSE": {
           "executable": false,
@@ -6991,7 +6991,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/GUIDE.md": {
           "executable": false,
-          "sha256": "91987a77d23b290637f2b9bf509d392266d55d56c728e2c6483ba07e6b9ccdf8"
+          "sha256": "283c700e8e185aadaba340008ca4644c2583bcf9b1e2b44967d4d7f9a06d8205"
         },
         "skills/project-docs/references/language-variants/project-docs-es/LICENSE": {
           "executable": false,
@@ -7135,7 +7135,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md": {
           "executable": false,
-          "sha256": "5f465311f55fc100adc63facf4ce056e2b0fa874d0968a6a88476230c483d997"
+          "sha256": "012a93b97a42de839195d2db037e4244dbf2df5d3b897196a05372d5791b464d"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/LICENSE": {
           "executable": false,
@@ -7279,7 +7279,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md": {
           "executable": false,
-          "sha256": "092f2dc65ff983480277e5e4925e111a1b779eb726f055f6924429f087a05f8e"
+          "sha256": "0552e644848e88490e944f3756e18112fe4d126611bd4e0c3b8407d468e34083"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/LICENSE": {
           "executable": false,
@@ -7563,7 +7563,7 @@
         }
       },
       "path": "cursor/planweft",
-      "sha256": "f22d2bc64f4307be0502ec561ce87eec28eedb788ff99be031aeb17bea77660a"
+      "sha256": "b839a18e5a3f86569f373a185ef460ace9ddaf004a1917ebfe3b05add2c3aeee"
     },
     "factory": {
       "file_count": 252,
@@ -7574,11 +7574,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "52bb1a64b1845f1aace936cd9a29a54a725d24945329f63407cf069b7b4a7c1f"
+          "sha256": "f529c1e067c75f2f1bdc91fdc91bfdf476f5cab7a0a303cbeca08b38c28e64f3"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "a028f67fb89856f6985f4588fe06928c3a8636e5f7b9c73a8c1003dd9805fb55"
+          "sha256": "39b4f40f3bd43dbcc24ede472e8850830626666983e7fc61602170f94f3dc25e"
         },
         "LICENSE": {
           "executable": false,
@@ -7694,7 +7694,7 @@
         },
         "skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "b297b5aa911dfd56c2403470ea99c0196f2405cd2141b80da184feaff70c33d1"
+          "sha256": "3b371e047803155df9948b9a0b3c586d1ba9f9356490aa460432aaa0cef3ec1f"
         },
         "skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -7718,7 +7718,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md": {
           "executable": false,
-          "sha256": "23b7af8c9dbc0db26624f0243e80556e6a14d5b84dd43019e5b563457fd02739"
+          "sha256": "90d9f7b076559684912fc4254e78f9675576f6b9ff7f527a6243f5e93348715b"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/LICENSE": {
           "executable": false,
@@ -7862,7 +7862,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/GUIDE.md": {
           "executable": false,
-          "sha256": "240e21cb422b9cc81bd5c0fe605cc132df0567e25ff03eb050271c29c9dbc29d"
+          "sha256": "ad3de7518e56a88e17dc0a856277ffc166eaf35f6bf2fcc23a4b36cb1c57ff39"
         },
         "skills/project-docs/references/language-variants/project-docs-de/LICENSE": {
           "executable": false,
@@ -8006,7 +8006,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/GUIDE.md": {
           "executable": false,
-          "sha256": "91987a77d23b290637f2b9bf509d392266d55d56c728e2c6483ba07e6b9ccdf8"
+          "sha256": "283c700e8e185aadaba340008ca4644c2583bcf9b1e2b44967d4d7f9a06d8205"
         },
         "skills/project-docs/references/language-variants/project-docs-es/LICENSE": {
           "executable": false,
@@ -8150,7 +8150,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md": {
           "executable": false,
-          "sha256": "5f465311f55fc100adc63facf4ce056e2b0fa874d0968a6a88476230c483d997"
+          "sha256": "012a93b97a42de839195d2db037e4244dbf2df5d3b897196a05372d5791b464d"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/LICENSE": {
           "executable": false,
@@ -8294,7 +8294,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md": {
           "executable": false,
-          "sha256": "092f2dc65ff983480277e5e4925e111a1b779eb726f055f6924429f087a05f8e"
+          "sha256": "0552e644848e88490e944f3756e18112fe4d126611bd4e0c3b8407d468e34083"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/LICENSE": {
           "executable": false,
@@ -8578,18 +8578,18 @@
         }
       },
       "path": "factory/planweft",
-      "sha256": "41908f451dde37caa40201a1d087a5b06887417feefe0631bd8d6a516af11b4d"
+      "sha256": "9259ba6cb292be78a53d4efba859cbb5d4df43fe68d8625f03577ac381f11fa7"
     },
     "gemini": {
       "file_count": 256,
       "files": {
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "8073d36866acc7c4c17df8b8fe5ee51f622f40ceceb7e4282bca93c35cb385e1"
+          "sha256": "4dbbe3613799ebc75067ff6e1086c7226b3e87e0b739d530f27e85f1153848da"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "6e99a338b8474685c924b00eb096b2139de59ef580dfb455f10244a03da0318c"
+          "sha256": "45cff932faf95103c2630c9c508eb5402b30fe7f0e2fb88308bb8c4e0ac6420b"
         },
         "LICENSE": {
           "executable": false,
@@ -8725,7 +8725,7 @@
         },
         "skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "b297b5aa911dfd56c2403470ea99c0196f2405cd2141b80da184feaff70c33d1"
+          "sha256": "3b371e047803155df9948b9a0b3c586d1ba9f9356490aa460432aaa0cef3ec1f"
         },
         "skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -8749,7 +8749,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md": {
           "executable": false,
-          "sha256": "23b7af8c9dbc0db26624f0243e80556e6a14d5b84dd43019e5b563457fd02739"
+          "sha256": "90d9f7b076559684912fc4254e78f9675576f6b9ff7f527a6243f5e93348715b"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/LICENSE": {
           "executable": false,
@@ -8893,7 +8893,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/GUIDE.md": {
           "executable": false,
-          "sha256": "240e21cb422b9cc81bd5c0fe605cc132df0567e25ff03eb050271c29c9dbc29d"
+          "sha256": "ad3de7518e56a88e17dc0a856277ffc166eaf35f6bf2fcc23a4b36cb1c57ff39"
         },
         "skills/project-docs/references/language-variants/project-docs-de/LICENSE": {
           "executable": false,
@@ -9037,7 +9037,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/GUIDE.md": {
           "executable": false,
-          "sha256": "91987a77d23b290637f2b9bf509d392266d55d56c728e2c6483ba07e6b9ccdf8"
+          "sha256": "283c700e8e185aadaba340008ca4644c2583bcf9b1e2b44967d4d7f9a06d8205"
         },
         "skills/project-docs/references/language-variants/project-docs-es/LICENSE": {
           "executable": false,
@@ -9181,7 +9181,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md": {
           "executable": false,
-          "sha256": "5f465311f55fc100adc63facf4ce056e2b0fa874d0968a6a88476230c483d997"
+          "sha256": "012a93b97a42de839195d2db037e4244dbf2df5d3b897196a05372d5791b464d"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/LICENSE": {
           "executable": false,
@@ -9325,7 +9325,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md": {
           "executable": false,
-          "sha256": "092f2dc65ff983480277e5e4925e111a1b779eb726f055f6924429f087a05f8e"
+          "sha256": "0552e644848e88490e944f3756e18112fe4d126611bd4e0c3b8407d468e34083"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/LICENSE": {
           "executable": false,
@@ -9609,18 +9609,18 @@
         }
       },
       "path": "gemini/planweft",
-      "sha256": "4c76f250ae53a0347c5028c7ddd685c0ff7d51c35387c0ae2c155281ca8f1327"
+      "sha256": "f5674062ba2340b9812bce8c62b3b12f0c076240ce81448ccad37d2d0e5abc76"
     },
     "hermes": {
       "file_count": 261,
       "files": {
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "92dee5750d93d81125d6ac9bcfaa253913a6b5ddab3469987c3401380dc7715a"
+          "sha256": "26b0f0cad82f8f4aa16fba9238ee0ee385449b6b35b39419829b3d097e25be7f"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "bed6ede19bc5bfb0a5a218e21cdaa788596945359e9b193148529df40e5c153d"
+          "sha256": "c98ac538e90265fd11bf5a2d37854acecf28130170ae4f7715b3e02181cfa479"
         },
         "LICENSE": {
           "executable": false,
@@ -9772,7 +9772,7 @@
         },
         "skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "b297b5aa911dfd56c2403470ea99c0196f2405cd2141b80da184feaff70c33d1"
+          "sha256": "3b371e047803155df9948b9a0b3c586d1ba9f9356490aa460432aaa0cef3ec1f"
         },
         "skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -9796,7 +9796,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md": {
           "executable": false,
-          "sha256": "23b7af8c9dbc0db26624f0243e80556e6a14d5b84dd43019e5b563457fd02739"
+          "sha256": "90d9f7b076559684912fc4254e78f9675576f6b9ff7f527a6243f5e93348715b"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/LICENSE": {
           "executable": false,
@@ -9940,7 +9940,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/GUIDE.md": {
           "executable": false,
-          "sha256": "240e21cb422b9cc81bd5c0fe605cc132df0567e25ff03eb050271c29c9dbc29d"
+          "sha256": "ad3de7518e56a88e17dc0a856277ffc166eaf35f6bf2fcc23a4b36cb1c57ff39"
         },
         "skills/project-docs/references/language-variants/project-docs-de/LICENSE": {
           "executable": false,
@@ -10084,7 +10084,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/GUIDE.md": {
           "executable": false,
-          "sha256": "91987a77d23b290637f2b9bf509d392266d55d56c728e2c6483ba07e6b9ccdf8"
+          "sha256": "283c700e8e185aadaba340008ca4644c2583bcf9b1e2b44967d4d7f9a06d8205"
         },
         "skills/project-docs/references/language-variants/project-docs-es/LICENSE": {
           "executable": false,
@@ -10228,7 +10228,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md": {
           "executable": false,
-          "sha256": "5f465311f55fc100adc63facf4ce056e2b0fa874d0968a6a88476230c483d997"
+          "sha256": "012a93b97a42de839195d2db037e4244dbf2df5d3b897196a05372d5791b464d"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/LICENSE": {
           "executable": false,
@@ -10372,7 +10372,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md": {
           "executable": false,
-          "sha256": "092f2dc65ff983480277e5e4925e111a1b779eb726f055f6924429f087a05f8e"
+          "sha256": "0552e644848e88490e944f3756e18112fe4d126611bd4e0c3b8407d468e34083"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/LICENSE": {
           "executable": false,
@@ -10660,18 +10660,18 @@
         }
       },
       "path": "hermes/planweft",
-      "sha256": "f88260ea3875bc9287d6d6e7218107879b28e99f3bbe666ac9b625131caf2d28"
+      "sha256": "9a99377eb7698eb698185a7c05089a6ae99c06ae4482ee991834eb1ab0603431"
     },
     "kiro": {
       "file_count": 264,
       "files": {
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "0544e837a4d6ba0de6ffa1749d060944e77f6cfa45dfafe8f92a6e76f5a697ec"
+          "sha256": "36a296e72d5ca2ec7abc9546405ec7b7b0527138ea46faed54713f579ed47a25"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "2347b712e245837c7f9f35ac79a93ba778b25b5b9534f1eb0d5cf8cc165a7f27"
+          "sha256": "59c868293a70f0e5d3f869b78cbf77b7a611c2b3af0bc0a83c2281c365960511"
         },
         "LICENSE": {
           "executable": false,
@@ -10791,7 +10791,7 @@
         },
         "skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "302a6b5d729010454b37407056e7b945e42d3e03748949a5af11eed22e2d19df"
+          "sha256": "31034e343cf4b4fd2518276645099a0e00dbbdd243c3a88a625d3946e9ec7701"
         },
         "skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -10851,7 +10851,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md": {
           "executable": false,
-          "sha256": "23b7af8c9dbc0db26624f0243e80556e6a14d5b84dd43019e5b563457fd02739"
+          "sha256": "90d9f7b076559684912fc4254e78f9675576f6b9ff7f527a6243f5e93348715b"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/LICENSE": {
           "executable": false,
@@ -10995,7 +10995,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/GUIDE.md": {
           "executable": false,
-          "sha256": "240e21cb422b9cc81bd5c0fe605cc132df0567e25ff03eb050271c29c9dbc29d"
+          "sha256": "ad3de7518e56a88e17dc0a856277ffc166eaf35f6bf2fcc23a4b36cb1c57ff39"
         },
         "skills/project-docs/references/language-variants/project-docs-de/LICENSE": {
           "executable": false,
@@ -11139,7 +11139,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/GUIDE.md": {
           "executable": false,
-          "sha256": "91987a77d23b290637f2b9bf509d392266d55d56c728e2c6483ba07e6b9ccdf8"
+          "sha256": "283c700e8e185aadaba340008ca4644c2583bcf9b1e2b44967d4d7f9a06d8205"
         },
         "skills/project-docs/references/language-variants/project-docs-es/LICENSE": {
           "executable": false,
@@ -11283,7 +11283,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md": {
           "executable": false,
-          "sha256": "5f465311f55fc100adc63facf4ce056e2b0fa874d0968a6a88476230c483d997"
+          "sha256": "012a93b97a42de839195d2db037e4244dbf2df5d3b897196a05372d5791b464d"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/LICENSE": {
           "executable": false,
@@ -11427,7 +11427,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md": {
           "executable": false,
-          "sha256": "092f2dc65ff983480277e5e4925e111a1b779eb726f055f6924429f087a05f8e"
+          "sha256": "0552e644848e88490e944f3756e18112fe4d126611bd4e0c3b8407d468e34083"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/LICENSE": {
           "executable": false,
@@ -11723,7 +11723,7 @@
         }
       },
       "path": "kiro/planweft",
-      "sha256": "f88c8fd8eecb5971f9c4203b2b82fc1755635bbc9f3c97da6b1c13a115d67185"
+      "sha256": "bfe024d1b50b09d8b94142adc614f3cc1f38d2bbcd8df3a46538bf778719518c"
     },
     "mastracode": {
       "file_count": 290,
@@ -11738,7 +11738,7 @@
         },
         ".mastracode/skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "913a6a8f9a9777f3b9673bfb697f989067d6995535db27560db62ad075c1a41b"
+          "sha256": "14af6fd19716e96634d812a9016aad86505743eb3f995aa0272e86e29d3364d6"
         },
         ".mastracode/skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -11886,11 +11886,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "56146e9794f778bc872d31c51b466a98b2201bb97150c73fe07717bb5116a6d1"
+          "sha256": "7b49154aee8f96c9c3f9ab1c0acc9cec74f64983eb4cec4f44b1226d869feeed"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "122e238e6453bb32caebf2351bfd643db7cbf0031f1cade49f6a85702f323e07"
+          "sha256": "0774fbd4beae62a775dcd377b7ff5d7a1155fd4db903fab9a31bf397d2e310cf"
         },
         "LICENSE": {
           "executable": false,
@@ -12006,7 +12006,7 @@
         },
         "skills/i18n/project-docs-ar/SKILL.md": {
           "executable": false,
-          "sha256": "a3257762ffd14e36423e8402beb4515a70c0e008481c924d0e4581333b2f1c17"
+          "sha256": "4be49a4fa288e4b5f7de097345e568ca5a8681f1f5491403c60bfb0a503c6867"
         },
         "skills/i18n/project-docs-ar/UPSTREAM.json": {
           "executable": false,
@@ -12150,7 +12150,7 @@
         },
         "skills/i18n/project-docs-de/SKILL.md": {
           "executable": false,
-          "sha256": "e2d3c11aa4f122123bbee5b42e68bd20d45ae3f15cce25e66bc2f133e5fce975"
+          "sha256": "053f73ea743ff0b00f73c5b20ccee27ad761b4fc6c05f8253a7b6db1068b8a28"
         },
         "skills/i18n/project-docs-de/UPSTREAM.json": {
           "executable": false,
@@ -12294,7 +12294,7 @@
         },
         "skills/i18n/project-docs-es/SKILL.md": {
           "executable": false,
-          "sha256": "272d937a478d0838f83f917987268008d8ffed1097bc6d7c9324c363f16e4f25"
+          "sha256": "e9b0789c7e257e4c8bd19cac05e8e280f42a076dd960ae415b8677b8ab0e40bf"
         },
         "skills/i18n/project-docs-es/UPSTREAM.json": {
           "executable": false,
@@ -12438,7 +12438,7 @@
         },
         "skills/i18n/project-docs-zh/SKILL.md": {
           "executable": false,
-          "sha256": "4254267c12e676d6aa28ddf0122fc61c4f609851512f2f71f09c53ed91c2c1e4"
+          "sha256": "79c4a318636bca2b703872729092cd64d47f9b6a201e8029f5c8cc742147f9c5"
         },
         "skills/i18n/project-docs-zh/UPSTREAM.json": {
           "executable": false,
@@ -12582,7 +12582,7 @@
         },
         "skills/i18n/project-docs-zht/SKILL.md": {
           "executable": false,
-          "sha256": "8fd4ac764c32ca788d769160fa22a83aeb04ed3dc90dfac46bb3ad2d2ef27060"
+          "sha256": "517334ab0ea864620825cd78af1b41164a68033f70b5c00e349792e08067d9dc"
         },
         "skills/i18n/project-docs-zht/UPSTREAM.json": {
           "executable": false,
@@ -12726,7 +12726,7 @@
         },
         "skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "df49d08ef1522be4488c73710be50ad1cbe1016b45710c7cfefa0cb1b0e473a9"
+          "sha256": "7dd139b644fc5a9ed8ab40056a4b9d6edf41b7dc7da94c6d24985b3dc03340aa"
         },
         "skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -12890,7 +12890,7 @@
         }
       },
       "path": "mastracode/planweft",
-      "sha256": "904e256c7a5b7019fe1092ec244023af3166e57302a12ec5d4384600d3b40e23"
+      "sha256": "1512c917938f56e4de6e29199182c52bf1953912d96406a58aa9d47f8a641e18"
     },
     "opencode": {
       "file_count": 264,
@@ -12901,11 +12901,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "f2e1477eaf521adec3cf3ebc27b27704bbe74249247b240ad0b25526d8ed9219"
+          "sha256": "7f5c44de4553987ebd556f226a54ea1bfc3031ac36df2e1b0fb52e9d5324e444"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "fef922f36e0f12a377c29110dd737778d1a992467282a7a95b2daeafddce0d05"
+          "sha256": "677bad97bfbed54f55ad87a0ebce525029de48dd613ca86145b4039b41c1f260"
         },
         "LICENSE": {
           "executable": false,
@@ -13057,7 +13057,7 @@
         },
         "skills/project-docs/SKILL.md": {
           "executable": false,
-          "sha256": "b297b5aa911dfd56c2403470ea99c0196f2405cd2141b80da184feaff70c33d1"
+          "sha256": "3b371e047803155df9948b9a0b3c586d1ba9f9356490aa460432aaa0cef3ec1f"
         },
         "skills/project-docs/UPSTREAM.json": {
           "executable": false,
@@ -13081,7 +13081,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md": {
           "executable": false,
-          "sha256": "23b7af8c9dbc0db26624f0243e80556e6a14d5b84dd43019e5b563457fd02739"
+          "sha256": "90d9f7b076559684912fc4254e78f9675576f6b9ff7f527a6243f5e93348715b"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/LICENSE": {
           "executable": false,
@@ -13225,7 +13225,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/GUIDE.md": {
           "executable": false,
-          "sha256": "240e21cb422b9cc81bd5c0fe605cc132df0567e25ff03eb050271c29c9dbc29d"
+          "sha256": "ad3de7518e56a88e17dc0a856277ffc166eaf35f6bf2fcc23a4b36cb1c57ff39"
         },
         "skills/project-docs/references/language-variants/project-docs-de/LICENSE": {
           "executable": false,
@@ -13369,7 +13369,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/GUIDE.md": {
           "executable": false,
-          "sha256": "91987a77d23b290637f2b9bf509d392266d55d56c728e2c6483ba07e6b9ccdf8"
+          "sha256": "283c700e8e185aadaba340008ca4644c2583bcf9b1e2b44967d4d7f9a06d8205"
         },
         "skills/project-docs/references/language-variants/project-docs-es/LICENSE": {
           "executable": false,
@@ -13513,7 +13513,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md": {
           "executable": false,
-          "sha256": "5f465311f55fc100adc63facf4ce056e2b0fa874d0968a6a88476230c483d997"
+          "sha256": "012a93b97a42de839195d2db037e4244dbf2df5d3b897196a05372d5791b464d"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/LICENSE": {
           "executable": false,
@@ -13657,7 +13657,7 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md": {
           "executable": false,
-          "sha256": "092f2dc65ff983480277e5e4925e111a1b779eb726f055f6924429f087a05f8e"
+          "sha256": "0552e644848e88490e944f3756e18112fe4d126611bd4e0c3b8407d468e34083"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/LICENSE": {
           "executable": false,
@@ -13953,18 +13953,18 @@
         }
       },
       "path": "opencode/planweft",
-      "sha256": "e847d7c9a5032f0070fd532e7b52389c35a87c18d7789c3fb7e3e8adfa7aa7b7"
+      "sha256": "eea428062d3153e69ea95d1d7b8bb7adb4b61e48fdd7160e71c45b7a153e2013"
     },
     "pi": {
       "file_count": 50,
       "files": {
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "095d9628bdc5f15cb4e2afaffa85c1c79ec154ac89ac5fc3b1b0e4189cd57e54"
+          "sha256": "f6a101a1fba62da26be3398b2bd900dbabfa2689252f7eda27c7b0a6b5cac375"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "1255294828b63e46e01c841a10ba7cb8556f950d19ed70f1a165f63fbd173dc7"
+          "sha256": "761219670d4be72f2496606e2be3fb34ecb6d07e5e0308fb31153886fae9bf84"
         },
         "LICENSE": {
           "executable": false,
@@ -13980,7 +13980,7 @@
         },
         "SKILL.md": {
           "executable": false,
-          "sha256": "5858c6de3eaef87518a1d9e54c2030cfa10a19e56f478a1a49c781791f454b57"
+          "sha256": "a27b5121bb9add426e9c2146b035f7776fd38e03e81b9dd021a1e87b0111b0c9"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -14160,7 +14160,7 @@
         }
       },
       "path": "pi/planweft",
-      "sha256": "0e4c752b1b201b980f28527d960298ecefc62b898d34c3438f155bb7bc99b6c2"
+      "sha256": "f0e6118fc31089fce2168195a19cbb77b08b7116f9052e4c3d8eaaa4db2ea5f7"
     }
   },
   "product": "planweft",

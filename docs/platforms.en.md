@@ -1,10 +1,35 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
+## 0.4.0 candidate validation
+
+One npm package now exposes the installer, Pi resources and OpenCode V1 entry. Local native lifecycle tests on Linux passed for the four core hosts; model and remote-channel validation remain separate gates. Other ten adapters retain their implementations but are experimental in 0.4.0. Windows/macOS installer CI is configured, not yet run. [Release: 中文](releasing.md) / [English](releasing.en.md). The 0.3.0 evidence below remains historical.
+
 # Cross-platform design
 
-Program Design 0.3.0 generates independent distributions for 14 hosts from one set of file-planning and documentation rules. The workflow and state protocol are shared; installation entry points, event formats, caches, trust, and continuation follow each host's native mechanisms.
+PlanWeft 0.4.0 generates independent distributions for 14 hosts from one set of file-planning and documentation rules. The workflow and state protocol are shared; installation entry points, event formats, caches, trust, and continuation follow each host's native mechanisms.
 
 For project goals and design sources, read the project introduction: [简体中文](../README.md) | [English](../README.en.md). For installation, updates, rollback, and removal, read the installation guide: [简体中文](installation.md) | [English](installation.en.md). This page explains platform structure and capability boundaries without repeating installation procedures.
+
+| Platform | Static | Protocol | Native lifecycle (Linux) | Model maintenance (Linux) |
+| --- | --- | --- | --- | --- |
+| Codex | Passed | Passed | Passed | Passed |
+| Claude Code | Passed | Passed | Passed | Not Run |
+| Pi | Passed | Passed | Passed | Not Run |
+| OpenCode V1 | Passed | Passed | Passed | Not Run |
+| Cursor | Passed | Passed | Not Run | Not Run |
+| Copilot CLI | Passed | Passed | Not Run | Not Run |
+| Gemini CLI | Passed | Passed | Not Run | Not Run |
+| Hermes | Passed | Passed | Not Run | Not Run |
+| Factory | Passed | Not Run | Not Run | Not Run |
+| CodeBuddy | Passed | Not Run | Not Run | Not Run |
+| Kiro | Passed | Not Run | Not Run | Not Run |
+| Continue | Passed | Not Run | Not Run | Not Run |
+| Mastra Code | Passed | Not Run | Not Run | Not Run |
+| Agents | Passed | Not Run | Not Run | Not Run |
+
+All remote npm/Git lifecycles and real Windows/macOS host sessions remain Not Run until separately recorded. Pi RPC and OpenCode debug discovery are actual host loading, not model calls. Non-core native runs from 0.3.0 are not reused as 0.4.0 results.
+
+The Codex model scenario uses an isolated container and an explicit hook trust bypass. It validates the reviewed hooks at runtime, not the default interactive trust confirmation flow.
 
 ## One source, multiple native directories
 
@@ -13,12 +38,12 @@ The build uses a pinned upstream snapshot, local overlays, and deterministic gen
 | Layer | Location | Responsibility |
 | --- | --- | --- |
 | Pinned source | `vendor/planning-with-files/` | Original source archive, file inventory, provenance, and MIT license; never patch the archive directly |
-| Shared overlays | `overlays/program-design/` | Documentation rules, templates, product identity, and installation resources |
-| Native adapters | `overlays/program-design/native/` | Host manifests, event bridges, component layouts, and installed resource resolution |
-| Compiled resources | `overlays/program-design/opencode-compiled/` | OpenCode V1 outputs bound to a source digest; maintainers compile them, users install the result |
+| Shared overlays | `overlays/planweft/` | Documentation rules, templates, product identity, and installation resources |
+| Native adapters | `overlays/planweft/native/` | Host manifests, event bridges, component layouts, and installed resource resolution |
+| Compiled resources | `overlays/planweft/opencode-compiled/` | OpenCode V1 outputs bound to a source digest; maintainers compile them, users install the result |
 | Generator | `scripts/build-plugin.py` | Apply identity mappings and patches; generate all platform directories, six catalogs, and the content manifest |
-| Distributions | `dist/<host>/program-design/` | Self-contained installation sources with `LICENSE`, `UPSTREAM.json`, and required runtime assets |
-| Compatibility mirror | `plugins/program-design/` | Generated Codex mirror retained for 0.3.x, identical to `dist/codex/program-design/` |
+| Distributions | `dist/<host>/planweft/` | Self-contained installation sources with `LICENSE`, `UPSTREAM.json`, and required runtime assets |
+| Compatibility mirror | `plugins/planweft/` | Generated Codex mirror retained for 0.3.x, identical to `dist/codex/planweft/` |
 
 Maintainers edit generation sources and rebuild instead of editing platform copies. `dist/manifest.json` records the product version, upstream commit, platform paths, per-file hashes, executable bits, and aggregate hashes. `--verify` checks missing files, extra files, content, and executable-bit drift without writing. The generator cleans only explicitly managed outputs and preserves other plugins' root catalog entries.
 
@@ -28,16 +53,16 @@ Directories provide inspectable installation sources; host channels provide ongo
 
 ## Six marketplaces provide independent discovery
 
-The paths below are relative to the repository root. Each catalog has `program-design` as its `name` metadata, but uses its host's own schema. Registering one does not register the others. There is no generic root `marketplace.json`, avoiding discovery precedence that could select another host's package.
+The paths below are relative to the repository root. Each catalog has `planweft` as its `name` metadata, but uses its host's own schema. Registering one does not register the others. There is no generic root `marketplace.json`, avoiding discovery precedence that could select another host's package.
 
 | Host | Repository discovery entry | Package directory |
 | --- | --- | --- |
-| Codex | `.agents/plugins/marketplace.json` | `dist/codex/program-design/` |
-| Claude Code | `.claude-plugin/marketplace.json` | `dist/claude/program-design/` |
-| Cursor | `.cursor-plugin/marketplace.json` | `dist/cursor/program-design/` |
-| Copilot CLI | `.github/plugin/marketplace.json` | `dist/copilot/program-design/` |
-| Factory / Droid | `.factory-plugin/marketplace.json` | `dist/factory/program-design/` |
-| CodeBuddy | `.codebuddy-plugin/marketplace.json` | `dist/codebuddy/program-design/` |
+| Codex | `.agents/plugins/marketplace.json` | `dist/codex/planweft/` |
+| Claude Code | `.claude-plugin/marketplace.json` | `dist/claude/planweft/` |
+| Cursor | `.cursor-plugin/marketplace.json` | `dist/cursor/planweft/` |
+| Copilot CLI | `.github/plugin/marketplace.json` | `dist/copilot/planweft/` |
+| Factory / Droid | `.factory-plugin/marketplace.json` | `dist/factory/planweft/` |
+| CodeBuddy | `.codebuddy-plugin/marketplace.json` | `dist/codebuddy/planweft/` |
 
 Use the host's listing to obtain the actual registered ID. Droid's name also depends on the source directory, repository, and pin, so it cannot be inferred from JSON `name` alone. A published Git marketplace must include both the catalog and referenced directories; hosting JSON alone does not make relative files downloadable. Cursor uses its native UI; a catalog does not imply a universal management CLI.
 
@@ -66,7 +91,7 @@ This table describes the entry points generated in 0.3.0 and the selected channe
 
 Scripts, templates, and language resources resolve from the actual installed plugin or Skill directory; task records resolve from the target project. An installation cache is not a project directory, and updating the plugin does not migrate project state. Adapters use the host-provided package root or equivalent resolution, such as Cursor's `CURSOR_PLUGIN_ROOT`, Copilot's `PLUGIN_ROOT`, Gemini's `${extensionPath}`, and OpenCode's `import.meta.url`.
 
-The main entry remains `project-docs`, auxiliary commands use `pd-`, and OpenCode tools use `pd_`. Codex and Claude retain their supported language-entry layouts and invocation policies. Platforms using the portable Skill layout place variants in the main Skill's `references/language-variants/`, using `GUIDE.md` as an explicitly read resource to avoid duplicate discovery during recursive scans. Pi also includes language resources; these assets must travel with any copy of the complete main Skill.
+The main entry remains `project-docs`, auxiliary commands use `pw-`, and OpenCode tools use `pw_`. Codex and Claude retain their supported language-entry layouts and invocation policies. Platforms using the portable Skill layout place variants in the main Skill's `references/language-variants/`, using `GUIDE.md` as an explicitly read resource to avoid duplicate discovery during recursive scans. Pi also includes language resources; these assets must travel with any copy of the complete main Skill.
 
 The runtime retains `PLAN_ID`, `PWF_*`, `PLANNING_DISABLED`, and the PWF disk protocol. Kiro retains its platform-specific `.kiro/plan` layout. Installers do not delete or rewrite the three planning files, attestations, ledgers, or long-term documents. Automatic recovery reads project files only; session-history access still requires explicit invocation. Multi-agent work keeps one plan owner and separate worker records, with separate plans or worktrees for independent tasks. The plugin uses existing host Agent capabilities without adding a unified scheduling service.
 
@@ -112,7 +137,7 @@ The following summarizes existing 0.3.0 validation recorded on 2026-09-08; this 
 | Codex 0.153.4 | Passed, real `skills/list` | Passed | Passed, updates through reinstallation | Passed, real exec with local synthetic responses checks trust, injection, fresh-session recovery, and disable behavior |
 | Claude Code 2.1.263 | Passed, structure and inherited hook protocol | Passed | Passed; uninstall may leave orphan caches | Not Run, no authenticated model session |
 | Pi 0.85.1 | Passed, 54 Extension tests | Passed, actual npm tarball | Passed | Not Run, Extension activation not checked in a model session |
-| OpenCode V1 1.18.29 | Passed, real debug discovery of three `pd_` tools and one main Skill | Passed | Passed, local packages and fresh processes | Passed, debug loading and direct tool execution; model calls and in-session reload are Not Run |
+| OpenCode V1 1.18.29 | Passed, real debug discovery of three `pw_` tools and one main Skill | Passed | Passed, local packages and fresh processes | Passed, debug loading and direct tool execution; model calls and in-session reload are Not Run |
 | Gemini CLI 0.58.0 | Passed, four-event script protocol | Passed | Passed, retaining trust/install confirmations | Not Run, no authenticated model session |
 | Copilot CLI 1.0.83 | Passed, native output protocol | Passed | Passed; local source loads in place, uninstall disables discovery and preserves the source directory | Not Run, no authenticated model session |
 | CodeBuddy 2.147.0 | Passed, Skill/catalog | Passed | Passed; uninstall may leave orphan caches | Not Run, no authenticated model session |
