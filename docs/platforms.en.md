@@ -2,7 +2,7 @@
 
 ## 0.4.0 candidate validation
 
-One npm package now exposes the installer, Pi resources and OpenCode V1 entry. Stable publication requires all five hosts: Codex, Claude Code, Pi, OpenCode and DSH. The other ten adapters remain experimental. Existing local lifecycle evidence is retained; exact artifacts, model sessions and remote installations are tested separately. Windows/macOS installer CI has now run; its first Windows run exposed a path-dependent failure-injection test, with verification of the fix pending. [Release: 中文](releasing.md) / [English](releasing.en.md). The 0.3.0 evidence below remains historical.
+One npm package now exposes the installer, Pi resources and OpenCode V1 entry. Stable publication requires all five hosts: Codex, Claude Code, Pi, OpenCode and DSH. The other ten adapters remain experimental. Existing local lifecycle evidence is retained; exact artifacts, model sessions and remote installations are tested separately. Linux, Windows and macOS installer CI passed after correcting the Windows failure-injection path; [run record](https://github.com/psiQAQ/planweft/actions/runs/34242500572). [Release: 中文](releasing.md) / [English](releasing.en.md). The 0.3.0 evidence below remains historical.
 
 # Cross-platform design
 

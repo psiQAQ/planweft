@@ -2,7 +2,7 @@
 
 ## 0.4.0 候选验证
 
-单 npm 包提供安装器、Pi 资源和 OpenCode V1 入口。正式发布要求 Codex、Claude Code、Pi、OpenCode 和 DSH 五个平台全部通过；其余十个平台仍为实验性。已有本地生命周期证据保留，准确归档、真实模型与远端安装分别验收。Windows/macOS 安装器 CI 已实际启动，首次 Windows 运行发现故障注入测试路径问题，修复后待重新验证。[发布：中文](releasing.md) / [English](releasing.en.md)。下方 0.3.0 证据继续作为历史记录。
+单 npm 包提供安装器、Pi 资源和 OpenCode V1 入口。正式发布要求 Codex、Claude Code、Pi、OpenCode 和 DSH 五个平台全部通过；其余十个平台仍为实验性。已有本地生命周期证据保留，准确归档、真实模型与远端安装分别验收。Linux、Windows、macOS 安装器 CI 已通过，首次 Windows 故障注入路径问题已修复；[运行记录](https://github.com/psiQAQ/planweft/actions/runs/34242500572)。[发布：中文](releasing.md) / [English](releasing.en.md)。下方 0.3.0 证据继续作为历史记录。
 
 # 跨平台设计
 

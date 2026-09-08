@@ -28,10 +28,12 @@
 ```json
 {
   "tests/five_agent_runtime.py": "b869bf32a75ff0ad8e37bb937a5ecfe21956eb57065d9a4252c53121bd534cdc",
-  "tests/run-five-agent-release.py": "1670b019f59c444339d4ba2d31303a83dfb772a0a00a52e00e7bb17032d850f1",
+  "tests/run-five-agent-release.py": "d311a7bad3976e5b37e9537e51193f8b0b650eeb84f79caff4cc65d13107d68b",
   "tests/run-registry-smoke.py": "c5c79c33eac84aeaa8e8b99808c9d00bbcf2a02fcea57b7435d5a5fe7854230b",
   "scripts/check-release-gate.py": "999db1a346fe4cce72d0c282921603a0cf3e9817dfda5f8af2f9e8e0cb470c2f",
   "scripts/check-release-artifact.py": "84ebba023eb72913fd6e89ba0306d56545dde4a42f67d91c029a25d711f2bd25",
   ".github/workflows/publish.yml": "e27600dff1fdc2cfd068f181a39ea55d470bec215161e96110e767524ca9cc77"
 }
 ```
+
+容器基线检查的复跑发现 Docker `ps` 不支持负 label filter；主 Agent 已改为全体 ID 减去正 label 查询的 ID，保留失败尝试并复验。

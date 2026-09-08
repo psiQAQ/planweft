@@ -160,7 +160,9 @@ def main(argv=None):
         'status':'In Progress','hosts':{},'semantic_review':'Not Run',
         'scope':'Linux amd64 real hosts; exact artifact, no external memory service'}
     # Concurrent labelled validation containers are not baseline services.
-    initial=set(subprocess.check_output(['docker','ps','-aq','--filter','label!=planweft.run'],text=True).split())
+    initial=set(subprocess.check_output(['docker','ps','-aq'],text=True).split())
+    concurrent_trials=set(subprocess.check_output(['docker','ps','-aq','--filter','label=planweft.run'],text=True).split())
+    initial-=concurrent_trials
     run_id='pw-release-'+uuid.uuid4().hex[:12]
     try:
         for host in dict.fromkeys(args.host):
