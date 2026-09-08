@@ -1,1 +1,4 @@
 /docs/books/
+__pycache__/
+*.pyc
+/.venv/
