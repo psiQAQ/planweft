@@ -21,6 +21,7 @@ def main():
     p.add_argument('--sha256', required=True)
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--cli-dir', type=Path, action='append', default=[])
+    p.add_argument('--with-dsh', action='store_true', help='Also verify the experimental DSH native bundle')
     args = p.parse_args()
     import re
     if not re.fullmatch(r'\d+\.\d+\.\d+(?:-[\w.-]+)?', args.version): p.error('Invalid version')
@@ -32,7 +33,7 @@ def main():
     env = {k:v for k,v in os.environ.items() if k.lower() in {'path','systemroot','windir','https_proxy','http_proxy','all_proxy','no_proxy'}}
     env.update(HOME=str(profile), USERPROFILE=str(profile), XDG_CONFIG_HOME=str(profile/'.config'),
                XDG_DATA_HOME=str(profile/'.local/share'), XDG_CACHE_HOME=str(profile/'.cache'),
-               CODEX_HOME=str(profile/'.codex'), CLAUDE_CONFIG_DIR=str(profile/'.claude'),
+               DSH_HOME=str(profile/'.dsh'), CODEX_HOME=str(profile/'.codex'), CLAUDE_CONFIG_DIR=str(profile/'.claude'),
                PI_CODING_AGENT_DIR=str(profile/'.pi/agent'), PLANNING_DISABLED='1',
                npm_config_userconfig=os.devnull, npm_config_cache=str(out/'npm-cache'),
                npm_config_prefix=str(profile/'npm-prefix'), npm_config_registry='https://registry.npmjs.org',
@@ -53,15 +54,15 @@ def main():
         run('npx-help',['npm','exec','--yes','--package=planweft@'+args.version,'--','planweft','--help'])
         with tarfile.open(archive) as tar: tar.extractall(out,filter='data')
         cli=out/'package/bin/planweft.mjs'
-        for host in ['codex','claude','pi','opencode']:
+        for host in ['codex','claude','pi','opencode'] + (['dsh'] if args.with_dsh else []):
             project=out/('项目 '+host);project.mkdir()
             protected={name:(name+' approved\r\n').encode() for name in ['task_plan.md','findings.md','progress.md','requirements.md']}
             for name,data in protected.items(): (project/name).write_bytes(data)
-            flags=['--global'] if host=='codex' else ['--approve-pi-project'] if host=='pi' else []
+            flags=['--global'] if host in ['codex','dsh'] else ['--approve-pi-project'] if host=='pi' else []
             def invoke(action,executable=cli):
                 return run(host+'-'+action,['node',str(executable),action,'-a',host,*flags],project)
             invoke('add')
-            state_dir=profile/'.local/share/planweft' if host=='codex' else project/'.planweft'
+            state_dir=profile/'.local/share/planweft' if host in ['codex','dsh'] else project/'.planweft'
             state=json.loads((state_dir/'installations.json').read_text())
             persistent=Path(state['agents'][host]['packageRoot'])/'bin/planweft.mjs'
             # The managed runtime must survive deletion of the test's disposable npx cache.
@@ -93,6 +94,11 @@ def main():
         if not all(agent.get('tools',{}).get(n) is True for n in ['pw_init','pw_status','pw_check']): raise RuntimeError('OpenCode root npm tools not loaded')
         run('opencode-npm-skills',['opencode','debug','skill'],direct_oc)
         run('opencode-unpair',['node',str(cli),'remove','-a','opencode'],direct_oc)
+        if args.with_dsh:
+            run('dsh-npm-install',['dsh','plugin','--profile','headless','add','planweft@'+args.version])
+            composed=run('dsh-npm-compose',['dsh','--profile','headless','--dump-config'])
+            if 'planweft/dsh' not in composed: raise RuntimeError('DSH npm bundle did not compose')
+            run('dsh-npm-remove',['dsh','plugin','--profile','headless','remove','planweft'])
         summary['status']='Passed'
     except Exception as error:
         summary['status']='Failed';summary['error']=str(error)
