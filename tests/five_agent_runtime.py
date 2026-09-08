@@ -4,6 +4,7 @@ Credentials arrive only over stdin and stay in container memory/tmpfs. This
 module never reads the laboratory's MemoryProxy config or identity headers.
 """
 import hashlib
+import importlib.util
 import ctypes
 import json
 import os
@@ -385,6 +386,13 @@ def controller(payload):
                 os.environ['PWF_GATE_CAP']='1' if case.startswith('gate-cap') else '20'
             prompt = payload['prompt']
             command, data = model_command(host,payload['model'],prompt,case)
+            traced=payload.get('trace_gate_processes',False)
+            if traced:
+                run('version-strace',['strace','--version'])
+                spec=importlib.util.spec_from_file_location('gate_process_trace',Path(__file__).with_name('gate_process_trace.py'))
+                tracer=importlib.util.module_from_spec(spec);spec.loader.exec_module(tracer)
+                expected_gate_hash=hashlib.sha256((package/'dist'/host/'planweft/scripts/check-complete.sh').read_bytes()).hexdigest()
+                command=['strace','-f','--decode-pids=comm','-s','4096','-e','trace='+tracer.TRACE_SYSCALLS,'-e','raw=read','-o','/tmp/planweft-gate.trace','--',*command]
             save('model-invocation',{'argv':command,'fresh_session':True,'case':case,
                 'plugin_installed':case!='cold-reader','external_memory':'direct-provider; no MemoryProxy or identity headers',
                 'codex_hook_trust':'invocation bypass' if '--dangerously-bypass-hook-trust' in command else 'normal',
@@ -403,6 +411,15 @@ def controller(payload):
                     observed_files={e['file'] for e in observed['events']}
                     result['any_gate_counter_access']=bool(observed_files) or observed['overflow']
                     result['gate_counters_read']=not observed['overflow'] and observed_files=={'.stop_blocks','.gate_last_ledger'}
+                if traced and Path('/tmp/planweft-gate.trace').is_file():
+                    raw=Path('/tmp/planweft-gate.trace').read_text()
+                    attributed=tracer.attributed_gate_reads(raw,expected_gate_hash);save('native-gate-processes',attributed)
+                    # Keep raw argv private in container tmpfs. Only the
+                    # allowlisted process/counter projection and source digest
+                    # are exported; credentials are never an output argument.
+                    result['gate_trace_complete']=attributed['trace_complete']
+                    result['attributed_gate_reads']=attributed['trace_complete'] and attributed['attributed_files']==['.gate_last_ledger','.stop_blocks']
+                    result['any_attributed_gate_reads']=bool(attributed['attributed_files'])
             if host=='dsh':
                 logs=list((HOME/'.dsh/sessions').rglob('*.jsonl'))
                 content='\n'.join(p.read_text() for p in sorted(logs))

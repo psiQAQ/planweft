@@ -61,9 +61,12 @@ def parse_args(argv=None):
     parser.add_argument('--model',default='deepseek-v4-flash')
     parser.add_argument('--codex-model',default='gpt-5.6-terra')
     parser.add_argument('--timeout',type=int,default=600)
+    parser.add_argument('--trace-gate-processes',action='store_true',help='Use a fixed strace-enabled image to attribute shell gate reads; Codex/Claude stopping cases only')
     args = parser.parse_args(argv)
     if not 30 <= args.timeout <= 1800:
         parser.error('Timeout must be 30..1800 seconds')
+    if args.trace_gate_processes and (set(args.host)-{'claude','codex'} or set(args.cases)-STOP_CASES):
+        parser.error('Process tracing is limited to Codex/Claude synthetic stopping cases')
     if 'pi' in args.host and set(args.cases)&(STOP_CASES-{'stopping','continuation-limit'}):
         parser.error('Pi uses continuation-limit, not shell ledger/cap gates')
     if 'continuation-limit' in args.cases and set(args.host)!={'pi'}:
@@ -86,6 +89,8 @@ def parse_args(argv=None):
         for host in args.host:
             if not re.fullmatch(r'sha256:[a-f0-9]{64}',images['hosts'][host]['image']):
                 raise ValueError('Image must be a full fixed digest')
+            if args.trace_gate_processes and images['hosts'][host].get('gate_trace',{}).get('strace')!='6.1':
+                raise ValueError('Process tracing requires the recorded fixed strace 6.1 image')
     except (OSError,ValueError,KeyError,tarfile.TarError) as error:
         parser.error(str(error))
     args.output=args.output.resolve()
@@ -187,6 +192,7 @@ def model_text(host, text):
 
 def stop_assertions(case,host,before,after,trace,result,rpc,cases):
     assertions={}
+    if 'gate_trace_complete' in result: assertions['gate_trace_complete']=result['gate_trace_complete'] is True
     counters={'.stop_blocks','.gate_last_ledger'}
     assertions.update(stop_answer='STOP_PROBE' in trace['final'],
         no_tools=trace['tool_observation_supported'] and not trace['tool_calls'],
@@ -198,7 +204,11 @@ def stop_assertions(case,host,before,after,trace,result,rpc,cases):
         assertions['observed_counter_access']=result.get('gate_counters_read') is True
         if host!='dsh':
             control=cases.get(case+'-disabled',{})
-            assertions['negative_control']=control.get('status')=='Passed' and control.get('controller',{}).get('any_gate_counter_access') is False
+            if 'attributed_gate_reads' in result:
+                assertions['attributed_gate_reads']=result['attributed_gate_reads'] is True
+                assertions['negative_control']=control.get('status')=='Passed' and control.get('controller',{}).get('gate_trace_complete') is True and control.get('controller',{}).get('any_attributed_gate_reads') is False
+            else:
+                assertions['negative_control']=control.get('status')=='Passed' and control.get('controller',{}).get('any_gate_counter_access') is False
     if case not in {'continuation-limit','gated-continuation'} and host!='dsh': assertions['single_response']=trace['assistant_responses']==1
     if case=='gated-continuation': assertions['actual_followup']=trace['assistant_responses']>=2
     if host=='dsh':
@@ -223,11 +233,14 @@ def main(argv=None):
     (args.output/'fixture.py').write_bytes((ROOT/'tests/run-pwf-smoke.py').read_bytes())
     runtime=args.output/'runtime.py'
     runtime.write_bytes((ROOT/'tests/five_agent_runtime.py').read_bytes())
+    trace_module=args.output/'gate_process_trace.py'
+    trace_module.write_bytes((ROOT/'tests/gate_process_trace.py').read_bytes())
     digest=hashlib.sha256(args.archive.read_bytes()).hexdigest()
     report={'schema_version':1,'version':args.package['version'],'npm_sha256':digest,
         'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         'fixture_sha256':hashlib.sha256((args.output/'fixture.py').read_bytes()).hexdigest(),
         'runtime_sha256':hashlib.sha256(runtime.read_bytes()).hexdigest(),
+        'trace_module_sha256':hashlib.sha256(trace_module.read_bytes()).hexdigest(),
         'status':'In Progress','hosts':{},'semantic_review':'Not Run',
         'scope':'Linux amd64 real hosts; exact artifact, no external memory service'}
     # Concurrent labelled validation containers are not baseline services.
@@ -280,7 +293,7 @@ def main(argv=None):
                 prompt+=fixture.BOUNDARY
                 (base/'prompt.txt').write_text(prompt)
                 payload={'host':host,'case':case,'secret':secret,'model':args.codex_model if host=='codex' else args.model,
-                         'prompt':prompt,'timeout':args.timeout}
+                         'prompt':prompt,'timeout':args.timeout,'trace_gate_processes':args.trace_gate_processes}
                 name=run_id+'-'+host+'-'+case
                 command=['docker','run','--rm','-i','--name',name,'--label','planweft.run='+run_id,
                     '--read-only','--user',f'{os.getuid()}:{os.getgid()}','--cap-drop=ALL',
@@ -291,6 +304,7 @@ def main(argv=None):
                     '--mount',f'type=bind,src={results},dst=/results',
                     '--mount',f'type=bind,src={args.archive.resolve()},dst=/input/package.tgz,readonly',
                     '--mount',f'type=bind,src={runtime},dst=/runner/runtime.py,readonly',
+                    '--mount',f'type=bind,src={trace_module},dst=/runner/gate_process_trace.py,readonly',
                     '-e','HOME=/home/agent','-e','HTTP_PROXY','-e','HTTPS_PROXY','-e','ALL_PROXY',
                     '--workdir','/workspace','--entrypoint','python3',image,'-c',
                     'import sys,json; sys.path.insert(0,"/runner"); import runtime; sys.exit(runtime.controller(json.load(sys.stdin)))']
