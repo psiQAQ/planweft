@@ -103,3 +103,13 @@ Pi 0.84.3 精确镜像源码确认 agent_settled 在扩展 followUp 后发出。
 `scripts/reassess-stop-evidence.py` 对已有原始结果使用修正后的断言，生成新的摘要绑定结果，不改原始 assessment、不重跑模型。Pi/DSH 后验复核 Passed，Claude cap/stall 继续 Failed。双计数后态、无意外 gate 续轮及负对照已纳入验收器，Linux inotify 只记录文件名/IN_ACCESS，不读内容或宣称 PID 归因。
 
 [实际模型、停止与后验复核附件](evidence/0010/rc3-workflow-and-stopping.tar.gz)：873 项，SHA-256 `8a71cff5685baa60e0633ecbd3e7d93671fd0275f6fa04c6f020accf2a8339aa`。包括失败、原始运行及检查器更正；已检查已知认证值无命中。Python 71 tests Passed；后续收集器/记录修订另按相关回归验证。[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34254397887) 适用于 c6d417c，不冒充新澄清包验收。
+
+## 主 Skill 路由复核与进程归因
+
+准确包 `5fb24d0c3af873c97df439ac07d1f39d357c24359283871369cb1faf023731a5`（`a8f0e1b`）分别使用 `deepseek-v4-flash`、`deepseek-v4-pro` 执行 DSH 维护，均仅唯一 PWF 计划断言 Failed，独立新会话的自动冷读断言 Passed。更换模型没有解除失败；不能据此证明模型或适配器单方原因。原始运行保留，后续脱敏附件单独归档。
+
+独立源码复核发现：reuse 未限定长期文档，无 PWF 时 Quick Start 的 “For a separate task” 分支不明确，Single-file edits 排除项未区分复杂维护；已收敛这些语义，不改夹具授权和验收断言。同时合并重复 catchup，移除主入口不适用的 Claude 六事件/turn-loop 长段，改为按需读取现有 controls；更正 Continue 能力表和 attestation 人工批准措辞。上游快照、运行时和辅助命令实现保留。新准确包的模型验证仍待运行。
+
+进程归因初稿的 PID/FD 复用、参数提及和异步 syscall 反例会产生假阳性，未用于放行。新模块以实际脚本摘要、fork 时身份、进程代际和精确计数路径绑定证据，正负样本都要求完整解析；原始 trace 只留容器私有 tmpfs，不导出任意 argv。12 项离线回归 Passed。固定 strace 6.1 派生镜像的无模型样本及真实 `check-complete.sh --gate` cap=1 正向测试 Passed，两个计数读取均归因到摘要匹配的 gate；这不代替实际模型门槛。
+
+OpenCode 同一准确包的默认停止、cap/stall 与禁用对照 Passed；gated 场景未观察到后续回应，继续 Failed。Claude 新进程归因模型复验被自动审批拒绝，原因是 Claude 目的地/负载的授权范围需要明确；没有绕过执行。其已有模型结果与新的无模型正向测试分开记录。
