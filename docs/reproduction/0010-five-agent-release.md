@@ -91,3 +91,15 @@ RC3 本地最终回归：Python 66 项、安装器 28 项、DSH shell facade 3 �
 Pi 0.84.3 精确镜像源码确认 agent_settled 在扩展 followUp 后发出。收集器现等待 settled，核对 isStreaming=false、isCompacting=false、pendingMessageCount=0，再 EOF shutdown 并排空输出；超时、重启或非零退出失败。真实 fake subprocess 回归 2 tests（七种失败子场景）Passed，独立 review 通过；此项不等于 Pi 模型停止门槛已通过。
 
 [更正与失败附件](evidence/0010/rc3-readiness-correction.tar.gz)：336 项，SHA-256 `71f11788c52563fd4365949764ebfab26784b9e03d563515aea75ae5609fdd56`。含原始模型失败、真实 Cordis 因果脚本及修复协议结果；已检查认证值无命中。修复后的准确 RC3 模型仍待复验。
+
+## RC3 工作流与停止实测
+
+修正包 `d635881e147c6eca4f5d19bf2d0d60d2db8b9a276e2f0255b3df9c850feec11d`（干净提交 `c6d417c`）的 DSH context/recovery 已 Passed。维护的修复、测试、历史、需求和用户修改保护均 Passed，但唯一 PWF 计划仍 Failed。独立冷读确认旧 notes/work 可接续，模型已实际读取完整主 Skill；一般“只改任务相关文件”并非禁止任务记录。新增通用澄清，保留指定文件范围等真实例外，不修改夹具授权或放宽唯一计划断言。该包未发布，后续澄清包单独冻结。
+
+- Pi 实际停止 Passed：未 execute 的默认 auto 会话自然 settled；parity + execute 出现三条本插件 followUp、四次 start/end，最终无 streaming/compacting/pending，项目不变。
+- DSH 实际 Stop：默认、cap=1 且 ledger 前进、stall 三种场景均为一次原生 pass；gated 场景为 block→pass 且有实际后续回应。默认出现两个模型 step，但只一次 Stop，不将 step 等同于 gate 续跑；原因尚未单独归因。
+- Claude 默认和 gated 续轮通过；首次断言错误地将同消息 ID 的 thinking/text 流式分块算作两次回应，修正消息计数。cap/stall 仍 Failed：禁用 hooks 的负对照也发生计数读取，inotify 无 PID 来源证明。不能把访问+退出当作 guard 执行证明；原生 debug 日志已保留，继续补可归因的证据。
+
+`scripts/reassess-stop-evidence.py` 对已有原始结果使用修正后的断言，生成新的摘要绑定结果，不改原始 assessment、不重跑模型。Pi/DSH 后验复核 Passed，Claude cap/stall 继续 Failed。双计数后态、无意外 gate 续轮及负对照已纳入验收器，Linux inotify 只记录文件名/IN_ACCESS，不读内容或宣称 PID 归因。
+
+[实际模型、停止与后验复核附件](evidence/0010/rc3-workflow-and-stopping.tar.gz)：873 项，SHA-256 `8a71cff5685baa60e0633ecbd3e7d93671fd0275f6fa04c6f020accf2a8339aa`。包括失败、原始运行及检查器更正；已检查已知认证值无命中。Python 71 tests Passed；后续收集器/记录修订另按相关回归验证。[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34254397887) 适用于 c6d417c，不冒充新澄清包验收。
