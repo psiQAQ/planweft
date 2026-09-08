@@ -1,0 +1,293 @@
+{
+  "version": "0.3.0",
+  "date": "2026-09-08",
+  "system": "Linux x86_64",
+  "distribution_manifest_sha256": "0df18a8dc00801f13c3a9d0c49540e995671e5085bbeefc4318c4ed2536f4916",
+  "source_binding": "Frozen distribution bytes, captured inventory and runner snapshots; scoped preparation was a dirty working-tree fixture, not a published release.",
+  "local": {
+    "unittest": {
+      "status": "Passed",
+      "tests": 52
+    },
+    "entry_contract": {
+      "status": "Passed",
+      "cases": 13
+    },
+    "compile_check": "Passed",
+    "build_verify": "Passed",
+    "npm_scoped_material_checks": "Passed: 20 independent checks"
+  },
+  "upstream": {
+    "baseline": {
+      "status": "Passed",
+      "pytest": "721 passed, 63 skipped, 798 subtests passed in 114.29s (0:01:54)",
+      "pi_tests": 54,
+      "opencode_tests": 34,
+      "opencode_typecheck_build": "Passed",
+      "tool_override": "Explicit GNU mkdir; see original logs for actual paths and SHA."
+    },
+    "migrated": {
+      "status": "Passed",
+      "pytest": "721 passed, 63 skipped, 851 subtests passed in 113.29s (0:01:53)",
+      "pi_tests": 54,
+      "opencode_tests": 34,
+      "opencode_typecheck_build": "Passed",
+      "tool_override": "Explicit GNU mkdir; see original logs for actual paths and SHA."
+    }
+  },
+  "native": {
+    "codex": {
+      "version": "0.153.4",
+      "status": "Passed",
+      "distribution_tree_sha256": "03ccc32fed320e97d4bca796c55e13eb9effac866a3a29bd48e197c07de4a8b5",
+      "evidence": "project-records/codex/summary.json",
+      "temporary_profile_removed": true,
+      "project_unchanged": true,
+      "protected_records": 7
+    },
+    "claude": {
+      "version": "2.1.263",
+      "status": "Passed",
+      "distribution_tree_sha256": "d5b14b5644b60712d70b5322dc293cca3379f116c331181a1f9dbe0c722cc19e",
+      "evidence": "project-records/claude/summary.json",
+      "temporary_profile_removed": true,
+      "project_unchanged": true,
+      "protected_records": 7
+    },
+    "pi": {
+      "version": "0.85.1",
+      "status": "Passed",
+      "distribution_tree_sha256": "22509c4aa153f4d406612926eb5794b7be59ae7d9b7611e3f1fc2ca373e7d862",
+      "evidence": "project-records/pi/summary.json",
+      "temporary_profile_removed": true,
+      "project_unchanged": true,
+      "protected_records": 7
+    },
+    "opencode": {
+      "version": "1.18.29",
+      "status": "Passed",
+      "distribution_tree_sha256": "01a1d4db84d0fd9434a34bd440cf2e0efb012e6b3985ccb61eb606e4946531de",
+      "evidence": "project-records/opencode/summary.json",
+      "temporary_profile_removed": true,
+      "project_unchanged": true,
+      "resource_delta": {
+        "added_in_B": [
+          "references/pd-lifecycle-add.txt"
+        ],
+        "removed_in_B": [
+          "references/pd-lifecycle-delete.txt"
+        ],
+        "changed_in_B": [
+          "SKILL.md",
+          "references/pd-lifecycle-change.txt"
+        ]
+      },
+      "protected_records": 7
+    },
+    "gemini": {
+      "version": "0.58.0",
+      "status": "Passed",
+      "distribution_tree_sha256": "03839dbf2e164d91999a897b95e714fb7fb8cb7a07f0986b94889f7d839145b2",
+      "evidence": "project-records/gemini/summary.json",
+      "temporary_profile_removed": true,
+      "project_unchanged": true,
+      "protected_records": 7
+    },
+    "copilot": {
+      "version": "1.0.83",
+      "status": "Passed",
+      "distribution_tree_sha256": "8b6f834c181ba2d28ad14f67208d28c3e72e80881995b70e9a5d10182749e96d",
+      "evidence": "project-records/copilot/summary.json",
+      "temporary_profile_removed": true,
+      "project_unchanged": true,
+      "protected_records": 7
+    },
+    "codebuddy": {
+      "version": "2.147.0",
+      "status": "Passed",
+      "distribution_tree_sha256": "171e332b6ddf7d450adf7b2c81425447fbfaa70b90c85a9f4689bc0034134436",
+      "evidence": "project-records/codebuddy/summary.json",
+      "temporary_profile_removed": true,
+      "project_unchanged": true,
+      "protected_records": 7
+    },
+    "factory": {
+      "version": "0.213.0",
+      "status": "Passed",
+      "distribution_tree_sha256": "d14bb441e286817f28ae82892034efb88b81124e384d4569fc1b7772481e8c07",
+      "evidence": "project-records/factory/summary.json",
+      "temporary_profile_removed": true,
+      "project_unchanged": true,
+      "protected_records": 7
+    },
+    "hermes": {
+      "version": "0.21.1",
+      "status": "Failed",
+      "distribution_tree_sha256": "85a9b28f3abdbc09e3461cc324b817256e61e82753249e87272b271a9b2855b6",
+      "evidence": "native/hermes/summary.json",
+      "temporary_profile_removed": true,
+      "project_unchanged": true
+    }
+  },
+  "remaining": {
+    "hermes": "Failed: default Plugin Guard dangerous, final 41 findings; no bypass",
+    "remote_channels": "Not Run: no remote/npm publication identity configured",
+    "gui_hosts": "Not Run: Cursor and Kiro GUI unavailable",
+    "operating_systems": "Not Run: Windows/macOS",
+    "real_model_maintenance_and_cold_reader": "Not Run: no authentication or paid model calls",
+    "live_session_reload": "Not Run"
+  },
+  "codex_host_hooks": {
+    "status": "Passed",
+    "cases": {
+      "untrusted": {
+        "returncode": 0,
+        "request_count": 1,
+        "marker_delivered": false,
+        "expected_delivery": false,
+        "project_unchanged": true,
+        "passed": true
+      },
+      "trusted": {
+        "returncode": 0,
+        "request_count": 1,
+        "marker_delivered": true,
+        "expected_delivery": true,
+        "project_unchanged": true,
+        "passed": true
+      },
+      "new-session-recovery": {
+        "returncode": 0,
+        "request_count": 1,
+        "marker_delivered": true,
+        "expected_delivery": true,
+        "project_unchanged": true,
+        "passed": true
+      },
+      "disabled": {
+        "returncode": 0,
+        "request_count": 1,
+        "marker_delivered": false,
+        "expected_delivery": false,
+        "project_unchanged": true,
+        "passed": true
+      }
+    },
+    "temporary_profile_removed": true,
+    "method": "Real host and local synthetic Responses provider; no real model."
+  },
+  "project_records": {
+    "codex": {
+      "status": "Passed",
+      "protected_records": [
+        "docs/adr/decision.md",
+        "docs/reproduction/known.md",
+        "docs/specs/approved.md",
+        "findings.md",
+        "progress.md",
+        "task_plan.md",
+        "user-note.txt"
+      ],
+      "evidence": "project-records/codex/summary.json",
+      "temporary_profile_removed": true
+    },
+    "claude": {
+      "status": "Passed",
+      "protected_records": [
+        "docs/adr/decision.md",
+        "docs/reproduction/known.md",
+        "docs/specs/approved.md",
+        "findings.md",
+        "progress.md",
+        "task_plan.md",
+        "user-note.txt"
+      ],
+      "evidence": "project-records/claude/summary.json",
+      "temporary_profile_removed": true
+    },
+    "gemini": {
+      "status": "Passed",
+      "protected_records": [
+        "docs/adr/decision.md",
+        "docs/reproduction/known.md",
+        "docs/specs/approved.md",
+        "findings.md",
+        "progress.md",
+        "task_plan.md",
+        "user-note.txt"
+      ],
+      "evidence": "project-records/gemini/summary.json",
+      "temporary_profile_removed": true
+    },
+    "pi": {
+      "status": "Passed",
+      "protected_records": [
+        "docs/adr/decision.md",
+        "docs/reproduction/known.md",
+        "docs/specs/approved.md",
+        "findings.md",
+        "progress.md",
+        "task_plan.md",
+        "user-note.txt"
+      ],
+      "evidence": "project-records/pi/summary.json",
+      "temporary_profile_removed": true
+    },
+    "opencode": {
+      "status": "Passed",
+      "protected_records": [
+        "docs/adr/decision.md",
+        "docs/reproduction/known.md",
+        "docs/specs/approved.md",
+        "findings.md",
+        "progress.md",
+        "task_plan.md",
+        "user-note.txt"
+      ],
+      "evidence": "project-records/opencode/summary.json",
+      "temporary_profile_removed": true
+    },
+    "copilot": {
+      "status": "Passed",
+      "protected_records": [
+        "docs/adr/decision.md",
+        "docs/reproduction/known.md",
+        "docs/specs/approved.md",
+        "findings.md",
+        "progress.md",
+        "task_plan.md",
+        "user-note.txt"
+      ],
+      "evidence": "project-records/copilot/summary.json",
+      "temporary_profile_removed": true
+    },
+    "codebuddy": {
+      "status": "Passed",
+      "protected_records": [
+        "docs/adr/decision.md",
+        "docs/reproduction/known.md",
+        "docs/specs/approved.md",
+        "findings.md",
+        "progress.md",
+        "task_plan.md",
+        "user-note.txt"
+      ],
+      "evidence": "project-records/codebuddy/summary.json",
+      "temporary_profile_removed": true
+    },
+    "factory": {
+      "status": "Passed",
+      "protected_records": [
+        "docs/adr/decision.md",
+        "docs/reproduction/known.md",
+        "docs/specs/approved.md",
+        "findings.md",
+        "progress.md",
+        "task_plan.md",
+        "unrelated.txt"
+      ],
+      "evidence": "project-records/factory/summary.json",
+      "temporary_profile_removed": true
+    }
+  }
+}

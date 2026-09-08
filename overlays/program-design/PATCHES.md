@@ -1,4 +1,4 @@
-# Program Design 0.2.0 本地差异清单
+# Program Design 本地差异清单（0.2.0 基线与 0.3.0 增量）
 
 基准为 PWF v3.17.0、`0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7`。原始归档保持逐字节不变；下列差异由 `scripts/build-plugin.py` 和本目录生成，不能在平台副本单独修改。来源清单见 `vendor/planning-with-files/inventory.json`；文件路径列使用上游原路径或相同类别的全部副本。
 
@@ -16,3 +16,17 @@
 | PD-P10 | `.gemini/settings.json` 的5条hook command | 为包含`$GEMINI_PROJECT_DIR`的完整路径加双引号，并显式使用Bash运行上游0664脚本，避免空格拆词及无执行位失败；不改变脚本或事件协议 | 修复前5事件退出127，仅加引号后5事件退出126；最终直接执行settings命令，禁用输出与项目/缓存不变检查 |
 
 测试中的身份变化只对应实际新接口，不删除上游功能断言。PD-P07 是分发完整性改变引起的 fixture 适配，原始 baseline 仍执行未经修改的测试。本轮结果及失败处理以 `docs/reproduction/0005-pwf-based-plugin.md` 为准；这里登记设计，不预先宣称每层宿主测试通过。
+
+## 0.3.0 追加差异
+
+下面是 0.3.0 对 PD-P06/P09/P10 的后继；上表保留 0.2.0 的原始含义。固定源码不变，目录及本地编译产物由生成器维护。
+
+| ID | 位置 | 变化及原因 | 验证 |
+| --- | --- | --- | --- |
+| PD-P11 | build-plugin.py、六 root catalog、dist | 目录替代 ZIP；逐文件内容/执行位、树摘要与镜像；只迁移 manifest 确认且摘要吻合的旧归档；保留其他根配置 | 确定性、漂移拒绝且无写入、用户备份保护、实际 Git CRLF blob |
+| PD-P12 | native/adapters.py、native-hook.py | 原生 manifests；Cursor/Copilot/Gemini 按各自协议注入，不输出 Copilot allow；资产从安装目录解析，状态仍在项目；native-gate 验证点位于原 attestation 之后 | 三宿主脚本协议、篡改/禁用/去重/续跑边界；独立运行时审查 |
+| PD-P13 | OpenCode core.ts、Hermes paths.py/shell_hook.py、Kiro Skill | 使用随包资产或明确 env override，删除隐含旧安装 fallback；Kiro 在加载 Skill 目录解析脚本；语言支持随单独复制 Skill 携带 | 独立复制、中文空格路径、OpenCode 真实 debug 工具/模板、资源契约 |
+| PD-P14 | compile-opencode.py、opencode-compiled、prepare-native-release.py | 锁定 TypeScript 预编译 V1；记录编译输入/输出摘要；scoped npm 仅改包身份时记录第二阶段输入及逐字段转换；实际 npm 包包含安装说明与全部入口 | 编译重现、过期/篡改拒绝、npm 实物、发布 Git 父提交及增改删 |
+| PD-P15 | native安装说明、包 README、平台矩阵 | 当前官方原生安装/显式更新/卸载；旧 Codex 身份迁移；不生成不存在的发布地址，不把 GUI/Skill 当完整 hooks 插件 | 独立依据 review 与隔离 CLI；Hermes 拒绝、GUI/远程/其他 OS 未运行分开报告 |
+
+0.3.0 原始/移植完整回归与各宿主结果见 REP-0006；PD-P12/P13 属于原生分发层，不能仅凭 `--tree` 上游测试通过代替其协议及实际加载验证。

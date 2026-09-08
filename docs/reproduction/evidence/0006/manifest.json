@@ -1,0 +1,2648 @@
+{
+  "archive": {
+    "path": "raw-evidence.tar.gz",
+    "sha256": "ddcae7064423e04e9e227afd9195d3ca75ad886d002943aa529a9743b5920537",
+    "size": 1119204
+  },
+  "audit": {
+    "credential_patterns": [
+      "private_key",
+      "github_token",
+      "openai_token",
+      "aws_key"
+    ],
+    "excluded": "profiles, auth, caches, dependency trees and copied source payloads; local paths retained",
+    "limitations": "Pattern scan is a check, not proof that arbitrary sensitive data is absent.",
+    "matches": []
+  },
+  "files": {
+    "collect-evidence.py": {
+      "sha256": "d7a42f0281aa7dbff2c1debd0513782b4bb145081ead304e558ee955b1f44ff2",
+      "size": 4748
+    },
+    "delivery/manifest.json": {
+      "sha256": "0df18a8dc00801f13c3a9d0c49540e995671e5085bbeefc4318c4ed2536f4916",
+      "size": 711585
+    },
+    "initial-failures/hermes/bootstrap.log": {
+      "sha256": "1714ce8770ecd316b8b5b5b08b433a26893018d111c92d8316251e7798783de2",
+      "size": 1523
+    },
+    "initial-failures/hermes/environment.json": {
+      "sha256": "6133cc244723536dc889eae37f2d18358286692613dbae5e3ab8af86caad226a",
+      "size": 718
+    },
+    "initial-failures/hermes/logs/01.json": {
+      "sha256": "b28938fc05ed72dc4c23dcb270b49c316be0e830e5ebd0c63cb89558664f8cd0",
+      "size": 260
+    },
+    "initial-failures/hermes/logs/02.json": {
+      "sha256": "8b5f5fbebf01320dcfcf395220a1154897845549202403a840e295ab3f0d2424",
+      "size": 168
+    },
+    "initial-failures/hermes/logs/03.json": {
+      "sha256": "b693068e84bfc5273520b65596e0e40feb09063e8cd6c69a5f935a007d633d67",
+      "size": 18686
+    },
+    "initial-failures/hermes/logs/04.json": {
+      "sha256": "a9804b750262b4f19f458ac095eb954ff1d36027cfcd0337e760af34ad809f51",
+      "size": 215
+    },
+    "initial-failures/hermes/logs/05.json": {
+      "sha256": "40d69ff44dfac2d388411553e448977f6e6d50c5a976b4f69f9b7baf4039e693",
+      "size": 1691
+    },
+    "initial-failures/hermes/logs/06.json": {
+      "sha256": "acd5b4a553148d15e1bd094e876fd8f47bc649d111b966a3f85f8537ad4703e1",
+      "size": 1088
+    },
+    "initial-failures/hermes/logs/07.json": {
+      "sha256": "ec1f5b293c1107b794cd7094b81e62a65734e2226da04d8a8a024242310ff302",
+      "size": 6446
+    },
+    "initial-failures/hermes/logs/state-installed-a.json": {
+      "sha256": "545064c5a1422b8b1e40fc6d3d0af8d11a056434928a08d915f3a4af90952d8b",
+      "size": 925
+    },
+    "initial-failures/hermes/payload-inventory.json": {
+      "sha256": "8e403168775c5eb333188e1d645eb2700aa86a81d96f57708c4a838a1b0a545c",
+      "size": 47359
+    },
+    "initial-failures/hermes/requirements-observed.txt": {
+      "sha256": "4e0403a193b45788f932410d1c359ad8f1bb0981438ff8baf395d210c30ab7c8",
+      "size": 291
+    },
+    "initial-failures/hermes/scan-readonly.json": {
+      "sha256": "5bbc80cd8ba86d894c98d6682a2c34e00fe06ea08348df93c39faa3752d5fe4d",
+      "size": 14389
+    },
+    "initial-failures/hermes/scan-readonly.py": {
+      "sha256": "be27a68a6b83a44420127115f7b0d7f01059ba29d810953cf3b8c6d9702f97e9",
+      "size": 260
+    },
+    "initial-failures/hermes/scan-readonly.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "initial-failures/hermes/summary.json": {
+      "sha256": "8f48c8c3af69b26ca8a158b04057f4e6fdd15d0861161513998876383fe8f301",
+      "size": 29370
+    },
+    "initial-failures/hermes/version.json": {
+      "sha256": "efae6c8c081c9840d11406a1bd69e65c996368a24d906a6436230aae94c2216b",
+      "size": 310
+    },
+    "initial-failures/pd-030-codex-hook-probe-01/marketplace-add.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "initial-failures/pd-030-codex-hook-probe-01/marketplace-add.stdout": {
+      "sha256": "8e0a4d820f0620e371b4e0697818af2d27f76b94adcdc6e6bcec439d5d2fda19",
+      "size": 161
+    },
+    "initial-failures/pd-030-codex-hook-probe-01/plugin-add.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "initial-failures/pd-030-codex-hook-probe-01/plugin-add.stdout": {
+      "sha256": "f1f4cdae54e78ecfbbfbd2c54abb73f7ea873037dd5e839f1bfef9c6b4765065",
+      "size": 187
+    },
+    "initial-failures/pd-030-codex-hook-probe-01/summary.json": {
+      "sha256": "7c106828cc5dbe22b524e7c336453f2c90877847564f115ec94757984379d755",
+      "size": 1106
+    },
+    "initial-failures/pd-030-codex-hook-probe-01/version.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "initial-failures/pd-030-codex-hook-probe-01/version.stdout": {
+      "sha256": "616dba4e87de2b1f07e61fe30ff4a5b3b075986c986c466ac5d244597eac0f36",
+      "size": 18
+    },
+    "initial-failures/pd-030-lifecycle-gemini-01/commands.json": {
+      "sha256": "f203b04b24dd27347d6b965c270810da1a0b4ec29189ac66b7daef97bb94b3fa",
+      "size": 2992
+    },
+    "initial-failures/pd-030-lifecycle-gemini-01/commands/cli-version.json": {
+      "sha256": "408d9cd8a4efbd110b13bb73f7cdad8280bc6ec5b6b910d2afb98da0976447e0",
+      "size": 265
+    },
+    "initial-failures/pd-030-lifecycle-gemini-01/commands/install-A.json": {
+      "sha256": "f15ca5e354274a538c3710765140a6c0a3a612d9c4b2d58b252ab58111a6c65b",
+      "size": 902
+    },
+    "initial-failures/pd-030-lifecycle-gemini-01/commands/lifecycle-help.json": {
+      "sha256": "a0e9ed6ab04a4a3f29afbff61749f8ae3813d60792620672d10b270887980f50",
+      "size": 1656
+    },
+    "initial-failures/pd-030-lifecycle-gemini-01/fixture-0.3.0.json": {
+      "sha256": "2288ac0e783e298d81dd575713c85d6e0ceda3dbe7be76f2b161c91a93e5ee77",
+      "size": 43090
+    },
+    "initial-failures/pd-030-lifecycle-gemini-01/fixture-0.3.1.json": {
+      "sha256": "428180c31b8dc93cba64be0b6e92de65caec9a5997c080ec8b30fbf420a51987",
+      "size": 43087
+    },
+    "initial-failures/pd-030-lifecycle-gemini-01/project-after.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "initial-failures/pd-030-lifecycle-gemini-01/project-before.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "initial-failures/pd-030-lifecycle-gemini-01/summary.json": {
+      "sha256": "2447b98ed64fe77224f2ea104e80d7c3e78f8fc7feda1aa17021d5401b870129",
+      "size": 902
+    },
+    "initial-failures/pd-030-lifecycle-gemini-02/commands.json": {
+      "sha256": "3085b70077bbc37202c8748606ae973dd475e1490941b3eca832cdfd26fc1702",
+      "size": 7505
+    },
+    "initial-failures/pd-030-lifecycle-gemini-02/commands/cli-version.json": {
+      "sha256": "08088f748fce257e66c39b51b207da43c75eca06146d6a5fa2100d1dfae245fb",
+      "size": 265
+    },
+    "initial-failures/pd-030-lifecycle-gemini-02/commands/failure-cleanup.json": {
+      "sha256": "b709f3bcf9ec3fbbfe355db071422533670dd70e79ba5f607dbce76486444039",
+      "size": 353
+    },
+    "initial-failures/pd-030-lifecycle-gemini-02/commands/install-A.json": {
+      "sha256": "b787d918a356829da7eca56f85f0b78917d37a96366ba0ebf12f06221be40647",
+      "size": 1362
+    },
+    "initial-failures/pd-030-lifecycle-gemini-02/commands/lifecycle-help.json": {
+      "sha256": "2ca15261debab039085c4d9376410eab5d1394e0894db7e83e0c9a95903fd59a",
+      "size": 1656
+    },
+    "initial-failures/pd-030-lifecycle-gemini-02/commands/list-A.json": {
+      "sha256": "e54808b52e2eb590884886c2cfc314099f400d310d207cb40fe7d14bce3339d2",
+      "size": 1428
+    },
+    "initial-failures/pd-030-lifecycle-gemini-02/commands/update-to-B.json": {
+      "sha256": "1b0fccd39ab8fec992349642e85b1a3ae3e4f9c707abe11747cb26f61f0e6a0e",
+      "size": 2108
+    },
+    "initial-failures/pd-030-lifecycle-gemini-02/fixture-0.3.0.json": {
+      "sha256": "4ef71af807ac9552105e106e972900f700e8495707a40ca551007178381a0435",
+      "size": 43090
+    },
+    "initial-failures/pd-030-lifecycle-gemini-02/fixture-0.3.1.json": {
+      "sha256": "031888b5d7ab1e7ad33acd2d3b3c4542ba702ad42eeb280afecf85a507183a0a",
+      "size": 43087
+    },
+    "initial-failures/pd-030-lifecycle-gemini-02/project-after.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "initial-failures/pd-030-lifecycle-gemini-02/project-before.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "initial-failures/pd-030-lifecycle-gemini-02/summary.json": {
+      "sha256": "4acd4e5daea43292f2d0039032fee1439dbb2c71c6a196115105a5666ca50290",
+      "size": 1249
+    },
+    "initial-failures/pd-030-lifecycle-gemini-02/verify-A.json": {
+      "sha256": "552c6908b83bae34f98ea57e22b649485e564d8882c5bb3eada226e9f0872593",
+      "size": 293
+    },
+    "initial-failures/pd-030-opencode-native-01/commands.json": {
+      "sha256": "c1a21eb83ad4756c429f16f5128e65b81c2c90cd09376ceaea74a4f2c3646fb5",
+      "size": 4156
+    },
+    "initial-failures/pd-030-opencode-native-01/commands/cli-version.json": {
+      "sha256": "25cc34f23f9f12bacacbfffd472879b1cb0f33789576c2d9cef51b30671d6998",
+      "size": 170
+    },
+    "initial-failures/pd-030-opencode-native-01/commands/debug-help.json": {
+      "sha256": "c56081a06ad143e34bdce1d9f15e635d1494d88e97b1ae2b86e10678c875b2de",
+      "size": 1099
+    },
+    "initial-failures/pd-030-opencode-native-01/commands/npm-ci.json": {
+      "sha256": "b84446492df78a39ff70dde4254e729651be5f07612b724c90ebd4a6fc34d58c",
+      "size": 2741
+    },
+    "initial-failures/pd-030-opencode-native-01/lifecycle-helper.py": {
+      "sha256": "8adedc4d69bb69d84c62849f067fae02263e7d704af91a8c810d0be460c975f1",
+      "size": 25885
+    },
+    "initial-failures/pd-030-opencode-native-01/runner.py": {
+      "sha256": "62f831325b665142fd55d7f753a5749cb30609573f7a12ae4e721595d3b5e00e",
+      "size": 11483
+    },
+    "initial-failures/pd-030-opencode-native-01/source-files.json": {
+      "sha256": "2438fc7c7275cd98797df6149f0b0749ccaefbc2384122c407d30f8267cd4956",
+      "size": 43788
+    },
+    "initial-failures/pd-030-opencode-native-01/summary.json": {
+      "sha256": "651978747917a67779666aace510fab661330d8c1e52f41e4660b39ef0d710ca",
+      "size": 540
+    },
+    "initial-failures/pd-native-lifecycle-evidence-codebuddy-v030/commands.json": {
+      "sha256": "21d4668933e5a9a3aafc4052cd9fab3571b44210eb34f97f79a3ba91228be76f",
+      "size": 4772
+    },
+    "initial-failures/pd-native-lifecycle-evidence-codebuddy-v030/commands/cli-version.json": {
+      "sha256": "d22ade03e64197afe945dc9dc9c4c07289f04521179bd0ed91b2a15fac917d0c",
+      "size": 279
+    },
+    "initial-failures/pd-native-lifecycle-evidence-codebuddy-v030/commands/install-help.json": {
+      "sha256": "220b46215382be7fbcf464f264dba01f2265ca348e30ff98e376417e752db7c6",
+      "size": 593
+    },
+    "initial-failures/pd-native-lifecycle-evidence-codebuddy-v030/commands/marketplace-help.json": {
+      "sha256": "60d7911521f81fe78b82af948b97dad4b726eb4d5db0fbca15b28f0493607daf",
+      "size": 714
+    },
+    "initial-failures/pd-native-lifecycle-evidence-codebuddy-v030/commands/plugin-help.json": {
+      "sha256": "4a4964f656e696660d218d78e13e931315d990eaeb9f0bc0da1568afd4957326",
+      "size": 1477
+    },
+    "initial-failures/pd-native-lifecycle-evidence-codebuddy-v030/commands/register-marketplace.json": {
+      "sha256": "4588d0e40b5e86ca21c2f96bb7fd37d09bf37b0f8a105ca66a0d959ad33f1ecf",
+      "size": 384
+    },
+    "initial-failures/pd-native-lifecycle-evidence-codebuddy-v030/commands/unregister-marketplace.json": {
+      "sha256": "527dd7feec67c701f1b95d043d10320cc76025b2bb3ab79f63e66377699e4d70",
+      "size": 351
+    },
+    "initial-failures/pd-native-lifecycle-evidence-codebuddy-v030/commands/update-help.json": {
+      "sha256": "8ea2d3894d15bb824748b7a3a5cac13e23ba7d7e0c2b82baa7cb2fef9445d992",
+      "size": 558
+    },
+    "initial-failures/pd-native-lifecycle-evidence-codebuddy-v030/fixture-0.3.0.json": {
+      "sha256": "d0f56655cbc4ce3bb908f2ff8e9b00041ca7401734410113d2bdd20e1e7ceb5b",
+      "size": 42537
+    },
+    "initial-failures/pd-native-lifecycle-evidence-codebuddy-v030/fixture-0.3.1.json": {
+      "sha256": "49a40df2be675d37db5b836f609f4177352c52d37408a7e8f001e389f311f2d6",
+      "size": 42534
+    },
+    "initial-failures/pd-native-lifecycle-evidence-codebuddy-v030/loopback-denial-diagnostic.txt": {
+      "sha256": "22b29f814153e8c5565a812731ab54bc83682fb19119c3ae4fbfee58604a2042",
+      "size": 2065
+    },
+    "initial-failures/pd-native-lifecycle-evidence-codebuddy-v030/project-after.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "initial-failures/pd-native-lifecycle-evidence-codebuddy-v030/project-before.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "initial-failures/pd-native-lifecycle-evidence-codebuddy-v030/summary.json": {
+      "sha256": "25aae36ddadc1e106df6b231ec3a2572598cc8db9c992150a4d2da588c837bd4",
+      "size": 901
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands.json": {
+      "sha256": "d51ded8b7d1b6bbdc1ec05c7d3403665b30825e572b42bdf0b62c87ea271ce5a",
+      "size": 13914
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/cli-version.json": {
+      "sha256": "5c8e727718e84817cbbf3a260177d7776c42b49973b484cea4549dc7a7a99229",
+      "size": 329
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/install-A.json": {
+      "sha256": "336d7f74bea3b57eafec221ac3332d193fa5337be7ed0e9371a4ca338975f8e8",
+      "size": 588
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/install-help.json": {
+      "sha256": "f5c4129346b86739a6942015941eacb7fcc792864b9290953e36a1d145e342e8",
+      "size": 1504
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/list-A.json": {
+      "sha256": "8cb3a61e0d9fdaf00a7a730f44412bf5436c567a20eaa58c2a0119b10f7f4671",
+      "size": 458
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/list-B.json": {
+      "sha256": "e9925201fc0e2cb13692004bc3c447b47571c83670a1b83fee6c5ce744f326aa",
+      "size": 458
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/list-after-uninstall.json": {
+      "sha256": "69328d278565beec0a7c063b06d3daef8f81583bae0921312334a02aac002a2e",
+      "size": 459
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/list-rollback-A.json": {
+      "sha256": "73dcfaad898f4d77f20772f0835f1f5bfb0fb2f65755afdc569df119b26e8c72",
+      "size": 458
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/locate-0.3.0.json": {
+      "sha256": "4e7ed1b7cd75e59e929cc98138216bcb5c47bd9fb28fba87e2279ec3de90bbbd",
+      "size": 458
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/locate-0.3.1.json": {
+      "sha256": "5b873cfc85767379fcbcff4b3184dcae2c0e2d163f1b3ad9554374ed4dc51199",
+      "size": 458
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/marketplace-help.json": {
+      "sha256": "b23d5b89561cce3984811529a7c310cb2fbbefaf868ea0be8e0d60608fab1487",
+      "size": 1171
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/plugin-help.json": {
+      "sha256": "73f94dccfaec79536101cfb55e4c428c6cd819d0934fc1638db4e9bfe0765d04",
+      "size": 1298
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/refresh-for-rollback.json": {
+      "sha256": "b71f8748a7f3cb80b0d1658cf4165376ab5804bd065364da573272fda6a62e0e",
+      "size": 407
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/refresh-marketplace.json": {
+      "sha256": "12582b5ed798e3c4343d858b82207390bfa37a9edbdcf60c43102675184c103d",
+      "size": 407
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/register-marketplace.json": {
+      "sha256": "b5d1382ad6e71d1485c0102b6554c1429d63e726ac5f0d98df288de0eeb68c4e",
+      "size": 394
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/remove-before-rollback.json": {
+      "sha256": "5e3808c40d719bfc5d11b39969b87708583e7e821a587464bb4b3f17edfb528e",
+      "size": 459
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/rollback-to-A.json": {
+      "sha256": "4c5ec67d7797a433f868e481fce6e38fa2a02a2fb297151cdddcb092aa7312f7",
+      "size": 588
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/uninstall.json": {
+      "sha256": "4fac001b528ce87f611369980067e1232bcf2da084eb170e97c7f4ede731ad2d",
+      "size": 459
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/unregister-marketplace.json": {
+      "sha256": "60b5133c01d7a59f0b935b69b672a6773f1ef429a0d527781a6e393cdcc471c0",
+      "size": 363
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/update-help.json": {
+      "sha256": "34544f22a0a250b82395d9798667b1cf6ae8234a6b85af33e915f0fa5b0ae7af",
+      "size": 1082
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/commands/update-to-B.json": {
+      "sha256": "de5eac5ff7e05caf5f270668b1331cfe1ed686d397db194569c5bdfe0ef6caf4",
+      "size": 454
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/fixture-0.3.0.json": {
+      "sha256": "c2b78f6e526dce2438a1fc306caff37849523178d730376c1af711dd56d6ccf4",
+      "size": 42787
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/fixture-0.3.1.json": {
+      "sha256": "f00c19210af5163df51d488110e88d8a7b8fe77efe8cfbbf9fd551fdea49edb0",
+      "size": 42784
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/project-after.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/project-before.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/summary.json": {
+      "sha256": "ca49d359ddccc7987d5d1567c87de9020a487a1b758a4323f37395aa824e1c69",
+      "size": 2018
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/verify-A.json": {
+      "sha256": "64b22e56b2ad1e60810be8e54464708a85da502ff12a7ba535aa9786954aaa7c",
+      "size": 250
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/verify-B.json": {
+      "sha256": "64b22e56b2ad1e60810be8e54464708a85da502ff12a7ba535aa9786954aaa7c",
+      "size": 250
+    },
+    "initial-failures/pd-native-lifecycle-evidence-copilot-v030/verify-rollback-A.json": {
+      "sha256": "64b22e56b2ad1e60810be8e54464708a85da502ff12a7ba535aa9786954aaa7c",
+      "size": 250
+    },
+    "local/build-verify.json": {
+      "sha256": "24b2548f42ca471b6c925b56cba351b3ae93321f3650c7dad1cc34d917b71c7e",
+      "size": 401
+    },
+    "local/codex-hooks.log": {
+      "sha256": "832520e2b1647220e7f72568540fee3c92f64c9714923e3a5910eb8764f9aea9",
+      "size": 64
+    },
+    "local/compile-check.json": {
+      "sha256": "ac1efbdc6081a9a49dd22e3e47e8024d71830eacd59deefa16f7dd8e17cb89ff",
+      "size": 67
+    },
+    "local/document-links.json": {
+      "sha256": "543ecf024835a74e6166164cb5e81c53d368377b8191afbdb56891d64ac01537",
+      "size": 59
+    },
+    "local/entry-contract.json": {
+      "sha256": "8d71ec590aa5436ddf837da5885cbd2ee8ce33a9113e329bad9d8f0349981cf2",
+      "size": 13465
+    },
+    "local/lifecycle-contract.log": {
+      "sha256": "e7768692b8f924173f1bd25c81677cfb3d458e5e3427eee87ed7dd2a2f6fb5ea",
+      "size": 1097
+    },
+    "local/records-negative-contract.log": {
+      "sha256": "5274c9c6e7723f4f30cfec547c7f5ed3c32a7868284b798dc94c1fceef9fc874",
+      "size": 1294
+    },
+    "local/release-prepare.log": {
+      "sha256": "76d1dd355b943aa37d42a88a450ab26421b2a7b1acde6130275b5539fdede364",
+      "size": 493
+    },
+    "local/unittest.log": {
+      "sha256": "d81bcc1df0967f3f4b05c0a2480002e762e259e46224ed2d2565319c5c401bca",
+      "size": 9296
+    },
+    "native/claude/commands.json": {
+      "sha256": "fadad6b9cdfef9868d1e226dbb97ff74a04f8460d862d2736eaf7e940c675df9",
+      "size": 10332
+    },
+    "native/claude/commands/cli-version.json": {
+      "sha256": "ac6d6f604d453648413acd697f04f0a6fdce73ffb97b241731ab2610e2b9ca19",
+      "size": 285
+    },
+    "native/claude/commands/install-A.json": {
+      "sha256": "1ed6295dca8b4c6a1bbd743958e41e1d004ae41eac86378612e3cbb6aea62cd1",
+      "size": 472
+    },
+    "native/claude/commands/lifecycle-help.json": {
+      "sha256": "b8008ea7c78879881b54e357538deda4bf2a9fce6f674a86a4ec40baf14a5cc8",
+      "size": 2899
+    },
+    "native/claude/commands/list-A.json": {
+      "sha256": "a1176804dadd71380a334eac235b906a5c806ca49d98517f32245c5d9a8dcea3",
+      "size": 664
+    },
+    "native/claude/commands/list-B.json": {
+      "sha256": "c78e2d10ead39ca4f7725b5d23f36e7c344ddcdb0efa71e2f4ef833a4b9cf3ba",
+      "size": 664
+    },
+    "native/claude/commands/list-after-uninstall.json": {
+      "sha256": "1289b34936e9ad793b06697bbee9b1a41e2d922bfd47a379161d5fc71ccd0cbd",
+      "size": 289
+    },
+    "native/claude/commands/list-rollback-A.json": {
+      "sha256": "ea38d629910d6d3d56a5f4e896a068ec21023eda1691e4efd677df8ee6667649",
+      "size": 664
+    },
+    "native/claude/commands/refresh-for-rollback.json": {
+      "sha256": "8994dadfb7bc4ecb28c788dea19b6e1771bbc92e4cdd0985e558a2ccfd02aadc",
+      "size": 437
+    },
+    "native/claude/commands/refresh-marketplace.json": {
+      "sha256": "bc5ea852dde4a1af11fc33288141ab5eebfbb1e465b054ba3d5207ad9fc2edbc",
+      "size": 437
+    },
+    "native/claude/commands/register-marketplace.json": {
+      "sha256": "f961cbeb7772b43bb412fc7958dd641c4b86012761f0f11f8c3c9ceca4114954",
+      "size": 443
+    },
+    "native/claude/commands/remove-before-rollback.json": {
+      "sha256": "e91883ba4ef9fdeb34be002861c6168219d71dd82d1b1bebd7092475eebddae1",
+      "size": 407
+    },
+    "native/claude/commands/rollback-to-A.json": {
+      "sha256": "b2966f58f2747f2aaa390988a6ec8bdc34ab695121e1a7f09a693b10d70b7c53",
+      "size": 472
+    },
+    "native/claude/commands/uninstall.json": {
+      "sha256": "84749c136191070e94b4328e6e668c02924b7256d0162dc09a738fe93b2b2aae",
+      "size": 407
+    },
+    "native/claude/commands/unregister-marketplace.json": {
+      "sha256": "b77e66ff1ae356d5bd75fa12b14bf608092877bbd511e9916b58e425728d90a3",
+      "size": 368
+    },
+    "native/claude/commands/update-to-B.json": {
+      "sha256": "55afda8f9535036898e190b2e467c2b8fd37852d78887eb017d65bdd472b9731",
+      "size": 522
+    },
+    "native/claude/fixture-0.3.0.json": {
+      "sha256": "4491005bdf3b585e896d0ce7044b183924718d321aa1d2a002be3ea19a0f506f",
+      "size": 43714
+    },
+    "native/claude/fixture-0.3.1.json": {
+      "sha256": "d05f6c313de2ee9a1dce827cc736d4147be33d0822f9fa973af8bea4febae5b4",
+      "size": 43711
+    },
+    "native/claude/project-after.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "native/claude/project-before.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "native/claude/runner.py": {
+      "sha256": "8adedc4d69bb69d84c62849f067fae02263e7d704af91a8c810d0be460c975f1",
+      "size": 25885
+    },
+    "native/claude/summary.json": {
+      "sha256": "65c719871666da32a779f9eadf4338218cdb4198884677c69cce1d748a44b081",
+      "size": 63374
+    },
+    "native/claude/verify-A.json": {
+      "sha256": "aed0b5fcf9d7dac00df269b916969e6cd30c4321f0b3a81f4f0f8e7ab99d92d3",
+      "size": 277
+    },
+    "native/claude/verify-B.json": {
+      "sha256": "05dd7b146573f505852e43794a57d0a6b3616e571d2639cca114ff45b8c59e9d",
+      "size": 277
+    },
+    "native/claude/verify-rollback-A.json": {
+      "sha256": "aed0b5fcf9d7dac00df269b916969e6cd30c4321f0b3a81f4f0f8e7ab99d92d3",
+      "size": 277
+    },
+    "native/codebuddy/commands.json": {
+      "sha256": "16c5ac571a6a66a49e2ec8874c95bfde2cf315c511a4a43e5a7128e936907909",
+      "size": 11235
+    },
+    "native/codebuddy/commands/cli-version.json": {
+      "sha256": "243259727d9fa527bc3aa1915693d90df7327313709243eb8ecd14eea4b3fe4d",
+      "size": 279
+    },
+    "native/codebuddy/commands/install-A.json": {
+      "sha256": "0516dee8d3c25c986b05309eba34712125e03b635945da922da81187bc9a0e2b",
+      "size": 524
+    },
+    "native/codebuddy/commands/install-help.json": {
+      "sha256": "a846ce3c92bb9206d7a492d39cbca8a29ef1ce57ecf2f36c4a7f452f0332d279",
+      "size": 593
+    },
+    "native/codebuddy/commands/list-A.json": {
+      "sha256": "128e69c74a8b1de40844bf5092f169671cf2bbc2b081a60bb66714da96d41e4f",
+      "size": 576
+    },
+    "native/codebuddy/commands/list-B.json": {
+      "sha256": "974a3a416f4e2cb95504800f41e5610a5114ec62f108fc92166bbf178e4ecf96",
+      "size": 576
+    },
+    "native/codebuddy/commands/list-after-uninstall.json": {
+      "sha256": "6b9d3d4a12b61d32ecd980eefcaa681fab0e7a9618da43dbb62f40da51236544",
+      "size": 297
+    },
+    "native/codebuddy/commands/list-rollback-A.json": {
+      "sha256": "7d4548b88fb7deeb1dee8b26f50be8b92031080f54c2e6b09c0225fe801cd52f",
+      "size": 576
+    },
+    "native/codebuddy/commands/marketplace-help.json": {
+      "sha256": "07e2f27039fd8b677c54241ada975ed91a81ce8e1e5fb5d26cc7de930da40ba9",
+      "size": 714
+    },
+    "native/codebuddy/commands/plugin-help.json": {
+      "sha256": "da0526aff7660931c0496197a00cab5602fc42eb5741f6527d709e4bbc0108a0",
+      "size": 1477
+    },
+    "native/codebuddy/commands/refresh-for-rollback.json": {
+      "sha256": "e86bd38f42322ccb0bf8dfdf4ca54c138a4548be374ebfb35e09f67ef399ab7d",
+      "size": 485
+    },
+    "native/codebuddy/commands/refresh-marketplace.json": {
+      "sha256": "7dbb26875649f3334635153051ebfe31039cf4ffd7fc5e5c0fc767b5a3ef8c5b",
+      "size": 485
+    },
+    "native/codebuddy/commands/register-marketplace.json": {
+      "sha256": "798100f10745d3c76d9ef43af0e65ea1bc9cac7727dd70792cd81d06b239e910",
+      "size": 497
+    },
+    "native/codebuddy/commands/remove-before-rollback.json": {
+      "sha256": "eeef3e187128513f75617f9e7586b6b289e8e92ca91245f06db6083d484d7e6f",
+      "size": 533
+    },
+    "native/codebuddy/commands/rollback-to-A.json": {
+      "sha256": "46dd1b27f7490d9d978dea43174449ba18a0385b521a164872885e13fd55ccb9",
+      "size": 524
+    },
+    "native/codebuddy/commands/uninstall.json": {
+      "sha256": "71284294dcd9a8c1ef19b2fc2374dd8685d1d344ee1fb04c1de0d89c88e81860",
+      "size": 533
+    },
+    "native/codebuddy/commands/unregister-marketplace.json": {
+      "sha256": "6bcdab9d0c81fcc48c89444b7e358869800a03cdef93b9e73812fde4ae3d9211",
+      "size": 419
+    },
+    "native/codebuddy/commands/update-help.json": {
+      "sha256": "0c06754cfc7d9f999d5ef18e92835618d3963bdcb517bdf25d259b24d7b85a02",
+      "size": 558
+    },
+    "native/codebuddy/commands/update-to-B.json": {
+      "sha256": "618638642d727561fc1eee805ccd3bd9582f527088f23a20b796e82c3dd86dd6",
+      "size": 519
+    },
+    "native/codebuddy/fixture-0.3.0.json": {
+      "sha256": "ec7718f6f798e5dba599f0bd887ee13f7ce3ee8a7c0b230655a581e0d3cc76dd",
+      "size": 48117
+    },
+    "native/codebuddy/fixture-0.3.1.json": {
+      "sha256": "b0ed3777487f9d0e86b22fcede7cf4739a41dc1eb1b802ccca01844fa8bdecb0",
+      "size": 48114
+    },
+    "native/codebuddy/project-after.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "native/codebuddy/project-before.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "native/codebuddy/summary.json": {
+      "sha256": "05405b37f33b434991f0ef1f99884060c79bd35adced9e942d30b46428d2d268",
+      "size": 75276
+    },
+    "native/codebuddy/verify-A.json": {
+      "sha256": "e7cac92715ae56250a6638d3948c466e8092120e59e0cc8d04597d32fb7a8985",
+      "size": 285
+    },
+    "native/codebuddy/verify-B.json": {
+      "sha256": "3e4091740635527cdf0f756de48444945ec9af93fb0c21c9a2f06f8dcc14291a",
+      "size": 285
+    },
+    "native/codebuddy/verify-rollback-A.json": {
+      "sha256": "e7cac92715ae56250a6638d3948c466e8092120e59e0cc8d04597d32fb7a8985",
+      "size": 285
+    },
+    "native/codex-hooks/disabled.requests.json": {
+      "sha256": "0a58c45955fe3453f8d0ec479417862688427b914deaa52db549174bc0f63efc",
+      "size": 44079
+    },
+    "native/codex-hooks/disabled.stderr": {
+      "sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721",
+      "size": 39
+    },
+    "native/codex-hooks/disabled.stdout": {
+      "sha256": "113c25f405b30b231e8068f78afaad844f00d9d32fab7a9c3176c58d94736d7c",
+      "size": 896
+    },
+    "native/codex-hooks/marketplace-add.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "native/codex-hooks/marketplace-add.stdout": {
+      "sha256": "35679942cabc1112c3e02d4c0a4feb458275f93b69098a1ac0ddc7a758e37a16",
+      "size": 161
+    },
+    "native/codex-hooks/marketplace-remove.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "native/codex-hooks/marketplace-remove.stdout": {
+      "sha256": "a07941bb1aff62081327c72fe3c37fb911fe7f5a9af30db85407fdf6f930319e",
+      "size": 38
+    },
+    "native/codex-hooks/new-session-recovery.requests.json": {
+      "sha256": "ad7ffa9b7248d35acbeffa5a8783615a704a5de72ab16e5594465a77e0afab0f",
+      "size": 46471
+    },
+    "native/codex-hooks/new-session-recovery.stderr": {
+      "sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721",
+      "size": 39
+    },
+    "native/codex-hooks/new-session-recovery.stdout": {
+      "sha256": "7e3e0ee7934ef363f1cc3dd036169e141679f33e1cd009a85104c68e3bb2d08e",
+      "size": 896
+    },
+    "native/codex-hooks/plugin-add.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "native/codex-hooks/plugin-add.stdout": {
+      "sha256": "ce8ebff147d6bcee10f91aecacbd4f6036aa8e3d108296fae4f99ca8b4169387",
+      "size": 187
+    },
+    "native/codex-hooks/plugin-remove.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "native/codex-hooks/plugin-remove.stdout": {
+      "sha256": "ed556b492ef02c4985feeec1b4dbde167488cf39b27eac3aace45f94cb7b6ddf",
+      "size": 67
+    },
+    "native/codex-hooks/runner.py": {
+      "sha256": "9249dbc5460cf26587239620cdaf09da1031cc20c3b99053d887a48d835ece5d",
+      "size": 10415
+    },
+    "native/codex-hooks/summary.json": {
+      "sha256": "f9605fd2aac8839e44bf723484c5b7c97a18bafa79402a4e373470df75b092c8",
+      "size": 50839
+    },
+    "native/codex-hooks/trusted.requests.json": {
+      "sha256": "27efa9a45da8920bd65b2f6aab0fdd47a08fa9567191df1da1e0590dc1eb50b9",
+      "size": 46471
+    },
+    "native/codex-hooks/trusted.stderr": {
+      "sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721",
+      "size": 39
+    },
+    "native/codex-hooks/trusted.stdout": {
+      "sha256": "93d7e55b9e8cbf197634d6ce9d3cf1163ce7d375537a1cfe4e93cf06526acd1d",
+      "size": 896
+    },
+    "native/codex-hooks/untrusted.requests.json": {
+      "sha256": "292ba196335a668993d1f992f52b792890baf7290e720d5b0b6e54a834f0f9a8",
+      "size": 44079
+    },
+    "native/codex-hooks/untrusted.stderr": {
+      "sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721",
+      "size": 39
+    },
+    "native/codex-hooks/untrusted.stdout": {
+      "sha256": "eaeb6118918bce43a0fb516a9e885ef00991a3cc1746c403acbc40dea2e9f3ca",
+      "size": 536
+    },
+    "native/codex-hooks/version.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "native/codex-hooks/version.stdout": {
+      "sha256": "616dba4e87de2b1f07e61fe30ff4a5b3b075986c986c466ac5d244597eac0f36",
+      "size": 18
+    },
+    "native/codex/commands.json": {
+      "sha256": "86744c095c546a1b634d8a60c0c431e6701a29147f3224248fe427241eb53e6b",
+      "size": 9336
+    },
+    "native/codex/commands/cli-version.json": {
+      "sha256": "8da2e05ea77c356626615e7be187c6757cca1ed017b6278937d48218c1f52a8f",
+      "size": 269
+    },
+    "native/codex/commands/install-A.json": {
+      "sha256": "2ee1ed2a9744af2fd1b13187dd901523e6f259d5e67356a7ffbc00f107fd1e7b",
+      "size": 637
+    },
+    "native/codex/commands/lifecycle-help.json": {
+      "sha256": "64d47264369bbfad11322614d01e713d4d16961bfa3392dd6c03dd2d407b4c41",
+      "size": 1487
+    },
+    "native/codex/commands/list-A.json": {
+      "sha256": "4152ca93e2405a6f7aede5cee02d391304199a41a0c86603e2e098725b5b0fae",
+      "size": 952
+    },
+    "native/codex/commands/list-B.json": {
+      "sha256": "e77adf2e97846d9a3b8454d6107d2ea771fb8a34aa29aee3b348401f1fc6050e",
+      "size": 952
+    },
+    "native/codex/commands/list-after-uninstall.json": {
+      "sha256": "380a2b3588bf139c01b569e9bbc416a7ad47d24df806527b55b9e3cc1ccd4028",
+      "size": 322
+    },
+    "native/codex/commands/list-rollback-A.json": {
+      "sha256": "821614072ba464c3f115fefa61fd3979ae283cb2b1fcde15bea880a000829d00",
+      "size": 952
+    },
+    "native/codex/commands/register-marketplace.json": {
+      "sha256": "0d1844aac41cdf695343bd07a4c7fcbbbce2f506e7c2bd7bdbbc13de451cef7b",
+      "size": 494
+    },
+    "native/codex/commands/remove-before-rollback.json": {
+      "sha256": "7600f87418b07eff6891bd7e5f5ea2b8be3b5abc907b291b33f145960aa7e5e9",
+      "size": 445
+    },
+    "native/codex/commands/replace-with-B.json": {
+      "sha256": "fd61808c629b4cec884ab19997af7e6be07111f3b19af32659ba6fef63b2a4f8",
+      "size": 637
+    },
+    "native/codex/commands/rollback-to-A.json": {
+      "sha256": "44e0cd8a357ca3a8ca23a0a3555c22e00ccb20e7a49107ef670294d4be3923bd",
+      "size": 636
+    },
+    "native/codex/commands/uninstall.json": {
+      "sha256": "fb1bea2081a21299cc13231240d4fb20c4272b48bd001cc3a09207145399d202",
+      "size": 446
+    },
+    "native/codex/commands/unregister-marketplace.json": {
+      "sha256": "4393f607c99577e826b7a156736251412dbfaec43ebab36888e37db3246765f3",
+      "size": 341
+    },
+    "native/codex/fixture-0.3.0.json": {
+      "sha256": "be3f150902d28e01fac1183e9527ffa3e7b8b0507067fb5bc2ec065be61c8da9",
+      "size": 45082
+    },
+    "native/codex/fixture-0.3.1.json": {
+      "sha256": "e0411b044b7f5cb5a84b423ae6c149aed40147244acc1ebc9a81554f338692da",
+      "size": 45079
+    },
+    "native/codex/project-after.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "native/codex/project-before.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "native/codex/runner.py": {
+      "sha256": "8adedc4d69bb69d84c62849f067fae02263e7d704af91a8c810d0be460c975f1",
+      "size": 25885
+    },
+    "native/codex/skills-A.json": {
+      "sha256": "00baf34d250c40a93d10d961ad5affd97ee2788a6fcce6febb23c9942336886e",
+      "size": 34014
+    },
+    "native/codex/skills-B.json": {
+      "sha256": "30d9cc934a43985b93723b764944ac64fb8ea58b6a61287063377816b0a73a44",
+      "size": 34014
+    },
+    "native/codex/skills-rollback-A.json": {
+      "sha256": "1b0930bd98ce42707d783b2ec1ed2a6b9eb305aa7e888ec5ee456dd8a24335a1",
+      "size": 34014
+    },
+    "native/codex/summary.json": {
+      "sha256": "e1b975e3c7cf28c662bed114aaf6386e82ab4c8c4cb3a8c70fb4aa693b212bf5",
+      "size": 2447
+    },
+    "native/codex/verify-A.json": {
+      "sha256": "5bec0028da9c0e233d384aac2ef37d2dac57a48108f7086ec13fb0947eea66ef",
+      "size": 276
+    },
+    "native/codex/verify-B.json": {
+      "sha256": "137fcc4b3f976e170bf3cc8de987596bad382f6a09ec81aba5b953a36bf918cb",
+      "size": 276
+    },
+    "native/codex/verify-rollback-A.json": {
+      "sha256": "5bec0028da9c0e233d384aac2ef37d2dac57a48108f7086ec13fb0947eea66ef",
+      "size": 276
+    },
+    "native/copilot/commands.json": {
+      "sha256": "63a132c609ea6511686105ff9e1b8da32cedadb22104e37260602d6c99006032",
+      "size": 14334
+    },
+    "native/copilot/commands/cli-version.json": {
+      "sha256": "afa8070fdac58f067b206cccd5d0b890d6089e2be7b4d6b534bcb06c15b3c97f",
+      "size": 329
+    },
+    "native/copilot/commands/install-A.json": {
+      "sha256": "8f63e87c0664b41b596aaf4f4ba97c5668acbb8672d47082905a19ad44c60e50",
+      "size": 588
+    },
+    "native/copilot/commands/install-help.json": {
+      "sha256": "f0d905cfe4991f960237277b1c1029569b0a43d56dab12741e567ed9dd25179b",
+      "size": 1504
+    },
+    "native/copilot/commands/list-A.json": {
+      "sha256": "b6734e964df78123093bbd2624633d5e6453a6863b5ea637f9103188e0864f8d",
+      "size": 458
+    },
+    "native/copilot/commands/list-B.json": {
+      "sha256": "37c940fddcf94db42641264765a0ca5ca999ad62c6e4dafe59f235d5960332dc",
+      "size": 457
+    },
+    "native/copilot/commands/list-after-marketplace-removal.json": {
+      "sha256": "a715076feeb99ba5e1b74fda66df5d1081cd2474bfcde6b2b6aca42172752a92",
+      "size": 351
+    },
+    "native/copilot/commands/list-after-uninstall.json": {
+      "sha256": "40da338148513fa74072ad85e201782727a1bc3ed1dfc1bf9e7b68686cce7a0a",
+      "size": 459
+    },
+    "native/copilot/commands/list-rollback-A.json": {
+      "sha256": "b9beb7a7110e770d77bb8c7c2dacd02f904bcd168f3b368fb1dc1645c12922c3",
+      "size": 458
+    },
+    "native/copilot/commands/locate-0.3.0.json": {
+      "sha256": "43cafb1c4ec770850ad74c64633521828d2d22dda0e32822113b7b63d3976a0b",
+      "size": 458
+    },
+    "native/copilot/commands/locate-0.3.1.json": {
+      "sha256": "41423f1d31bb51b4e92fccfc7a94ac9cb82bc823444b41459b7e12c590c5b86e",
+      "size": 458
+    },
+    "native/copilot/commands/marketplace-help.json": {
+      "sha256": "5204696082daf3451c86823864230edf1e937343adfda955e1ccee914a031f64",
+      "size": 1170
+    },
+    "native/copilot/commands/plugin-help.json": {
+      "sha256": "9564dddbff56b3a6267798b1d65691e14ce6a0764a02515adf426ed15db89ec6",
+      "size": 1298
+    },
+    "native/copilot/commands/refresh-for-rollback.json": {
+      "sha256": "54cceed34c8a654ca643871d46bc17a75e3406081bc0ba4b0a74b5cfb6adb682",
+      "size": 407
+    },
+    "native/copilot/commands/refresh-marketplace.json": {
+      "sha256": "2b0e7c02115ce01877279cd3a661026e5a7b06cdd71193bba446b8471ea41314",
+      "size": 407
+    },
+    "native/copilot/commands/register-marketplace.json": {
+      "sha256": "e1994d775789f4d7c7c3b4b7bcb6333db8cd16fe13e1a63316674bbd83b096b9",
+      "size": 393
+    },
+    "native/copilot/commands/remove-before-rollback.json": {
+      "sha256": "57d14bd7308e8728d7e392aae4af634c71281373677468f67aaaf14e57dd222f",
+      "size": 459
+    },
+    "native/copilot/commands/remove-live-marketplace.json": {
+      "sha256": "4ac08b960290541ee7c1f1c744fe8e6b93cc2a9ea5922f2be7d0aafc591d0c53",
+      "size": 363
+    },
+    "native/copilot/commands/rollback-to-A.json": {
+      "sha256": "e8fa55d8775b766dd5008fccf428bbf424c2b0588b2bddbcc6dbf257bf9ca307",
+      "size": 588
+    },
+    "native/copilot/commands/uninstall.json": {
+      "sha256": "2b39a39bae9fbe63e4fd1ffcbe01492b08c61fc1e176647d93a4b7b28e3f2d1f",
+      "size": 459
+    },
+    "native/copilot/commands/update-help.json": {
+      "sha256": "c9b610af486060d0e968d4e30019319b4c4aecde2213b807281c9b393cf56c8d",
+      "size": 1082
+    },
+    "native/copilot/commands/update-to-B.json": {
+      "sha256": "af50619451e9e57b45bb5aa786b6581b2fcf1b3b5519c47abffe5aeef6f8c8ea",
+      "size": 453
+    },
+    "native/copilot/fixture-0.3.0.json": {
+      "sha256": "459f0e00a5d2e8347d6fb0645d78706cde29fce9f3062f3be3d03e710ce868c8",
+      "size": 48367
+    },
+    "native/copilot/fixture-0.3.1.json": {
+      "sha256": "2a31fcb67466d0e7202b32853f36d50ac3975d71207d6b624baa43144de9fe50",
+      "size": 48364
+    },
+    "native/copilot/project-after.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "native/copilot/project-before.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "native/copilot/summary.json": {
+      "sha256": "6f335f87e28b3448cd7d7cbb6e5df3b149a54aa68909fa469bb08e9f76a6b72e",
+      "size": 2168
+    },
+    "native/copilot/verify-A.json": {
+      "sha256": "4bba915c0ebbc8da800fe1cedb263e563d620951bc072448538f404d46206203",
+      "size": 250
+    },
+    "native/copilot/verify-B.json": {
+      "sha256": "4bba915c0ebbc8da800fe1cedb263e563d620951bc072448538f404d46206203",
+      "size": 250
+    },
+    "native/copilot/verify-rollback-A.json": {
+      "sha256": "4bba915c0ebbc8da800fe1cedb263e563d620951bc072448538f404d46206203",
+      "size": 250
+    },
+    "native/factory/logs/01.json": {
+      "sha256": "504bffd24c7f89c9f9f1d4854c2669cb5601dc7e9d664be815c43bb26fd70465",
+      "size": 262
+    },
+    "native/factory/logs/02.json": {
+      "sha256": "8da0e959a313cb518ae182ae3772fd56a50861d61e9c10f7e2e1d90764c1e11f",
+      "size": 169
+    },
+    "native/factory/logs/03.json": {
+      "sha256": "499434133cab60397189e90c7b5f25303b2c4aafa1f075c0bcc4a023e003ecff",
+      "size": 31089
+    },
+    "native/factory/logs/04.json": {
+      "sha256": "77a813aed79517e90e15de157fcf5a1b0d33169b643b143c4a81ba3c5dd97295",
+      "size": 216
+    },
+    "native/factory/logs/05.json": {
+      "sha256": "6f74be948048d8ca41562c216b4dc4f4016ffdf77b46dfd4f93fc3fbf7985e63",
+      "size": 195
+    },
+    "native/factory/logs/06.json": {
+      "sha256": "220087c2eae63e32d210a51fe1cfab5d6a9a7bc3177bf1344511bd39019dfba8",
+      "size": 571
+    },
+    "native/factory/logs/07.json": {
+      "sha256": "c0a4053e0dcedac674a4e99ebd4690b9e6d845ec12e22a255172ce4f76cb65b6",
+      "size": 498
+    },
+    "native/factory/logs/08.json": {
+      "sha256": "1dd41008a6bb4e1e232ba02e313a0126fd761f9d1fa65cde98201d76fc247c7b",
+      "size": 293
+    },
+    "native/factory/logs/09.json": {
+      "sha256": "edc9e98385dd0fcea5087d52f7d8d1b09b74abb240d6e546bbb9fbf549db69f8",
+      "size": 313
+    },
+    "native/factory/logs/10.json": {
+      "sha256": "df197f0866eb5031a5c2129ae76f0124148e1b8ceee2c6e6c3a35dc679850f0b",
+      "size": 301
+    },
+    "native/factory/logs/11.json": {
+      "sha256": "2884b218010cffe6640f1535eac337e1a3f9864ce09fa6885bf9abff6c614f04",
+      "size": 169
+    },
+    "native/factory/logs/12.json": {
+      "sha256": "cd04bb0891dfb6870dc7c6fe3ce0c4e0e1eeb6855453fcf68bbf4b57715664b7",
+      "size": 489
+    },
+    "native/factory/logs/13.json": {
+      "sha256": "2a963382005c8cf1a702a3f4ddd64277e98a06ab26ceec18e55bef97dfdfbd37",
+      "size": 216
+    },
+    "native/factory/logs/14.json": {
+      "sha256": "6a01aca74f1fc3cabfbc18d3db45fa886f2ee93f03e522c6d0b06a3ea8bbec2a",
+      "size": 262
+    },
+    "native/factory/logs/15.json": {
+      "sha256": "e7fa78342e9b212ee908adab918f40f798048746ee76feac2d802544a51c69ab",
+      "size": 312
+    },
+    "native/factory/logs/16.json": {
+      "sha256": "de15f83773073999f6b40a4957db369b341c79e8c293499e20e3a3a48813f0bf",
+      "size": 301
+    },
+    "native/factory/logs/17.json": {
+      "sha256": "2c174e12a653d190667defdce8b80598659b9b30b5391bd484d2e7a59acf6e64",
+      "size": 840
+    },
+    "native/factory/logs/18.json": {
+      "sha256": "d4e4699c45d0e75d75541c9f92377bf60eb1a075bd36bd982373d54dc0df61f8",
+      "size": 262
+    },
+    "native/factory/logs/19.json": {
+      "sha256": "dda304cfb5d317c18a2cebba5a304e1b42d2e4cb63f948a47a9dadee0f226abb",
+      "size": 312
+    },
+    "native/factory/logs/20.json": {
+      "sha256": "f4f7d5c614906658a941ce1eb33758021f51ba478e6e66afc78ab902a484ca7a",
+      "size": 309
+    },
+    "native/factory/logs/21.json": {
+      "sha256": "451dfd360669fe30b1fab0f28ce362fb41a5d669492d4fcd469a6779be70cebc",
+      "size": 267
+    },
+    "native/factory/logs/22.json": {
+      "sha256": "cbff428ed5fdb7121d282009f72786ae3ecc86194209f148471a2e5fd535799c",
+      "size": 274
+    },
+    "native/factory/logs/profile-state-before-cleanup.json": {
+      "sha256": "626158eff71334ca7d18b3923e48b5b18595a4b377782218a03f1ce9ab3a4e08",
+      "size": 1666
+    },
+    "native/factory/logs/state-catalog.json": {
+      "sha256": "c62476fa475e9f0ec06f59f8bed4abfd8e1cfa96125848a29d14372b4c79800b",
+      "size": 1946
+    },
+    "native/factory/logs/state-installed-a.json": {
+      "sha256": "7174ea911e4013b7d16f3ea847f774a70498621420e271008c9069796507c1cd",
+      "size": 70977
+    },
+    "native/factory/logs/state-marketplace-removed.json": {
+      "sha256": "f762e24aa7f00ebf297029392775b5c1a6868b0bd437fe7673b4c70a420bf048",
+      "size": 1623
+    },
+    "native/factory/logs/state-rollback-a.json": {
+      "sha256": "e84e97dcc9ae5c567034edaec883cf79ba4f85c9491b62dcd3b549d35b2ea73b",
+      "size": 70978
+    },
+    "native/factory/logs/state-uninstalled.json": {
+      "sha256": "5ceee943042c91425a3ea47e62027189222135b90c69fd2f1e8d280cc7e96e11",
+      "size": 1948
+    },
+    "native/factory/logs/state-updated-b.json": {
+      "sha256": "7f83065d378a6a1a083a5e340cc4622f08ed675176f4867509799685de8076f3",
+      "size": 70974
+    },
+    "native/factory/payload-inventory.json": {
+      "sha256": "81d596a9601dfa9071f02c3a9717528a0a17dba1d7a5f2646d3d4cd9f91e999f",
+      "size": 51649
+    },
+    "native/factory/run-extra-host-lifecycle.py": {
+      "sha256": "11f7f67531558746a83b51ef9c884fc985ca2c3c143a8e3ae081cb7fd100e593",
+      "size": 8259
+    },
+    "native/factory/summary.json": {
+      "sha256": "b0cdadc5baa29152f84e266f16ac9b6dc12f0182d2b91ba096c6c3128938bc40",
+      "size": 43130
+    },
+    "native/gemini/commands.json": {
+      "sha256": "f2c3bef58fc525431f98a40eda23f45ef968b27c7e638d3f65505332b184d2a0",
+      "size": 12245
+    },
+    "native/gemini/commands/cli-version.json": {
+      "sha256": "d11df6a5448f7c665f6b0f33cf98a558e70ee6737f932750e259cbd85592c328",
+      "size": 265
+    },
+    "native/gemini/commands/install-A.json": {
+      "sha256": "8117d390e6075b1bb54e49896ae1b0df0fbaad457ffaf6e63f32168279615d12",
+      "size": 1362
+    },
+    "native/gemini/commands/lifecycle-help.json": {
+      "sha256": "38dad721e95c569f943a5e5eabdc00f025b7c2f4474a79397f8ed17519045be5",
+      "size": 1656
+    },
+    "native/gemini/commands/list-A.json": {
+      "sha256": "ffe096435586d9758516f6c933e66bc3ee9aecfb1cbe76cfd5721759a7706546",
+      "size": 1429
+    },
+    "native/gemini/commands/list-B.json": {
+      "sha256": "2a7124423152a7abb45be7f92f35cef7dba7f1870467ff3fb93a97a028ae4ab2",
+      "size": 1429
+    },
+    "native/gemini/commands/list-after-uninstall.json": {
+      "sha256": "725e6aec2bd1fcff8225f5b534a90280b29e928e7b11f74777ecdd8cdfb87e9e",
+      "size": 296
+    },
+    "native/gemini/commands/list-rollback-A.json": {
+      "sha256": "c7b1b38b69467495b09c0e03a0c8ef9a54d929afd357ea50244706b63b742f49",
+      "size": 1429
+    },
+    "native/gemini/commands/remove-before-rollback.json": {
+      "sha256": "f569b3117f24c5dd49508ed9629a064e26717dd25cce8b307e9efd3af88b6d60",
+      "size": 353
+    },
+    "native/gemini/commands/rollback-to-A.json": {
+      "sha256": "215a873992fa9ba9cd7704ed6ad8d3ba6be8656afc694ee340b4c2f7411b19e5",
+      "size": 881
+    },
+    "native/gemini/commands/uninstall.json": {
+      "sha256": "64ebcc51b341981e0c0db820079188713dda422bf00330cd0c19d03f2650f53b",
+      "size": 353
+    },
+    "native/gemini/commands/update-to-B.json": {
+      "sha256": "35e7315489fd1bee8c1254fe822200e5f5868ffff46fb8291fe1dd23b1880b62",
+      "size": 2169
+    },
+    "native/gemini/fixture-0.3.0.json": {
+      "sha256": "2d3d6254f2fccbebf80fa7a7ef88b5ca7d6b75508809b8fdf50cdd9c73c02202",
+      "size": 48670
+    },
+    "native/gemini/fixture-0.3.1.json": {
+      "sha256": "601514c6789d902e0eddc46139bbcf55e65e07460e12a713f7cb710aa28a653c",
+      "size": 48667
+    },
+    "native/gemini/project-after.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "native/gemini/project-before.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "native/gemini/runner.py": {
+      "sha256": "8adedc4d69bb69d84c62849f067fae02263e7d704af91a8c810d0be460c975f1",
+      "size": 25885
+    },
+    "native/gemini/summary.json": {
+      "sha256": "13e4705a1736b82e6b2d6c61c6911715dc3a6fbecb6fbb7a0c4fc147f31c89e9",
+      "size": 2060
+    },
+    "native/gemini/verify-A.json": {
+      "sha256": "b2e3e8978d04e5dbe1fded454f86269403aaa93724652dcf2fded0e46e1900bb",
+      "size": 293
+    },
+    "native/gemini/verify-B.json": {
+      "sha256": "b2e3e8978d04e5dbe1fded454f86269403aaa93724652dcf2fded0e46e1900bb",
+      "size": 293
+    },
+    "native/gemini/verify-rollback-A.json": {
+      "sha256": "b2e3e8978d04e5dbe1fded454f86269403aaa93724652dcf2fded0e46e1900bb",
+      "size": 293
+    },
+    "native/hermes/environment.json": {
+      "sha256": "6133cc244723536dc889eae37f2d18358286692613dbae5e3ab8af86caad226a",
+      "size": 718
+    },
+    "native/hermes/logs/01.json": {
+      "sha256": "dc6c7d26f88a5f94b8d339fbf79707b72644f464f2fcfe22be23fb35fa90159e",
+      "size": 260
+    },
+    "native/hermes/logs/02.json": {
+      "sha256": "137f4825bed7e1566f3116683cba628fab6f539f850ab9d26dab2626c3c57175",
+      "size": 168
+    },
+    "native/hermes/logs/03.json": {
+      "sha256": "c273c94bb52129182c5c782f97d322dbc17e42f388aa77be90da9bfb51192506",
+      "size": 24266
+    },
+    "native/hermes/logs/04.json": {
+      "sha256": "52d4cd9ab0846f72fd30e14c54a80c7526d3d3cc15bc083ec2774dc5f1a5f33a",
+      "size": 215
+    },
+    "native/hermes/logs/05.json": {
+      "sha256": "018809d8d7192cf29895afb35e2c1654d8b555439a9a0fd2981986ab445c3baf",
+      "size": 1691
+    },
+    "native/hermes/logs/06.json": {
+      "sha256": "defcdd7ef37c7bde9f7bf7c187a41487baf50a185d09822c8c30efc05bf32fea",
+      "size": 1088
+    },
+    "native/hermes/logs/07.json": {
+      "sha256": "f33f7f566c5f50d5d8184caab8f8b7d28e26310264c83f96542fc26e2d8010ad",
+      "size": 7098
+    },
+    "native/hermes/logs/profile-state-before-cleanup.json": {
+      "sha256": "cb95ffe39c86b023ee13a1d652eeb6ec1bca29154239c4ca09b0d08f0eeb36f1",
+      "size": 1035
+    },
+    "native/hermes/logs/state-installed-a.json": {
+      "sha256": "545064c5a1422b8b1e40fc6d3d0af8d11a056434928a08d915f3a4af90952d8b",
+      "size": 925
+    },
+    "native/hermes/payload-inventory.json": {
+      "sha256": "3d5536d840686c14c4953645e193dffc78a67bf3805c79d529c03a1ce7d5dff5",
+      "size": 52939
+    },
+    "native/hermes/requirements-observed.txt": {
+      "sha256": "4e0403a193b45788f932410d1c359ad8f1bb0981438ff8baf395d210c30ab7c8",
+      "size": 291
+    },
+    "native/hermes/run-extra-host-lifecycle.py": {
+      "sha256": "11f7f67531558746a83b51ef9c884fc985ca2c3c143a8e3ae081cb7fd100e593",
+      "size": 8259
+    },
+    "native/hermes/scan-comparison.json": {
+      "sha256": "b494e2f31e4d4fe921ad72d55061ce05f6b9e5d2aaaba12802e8fbd9ffd1684d",
+      "size": 786
+    },
+    "native/hermes/scan-readonly.json": {
+      "sha256": "9457ccf471db17912c83181c2aa786f99231ed0f9b25c13eaf4563df3afcc110",
+      "size": 14777
+    },
+    "native/hermes/scan-readonly.py": {
+      "sha256": "1b5cfe684320c1cdc2df6697bec96e393349364e33eb7057886552ba9596c1c7",
+      "size": 259
+    },
+    "native/hermes/scan-readonly.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "native/hermes/summary.json": {
+      "sha256": "c96d24cd6bf02a052b8496c923d8725d96f5544abaf8e2f408c034a3e4bd11a8",
+      "size": 36991
+    },
+    "native/hermes/version.json": {
+      "sha256": "efae6c8c081c9840d11406a1bd69e65c996368a24d906a6436230aae94c2216b",
+      "size": 310
+    },
+    "native/kiro-protocol/summary.json": {
+      "sha256": "cffaa8aa88967e2aa5d2fa5176fce940d2a8567d3e27516fd82781bae768c30b",
+      "size": 354
+    },
+    "native/kiro-protocol/test_native_resource_paths.py": {
+      "sha256": "ac16e94886e094152bbeaaa1bc9ea75f2f463aadd2117f0d74097545f2349b0f",
+      "size": 6241
+    },
+    "native/kiro-protocol/unittest.log": {
+      "sha256": "c0eb4eff90a1935e148e72ca8fd3a9439d4067c78bf73c547e1477e1b4d0c2c3",
+      "size": 273
+    },
+    "native/opencode/commands.json": {
+      "sha256": "7bb717a414d7af9dd4e092186d735a2c66b53bdee8866f755a1452a7461763ee",
+      "size": 241229
+    },
+    "native/opencode/commands/agent-A.json": {
+      "sha256": "165ca6862fe0c9f046a3d8ee1bf04e1ceffeab392481af4f59dfa0c38942cdd9",
+      "size": 2837
+    },
+    "native/opencode/commands/agent-B.json": {
+      "sha256": "165ca6862fe0c9f046a3d8ee1bf04e1ceffeab392481af4f59dfa0c38942cdd9",
+      "size": 2837
+    },
+    "native/opencode/commands/agent-after-remove.json": {
+      "sha256": "1b48db6fdcf592fe77f8ad5b5ce52f761075f8d81353662e49e50b9ac641b05b",
+      "size": 2564
+    },
+    "native/opencode/commands/agent-rollback-A.json": {
+      "sha256": "165ca6862fe0c9f046a3d8ee1bf04e1ceffeab392481af4f59dfa0c38942cdd9",
+      "size": 2837
+    },
+    "native/opencode/commands/check-A.json": {
+      "sha256": "84edbe0eaf67699779e1ed2e73e5af501ea478d6f51c1c2a77242beecd4aa1f6",
+      "size": 681
+    },
+    "native/opencode/commands/check-B.json": {
+      "sha256": "d0146b2c922c9cf29b8f7076aa009b56a6d84057df1d9bfa02f89a67dbc40924",
+      "size": 681
+    },
+    "native/opencode/commands/check-rollback-A.json": {
+      "sha256": "84edbe0eaf67699779e1ed2e73e5af501ea478d6f51c1c2a77242beecd4aa1f6",
+      "size": 681
+    },
+    "native/opencode/commands/cli-version.json": {
+      "sha256": "25cc34f23f9f12bacacbfffd472879b1cb0f33789576c2d9cef51b30671d6998",
+      "size": 170
+    },
+    "native/opencode/commands/config-A.json": {
+      "sha256": "ef56891bd0731b52d31bcaaa7e67049a9e03da95bc48511ad868d68fb5e04786",
+      "size": 1284
+    },
+    "native/opencode/commands/config-B.json": {
+      "sha256": "ef56891bd0731b52d31bcaaa7e67049a9e03da95bc48511ad868d68fb5e04786",
+      "size": 1284
+    },
+    "native/opencode/commands/config-rollback-A.json": {
+      "sha256": "ef56891bd0731b52d31bcaaa7e67049a9e03da95bc48511ad868d68fb5e04786",
+      "size": 1284
+    },
+    "native/opencode/commands/debug-help.json": {
+      "sha256": "c56081a06ad143e34bdce1d9f15e635d1494d88e97b1ae2b86e10678c875b2de",
+      "size": 1099
+    },
+    "native/opencode/commands/init.json": {
+      "sha256": "280a20e938e7d7d3f1ee06be1776038cb1d44c7c0629ad320a173dc1c0df189c",
+      "size": 900
+    },
+    "native/opencode/commands/npm-ci.json": {
+      "sha256": "202271f2026eefa5d742cf6394fdcabe8dceaacac2ed3bb8c7112cfa697e4495",
+      "size": 424
+    },
+    "native/opencode/commands/paths.json": {
+      "sha256": "e318b6b483ced0b0840d0b15f6e8b802c67e4b4f7f52447e4c472c840dae0db2",
+      "size": 865
+    },
+    "native/opencode/commands/skills-A.json": {
+      "sha256": "15403a5ad3d2c102852c3e1a97e083b6767c21be9ee47e025d9e9280dc7a600d",
+      "size": 66064
+    },
+    "native/opencode/commands/skills-B.json": {
+      "sha256": "63c8a92a22320f605895c9a55ed4c9c41a074f8bfc1a505f9c4487c22a10f6ce",
+      "size": 66064
+    },
+    "native/opencode/commands/skills-after-remove.json": {
+      "sha256": "53021a6295dbe590f92428c16e1b7db20eb7402914e3035275efe1ab7e6764ad",
+      "size": 18977
+    },
+    "native/opencode/commands/skills-rollback-A.json": {
+      "sha256": "15403a5ad3d2c102852c3e1a97e083b6767c21be9ee47e025d9e9280dc7a600d",
+      "size": 66064
+    },
+    "native/opencode/commands/status-A.json": {
+      "sha256": "7f8a86a99be7cdfb341e7d5223c955d7954fe02440bdfd56e37e8f4c5b8108cc",
+      "size": 827
+    },
+    "native/opencode/commands/status-B.json": {
+      "sha256": "7f8a86a99be7cdfb341e7d5223c955d7954fe02440bdfd56e37e8f4c5b8108cc",
+      "size": 827
+    },
+    "native/opencode/commands/status-rollback-A.json": {
+      "sha256": "7f8a86a99be7cdfb341e7d5223c955d7954fe02440bdfd56e37e8f4c5b8108cc",
+      "size": 827
+    },
+    "native/opencode/lifecycle-helper.py": {
+      "sha256": "8adedc4d69bb69d84c62849f067fae02263e7d704af91a8c810d0be460c975f1",
+      "size": 25885
+    },
+    "native/opencode/runner.py": {
+      "sha256": "ed65612d2068ad57b6d8d00fa07f421e2b65a0bd4eeb3d0caeb620009820c3cd",
+      "size": 14282
+    },
+    "native/opencode/skill-fixture-delta.json": {
+      "sha256": "79030e556dab193752d83429142f13c563e444ad825bffac206a991fb3e5beeb",
+      "size": 212
+    },
+    "native/opencode/source-files.json": {
+      "sha256": "577dac453b46c8c66a87c84d432de9856666f6bd7eb7efec117d1ebbd15d46d0",
+      "size": 49368
+    },
+    "native/opencode/summary.json": {
+      "sha256": "0b4ed8c57569ae80b9863fffbe26ca6c270a5ebe05bdf971e0648c58c1dae14e",
+      "size": 1834
+    },
+    "native/pi/commands.json": {
+      "sha256": "0505fa24abc539db80b613e18e7455094007c3deca730925b3e91440014e8380",
+      "size": 19139
+    },
+    "native/pi/commands/cli-version.json": {
+      "sha256": "39fb24c3fcb6d437ed86f8064b339fe9c7e5b30ca1cd3b011cab3768a708bb2e",
+      "size": 276
+    },
+    "native/pi/commands/install-A.json": {
+      "sha256": "34ee8b7710be36d4f421c86bdfa2d84987b560b479ec7d46625be9cf9d56d814",
+      "size": 549
+    },
+    "native/pi/commands/lifecycle-help.json": {
+      "sha256": "ee91c3c1ef5ece9d399991533242e29d20b0098146b4c9910a18a6d704c4f17a",
+      "size": 831
+    },
+    "native/pi/commands/list-A.json": {
+      "sha256": "e1be24321b8e8cb9d76d9c9fec55b4588619edc36a18eb007a857674dea027a2",
+      "size": 451
+    },
+    "native/pi/commands/list-B.json": {
+      "sha256": "1cf7a7922495baa6445305f2723932f33a41eb2d5f6328d16003f38cfe31cf70",
+      "size": 451
+    },
+    "native/pi/commands/list-after-uninstall.json": {
+      "sha256": "c27a53ec80e162dfc6d690dd78855d5e651f0faa51588ac1fd70d37d89f93691",
+      "size": 287
+    },
+    "native/pi/commands/list-rollback-A.json": {
+      "sha256": "e40d25bbd6f5b8fd7aca9580d56e3426aedd0fa2ac0573a7fe3746d70d525797",
+      "size": 451
+    },
+    "native/pi/commands/npm-pack-0.3.0.json": {
+      "sha256": "9ff59559cc83e05870ea8b289d3f3fdb0381f5488e20b89f49ff74a90754ac70",
+      "size": 6469
+    },
+    "native/pi/commands/npm-pack-0.3.1.json": {
+      "sha256": "7bfbaedcdd67299c84befb3811ac9fa0c4930b271d13d1ee5a92f37dd5cdd843",
+      "size": 6466
+    },
+    "native/pi/commands/remove-before-rollback.json": {
+      "sha256": "ee239bb6c7c8e5ee502ec79de841e7972bf461230298e5523d60c2db722b543f",
+      "size": 545
+    },
+    "native/pi/commands/replace-with-B.json": {
+      "sha256": "d3728cb0f59e5ef499f37d849463b55c3e3f05f3ab90f1e7020b1844f6df3a11",
+      "size": 551
+    },
+    "native/pi/commands/rollback-to-A.json": {
+      "sha256": "aee5d6d99e2f225955abe4edd62cb4713953a30d7f8a4d32848b45f3ba2bff12",
+      "size": 549
+    },
+    "native/pi/commands/uninstall.json": {
+      "sha256": "b0630feab783715d6add4341f0f99711d35463369f0dbbb60fcf46f8c72e9431",
+      "size": 545
+    },
+    "native/pi/fixture-0.3.0.json": {
+      "sha256": "e0820d50ae27600747a92c5a76ec779aa9285f19a3add361127cbd2563d2bc70",
+      "size": 7023
+    },
+    "native/pi/fixture-0.3.1.json": {
+      "sha256": "1ef02957ab39234b2de5f428e434695edd9a4b89196fa3363fc5f5477ea7b622",
+      "size": 7020
+    },
+    "native/pi/npm-0.3.0.json": {
+      "sha256": "aa51e9192f9f7b9352f30c87c6375689c2110e30bdddb78291ee7a81328aabb8",
+      "size": 7642
+    },
+    "native/pi/npm-0.3.1.json": {
+      "sha256": "68a80a16945e5934bcc73f1081310f34684e15bb639f955a2d77345b1fe4cb7b",
+      "size": 7639
+    },
+    "native/pi/project-after.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "native/pi/project-before.json": {
+      "sha256": "6647a81bf9261e872b31b2376d0c1ee7f8a30197f56950b9e7fa747a12827e49",
+      "size": 526
+    },
+    "native/pi/runner.py": {
+      "sha256": "8adedc4d69bb69d84c62849f067fae02263e7d704af91a8c810d0be460c975f1",
+      "size": 25885
+    },
+    "native/pi/summary.json": {
+      "sha256": "e4caf534457d254573667cb454d53b167528cb92c6eb4e3ddc9d66141d17af2b",
+      "size": 1957
+    },
+    "native/pi/verify-A.json": {
+      "sha256": "120ff9d2e4f7a9a512e7df8e0d5d2ec9493740e2c3ce358d5b0e1996099bd3a5",
+      "size": 260
+    },
+    "native/pi/verify-B.json": {
+      "sha256": "120ff9d2e4f7a9a512e7df8e0d5d2ec9493740e2c3ce358d5b0e1996099bd3a5",
+      "size": 260
+    },
+    "native/pi/verify-rollback-A.json": {
+      "sha256": "120ff9d2e4f7a9a512e7df8e0d5d2ec9493740e2c3ce358d5b0e1996099bd3a5",
+      "size": 260
+    },
+    "project-records/claude/commands.json": {
+      "sha256": "f7d4579d299f1f9751ac21faaf643fda3c0f54fb3f3b91ed022a995bb092491e",
+      "size": 10331
+    },
+    "project-records/claude/commands/cli-version.json": {
+      "sha256": "0956d9fe61d38f61e6e2563785143a0c1b5ddb44ee87843acc5fefafd64eeca4",
+      "size": 285
+    },
+    "project-records/claude/commands/install-A.json": {
+      "sha256": "dae844094d4c07c1071fedfdd205fdc934be1440ca4dc787940bf677f61f8d47",
+      "size": 472
+    },
+    "project-records/claude/commands/lifecycle-help.json": {
+      "sha256": "47d7f3f2d9b330108440eb31579e2f3a73fdf02ec7ca04ea21b4542fcedae489",
+      "size": 2899
+    },
+    "project-records/claude/commands/list-A.json": {
+      "sha256": "1aeb9abc303c2833f0addf7a871b477f4990afa02b223fd4bf01fc3a699ab973",
+      "size": 664
+    },
+    "project-records/claude/commands/list-B.json": {
+      "sha256": "8c463d05c2f54e466e6060f5a8ced6dcc34504619b722dd37b39f0b960d539de",
+      "size": 664
+    },
+    "project-records/claude/commands/list-after-uninstall.json": {
+      "sha256": "2080fb5c820d570a9a83bac88e1ac26263430f4eb4b5ba053617e0bd4e6ffcb6",
+      "size": 289
+    },
+    "project-records/claude/commands/list-rollback-A.json": {
+      "sha256": "436b4979209ed739f4f35cf5c13bf5721835f74552224206a93dcc5c70f67a40",
+      "size": 664
+    },
+    "project-records/claude/commands/refresh-for-rollback.json": {
+      "sha256": "8a42b5d596c7cd24ef1d967ac18b4b16e0df7b1077fac0f3355c2ecc8db1129f",
+      "size": 436
+    },
+    "project-records/claude/commands/refresh-marketplace.json": {
+      "sha256": "4aaafe9821f665aa9cb6c21490f237951a91174af910def8524371ee1cba33cc",
+      "size": 437
+    },
+    "project-records/claude/commands/register-marketplace.json": {
+      "sha256": "f3ed8c228119b79205e7f4bafa7e78006f19a9c302060553126da4ca45e49cc5",
+      "size": 443
+    },
+    "project-records/claude/commands/remove-before-rollback.json": {
+      "sha256": "2773b96662355a38e15feda65531a25e40af46262ca715420db1966a29cf2687",
+      "size": 407
+    },
+    "project-records/claude/commands/rollback-to-A.json": {
+      "sha256": "06342f81a950583a2e85d38594923579afed956d1c21da89bf7ff651abe4f9c3",
+      "size": 472
+    },
+    "project-records/claude/commands/uninstall.json": {
+      "sha256": "d715a54a13bde34f9e6cb01f9407327ce1fe57e3e76c97b57b7ca78e9c966c5d",
+      "size": 407
+    },
+    "project-records/claude/commands/unregister-marketplace.json": {
+      "sha256": "3a018fcd39a0dadd93a3c27e22a900974a7e66980aa6d7052613f76cacead07f",
+      "size": 368
+    },
+    "project-records/claude/commands/update-to-B.json": {
+      "sha256": "111b9a46be9da311ed23232b25f8af2cfc4befec97671b452e4013bcdd1baffd",
+      "size": 522
+    },
+    "project-records/claude/fixture-0.3.0.json": {
+      "sha256": "4491005bdf3b585e896d0ce7044b183924718d321aa1d2a002be3ea19a0f506f",
+      "size": 43714
+    },
+    "project-records/claude/fixture-0.3.1.json": {
+      "sha256": "d05f6c313de2ee9a1dce827cc736d4147be33d0822f9fa973af8bea4febae5b4",
+      "size": 43711
+    },
+    "project-records/claude/project-after.json": {
+      "sha256": "5d38e844a28303a0b6b13745c9c1470076c93d28aa521d40091abe89367b73e7",
+      "size": 951
+    },
+    "project-records/claude/project-before.json": {
+      "sha256": "5d38e844a28303a0b6b13745c9c1470076c93d28aa521d40091abe89367b73e7",
+      "size": 951
+    },
+    "project-records/claude/records-protection-summary.json": {
+      "sha256": "6c1e22a538e5cacaf79c6d0c17a1a55409a910a8e002f65072f8e43d73aa1cfe",
+      "size": 329
+    },
+    "project-records/claude/runner.py": {
+      "sha256": "8892a26df3bd2bdf456e90583ddbd9cd2e0d5f0141465351f55a3a122bd2999c",
+      "size": 26468
+    },
+    "project-records/claude/summary.json": {
+      "sha256": "9db9bf15cd5b14e733eeaf9b1fb3d062bdccb420a03ac8bf04e4c4a638a0c45c",
+      "size": 63374
+    },
+    "project-records/claude/verify-A.json": {
+      "sha256": "f2ce0f12cb435b5d534370cf4cc334bd5cff6637f4caf0050cd9d478fc87ccfe",
+      "size": 277
+    },
+    "project-records/claude/verify-B.json": {
+      "sha256": "6d9e448dde24b31faf2cdacfb8126de127589e3d9ecc63b014de5958e2a26c79",
+      "size": 277
+    },
+    "project-records/claude/verify-rollback-A.json": {
+      "sha256": "f2ce0f12cb435b5d534370cf4cc334bd5cff6637f4caf0050cd9d478fc87ccfe",
+      "size": 277
+    },
+    "project-records/codebuddy/commands.json": {
+      "sha256": "72198efa3c1dc33fe9c9d8aa9f3f678a8a4b1ffbc4f11269972e2273b7f5a80b",
+      "size": 11234
+    },
+    "project-records/codebuddy/commands/cli-version.json": {
+      "sha256": "c065f0205918d6b327a850adf407002951690657df740432aa596fd057ae9c3d",
+      "size": 279
+    },
+    "project-records/codebuddy/commands/install-A.json": {
+      "sha256": "2f33d88d51dc644e183f12188975c25c765395c531ccfffdfa69da74b02c4c4a",
+      "size": 524
+    },
+    "project-records/codebuddy/commands/install-help.json": {
+      "sha256": "2a7131d9ead851b533c78d2b95ad0d33c2f6f60f1bb637a97ad7ba8e89786df3",
+      "size": 593
+    },
+    "project-records/codebuddy/commands/list-A.json": {
+      "sha256": "57382020b9a2974762054215aa6ecbb384a7f8e8b739a11ac71d958a715ad8cd",
+      "size": 576
+    },
+    "project-records/codebuddy/commands/list-B.json": {
+      "sha256": "7a84082e3fdbcfd449c48c8474c447e201937260d07ddb0c184fc79811c575b7",
+      "size": 576
+    },
+    "project-records/codebuddy/commands/list-after-uninstall.json": {
+      "sha256": "1f8f8b7419f29a10349a10eea3cd7e003296f80d67990b25014a274d34a519cc",
+      "size": 297
+    },
+    "project-records/codebuddy/commands/list-rollback-A.json": {
+      "sha256": "cd04f911d1bac286bea7f9f47c07e046e5074032fa3ad48ada0e22317fb6e072",
+      "size": 576
+    },
+    "project-records/codebuddy/commands/marketplace-help.json": {
+      "sha256": "0fbf1fb1b5f63cbf22002b7ae69def8d51ccdc88fb46f82a0007b45608eca9a5",
+      "size": 714
+    },
+    "project-records/codebuddy/commands/plugin-help.json": {
+      "sha256": "316855021941e9c22a5e7fec1e797758956591bea05d3220fbce263c99aae34e",
+      "size": 1477
+    },
+    "project-records/codebuddy/commands/refresh-for-rollback.json": {
+      "sha256": "9a5a5dba2f6b399c41a027b0e264b28f2b7a5d82beea2a4a2f21c25edc2d2f09",
+      "size": 485
+    },
+    "project-records/codebuddy/commands/refresh-marketplace.json": {
+      "sha256": "707247bc3301ac4c58f782d4a5405170b4c63b1650a0272a4882ba70dee39c8a",
+      "size": 485
+    },
+    "project-records/codebuddy/commands/register-marketplace.json": {
+      "sha256": "cee6e5733ceb52eb949bf6fc3dee1f3ec8f889515564d09e7c68d1a0e635a550",
+      "size": 496
+    },
+    "project-records/codebuddy/commands/remove-before-rollback.json": {
+      "sha256": "95ff3c6992ad1b19c4ea57a4655b9be0339f83f02285e6a85208bc4e2c9da928",
+      "size": 533
+    },
+    "project-records/codebuddy/commands/rollback-to-A.json": {
+      "sha256": "55f7ce126854aaf837252ba75cedee59ea545862109eaca562c55b6b279c81a4",
+      "size": 524
+    },
+    "project-records/codebuddy/commands/uninstall.json": {
+      "sha256": "9d692f87c9e5ef777e7f038bde8780790a5e2c2fc707c6ad12780138eaf3a802",
+      "size": 533
+    },
+    "project-records/codebuddy/commands/unregister-marketplace.json": {
+      "sha256": "e33dd5de6e6a50971a331ad3254cb3434d0c2bf70e83f38228205fcc145e2d70",
+      "size": 419
+    },
+    "project-records/codebuddy/commands/update-help.json": {
+      "sha256": "c6151604e904351a59b35662f418c1a2ef3e5657a6b44e72d6f2a9d4fa2f6794",
+      "size": 558
+    },
+    "project-records/codebuddy/commands/update-to-B.json": {
+      "sha256": "2949fd6753991d7aab0c6fca4cd32415edbc3b39d5247ced83a41bcc4802d40d",
+      "size": 519
+    },
+    "project-records/codebuddy/fixture-0.3.0.json": {
+      "sha256": "ec7718f6f798e5dba599f0bd887ee13f7ce3ee8a7c0b230655a581e0d3cc76dd",
+      "size": 48117
+    },
+    "project-records/codebuddy/fixture-0.3.1.json": {
+      "sha256": "b0ed3777487f9d0e86b22fcede7cf4739a41dc1eb1b802ccca01844fa8bdecb0",
+      "size": 48114
+    },
+    "project-records/codebuddy/project-after.json": {
+      "sha256": "5d38e844a28303a0b6b13745c9c1470076c93d28aa521d40091abe89367b73e7",
+      "size": 951
+    },
+    "project-records/codebuddy/project-before.json": {
+      "sha256": "5d38e844a28303a0b6b13745c9c1470076c93d28aa521d40091abe89367b73e7",
+      "size": 951
+    },
+    "project-records/codebuddy/records-preservation.json": {
+      "sha256": "66bf7254ee3954154f590747d8ccd94cf135acd4969eb70123e6c938f6654230",
+      "size": 3776
+    },
+    "project-records/codebuddy/runner-provenance.json": {
+      "sha256": "e9dd0ef0104df31fb23b433a21b71057387742b9a142513cfedb3e7e7d0ddc46",
+      "size": 379
+    },
+    "project-records/codebuddy/runner-snapshots/run-marketplace-lifecycle.py": {
+      "sha256": "07c2658f084138f495f2bc57f9e55741cee747f605726037d602e78b73a99648",
+      "size": 9160
+    },
+    "project-records/codebuddy/runner-snapshots/run-native-lifecycle.py": {
+      "sha256": "8892a26df3bd2bdf456e90583ddbd9cd2e0d5f0141465351f55a3a122bd2999c",
+      "size": 26468
+    },
+    "project-records/codebuddy/summary.json": {
+      "sha256": "9c48d45858743637a4ac6f6906e213e70884b1c9fff3e75e6864bd3234c84c71",
+      "size": 75276
+    },
+    "project-records/codebuddy/verify-A.json": {
+      "sha256": "8bc3f8bca7b1b050a74e7089ecae39febc104d30f944f7dededacf8464afa06a",
+      "size": 285
+    },
+    "project-records/codebuddy/verify-B.json": {
+      "sha256": "b859f4405e53f8b4beeb6e0bba3be18242c581326fc60066481e731bbd27ec1d",
+      "size": 285
+    },
+    "project-records/codebuddy/verify-rollback-A.json": {
+      "sha256": "8bc3f8bca7b1b050a74e7089ecae39febc104d30f944f7dededacf8464afa06a",
+      "size": 285
+    },
+    "project-records/codex/commands.json": {
+      "sha256": "6d66d6aa5760717312eef61634474302f770594a96887b44958e345d1b2566a7",
+      "size": 9337
+    },
+    "project-records/codex/commands/cli-version.json": {
+      "sha256": "a135ec3398329935c130159ef8eb79a0c632a425c3735a154050aa45d72c1a50",
+      "size": 269
+    },
+    "project-records/codex/commands/install-A.json": {
+      "sha256": "19a633841c10f64b9341a5363167d9a2e977ed934562283f3761b70889e417d4",
+      "size": 637
+    },
+    "project-records/codex/commands/lifecycle-help.json": {
+      "sha256": "699d80f76758ec0917eefc6d55975a09057c68faca1767d6a1e7630acd3f2b9e",
+      "size": 1487
+    },
+    "project-records/codex/commands/list-A.json": {
+      "sha256": "e0f85d71bfac9601114d6bae27ed74b89d0390f957e7311ab30c5d27d9d9e81c",
+      "size": 951
+    },
+    "project-records/codex/commands/list-B.json": {
+      "sha256": "ec1f7a89e9a92edc03c88c14176b100abe9e4f65c544a07923b0a3b7ef9597cd",
+      "size": 952
+    },
+    "project-records/codex/commands/list-after-uninstall.json": {
+      "sha256": "424bfdd7d7fac5724e1e43516e435b9d8dc491c4fdf792c11bd60b9425aae02e",
+      "size": 322
+    },
+    "project-records/codex/commands/list-rollback-A.json": {
+      "sha256": "f59d85979164d2f18cf210338c0ea890e29aa11776cb660113b3c1bfddeb7d21",
+      "size": 952
+    },
+    "project-records/codex/commands/register-marketplace.json": {
+      "sha256": "bb07d295abe25d6935b02addf046a6db48f4e9b9f25a0f9b7b09115a58578133",
+      "size": 494
+    },
+    "project-records/codex/commands/remove-before-rollback.json": {
+      "sha256": "ce95e6e61ecdfd8154f965b9c8663c78eb85140252481a80e0fb1611ec4c7e32",
+      "size": 446
+    },
+    "project-records/codex/commands/replace-with-B.json": {
+      "sha256": "4f08744ec73dc83e273b0bf3095ec47cd121e2a6dd7f20f3357e5a27e5c480fa",
+      "size": 637
+    },
+    "project-records/codex/commands/rollback-to-A.json": {
+      "sha256": "86f6a6d97ba7930272de09a0fb19bd16dd31997d443eca1a5dcbc8166cb19f22",
+      "size": 637
+    },
+    "project-records/codex/commands/uninstall.json": {
+      "sha256": "3c0c95923feed76334fe864937cf2ea0ecdc71c8f330634292a98e094bfe18e2",
+      "size": 446
+    },
+    "project-records/codex/commands/unregister-marketplace.json": {
+      "sha256": "a94818b6b3395cfd52a18fb5a66aad20fdff2bf6537fa390935ba105460b4d78",
+      "size": 341
+    },
+    "project-records/codex/fixture-0.3.0.json": {
+      "sha256": "be3f150902d28e01fac1183e9527ffa3e7b8b0507067fb5bc2ec065be61c8da9",
+      "size": 45082
+    },
+    "project-records/codex/fixture-0.3.1.json": {
+      "sha256": "e0411b044b7f5cb5a84b423ae6c149aed40147244acc1ebc9a81554f338692da",
+      "size": 45079
+    },
+    "project-records/codex/project-after.json": {
+      "sha256": "5d38e844a28303a0b6b13745c9c1470076c93d28aa521d40091abe89367b73e7",
+      "size": 951
+    },
+    "project-records/codex/project-before.json": {
+      "sha256": "5d38e844a28303a0b6b13745c9c1470076c93d28aa521d40091abe89367b73e7",
+      "size": 951
+    },
+    "project-records/codex/records-protection-summary.json": {
+      "sha256": "6c1e22a538e5cacaf79c6d0c17a1a55409a910a8e002f65072f8e43d73aa1cfe",
+      "size": 329
+    },
+    "project-records/codex/runner.py": {
+      "sha256": "8892a26df3bd2bdf456e90583ddbd9cd2e0d5f0141465351f55a3a122bd2999c",
+      "size": 26468
+    },
+    "project-records/codex/skills-A.json": {
+      "sha256": "955dbabfe2e8626e17cc877a81af84264009d2f32487829a7c432a4d6e6c2346",
+      "size": 34014
+    },
+    "project-records/codex/skills-B.json": {
+      "sha256": "f8fd83a5287328563f6ad84f3a54b8c60f8e0a6c47f1145190b8cb44524bd607",
+      "size": 34014
+    },
+    "project-records/codex/skills-rollback-A.json": {
+      "sha256": "57e6b6d26846227ac4ab587d42d8003da61d88de3bacaffa7f6bf1ec1b4e1213",
+      "size": 34014
+    },
+    "project-records/codex/summary.json": {
+      "sha256": "8b93c11ab73e1596393b6c7aaee33220447df7af168b6a2a5eced7387aa7739e",
+      "size": 2447
+    },
+    "project-records/codex/verify-A.json": {
+      "sha256": "8a65777d030175a5a603ac4031536d48d99a111590ac576446cac793749be58a",
+      "size": 276
+    },
+    "project-records/codex/verify-B.json": {
+      "sha256": "b93eb12bacad38161403a2f5c5062f19f698e24a8ce2bf8274a148957b99134e",
+      "size": 276
+    },
+    "project-records/codex/verify-rollback-A.json": {
+      "sha256": "8a65777d030175a5a603ac4031536d48d99a111590ac576446cac793749be58a",
+      "size": 276
+    },
+    "project-records/copilot/commands.json": {
+      "sha256": "79ee8439ea06bc316044eef9c1b7cd65d2df47444dc2df88395202eca9ef3aba",
+      "size": 14337
+    },
+    "project-records/copilot/commands/cli-version.json": {
+      "sha256": "eda9ed3ad168c2586b271dee477015739975f5767274e94b0fe836f277025d80",
+      "size": 329
+    },
+    "project-records/copilot/commands/install-A.json": {
+      "sha256": "ac70a512a2802591d275826ad4309d54fffb55dd034e215bb86c7041c60d5c9e",
+      "size": 588
+    },
+    "project-records/copilot/commands/install-help.json": {
+      "sha256": "24fe53e955fff166143f8ad6cbdf98efab19522c69702793df954601da6b154d",
+      "size": 1504
+    },
+    "project-records/copilot/commands/list-A.json": {
+      "sha256": "6328deda825465316b68521004c3124a779d29f1992d53a610b687e5531f8e98",
+      "size": 458
+    },
+    "project-records/copilot/commands/list-B.json": {
+      "sha256": "d182109f4ef0f66c68e6f38f6149c3f1b89a9c7800d2bff64d7b4bc5fa768381",
+      "size": 458
+    },
+    "project-records/copilot/commands/list-after-marketplace-removal.json": {
+      "sha256": "865a26fa0561a83faa4df8dc99f7cab80587bc655d42da92e33d326be09e9d21",
+      "size": 350
+    },
+    "project-records/copilot/commands/list-after-uninstall.json": {
+      "sha256": "b6b80de58787e7676b64a9589317b0525d99eaaab2c7204d4474860f8773e45e",
+      "size": 459
+    },
+    "project-records/copilot/commands/list-rollback-A.json": {
+      "sha256": "42037a9faefce29fb2d2b3f9653abc2312b6bf5bca002f1840a4cdfe95b18741",
+      "size": 458
+    },
+    "project-records/copilot/commands/locate-0.3.0.json": {
+      "sha256": "49514ef1cb8ee80ee1b789936f36fe9be3fadeead33d880e4c13ec5bf543d0bd",
+      "size": 458
+    },
+    "project-records/copilot/commands/locate-0.3.1.json": {
+      "sha256": "47b5540344d08024fa6c99e3f2818e5ef544abfb85a91102701080799074b99d",
+      "size": 458
+    },
+    "project-records/copilot/commands/marketplace-help.json": {
+      "sha256": "482c67e56d119a033ee6e04cdf4093e168f18974063a5b7402481cc74a4b25bc",
+      "size": 1171
+    },
+    "project-records/copilot/commands/plugin-help.json": {
+      "sha256": "eeea2d8fe9b0bca894d6cf95492150909d6d3e1b220abe28b3ef1e2323094fa4",
+      "size": 1298
+    },
+    "project-records/copilot/commands/refresh-for-rollback.json": {
+      "sha256": "0a0246ccf47534fbf432edd84daf646d3b96e1eeb5a14aaa1b7246375ddc0c04",
+      "size": 407
+    },
+    "project-records/copilot/commands/refresh-marketplace.json": {
+      "sha256": "d84a71822b2b311f52465081d051672a9a7f51d661a8ad1bd117e25eb8f80053",
+      "size": 407
+    },
+    "project-records/copilot/commands/register-marketplace.json": {
+      "sha256": "8790dd8bdc01891f1e859fcb0a3a24a65950926532f8a3fe5b153d5bfeea7656",
+      "size": 394
+    },
+    "project-records/copilot/commands/remove-before-rollback.json": {
+      "sha256": "13b7267e40477bf1f952cf8b9a6eec33753f7ec476d7742e4aca9f4136aa1b86",
+      "size": 459
+    },
+    "project-records/copilot/commands/remove-live-marketplace.json": {
+      "sha256": "7f7fab8b18df9860f98405b70fd125437b926e28a713d7cd4e652106d620a934",
+      "size": 363
+    },
+    "project-records/copilot/commands/rollback-to-A.json": {
+      "sha256": "fc6d6b1db5abcdeb5a6621a4a22d95f72ee03309ce6b62f2b3d29e1a7abb4be5",
+      "size": 588
+    },
+    "project-records/copilot/commands/uninstall.json": {
+      "sha256": "80c8b0d4249228bbeab8c292f2c38acd0692af2fb3c2381a4445da475add0a97",
+      "size": 459
+    },
+    "project-records/copilot/commands/update-help.json": {
+      "sha256": "0d0509dd98afaf9b7f294375752abb2e8958cb45fb525f214d0c549874cc0573",
+      "size": 1082
+    },
+    "project-records/copilot/commands/update-to-B.json": {
+      "sha256": "b63ec44d8821c4f3d79866bd9824fb25209069546dfd0df236f1e9d62c8c802f",
+      "size": 454
+    },
+    "project-records/copilot/fixture-0.3.0.json": {
+      "sha256": "459f0e00a5d2e8347d6fb0645d78706cde29fce9f3062f3be3d03e710ce868c8",
+      "size": 48367
+    },
+    "project-records/copilot/fixture-0.3.1.json": {
+      "sha256": "2a31fcb67466d0e7202b32853f36d50ac3975d71207d6b624baa43144de9fe50",
+      "size": 48364
+    },
+    "project-records/copilot/project-after.json": {
+      "sha256": "5d38e844a28303a0b6b13745c9c1470076c93d28aa521d40091abe89367b73e7",
+      "size": 951
+    },
+    "project-records/copilot/project-before.json": {
+      "sha256": "5d38e844a28303a0b6b13745c9c1470076c93d28aa521d40091abe89367b73e7",
+      "size": 951
+    },
+    "project-records/copilot/records-preservation.json": {
+      "sha256": "2ada305ecaa57e3cdb21a3df9fb92439e0df6628fd500210b7f2ca9639731596",
+      "size": 3774
+    },
+    "project-records/copilot/runner-provenance.json": {
+      "sha256": "e9dd0ef0104df31fb23b433a21b71057387742b9a142513cfedb3e7e7d0ddc46",
+      "size": 379
+    },
+    "project-records/copilot/runner-snapshots/run-marketplace-lifecycle.py": {
+      "sha256": "07c2658f084138f495f2bc57f9e55741cee747f605726037d602e78b73a99648",
+      "size": 9160
+    },
+    "project-records/copilot/runner-snapshots/run-native-lifecycle.py": {
+      "sha256": "8892a26df3bd2bdf456e90583ddbd9cd2e0d5f0141465351f55a3a122bd2999c",
+      "size": 26468
+    },
+    "project-records/copilot/summary.json": {
+      "sha256": "e5d225cc8270410c616f9f2d31b24a8542f69f7364ad1feac6c647a1f7629ab6",
+      "size": 2168
+    },
+    "project-records/copilot/verify-A.json": {
+      "sha256": "10e81909c4983557c71c26aafc1f9276d2c0a762c00a0c769cedac53c596bab5",
+      "size": 250
+    },
+    "project-records/copilot/verify-B.json": {
+      "sha256": "10e81909c4983557c71c26aafc1f9276d2c0a762c00a0c769cedac53c596bab5",
+      "size": 250
+    },
+    "project-records/copilot/verify-rollback-A.json": {
+      "sha256": "10e81909c4983557c71c26aafc1f9276d2c0a762c00a0c769cedac53c596bab5",
+      "size": 250
+    },
+    "project-records/factory/README.md": {
+      "sha256": "90d2784d314d6f822a4928813df33a8b8209428bbab2358cec91437f66f2aa35",
+      "size": 1445
+    },
+    "project-records/factory/built-payload-inventory.json": {
+      "sha256": "f00ede90aee4c6b6726ffdd1783f648227ccfa0b18d503804873dda770a2a9d7",
+      "size": 51352
+    },
+    "project-records/factory/frozen-payload-comparison.json": {
+      "sha256": "0fedf933f4219e96178f6c9bbca8a5c422f130a285aa0c3b922f5596633a02c8",
+      "size": 659
+    },
+    "project-records/factory/logs/01.json": {
+      "sha256": "b95ecba77bc67fe2fcd33a940d9ac1bd667ff05c79fa56d91af480d57c520812",
+      "size": 266
+    },
+    "project-records/factory/logs/02.json": {
+      "sha256": "6bfdf7c0ae1772cb46f760abd43d502701d701e0716d35691b526daf2b040528",
+      "size": 171
+    },
+    "project-records/factory/logs/03.json": {
+      "sha256": "eb9044fa64c91566e670c16f1697eaa58d2fcdb7e682e24e8c6b51747f98440f",
+      "size": 31091
+    },
+    "project-records/factory/logs/04.json": {
+      "sha256": "efa0280d1bb7ec6299aeb1431ce3899d77deb71b76505fcfbb8b6ef16e066287",
+      "size": 218
+    },
+    "project-records/factory/logs/05.json": {
+      "sha256": "b13eecdb50e9de22ad3a43ecfa6c5477dbb905255d0e57bd891a5b791b269001",
+      "size": 199
+    },
+    "project-records/factory/logs/06.json": {
+      "sha256": "700d6813aa2311f5eca33266e0be99567a810db13ae12b2144286aa31473f2fc",
+      "size": 573
+    },
+    "project-records/factory/logs/07.json": {
+      "sha256": "e74104fd20fedfe1fa0a406247c636ee065d7fffdc1985e710307b1790490fd8",
+      "size": 500
+    },
+    "project-records/factory/logs/08.json": {
+      "sha256": "356eeb8c62d6e2749e00a0f3b89f79b50170b84b73ad1c6225c1289d6b04d04f",
+      "size": 299
+    },
+    "project-records/factory/logs/09.json": {
+      "sha256": "907a93c98a03d0c9cc7601d2e51e6c4fb2b6cd3fdd0e3aa857998e66381e5992",
+      "size": 317
+    },
+    "project-records/factory/logs/10.json": {
+      "sha256": "cd93089a521c128235069720abf8d58d3ed097937bd7a35b4d97b8449e80e76d",
+      "size": 303
+    },
+    "project-records/factory/logs/11.json": {
+      "sha256": "1b52f027efa5070202268f95c68d133fd15426ebc7df2184eed91bcc255f7d53",
+      "size": 171
+    },
+    "project-records/factory/logs/12.json": {
+      "sha256": "2c6702d2870dc258c6da1d2ec8d4b2ee710cf019bda0a7e9bdd1e397f9c301e2",
+      "size": 491
+    },
+    "project-records/factory/logs/13.json": {
+      "sha256": "ec40c8503b73b75926603d217237a01703c3dfabf043d536606bfa8f8085c3a4",
+      "size": 218
+    },
+    "project-records/factory/logs/14.json": {
+      "sha256": "e0504355560cae86c205549421e2961812f0fc287ab4c23143890f0535a6bd58",
+      "size": 264
+    },
+    "project-records/factory/logs/15.json": {
+      "sha256": "5f4d7a65cfce12cbdd77674cb95f6f086140ff7f2ff4f735729331be70c97c12",
+      "size": 314
+    },
+    "project-records/factory/logs/16.json": {
+      "sha256": "6a3e9eb4bce64c8fe9d4b44c08160215e9fa2520d36e2a55f5f223e06eb2f78c",
+      "size": 303
+    },
+    "project-records/factory/logs/17.json": {
+      "sha256": "321acac213e55ee6039164e25b6600f9d31d5f4b08eb13bebc3c4b93d0f4541b",
+      "size": 842
+    },
+    "project-records/factory/logs/18.json": {
+      "sha256": "20e687e9cd586471b7aec2285406571bc6240523ff32516142e3773262f4960b",
+      "size": 264
+    },
+    "project-records/factory/logs/19.json": {
+      "sha256": "676082820f8684e6f2e263ed7bab7e8454a777e69817c12f98236c1e724c6525",
+      "size": 314
+    },
+    "project-records/factory/logs/20.json": {
+      "sha256": "6696aefd7c71eff1248c1a51365211065c15bd236cc2c5cec0ce8c389248ea8e",
+      "size": 311
+    },
+    "project-records/factory/logs/21.json": {
+      "sha256": "1de910bcb98db23e0587a1f043270bf3545e857e3d0ca862759db3e79363ab3c",
+      "size": 269
+    },
+    "project-records/factory/logs/22.json": {
+      "sha256": "8e67d029bd08fb198338ffde86b5a780cfcc90e75e76713f0f091c330b65ed56",
+      "size": 276
+    },
+    "project-records/factory/logs/profile-state-before-cleanup.json": {
+      "sha256": "b7880e47de2379f41986ee64c597bffff5e60424c3b108f42c099d5124bd5989",
+      "size": 2162
+    },
+    "project-records/factory/logs/project-records-catalog.json": {
+      "sha256": "203314d7cc2a34abaf0d650f3d674a9bbd4d9495719dc2f2cf39e48fc29e5100",
+      "size": 1427
+    },
+    "project-records/factory/logs/project-records-final.json": {
+      "sha256": "203314d7cc2a34abaf0d650f3d674a9bbd4d9495719dc2f2cf39e48fc29e5100",
+      "size": 1427
+    },
+    "project-records/factory/logs/project-records-initial.json": {
+      "sha256": "203314d7cc2a34abaf0d650f3d674a9bbd4d9495719dc2f2cf39e48fc29e5100",
+      "size": 1427
+    },
+    "project-records/factory/logs/project-records-installed-a.json": {
+      "sha256": "203314d7cc2a34abaf0d650f3d674a9bbd4d9495719dc2f2cf39e48fc29e5100",
+      "size": 1427
+    },
+    "project-records/factory/logs/project-records-marketplace-removed.json": {
+      "sha256": "203314d7cc2a34abaf0d650f3d674a9bbd4d9495719dc2f2cf39e48fc29e5100",
+      "size": 1427
+    },
+    "project-records/factory/logs/project-records-rollback-a.json": {
+      "sha256": "203314d7cc2a34abaf0d650f3d674a9bbd4d9495719dc2f2cf39e48fc29e5100",
+      "size": 1427
+    },
+    "project-records/factory/logs/project-records-uninstalled.json": {
+      "sha256": "203314d7cc2a34abaf0d650f3d674a9bbd4d9495719dc2f2cf39e48fc29e5100",
+      "size": 1427
+    },
+    "project-records/factory/logs/project-records-updated-b.json": {
+      "sha256": "203314d7cc2a34abaf0d650f3d674a9bbd4d9495719dc2f2cf39e48fc29e5100",
+      "size": 1427
+    },
+    "project-records/factory/logs/state-catalog.json": {
+      "sha256": "d88557d40d16a592a63c4a5b483a38de77576259de80e7fd689d68c0291a8b4e",
+      "size": 2373
+    },
+    "project-records/factory/logs/state-initial.json": {
+      "sha256": "447a820fc52172ee44f996ac467c1815d8bc71843e8bbcfd4617a24399602d65",
+      "size": 946
+    },
+    "project-records/factory/logs/state-installed-a.json": {
+      "sha256": "78a53a4f46764015f1f11de99fd9d7b66efc555f518093ef6ad22f414ef5f427",
+      "size": 71404
+    },
+    "project-records/factory/logs/state-marketplace-removed.json": {
+      "sha256": "c49ba9a3f5a1f0f003b384338874b783226c2f5dcc176ab8a16c9eb746558bef",
+      "size": 2048
+    },
+    "project-records/factory/logs/state-rollback-a.json": {
+      "sha256": "38e13c655da527678fd2544b7c4727dddaeb33afa382145f8b161dbacca115d1",
+      "size": 71405
+    },
+    "project-records/factory/logs/state-uninstalled.json": {
+      "sha256": "43300d9e0855532ab3b9507e7b52accb9019b48f36b10812f6c4be842e27710d",
+      "size": 2375
+    },
+    "project-records/factory/logs/state-updated-b.json": {
+      "sha256": "43831494064e3e5d572c1fe047c87ad4cb29687c61f7ee47f06b2bf9ff42e4b1",
+      "size": 71401
+    },
+    "project-records/factory/payload-inventory.json": {
+      "sha256": "c208e8da01fecfc834c9c2b2f340e5295764bd651f9065c6016193bb4d23d211",
+      "size": 51649
+    },
+    "project-records/factory/run-extra-host-lifecycle.py": {
+      "sha256": "1a5eb1657e23377c677c091b8acb214bde1172d27ad20fc167ce82828fb83ecd",
+      "size": 10905
+    },
+    "project-records/factory/summary.json": {
+      "sha256": "b3313a8998dd487d4381349775109018bb85838200e51133ed51fe416763ebea",
+      "size": 44352
+    },
+    "project-records/gemini/commands.json": {
+      "sha256": "8a58ecd1c9305d3dfd81c4e9addf430c6b8682b48a79292e360a1e3f215656a4",
+      "size": 12245
+    },
+    "project-records/gemini/commands/cli-version.json": {
+      "sha256": "8872c5ff58c9576465db3e9053b0d5ea434bf3d0f3282a4fe3bd8e9727b2f045",
+      "size": 265
+    },
+    "project-records/gemini/commands/install-A.json": {
+      "sha256": "55342475ee79b43cb121b5fce7bcd71646a5e093a370c954b0161fcae15ee776",
+      "size": 1362
+    },
+    "project-records/gemini/commands/lifecycle-help.json": {
+      "sha256": "72acec31e001eb95f2585596e54270087909be4d1e60d83296e4211e955b08a6",
+      "size": 1656
+    },
+    "project-records/gemini/commands/list-A.json": {
+      "sha256": "11c658c607d5d7161628cbbeb41fc0cbc48fb16b1e91d7a484053674867cbd8c",
+      "size": 1429
+    },
+    "project-records/gemini/commands/list-B.json": {
+      "sha256": "3e8f90b0effd65d97b6d616d7e5b43aa6b0eef9edd248df6514b684cf34b971e",
+      "size": 1429
+    },
+    "project-records/gemini/commands/list-after-uninstall.json": {
+      "sha256": "9427960951a1127a144b355b98a568fb849c866cab0294a9a6af8523be48f86c",
+      "size": 296
+    },
+    "project-records/gemini/commands/list-rollback-A.json": {
+      "sha256": "ae457cad00c5793f6cea5779840c384f922eaa3b3af0d0bc2a25808460f76e6f",
+      "size": 1429
+    },
+    "project-records/gemini/commands/remove-before-rollback.json": {
+      "sha256": "518c55ff5e0729b72957a1ef4038571653814c87466ac29771d31561542424ec",
+      "size": 353
+    },
+    "project-records/gemini/commands/rollback-to-A.json": {
+      "sha256": "cbdd32eaa2b3782305809e1c7549d471bdfd3727bd8d062501661f8398fe8300",
+      "size": 881
+    },
+    "project-records/gemini/commands/uninstall.json": {
+      "sha256": "bf99564e1fd9d18438fcef70f08cac23760de16c816737c997d47c1712b420ca",
+      "size": 353
+    },
+    "project-records/gemini/commands/update-to-B.json": {
+      "sha256": "14997454d4b1703dcc7c9f2aad0e00520f03d8e815fb565f5765996f1876092a",
+      "size": 2169
+    },
+    "project-records/gemini/fixture-0.3.0.json": {
+      "sha256": "2d3d6254f2fccbebf80fa7a7ef88b5ca7d6b75508809b8fdf50cdd9c73c02202",
+      "size": 48670
+    },
+    "project-records/gemini/fixture-0.3.1.json": {
+      "sha256": "601514c6789d902e0eddc46139bbcf55e65e07460e12a713f7cb710aa28a653c",
+      "size": 48667
+    },
+    "project-records/gemini/project-after.json": {
+      "sha256": "5d38e844a28303a0b6b13745c9c1470076c93d28aa521d40091abe89367b73e7",
+      "size": 951
+    },
+    "project-records/gemini/project-before.json": {
+      "sha256": "5d38e844a28303a0b6b13745c9c1470076c93d28aa521d40091abe89367b73e7",
+      "size": 951
+    },
+    "project-records/gemini/records-protection-summary.json": {
+      "sha256": "6c1e22a538e5cacaf79c6d0c17a1a55409a910a8e002f65072f8e43d73aa1cfe",
+      "size": 329
+    },
+    "project-records/gemini/runner.py": {
+      "sha256": "8892a26df3bd2bdf456e90583ddbd9cd2e0d5f0141465351f55a3a122bd2999c",
+      "size": 26468
+    },
+    "project-records/gemini/summary.json": {
+      "sha256": "6f36759a3ad7f2a557fe1ed059672c8ca384f4523f883fccbc6780f883ab7bb0",
+      "size": 2060
+    },
+    "project-records/gemini/verify-A.json": {
+      "sha256": "c9ed708a0dc830ace74dd1fc51f68f16d8e633840b11bfd6ff6541965b72e762",
+      "size": 293
+    },
+    "project-records/gemini/verify-B.json": {
+      "sha256": "c9ed708a0dc830ace74dd1fc51f68f16d8e633840b11bfd6ff6541965b72e762",
+      "size": 293
+    },
+    "project-records/gemini/verify-rollback-A.json": {
+      "sha256": "c9ed708a0dc830ace74dd1fc51f68f16d8e633840b11bfd6ff6541965b72e762",
+      "size": 293
+    },
+    "project-records/opencode/commands.json": {
+      "sha256": "4ba88f1858ce37b5bdf12eb815662dbbf5c36d4b6042561ffe78dd7731911226",
+      "size": 241229
+    },
+    "project-records/opencode/commands/agent-A.json": {
+      "sha256": "e1d2dcfa5bf47712bf7c415ac083d2a9bf7a975d23357608b43a578f1d265899",
+      "size": 2837
+    },
+    "project-records/opencode/commands/agent-B.json": {
+      "sha256": "e1d2dcfa5bf47712bf7c415ac083d2a9bf7a975d23357608b43a578f1d265899",
+      "size": 2837
+    },
+    "project-records/opencode/commands/agent-after-remove.json": {
+      "sha256": "c48dec0ab03dbf62509dae526a6f8a5b9ca2dacaca70de7a4f1b37c70bc40b3b",
+      "size": 2564
+    },
+    "project-records/opencode/commands/agent-rollback-A.json": {
+      "sha256": "e1d2dcfa5bf47712bf7c415ac083d2a9bf7a975d23357608b43a578f1d265899",
+      "size": 2837
+    },
+    "project-records/opencode/commands/check-A.json": {
+      "sha256": "84edbe0eaf67699779e1ed2e73e5af501ea478d6f51c1c2a77242beecd4aa1f6",
+      "size": 681
+    },
+    "project-records/opencode/commands/check-B.json": {
+      "sha256": "d0146b2c922c9cf29b8f7076aa009b56a6d84057df1d9bfa02f89a67dbc40924",
+      "size": 681
+    },
+    "project-records/opencode/commands/check-rollback-A.json": {
+      "sha256": "84edbe0eaf67699779e1ed2e73e5af501ea478d6f51c1c2a77242beecd4aa1f6",
+      "size": 681
+    },
+    "project-records/opencode/commands/cli-version.json": {
+      "sha256": "25cc34f23f9f12bacacbfffd472879b1cb0f33789576c2d9cef51b30671d6998",
+      "size": 170
+    },
+    "project-records/opencode/commands/config-A.json": {
+      "sha256": "c08aa0ae4e3511c13a35e3a079c225cdf8ae8c838b72f85c7ec53d32cd9a2325",
+      "size": 1284
+    },
+    "project-records/opencode/commands/config-B.json": {
+      "sha256": "c08aa0ae4e3511c13a35e3a079c225cdf8ae8c838b72f85c7ec53d32cd9a2325",
+      "size": 1284
+    },
+    "project-records/opencode/commands/config-rollback-A.json": {
+      "sha256": "c08aa0ae4e3511c13a35e3a079c225cdf8ae8c838b72f85c7ec53d32cd9a2325",
+      "size": 1284
+    },
+    "project-records/opencode/commands/debug-help.json": {
+      "sha256": "c56081a06ad143e34bdce1d9f15e635d1494d88e97b1ae2b86e10678c875b2de",
+      "size": 1099
+    },
+    "project-records/opencode/commands/init.json": {
+      "sha256": "2d10671120f475816c4c156d9c8846b73fe1d284939ac752fdc3c4967fa582fd",
+      "size": 900
+    },
+    "project-records/opencode/commands/npm-ci.json": {
+      "sha256": "202271f2026eefa5d742cf6394fdcabe8dceaacac2ed3bb8c7112cfa697e4495",
+      "size": 424
+    },
+    "project-records/opencode/commands/paths.json": {
+      "sha256": "c47aa7d53e95258f357e5a64bc83871b6fb0023a4d8a334814a3570864a45ffd",
+      "size": 865
+    },
+    "project-records/opencode/commands/skills-A.json": {
+      "sha256": "52d2d96fe008c6cba24b20f8d84e166b12b150701dfd49bd24ab56005d1a2084",
+      "size": 66064
+    },
+    "project-records/opencode/commands/skills-B.json": {
+      "sha256": "a3105d3328d99dc51b24e457540abeea04e75e02e80ec8e658572d582d7facb9",
+      "size": 66064
+    },
+    "project-records/opencode/commands/skills-after-remove.json": {
+      "sha256": "53021a6295dbe590f92428c16e1b7db20eb7402914e3035275efe1ab7e6764ad",
+      "size": 18977
+    },
+    "project-records/opencode/commands/skills-rollback-A.json": {
+      "sha256": "52d2d96fe008c6cba24b20f8d84e166b12b150701dfd49bd24ab56005d1a2084",
+      "size": 66064
+    },
+    "project-records/opencode/commands/status-A.json": {
+      "sha256": "b0f57f66f7ea44e9d82b7dcd4900f840ced43f8116e5cbf5345aa9733cb5ba6a",
+      "size": 827
+    },
+    "project-records/opencode/commands/status-B.json": {
+      "sha256": "b0f57f66f7ea44e9d82b7dcd4900f840ced43f8116e5cbf5345aa9733cb5ba6a",
+      "size": 827
+    },
+    "project-records/opencode/commands/status-rollback-A.json": {
+      "sha256": "b0f57f66f7ea44e9d82b7dcd4900f840ced43f8116e5cbf5345aa9733cb5ba6a",
+      "size": 827
+    },
+    "project-records/opencode/lifecycle-helper.py": {
+      "sha256": "8892a26df3bd2bdf456e90583ddbd9cd2e0d5f0141465351f55a3a122bd2999c",
+      "size": 26468
+    },
+    "project-records/opencode/project-after.json": {
+      "sha256": "2859610176e0e29fb417d5417613627be5a8578086e304d713af3a936ecc5377",
+      "size": 951
+    },
+    "project-records/opencode/project-before.json": {
+      "sha256": "5d38e844a28303a0b6b13745c9c1470076c93d28aa521d40091abe89367b73e7",
+      "size": 951
+    },
+    "project-records/opencode/records-protection-summary.json": {
+      "sha256": "6c1e22a538e5cacaf79c6d0c17a1a55409a910a8e002f65072f8e43d73aa1cfe",
+      "size": 329
+    },
+    "project-records/opencode/runner.py": {
+      "sha256": "a17acf60821ecacd2b53b7e9c1b7f74679f776343be4d02e381f3ca261fa4ea8",
+      "size": 14799
+    },
+    "project-records/opencode/skill-fixture-delta.json": {
+      "sha256": "79030e556dab193752d83429142f13c563e444ad825bffac206a991fb3e5beeb",
+      "size": 212
+    },
+    "project-records/opencode/source-files.json": {
+      "sha256": "577dac453b46c8c66a87c84d432de9856666f6bd7eb7efec117d1ebbd15d46d0",
+      "size": 49368
+    },
+    "project-records/opencode/summary.json": {
+      "sha256": "823f729f739eb7330dce1d7732c8ad4dde1dc9ac59a5e2f287d27e2ae844ce2e",
+      "size": 2076
+    },
+    "project-records/pi/commands.json": {
+      "sha256": "d5f7e53ab9813075baf4c2b99a3c5e8f91b444316640a794ce41528d41908da2",
+      "size": 19180
+    },
+    "project-records/pi/commands/cli-version.json": {
+      "sha256": "052a41d534fe2787254dd6f53b1a4b780ab8c4e488e2dc14fb876608b84b8c2f",
+      "size": 276
+    },
+    "project-records/pi/commands/install-A.json": {
+      "sha256": "a2a1d340d9ad74131ca7399cd3aded4d5a5224129efdf94af9423f49968ec168",
+      "size": 555
+    },
+    "project-records/pi/commands/lifecycle-help.json": {
+      "sha256": "bbd5f594fc124ec8a2e24e31ba993eb6c7eb72de37f1518a54ddc6e013ba43e8",
+      "size": 831
+    },
+    "project-records/pi/commands/list-A.json": {
+      "sha256": "ccc0bd72c123981c60caeb7692f42f02880900221e968adcf819072bdc58389c",
+      "size": 453
+    },
+    "project-records/pi/commands/list-B.json": {
+      "sha256": "a70364b9aef33c48c065b3348b988a77283926308d4892cc17ec4250e7e118c9",
+      "size": 453
+    },
+    "project-records/pi/commands/list-after-uninstall.json": {
+      "sha256": "0e1574f7c8e6f4e99f6d951460d5a2eb1aef56d370f28bcdae0bd8eaaedddb32",
+      "size": 287
+    },
+    "project-records/pi/commands/list-rollback-A.json": {
+      "sha256": "1344329f889a75fae195fd3bdf86a0af76f5abe8b295bd4b891ee6591a44df41",
+      "size": 453
+    },
+    "project-records/pi/commands/npm-pack-0.3.0.json": {
+      "sha256": "44d73612fc7495d59ffa0704a91759e4b0d7fba19a3853196d97269091ed5320",
+      "size": 6470
+    },
+    "project-records/pi/commands/npm-pack-0.3.1.json": {
+      "sha256": "aaf8bbb7d78fa57eb2431dae1fe66889ba553bff3fb3e52412d74084f77c1281",
+      "size": 6468
+    },
+    "project-records/pi/commands/remove-before-rollback.json": {
+      "sha256": "50901b435c4188783d0c027093375cd9344fbd191384fd42896f635fae296021",
+      "size": 552
+    },
+    "project-records/pi/commands/replace-with-B.json": {
+      "sha256": "be6bcc742fd364c607cd5e1147573659d6588196132fae5526d5228555e32e84",
+      "size": 557
+    },
+    "project-records/pi/commands/rollback-to-A.json": {
+      "sha256": "541427e53fa8116ddbf977fa4b6c836f771754a8ef89f97235e7062a03081986",
+      "size": 555
+    },
+    "project-records/pi/commands/uninstall.json": {
+      "sha256": "83a74eabd688f6bfb7a5bd74fb209860f00bd18393a8894526ccc9121f1970dc",
+      "size": 552
+    },
+    "project-records/pi/fixture-0.3.0.json": {
+      "sha256": "e0820d50ae27600747a92c5a76ec779aa9285f19a3add361127cbd2563d2bc70",
+      "size": 7023
+    },
+    "project-records/pi/fixture-0.3.1.json": {
+      "sha256": "1ef02957ab39234b2de5f428e434695edd9a4b89196fa3363fc5f5477ea7b622",
+      "size": 7020
+    },
+    "project-records/pi/npm-0.3.0.json": {
+      "sha256": "bf3fd5c096a11022b90dfab97c55766987e3102cf6fdd5aacc45954663aaee4e",
+      "size": 7644
+    },
+    "project-records/pi/npm-0.3.1.json": {
+      "sha256": "723f8045923ab38776ef6ab73736005d294d61c065f35d0f7a1e1e7a2caf227d",
+      "size": 7641
+    },
+    "project-records/pi/project-after.json": {
+      "sha256": "5d38e844a28303a0b6b13745c9c1470076c93d28aa521d40091abe89367b73e7",
+      "size": 951
+    },
+    "project-records/pi/project-before.json": {
+      "sha256": "5d38e844a28303a0b6b13745c9c1470076c93d28aa521d40091abe89367b73e7",
+      "size": 951
+    },
+    "project-records/pi/records-protection-summary.json": {
+      "sha256": "6c1e22a538e5cacaf79c6d0c17a1a55409a910a8e002f65072f8e43d73aa1cfe",
+      "size": 329
+    },
+    "project-records/pi/runner.py": {
+      "sha256": "8892a26df3bd2bdf456e90583ddbd9cd2e0d5f0141465351f55a3a122bd2999c",
+      "size": 26468
+    },
+    "project-records/pi/summary.json": {
+      "sha256": "2c7318200d5eace0927a12d78eb9161cf9eeeb697a5f04f1aa722caac71a21dc",
+      "size": 1957
+    },
+    "project-records/pi/verify-A.json": {
+      "sha256": "3ef8168ca405b8059f751fbf12ae87a2e1101130c1f07a7eb41539a22e71b3d7",
+      "size": 260
+    },
+    "project-records/pi/verify-B.json": {
+      "sha256": "3ef8168ca405b8059f751fbf12ae87a2e1101130c1f07a7eb41539a22e71b3d7",
+      "size": 260
+    },
+    "project-records/pi/verify-rollback-A.json": {
+      "sha256": "3ef8168ca405b8059f751fbf12ae87a2e1101130c1f07a7eb41539a22e71b3d7",
+      "size": 260
+    },
+    "regression/baseline/logs/git-index.log": {
+      "sha256": "db630bf4ca3c3c4739d696b1c3f6e2025814f407538fd3f5678a3eade30420c0",
+      "size": 95
+    },
+    "regression/baseline/logs/git-init.log": {
+      "sha256": "1b7c8603f00388b027a1a611031d07640bae383f93502598ab1123eff28561ae",
+      "size": 87
+    },
+    "regression/baseline/logs/node-version.log": {
+      "sha256": "66afb2709d33a5abca5ae4437e5527dab1e0c104d744e27ab20f24f2e28239c2",
+      "size": 84
+    },
+    "regression/baseline/logs/npm-version.log": {
+      "sha256": "34b592c765de42d8a44a3d9e5dd27898baef774c69a05e4696f9a2e4a8c10d01",
+      "size": 80
+    },
+    "regression/baseline/logs/opencode-build.log": {
+      "sha256": "6145acc71ffaabf55f74a3060b93bfcd404d6b1fb3e80d4483c834288f63af00",
+      "size": 200
+    },
+    "regression/baseline/logs/opencode-npm-ci.log": {
+      "sha256": "738f8679544907437077e88bc827ccbde2c7babf7fd139b831a8cde6ff71aa81",
+      "size": 425
+    },
+    "regression/baseline/logs/opencode-test.log": {
+      "sha256": "0799688bad42359637d587b2cfa7105ccaf0e8db3b24196f7e5aa14ad6ab32be",
+      "size": 1717
+    },
+    "regression/baseline/logs/opencode-typecheck.log": {
+      "sha256": "e93e938d6142f5c9a3190434abc78d8ee3387c011c7a40b443ba470c35b05466",
+      "size": 217
+    },
+    "regression/baseline/logs/pi-npm-ci.log": {
+      "sha256": "61b0fda265e5db51790c71c34afd5b3855cec9b64e151e0c7a041f77bb6f24bf",
+      "size": 282
+    },
+    "regression/baseline/logs/pi-test.log": {
+      "sha256": "58de350b719c231e3ac2ca56d0e651bcf7d56ff9eae19e4ae082978dbc34bf77",
+      "size": 648
+    },
+    "regression/baseline/logs/pytest.log": {
+      "sha256": "ddbfb66c23a59ecd3f250e702a16f818c6644df556ba2ebfd2643e6bb1b9cc75",
+      "size": 1110
+    },
+    "regression/baseline/logs/python-dependencies.log": {
+      "sha256": "6cfe3b2232038a232ee5df54ad2f9fd5068ea2ae4be745d5e9bfb15b13aaa842",
+      "size": 372
+    },
+    "regression/baseline/pytest.junit.xml": {
+      "sha256": "9fb5c47d6f9f27d00772bcc940d9af07aa59168544d163e8bc0f66428a311383",
+      "size": 127234
+    },
+    "regression/baseline/summary.json": {
+      "sha256": "bc5d602439630358052ff07fcfd261ff3b9daf38d91eeb4a1461eb4f95dd15da",
+      "size": 19328
+    },
+    "regression/migrated/logs/build-migrated-tree.log": {
+      "sha256": "5c909e5360e6790aa09f53da9bcfaef5a6d6d66cedf93c887164dd83df74e297",
+      "size": 248
+    },
+    "regression/migrated/logs/git-index.log": {
+      "sha256": "42a7bd3e08e54ad16c5e1a976f5842a8ba7ccce4e0c52468b3dfceb10f97737b",
+      "size": 95
+    },
+    "regression/migrated/logs/git-init.log": {
+      "sha256": "d36d6633b2e70b5c525d0f745374aa27198e4b81eca873ce955dc6cf2724d95d",
+      "size": 87
+    },
+    "regression/migrated/logs/node-version.log": {
+      "sha256": "665ae32dfbb9cce9c83aaafbf276a189a8220cc08ddf88b576696c704ad8faa9",
+      "size": 84
+    },
+    "regression/migrated/logs/npm-version.log": {
+      "sha256": "eccf4608e7483ad59d2fdce903342cd82e94303a53a245f3071918cee9a2b96f",
+      "size": 80
+    },
+    "regression/migrated/logs/opencode-build.log": {
+      "sha256": "97aaa1da9163472a8ce95a85d86aa18b01b9089ed306e4af8a0d9f086e4a232a",
+      "size": 190
+    },
+    "regression/migrated/logs/opencode-npm-ci.log": {
+      "sha256": "9d0ed276f2a857ca9059109ee0f43de8cd306dd5c79c916d20f63c79d796da5a",
+      "size": 420
+    },
+    "regression/migrated/logs/opencode-test.log": {
+      "sha256": "fb24fcb648eb632b0930907e6e61f282d122c56bb0ecee0becd59dea78610eed",
+      "size": 941
+    },
+    "regression/migrated/logs/opencode-typecheck.log": {
+      "sha256": "061edaf0801217b82ac5c671dc459ef5de9acb11a938ee60d3a29b61c711ddec",
+      "size": 207
+    },
+    "regression/migrated/logs/pi-npm-ci.log": {
+      "sha256": "ad36d11c36188e909d198923b5b1a910b69f1ff458fbd5e2c98ff4c6be1577c2",
+      "size": 270
+    },
+    "regression/migrated/logs/pi-test.log": {
+      "sha256": "05a433aaa85de799cb66789535e261a088e61edb1e2853f694d539390e170321",
+      "size": 740
+    },
+    "regression/migrated/logs/pytest.log": {
+      "sha256": "4dc73b1090b91b78dd918422886c481ab0b53ea4f52d58d1717ff5e1314b57d5",
+      "size": 1145
+    },
+    "regression/migrated/logs/python-dependencies.log": {
+      "sha256": "d7750454e8d4ccb92a1af0b0e062c25de51eee43c151ef34f4d5dcca464d9b8c",
+      "size": 372
+    },
+    "regression/migrated/pytest.junit.xml": {
+      "sha256": "a467439e950b50499cc4613451a2da3096fdf32ed79270641bec5f2ef067f614",
+      "size": 127213
+    },
+    "regression/migrated/summary.json": {
+      "sha256": "ba11c234e6820fec5514bd37e1f639187d4f19f63ec7d7dc60030701dd68bfeb",
+      "size": 19726
+    },
+    "release/scoped-opencode-BUILD.json": {
+      "sha256": "800bf1ec6fb162dcd1b39e7432be5c48321b323e764891eeea3ee7f36ea320fa",
+      "size": 3065
+    },
+    "release/scoped-release.json": {
+      "sha256": "bf807ce119db4d8507eb9bef5433bc1dee4311a8b64e2fcc5d5841a1d6b51104",
+      "size": 147621
+    },
+    "review/pd-native-independent-review-checks.json": {
+      "sha256": "74d641acda99a423572669bef14b1a6691de1ec2cffb5bb0fbed773490b564a8",
+      "size": 1205
+    },
+    "review/pd-native-independent-review-final-checks.json": {
+      "sha256": "a29b636e54c44f7630519deb9d82b96ee65a42d0063eee2fe9d06254a85f0eb7",
+      "size": 1125
+    },
+    "review/resource-fix/README.md": {
+      "sha256": "5ad2ee89b16417b6662cdecf029ec9d38bd48cb507b96f7a001d2a5dfc807652",
+      "size": 1683
+    },
+    "review/resource-fix/adapters.py": {
+      "sha256": "4ee38212bd626f88b37be24c29213a3d58dbce7ac8e89efa62161ea89814b8a0",
+      "size": 15929
+    },
+    "review/resource-fix/after.log": {
+      "sha256": "8f79f5ccf2190bb7dc258a806dd893edda9787c81b00572da6edce7147b349f5",
+      "size": 648
+    },
+    "review/resource-fix/before.log": {
+      "sha256": "aab887342fa6fcbfec38cd72e74a306d54b536fa9a7597c86ac717e121ee21e6",
+      "size": 372476
+    },
+    "review/resource-fix/inventory.json": {
+      "sha256": "8aac62263784ae9045fe38f3102f1a1dff9d4be07330a5de2fa063c6d77cab75",
+      "size": 640
+    },
+    "review/resource-fix/opencode-nested-raw.json": {
+      "sha256": "e16c25f7b8fdfc000b7c7e481d8a4a83fabf21a25b96eb140824b3da7dec3043",
+      "size": 19476
+    },
+    "review/resource-fix/opencode-nested-summary.json": {
+      "sha256": "01144a7410905171a60964fb4fb7929629753b35eaab8f277360ff59f258c8e1",
+      "size": 581
+    },
+    "review/resource-fix/test_native_resource_paths.py": {
+      "sha256": "ac16e94886e094152bbeaaa1bc9ea75f2f463aadd2117f0d74097545f2349b0f",
+      "size": 6241
+    },
+    "runners/run-codex-hook-probe.py": {
+      "sha256": "9249dbc5460cf26587239620cdaf09da1031cc20c3b99053d887a48d835ece5d",
+      "size": 10415
+    },
+    "runners/run-extra-host-lifecycle.py": {
+      "sha256": "11f7f67531558746a83b51ef9c884fc985ca2c3c143a8e3ae081cb7fd100e593",
+      "size": 8259
+    },
+    "runners/run-marketplace-lifecycle.py": {
+      "sha256": "07c2658f084138f495f2bc57f9e55741cee747f605726037d602e78b73a99648",
+      "size": 9160
+    },
+    "runners/run-native-lifecycle.py": {
+      "sha256": "8892a26df3bd2bdf456e90583ddbd9cd2e0d5f0141465351f55a3a122bd2999c",
+      "size": 26468
+    },
+    "runners/run-opencode-native.py": {
+      "sha256": "a17acf60821ecacd2b53b7e9c1b7f74679f776343be4d02e381f3ca261fa4ea8",
+      "size": 14799
+    },
+    "runners/run-plugin-smoke.py": {
+      "sha256": "334d30282ae62e28ad9adf8863bc31ea2e8400cc352d62f7a6ba8d78e3ef9429",
+      "size": 11977
+    },
+    "runners/run-pwf-smoke.py": {
+      "sha256": "2fdcfacb647101b1c92b03f21aac64adcfde702f2e5fac93456685ebf46871eb",
+      "size": 36768
+    }
+  }
+}
