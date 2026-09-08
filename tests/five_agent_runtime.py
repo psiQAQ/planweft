@@ -386,6 +386,9 @@ def controller(payload):
                 os.environ['PWF_GATE_CAP']='1' if case.startswith('gate-cap') else '20'
             prompt = payload['prompt']
             command, data = model_command(host,payload['model'],prompt,case)
+            server_probe=host=='opencode' and case in {'stopping','gated-continuation','gate-cap','gate-stall','gate-cap-disabled','gate-stall-disabled'}
+            if server_probe:
+                command=['opencode','serve','--hostname','127.0.0.1','--port','0']
             traced=payload.get('trace_gate_processes',False)
             if traced:
                 run('version-strace',['strace','--version'])
@@ -395,6 +398,7 @@ def controller(payload):
                 command=['strace','-f','--decode-pids=comm','-s','4096','-e','trace='+tracer.TRACE_SYSCALLS,'-e','raw=read','-o','/tmp/planweft-gate.trace','--',*command]
             save('model-invocation',{'argv':command,'fresh_session':True,'case':case,
                 'plugin_installed':case!='cold-reader','external_memory':'direct-provider; no MemoryProxy or identity headers',
+                'transport':'native server SSE; finite quiet window' if server_probe else 'native CLI',
                 'codex_hook_trust':'invocation bypass' if '--dangerously-bypass-hook-trust' in command else 'normal',
                 'planning_disabled':os.environ.get('PLANNING_DISABLED')=='1'})
             if host=='pi': save('pi-mode',{'configured':os.environ.get('PWF_MODE','auto'),
@@ -403,6 +407,16 @@ def controller(payload):
             try:
                 if host=='pi' and case in {'context','recovery','continuation-limit','stopping'}:
                     process=pi_model(payload['model'],prompt,payload['timeout'],activate=case!='stopping')
+                elif server_probe:
+                    spec=importlib.util.spec_from_file_location('opencode_server_probe',Path(__file__).with_name('opencode_server_probe.py'))
+                    probe=importlib.util.module_from_spec(spec);spec.loader.exec_module(probe)
+                    process=probe.run_probe('release/'+payload['model'],prompt,payload['timeout'],WORK,OUT,case)
+                    save('native-server-observation',process.evidence)
+                    (OUT/'model.stdout').write_text(safe_text(process.stdout))
+                    (OUT/'model.stderr').write_text(safe_text(process.stderr))
+                    save('model',{'argv':command,'exit_code':process.returncode,
+                        'completion':'finite native SSE/message observation; harness shuts down server',
+                        'seconds':process.evidence['seconds'],'stdout_format':'projection of native stored message parts; original messages/SSE in native-server-observation.json'})
                 else:
                     process = run('model',command,input_data=data,timeout=payload['timeout'],required=False)
             finally:

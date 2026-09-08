@@ -235,12 +235,15 @@ def main(argv=None):
     runtime.write_bytes((ROOT/'tests/five_agent_runtime.py').read_bytes())
     trace_module=args.output/'gate_process_trace.py'
     trace_module.write_bytes((ROOT/'tests/gate_process_trace.py').read_bytes())
+    server_module=args.output/'opencode_server_probe.py'
+    server_module.write_bytes((ROOT/'tests/opencode_server_probe.py').read_bytes())
     digest=hashlib.sha256(args.archive.read_bytes()).hexdigest()
     report={'schema_version':1,'version':args.package['version'],'npm_sha256':digest,
         'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         'fixture_sha256':hashlib.sha256((args.output/'fixture.py').read_bytes()).hexdigest(),
         'runtime_sha256':hashlib.sha256(runtime.read_bytes()).hexdigest(),
         'trace_module_sha256':hashlib.sha256(trace_module.read_bytes()).hexdigest(),
+        'server_module_sha256':hashlib.sha256(server_module.read_bytes()).hexdigest(),
         'status':'In Progress','hosts':{},'semantic_review':'Not Run',
         'scope':'Linux amd64 real hosts; exact artifact, no external memory service'}
     # Concurrent labelled validation containers are not baseline services.
@@ -305,6 +308,7 @@ def main(argv=None):
                     '--mount',f'type=bind,src={args.archive.resolve()},dst=/input/package.tgz,readonly',
                     '--mount',f'type=bind,src={runtime},dst=/runner/runtime.py,readonly',
                     '--mount',f'type=bind,src={trace_module},dst=/runner/gate_process_trace.py,readonly',
+                    '--mount',f'type=bind,src={server_module},dst=/runner/opencode_server_probe.py,readonly',
                     '-e','HOME=/home/agent','-e','HTTP_PROXY','-e','HTTPS_PROXY','-e','ALL_PROXY',
                     '--workdir','/workspace','--entrypoint','python3',image,'-c',
                     'import sys,json; sys.path.insert(0,"/runner"); import runtime; sys.exit(runtime.controller(json.load(sys.stdin)))']
