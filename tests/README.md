@@ -9,7 +9,7 @@ python3 tests/experiments/check-entry-contract.py .
 
 第一条验证分发、脚本协议、参数解析及副作用边界；第二条独立从 CLI/main 边界验收历史 smoke 的 13 个场景，包括默认值、帮助、repo-copy、多个合法场景，以及 enabled 成功/失败时是否执行 handoff。合法路径用假进程和假 HOME，不代表真实模型或 Windows 验证。
 
-`test_pwf_distribution.py` 直接复制 `dist/<host>/program-design/` 并调用目录内脚本。0.3.0 验证 14 平台目录、schema version 2 清单、逐文件 SHA-256 与执行位、规范 JSON 的树摘要、无残留 ZIP、Codex 兼容镜像，以及确定性重建。另对增、删、改、执行位和镜像漂移执行 `--verify`，要求拒绝漂移且不写任何文件。
+`test_pwf_distribution.py` 直接复制 `dist/<host>/planweft/` 并调用目录内脚本。0.3.0 验证 14 平台目录、schema version 2 清单、逐文件 SHA-256 与执行位、规范 JSON 的树摘要、无残留 ZIP、Codex 兼容镜像，以及确定性重建。另对增、删、改、执行位和镜像漂移执行 `--verify`，要求拒绝漂移且不写任何文件。
 
 原有脚本协议检查继续覆盖唯一自动主入口、命令身份、计划选择与错误拒绝、三文件保护、attestation、Codex JSON 协议、禁用与去重、模板解析、旧插件诊断和 Python 同名模块隔离。它们不模拟一个完整真实 Agent，也不替代宿主安装证据。历史 0.2.0 数量与实测结果保留在 [REP-0005](../docs/reproduction/0005-pwf-based-plugin.md)，不能作为 0.3.0 已通过的证据。
 
@@ -24,14 +24,14 @@ python3 tests/experiments/check-entry-contract.py .
 构建只使用 Python 标准库；运行上游测试另需 [requirements-test.txt](../requirements-test.txt) 中固定的 pytest 和 PyYAML。使用已有 Python 3.12+ 测试环境，或在依赖安装已获授权时建立独立环境：
 
 ```bash
-python3 -m venv /tmp/pd-test-venv
-/tmp/pd-test-venv/bin/python -m pip install -r requirements-test.txt
+python3 -m venv /tmp/pw-test-venv
+/tmp/pw-test-venv/bin/python -m pip install -r requirements-test.txt
 
 # 原始699文件快照：baseline，不应用本地改动
-python3 scripts/run-upstream-tests.py baseline --python /tmp/pd-test-venv/bin/python --output /tmp/pd-baseline-new --with-node
+python3 scripts/run-upstream-tests.py baseline --python /tmp/pw-test-venv/bin/python --output /tmp/pw-baseline-new --with-node
 
 # 固定来源 + 身份映射 + 本地扩展：migrated
-python3 scripts/run-upstream-tests.py migrated --python /tmp/pd-test-venv/bin/python --output /tmp/pd-migrated-new --with-node
+python3 scripts/run-upstream-tests.py migrated --python /tmp/pw-test-venv/bin/python --output /tmp/pw-migrated-new --with-node
 
 python3 scripts/build-plugin.py --verify
 ```
@@ -41,10 +41,10 @@ python3 scripts/build-plugin.py --verify
 本机 uutils `mkdir` 0.8.0 的并发原语存在已复现问题，原始 PWF 也受影响。对照运行使用已有 GNU 9.7 `gnumkdir`，显式配置下面的临时 PATH；`--tool-path` 仅用于该次回归并记录实际工具 SHA，不改变产品或系统默认命令：
 
 ```bash
-mkdir -p /tmp/pd-gnu-tools
-ln -s /usr/bin/gnumkdir /tmp/pd-gnu-tools/mkdir
-python3 scripts/run-upstream-tests.py baseline --python /tmp/pd-test-venv/bin/python --output /tmp/pd-baseline-gnu-new --tool-path /tmp/pd-gnu-tools
-python3 scripts/run-upstream-tests.py migrated --python /tmp/pd-test-venv/bin/python --output /tmp/pd-migrated-gnu-new --tool-path /tmp/pd-gnu-tools
+mkdir -p /tmp/pw-gnu-tools
+ln -s /usr/bin/gnumkdir /tmp/pw-gnu-tools/mkdir
+python3 scripts/run-upstream-tests.py baseline --python /tmp/pw-test-venv/bin/python --output /tmp/pw-baseline-gnu-new --tool-path /tmp/pw-gnu-tools
+python3 scripts/run-upstream-tests.py migrated --python /tmp/pw-test-venv/bin/python --output /tmp/pw-migrated-gnu-new --tool-path /tmp/pw-gnu-tools
 ```
 
 以上命令仅适用于已有该 GNU 可执行文件的环境；不自动安装或假定别的机器路径一致。原生失败、GNU 对照和最小复现都保留在 REP-0005 的回归证据中。
@@ -54,10 +54,10 @@ python3 scripts/run-upstream-tests.py migrated --python /tmp/pd-test-venv/bin/py
 [run-native-lifecycle.py](run-native-lifecycle.py) 使用已经安装的官方 Codex、Claude Code、Gemini CLI 或 Pi。它不安装 CLI、不继承认证或个人配置；每次命令使用临时 HOME、各宿主配置目录和独立 cache。输出目录必须是仓库外的新目录：
 
 ```bash
-python3 tests/run-native-lifecycle.py --host codex --cli /absolute/path/to/codex --output /tmp/pd-native-codex-new
-python3 tests/run-native-lifecycle.py --host claude --cli /absolute/path/to/claude --output /tmp/pd-native-claude-new
-python3 tests/run-native-lifecycle.py --host gemini --cli /absolute/path/to/gemini --output /tmp/pd-native-gemini-new
-python3 tests/run-native-lifecycle.py --host pi --cli /absolute/path/to/pi --output /tmp/pd-native-pi-new
+python3 tests/run-native-lifecycle.py --host codex --cli /absolute/path/to/codex --output /tmp/pw-native-codex-new
+python3 tests/run-native-lifecycle.py --host claude --cli /absolute/path/to/claude --output /tmp/pw-native-claude-new
+python3 tests/run-native-lifecycle.py --host gemini --cli /absolute/path/to/gemini --output /tmp/pw-native-gemini-new
+python3 tests/run-native-lifecycle.py --host pi --cli /absolute/path/to/pi --output /tmp/pw-native-pi-new
 ```
 
 | 参数 | 默认值 | 说明 |
@@ -76,23 +76,23 @@ Claude 使用原生 marketplace/plugin update；Gemini 使用记录的本地目�
 [run-opencode-native.py](run-opencode-native.py) 使用已安装的 OpenCode V1，在临时包副本中执行 `npm ci --omit=dev --ignore-scripts`，因此运行此探针需要已授权的依赖下载。它使用临时 HOME/cache、项目 loader 和单独复制的主 Skill；不继承认证或个人配置，不修改传入包：
 
 ```bash
-python3 tests/run-opencode-native.py --cli /absolute/path/to/opencode --package /absolute/path/to/prepared/opencode --output /tmp/pd-opencode-native-new
+python3 tests/run-opencode-native.py --cli /absolute/path/to/opencode --package /absolute/path/to/prepared/opencode --output /tmp/pw-opencode-native-new
 ```
 
-`--package` 默认为本仓库 `dist/opencode/program-design/`，`--cli` 与 `--output` 必填，输出必须是仓库外的新目录。真实 `debug config`、`debug agent build`、`debug skill` 检查三项 `pd_` 工具和唯一 `project-docs`，核对宿主报告的 Skill 路径、全部复制内容及五种语言资源，拒绝额外变体入口；随后直接执行工具，核对 A/B/回退的实际插件版本、Skill 资源增改删、包内模板来源、移除后的发现结果，以及已有项目记录和来源包不变。`skill-fixture-delta.json` 记录三个资源变化类别，完整安装内容比较拒绝残留旧文件。debug 工具执行只读取模型元数据，fixture 模型没有真实认证且指向拒绝连接的本地地址，不发送模型请求。此探针证明本地 file URL 加载与新进程的配置切换；远程 npm 安装更新、现有会话 reload 和其他 OS 均未覆盖。每次运行保存命令日志、runner/helper 快照及摘要。
+`--package` 默认为本仓库 `dist/opencode/planweft/`，`--cli` 与 `--output` 必填，输出必须是仓库外的新目录。真实 `debug config`、`debug agent build`、`debug skill` 检查三项 `pw_` 工具和唯一 `project-docs`，核对宿主报告的 Skill 路径、全部复制内容及五种语言资源，拒绝额外变体入口；随后直接执行工具，核对 A/B/回退的实际插件版本、Skill 资源增改删、包内模板来源、移除后的发现结果，以及已有项目记录和来源包不变。`skill-fixture-delta.json` 记录三个资源变化类别，完整安装内容比较拒绝残留旧文件。debug 工具执行只读取模型元数据，fixture 模型没有真实认证且指向拒绝连接的本地地址，不发送模型请求。此探针证明本地 file URL 加载与新进程的配置切换；远程 npm 安装更新、现有会话 reload 和其他 OS 均未覆盖。每次运行保存命令日志、runner/helper 快照及摘要。
 
 ## 0.3.0 目录分发的真实模型试用入口
 
-[run-pwf-smoke.py](run-pwf-smoke.py) 使用已存在的固定镜像 SHA、独立 tmpfs HOME 和本地 Codex 原生目录。它先核对 schema version 2 的文件与执行位清单，再复制根 catalog 与 `dist/codex/program-design/` 到临时仓库布局，交给原生 CLI 注册、安装和卸载。可先做不读取认证、不调用模型的安装预检：
+[run-pwf-smoke.py](run-pwf-smoke.py) 使用已存在的固定镜像 SHA、独立 tmpfs HOME 和本地 Codex 原生目录。它先核对 schema version 2 的文件与执行位清单，再复制根 catalog 与 `dist/codex/planweft/` 到临时仓库布局，交给原生 CLI 注册、安装和卸载。可先做不读取认证、不调用模型的安装预检：
 
 ```bash
-python3 tests/run-pwf-smoke.py --preflight-only --output /tmp/pd-preflight-new
+python3 tests/run-pwf-smoke.py --preflight-only --output /tmp/pw-preflight-new
 ```
 
 在具备 Docker、已有 Codex 认证及真实模型运行授权时执行：
 
 ```bash
-python3 tests/run-pwf-smoke.py --output /tmp/pd-host-new
+python3 tests/run-pwf-smoke.py --output /tmp/pw-host-new
 ```
 
 该入口不同于下方历史 0.1.0 实验，不安装到个人配置。默认记录未信任/一次性已审信任的 hooks 对照、无工具随机上下文标记、全新会话恢复、自动读取 Skill 的维护任务、无插件冷读、简单与只读请求。`--cases` 可选择子集及额外冲突场景；恢复须位于 trusted 场景之后。默认单次超时为 600 秒，合法范围 360–600；模型固定为 `gpt-5.6-terra`。使用 `--help` 查当前全部选项。
@@ -104,7 +104,7 @@ python3 tests/run-pwf-smoke.py --output /tmp/pd-host-new
 [run-plugin-smoke.py](run-plugin-smoke.py) 是需要明确模型运行授权的 Linux 容器实验脚本。它会访问已有 Codex 认证和 Docker，并产生完整任务与运行记录。这里只列用法；离线回归不执行这条命令。
 
 ```bash
-python3 tests/run-plugin-smoke.py --output /tmp/program-design-smoke-new --model gpt-5.6-terra --cases enabled repo-copy --timeout 360
+python3 tests/run-plugin-smoke.py --output /tmp/planweft-smoke-new --model gpt-5.6-terra --cases enabled repo-copy --timeout 360
 ```
 
 | 参数 | 默认值 | 说明 |
@@ -126,7 +126,7 @@ python3 tests/run-plugin-smoke.py --output /tmp/program-design-smoke-new --model
 运行需要重新具备模型授权、已有镜像和认证；输出必须是仓库外的新目录：
 
 ```bash
-python3 tests/experiments/run-maintenance-comparison.py --output /tmp/program-design-paired-new
+python3 tests/experiments/run-maintenance-comparison.py --output /tmp/planweft-paired-new
 ```
 
 真实结果、执行限制及证据解包方式见 [REP-0004](../docs/reproduction/0004-paired-maintenance-trial.md) 和[证据说明](../docs/reproduction/evidence/0004/README.md)。本轮没有正式启用本仓库自身管理。
@@ -138,14 +138,14 @@ python3 tests/experiments/run-maintenance-comparison.py --output /tmp/program-de
 [run-marketplace-lifecycle.py](run-marketplace-lifecycle.py) 复用隔离生命周期核心，支持 Copilot CLI 与 CodeBuddy：
 
 ```bash
-python3 tests/run-marketplace-lifecycle.py --host copilot --cli /absolute/path/to/copilot --output /tmp/pd-copilot-new
-python3 tests/run-marketplace-lifecycle.py --host codebuddy --cli /absolute/path/to/codebuddy --output /tmp/pd-codebuddy-new
+python3 tests/run-marketplace-lifecycle.py --host copilot --cli /absolute/path/to/copilot --output /tmp/pw-copilot-new
+python3 tests/run-marketplace-lifecycle.py --host codebuddy --cli /absolute/path/to/codebuddy --output /tmp/pw-codebuddy-new
 ```
 
 [run-codex-hook-probe.py](run-codex-hook-probe.py) 用真实 Codex 和本地合成 Responses 服务检查未信任、单次已审信任、全新会话恢复及 PLANNING_DISABLED 四个场景。只在本次调用中信任已核对字节，不修改个人信任；不读取认证或发送外部模型请求。需要允许 loopback 监听；CLI 如压缩请求，Python 3.14 的标准库 zstd 用于读取该请求。此探针不验证模型理解或维护质量：
 
 ```bash
-python3 tests/run-codex-hook-probe.py --cli /absolute/path/to/codex --output /tmp/pd-codex-hook-new
+python3 tests/run-codex-hook-probe.py --cli /absolute/path/to/codex --output /tmp/pw-codex-hook-new
 ```
 
 输出保存 runner、实际源清单、调用日志、合成请求与保护检查。Factory/Hermes 的一次性真实 CLI runner 和精确下载来源保存在 [REP-0006 证据](../docs/reproduction/evidence/0006/README.md) 中；Hermes 默认扫描拒绝不得写为安装通过。

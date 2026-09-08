@@ -37,8 +37,8 @@ def main():
         parser.error('--output must be a NEW directory outside the repository')
     if not args.cli or not Path(args.cli).is_file():
         parser.error('--cli must be an installed Codex executable')
-    lifecycle = module('pd_lifecycle_probe', 'tests/run-native-lifecycle.py')
-    staging = module('pd_staging_probe', 'tests/run-pwf-smoke.py')
+    lifecycle = module('pw_lifecycle_probe', 'tests/run-native-lifecycle.py')
+    staging = module('pw_staging_probe', 'tests/run-pwf-smoke.py')
     output.mkdir(parents=True)
     runner = Path(__file__).read_bytes()
     (output / 'runner.py').write_bytes(runner)
@@ -84,14 +84,14 @@ def main():
 
     server = None
     try:
-        with tempfile.TemporaryDirectory(prefix='pd-codex-host-probe-') as temporary:
+        with tempfile.TemporaryDirectory(prefix='pw-codex-host-probe-') as temporary:
             root = Path(temporary)
             profile, project = root / 'profile', root / '项目 with spaces'
             project.mkdir()
             env = lifecycle.isolated_environment(profile)
             source = root / 'marketplace'
             staging.prepare_reviewed_package(source)
-            report['source_inventory'] = lifecycle.inventory(source / 'dist/codex/program-design')
+            report['source_inventory'] = lifecycle.inventory(source / 'dist/codex/planweft')
 
             def call(label, argv, extra=None):
                 try:
@@ -109,7 +109,7 @@ def main():
             report['version'] = call('version', [args.cli, '--version']).stdout.strip()
             for label, argv in [
                 ('marketplace-add', [args.cli, 'plugin', 'marketplace', 'add', str(source)]),
-                ('plugin-add', [args.cli, 'plugin', 'add', 'program-design@program-design']),
+                ('plugin-add', [args.cli, 'plugin', 'add', 'planweft@planweft']),
             ]:
                 if call(label, argv).returncode:
                     raise RuntimeError(label + ' failed')
@@ -117,15 +117,15 @@ def main():
             # bytes. It does not grant persistent trust in a personal profile.
             candidates = list((profile / '.codex').rglob('.codex-plugin/plugin.json'))
             installed = [p.parent.parent for p in candidates
-                         if json.loads(p.read_text()).get('name') == 'program-design'
+                         if json.loads(p.read_text()).get('name') == 'planweft'
                          and 'cache' in p.parts]
-            expected = lifecycle.inventory(source / 'dist/codex/program-design')
+            expected = lifecycle.inventory(source / 'dist/codex/planweft')
             if not installed or not any(lifecycle.inventory(path) == expected for path in installed):
                 raise RuntimeError('Installed plugin bytes differ from the reviewed directory')
             server = ThreadingHTTPServer(('127.0.0.1', 0), Handler)
             worker = threading.Thread(target=server.serve_forever, daemon=True)
             worker.start()
-            config = ('model = "pd-fixture"\nmodel_provider = "local_fixture"\n'
+            config = ('model = "pw-fixture"\nmodel_provider = "local_fixture"\n'
                       'model_context_window = 128000\nmodel_max_output_tokens = 1024\n'
                       '[model_providers.local_fixture]\nname = "Local fixture"\n'
                       'base_url = "http://127.0.0.1:' + str(server.server_port) + '/v1"\n'
@@ -162,8 +162,8 @@ def main():
                     'passed': result.returncode == 0 and bool(requests) and delivered == expected_delivery
                               and lifecycle.inventory(project) == before}
             for label, argv in [
-                ('plugin-remove', [args.cli, 'plugin', 'remove', 'program-design@program-design']),
-                ('marketplace-remove', [args.cli, 'plugin', 'marketplace', 'remove', 'program-design']),
+                ('plugin-remove', [args.cli, 'plugin', 'remove', 'planweft@planweft']),
+                ('marketplace-remove', [args.cli, 'plugin', 'marketplace', 'remove', 'planweft']),
             ]:
                 if call(label, argv).returncode:
                     raise RuntimeError(label + ' failed')

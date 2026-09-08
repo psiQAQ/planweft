@@ -17,7 +17,7 @@ LANGUAGES = ('ar', 'de', 'es', 'zh', 'zht')
 class NativeResourcePathsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        spec = importlib.util.spec_from_file_location('pd_resource_builder', ROOT / 'scripts/build-plugin.py')
+        spec = importlib.util.spec_from_file_location('pw_resource_builder', ROOT / 'scripts/build-plugin.py')
         cls.builder = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(cls.builder)
         upstream, provenance = cls.builder.read_upstream()
@@ -69,7 +69,7 @@ class NativeResourcePathsTest(unittest.TestCase):
             self.assertIn('/assets/scripts/' + command + '"', body)
         # Exercise the documented POSIX bootstrap from a separate project,
         # with installation and project paths containing spaces/non-ASCII.
-        with tempfile.TemporaryDirectory(prefix='pd-kiro-resource-') as temporary:
+        with tempfile.TemporaryDirectory(prefix='pw-kiro-resource-') as temporary:
             base = Path(temporary)
             installed = base / 'Power cache 中文' / 'skills' / 'project-docs'
             project = base / 'Target project 中文'

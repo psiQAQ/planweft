@@ -22,7 +22,7 @@ spec.loader.exec_module(RUNNER)
 
 class NativeLifecycleBoundaryTest(unittest.TestCase):
     def test_existing_nested_documents_are_preserved_and_drift_fails_cleanup(self):
-        with tempfile.TemporaryDirectory(prefix='pd-lifecycle-records-') as temporary:
+        with tempfile.TemporaryDirectory(prefix='pw-lifecycle-records-') as temporary:
             root = Path(temporary)
             lifecycle = RUNNER.Lifecycle(SimpleNamespace(host='gemini', output=root / 'evidence'), root)
             required = {'docs/specs/approved.md', 'docs/adr/decision.md', 'docs/reproduction/known.md'}
@@ -49,7 +49,7 @@ class NativeLifecycleBoundaryTest(unittest.TestCase):
         spec = importlib.util.spec_from_file_location('opencode_native', ROOT / 'tests/run-opencode-native.py')
         runner = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(runner)
-        with tempfile.TemporaryDirectory(prefix='pd-opencode-args-') as temporary:
+        with tempfile.TemporaryDirectory(prefix='pw-opencode-args-') as temporary:
             root = Path(temporary)
             output = root / 'missing-parent/evidence'
             source = root / 'package'
@@ -70,7 +70,7 @@ class NativeLifecycleBoundaryTest(unittest.TestCase):
                 self.assertEqual((source / 'package-lock.json').read_text(), '{}')
 
     def test_catalog_cleanup_failure_cannot_leave_a_passed_summary(self):
-        with tempfile.TemporaryDirectory(prefix='pd-lifecycle-cleanup-') as temporary:
+        with tempfile.TemporaryDirectory(prefix='pw-lifecycle-cleanup-') as temporary:
             root = Path(temporary)
             lifecycle = RUNNER.Lifecycle.__new__(RUNNER.Lifecycle)
             lifecycle.args = SimpleNamespace(host='codex', output=root / 'evidence')
@@ -87,7 +87,7 @@ class NativeLifecycleBoundaryTest(unittest.TestCase):
             self.assertEqual(lifecycle.summary['cleanup_error'], 'native marketplace removal failed')
 
     def test_invalid_arguments_and_help_do_not_create_output_or_start_a_cli(self):
-        with tempfile.TemporaryDirectory(prefix='pd-lifecycle-args-') as temporary:
+        with tempfile.TemporaryDirectory(prefix='pw-lifecycle-args-') as temporary:
             output = Path(temporary) / 'missing-parent/evidence'
             base = ['--cli', sys.executable, '--output', str(output)]
             cases = [([], 2), (['--help'], 0), (base + ['--host', 'other'], 2),
@@ -110,7 +110,7 @@ class NativeLifecycleBoundaryTest(unittest.TestCase):
             self.assertEqual(marker.read_text(), 'keep')
 
     def test_isolated_environment_does_not_inherit_auth_or_user_configuration(self):
-        with tempfile.TemporaryDirectory(prefix='pd-lifecycle-env-') as temporary:
+        with tempfile.TemporaryDirectory(prefix='pw-lifecycle-env-') as temporary:
             profile = Path(temporary) / 'profile'
             inherited = {'PATH': '/usr/bin', 'HOME': '/personal-home',
                          'CODEX_HOME': '/personal-codex', 'CLAUDE_CONFIG_DIR': '/personal-claude',
@@ -131,11 +131,11 @@ class NativeLifecycleBoundaryTest(unittest.TestCase):
             self.assertEqual(environment['npm_config_offline'], 'true')
 
     def test_version_fixture_and_cache_checks_detect_added_changed_deleted_and_executable_files(self):
-        with tempfile.TemporaryDirectory(prefix='pd-lifecycle-byte-') as temporary:
+        with tempfile.TemporaryDirectory(prefix='pw-lifecycle-byte-') as temporary:
             root = Path(temporary)
             source = root / 'source'
             source.mkdir()
-            (source / 'gemini-extension.json').write_text(json.dumps({'name': 'program-design', 'version': '0.3.0'}))
+            (source / 'gemini-extension.json').write_text(json.dumps({'name': 'planweft', 'version': '0.3.0'}))
             executable = source / 'hook.sh'
             executable.write_text('#!/bin/sh\nexit 0\n')
             executable.chmod(0o755)

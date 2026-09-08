@@ -25,7 +25,7 @@ def snapshot(root):
 
 class NativeHookTest(unittest.TestCase):
     def setUp(self):
-        temporary = tempfile.TemporaryDirectory(prefix='pd-native-hook-')
+        temporary = tempfile.TemporaryDirectory(prefix='pw-native-hook-')
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name)
         self.project = self.root / '项目 工作目录'
@@ -35,7 +35,7 @@ class NativeHookTest(unittest.TestCase):
         self.packages = {}
         for host in HOSTS:
             package = self.root / '独立 插件缓存' / host
-            shutil.copytree(ROOT / 'dist' / host / 'program-design', package)
+            shutil.copytree(ROOT / 'dist' / host / 'planweft', package)
             self.packages[host] = package
         self.env = {'PATH': os.environ.get('PATH', ''), 'HOME': str(self.home),
                     'XDG_CACHE_HOME': str(self.root / 'runtime-cache'),
@@ -51,8 +51,8 @@ class NativeHookTest(unittest.TestCase):
 
     def hook(self, host, event, payload=None, env=None):
         package = self.packages[host]
-        data = {'cwd': str(self.project), 'conversation_id': 'pd-native-session',
-                'session_id': 'pd-native-session', 'sessionId': 'pd-native-session'}
+        data = {'cwd': str(self.project), 'conversation_id': 'pw-native-session',
+                'session_id': 'pw-native-session', 'sessionId': 'pw-native-session'}
         data.update(payload or {})
         result = subprocess.run([sys.executable, '-I', '-B', str(package / 'hooks/native-hook.py'),
                                  host, event], input=json.dumps(data), text=True,

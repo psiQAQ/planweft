@@ -11,7 +11,7 @@ import sys
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location('pd_native_lifecycle', ROOT / 'tests/run-native-lifecycle.py')
+spec = importlib.util.spec_from_file_location('pw_native_lifecycle', ROOT / 'tests/run-native-lifecycle.py')
 COMMON = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(COMMON)
 
@@ -19,7 +19,7 @@ spec.loader.exec_module(COMMON)
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cli', required=True, type=Path)
-    parser.add_argument('--package', type=Path, default=ROOT / 'dist/opencode/program-design')
+    parser.add_argument('--package', type=Path, default=ROOT / 'dist/opencode/planweft')
     parser.add_argument('--output', required=True, type=Path)
     args = parser.parse_args(argv)
     args.cli, args.package, args.output = (path.expanduser().resolve()
@@ -66,7 +66,7 @@ def main(argv=None):
                'remote_npm': 'Not Run: local file URL loader; no published npm package is assumed',
                'update_route': 'local package/configuration switch with a fresh host process',
                'live_session_reload': 'Not Run', 'source': str(args.package)}
-    with tempfile.TemporaryDirectory(prefix='pd-opencode-native-') as temporary:
+    with tempfile.TemporaryDirectory(prefix='pw-opencode-native-') as temporary:
         scratch = Path(temporary)
         profile = scratch / 'isolated-home'
         env = COMMON.isolated_environment(profile)
@@ -111,13 +111,13 @@ def main(argv=None):
         def setup_project(directory, package):
             directory.mkdir(parents=True, exist_ok=True)
             config = {'$schema': 'https://opencode.ai/config.json', 'autoupdate': False,
-                'model': 'pd-fixture/never-call', 'enabled_providers': ['pd-fixture'],
-                'provider': {'pd-fixture': {'name': 'No-model lifecycle fixture',
+                'model': 'pw-fixture/never-call', 'enabled_providers': ['pw-fixture'],
+                'provider': {'pw-fixture': {'name': 'No-model lifecycle fixture',
                     'npm': '@ai-sdk/openai-compatible',
                     'options': {'baseURL': 'http://127.0.0.1:1/v1', 'apiKey': 'fixture-not-a-credential'},
                     'models': {'never-call': {'name': 'Never called'}}}}}
             COMMON.save(directory / 'opencode.json', config)
-            loader = directory / '.opencode/plugins/program-design.ts'
+            loader = directory / '.opencode/plugins/planweft.ts'
             loader.parent.mkdir(parents=True, exist_ok=True)
             loader.write_text('export { PlanningWithFiles } from ' + json.dumps((package / 'dist/index.js').as_uri()) + '\n')
             skill = directory / '.opencode/skills/project-docs'
@@ -128,19 +128,19 @@ def main(argv=None):
         def check(label, version):
             command('config-' + label, ['debug', 'config'])
             agent = json.loads(command('agent-' + label, ['debug', 'agent', 'build'])['stdout'])
-            required = {'pd_init', 'pd_status', 'pd_check'}
+            required = {'pw_init', 'pw_status', 'pw_check'}
             if not all(agent.get('tools', {}).get(name) is True for name in required):
-                raise RuntimeError('native tool registry did not load the three pd_ tools')
+                raise RuntimeError('native tool registry did not load the three pw_ tools')
             skills = json.loads(command('skills-' + label, ['debug', 'skill'])['stdout'])
             languages = verify_loaded_skill(skills, project / '.opencode/skills/project-docs',
                 fixtures[version] / 'skills/project-docs', version)
             check_result = json.loads(command('check-' + label,
-                ['debug', 'agent', 'build', '--tool', 'pd_check', '--params', '{}'])['stdout'])
+                ['debug', 'agent', 'build', '--tool', 'pw_check', '--params', '{}'])['stdout'])
             result = check_result['result']
             output = json.loads(result['output'] if isinstance(result, dict) else result)
             if output.get('plugin') != version:
-                raise RuntimeError('native pd_check returned a stale plugin version')
-            command('status-' + label, ['debug', 'agent', 'build', '--tool', 'pd_status', '--params', '{}'])
+                raise RuntimeError('native pw_check returned a stale plugin version')
+            command('status-' + label, ['debug', 'agent', 'build', '--tool', 'pw_status', '--params', '{}'])
             if any(not (project / name).is_file() or (project / name).read_bytes() != content
                    for name, content in protected.items()):
                 raise RuntimeError('read-only native debug tools changed project records')
@@ -174,8 +174,8 @@ def main(argv=None):
                 # These belong to the copied Skill. The host-reported install
                 # path must match the complete fixture, including no stale files.
                 references = skill.parent / 'references'
-                (references / 'pd-lifecycle-change.txt').write_text('Selected fixture: ' + version + '\n')
-                exclusive = 'pd-lifecycle-delete.txt' if version == '0.3.0' else 'pd-lifecycle-add.txt'
+                (references / 'pw-lifecycle-change.txt').write_text('Selected fixture: ' + version + '\n')
+                exclusive = 'pw-lifecycle-delete.txt' if version == '0.3.0' else 'pw-lifecycle-add.txt'
                 (references / exclusive).write_text('Only present in ' + version + '\n')
             inventories = {version: COMMON.inventory(package / 'skills/project-docs')
                            for version, package in fixtures.items()}
@@ -194,21 +194,21 @@ def main(argv=None):
             check('B', '0.3.1')
             setup_project(project, fixtures['0.3.0'])
             check('rollback-A', '0.3.0')
-            # A separate blank project proves pd_init reads the packaged template.
+            # A separate blank project proves pw_init reads the packaged template.
             package = fixtures['0.3.0']
             template = package / 'skills/project-docs/templates/task_plan.md'
             template.write_text(template.read_text() + '\nPD_BUNDLED_TEMPLATE_PROBE\n')
             blank = scratch / '独立 初始化项目'
             setup_project(blank, package)
-            command('init', ['debug', 'agent', 'build', '--tool', 'pd_init', '--params', '{}'], cwd=blank)
+            command('init', ['debug', 'agent', 'build', '--tool', 'pw_init', '--params', '{}'], cwd=blank)
             if 'PD_BUNDLED_TEMPLATE_PROBE' not in (blank / 'task_plan.md').read_text():
-                raise RuntimeError('native pd_init did not use the bundled Skill template')
+                raise RuntimeError('native pw_init did not use the bundled Skill template')
             summary['checks']['bundled-template'] = {'status': 'Passed'}
-            (project / '.opencode/plugins/program-design.ts').unlink()
+            (project / '.opencode/plugins/planweft.ts').unlink()
             shutil.rmtree(project / '.opencode/skills/project-docs')
             agent = json.loads(command('agent-after-remove', ['debug', 'agent', 'build'])['stdout'])
             skills = json.loads(command('skills-after-remove', ['debug', 'skill'])['stdout'])
-            if any(name in agent.get('tools', {}) for name in ['pd_init', 'pd_check', 'pd_status']):
+            if any(name in agent.get('tools', {}) for name in ['pw_init', 'pw_check', 'pw_status']):
                 raise RuntimeError('removed local plugin is still loaded')
             if any(skill.get('name') == 'project-docs' for skill in skills):
                 raise RuntimeError('removed local Skill is still loaded')

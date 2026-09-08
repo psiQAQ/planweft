@@ -21,7 +21,7 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 HOSTS = ('codex', 'claude', 'gemini', 'pi')
-PRODUCT = 'program-design'
+PRODUCT = 'planweft'
 CATALOGS = {'codex': '.agents/plugins/marketplace.json',
             'claude': '.claude-plugin/marketplace.json'}
 MANIFESTS = {'codex': '.codex-plugin/plugin.json', 'claude': '.claude-plugin/plugin.json',
@@ -118,8 +118,8 @@ def fixture_version(source, destination, host, version):
     # Markers are placed in real Skill resources so npm's files allowlist is exercised.
     resource = destination / ('references' if host == 'pi' else 'skills/project-docs/references')
     resource.mkdir(parents=True, exist_ok=True)
-    (resource / 'pd-lifecycle-change.txt').write_text(version + '\n')
-    marker = 'pd-lifecycle-delete.txt' if version == '0.3.0' else 'pd-lifecycle-add.txt'
+    (resource / 'pw-lifecycle-change.txt').write_text(version + '\n')
+    marker = 'pw-lifecycle-delete.txt' if version == '0.3.0' else 'pw-lifecycle-add.txt'
     (resource / marker).write_text('Synthetic lifecycle fixture ' + version + '\n')
     return inventory(destination)
 
@@ -228,7 +228,7 @@ class Lifecycle:
                     'executable': bool(member.mode & 0o111)}
         package = json.loads((fixture / 'package.json').read_text())
         required = [*package['pi']['skills'], *package['pi']['extensions'], 'LICENSE', 'UPSTREAM.json',
-                    'templates/task_plan.md', 'scripts/init-session.sh', 'references/pd-lifecycle-change.txt']
+                    'templates/task_plan.md', 'scripts/init-session.sh', 'references/pw-lifecycle-change.txt']
         missing = [path for path in required if path not in expected]
         if missing:
             raise RuntimeError('Pi npm tarball omits required assets: ' + ', '.join(missing))
@@ -277,10 +277,10 @@ class Lifecycle:
     def installed_path(self, version):
         host = self.args.host
         if host == 'pi':
-            root = self.profile / '.pi/agent/npm/node_modules/program-design'
+            root = self.profile / '.pi/agent/npm/node_modules/planweft'
             candidates = [root] if root.is_dir() else []
         elif host == 'gemini':
-            root = self.profile / '.gemini/extensions/program-design'
+            root = self.profile / '.gemini/extensions/planweft'
             candidates = [root] if root.is_dir() else []
         else:
             cache = self.profile / ('.codex/plugins/cache' if host == 'codex' else '.claude/plugins/cache')
@@ -329,7 +329,7 @@ class Lifecycle:
             response = {}
             try:
                 initialized = request(1, 'initialize', {'clientInfo': {
-                    'name': 'program-design-native-lifecycle', 'version': '0.3.0'},
+                    'name': 'planweft-native-lifecycle', 'version': '0.3.0'},
                     'capabilities': {'experimentalApi': True}})
                 if 'error' in initialized:
                     raise RuntimeError('native app-server initialization failed')
@@ -353,8 +353,8 @@ class Lifecycle:
         rows = response.get('result', {}).get('data', [])
         skills = [skill for row in rows for skill in row.get('skills', [])
                   if skill.get('pluginId') == self.plugin_id]
-        expected_names = {'program-design:project-docs',
-                          *{'program-design:project-docs-' + lang for lang in ['ar', 'de', 'es', 'zh', 'zht']}}
+        expected_names = {'planweft:project-docs',
+                          *{'planweft:project-docs-' + lang for lang in ['ar', 'de', 'es', 'zh', 'zht']}}
         if (len(skills) != 6 or set(skill.get('name') for skill in skills) != expected_names
                 or any(row.get('errors') for row in rows)
                 or not all(skill.get('enabled') is True and skill.get('scope') == 'user'
@@ -368,7 +368,7 @@ class Lifecycle:
         args = {'codex': ['plugin', 'remove', getattr(self, 'plugin_id', PRODUCT), '--json'],
                 'claude': ['plugin', 'uninstall', getattr(self, 'plugin_id', PRODUCT), '--scope', 'user'],
                 'gemini': ['extensions', 'uninstall', PRODUCT],
-                'pi': ['remove', self.pi_sources.get(version, 'npm:program-design')]}[host]
+                'pi': ['remove', self.pi_sources.get(version, 'npm:planweft')]}[host]
         self.command(label, args, required=required)
         self.installed = False
 
@@ -449,7 +449,7 @@ def main(argv=None):
     args.output.mkdir(parents=True)
     shutil.copy2(Path(__file__), args.output / 'runner.py')
     lifecycle = None
-    with tempfile.TemporaryDirectory(prefix='pd-native-lifecycle-') as temporary:
+    with tempfile.TemporaryDirectory(prefix='pw-native-lifecycle-') as temporary:
         scratch = Path(temporary)
         lifecycle = Lifecycle(args, scratch)
         try:

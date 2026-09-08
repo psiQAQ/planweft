@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Prepare local npm packages and Git release trees. Never publishes or pushes.
+"""Prepare one npm package and Git release trees. Never publishes or pushes.
 
 The output must be a new directory outside this checkout. --previous-release
 continues earlier generated Git branches without rewriting their history.
 Remote installation coordinates are emitted only with an explicit repository
-URL and npm scope; they describe prepared artifacts, not a published release.
+URL; they describe prepared artifacts, not a published release.
 """
 import argparse
 import importlib.util
@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def builder_module():
-    spec = importlib.util.spec_from_file_location('pd_builder', ROOT / 'scripts/build-plugin.py')
+    spec = importlib.util.spec_from_file_location('pw_builder', ROOT / 'scripts/build-plugin.py')
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -59,18 +59,28 @@ def npm_archive(builder, source, npm_dir, env):
             if name in files:
                 raise ValueError('Duplicate npm member: ' + name)
             files[name] = (archive.extractfile(item).read(), item.mode)
-    for required in ['LICENSE', 'UPSTREAM.json', 'package.json', 'README.en.md', 'INSTALL.md', 'INSTALL.en.md']:
-        if required not in files:
-            raise ValueError('npm archive missing ' + required)
+    required = ['LICENSE', 'NOTICE', 'package.json', 'README.en.md', 'bin/planweft.mjs',
+                'lib/installer.mjs', 'dist/manifest.json', 'docs/installation.md',
+                'docs/installation.en.md', *builder.CATALOGS.values()]
     package = json.loads(files['package.json'][0])
-    if 'pi' in package:
-        required = [*package['pi']['skills'], *package['pi']['extensions'], 'scripts/init-session.sh']
-    else:
-        required = ['dist/index.js', 'BUILD.json', 'skills/project-docs/SKILL.md',
-                    'skills/project-docs/scripts/init-session.sh']
+    required += [*package['pi']['skills'], *package['pi']['extensions'],
+                 package['exports']['.']['import'].removeprefix('./'),
+                 package['exports']['.']['types'].removeprefix('./')]
     for path in required:
         if path not in files:
-            raise ValueError('npm runtime missing ' + path)
+            raise ValueError('npm archive missing ' + path)
+    # Check every platform, including nested lockfiles and hook execution bits;
+    # the presence of Pi metadata must not bypass OpenCode completeness checks.
+    manifest = json.loads(files['dist/manifest.json'][0])
+    if package['name'] != 'planweft' or package['version'] != manifest['version']:
+        raise ValueError('npm and distribution identities differ')
+    for host, item in manifest['platforms'].items():
+        for name, expected in item['files'].items():
+            key = 'dist/' + item['path'] + '/' + name
+            if key not in files or builder.sha(files[key][0]) != expected['sha256']:
+                raise ValueError('npm platform file missing or changed: ' + key)
+            if bool(files[key][1] & 0o111) != expected['executable']:
+                raise ValueError('npm platform execution bit changed: ' + key)
     return {'name': package['name'], 'version': package['version'],
             'archive': 'npm/' + filename, 'sha256': builder.sha(packed.read_bytes()),
             'files': builder.inventory(files)}
@@ -99,9 +109,9 @@ def git_tree(builder, host, files, output, previous, env):
     builder.write_files(files, destination)
     run(['git', 'add', '--all'], destination, env)
     if not previous or run(['git', 'diff', '--cached', '--name-only'], destination, env):
-        run(['git', '-c', 'user.name=Program Design build',
-             '-c', 'user.email=build@program-design.invalid', 'commit', '--quiet',
-             '--no-gpg-sign', '-m', 'Release program-design ' + builder.VERSION + ' for ' + host],
+        run(['git', '-c', 'user.name=PlanWeft build',
+             '-c', 'user.email=build@planweft.invalid', 'commit', '--quiet',
+             '--no-gpg-sign', '-m', 'Release planweft ' + builder.VERSION + ' for ' + host],
             destination, env)
     return {'branch': branch, 'commit': run(['git', 'rev-parse', 'HEAD'], destination, env),
             'tree_sha256': builder.tree_digest(files), 'directory': 'git/' + host}
@@ -112,22 +122,17 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--previous-release', type=Path)
     parser.add_argument('--repository-url')
-    parser.add_argument('--npm-scope')
+    parser.add_argument('--release', action='store_true', help='Require clean tracked release inputs')
     args = parser.parse_args()
     output = args.output.resolve()
     if output.exists() or output == ROOT or ROOT in output.parents:
         parser.error('--output must be a NEW directory outside this checkout')
-    if bool(args.repository_url) != bool(args.npm_scope):
-        parser.error('--repository-url and --npm-scope must be provided together')
     if args.repository_url:
         parsed = urlparse(args.repository_url)
         if (parsed.scheme not in {'https', 'ssh'} or not parsed.hostname or parsed.password
                 or (parsed.username and not (parsed.scheme == 'ssh' and parsed.username == 'git'))
                 or parsed.query or parsed.fragment):
             parser.error('Use a credential-free HTTPS or ssh://git@host repository URL')
-        args.npm_scope = args.npm_scope.removeprefix('@')
-        if not re.fullmatch(r'[a-z0-9][a-z0-9._-]*', args.npm_scope):
-            parser.error('Invalid npm scope')
     previous = args.previous_release.resolve() if args.previous_release else None
     if previous and not (previous / 'release.json').is_file():
         parser.error('--previous-release must contain release.json')
@@ -137,6 +142,8 @@ def main():
                    cwd=ROOT, check=True)
     source_commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     source_dirty = bool(subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT))
+    if args.release and source_dirty:
+        parser.error('--release requires a clean source checkout')
     output.mkdir(parents=True)
     for name in ['npm', 'packages', 'environment']:
         (output / name).mkdir()
@@ -151,46 +158,10 @@ def main():
     manifest = {'product': builder.PRODUCT, 'version': builder.VERSION,
                 'status': 'Prepared locally; not published', 'source_commit': source_commit,
                 'source_dirty': source_dirty, 'platforms': {}, 'npm': {},
-                'repository_url': args.repository_url, 'npm_scope': args.npm_scope}
+                'repository_url': args.repository_url, 'npm_package': 'planweft'}
     write_json(output / 'release.json', {**manifest, 'status': 'In Progress'})
     try:
-        for host in ['pi', 'opencode']:
-            source = output / 'packages' / host
-            files = builder.read_tree(ROOT / 'dist' / host / builder.PRODUCT)
-            package = json.loads(files['package.json'][0])
-            if args.npm_scope:
-                old_package = dict(package)
-                old_lock = json.loads(files['package-lock.json'][0]) if 'package-lock.json' in files else None
-                package['name'] = '@' + args.npm_scope + '/program-design-' + host
-                package['repository'] = {'type': 'git', 'url': args.repository_url,
-                                         'directory': 'dist/' + host + '/program-design'}
-                files['package.json'] = ((json.dumps(package, indent=2) + '\n').encode(), 0o644)
-                if 'package-lock.json' in files:
-                    lock = json.loads(files['package-lock.json'][0])
-                    lock['name'] = package['name']
-                    lock['packages']['']['name'] = package['name']
-                    files['package-lock.json'] = ((json.dumps(lock, indent=2) + '\n').encode(), 0o644)
-                if host == 'opencode':
-                    # JS is compiled from the reviewed inputs; npm publication
-                    # identity is a later JSON-only transformation. Keep both
-                    # bindings instead of claiming the renamed manifest was
-                    # the original compiler input.
-                    build = json.loads(files['BUILD.json'][0])
-                    changes = {
-                        'package.json.name': {'before': old_package['name'], 'after': package['name']},
-                        'package.json.repository': {'before': old_package.get('repository'),
-                                                    'after': package['repository']},
-                        'package-lock.json.name': {'before': old_lock['name'], 'after': package['name']},
-                        'package-lock.json.packages[""].name': {
-                            'before': old_lock['packages']['']['name'], 'after': package['name']}}
-                    build['identity_transform'] = changes
-                    build['identity_transform_sha256'] = builder.sha(
-                        json.dumps(changes, sort_keys=True, separators=(',', ':')).encode())
-                    build['packaging_inputs'] = builder.inventory(builder.opencode_inputs(files))
-                    build['packaging_source_sha256'] = builder.tree_digest(builder.opencode_inputs(files))
-                    files['BUILD.json'] = ((json.dumps(build, indent=2, sort_keys=True) + '\n').encode(), 0o644)
-            builder.write_tree(files, source)
-            manifest['npm'][host] = npm_archive(builder, source, output / 'npm', env)
+        manifest['npm']['planweft'] = npm_archive(builder, ROOT, output / 'npm', env)
         for host in ['gemini', 'hermes']:
             files = builder.read_tree(ROOT / 'dist' / host / builder.PRODUCT)
             manifest['platforms'][host] = git_tree(builder, host, files, output, previous, env)
@@ -199,9 +170,9 @@ def main():
             files = builder.read_tree(ROOT / 'dist' / host / builder.PRODUCT / 'skills/project-docs')
             manifest['skill_pairs'][host] = {
                 'source_commit': source_commit, 'source_dirty': source_dirty,
-                'path': 'dist/' + host + '/program-design/skills/project-docs',
+                'path': 'dist/' + host + '/planweft/skills/project-docs',
                 'sha256': builder.tree_digest(files), 'files': builder.inventory(files),
-                'runtime': (manifest['npm']['opencode']['name'] + '@' + builder.VERSION
+                'runtime': (manifest['npm']['planweft']['name'] + '@' + builder.VERSION
                             if host == 'opencode' else manifest['platforms']['hermes']['commit'])}
         write_json(output / 'release.json', manifest)
         print(json.dumps({'output': str(output), 'status': manifest['status']}))
