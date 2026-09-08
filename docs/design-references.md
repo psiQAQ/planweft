@@ -161,3 +161,19 @@ vendor 四文件是导入器产物，dist 与 plugins 由 builder 生成；证�
 
 
 安装补充：用户要求解释并落实各Agent安装方式；PWF-317的`sync-ide-folders.py`、各平台manifest、Gemini settings和脚本原mode为准确源证据。PD-P09将继承发布式说明改为本地ZIP路径，PD-P10针对实际127/126退出修复Gemini命令。新增[test_pwf_installation.py](../tests/test_pwf_installation.py)与[独立安装review](reviews/0005-installation-review.md)检查实际包入口和命令；[补充证据](reproduction/evidence/0005/installation/README.md)区分静态、协议与当前Codex无模型安装预检。[.gitattributes](../.gitattributes)保护可重复构建所需换行和上游Windows CRLF，不代表Windows宿主已实测。
+
+## 0.3.0 原生分发与更新
+
+需求来源：用户批准的 [SPEC-0004](specs/0004-native-distributions.md)；版本取舍见 [ADR-0007](adr/0007-native-distributions.md)。以下官方页面/源码在线核查日期为 2026-09-08；没有把上游 PWF 旧安装文案当成宿主当前协议。
+
+| 第一方入口 | 精确来源与实际借鉴 | 本地实现与证据 |
+| --- | --- | --- |
+| [生成器](../scripts/build-plugin.py)与六 catalog | [Codex 插件](https://developers.openai.com/plugins/build/plugins)、[Claude marketplace](https://code.claude.com/docs/en/plugin-marketplaces)、[Cursor plugins](https://cursor.com/docs/reference/plugins)、[Copilot CLI plugin reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference)、[Factory plugins](https://docs.factory.ai/harness/plugins)、[CodeBuddy marketplace](https://www.codebuddy.ai/docs/cli/plugin-marketplaces) 各自的目录入口和相对 source | 独立 catalog 指向对应 dist；目录摘要/模式与兼容镜像是本地维护选择；构建漂移、真实 CLI 缓存核对见 REP-0006 |
+| [native adapters](../overlays/program-design/native/adapters.py) / [hook bridge](../overlays/program-design/native/native-hook.py) | [Cursor hooks](https://cursor.com/docs/agent/hooks)、[Copilot hooks](https://docs.github.com/en/copilot/reference/hooks-configuration)、[Gemini hooks](https://geminicli.com/docs/hooks/reference/)、PWF-317 inject-plan.py / gate 实现 | 原生输出字段、安装资产与项目 cwd 分离；不放宽工具权限；独立运行时 review、协议与 Codex 真实注入证据 |
+| [OpenCode 编译器](../scripts/compile-opencode.py) / [发布准备](../scripts/prepare-native-release.py) | [OpenCode V1 plugins](https://opencode.ai/docs/plugins/)、[V2 migration](https://opencode.ai/v2/docs/migrate-v1/)、[Pi packages](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/packages.md)、[npm pack](https://docs.npmjs.com/cli/v11/commands/npm-pack)；PWF 固定 lock/tsconfig | 保留 V1；维护者预编译、普通构建离线；实际 npm 文件清单及编译/发布输入两阶段绑定为本地可追溯机制 |
+| [发布树与安装配对](../scripts/prepare-native-release.py) | [Gemini releasing](https://geminicli.com/docs/extensions/releasing/)、[Hermes plugins](https://hermes-agent.nousresearch.com/docs/user-guide/features/plugins)、[Hermes Skills Hub 源码](https://github.com/NousResearch/hermes-agent/blob/main/tools/skills_hub_github.py) | 专用分支根满足 manifest/保留 Git 元数据；Hermes Skill 固定提交复制，无虚构 --ref；版本/内容配对并非原子更新器 |
+| [安装指南](../overlays/program-design/install/INSTALL.md) / [平台矩阵](platforms.md) | [Kiro Powers](https://kiro.dev/docs/powers/installation/)、[Kiro v3 auto pickup](https://kiro.dev/docs/cli/v3/new-features/#powers-auto-pickup)、[Continue loader](https://github.com/continuedev/continue/blob/main/extensions/cli/src/util/loadMarkdownSkills.ts)、[Mastra config](https://code.mastra.ai/configuration)、[Agent Skills](https://agentskills.io/specification) | 原生 GUI 或完整 Skill 目录安装；按各宿主真实能力说明更新/卸载；Kiro 缓存资源定位，语言资源随主 Skill 独立复制 |
+| [生命周期 runner](../tests/run-native-lifecycle.py)、[marketplace runner](../tests/run-marketplace-lifecycle.py)、[OpenCode probe](../tests/run-opencode-native.py)、[Codex hook probe](../tests/run-codex-hook-probe.py) | 用户 A/B、增改删、回退/卸载、项目保护要求；上述宿主官方 CLI help/实际命令；HOOKS-20260908 trust | 临时 HOME/cache、无个人认证、无模型；CLI 返回值、实际安装内容与真实事件送达分别验证；合成 provider 不作语义效果证据 |
+| [REP-0006](reproduction/0006-native-distributions.md)及两份 review | 本轮实际日志、固定源码、独立审查 | 原始输出可追溯；Hermes Failed、远程/模型/GUI/OS Not Run 明列；旧证据不冒充新链路已测 |
+
+平台目录、原生 manifest、镜像与编译中间产物均由对应脚本生成，不为每份共享副本建立不同设计来源。普通目录/打包/测试胶水不另作创新声明；状态协议与文档工作流继续采用 0.2.0 已登记来源。

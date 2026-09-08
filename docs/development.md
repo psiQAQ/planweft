@@ -4,15 +4,19 @@
 
 先读 [规格](specs/0001-document-management.md) 与 [当前计划](plans/0004-paired-maintenance-trial.md)。按任务查 [资料索引](reference/README.md)，无需逐次通读所有文章和子模块。项目状态以计划为入口；规格描述目标行为，ADR 记录重要决定，reproduction 记录已观察到的结果。
 
-0.2.0 插件实施使用 [SPEC-0003](specs/0003-pwf-based-plugin.md) 与 [PLAN-0005](plans/0005-pwf-based-plugin.md)；这是沿用现有文档流程的后继工作，不在本仓创建或同步 PWF 根计划。
+运行时基础见 [SPEC-0003](specs/0003-pwf-based-plugin.md) 与 [PLAN-0005](plans/0005-pwf-based-plugin.md)；0.3.0 原生分发使用 [SPEC-0004](specs/0004-native-distributions.md)、[PLAN-0006](plans/0006-native-distributions.md) 与 [ADR-0007](adr/0007-native-distributions.md)。本仓继续沿用现有文档流程，不创建或同步 PWF 根计划。
 
 ## 插件源码与生成分发
 
-`vendor/planning-with-files/` 保存 PWF v3.17.0 原始归档、逐文件清单和许可；`overlays/program-design/` 保存本地规则与模板。`scripts/build-plugin.py` 负责统一身份映射、明确的运行时补丁和确定性分发。不要手改 `plugins/program-design/` 或 ZIP 内的共享副本。
+`vendor/planning-with-files/` 保存 PWF v3.17.0 原始归档、逐文件清单和许可；`overlays/program-design/` 保存本地规则与模板。`scripts/build-plugin.py` 负责统一身份映射、明确的运行时补丁和确定性分发。平台原生包装维护于 `overlays/program-design/native/`。不要手改 `plugins/program-design/`、`dist/<host>/program-design/` 或六个生成 catalog；当前构建不生成 ZIP。
 
 修改源后运行构建，再执行 `--verify` 与受影响的离线回归。变更身份映射、hook 或模板解析时，需要原始/迁移上游回归比较；不能删改失败断言来换取通过。详细命令见 [测试说明](../tests/README.md)，固定版本更新、导入及补丁边界见 [上游维护](upstream-maintenance.md)。
 
-每个安装包必须脱离本仓文档、研究子模块及个人缓存运行。包中安装步骤必须指向本地交付物，不假定衍生 npm/GitHub 包已经发布。许可证、来源和必要脚本应随独立复制的 Skill/平台包一同保留。
+每个安装目录必须脱离本仓文档、研究子模块及个人缓存运行。资产以安装根定位，项目工作目录只用于任务状态。包中安装步骤必须指向本地交付物，不假定衍生 npm/GitHub 包已经发布。许可证、来源和必要脚本应随独立复制的 Skill/平台包一同保留。
+
+普通 `python3 scripts/build-plugin.py` 与 `--verify` 使用标准库和固定输入，保持离线。修改 OpenCode 源码时，维护者先运行 `python3 scripts/compile-opencode.py --install` 更新与 source hash 绑定的预编译文件；`--check --install` 在临时目录按现有锁文件复编译核对，不修改业务项目依赖。用户安装预编译 V1 包不需要执行这一步。
+
+发布准备使用 `python3 scripts/prepare-native-release.py --output NEW_DIRECTORY`，输出须在仓库外且尚不存在，`--previous-release` 可沿用旧发布历史；可选真实 `--repository-url` 与 `--npm-scope` 必须成对提供。输出应包含可审阅目录与清单；生成成功不等于 Git 分支已推送、npm 已发布或市场已上架。远端写入、发布和个人安装分别按授权执行。验证至少区分 catalog 发现、插件安装/缓存、更新回滚、会话加载、Skill 实际读取、hooks 信任与执行；历史 0.2.0 报告保持原样。
 
 ## 设计、实施、审查
 
