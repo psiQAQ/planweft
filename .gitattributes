@@ -1,0 +1,8 @@
+# Keep source and overlay text stable when Git clients use core.autocrlf.
+* text=auto eol=lf
+
+# Preserve the pinned Windows launchers' CRLF bytes and accept CR at EOL.
+*.cmd -text whitespace=cr-at-eol
+*.bat -text whitespace=cr-at-eol
+*.zip -text
+*.tar.gz -text
