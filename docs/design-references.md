@@ -177,3 +177,18 @@ vendor 四文件是导入器产物，dist 与 plugins 由 builder 生成；证�
 | [REP-0006](reproduction/0006-native-distributions.md)及两份 review | 本轮实际日志、固定源码、独立审查 | 原始输出可追溯；Hermes Failed、远程/模型/GUI/OS Not Run 明列；旧证据不冒充新链路已测 |
 
 平台目录、原生 manifest、镜像与编译中间产物均由对应脚本生成，不为每份共享副本建立不同设计来源。普通目录/打包/测试胶水不另作创新声明；状态协议与文档工作流继续采用 0.2.0 已登记来源。
+
+## 双语公开文档整理（2026-09-08）
+
+需求来源：用户要求 README 聚焦定位、实现思想、类似方案表格、借鉴及原创部分；安装与跨平台设计单列，中英文互链。[PLAN-0007](plans/0007-bilingual-public-docs.md) 记录范围，历史规格与证据保持原文。
+
+| 文件或生成入口 | 实际依据与归属 | 本轮检查 |
+| --- | --- | --- |
+| README.md / README.en.md | SPEC-0003/0004 与已实现 workflow；PWF-317 Skill 和 workflow After Completion；P-03 concepts、P-04 writing-plans/Pi薄适配、P-06 doc-coauthoring、P-12 MADR固定模板 | 固定源码比较；直接移植、思想借鉴、本地组合明确分开，不宣称方法首创或效果排名；两名 reviewer 范围互补 |
+| 安装 overlay 中英、docs/installation 中英镜像、各包 README/INSTALL 中英 | 0.3.0 已核对的官方宿主命令和 REP-0006；本轮只翻译/整理正文，保留命令、scope、限制及历史失败 | 中英文命令块/URL集合一致、原生包内容、独立语义检查；历史宿主结果不冒充双语产物实测 |
+| docs/platforms.md / platforms.en.md | 固定快照、overlays/native、build/compile/prepare实际实现；六catalog协议和REP-0006矩阵 | 设计说明与安装教程分工；原生hooks、更新、恢复、发现、trust与未测范围分别解释 |
+| build-plugin.py、native/adapters.py、prepare-native-release.py、编译清单 | 用户公开文档双语与单一来源要求；既有确定性生成/自包含/漂移拒绝方案 | 新增两种语言的镜像与npm files条目，运行文件差异审计；不新增运行时行为 |
+| tests/test_public_docs.py、分发漂移测试与测试说明 | 用户双向导航、引用两种语言、完整安装方法要求 | 校验相对链接、语言配对、命令一致与镜像漂移；不能替代翻译语义审查 |
+| innovations.md、开发约定、BUILD说明 | 已登记来源与0.2/0.3具体代码 | 修正历史候选尚未实施被误读为当前状态的问题；本地代码贡献与方法新颖性分开 |
+
+源码比较由独立成员实际读取固定归档/子模块；浏览器也复核 OpenSpec、Superpowers 和 MADR 固定页面，PWF 页面抓取失败时使用已校验归档，不将抓取失败写成来源不存在。review 范围与参与比较草稿者的独立性限制见 [公开文档审查](reviews/0007-public-docs-review.md) 及 [README/分发独立复核](reviews/0007-readme-distribution-review.md)。

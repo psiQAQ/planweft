@@ -1,0 +1,22 @@
+{
+  "opencode": {
+    "archive": "npm/opencode-program-design-0.3.0.tgz",
+    "sha256": "ff2ad7e99046f3266cf9e1a14838f7467fbfd3b0b944f8e9a0a4fd9b4a64ccca",
+    "files": 230,
+    "documentation_languages": [
+      "zh-CN",
+      "en"
+    ],
+    "status": "Passed"
+  },
+  "pi": {
+    "archive": "npm/program-design-0.3.0.tgz",
+    "sha256": "c2cdb51260f2d762fa7c005fad1f6c2330035e39fa0c135202a29fb6c6e8b0f1",
+    "files": 49,
+    "documentation_languages": [
+      "zh-CN",
+      "en"
+    ],
+    "status": "Passed"
+  }
+}

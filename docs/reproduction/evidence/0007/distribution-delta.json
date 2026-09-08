@@ -1,0 +1,93 @@
+{
+  "baseline": "ff9e6a4",
+  "changes": {
+    "agents": [
+      "INSTALL.en.md",
+      "INSTALL.md",
+      "README.en.md",
+      "README.md"
+    ],
+    "claude": [
+      "INSTALL.en.md",
+      "INSTALL.md",
+      "README.en.md",
+      "README.md"
+    ],
+    "codebuddy": [
+      "INSTALL.en.md",
+      "INSTALL.md",
+      "README.en.md",
+      "README.md"
+    ],
+    "codex": [
+      "INSTALL.en.md",
+      "INSTALL.md",
+      "README.en.md",
+      "README.md"
+    ],
+    "continue": [
+      "INSTALL.en.md",
+      "INSTALL.md",
+      "README.en.md",
+      "README.md"
+    ],
+    "copilot": [
+      "INSTALL.en.md",
+      "INSTALL.md",
+      "README.en.md",
+      "README.md"
+    ],
+    "cursor": [
+      "INSTALL.en.md",
+      "INSTALL.md",
+      "README.en.md",
+      "README.md"
+    ],
+    "factory": [
+      "INSTALL.en.md",
+      "INSTALL.md",
+      "README.en.md",
+      "README.md"
+    ],
+    "gemini": [
+      "INSTALL.en.md",
+      "INSTALL.md",
+      "README.en.md",
+      "README.md"
+    ],
+    "hermes": [
+      "INSTALL.en.md",
+      "INSTALL.md",
+      "README.en.md",
+      "README.md"
+    ],
+    "kiro": [
+      "INSTALL.en.md",
+      "INSTALL.md",
+      "README.en.md",
+      "README.md"
+    ],
+    "mastracode": [
+      "INSTALL.en.md",
+      "INSTALL.md",
+      "README.en.md",
+      "README.md"
+    ],
+    "opencode": [
+      "BUILD.json",
+      "INSTALL.en.md",
+      "INSTALL.md",
+      "README.en.md",
+      "README.md",
+      "package.json"
+    ],
+    "pi": [
+      "INSTALL.en.md",
+      "INSTALL.md",
+      "README.en.md",
+      "README.md",
+      "package.json"
+    ]
+  },
+  "unexpected": []
+}
