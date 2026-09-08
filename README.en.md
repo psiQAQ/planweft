@@ -1,6 +1,6 @@
 [简体中文](README.md) | [English](README.en.md)
 
-> PlanWeft 0.4.0-rc.1 is a release candidate. Stable 0.4.0 requires live acceptance on Codex, Claude Code, Pi, OpenCode and DSH. See the [release checklist](docs/releasing.en.md) / [中文](docs/releasing.md).
+> PlanWeft 0.4.0-rc.2 is a release candidate. Stable 0.4.0 requires live acceptance on Codex, Claude Code, Pi, OpenCode and DSH. See the [release checklist](docs/releasing.en.md) / [中文](docs/releasing.md).
 
 # PlanWeft
 

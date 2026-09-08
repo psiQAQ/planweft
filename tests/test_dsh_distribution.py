@@ -11,6 +11,10 @@ class DshDistributionTest(unittest.TestCase):
         native = json.loads((DSH / 'package.json').read_text())
         self.assertEqual((ROOT / package['exports']['./dsh']).read_bytes(), (DSH / native['exports']['./dsh']).read_bytes())
         self.assertEqual((ROOT / package['dsh']['bundle']['patch']).read_bytes(), (DSH / native['dsh']['bundle']['patch']).read_bytes())
+        patch=(DSH / native['dsh']['bundle']['patch'])
+        entry=next(line.split('name:',1)[1].strip() for line in patch.read_text().splitlines() if 'name:' in line)
+        self.assertTrue(entry.startswith('./'), 'DSH must anchor the module to the bundle patch')
+        self.assertEqual((patch.parent / entry).resolve(), (DSH / native['exports']['./dsh']).resolve())
         for name in ['@deepseek-ai/dsh-hooks-claude-code', '@deepseek-ai/dsh-skill-filesystem']:
             self.assertEqual(package['dependencies'][name], '0.1.2-rc.1')
             self.assertEqual(native['dependencies'][name], package['dependencies'][name])

@@ -222,6 +222,16 @@ def opencode(files, version, description):
 }
 ''' + text[end:]
     result['src/core.ts'] = (text.encode(), mode)
+    data, mode = result['src/index.ts']
+    text = data.decode()
+    needle = '        else if (located.conflicts.length) text = ambiguityNotice(located.conflicts)\n'
+    if text.count(needle) != 1:
+        raise ValueError('Review changed upstream OpenCode chat.message before adapting it')
+    # Discovery alone did not activate the Skill in the RC1 maintenance trial.
+    # The native event only reminds; task scope and any initialization stay with
+    # the Skill. Existing opt-out, conflict handling and per-message dedup apply.
+    text = text.replace(needle, needle + '        else if (!(env.PLAN_ID ?? "").trim()) text = "[planweft] For an authorized multi-step implementation task, first load the installed project-docs Skill and follow its plan-selection workflow. Simple tasks, read-only review, diagnosis and planning mode must not initialize project records. User scope and project rules take precedence."\n')
+    result['src/index.ts'] = (text.encode(), mode)
     result['install/loader-template.ts'] = (
         b'// Replace this file URL with the absolute path to the built package.\n'
         b'export { PlanningWithFiles } from "file:///ABSOLUTE/PATH/TO/planweft/dist/index.js"\n', 0o644)
@@ -304,7 +314,9 @@ def adapt(bundles, version, description):
     # DSH mounts a native bundle through its profile manager, not a marketplace.
     files = shared(result['dsh'], version)
     files['index.mjs'] = ((HERE / 'dsh/index.mjs').read_bytes(), 0o644)
-    files['cordis.patch.yml'] = (b'- insert:\n    - id: planweft\n      name: planweft/dsh\n', 0o644)
+    # DSH anchors relative inserted names to the bundle patch directory. Bare
+    # package names resolve from Cordis itself and fail for profile-local installs.
+    files['cordis.patch.yml'] = (b'- insert:\n    - id: planweft\n      name: ./index.mjs\n', 0o644)
     files['package.json'] = json_file({'name': PRODUCT, 'version': version, 'type': 'module',
         'exports': {'./dsh': './index.mjs', './package.json': './package.json'},
         'dsh': {'bundle': {'patch': './cordis.patch.yml'}},

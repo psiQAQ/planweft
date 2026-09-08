@@ -4,11 +4,11 @@
   "files": {
     "dist/core.d.ts": {
       "executable": false,
-      "sha256": "53ea319430d12712d189c9a5c0f64b52643b91630530a342cd9b4d86e71b11dd"
+      "sha256": "651eb30cc9bd8de39105b68304350a36170447064acf1d15fec4c32b0e2982ee"
     },
     "dist/core.js": {
       "executable": false,
-      "sha256": "64559eb42ae6035ec31838fbb0275d249819d550a1d759e832a99e96971d4512"
+      "sha256": "2a56dfd11186a3f953ead09a16dd52e184a207fb91046eac3a7295918ced9038"
     },
     "dist/index.d.ts": {
       "executable": false,
@@ -16,30 +16,30 @@
     },
     "dist/index.js": {
       "executable": false,
-      "sha256": "f26b8b43df09be82f8a2612c2414dabd1da851e11e47325d6a178ea80ed5ee72"
+      "sha256": "194e93b3d045c97c74e97906e07990063fe3dd79e0eddf341dce5ff0e3fb3c50"
     }
   },
   "inputs": {
     "package-lock.json": {
       "executable": false,
-      "sha256": "89605d65d945f9eab73a3bbb5f206966498da26367c1769350afda064224d0e7"
+      "sha256": "b38fcafc525a115992cb181c5d10e1d964f674dde141eaea8e9b8b62352f0bd2"
     },
     "package.json": {
       "executable": false,
-      "sha256": "beba7362b5e9738269b2e285abf4d0f99c2982667f6c74f41387cd039e024a01"
+      "sha256": "7bf1acb8d5e8203f70f6252b3b9b9fab1645030ac7984cf5f07fd9727b25bccb"
     },
     "src/core.ts": {
       "executable": false,
-      "sha256": "5d6a3e482c3bdf0812050c81568631003be7cf3ead81e0efcdbf5691ce5b4bbd"
+      "sha256": "859b14f747546a14d3c803c57d83734b0582b499a20557b8971f5db162599f21"
     },
     "src/index.ts": {
       "executable": false,
-      "sha256": "e6d062cc2acabf737621d4045f1bc64b9b4392124ed6aa8818ebfca3114fc8c7"
+      "sha256": "fb5383449e129af388d587bfcf6cf42cdee01644504f5bc693c5822a3c7e677c"
     },
     "tsconfig.json": {
       "executable": false,
       "sha256": "29abb8649f73c66d5b5f807103a8d591a878cc1ce2fe959ead50a4e7805950ca"
     }
   },
-  "source_sha256": "ecabd426fc1c353c2d11aaeada151c52cdf99f0c661c60f7eecb72997c11b621"
+  "source_sha256": "1d98753f3e8b46a6d404a519fa6a0f319b8ce8d07760c5562b60665620a956c5"
 }

@@ -2,6 +2,15 @@
 
 # Changelog
 
+## 0.4.0-rc.2 (in development)
+
+- OpenCode now reminds authorized multi-step tasks to load project-docs when no plan exists; simple/read-only tasks remain outside initialization.
+
+- Anchor the DSH profile bundle entry to its own patch and require an actual boot check.
+- Allow a version-matched Skill alongside an OpenCode npm plugin, while rejecting duplicate runtimes and mismatched versions.
+- Add five-host containers, exact-artifact gates, public-history sanitization and three-OS installer CI. Stable requires all five hosts.
+- RC1 is public; retain its model failures and the distinction between registration and actual loading in the evidence.
+
 ## 0.4.0-rc.1 (2026-09-08, candidate)
 
 - Renamed to PlanWeft; project-docs and the PWF state protocol remain.

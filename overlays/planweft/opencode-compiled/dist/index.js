@@ -90,6 +90,8 @@ export const PlanningWithFiles = async ({ client, directory }) => {
                     text = buildContext(located.root, located.planDir);
                 else if (located.conflicts.length)
                     text = ambiguityNotice(located.conflicts);
+                else if (!(env.PLAN_ID ?? "").trim())
+                    text = "[planweft] For an authorized multi-step implementation task, first load the installed project-docs Skill and follow its plan-selection workflow. Simple tasks, read-only review, diagnosis and planning mode must not initialize project records. User scope and project rules take precedence.";
                 if (!text)
                     return;
                 const alreadyInjected = output.parts.some((part) => {

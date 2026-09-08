@@ -275,3 +275,16 @@ test('DSH duplicate-hook hints ignore whole-line comments and skill-only operati
   fs.writeFileSync(file,'- insert:\n    - name: planweft/dsh\n');
   assert.equal(await f.create(['add','-a','dsh','--global','--skill-only']).execute(),0);
 });
+
+
+test('OpenCode npm runtime permits only a version-paired Skill without a second loader', async t => {
+  const f=fixture(t),file=path.join(f.project,'opencode.json');
+  const config=JSON.stringify({plugin:['planweft@0.4.0-rc.1']});fs.writeFileSync(file,config);
+  await assert.rejects(f.create(['add','-a','opencode']).execute(),/Another planning registration/);
+  await assert.rejects(f.create(['add','-a','opencode','--skill-only'],'0.4.0-rc.2').execute(),/Another planning registration/);
+  assert.equal(f.calls.length,0);
+  assert.equal(await f.create(['add','-a','opencode','--skill-only']).execute(),0);
+  assert.equal(fs.existsSync(path.join(f.project,'.opencode/plugins/planweft.ts')),false);
+  assert.equal(await f.create(['remove','-a','opencode']).execute(),0);
+  assert.equal(fs.readFileSync(file,'utf8'),config);
+});

@@ -19,6 +19,7 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
+VERSION = json.loads((ROOT / 'package.json').read_text())['version']
 DIST = ROOT / 'dist'
 PLUGIN = DIST / 'codex/planweft'
 COMMIT = '0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7'
@@ -125,7 +126,7 @@ class PackageContractTest(unittest.TestCase):
         self.assertEqual(manifest['product'], 'planweft')
         self.assertEqual(manifest['upstream_commit'], COMMIT)
         self.assertEqual(set(manifest['platforms']), HOSTS)
-        self.assertEqual(manifest['version'], '0.4.0-rc.1')
+        self.assertEqual(manifest['version'], VERSION)
         self.assertEqual(list(DIST.rglob('*.zip')), [], 'old ZIPs must not remain distributable')
         self.assertEqual({path.name for path in DIST.iterdir() if path.is_dir()}, HOSTS)
         for host, item in manifest['platforms'].items():
@@ -176,7 +177,7 @@ class PackageContractTest(unittest.TestCase):
     def test_codex_has_one_automatic_main_skill_and_its_own_hooks(self):
         manifest = json.loads((PLUGIN / '.codex-plugin/plugin.json').read_text())
         self.assertEqual(manifest['name'], 'planweft')
-        self.assertEqual(manifest['version'], '0.4.0-rc.1')
+        self.assertEqual(manifest['version'], VERSION)
         skills_root = PLUGIN / manifest['skills']
         automatic = []
         for path in skills_root.rglob('SKILL.md'):
@@ -257,7 +258,7 @@ class PackageContractTest(unittest.TestCase):
         files = package_contents('pi')
         package = json.loads(files['package.json'])
         self.assertEqual(package['name'], 'planweft')
-        self.assertEqual(package['version'], '0.4.0-rc.1')
+        self.assertEqual(package['version'], VERSION)
         for path in package['pi']['skills'] + package['pi']['extensions']:
             self.assertIn(path, files)
         self.assertTrue({'LICENSE', 'UPSTREAM.json', 'references/'}.issubset(package['files']))

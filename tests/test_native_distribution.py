@@ -11,7 +11,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from test_pwf_distribution import ROOT, assert_snapshots_equal, copy_build_inputs, snapshot
+from test_pwf_distribution import ROOT, VERSION, assert_snapshots_equal, copy_build_inputs, snapshot
 
 
 CATALOGS = {
@@ -42,7 +42,7 @@ class NativeCatalogTest(unittest.TestCase):
                 self.assertEqual(resolved, ROOT / 'dist' / host / 'planweft')
                 plugin = json.loads((resolved / plugin_manifest).read_text())
                 self.assertEqual(plugin['name'], entries[0]['name'])
-                self.assertEqual(plugin['version'], '0.4.0-rc.1')
+                self.assertEqual(plugin['version'], VERSION)
 
     def test_build_preserves_other_catalog_entries_and_verify_is_read_only(self):
         with tempfile.TemporaryDirectory(prefix='pw-catalog-contract-') as temporary:
