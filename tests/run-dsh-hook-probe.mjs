@@ -13,19 +13,24 @@ if(out===root || out.startsWith(root+path.sep)) throw Error('Keep test output ou
 const adapter=await import(pathToFileURL(path.join(root,'dist/dsh/planweft/index.mjs')).href);
 fs.mkdirSync(out,{recursive:true});
 const env={PATH:process.env.PATH,HOME:path.join(out,'home'),XDG_CACHE_HOME:path.join(out,'cache'),LANG:'C.UTF-8',PYTHONDONTWRITEBYTECODE:'1',PWF_FAST_PATH:process.env.PWF_FAST_PATH||'1'};
-const handlers=new Map(),events=[],runs=[],warnings=[],effects=[],plugins=[];
-const ctx={logger:{warn:msg=>warnings.push(msg)},get:()=>undefined,
-  sessionProjections:{stateOf:()=>({lastTurn:1})},
-  on:(name,fn)=>handlers.set(name,fn),effect:fn=>effects.push(fn()),
-  isolate: function(){return Object.create(this);},
-  provide: function(name,value){this[name]=value;},
-  plugin: function(plugin,config){plugins.push({name:plugin.name,config});if(plugin.name==='hooks-claude-code')plugin.apply(this,config);},
-  shell:{resolve:r=>r,run:async r=>{
-    const result=spawnSync('sh',['-c',r.command],{cwd:r.workdir,env:{...env,...r.env},input:r.stdin,encoding:'utf8',timeout:r.timeoutMs});
-    runs.push({cwd:r.workdir,event:JSON.parse(r.stdin).hook_event_name,exit:result.status,stdout:result.stdout,stderr:result.stderr});
-    return {exitCode:result.status,stdout:{text:result.stdout||''},stderr:{text:result.stderr||''}};
-  }}
-};
+const handlers=new Map(),events=[],runs=[],warnings=[],plugins=[];
+const modules=path.resolve(sdkModules || path.join(root,'node_modules'));
+const {Context}=await import(pathToFileURL(path.join(modules,'@deepseek-ai/cordis/lib/index.js')).href);
+const ctx=new Context();
+// Observe native registrations without replacing bound Context methods,
+// which would accidentally erase their private service scope.
+ctx.on('internal/listener',(name,fn)=>{
+  if(['agent/session-start','agent/pre-step','tools/pre-execute','tools/post-execute','agent/turn-stopping'].includes(name)) handlers.set(name,fn);
+});
+ctx.on('internal/plugin',fiber=>plugins.push({name:fiber.name,get config(){return fiber.config;},fiber}));
+ctx.provide('sessionProjections',{stateOf:()=>({lastTurn:1})});
+const skillControl=new AbortController();
+ctx.provide('skills',{registerProvider:factory=>factory({signal:skillControl.signal,invalidate(){}})});
+let shell={resolve:r=>r,run:async r=>{
+  const result=spawnSync('sh',['-c',r.command],{cwd:r.workdir,env:{...env,...r.env},input:r.stdin,encoding:'utf8',timeout:r.timeoutMs});
+  runs.push({cwd:r.workdir,event:JSON.parse(r.stdin).hook_event_name,exit:result.status,stdout:result.stdout,stderr:result.stderr});
+  return {exitCode:result.status,stdout:{text:result.stdout||''},stderr:{text:result.stderr||''}};
+}};
 const fibers=[];
 if(sdkModules) {
   const load=name=>import(pathToFileURL(path.resolve(sdkModules,name,'lib/index.js')).href);
@@ -36,13 +41,20 @@ if(sdkModules) {
   }
   runtime.provide('sandboxPolicy',{defaultMode:'workspace-write',resolve:()=>({mode:'workspace-write',workspaceRoot:out})});
   const fiber=runtime.plugin((await load('@deepseek-ai/dsh-bash-sandbox')).default,{});await fiber.await();fibers.push(fiber);
-  ctx.shell={resolve:r=>runtime.shell.resolve({...r,sandboxPolicy:{mode:'workspace-write',workspaceRoot:r.workdir},env:{...env,...r.env}}),run:async spec=>{
+  shell={resolve:r=>runtime.shell.resolve({...r,sandboxPolicy:{mode:'workspace-write',workspaceRoot:r.workdir},env:{...env,...r.env}}),run:async spec=>{
     const result=await runtime.shell.run(spec);
     runs.push({cwd:spec.workdir,event:JSON.parse(spec.stdin).hook_event_name,exit:result.exitCode,stdout:result.stdout.text,stderr:result.stderr.text,sandbox:result.sandbox});
     return result;
   }};
 }
-adapter.apply(ctx);
+ctx.provide('shell',shell);
+const adapterFiber=ctx.plugin(adapter,{});await adapterFiber.await();
+for(const plugin of plugins) await plugin.fiber.await();
+// Actual dependency readiness is part of this probe. Direct apply() calls
+// cannot detect an installed bridge stranded in an inactive private scope.
+for(let i=0;i<100 && !handlers.has('agent/pre-step');i++) await new Promise(r=>setTimeout(r,10));
+assert.ok(handlers.has('agent/pre-step'),'native Cordis bridge never activated: '+JSON.stringify(plugins.map(p=>({name:p.name,state:p.fiber.state})))+'; '+warnings.join('; '));
+assert.equal(plugins.find(p=>p.name==='hooks-claude-code')?.fiber.state,2);
 assert.equal(plugins.filter(p=>p.name==='hooks-claude-code').length,1);
 const hook=plugins.find(p=>p.name==='hooks-claude-code');assert.ok(!('projectDir' in hook.config));
 assert.ok(path.isAbsolute(hook.config.configPath));
@@ -102,10 +114,11 @@ try {
   assert.ok(!disabled.includes('hooks-claude-code'));
   assert.ok(runs.every(r=>r.exit===0));
   assert.ok(warnings.every(w=>w.includes('Stop hook emitted a systemMessage'))); // Explicit official bridge limitation.
-  fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({status:'Passed',kind:sdkModules?'protocol fixture with real DSH bridge and sandbox':'protocol fixture with real DSH bridge and subprocesses',fastPath:env.PWF_FAST_PATH,projectIsolation:true,promptRefresh:true,postToolDedup:true,recovery:true,defaultStop:true,gatedCap:true,gatedStall:true,unplannedReadOnly:true,brokenStatePreserved:true,stopSystemMessage:'not surfaced by DSH',permissionPreserved:true,disabled:true},null,2));
+  fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({status:'Passed',kind:sdkModules?'protocol fixture with real DSH bridge and sandbox':'protocol fixture with real DSH bridge and subprocesses',fastPath:env.PWF_FAST_PATH,nativeCordisReadiness:true,projectIsolation:true,promptRefresh:true,postToolDedup:true,recovery:true,defaultStop:true,gatedCap:true,gatedStall:true,unplannedReadOnly:true,brokenStatePreserved:true,stopSystemMessage:'not surfaced by DSH',permissionPreserved:true,disabled:true},null,2));
   console.log('Passed');
 } finally {
-  for(const dispose of effects) if(typeof dispose==='function') await dispose();
+  skillControl.abort();
+  await adapterFiber.dispose();
   for(const fiber of fibers.reverse())await fiber.dispose();
   fs.writeFileSync(path.join(out,'trace.json'),JSON.stringify({events,runs,warnings},null,2));
 }

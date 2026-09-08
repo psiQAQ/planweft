@@ -16,6 +16,10 @@ export function apply(ctx) {
   // its own workspace, including different projects in one web profile.
   const shell = ctx.shell;
   const scoped = ctx.isolate('shell');
-  scoped.provide('shell', hookShell(shell));
-  scoped.plugin(hooks, {configPath: path.join(root, 'hooks/hooks.json'), pluginRoot: root});
+  // The provider must own a fiber in this scope: outer-fiber activation does
+  // not notify dependencies waiting on the isolated shell service.
+  scoped.plugin({name: 'planweft-hook-runtime', apply(hookCtx) {
+    hookCtx.provide('shell', hookShell(shell));
+    hookCtx.plugin(hooks, {configPath: path.join(root, 'hooks/hooks.json'), pluginRoot: root});
+  }});
 }
