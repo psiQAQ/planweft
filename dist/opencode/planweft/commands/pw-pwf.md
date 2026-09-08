@@ -1,0 +1,14 @@
+---
+description: Start planweft (task_plan.md, findings.md, progress.md); flags --gated, --autonomous, --template analytics, then an optional plan name
+disable-model-invocation: true
+---
+
+Follow project-docs scope rules: read-only requests and host plan mode do not initialize or update project files. Resolve the task-owned plan first; never create a competing root plan.
+
+Start the planweft workflow for this project.
+
+Arguments given: "$ARGUMENTS"
+
+1. Call the `pw_init` tool. Map the arguments: `--gated` sets mode "gated", `--autonomous` sets mode "autonomous", `--template analytics` sets template "analytics"; every remaining word forms the plan name. A name creates an isolated `.planning/YYYY-MM-DD-<slug>/` plan and makes it the active plan; no name uses the project root.
+2. Read the created `task_plan.md`, `findings.md` and `progress.md` from the directory the tool reports, then fill in the goal, the next step and the phases for the task at hand before any other work.
+3. Follow the planweft skill from then on: update `progress.md` after every action, log errors in the plan, and mark phases complete as they finish.

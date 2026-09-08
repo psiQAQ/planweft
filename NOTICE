@@ -1,0 +1,12 @@
+PlanWeft incorporates planning-with-files v3.17.0 by Ahmad Adi (MIT).
+Upstream: https://github.com/OthmanAdi/planning-with-files
+Commit: 0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7
+Every platform distribution and standalone Skill retains its upstream LICENSE
+and UPSTREAM.json. The immutable source inventory is in vendor/planning-with-files.
+
+The installer design draws on Vercel Skills (https://github.com/vercel-labs/skills,
+commit 1682051d48c34f5eb135e6475c1a965dce05e820): explicit agent/scope selection,
+canonical resource storage and links. Installer code is independently implemented.
+
+Research documents and referenced publications are not covered by the local MIT
+grant unless explicitly stated. Their original notices and attribution apply.

@@ -11,13 +11,14 @@ import io
 import json
 from pathlib import Path, PurePosixPath
 import re
+import shutil
 import tarfile
 
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR = ROOT / 'vendor/planning-with-files'
-OVERLAY = ROOT / 'overlays/program-design'
-VERSION = '0.3.0'
-PRODUCT = 'program-design'
+OVERLAY = ROOT / 'overlays/planweft'
+VERSION = '0.4.0-rc.1'
+PRODUCT = 'planweft'
 SKILL = 'project-docs'
 DESCRIPTION = ('Persistent file planning and task-relevant project documentation. '
                'Use for multi-step implementation, documented work and handoffs; '
@@ -65,15 +66,15 @@ def read_upstream():
 
 
 def command_name(name):
-    return 'pd-' + name
+    return 'pw-' + name
 
 
 def map_path(path):
     path = path.replace('planning-with-files', PRODUCT)
-    path = path.replace('skills/program-design', 'skills/' + SKILL)
-    path = path.replace('skills/i18n/program-design-', 'skills/i18n/' + SKILL + '-')
-    if path == '.continue/prompts/program-design.prompt':
-        return '.continue/prompts/pd-plan.prompt'
+    path = path.replace('skills/planweft', 'skills/' + SKILL)
+    path = path.replace('skills/i18n/planweft-', 'skills/i18n/' + SKILL + '-')
+    if path == '.continue/prompts/planweft.prompt':
+        return '.continue/prompts/pw-plan.prompt'
     parts = path.split('/')
     if 'commands' in parts or 'prompts' in parts:
         if parts[-1].endswith('.md') and parts[-1][:-3] in COMMANDS:
@@ -83,19 +84,19 @@ def map_path(path):
 
 def identity_text(text):
     # Source citations are provenance, not executable fallback locations.
-    text = text.replace(UPSTREAM_URL, '__PD_UPSTREAM_URL__')
+    text = text.replace(UPSTREAM_URL, '__PW_UPSTREAM_URL__')
     text = text.replace('planning-with-files:planning-with-files', PRODUCT + ':' + SKILL)
     text = text.replace('planning-with-files', PRODUCT)
-    text = text.replace('skills/program-design', 'skills/' + SKILL)
-    text = text.replace('skills/i18n/program-design-', 'skills/i18n/' + SKILL + '-')
-    text = re.sub(r'program-design-(ar|de|es|zh|zht)(?=[\"\'/\\])', r'project-docs-\1', text)
-    text = re.sub(r'(skills\\+)program-design', r'\g<1>project-docs', text)
+    text = text.replace('skills/planweft', 'skills/' + SKILL)
+    text = text.replace('skills/i18n/planweft-', 'skills/i18n/' + SKILL + '-')
+    text = re.sub(r'planweft-(ar|de|es|zh|zht)(?=[\"\'/\\])', r'project-docs-\1', text)
+    text = re.sub(r'(skills\\+)planweft', r'\g<1>project-docs', text)
     # pathlib, path.join and PowerShell build skill paths from separate tokens.
-    text = re.sub(r'([\"\']skills[\"\']\s*[/,]\s*[\"\'])program-design', r'\g<1>project-docs', text)
-    text = re.sub(r'(SKILL_DIR_NAME\s*=\s*[\"\'])program-design', r'\g<1>project-docs', text)
-    text = text.replace('path.join(base, "program-design")', 'path.join(base, "project-docs")')
-    text = text.replace('planning_with_files', 'program_design')
-    text = text.replace('pwf_init', 'pd_init').replace('pwf_status', 'pd_status').replace('pwf_check', 'pd_check')
+    text = re.sub(r'([\"\']skills[\"\']\s*[/,]\s*[\"\'])planweft', r'\g<1>project-docs', text)
+    text = re.sub(r'(SKILL_DIR_NAME\s*=\s*[\"\'])planweft', r'\g<1>project-docs', text)
+    text = text.replace('path.join(base, "planweft")', 'path.join(base, "project-docs")')
+    text = text.replace('planning_with_files', 'planweft')
+    text = text.replace('pwf_init', 'pw_init').replace('pwf_status', 'pw_status').replace('pwf_check', 'pw_check')
     # Config keys, PWF_* env vars, PLAN_ID and disk state remain compatible.
     for name in sorted(COMMANDS, key=len, reverse=True):
         mapped = command_name(name)
@@ -107,9 +108,9 @@ def identity_text(text):
         if '-' in name or name == 'pwf':
             text = re.sub(r'([\"\'])' + re.escape(name) + r'([\"\'])', r'\g<1>' + mapped + r'\2', text)
     # These are skill-identity comparisons, not plugin names or state keys.
-    text = text.replace('CANONICAL = "program-design"', 'CANONICAL = "project-docs"')
-    text = text.replace('skill_md.parent.name != "program-design"', 'skill_md.parent.name != "project-docs"')
-    return text.replace('__PD_UPSTREAM_URL__', UPSTREAM_URL)
+    text = text.replace('CANONICAL = "planweft"', 'CANONICAL = "project-docs"')
+    text = text.replace('skill_md.parent.name != "planweft"', 'skill_md.parent.name != "project-docs"')
+    return text.replace('__PW_UPSTREAM_URL__', UPSTREAM_URL)
 
 
 def enhance_skill(text, path):
@@ -153,30 +154,30 @@ def local_install_text(text, path):
     """
     if path.endswith('/SKILL.md'):
         text = text.replace(
-            '`/plugin marketplace add OthmanAdi/program-design` then `/plugin install`',
+            '`/plugin marketplace add OthmanAdi/planweft` then `/plugin install`',
             '`/plugin marketplace add <absolute-claude-package-root>` then '
-            '`/plugin install program-design@program-design`')
+            '`/plugin install planweft@planweft`')
         text = text.replace(
-            '`npx skills add OthmanAdi/program-design` (or ClawHub)',
+            '`npx skills add OthmanAdi/planweft` (or ClawHub)',
             'Copy the complete packaged `skills/project-docs/` to '
             '`.claude/skills/project-docs/` (project) or `~/.claude/skills/project-docs/` (user)')
         text = text.replace(
             'Install it with `hermes plugins install '
-            'OthmanAdi/program-design/.hermes/plugins/program-design`, then '
-            '`hermes plugins enable program-design`. Full guide: docs/hermes.md in the repository.',
+            'OthmanAdi/planweft/.hermes/plugins/planweft`, then '
+            '`hermes plugins enable planweft`. Full guide: docs/hermes.md in the repository.',
             'From the Hermes platform directory, copy the complete plugin root and '
-            'its `skills/project-docs/` into `plugins/program-design/` and '
+            'its `skills/project-docs/` into `plugins/planweft/` and '
             '`skills/project-docs/` under the same `HERMES_HOME`. Then run '
-            '`hermes plugins enable program-design` and restart Hermes. '
+            '`hermes plugins enable planweft` and restart Hermes. '
             'This derivative is installed from the local package.')
         text = text.replace(
-            'add `"plugin": ["opencode-program-design"]` to `opencode.json`.',
+            'add `"plugin": ["opencode-planweft"]` to `opencode.json`.',
             'copy the complete OpenCode platform directory into a local package and '
             'register its precompiled `dist/index.js` through a local loader; '
             'run `npm ci --omit=dev --ignore-scripts` for runtime dependencies in that local '
             'package directory. The shipped entry loads its compiled `dist/index.js`.')
         text = text.replace(
-            '`npx skills add OthmanAdi/program-design --skill program-design -g` '
+            '`npx skills add OthmanAdi/planweft --skill planweft -g` '
             'installs this skill to `~/.agents/skills/project-docs/`, one of the '
             'paths OpenCode reads natively. Full guide: docs/opencode.md.',
             'Copy the platform package complete `skills/project-docs/` directory to '
@@ -187,13 +188,13 @@ def local_install_text(text, path):
         text = text.replace(
             '`~/.agents/skills/project-docs/templates/` after `npx skills add -g`',
             '`.opencode/skills/project-docs/templates/` after a project copy')
-    if path == '.opencode/packages/opencode-program-design/README.md':
-        text = text.replace('[program-design](' + UPSTREAM_URL + ')',
-                            'Program Design, derived from [planning-with-files](' + UPSTREAM_URL + ')')
+    if path == '.opencode/packages/opencode-planweft/README.md':
+        text = text.replace('[planweft](' + UPSTREAM_URL + ')',
+                            'PlanWeft, derived from [planning-with-files](' + UPSTREAM_URL + ')')
         text = re.sub(r'(?<=## Install\n).*?(?=\n## What the plugin does)',
                       lambda _: '\n' + (OVERLAY / 'install/opencode.md').read_text() + '\n',
                       text, flags=re.S)
-        text = text.replace('`pwf.md` and `pwf-status.md`', '`pd-pwf.md` and `pd-pwf-status.md`')
+        text = text.replace('`pwf.md` and `pwf-status.md`', '`pw-pwf.md` and `pw-pwf-status.md`')
         text = text.replace("from the repository's `.opencode/commands/`",
                             "from the OpenCode platform package's `commands/`")
         text = text.replace('Full guide: [docs/opencode.md]', 'Upstream implementation reference: [docs/opencode.md]')
@@ -263,7 +264,7 @@ def transform(upstream, enhanced=True):
                     # the publisher/support endpoint of a modified package.
                     for field in ['repository', 'homepage', 'bugs']:
                         payload.pop(field, None)
-                payload['author'] = 'Program Design contributors; derived from Ahmad Adi / PWF'
+                payload['author'] = 'PlanWeft contributors; derived from Ahmad Adi / PWF'
             else:
                 payload['version'] = VERSION
                 root_package = payload.get('packages', {}).get('')
@@ -275,26 +276,26 @@ def transform(upstream, enhanced=True):
                 payload = json.loads(text)
                 payload.update(name=PRODUCT, version=VERSION, description=DESCRIPTION)
                 payload.pop('repository', None)
-                payload['author'] = {'name': 'Program Design contributors'}
+                payload['author'] = {'name': 'PlanWeft contributors'}
                 text = json.dumps(payload, indent=2) + '\n'
             except json.JSONDecodeError:
                 pass
-        if target == '.hermes/plugins/program-design/plugin.yaml':
+        if target == '.hermes/plugins/planweft/plugin.yaml':
             text = re.sub(r'^version:.*$', 'version: ' + VERSION, text, flags=re.M)
         if target == '.claude-plugin/marketplace.json':
             payload = json.loads(text)
-            payload['owner'] = {'name': 'Program Design contributors'}
+            payload['owner'] = {'name': 'PlanWeft contributors'}
             payload['description'] = DESCRIPTION
             for entry in payload['plugins']:
                 entry.update(name=PRODUCT, version=VERSION, description=DESCRIPTION)
             text = json.dumps(payload, indent=2) + '\n'
-        if target == '.hermes/plugins/program-design/__init__.py':
-            text = text.replace('name="program-design",\n', 'name="project-docs",\n')
+        if target == '.hermes/plugins/planweft/__init__.py':
+            text = text.replace('name="planweft",\n', 'name="project-docs",\n')
             text = text.replace('("pwf", "pwf-status", "plan-status")',
-                                '("pd-pwf", "pd-pwf-status", "pd-plan-status")')
+                                '("pw-pwf", "pw-pwf-status", "pw-plan-status")')
         if target == 'tests/test_hermes_first_class.py':
-            text = text.replace('"program-design", ctx.skills', '"project-docs", ctx.skills')
-            text = text.replace('ctx.skills["program-design"]', 'ctx.skills["project-docs"]')
+            text = text.replace('"planweft", ctx.skills', '"project-docs", ctx.skills')
+            text = text.replace('ctx.skills["planweft"]', 'ctx.skills["project-docs"]')
             if enhanced:
                 # Upstream test_hermes_first_class.py:763 assumed this bundle
                 # lacked inject-plan.sh. Self-contained Skills now include it.
@@ -309,22 +310,22 @@ def transform(upstream, enhanced=True):
                     '            self.assertIn("context", run("pre_llm_call"), '
                     '"an invalid explicit root still permits the bundled fallback")\n'
                     '            bundled_bridge = bridge\n'
-                    '            bridge = root / "uninstalled" / "plugins" / "program-design" / "shell_hook.py"\n'
+                    '            bridge = root / "uninstalled" / "plugins" / "planweft" / "shell_hook.py"\n'
                     '            bridge.parent.mkdir(parents=True)\n'
                     '            shutil.copyfile(bundled_bridge, bridge)\n')
                 text = text.replace(missing_script_assertion, isolated_bridge + missing_script_assertion)
         if target == 'tests/test_codex_plugin_operations.py':
-            text = text.replace('["program-design"], sorted(path.name for path in skill_dirs)',
+            text = text.replace('["planweft"], sorted(path.name for path in skill_dirs)',
                                 '["project-docs"], sorted(path.name for path in skill_dirs)')
         if target == 'CITATION.cff':
             text = re.sub(r'^version:.*$', 'version: ' + VERSION, text, flags=re.M)
-        if target == '.opencode/packages/opencode-program-design/src/core.ts':
+        if target == '.opencode/packages/opencode-planweft/src/core.ts':
             text = re.sub(r'export const VERSION = "[^"]+"', 'export const VERSION = "' + VERSION + '"', text)
         if ('/commands/' in '/' + target or '/prompts/' in '/' + target) and target.endswith(('.md', '.prompt')):
             if text.startswith('---\n'):
                 front, body = text[4:].split('\n---\n', 1)
                 if target.endswith('.prompt'):
-                    front = re.sub(r'^name:.*$', 'name: pd-plan', front, flags=re.M)
+                    front = re.sub(r'^name:.*$', 'name: pw-plan', front, flags=re.M)
                 if 'disable-model-invocation:' not in front:
                     front += '\ndisable-model-invocation: true'
                 text = '---\n' + front + '\n---\n\n' + (
@@ -333,6 +334,8 @@ def transform(upstream, enhanced=True):
                     'never create a competing root plan.\n\n') + body.lstrip()
         result[target] = (text.encode('utf-8'), mode)
     if enhanced:
+        data, mode = result['LICENSE']
+        result['LICENSE'] = (data.replace(b'Permission is hereby granted', b'Copyright (c) 2026 PlanWeft contributors\n\nPermission is hereby granted', 1), mode)
         canonical = 'skills/project-docs/'
         for name in list(result):
             if name.endswith('/SKILL.md'):
@@ -372,14 +375,14 @@ def distributions(tree, upstream, compiled=True):
             result['codex'][policy_path] = (b'policy:\n  allow_implicit_invocation: false\n', 0o644)
     codex_manifest = {'name': PRODUCT, 'version': VERSION, 'description': DESCRIPTION,
                       'skills': './skills/', 'hooks': './hooks/codex-hooks.json',
-                      'author': {'name': 'Program Design contributors'},
-                      'interface': {'displayName': 'Program Design', 'category': 'Productivity',
+                      'author': {'name': 'PlanWeft contributors'},
+                      'interface': {'displayName': 'PlanWeft', 'category': 'Productivity',
                                     'shortDescription': 'Persistent planning and project documentation',
-                                    'longDescription': DESCRIPTION, 'developerName': 'Program Design contributors',
+                                    'longDescription': DESCRIPTION, 'developerName': 'PlanWeft contributors',
                                     'capabilities': ['Read', 'Write'],
                                     'defaultPrompt': ['Use $project-docs to continue this project.']}}
     result['codex']['.codex-plugin/plugin.json'] = (json.dumps(codex_manifest, indent=2).encode() + b'\n', 0o644)
-    local_catalog = {'name': 'program-design-local', 'plugins': [{
+    local_catalog = {'name': 'planweft-local', 'plugins': [{
         'name': PRODUCT, 'source': {'source': 'local', 'path': './'},
         'policy': {'installation': 'AVAILABLE', 'authentication': 'ON_INSTALL'},
         'category': 'Productivity'}]}
@@ -390,9 +393,9 @@ def distributions(tree, upstream, compiled=True):
     result['opencode'] = subset(tree, ['.opencode', *common])
     # The source tree keeps its development entry; installation loads the locked
     # local build, so users can copy the adapter without hand-writing a loader.
-    result['opencode']['.opencode/plugins/program-design.ts'] = (
+    result['opencode']['.opencode/plugins/planweft.ts'] = (
         b'// Local package: run npm ci --ignore-scripts and npm run build in its directory.\n'
-        b'export { PlanningWithFiles } from "../packages/opencode-program-design/dist/index.js"\n',
+        b'export { PlanningWithFiles } from "../packages/opencode-planweft/dist/index.js"\n',
         0o644)
     for host in HOSTS:
         if host in result:
@@ -421,7 +424,7 @@ def distributions(tree, upstream, compiled=True):
                 files[prefix + 'UPSTREAM.json'] = (provenance, 0o644)
         if host == 'hermes':
             for name in ['LICENSE', 'UPSTREAM.json']:
-                files['.hermes/plugins/program-design/' + name] = files[name]
+                files['.hermes/plugins/planweft/' + name] = files[name]
         for suffix in ['', '.en']:
             notice = ('> Package: **' + host + '**. Use this host\'s installation section.'
                       if suffix else '> 当前安装包：**' + host + '**。请选择本文对应宿主的安装章节。')
@@ -444,14 +447,14 @@ def distributions(tree, upstream, compiled=True):
                                                   'README.en.md', 'INSTALL.md', 'INSTALL.en.md', 'references/']))
             files['package.json'] = (json.dumps(payload, indent=2).encode() + b'\n', 0o644)
         if host == 'opencode':
-            prefix = '.opencode/packages/opencode-program-design/'
+            prefix = '.opencode/packages/opencode-planweft/'
             for name in ['LICENSE', 'UPSTREAM.json']:
                 files[prefix + name] = files[name]
             payload = json.loads(files[prefix + 'package.json'][0])
             payload['files'] = list(dict.fromkeys([*payload.get('files', []), 'LICENSE', 'UPSTREAM.json']))
             files[prefix + 'package.json'] = (json.dumps(payload, indent=2).encode() + b'\n', 0o644)
         result[host] = files
-    spec = importlib.util.spec_from_file_location('pd_native_adapters', OVERLAY / 'native/adapters.py')
+    spec = importlib.util.spec_from_file_location('pw_native_adapters', OVERLAY / 'native/adapters.py')
     native = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(native)
     result = native.adapt(result, VERSION, DESCRIPTION)
@@ -477,7 +480,7 @@ def public_installation_files():
                    'Cross-platform design: [中文](platforms.md) / [English](platforms.en.md)'
                    if suffix else '项目介绍：[中文](../README.md) / [English](../README.en.md) · '
                    '跨平台设计：[中文](platforms.md) / [English](platforms.en.md)')
-        generated = '<!-- Generated from overlays/program-design/install/' + source.name + '; edit the source. -->'
+        generated = '<!-- Generated from overlays/planweft/install/' + source.name + '; edit the source. -->'
         result['installation' + suffix + '.md'] = (
             (navigation + '\n\n' + context + '\n\n' + generated + '\n\n' + body.lstrip()).encode(), 0o644)
     return result
@@ -539,18 +542,24 @@ def marketplace_files():
             entry = {'name': PRODUCT, 'source': {'source': 'local', 'path': entry['source']},
                      'policy': {'installation': 'AVAILABLE', 'authentication': 'ON_INSTALL'},
                      'category': 'Productivity'}
-            payload = {'name': PRODUCT, 'interface': {'displayName': 'Program Design'}, 'plugins': [entry]}
+            payload = {'name': PRODUCT, 'interface': {'displayName': 'PlanWeft'}, 'plugins': [entry]}
         else:
-            payload = {'name': PRODUCT, 'owner': {'name': 'Program Design contributors'}, 'plugins': [entry]}
+            payload = {'name': PRODUCT, 'owner': {'name': 'PlanWeft contributors'}, 'plugins': [entry]}
         path = ROOT / name
         reject_symlinks(path)
         if path.is_file():
             old = json.loads(path.read_text())
             if not isinstance(old.get('plugins'), list):
                 raise ValueError('Invalid existing marketplace: ' + name)
+            legacy = [item for item in old['plugins'] if item.get('name') == 'program-design']
+            if legacy:
+                ownership = json.loads((OVERLAY / 'legacy-0.3.json').read_text())
+                if sha(path.read_bytes()) != ownership['catalogs'].get(name):
+                    raise ValueError('Modified legacy marketplace preserved: ' + name)
+                old['plugins'] = [item for item in old['plugins'] if item.get('name') != 'program-design']
             matches = [i for i, item in enumerate(old['plugins']) if item.get('name') == PRODUCT]
             if len(matches) > 1:
-                raise ValueError('Duplicate program-design marketplace entries: ' + name)
+                raise ValueError('Duplicate planweft marketplace entries: ' + name)
             entries = old['plugins'][:]
             if matches:
                 entries[matches[0]] = entry
@@ -645,6 +654,23 @@ def retired_archives():
     return result
 
 
+
+def legacy_directories():
+    """Refuse to retire any 0.3 directory not matching its reviewed content hash."""
+    record = json.loads((OVERLAY / 'legacy-0.3.json').read_text())
+    candidates = [(ROOT / 'dist' / host / 'program-design', digest)
+                  for host, digest in record['platforms'].items()]
+    candidates.append((ROOT / 'plugins/program-design', record['platforms']['codex']))
+    result = []
+    for path, digest in candidates:
+        reject_symlinks(path)
+        if path.exists():
+            if tree_digest(read_tree(path)) != digest:
+                raise ValueError('Modified legacy directory preserved: ' + str(path))
+            result.append(path)
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--verify', action='store_true', help='Compare generated artifacts without changing them')
@@ -665,16 +691,17 @@ def main():
         return
     bundles = distributions(tree, upstream)
     retired = retired_archives()
+    old_directories = legacy_directories()
     index = {'schema_version': 2, 'product': PRODUCT, 'version': VERSION,
              'upstream_commit': upstream['commit'], 'platforms': {}}
     catalogs = marketplace_files()
-    differences = {}
+    differences = {'retired-directories': [str(p.relative_to(ROOT)) for p in old_directories]}
     for host, files in bundles.items():
         relative = host + '/' + PRODUCT
         index['platforms'][host] = {'path': relative, 'sha256': tree_digest(files),
                                    'file_count': len(files), 'files': inventory(files)}
         differences[host] = write_tree(files, ROOT / 'dist' / relative, args.verify)
-    differences['codex-mirror'] = write_tree(bundles['codex'], ROOT / 'plugins/program-design', args.verify)
+    differences['codex-mirror'] = write_tree(bundles['codex'], ROOT / 'plugins/planweft', args.verify)
     manifest = {'manifest.json': (json.dumps(index, indent=2, sort_keys=True).encode() + b'\n', 0o644)}
     differences['manifest'] = write_files(manifest, ROOT / 'dist', args.verify)
     differences['marketplaces'] = write_files(catalogs, ROOT, args.verify)
@@ -686,6 +713,9 @@ def main():
         differences['retired-archives'].append(path.name)
         if not args.verify:
             path.unlink()
+    if not args.verify:
+        for path in old_directories:
+            shutil.rmtree(path)
     print(json.dumps({'platforms': len(bundles), 'differences': {k: len(v) for k, v in differences.items()},
                       'verified': args.verify and not any(differences.values())}, indent=2))
     if args.verify and any(differences.values()):

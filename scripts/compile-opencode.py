@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def load_builder():
-    spec = importlib.util.spec_from_file_location('pd_builder', ROOT / 'scripts/build-plugin.py')
+    spec = importlib.util.spec_from_file_location('pw_builder', ROOT / 'scripts/build-plugin.py')
     builder = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(builder)
     return builder
@@ -36,7 +36,7 @@ def main():
     original, upstream = builder.read_upstream()
     files = builder.distributions(builder.transform(original), upstream, compiled=False)['opencode']
     inputs = builder.opencode_inputs(files)
-    with tempfile.TemporaryDirectory(prefix='pd-opencode-compile-') as directory:
+    with tempfile.TemporaryDirectory(prefix='pw-opencode-compile-') as directory:
         work = Path(directory)
         builder.write_tree(inputs, work)
         env = {**os.environ, 'npm_config_audit': 'false', 'npm_config_fund': 'false',
@@ -64,7 +64,7 @@ def main():
                     'compiler': 'typescript@' + compiler,
                     'command': 'tsc -p tsconfig.json', 'files': builder.inventory(output)}
         output['manifest.json'] = (json.dumps(manifest, indent=2, sort_keys=True).encode() + b'\n', 0o644)
-        differences = builder.write_tree(output, ROOT / 'overlays/program-design/opencode-compiled', args.check)
+        differences = builder.write_tree(output, ROOT / 'overlays/planweft/opencode-compiled', args.check)
         print(json.dumps({'check': args.check, 'differences': differences, 'compiler': manifest['compiler']}))
         if args.check and differences:
             raise SystemExit(1)
