@@ -192,3 +192,10 @@ python3 scripts/run-opencode-tests.py --output /tmp/planweft-opencode-regression
 ```
 
 保留上游原字节测试、原生未调整结果，以及两项明确本地差异的适配结果：无计划 Skill 提醒、安装包/显式模板来源。附加测试验证无写盘、去重、禁用及项目模板不能替换安装资源；协议通过不代替模型验收。
+
+
+## 原生停止证据
+
+`run-five-agent-release.py` 提供 `stopping`、`gated-continuation`、`gate-cap`、`gate-stall`；Pi 使用 `stopping` 和独有 `continuation-limit`，不模拟 Shell ledger gate。非 DSH 的 cap/stall 要先运行同夹具的 `gate-cap-disabled` / `gate-stall-disabled`，否则参数校验拒绝执行。所有场景需要准确归档和隔离模型认证，按既有授权使用。
+
+计数访问由 Linux inotify 在模型进程期间观察，不能提供 PID 归因；负对照同样读取时保持 Failed。DSH 另外记录原生 Stop block/pass。Pi RPC 等到 settled、空队列和自然 EOF；不在首个 agent_end 结束。新运行保存 runner、runtime、fixture 源码与摘要。`scripts/reassess-stop-evidence.py --run RUN --output NEW_JSON` 可重判历史原始数据，明确不是模型重跑且不改原文件。

@@ -4,12 +4,14 @@ Credentials arrive only over stdin and stay in container memory/tmpfs. This
 module never reads the laboratory's MemoryProxy config or identity headers.
 """
 import hashlib
+import ctypes
 import json
 import os
 from pathlib import Path
 import queue
 import shutil
 import subprocess
+import struct
 import tarfile
 import tempfile
 import threading
@@ -20,6 +22,45 @@ WORK = Path('/workspace')
 HOME = Path('/home/agent')
 SECRETS = []
 REDACTIONS = 0
+
+
+def watch_gate_reads():
+    """Observe only two synthetic gate files during a Linux model invocation.
+
+    IN_ACCESS distinguishes a read from merely exiting without running Stop.
+    This carries no PID attribution; use only in isolated no-tool scenarios.
+    """
+    libc=ctypes.CDLL(None,use_errno=True)
+    libc.inotify_init1.argtypes=[ctypes.c_int];libc.inotify_init1.restype=ctypes.c_int
+    libc.inotify_add_watch.argtypes=[ctypes.c_int,ctypes.c_char_p,ctypes.c_uint32]
+    libc.inotify_add_watch.restype=ctypes.c_int
+    fd=libc.inotify_init1(os.O_NONBLOCK|os.O_CLOEXEC)
+    if fd<0: raise OSError(ctypes.get_errno(),'Cannot initialize gate read observation')
+    watches={}
+    try:
+        for name in ['.stop_blocks','.gate_last_ledger']:
+            wd=libc.inotify_add_watch(fd,os.fsencode(WORK/name),0x1)
+            if wd<0: raise OSError(ctypes.get_errno(),'Cannot watch gate counter')
+            watches[wd]=name
+    except Exception:
+        os.close(fd);raise
+    return fd,watches
+
+
+def finish_gate_reads(watch):
+    fd,watches=watch;events=[];overflow=False
+    try:
+        while True:
+            try: data=os.read(fd,65536)
+            except BlockingIOError: break
+            if not data: break
+            offset=0
+            while offset<len(data):
+                wd,mask,cookie,size=struct.unpack_from('iIII',data,offset);offset+=16+size
+                overflow |= bool(mask&0x4000)
+                if mask&0x1: events.append({'file':watches.get(wd),'event':'IN_ACCESS'})
+    finally: os.close(fd)
+    return {'kind':'Linux inotify during isolated no-tool model invocation','events':events,'overflow':overflow,'pid_attribution':False}
 
 
 def safe_text(text):
@@ -184,9 +225,12 @@ def model_command(host, model, prompt, case):
             command += ['--dangerously-bypass-hook-trust']
         return command+['-'], prompt
     if host == 'claude':
-        return ['claude','-p','--no-session-persistence','--permission-mode','acceptEdits',
+        command=['claude','-p','--no-session-persistence','--permission-mode','acceptEdits',
                 '--allowedTools','Read,Edit,Write,Bash,Glob,Grep,Skill',
-                '--model',model,'--output-format','stream-json','--verbose'], prompt
+                '--model',model,'--output-format','stream-json','--verbose']
+        if case in {'stopping','gated-continuation','gate-cap','gate-stall','gate-cap-disabled','gate-stall-disabled'}:
+            command+=['--debug','hooks','--debug-file','/tmp/planweft-native-hooks.log']
+        return command, prompt
     if host == 'pi':
         return ['pi','--print','--no-session','--approve','--provider','release',
                 '--model',model,'--mode','json',prompt], None
@@ -195,7 +239,7 @@ def model_command(host, model, prompt, case):
     return ['dsh','--profile','headless',prompt], None
 
 
-def pi_model(model, prompt, timeout):
+def pi_model(model, prompt, timeout, *, activate=True):
     """Keep native follow-ups until Pi 0.84.3 settles, then verify idle state."""
     command=['pi','--mode','rpc','--no-session','--approve','--provider','release','--model',model]
     messages=[]; inbox=queue.Queue(); started=time.monotonic(); deadline=started+timeout
@@ -234,9 +278,10 @@ def pi_model(model, prompt, timeout):
                 value=event()
                 if predicate(value): return value
         try:
-            send({'id':'activate','type':'prompt','message':'/pw-plan-execute'})
-            activation=until(lambda x:x.get('id')=='activate')
-            if activation.get('success') is not True: raise RuntimeError('Pi explicit activation failed')
+            if activate:
+                send({'id':'activate','type':'prompt','message':'/pw-plan-execute'})
+                activation=until(lambda x:x.get('id')=='activate')
+                if activation.get('success') is not True: raise RuntimeError('Pi explicit activation failed')
             send({'id':'task','type':'prompt','message':prompt})
             until(lambda x:x.get('type')=='agent_settled' and counts['agent_end']>0 and counts['agent_start']>0)
             settled_starts=counts['agent_start']
@@ -281,7 +326,7 @@ def pi_model(model, prompt, timeout):
     save('model',{'argv':command,'exit_code':returncode,'process_exit_code':proc.returncode,
                   'seconds':time.monotonic()-started,'completion':completion,'failure':failure,
                   'forced_termination':forced,'event_counts':counts,'final_state':state,
-                  'activation':'native /pw-plan-execute in same fresh RPC session'})
+                  'activation':'native /pw-plan-execute in same fresh RPC session' if activate else 'not requested; passive session'})
     return subprocess.CompletedProcess(command,returncode)
 
 
@@ -329,13 +374,15 @@ def controller(payload):
         if case not in {'preflight','lifecycle'}:
             if not secret:
                 raise RuntimeError('No isolated model authentication')
-            if case not in {'readonly','simple','cold-reader','conflict','evidence-gap'}:
+            if case not in {'readonly','simple','cold-reader','conflict','evidence-gap','gate-cap-disabled','gate-stall-disabled'}:
                 os.environ.pop('PLANNING_DISABLED',None)
-            if host=='pi' and case in {'context','recovery'}:
+            if host=='pi' and case in {'context','recovery','continuation-limit','stopping'}:
                 # DeepSeek defaults to cache-safe reminders, which deliberately
                 # omit plan contents. This full-content probe explicitly tests
                 # the supported parity mode without changing product defaults.
-                os.environ['PWF_MODE']='parity'
+                os.environ['PWF_MODE']='auto' if case=='stopping' else 'parity'
+            if case in {'gated-continuation','gate-cap','gate-stall','gate-cap-disabled','gate-stall-disabled'}:
+                os.environ['PWF_GATE_CAP']='1' if case.startswith('gate-cap') else '20'
             prompt = payload['prompt']
             command, data = model_command(host,payload['model'],prompt,case)
             save('model-invocation',{'argv':command,'fresh_session':True,'case':case,
@@ -344,15 +391,25 @@ def controller(payload):
                 'planning_disabled':os.environ.get('PLANNING_DISABLED')=='1'})
             if host=='pi': save('pi-mode',{'configured':os.environ.get('PWF_MODE','auto'),
                 'default_deepseek_behavior':'cache-safe reminder; full plan content requires parity'})
-            if host=='pi' and case in {'context','recovery'}:
-                process=pi_model(payload['model'],prompt,payload['timeout'])
-            else:
-                process = run('model',command,input_data=data,timeout=payload['timeout'],required=False)
+            gate_watch=watch_gate_reads() if case in {'gate-cap','gate-stall','gate-cap-disabled','gate-stall-disabled'} else None
+            try:
+                if host=='pi' and case in {'context','recovery','continuation-limit','stopping'}:
+                    process=pi_model(payload['model'],prompt,payload['timeout'],activate=case!='stopping')
+                else:
+                    process = run('model',command,input_data=data,timeout=payload['timeout'],required=False)
+            finally:
+                if gate_watch:
+                    observed=finish_gate_reads(gate_watch);save('native-gate-reads',observed)
+                    observed_files={e['file'] for e in observed['events']}
+                    result['any_gate_counter_access']=bool(observed_files) or observed['overflow']
+                    result['gate_counters_read']=not observed['overflow'] and observed_files=={'.stop_blocks','.gate_last_ledger'}
             if host=='dsh':
                 logs=list((HOME/'.dsh/sessions').rglob('*.jsonl'))
                 content='\n'.join(p.read_text() for p in sorted(logs))
                 (OUT/'native-events.jsonl').write_text(safe_text(content))
                 result['native_session_logs']=len(logs)
+            if host=='claude' and Path('/tmp/planweft-native-hooks.log').is_file():
+                (OUT/'native-hooks.log').write_text(safe_text(Path('/tmp/planweft-native-hooks.log').read_text()))
             result['model_session'] = 'Passed' if process.returncode == 0 else 'Failed'
             if process.returncode:
                 raise RuntimeError('Real model process failed')

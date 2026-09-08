@@ -19,6 +19,30 @@ def module(name,path):
 
 
 class ContainerReleaseTest(unittest.TestCase):
+    def test_claude_stream_blocks_are_not_extra_model_responses(self):
+        runner=module('pw_claude_responses','tests/run-five-agent-release.py')
+        events=[{'type':'assistant','message':{'id':'one','content':[{'type':kind}]}} for kind in ['thinking','text']]
+        parse=lambda:runner.model_text('claude','\n'.join(json.dumps(e) for e in events))
+        self.assertEqual(parse()['assistant_responses'],1)
+        events.append({'type':'assistant','message':{'id':'followup','content':[{'type':'text'}]}})
+        self.assertEqual(parse()['assistant_responses'],2)
+
+    @unittest.skipUnless(sys.platform=='linux','inotify observation is a Linux container lane')
+    def test_gate_observer_distinguishes_read_from_no_hook(self):
+        runtime=module('pw_gate_observer','tests/five_agent_runtime.py')
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);runtime.WORK=root
+            for name in ['.stop_blocks','.gate_last_ledger']: (root/name).write_text('1\n')
+            watch=runtime.watch_gate_reads()
+            (root/'unrelated.txt').write_text('fixture')
+            empty=runtime.finish_gate_reads(watch)
+            self.assertEqual(empty['events'],[])
+            watch=runtime.watch_gate_reads()
+            self.assertEqual((root/'.stop_blocks').read_text(),'1\n')
+            read=runtime.finish_gate_reads(watch)
+            self.assertFalse(read['overflow'])
+            self.assertEqual(read['events'],[{'file':'.stop_blocks','event':'IN_ACCESS'}])
+
     def test_bad_arguments_have_no_output_side_effect(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary);archive=root/'package.tgz';output=root/'absent'
@@ -28,12 +52,33 @@ class ContainerReleaseTest(unittest.TestCase):
                 tar.addfile(info,io.BytesIO(data))
             base=[sys.executable,str(ROOT/'tests/run-five-agent-release.py'),'--archive',str(archive),'--output',str(output)]
             for flags in [['--host','unknown'],['--host','codex','--timeout','0'],
+                          ['--host','pi','--cases','gate-cap'],
+                          ['--host','claude','--cases','gate-cap'],
+                          ['--host','codex','--cases','continuation-limit'],
                           ['--host','codex','--cases','cold-reader'],
                           ['--host','codex','--cases','cold-reader','maintenance'],['--host','codex','--image-lock',str(root/'missing')]]:
                 with self.subTest(flags=flags):
                     result=subprocess.run(base+flags,capture_output=True)
                     self.assertEqual(result.returncode,2)
                     self.assertFalse(output.exists())
+
+    def test_stop_fixtures_separate_cap_from_stall(self):
+        import hashlib
+        runner=module('pw_stop_fixture','tests/run-five-agent-release.py')
+        cap=runner.stop_fixture('gate-cap');stall=runner.stop_fixture('gate-stall')
+        for files in [cap,stall,runner.stop_fixture('gated-continuation')]:
+            self.assertIn('### Phase 1:',files['task_plan.md'])
+            self.assertIn('**Status:** in_progress',files['task_plan.md'])
+            self.assertEqual(files['.plan-attestation'].strip(),hashlib.sha256(files['task_plan.md'].encode()).hexdigest())
+        self.assertEqual(cap['.stop_blocks'],stall['.stop_blocks'])
+        self.assertEqual(cap['.gate_last_ledger'],'0\n')
+        self.assertEqual(len(cap['ledger-owner.jsonl'].splitlines()),1)
+        self.assertNotIn('ledger-owner.jsonl',stall)
+        self.assertEqual(cap,runner.stop_fixture('gate-cap-disabled'))
+        self.assertEqual(stall,runner.stop_fixture('gate-stall-disabled'))
+        self.assertNotIn('.stop_blocks',runner.stop_fixture('gated-continuation'))
+        for case in ['stopping','continuation-limit']:
+            self.assertNotIn('.mode',runner.stop_fixture(case))
 
     def test_direct_provider_rejects_memory_configuration_and_nonofficial_routes(self):
         from types import SimpleNamespace

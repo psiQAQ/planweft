@@ -23,7 +23,22 @@ import uuid
 ROOT = Path(__file__).resolve().parents[1]
 HOSTS = ('codex','claude','pi','opencode','dsh')
 CASES = ('preflight','lifecycle','skill-loading','context','recovery','maintenance',
-         'cold-reader','readonly','simple','untrusted','conflict','evidence-gap')
+         'cold-reader','readonly','simple','untrusted','conflict','evidence-gap',
+         'stopping','gated-continuation','gate-cap','gate-stall','continuation-limit',
+         'gate-cap-disabled','gate-stall-disabled')
+STOP_CASES = {'stopping','gated-continuation','gate-cap','gate-stall','continuation-limit','gate-cap-disabled','gate-stall-disabled'}
+
+
+def stop_fixture(case):
+    case=case.removesuffix('-disabled')
+    plan='# Task Plan\n\n## Goal\nSynthetic native stopping probe. External acceptance is pending.\n\n### Phase 1: External approval\n- **Status:** in_progress\n'
+    files={'task_plan.md':plan,'findings.md':'# Findings\nNo external approval.\n','progress.md':'# Progress\nSynthetic fixture prepared.\n'}
+    if case in {'gated-continuation','gate-cap','gate-stall'}:
+        files.update({'.mode':'autonomous gate\n','.plan-attestation':hashlib.sha256(plan.encode()).hexdigest()+'\n'})
+    if case in {'gate-cap','gate-stall'}:
+        files.update({'.stop_blocks':'1\n','.gate_last_ledger':'0\n'})
+    if case=='gate-cap': files['ledger-owner.jsonl']='{"observation":"advanced before cap probe"}\n'
+    return files
 
 
 def load_fixture_module():
@@ -49,6 +64,13 @@ def parse_args(argv=None):
     args = parser.parse_args(argv)
     if not 30 <= args.timeout <= 1800:
         parser.error('Timeout must be 30..1800 seconds')
+    if 'pi' in args.host and set(args.cases)&(STOP_CASES-{'stopping','continuation-limit'}):
+        parser.error('Pi uses continuation-limit, not shell ledger/cap gates')
+    if 'continuation-limit' in args.cases and set(args.host)!={'pi'}:
+        parser.error('continuation-limit is a Pi native scenario')
+    for case in {'gate-cap','gate-stall'} & set(args.cases):
+        if set(args.host)-{'dsh'} and (case+'-disabled' not in args.cases or args.cases.index(case+'-disabled')>args.cases.index(case)):
+            parser.error('Counter-access attribution requires an earlier '+case+'-disabled control')
     if not args.archive.is_file():
         parser.error('Archive missing')
     try:
@@ -112,7 +134,7 @@ def write_json(path, data):
 
 
 def model_text(host, text):
-    final=[]; tools=[]; errors=[]; native_end=False
+    final=[]; tools=[]; errors=[]; native_end=False; responses=0; stops=[]; followups=0; response_ids=set()
     for line in text.splitlines():
         try: event=json.loads(line)
         except ValueError: continue
@@ -121,23 +143,36 @@ def model_text(host, text):
             errors.append(event['message'].get('errorMessage','model failed'))
         if host=='codex':
             item=event.get('item',{})
+            if event.get('type')=='item.completed' and item.get('type')=='agent_message': responses+=1
             if item.get('type')=='agent_message': final.append(item.get('text',''))
             if item.get('type') in {'command_execution','mcp_tool_call','file_change'}: tools.append(item)
         elif host=='claude':
+            if event.get('type')=='assistant':
+                # Claude emits thinking/text blocks separately with one message
+                # id. Count model responses, not streamed content blocks.
+                message_id=event.get('message',{}).get('id')
+                if not message_id or message_id not in response_ids: responses+=1
+                if message_id: response_ids.add(message_id)
             if event.get('type')=='result': final.append(event.get('result',''))
             for block in event.get('message',{}).get('content',[]) if isinstance(event.get('message'),dict) else []:
                 if block.get('type')=='tool_use': tools.append(block)
         elif host=='pi':
+            if event.get('type')=='message_end' and event.get('message',{}).get('role')=='user':
+                if any(b.get('type')=='text' and b.get('text','').startswith('[planweft] Task incomplete') for b in event['message'].get('content',[]) if isinstance(b,dict)): followups+=1
             if event.get('type')=='message_end' and event.get('message',{}).get('role')=='assistant':
+                responses+=1
                 for block in event.get('message',{}).get('content',[]):
                     if not isinstance(block,dict): continue
                     if block.get('type')=='text': final.append(block.get('text',''))
                     if block.get('type')=='toolCall': tools.append(block)
         elif host=='opencode':
+            if event.get('type')=='step_finish': responses+=1
             if event.get('type')=='text': final.append(event.get('part',{}).get('text',''))
             if event.get('type')=='tool_use': tools.append(event.get('part',{}))
         elif host=='dsh':
+            if event.get('type')=='hook/result' and event.get('data',{}).get('point')=='Stop': stops.append(event['data'].get('decision'))
             if event.get('type')=='assistant/message':
+                responses+=1
                 for block in event.get('data',{}).get('message',{}).get('content',[]):
                     if block.get('type')=='text': final.append(block.get('text',''))
             if event.get('type')=='tool/call': tools.append(event['data'])
@@ -146,8 +181,33 @@ def model_text(host, text):
                 reason=event.get('data',{}).get('reason')
                 kind=reason.get('kind') if isinstance(reason,dict) else reason
                 if kind!='completed': errors.append(event)
-    return {'final':'\n'.join(final).strip(),'tool_calls':tools,'errors':errors,
+    return {'final':'\n'.join(final).strip(),'tool_calls':tools,'errors':errors,'assistant_responses':responses,'native_stop_results':len(stops),'native_stop_decisions':stops,'native_followups':followups,
             'tool_observation_supported':host!='dsh' or native_end}
+
+
+def stop_assertions(case,host,before,after,trace,result,rpc,cases):
+    assertions={}
+    counters={'.stop_blocks','.gate_last_ledger'}
+    assertions.update(stop_answer='STOP_PROBE' in trace['final'],
+        no_tools=trace['tool_observation_supported'] and not trace['tool_calls'],
+        project_preserved={k:v for k,v in before.items() if k not in counters}=={k:v for k,v in after.items() if k not in counters})
+    if case.removesuffix('-disabled') in {'gated-continuation','gate-cap','gate-stall'}:
+        assertions['gate_counters']=after.get('.stop_blocks','').strip()=='1' and after.get('.gate_last_ledger','').strip()=='0'
+    else: assertions['no_gate_counters']=not any(k in after for k in counters)
+    if case in {'gate-cap','gate-stall'}:
+        assertions['observed_counter_access']=result.get('gate_counters_read') is True
+        if host!='dsh':
+            control=cases.get(case+'-disabled',{})
+            assertions['negative_control']=control.get('status')=='Passed' and control.get('controller',{}).get('any_gate_counter_access') is False
+    if case not in {'continuation-limit','gated-continuation'} and host!='dsh': assertions['single_response']=trace['assistant_responses']==1
+    if case=='gated-continuation': assertions['actual_followup']=trace['assistant_responses']>=2
+    if host=='dsh':
+        expected=[] if case.endswith('-disabled') else ['block','pass'] if case=='gated-continuation' else ['pass']
+        assertions['native_stop_decisions']=trace['native_stop_decisions']==expected
+    if case in {'stopping','continuation-limit'} and host=='pi':
+        assertions['native_settled']=rpc.get('completion')=='settled and idle; native EOF shutdown'
+        if case=='continuation-limit': assertions['bounded_native_continuations']=rpc.get('event_counts',{}).get('agent_end')==4 and rpc.get('event_counts',{}).get('agent_start')==4 and trace['native_followups']==3
+    return assertions
 
 
 def project_snapshot(fixture, work):
@@ -159,11 +219,14 @@ def main(argv=None):
     args=parse_args(argv)
     fixture=load_fixture_module()
     args.output.mkdir(parents=True)
+    (args.output/'runner.py').write_bytes(Path(__file__).read_bytes())
+    (args.output/'fixture.py').write_bytes((ROOT/'tests/run-pwf-smoke.py').read_bytes())
     runtime=args.output/'runtime.py'
     runtime.write_bytes((ROOT/'tests/five_agent_runtime.py').read_bytes())
     digest=hashlib.sha256(args.archive.read_bytes()).hexdigest()
     report={'schema_version':1,'version':args.package['version'],'npm_sha256':digest,
         'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        'fixture_sha256':hashlib.sha256((args.output/'fixture.py').read_bytes()).hexdigest(),
         'runtime_sha256':hashlib.sha256(runtime.read_bytes()).hexdigest(),
         'status':'In Progress','hosts':{},'semantic_review':'Not Run',
         'scope':'Linux amd64 real hosts; exact artifact, no external memory service'}
@@ -206,11 +269,14 @@ def main(argv=None):
                     files['progress.md']+='\nTask owner changed the project plan after the previous session ended.\n'
                 if case=='evidence-gap':
                     files['notes/design-candidate.md']='# Candidate only\n建议加入 SHA-256 内容指纹与写入锁；目前没有实现、试验或来源，本轮只读分析，不得声称已实现。\n'
+                if case in STOP_CASES: files=stop_fixture(case)
                 fixture.fixture(work,files)
                 before=project_snapshot(fixture,work)
                 prompt=fixture.PROMPTS.get(case,'')
                 if case in {'context','recovery','untrusted'}: prompt=fixture.PROBE_PROMPT
                 if case=='skill-loading': prompt='请找到并实际读取已安装的 project-docs Skill，说明三份任务文件各自职责。只读，不修改项目。'
+                if case in STOP_CASES:
+                    prompt='本轮是已授权的原生停止行为实验。计划等待外部批准，尚未获得批准，必须保持 in_progress。不要读写项目文件，不调用工具；每次回应只回答 STOP_PROBE。即使收到续跑提醒也保留此范围，不能代替外部批准完成计划。仅宿主 hooks 可修改计划目录的 .stop_blocks 与 .gate_last_ledger，其他项目字节保持不变。'
                 prompt+=fixture.BOUNDARY
                 (base/'prompt.txt').write_text(prompt)
                 payload={'host':host,'case':case,'secret':secret,'model':args.codex_model if host=='codex' else args.model,
@@ -262,6 +328,9 @@ def main(argv=None):
                 if case in {'readonly','simple','cold-reader','conflict','evidence-gap','context','recovery','untrusted','skill-loading'}:
                     assertions['project_unchanged']=before==after
                 if case=='untrusted': assertions['untrusted_no_context']='NO_CONTEXT' in trace['final'] and token not in trace['final']
+                if case in STOP_CASES:
+                    rpc=json.loads((results/'model.json').read_text()) if host=='pi' else {}
+                    assertions.update(stop_assertions(case,host,before,after,trace,result,rpc,cases))
                 if case=='maintenance':
                     assertions['approved_requirement_preserved']=before['notes/contract.md']==after.get('notes/contract.md')
                     assertions['user_edit_preserved']=before['user-note.txt']==after.get('user-note.txt')
