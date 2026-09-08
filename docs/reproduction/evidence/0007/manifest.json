@@ -1,0 +1,34 @@
+{
+  "build-verify.json": {
+    "bytes": 423,
+    "sha256": "dfd95856800a6e1b62d335cdd1af7029d55075378582e00b696cb85d860f770f"
+  },
+  "compile-check.log": {
+    "bytes": 67,
+    "sha256": "ac1efbdc6081a9a49dd22e3e47e8024d71830eacd59deefa16f7dd8e17cb89ff"
+  },
+  "distribution-delta.json": {
+    "bytes": 1621,
+    "sha256": "83d3838a6d667e8fc63f6c144f7acfb87773825a1a6b83f7af54860ea1d766f9"
+  },
+  "native-pack.log": {
+    "bytes": 522,
+    "sha256": "13f0b61eef338805135aca3caf7be1b07a34dfe4a3bc7c92e802610639025d8e"
+  },
+  "npm-contents.json": {
+    "bytes": 519,
+    "sha256": "082559919b378bddb2a3df81ee337a183b94d0b09c05f52f6aef0af29a879d62"
+  },
+  "targeted.log": {
+    "bytes": 478,
+    "sha256": "6665d327c0d14acba61a6b1cf51a87a3f4889d520ab88097e41a1e379087b8e7"
+  },
+  "unittest-initial.log": {
+    "bytes": 10744,
+    "sha256": "d3540fd2a25e617ba9db520a7e45ace932b7647f5d13b1459b1da4f26025b18c"
+  },
+  "unittest.log": {
+    "bytes": 9676,
+    "sha256": "198a0e3e2fc8c6e3ddd252ffe9195e285a2610faead9bbaffa51beda424878e8"
+  }
+}
