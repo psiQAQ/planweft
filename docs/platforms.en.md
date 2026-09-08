@@ -2,7 +2,7 @@
 
 ## 0.4.0 candidate validation
 
-One npm package now exposes the installer, Pi resources and OpenCode V1 entry. Local native lifecycle tests on Linux passed for the four core hosts; model and remote-channel validation remain separate gates. Other eleven adapters retain their implementations but are experimental in 0.4.0. Windows/macOS installer CI is configured, not yet run. [Release: 中文](releasing.md) / [English](releasing.en.md). The 0.3.0 evidence below remains historical.
+One npm package now exposes the installer, Pi resources and OpenCode V1 entry. Stable publication requires all five hosts: Codex, Claude Code, Pi, OpenCode and DSH. The other ten adapters remain experimental. Existing local lifecycle evidence is retained; exact artifacts, model sessions and remote installations are tested separately. Windows/macOS installer CI has now run; its first Windows run exposed a path-dependent failure-injection test, with verification of the fix pending. [Release: 中文](releasing.md) / [English](releasing.en.md). The 0.3.0 evidence below remains historical.
 
 # Cross-platform design
 
@@ -31,6 +31,8 @@ For project goals and design sources, read the project introduction: [简体中�
 All remote npm/Git lifecycles and real Windows/macOS host sessions remain Not Run until separately recorded. Pi RPC and OpenCode debug discovery are actual host loading, not model calls. Non-core native runs from 0.3.0 are not reused as 0.4.0 results.
 
 The Codex model scenario uses an isolated container and an explicit hook trust bypass. It validates the reviewed hooks at runtime, not the default interactive trust confirmation flow.
+
+Current five-image observations are recorded in internal [REP-0010](reproduction/0010-five-agent-release.md) (Chinese). Existing evidence above does not replace acceptance of the final stable archive.
 
 ## One source, multiple native directories
 

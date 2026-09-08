@@ -13,8 +13,25 @@
 
 公开[提交与 blob 映射](../reproduction/evidence/0010/history-sanitization.json)。映射中的原始摘要属于历史观察，清理后的附件摘要见 public_sha256；不将它们冒充原始未改动附件。历史重写不能撤回其他人已有副本。
 
-## 验收工具：修订后待复审
+## 验收工具：有限范围可合并
 
 独立审查发现并要求处理：原生命令退出码不足以证明加载；恢复必须接续前次项目；维护需要独立字节断言；DSH 文本不提供工具事件证据；认证异常和日志须防凭据落盘；远端内容须绑定下载归档；卸载须检查实际注册消失；冷读与审查须关联实际输入输出摘要。
 
 主 Agent 已逐项修订相关边界。DSH 缺少工具事件时不标 no-tools Passed；Codex 单次 trust bypass 不计正常持久信任。真实模型验收和最终源码复审结果尚未全部完成，不据本记录放行稳定发布。
+
+最终复审结论：可以作为候选发布工具和有限验收证据合并，不可作稳定版放行。修复了 Pi/OpenCode 远端项目级发现的工作目录遗漏。运行汇总的容器基线遗漏已修复；旧 Codex 组该项未证实，保留原始记录并在 REP-0010 更正，未冒称完整隔离验收通过。
+
+独立语义审查：Codex maintenance 与 cold-reader 两项 Passed；代码字节回归、批准合同、用户改动、单一计划、历史保留、Windows Not Run 均准确。冷读输入与维护输出一致。另确认原生 TUI 的 7 hooks 激活记录和无 bypass 新会话无工具返回随机码；不推导全部权限策略已验证。
+
+合并时受审文件摘要（最后容器基线修复由主 Agent 验证）：
+
+```json
+{
+  "tests/five_agent_runtime.py": "b869bf32a75ff0ad8e37bb937a5ecfe21956eb57065d9a4252c53121bd534cdc",
+  "tests/run-five-agent-release.py": "1670b019f59c444339d4ba2d31303a83dfb772a0a00a52e00e7bb17032d850f1",
+  "tests/run-registry-smoke.py": "c5c79c33eac84aeaa8e8b99808c9d00bbcf2a02fcea57b7435d5a5fe7854230b",
+  "scripts/check-release-gate.py": "999db1a346fe4cce72d0c282921603a0cf3e9817dfda5f8af2f9e8e0cb470c2f",
+  "scripts/check-release-artifact.py": "84ebba023eb72913fd6e89ba0306d56545dde4a42f67d91c029a25d711f2bd25",
+  ".github/workflows/publish.yml": "e27600dff1fdc2cfd068f181a39ea55d470bec215161e96110e767524ca9cc77"
+}
+```

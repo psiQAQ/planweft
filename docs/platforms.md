@@ -2,7 +2,7 @@
 
 ## 0.4.0 候选验证
 
-单 npm 包提供安装器、Pi 资源和 OpenCode V1 入口。四核心宿主的 Linux 本地原生生命周期已通过；真实模型和远端安装仍是独立门槛。其余十一个平台保留实现，在 0.4.0 标为实验性。Windows/macOS 安装器 CI 已配置、尚未执行。[发布：中文](releasing.md) / [English](releasing.en.md)。下方 0.3.0 证据继续作为历史记录。
+单 npm 包提供安装器、Pi 资源和 OpenCode V1 入口。正式发布要求 Codex、Claude Code、Pi、OpenCode 和 DSH 五个平台全部通过；其余十个平台仍为实验性。已有本地生命周期证据保留，准确归档、真实模型与远端安装分别验收。Windows/macOS 安装器 CI 已实际启动，首次 Windows 运行发现故障注入测试路径问题，修复后待重新验证。[发布：中文](releasing.md) / [English](releasing.en.md)。下方 0.3.0 证据继续作为历史记录。
 
 # 跨平台设计
 
@@ -31,6 +31,8 @@ PlanWeft 0.4.0 将同一套文件规划与文档协作规则，生成适合 15 �
 远端 npm/Git 生命周期及 Windows/macOS 真实宿主尚待单独记录。Pi RPC 与 OpenCode debug 是实际宿主加载，不是模型调用；非核心宿主的 0.3.0 安装结果不冒充 0.4.0 实测。
 
 Codex 模型场景使用隔离容器及显式的 hook trust bypass；该结果证明已审查 hooks 的运行行为，不代表默认交互式信任确认流程已通过。
+
+本轮五镜像验收的逐项结果见内部 [REP-0010](reproduction/0010-five-agent-release.md)（中文）；上表已有证据不替代最终稳定归档验收。
 
 ## 一份来源，生成多种原生目录
 
