@@ -36,6 +36,7 @@ INSTALL_SURFACES = {
     'factory': ['.factory-plugin/plugin.json', 'skills/project-docs/SKILL.md'],
     'codebuddy': ['.codebuddy-plugin/plugin.json', 'skills/project-docs/SKILL.md'],
     'agents': ['.agents/skills/project-docs/SKILL.md'],
+    'dsh': ['skills/project-docs/SKILL.md', 'skills/project-docs/scripts/init-session.sh'],
 }
 
 

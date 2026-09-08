@@ -301,4 +301,6 @@ def adapt(bundles, version, description):
     manifest['$schema'] = 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json'
     manifest['keywords'] = ['planning', 'project documentation', 'requirements', 'decisions', 'evidence', 'handoff']
     result['kiro']['plugin.json'] = json_file(manifest)
+    # DSH's native filesystem provider discovers one level of Skill bundles.
+    result['dsh'] = shared(result['dsh'], version)
     return result

@@ -23,7 +23,7 @@ DIST = ROOT / 'dist'
 PLUGIN = DIST / 'codex/planweft'
 COMMIT = '0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7'
 HOSTS = {'codex', 'claude', 'pi', 'opencode', 'hermes', 'cursor', 'gemini',
-         'copilot', 'mastracode', 'kiro', 'continue', 'factory', 'codebuddy', 'agents'}
+         'copilot', 'mastracode', 'kiro', 'continue', 'factory', 'codebuddy', 'agents', 'dsh'}
 
 
 def package_contents(host):
