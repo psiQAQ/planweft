@@ -1,6 +1,8 @@
-> 当前安装包：**claude**。请选择本文对应宿主的章节；其余章节用于说明平台差异。
+[简体中文](INSTALL.md) | [English](INSTALL.en.md)
 
-# Program Design 0.3.0 平台安装说明
+> 当前安装包：**claude**。请选择本文对应宿主的安装章节。
+
+# Program Design 0.3.0 安装、更新与卸载
 
 本版直接交付 `dist/<host>/program-design/`，不生成 ZIP。14 个 host 是 `codex`、`claude`、`pi`、`opencode`、`hermes`、`cursor`、`gemini`、`copilot`、`mastracode`、`kiro`、`continue`、`factory`、`codebuddy`、`agents`。选择一个宿主的完整目录；不要把不同平台合并安装。
 
@@ -64,7 +66,7 @@ claude plugin list
 ```bash
 claude plugin marketplace update program-design
 claude plugin update program-design@program-design --scope user
-# 需要卸载时：
+# To uninstall:
 claude plugin uninstall program-design@program-design --scope user
 ```
 
@@ -86,7 +88,7 @@ npm 发布完成后，使用真实 scope：
 ```bash
 pi install -l npm:@scope/program-design-pi
 pi update npm:@scope/program-design-pi
-# 卸载项目安装：
+# Remove the project installation:
 pi remove -l npm:@scope/program-design-pi
 ```
 
@@ -117,7 +119,7 @@ npm 发布完成后，原生配置可使用 `"plugin": ["@scope/program-design-o
 
 ## Hermes
 
-**本轮验证限制（2026-09-08）**：官方 Hermes v0.21.1、源码提交 `9fd44b4dfc44138b9e5d5689acb56c438364ff7b` 在独立配置、无认证环境中可运行插件管理，但原样 0.3.0 包的 Git 安装被默认 Plugin Guard 拒绝（dangerous，42 条 findings）。原生安装记为 **Failed**；更新、回滚和卸载记为 **Not Run**，因为安装未完成。本轮保留扫描、包内容和拒绝证据，不关闭扫描、不改变文本来规避规则，也不通过手工复制将拒绝改写为通过。以下是官方支持的发现布局和管理接口，尚不能作为本包当前可成功原生安装的承诺。
+**已记录的验证限制（2026-09-08）**：官方 Hermes v0.21.1、源码提交 `9fd44b4dfc44138b9e5d5689acb56c438364ff7b` 在独立配置、无认证环境中可运行插件管理，但 0.3.0 交付验证中的 Git 安装被默认 Plugin Guard 拒绝：初次为 dangerous、42 条 findings；修正语言资源路径后的最终目录复验仍为 dangerous、41 条 findings。两次原生安装均记为 **Failed**；更新、回滚和卸载记为 **Not Run**，因为安装未完成。这些数字是当时包内容的历史观察；本次双语文档调整没有重新运行 Hermes 扫描。保留原始拒绝证据，不关闭扫描、不改变文本来规避规则，也不通过手工复制将拒绝改写为通过。以下是官方支持的发现布局和管理接口，尚不能作为本包当前可成功原生安装的承诺。
 
 将 `dist/hermes/program-design/` 整体复制到当前 Hermes profile 的 `<HERMES_HOME>/plugins/program-design/`，再将其中 `skills/project-docs/` 完整复制到**同一个** `<HERMES_HOME>/skills/project-docs/`。用户根以宿主配置为准，不能假定所有 OS 都是 `~/.hermes`。
 
@@ -132,7 +134,7 @@ hermes plugins list
 
 ```bash
 hermes plugins install OWNER/REPO --ref FULL_40_CHARACTER_SHA --enable
-# 升级 pinned plugin：明确选定新的发布分支提交
+# Upgrade the pinned plugin: select a new release-branch commit explicitly
 hermes plugins install OWNER/REPO --force --ref NEW_FULL_40_CHARACTER_SHA --enable
 ```
 
@@ -181,7 +183,7 @@ Git marketplace 更新与卸载：
 ```bash
 copilot plugin marketplace update program-design
 copilot plugin update program-design
-# 卸载：
+# Uninstall:
 copilot plugin uninstall program-design
 ```
 
@@ -201,10 +203,10 @@ droid plugin marketplace list
 ```bash
 droid plugin install program-design@REGISTERED_NAME --scope project
 droid plugin list --scope project
-# 显式更新：
+# Explicit update:
 droid plugin marketplace update REGISTERED_NAME
 droid plugin update program-design@REGISTERED_NAME --scope project
-# 卸载：
+# Uninstall:
 droid plugin uninstall program-design@REGISTERED_NAME --scope project
 ```
 
@@ -217,10 +219,10 @@ droid plugin uninstall program-design@REGISTERED_NAME --scope project
 ```bash
 codebuddy plugin marketplace add /abs/repo
 codebuddy plugin install program-design@program-design --scope project
-# 显式更新：
+# Explicit update:
 codebuddy plugin marketplace update program-design
 codebuddy plugin update program-design@program-design --scope project
-# 卸载并保留插件数据：
+# Uninstall and preserve plugin data:
 codebuddy plugin uninstall program-design@program-design --scope project --keep-data
 ```
 

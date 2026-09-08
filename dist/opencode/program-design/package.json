@@ -16,7 +16,9 @@
     "skills/",
     "commands/",
     "README.md",
+    "README.en.md",
     "INSTALL.md",
+    "INSTALL.en.md",
     "BUILD.json",
     "LICENSE",
     "UPSTREAM.json"

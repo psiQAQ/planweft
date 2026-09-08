@@ -44,3 +44,11 @@ subagent 不可用时记录本阶段依据审查为 Not Run，并继续不依赖
 ## 完成记录
 
 计划写清已完成、下一步、阻塞和未验证项；reproduction 给出环境、命令、预期、实际结果。Passed/Failed/Not Run 分开记录。本阶段的复核方法见 [验证记录](reproduction/0001-reference-foundation.md)。
+
+## 公开文档的双语来源
+
+项目介绍是 [README 中文](../README.md) / [English](../README.en.md)；安装指南是 [中文](installation.md) / [English](installation.en.md)；跨平台设计是 [中文](platforms.md) / [English](platforms.en.md)。公开文档从首行提供语言切换，引用这些文档时并列两种语言；内部规格、计划、原始证据保留其语言并明确标注。
+
+安装正文的唯一编辑源为 `overlays/program-design/install/INSTALL.md` 和 `INSTALL.en.md`，由 build-plugin.py 同时生成 docs/installation 两份指南和各平台包内 INSTALL。包内 README 的来源同样在 overlays，并提供中英版本。不要分别编辑 docs 中的安装镜像或 dist 中的副本；`--verify` 会拒绝其漂移。中英安装命令块保持一致，语言表达与能力范围还需人工/独立 review，不能只靠文本测试判断翻译质量。
+
+npm 包的 files 清单必须保留 README.en.md 与 INSTALL.en.md；OpenCode package.json 属于已绑定的编译输入，修改清单后仍要刷新编译绑定并确认 JavaScript 没有意外变化。纯说明文档调整按差异运行链接、构建、打包与相关契约检查，不把历史真实宿主运行自动改标为本次实测。

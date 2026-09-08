@@ -1,88 +1,79 @@
+[简体中文](README.md) | [English](README.en.md)
+
 # Program Design
 
-研究并构建面向 Agent 的本地项目文档管理工具：持续维护长期知识、当前任务、设计依据和验证结果，供新会话和人类读者使用。
+**让 Agent 的任务进展、设计理由和验证结果留在项目里，供后续会话和协作者接续。**
 
-Program Design 0.3.0 固定使用 PWF v3.17.0，提供 `project-docs` Skill、文件规划与恢复及宿主适配。默认构建输出 **14 个 `dist/<host>/program-design/` 目录，不再打包 ZIP**；支持的宿主采用原生插件入口与更新渠道。目录格式、安装命令和真实宿主验证是不同层级，具体见 [平台矩阵](docs/platforms.md)。本仓库继续使用现有文档入口，没有正式自身接管。
+Program Design 是面向编程 Agent 的文件规划与项目文档协作插件。它以 **planning-with-files（PWF）v3.17.0** 为固定运行底座，在任务规划与恢复流程中，默认加入按需文档维护、设计依据检查和可复核交接。
 
-## 从哪里开始
+它适合需要跨会话完成的功能开发、维护、调查和设计工作：既要继续当前任务，也要保留已经确认的需求、重要决定与实际验证。小改动只维护必要资料，沿用项目已有目录和规则。
 
-| 需求 | 入口 |
-| --- | --- |
-| 理解本次分发变化 | [0.3.0 规格](docs/specs/0004-native-distributions.md)；[架构决定](docs/adr/0007-native-distributions.md) |
-| 理解继承的运行时 | [PWF 底座规格](docs/specs/0003-pwf-based-plugin.md) |
-| 安装、更新或卸载 | [平台矩阵](docs/platforms.md)；[完整安装说明](overlays/program-design/install/INSTALL.md) |
-| 检查生成文件和摘要 | [分发清单](dist/manifest.json) |
-| 构建、同步上游及准备发布 | [维护流程](docs/upstream-maintenance.md) |
-| 运行回归及查看验证分层 | [测试说明](tests/README.md)；[0.3.0 实测与限制](docs/reproduction/0006-native-distributions.md) |
-| 接续既有项目文档工作 | [配对维护计划](docs/plans/0004-paired-maintenance-trial.md) |
-| 阅读文章与参考实现 | [资料索引](docs/reference/README.md) |
-| 核查设计依据 | [引用台账](docs/design-references.md)；[创新记录](docs/innovations.md) |
-| 查看历史实验 | [0.2.0 结果](docs/reproduction/0005-pwf-based-plugin.md)；[0.1.0 试用](docs/reproduction/0004-paired-maintenance-trial.md) |
-
-## 本地构建
-
-正常构建只需 Python 3 标准库，从固定快照及本地扩展生成，不联网，不读取研究子模块或个人插件缓存：
-
-```bash
-python3 scripts/build-plugin.py
-python3 scripts/build-plugin.py --verify
-PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_*.py' -v
-```
-
-生成物包括平台目录、原生 catalogs、`dist/manifest.json` 及 Codex 兼容镜像 `plugins/program-design/`。修改 `overlays/program-design/`、运行时适配源或构建脚本后重建，不逐份编辑生成物。OpenCode 使用预编译 V1 入口，普通用户无需编译 TypeScript；维护者修改其源码时，按 [维护流程](docs/upstream-maintenance.md) 刷新并验证编译产物。
-
-## 安装到不同 Agent
-
-从源码 checkout 构建后，选择对应目录。下面的目录是安装源，目标项目另行指定；完整的安装、scope、更新和信任步骤见 [INSTALL.md](overlays/program-design/install/INSTALL.md)。
-
-| 宿主 | 安装目录 | 原生安装表面 |
+| 阅读目的 | 中文 | English |
 | --- | --- | --- |
-| Codex | [codex](dist/codex/program-design/) | 仓库 `.agents/plugins` marketplace；保留旧 Codex 镜像 |
-| Claude Code | [claude](dist/claude/program-design/) | `.claude-plugin` marketplace 或单次 `--plugin-dir` |
-| Pi | [pi](dist/pi/program-design/) | pi-package，本地路径或发布后的 npm 包 |
-| OpenCode | [opencode](dist/opencode/program-design/) | 预编译 V1 插件，本地 loader 或发布后的 npm 包，配套 Skill 单独发现 |
-| Hermes | [hermes](dist/hermes/program-design/) | 原生 Python 插件与同版本 Skill |
-| Cursor | [cursor](dist/cursor/program-design/) | `.cursor-plugin` marketplace 与插件目录 |
-| Gemini CLI | [gemini](dist/gemini/program-design/) | Gemini Extension，本地目录或专用发布分支 |
-| GitHub Copilot | [copilot](dist/copilot/program-design/) | `.github/plugin` marketplace 与原生插件 |
-| Mastra Code | [mastracode](dist/mastracode/program-design/) | `.mastracode` Skill 和原有 hooks 配置 |
-| Kiro | [kiro](dist/kiro/program-design/) | skills-only Power，IDE 安装更新，CLI v3 自动发现 |
-| Continue | [continue](dist/continue/program-design/) | CLI Skill、IDE Prompt；导入不提供持续更新记录 |
-| Factory / Droid | [factory](dist/factory/program-design/) | `.factory-plugin` marketplace，最小 Skill 插件 |
-| CodeBuddy | [codebuddy](dist/codebuddy/program-design/) | `.codebuddy-plugin` marketplace，最小 Skill 插件 |
-| 通用 Agent Skills | [agents](dist/agents/program-design/) | `.agents/skills`，依赖宿主支持该发现路径 |
+| 安装、更新、回退与卸载 | [安装指南](docs/installation.md) | [Installation guide](docs/installation.en.md) |
+| 理解平台适配、分发和能力差异 | [跨平台设计](docs/platforms.md) | [Cross-platform design](docs/platforms.en.md) |
 
-例如，在目标项目内注册 Pi 本地包：
+## 实现思想
 
-```bash
-cd /path/to/target-project
-pi install -l /path/to/program-design-repository/dist/pi/program-design
-pi list
-```
+**用项目文件承接工作上下文。** 复杂任务使用选定的 PWF 计划目录保存目标、发现和操作记录。新会话从项目记录恢复；读取宿主会话历史仍需显式调用。一个计划由一个 owner 维护，worker 使用独立记录，独立任务使用不同计划或 worktree。
 
-Pi 本地安装记录源路径，应长期保留该目录。重启或 `/reload` 后检查 `/skill:project-docs`；`/pd-plan-execute` 才显式启用其执行流程。其他宿主的 catalog 注册源使用本仓库根目录，不能把不含 catalog 的插件目录当作 marketplace。
+**让任务记录与长期文档各司其职。** 三文件服务于正在进行的任务，稳定知识按需进入项目已有的规格、ADR 和复现记录。不会为每个小改动生成整套文档，也不会为了迎合代码现状改写已经批准的需求。
 
-## 更新与发布状态
+| 记录 | 职责 |
+| --- | --- |
+| `task_plan.md` | 当前任务的唯一动态状态：目标、阶段、下一步、阻塞及证据入口 |
+| `findings.md` | 调研发现、来源、假设和候选决定 |
+| `progress.md` | 实际操作、错误、测试和观察 |
+| specs | 目标行为、边界和批准的验收要求 |
+| ADR | 重要设计选择、替代方案、理由和后果 |
+| reproduction | 值得长期保存的环境、复现步骤、结果和限制 |
 
-默认采用显式更新。对本地来源，先将源码 checkout 更新到选定版本、构建并执行 `--verify`，再执行宿主的更新或重新加载步骤。刷新 marketplace、更新安装缓存、重新加载和重新信任 hooks 分别检查；安装更新不删除项目计划和证据。
+**把依据检查与交接检查分开。** 实质设计需要准确来源；资料不足时记录实际检索和未验证项。重要设计由独立 reviewer 核查依据，重要交接由不带旧聊天的新读者检查可接续性。两类检查使用宿主已有 Agent 能力；它们是 Skill 的工作约定，没有额外调度服务。
 
-发布准备可在新目录中生成供检查的原生分发材料：
+**让自动化保持明确边界。** 主入口 `project-docs` 可以由支持的宿主按任务匹配，默认运行时以提醒为主，autonomous/gated 和原生执行方式按平台显式选择。项目规则、用户范围、只读要求和宿主信任优先；attestation 校验文件内容，完成门禁检查状态，二者都不能证明人工批准或语义正确。
 
-```bash
-python3 scripts/prepare-native-release.py --output /tmp/program-design-release-new
-```
+## 一次任务如何推进
 
-成对提供的可选 `--repository-url` 与 `--npm-scope` 用于配置真实发布身份。准备脚本不 push、不执行 npm publish；未提供真实身份或尚未完成发布时，只能使用已生成的本地入口，不把上游账号、示例 URL 或 npm 名称写成可安装的已发布产品。Gemini/Hermes 的远端发布分支另在发布准备中保留包根布局。
+1. 读取项目入口和任务约束，定位已有规格、决定与验证资料。
+2. 对获准执行的复杂工作，解析或初始化所属 PWF 计划；阅读、诊断和简单工作保持相应的最小范围。
+3. 实施时记录发现与实际操作，最小更新受影响的项目文档，保护用户已有修改。
+4. 用 Passed、Failed、Not Run 记录验证；核对批准需求与实际结果，说明限制。
+5. 按任务重要程度完成独立依据 review 或新读者交接，留下可执行的下一步。
 
-## 参考项目与开发
+这些约定依赖 Agent 正确读取并遵循 Skill。插件提供记录、恢复和宿主适配能力，任务效果仍需要实际验证。
 
-在本仓库根恢复固定研究 checkout：
+## 与相关方案的比较
 
-```bash
-git submodule update --init
-git submodule status
-```
+以下比较针对本仓实际参考的固定版本，展示关注点与借鉴关系，不作性能排名。链接指向对应原始资料。
 
-参考项目位于 `.submodule/<owner>/<repo>`，不是构建运行依赖。默认只初始化登记的一层子模块，不安装依赖或执行其中脚本；更新 gitlink 前单独检查提交、许可及引用，不用 `--remote` 代替恢复固定版本。
+| 方案 | 主要关注点 | Program Design 的借鉴与差异 |
+| --- | --- | --- |
+| **Program Design** | 跨会话的任务状态、长期文档、设计依据与交接 | 在 PWF 底座上整合下列方法，并提供按宿主生成的分发；尚未证明效果优于其他方案 |
+| [PWF v3.17.0](https://github.com/OthmanAdi/planning-with-files/blob/0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7/skills/planning-with-files/SKILL.md) | 三文件任务工作记忆、恢复、hooks 和计划控制 | 直接移植运行时与状态协议，将按需文档维护、依据与交接检查融入默认工作流；PWF 本身也建议长期知识另存 |
+| [OpenSpec](https://github.com/Fission-AI/OpenSpec/blob/e062b9572be933564ba3899d059377dfa1393e32/docs/concepts.md) | 行为规格、变更提案、设计、任务、增量规格与归档 | 借鉴目标行为、设计与任务的分工，以及与风险相称的严谨度；未集成其 schema 或增量合并引擎 |
+| [Superpowers](https://github.com/obra/superpowers/blob/b36e0829c6d0140e93cfef2ca599b1b07d4a7797/skills/writing-plans/SKILL.md) | 包含文件、测试和执行交接的可执行小任务计划 | 借鉴可接续计划及宿主薄适配；未移植其整套必需 Skill 链，也不统一强制 TDD 流程 |
+| [doc-coauthoring](https://github.com/anthropics/skills/blob/41bbe19d1a1a7eaab5e7bb9050a417e5c6cffc8f/skills/doc-coauthoring/SKILL.md) | 收集上下文、逐步完善文档、无旧上下文读者测试 | 借鉴独立读者检查；来源依据 review 是本项目另行加入的要求 |
+| [MADR](https://github.com/adr/madr/blob/ba75bb1b20d42af5746b246ad348c202419ae681/template/adr-template.md) | 记录重要选择、备选、理由、后果与确认方式 | 借鉴最小 ADR 结构，按需保存长期决定；MADR 本身不承担任务恢复或插件运行职责 |
 
-平台运行时保留所需 Shell、Python、PowerShell 和 TypeScript。可用宿主和 OS 的验证范围以实际报告为准，历史 0.2.0 结果不等于新安装链路已通过。开发规则见 [0.3.0 实施计划](docs/plans/0006-native-distributions.md) · [开发约定](docs/development.md)，个人偏好见 [override 差异稿](profiles/personal/AGENTS.override.md)。第三方资料和分发保留各自许可；本仓库尚未公开发布。
+PWF 的[任务完成后指导](https://github.com/OthmanAdi/planning-with-files/blob/0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7/docs/workflow.md)已经区分任务工作记忆和长期文档；Superpowers 的[原生适配源码](https://github.com/obra/superpowers/blob/b36e0829c6d0140e93cfef2ca599b1b07d4a7797/.pi/extensions/superpowers.ts)是薄适配的另一处参考。除此之外，本仓也参考 OpenAI 的仓库知识与可接续计划实践，以及 Diátaxis 的文档职责分类。完整来源、许可与具体借鉴位置登记在[引用台账（工程记录，中文）](docs/design-references.md)和[资料索引（工程记录，中文）](docs/reference/README.md)。
+
+## 本仓库新增与原创实现
+
+本项目的贡献在于具体的工作流整合和工程实现：
+
+- **默认文档协作流程**：把已有文档维护、准确来源、批准需求保护、验证状态和独立交接接入 `project-docs`，形成统一的[工作流扩展](overlays/program-design/workflow.md)。
+- **可追溯构建与分发**：固定上游快照、本地 overlays 和[生成器](scripts/build-plugin.py)共同生成平台目录；用逐文件内容与执行位摘要检测漂移，维护统一产品身份。
+- **宿主适配与发布准备**：[原生适配层](overlays/program-design/native/adapters.py)处理安装资产定位、事件协议和发现差异；[发布准备工具](scripts/prepare-native-release.py)生成 npm 原生产物及包根 Git 发布树。
+- **与安装内容对应的验证**：记录真实安装文件、更新增改删、回退、卸载和项目文档保护，区分脚本协议、宿主加载与模型行为。
+
+这里的“原创实现”指本仓库编写的扩展与组合贡献，不表示首创文件规划、ADR、冷读测试或生成分发，也不表示已经证明所有平台行为或任务效果一致。运行时继承与本地差异可按[补丁清单（工程记录，中文）](overlays/program-design/PATCHES.md)追溯；方法新颖性按[创新记录（工程记录，中文）](docs/innovations.md)单独判断。
+
+## 当前交付与使用边界
+
+当前版本 **0.3.0** 提供 14 个平台目录、6 种原生 marketplace 入口，以及 Pi/OpenCode npm 和 Gemini/Hermes Git 发布树准备。安装方法见[中文指南](docs/installation.md) / [English guide](docs/installation.en.md)，平台能力与验证范围见[中文设计](docs/platforms.md) / [English design](docs/platforms.en.md)。
+
+0.3.0 的记录包含八个宿主的本地安装生命周期验证；Hermes 被默认扫描器拒绝安装。GUI、Windows/macOS、公开远程渠道以及新版真实模型维护/冷读仍有 Not Run 项。历史验证不随文档修改自动变成新一轮实测，具体边界见上述跨平台文档。
+
+本仓库尚未公开发布，不提供未经确认的 Git/npm 安装地址。各分发保留 PWF 的 MIT 版权与许可，其他参考材料按各自许可处理。本仓自身继续沿用既有文档入口，没有正式迁移到插件管理。
+
+维护者资料：[开发约定（中文）](docs/development.md) · [上游维护（中文）](docs/upstream-maintenance.md) · [测试与证据入口（中文）](tests/README.md)。这些工程记录保留原语言；对外项目介绍、安装和跨平台设计均提供上述中英文版本。

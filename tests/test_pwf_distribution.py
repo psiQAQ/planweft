@@ -85,7 +85,7 @@ class PackageContractTest(unittest.TestCase):
             assert_snapshots_equal(self, distribution_snapshot(root / 'dist'), expected)
             target = root / 'dist/codex/program-design/skills/project-docs/SKILL.md'
             original, mode = target.read_bytes(), target.stat().st_mode
-            for change in ['content', 'missing', 'extra', 'executable', 'mirror']:
+            for change in ['content', 'missing', 'extra', 'executable', 'mirror', 'public-docs']:
                 with self.subTest(change=change):
                     changed = target
                     if change == 'content':
@@ -97,6 +97,10 @@ class PackageContractTest(unittest.TestCase):
                         changed.write_text('Unexpected shipped file.\n')
                     elif change == 'executable':
                         changed.chmod(mode ^ 0o111)
+                    elif change == 'public-docs':
+                        changed = root / 'docs/installation.en.md'
+                        document = changed.read_bytes()
+                        changed.write_text('Generated installation-guide drift.\n')
                     else:
                         changed = root / 'plugins/program-design/skills/project-docs/SKILL.md'
                         changed.write_text('Compatibility mirror drift.\n')
@@ -108,6 +112,8 @@ class PackageContractTest(unittest.TestCase):
                     assert_snapshots_equal(self, snapshot(root), before, '--verify must not repair or write files')
                     if change == 'extra':
                         changed.unlink()
+                    elif change == 'public-docs':
+                        changed.write_bytes(document)
                     else:
                         changed.write_bytes(original)
                         changed.chmod(mode)
