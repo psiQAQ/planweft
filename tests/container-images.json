@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "hosts": {
+    "codex": {
+      "image": "sha256:aa46e31c71577eb37c1e1d856427d9d159ddd5a41aa92472af722838b1c3a159",
+      "base_image": "sha256:aa46e31c71577eb37c1e1d856427d9d159ddd5a41aa92472af722838b1c3a159"
+    },
+    "claude": {
+      "image": "sha256:3f3f6855d956cc142f4da89b9bb20851e6523f14e68084d7168732d2429d5a05",
+      "base_image": "sha256:3f3f6855d956cc142f4da89b9bb20851e6523f14e68084d7168732d2429d5a05"
+    },
+    "pi": {
+      "image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b",
+      "base_image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b"
+    },
+    "opencode": {
+      "image": "sha256:35d7e7989b6fdbefb83135c647cf3eefffcd843b6a6a2a6b0587ced548efeec1",
+      "base_image": "sha256:35d7e7989b6fdbefb83135c647cf3eefffcd843b6a6a2a6b0587ced548efeec1"
+    },
+    "dsh": {
+      "image": "sha256:8794ad0cd474da6da9a754308055d3993da8c4f3ecdff5e71136298f9efc6375",
+      "base_image": "sha256:b3f5db67878e2e8e42d820443452cf1a10df5cf3684e29a0486e71a971ddce16",
+      "cli_version": "0.1.2-rc.1",
+      "pnpm_version": "10.28.2",
+      "derivation": "COPY previously verified npm dependency tree; no credentials or model configuration"
+    }
+  }
+}

@@ -159,7 +159,7 @@ test('Pi replacement failure attempts restoration and keeps failure evidence', a
 test('component removal failure records progress and can be retried', async t => {
   const f=fixture(t); assert.equal(await f.create(['add','-a','opencode','--copy']).execute(),0);
   const rm=fs.rmSync;
-  fs.rmSync=(target, options)=>{ if(target.endsWith('plugins/planweft.ts')) throw Error('injected EACCES'); return rm(target,options); };
+  fs.rmSync=(target, options)=>{ if(target.endsWith(path.join('plugins','planweft.ts'))) throw Error('injected EACCES'); return rm(target,options); };
   try { assert.equal(await f.create(['remove','-a','opencode']).execute(),1); } finally { fs.rmSync=rm; }
   assert.equal(await f.create(['remove','-a','opencode']).execute(),0);
 });

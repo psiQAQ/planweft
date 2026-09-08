@@ -163,3 +163,22 @@ python3 tests/run-codex-hook-probe.py --cli /absolute/path/to/codex --output /tm
 ## DeepSeek Harness
 
 `run-installer-lifecycle.py --host dsh` covers isolated official DSH/pnpm profile installation, A/B payload changes, rollback, removal and config composition. `run-dsh-skill-smoke.mjs` exercises the native provider; `run-dsh-hook-probe.mjs` uses the published bridge and real subprocesses with an explicit event carrier. These probes do not invoke a model or claim model-session acceptance. See REP-0009 for source versions and actual limits.
+# 五 Agent 准确归档验收（0.4.0）
+
+`run-five-agent-release.py` 使用 `container-images.json` 的固定镜像和独立 HOME；仅挂载合成项目、准确 npm 归档与测试运行器。原 Lab 入口和清记忆脚本不参与。
+
+```bash
+python3 tests/run-five-agent-release.py \
+  --archive /path/to/planweft-VERSION.tgz \
+  --output /path/to/new-external-output \
+  --host codex --host claude --host pi --host opencode --host dsh \
+  --cases preflight lifecycle
+```
+
+模型场景需另行提供现有认证文件引用，并事先取得真实模型调用授权。`--model-config` 只读取已部署 upstream YAML 中所选官方 DeepSeek URL/key；不挂载完整配置，不发送 Lab 身份头；Codex 通过 `--codex-auth` 指定既有认证。不要在参数或公开日志中写密钥。
+
+`context recovery` 必须按此顺序运行；`maintenance cold-reader` 同样配对。冷读复制维护后的项目文件，使用全新会话。自动断言只证明明确观察项，语义结论需要独立 review；不支持的事件或缺失记录不得当作 Passed。准确归档测试与 `run-installer-lifecycle.py` 的合成 A/B 变体分开报告。
+
+远端回归接受 `--version/--sha256` 和成对的 `--previous-version/--previous-sha256`；只有真实下载的两个版本才能证明远端 A→B→A→B→卸载。单版本只证明幂等。模型新会话和公开 Git marketplace 是独立验收项。
+
+以上为内部开发文档；对外说明见 [发布：中文](../docs/releasing.md) / [English](../docs/releasing.en.md)。
