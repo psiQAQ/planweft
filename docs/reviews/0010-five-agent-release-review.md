@@ -53,3 +53,5 @@ OpenCode 未自动读取 Skill 的实际维护失败需要修复，reviewer 同�
 OpenCode RC2 维护与独立冷读语义 Passed，附 REP-0010 中的错误日志和措辞差异。reviewer 先从维护后的文件重建结果，再核对 trace；两个会话身份不同，冷读未安装插件、输入完全等于维护输出、冷读前后项目不变。
 
 DSH reviewer 确认 HOME 缓存在原沙箱不可写，且 bwrap 每次调用会替换 /tmp，故仅改缓存不足以保存去重。所提临时缓存、session 映射和有界进程状态方案不修改原生权限；指出的 JSON null 透明传递、有效 Stop stdin 和容量边界已经补回归。临时 pwf-prog 限制明确公开，不据协议测试放行稳定版。
+
+独立 RC3 readiness 复审：真实 Cordis 私有 provider fiber 方案可激活官方 bridge；原 direct apply 协议不足以验证注册。Pi 精确镜像 0.84.3 的 settled/state/EOF 顺序已核实，修订收集器及七种失败边界回归通过。两项修改仍须新准确归档和真实模型证据。

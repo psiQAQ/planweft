@@ -81,3 +81,13 @@ RC3 的每次 hook 用私有 mktemp 缓存并清理，native shell facade 绑定
 [RC2 模型与 RC3 协议附件](evidence/0010/rc2-models-and-rc3-protocol.tar.gz)，733 项，SHA-256 `c8d2f77804c4ca7798b0a9f7d7ad3044ac4b737836987ad5559a972b10e57459`。包含原始失败、成功、官方沙箱因果探针及摘要映射；已检查认证值无命中。
 
 RC3 本地最终回归：Python 66 项、安装器 28 项、DSH shell facade 3 项 Passed；构建一致性与 diff whitespace 检查 Passed。首轮路径泄漏断言误报了合法 mktemp 路径，修正为仅允许 DSH launcher 的该模板后全量复验通过；未扩大其他平台或路径豁免。
+
+## RC3 注册与收集器更正
+
+第一份未发布 RC3（提交 `f9d108b`，SHA-256 `36cf77868b143f6c5518eba55cf831fb389a5e19ea49a6a3b2d1d630376d7369`）安装及生命周期通过，但 DSH context/recovery/maintenance 仍 Failed，simple 未按要求只输出 42；cold-reader/readonly/skill-loading Passed。该归档保留，不覆盖或冒充后续修复包。
+
+独立 reviewer 用真实 Cordis 4.0.2 复现：外层 fiber 提供隔离 shell 时 bridge state=0；独立私有 provider fiber 后 bridge state=2。原协议探针直接 apply，遗漏 readiness；已改用实际 Context/plugin 生命周期及原生观察事件，保留事件 carrier 为 fixture。固定 DSH 镜像中 Python/Shell 两路径全部 Passed，包含 nativeCordisReadiness。探针开发中曾用覆盖已绑定方法错误改变 scope，已移除；本地无沙箱路径的 Stop 超时不计 Passed。
+
+Pi 0.84.3 精确镜像源码确认 agent_settled 在扩展 followUp 后发出。收集器现等待 settled，核对 isStreaming=false、isCompacting=false、pendingMessageCount=0，再 EOF shutdown 并排空输出；超时、重启或非零退出失败。真实 fake subprocess 回归 2 tests（七种失败子场景）Passed，独立 review 通过；此项不等于 Pi 模型停止门槛已通过。
+
+[更正与失败附件](evidence/0010/rc3-readiness-correction.tar.gz)：336 项，SHA-256 `71f11788c52563fd4365949764ebfab26784b9e03d563515aea75ae5609fdd56`。含原始模型失败、真实 Cordis 因果脚本及修复协议结果；已检查认证值无命中。修复后的准确 RC3 模型仍待复验。
