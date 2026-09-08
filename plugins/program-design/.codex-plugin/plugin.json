@@ -1,23 +1,24 @@
 {
   "name": "program-design",
-  "version": "0.1.0",
-  "description": "Task-relevant Markdown maintenance and evidence-backed handoffs",
+  "version": "0.2.0",
+  "description": "Persistent file planning and task-relevant project documentation. Use for multi-step implementation, documented work and handoffs; maintain requirements, decisions and observed evidence as needed. Reading, diagnosis and host plan mode remain read-only. No project opt-in is required; respect applicable project rules. Hooks inject selected project context; session history access is explicit. Optional host-aware continuation; no network upload path.",
   "skills": "./skills/",
+  "hooks": "./hooks/codex-hooks.json",
+  "author": {
+    "name": "Program Design contributors"
+  },
   "interface": {
     "displayName": "Program Design",
-    "shortDescription": "Maintain project documents and handoff evidence",
     "category": "Productivity",
+    "shortDescription": "Persistent planning and project documentation",
+    "longDescription": "Persistent file planning and task-relevant project documentation. Use for multi-step implementation, documented work and handoffs; maintain requirements, decisions and observed evidence as needed. Reading, diagnosis and host plan mode remain read-only. No project opt-in is required; respect applicable project rules. Hooks inject selected project context; session history access is explicit. Optional host-aware continuation; no network upload path.",
+    "developerName": "Program Design contributors",
     "capabilities": [
       "Read",
       "Write"
     ],
     "defaultPrompt": [
-      "Use $project-docs to continue this project from its documents."
-    ],
-    "developerName": "Program Design contributors",
-    "longDescription": "Read task-relevant project documents, maintain affected Markdown and preserve evidence for the next session."
-  },
-  "author": {
-    "name": "Program Design contributors"
+      "Use $project-docs to continue this project."
+    ]
   }
 }

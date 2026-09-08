@@ -1,0 +1,519 @@
+#!/usr/bin/env python3
+"""Generate self-contained platform distributions from the pinned PWF archive.
+
+Only this builder and overlays are maintained. No network access or upstream
+scripts run during generation. --verify compares bytes and executable modes.
+"""
+import argparse
+import hashlib
+import io
+import json
+from pathlib import Path, PurePosixPath
+import re
+import tarfile
+import zipfile
+
+ROOT = Path(__file__).resolve().parents[1]
+VENDOR = ROOT / 'vendor/planning-with-files'
+OVERLAY = ROOT / 'overlays/program-design'
+VERSION = '0.2.0'
+PRODUCT = 'program-design'
+SKILL = 'project-docs'
+DESCRIPTION = ('Persistent file planning and task-relevant project documentation. '
+               'Use for multi-step implementation, documented work and handoffs; '
+               'maintain requirements, decisions and observed evidence as needed. '
+               'Reading, diagnosis and host plan mode remain read-only. '
+               'No project opt-in is required; respect applicable project rules. '
+               'Hooks inject selected project context; session history access is explicit. '
+               'Optional host-aware continuation; no network upload path.')
+UPSTREAM_URL = 'https://github.com/OthmanAdi/planning-with-files'
+COMMANDS = ['plan', 'start', 'status', 'pwf', 'pwf-status', 'plan-status',
+            'plan-attest', 'plan-doctor', 'plan-execute', 'plan-goal', 'plan-loop',
+            'plan-ar', 'plan-de', 'plan-es', 'plan-zh', 'plan-zht']
+HOSTS = ['codex', 'claude', 'pi', 'opencode', 'hermes', 'cursor', 'gemini',
+         'copilot', 'mastracode', 'kiro', 'continue', 'factory', 'codebuddy', 'agents']
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def read_upstream():
+    manifest = json.loads((VENDOR / 'upstream.json').read_text())
+    packed = (VENDOR / manifest['archive']).read_bytes()
+    if sha(packed) != manifest['sha256']:
+        raise ValueError('upstream archive digest mismatch')
+    inventory = json.loads((VENDOR / 'inventory.json').read_text())
+    result = {}
+    with tarfile.open(fileobj=io.BytesIO(packed), mode='r:gz') as archive:
+        for entry in archive:
+            if entry.isdir():
+                continue
+            path = PurePosixPath(entry.name)
+            if not entry.isfile() or path.is_absolute() or '..' in path.parts:
+                raise ValueError('unsafe upstream archive member: ' + entry.name)
+            data = archive.extractfile(entry).read()
+            expected = inventory[entry.name]
+            if sha(data) != expected['sha256'] or oct(entry.mode) != expected['mode']:
+                raise ValueError('upstream inventory mismatch: ' + entry.name)
+            if entry.name in result:
+                raise ValueError('duplicate upstream member: ' + entry.name)
+            result[entry.name] = (data, entry.mode)
+    if set(result) != set(inventory) or len(result) != manifest['file_count']:
+        raise ValueError('incomplete upstream archive')
+    return result, manifest
+
+
+def command_name(name):
+    return 'pd-' + name
+
+
+def map_path(path):
+    path = path.replace('planning-with-files', PRODUCT)
+    path = path.replace('skills/program-design', 'skills/' + SKILL)
+    path = path.replace('skills/i18n/program-design-', 'skills/i18n/' + SKILL + '-')
+    if path == '.continue/prompts/program-design.prompt':
+        return '.continue/prompts/pd-plan.prompt'
+    parts = path.split('/')
+    if 'commands' in parts or 'prompts' in parts:
+        if parts[-1].endswith('.md') and parts[-1][:-3] in COMMANDS:
+            parts[-1] = command_name(parts[-1][:-3]) + '.md'
+    return '/'.join(parts)
+
+
+def identity_text(text):
+    # Source citations are provenance, not executable fallback locations.
+    text = text.replace(UPSTREAM_URL, '__PD_UPSTREAM_URL__')
+    text = text.replace('planning-with-files:planning-with-files', PRODUCT + ':' + SKILL)
+    text = text.replace('planning-with-files', PRODUCT)
+    text = text.replace('skills/program-design', 'skills/' + SKILL)
+    text = text.replace('skills/i18n/program-design-', 'skills/i18n/' + SKILL + '-')
+    text = re.sub(r'program-design-(ar|de|es|zh|zht)(?=[\"\'/\\])', r'project-docs-\1', text)
+    text = re.sub(r'(skills\\+)program-design', r'\g<1>project-docs', text)
+    # pathlib, path.join and PowerShell build skill paths from separate tokens.
+    text = re.sub(r'([\"\']skills[\"\']\s*[/,]\s*[\"\'])program-design', r'\g<1>project-docs', text)
+    text = re.sub(r'(SKILL_DIR_NAME\s*=\s*[\"\'])program-design', r'\g<1>project-docs', text)
+    text = text.replace('path.join(base, "program-design")', 'path.join(base, "project-docs")')
+    text = text.replace('planning_with_files', 'program_design')
+    text = text.replace('pwf_init', 'pd_init').replace('pwf_status', 'pd_status').replace('pwf_check', 'pd_check')
+    # Config keys, PWF_* env vars, PLAN_ID and disk state remain compatible.
+    for name in sorted(COMMANDS, key=len, reverse=True):
+        mapped = command_name(name)
+        text = re.sub(r'(?<![\w./-])/' + re.escape(name) + r'(?![\w./-])', '/' + mapped, text)
+        text = text.replace('commands/' + name + '.md', 'commands/' + mapped + '.md')
+        text = re.sub(r'(registerCommand\(\s*[\"\'])' + re.escape(name) + r'([\"\'])', r'\g<1>' + mapped + r'\2', text)
+        text = re.sub(r'(name\s*=\s*[\"\'])' + re.escape(name) + r'([\"\'])', r'\g<1>' + mapped + r'\2', text)
+        text = re.sub(r'([\"\'])' + re.escape(name) + r'\.md([\"\'])', r'\g<1>' + mapped + r'.md\2', text)
+        if '-' in name or name == 'pwf':
+            text = re.sub(r'([\"\'])' + re.escape(name) + r'([\"\'])', r'\g<1>' + mapped + r'\2', text)
+    # These are skill-identity comparisons, not plugin names or state keys.
+    text = text.replace('CANONICAL = "program-design"', 'CANONICAL = "project-docs"')
+    text = text.replace('skill_md.parent.name != "program-design"', 'skill_md.parent.name != "project-docs"')
+    return text.replace('__PD_UPSTREAM_URL__', UPSTREAM_URL)
+
+
+def enhance_skill(text, path):
+    if not text.startswith('---\n') or '\n---\n' not in text[4:]:
+        raise ValueError('unsupported skill frontmatter: ' + path)
+    front, body = text[4:].split('\n---\n', 1)
+    language = re.search(r'/i18n/(project-docs-[^/]+)/', path)
+    name = language.group(1) if language else SKILL
+    front = re.sub(r'^name:.*$', 'name: ' + name, front, flags=re.M)
+    description = re.search(r'^description:\s*(.*)$', front, re.M).group(1)
+    if description.startswith('"'):
+        description = json.loads(description)
+    else:
+        description = description.strip("'")
+    description += ' Automatic matching adds project docs and evidence maintenance; read-only and plan mode do not write records.'
+    front = re.sub(r'^description:.*$', lambda _: 'description: ' + json.dumps(description, ensure_ascii=False), front, flags=re.M)
+    front = re.sub(r'^(\s+version:) .+$', r'\1 "' + VERSION + '"', front, flags=re.M)
+    if language and 'disable-model-invocation:' not in front:
+        front += '\ndisable-model-invocation: true'
+    workflow = (OVERLAY / 'workflow.md').read_text()
+    # Installed skills need their own sibling helper, irrespective of host.
+    # Preserve all consent options while removing another host's assumed path.
+    def portable_catchup(match):
+        block = match.group(0)
+        if 'session-catchup.py' not in block or '.claude' not in block:
+            return block
+        return ('Locate the absolute directory containing the installed `SKILL.md` you just read. '
+                'Run its sibling `scripts/session-catchup.py --metadata <absolute-project-directory>` '
+                'with an available Python 3 interpreter only when metadata was explicitly requested. '
+                'Use `--replay` only when bounded transcript replay was explicitly authorized. '
+                'Resolve that same installed helper on Windows; do not assume another host\'s installation path.\n')
+    body = re.sub(r'```[^\n]*\n.*?```', portable_catchup, body, flags=re.S)
+    return '---\n' + front + '\n---\n\n' + workflow.rstrip() + '\n\n' + body.lstrip()
+
+
+def local_install_text(text, path):
+    """Replace inherited release instructions with the derivative's local routes.
+
+    Product renaming cannot imply that upstream publishes our GitHub/npm names.
+    Keep provenance URLs while making instructions in installed Skills usable.
+    """
+    if path.endswith('/SKILL.md'):
+        text = text.replace(
+            '`/plugin marketplace add OthmanAdi/program-design` then `/plugin install`',
+            '`/plugin marketplace add <absolute-claude-package-root>` then '
+            '`/plugin install program-design@program-design`')
+        text = text.replace(
+            '`npx skills add OthmanAdi/program-design` (or ClawHub)',
+            'Copy the complete packaged `skills/project-docs/` to '
+            '`.claude/skills/project-docs/` (project) or `~/.claude/skills/project-docs/` (user)')
+        text = text.replace(
+            'Install it with `hermes plugins install '
+            'OthmanAdi/program-design/.hermes/plugins/program-design`, then '
+            '`hermes plugins enable program-design`. Full guide: docs/hermes.md in the repository.',
+            'From the Hermes ZIP, copy `.hermes/plugins/program-design/` and '
+            '`.hermes/skills/project-docs/` into `plugins/program-design/` and '
+            '`skills/project-docs/` under the same `HERMES_HOME`. Then run '
+            '`hermes plugins enable program-design` and restart Hermes. '
+            'This derivative is installed from the local package.')
+        text = text.replace(
+            'add `"plugin": ["opencode-program-design"]` to `opencode.json`.',
+            'copy the ZIP\'s `.opencode/packages/opencode-program-design/` and '
+            '`.opencode/plugins/program-design.ts` to the same project paths, '
+            'then run `npm ci --ignore-scripts` and `npm run build` in that local '
+            'package directory. The shipped entry loads its compiled `dist/index.js`.')
+        text = text.replace(
+            '`npx skills add OthmanAdi/program-design --skill program-design -g` '
+            'installs this skill to `~/.agents/skills/project-docs/`, one of the '
+            'paths OpenCode reads natively. Full guide: docs/opencode.md.',
+            'Copy the complete ZIP directory `.opencode/skills/project-docs/` to '
+            'your project\'s `.opencode/skills/project-docs/`. For user scope, '
+            'install the same packages/plugins/skills layout under '
+            '`~/.config/opencode/`. Keep the local package\'s `node_modules/`. '
+            'This derivative has no published npm installation route.')
+        text = text.replace(
+            '`~/.agents/skills/project-docs/templates/` after `npx skills add -g`',
+            '`.opencode/skills/project-docs/templates/` after a project copy')
+    if path == '.opencode/packages/opencode-program-design/README.md':
+        text = text.replace('[program-design](' + UPSTREAM_URL + ')',
+                            'Program Design, derived from [planning-with-files](' + UPSTREAM_URL + ')')
+        text = re.sub(r'(?<=## Install\n).*?(?=\n## What the plugin does)',
+                      lambda _: '\n' + (OVERLAY / 'install/opencode.md').read_text() + '\n',
+                      text, flags=re.S)
+        text = text.replace('`pwf.md` and `pwf-status.md`', '`pd-pwf.md` and `pd-pwf-status.md`')
+        text = text.replace("from the repository's `.opencode/commands/`",
+                            "from the unpacked OpenCode ZIP's `.opencode/commands/`")
+        text = text.replace('Full guide: [docs/opencode.md]', 'Upstream implementation reference: [docs/opencode.md]')
+    return text
+
+
+def transform(upstream, enhanced=True):
+    """Transform the complete tree, including tests for the migration regression."""
+    result = {}
+    for source, (raw, mode) in upstream.items():
+        target = map_path(source)
+        try:
+            text = raw.decode('utf-8')
+        except UnicodeDecodeError:
+            result[target] = (raw, mode)
+            continue
+        if PurePosixPath(source).name != 'LICENSE':
+            text = identity_text(text)
+        if target.endswith('.md'):
+            text = local_install_text(text, target)
+        if enhanced and source.endswith('/SKILL.md'):
+            text = enhance_skill(text, target)
+        # Local, source-reviewed adapter patches. Keep event payloads and the
+        # upstream state protocol; only remove implicit cwd imports/opt-out gaps.
+        if '/hooks/' in '/' + target and target.endswith('.sh'):
+            text = re.sub(r'(\$[A-Z_]*PYTHON[A-Z_]*"?)(\s+)(?=-c\b|-(?=\s|$))',
+                          r'\1\2-I ', text)
+        if target.startswith('.gemini/hooks/') and target.endswith('.sh') and 'PLANNING_DISABLED' not in text:
+            first, rest = text.split('\n', 1)
+            text = first + '\n[ "${PLANNING_DISABLED:-}" = "1" ] && { echo \'{}\'; exit 0; }\n' + rest
+        if target == '.mastracode/hooks.json':
+            payload = json.loads(text)
+            for handlers in payload.values():
+                for handler in handlers:
+                    handler['command'] = '[ "${PLANNING_DISABLED:-}" = "1" ] && exit 0; ' + handler['command']
+            text = json.dumps(payload, indent=2) + '\n'
+        if target == '.gemini/settings.json':
+            payload = json.loads(text)
+            for groups in payload['hooks'].values():
+                for group in groups:
+                    for hook in group['hooks']:
+                        command = hook['command']
+                        if not re.fullmatch(r'\$GEMINI_PROJECT_DIR/\.gemini/hooks/[\w-]+\.sh', command):
+                            raise ValueError('Gemini command changed; review its shell quoting')
+                        # Upstream ships these scripts as 0664. Use their Bash
+                        # interpreter explicitly instead of relying on +x.
+                        hook['command'] = 'bash "' + command + '"'
+            text = json.dumps(payload, indent=2) + '\n'
+        if target.endswith('/scripts/plan-doctor.sh') or target == 'scripts/plan-doctor.sh':
+            text = text.replace("echo '=== plan-doctor done ==='", (OVERLAY / 'doctor-overlap.sh').read_text() + "\necho '=== plan-doctor done ==='")
+        if enhanced and '/templates/' in '/' + target:
+            stem = PurePosixPath(target).stem
+            if stem in ('analytics_task_plan', 'task_plan_autonomous'):
+                stem = 'task_plan'
+            if stem == 'analytics_findings':
+                stem = 'findings'
+            extra = OVERLAY / 'templates' / (stem + '.append.md')
+            if extra.is_file():
+                text = text.rstrip() + '\n\n' + extra.read_text().rstrip() + '\n'
+        if source.endswith('/package.json') or source.endswith('/package-lock.json'):
+            payload = json.loads(text)
+            if source.endswith('/package.json'):
+                payload['version'] = VERSION
+                payload['description'] = DESCRIPTION
+                if 'private' not in payload:
+                    # These are local artifacts; do not advertise upstream as
+                    # the publisher/support endpoint of a modified package.
+                    for field in ['repository', 'homepage', 'bugs']:
+                        payload.pop(field, None)
+                payload['author'] = 'Program Design contributors; derived from Ahmad Adi / PWF'
+            else:
+                payload['version'] = VERSION
+                root_package = payload.get('packages', {}).get('')
+                if root_package is not None:
+                    root_package['version'] = VERSION
+            text = json.dumps(payload, indent=2) + '\n'
+        if target.endswith('/plugin.json'):
+            try:
+                payload = json.loads(text)
+                payload.update(name=PRODUCT, version=VERSION, description=DESCRIPTION)
+                payload.pop('repository', None)
+                payload['author'] = {'name': 'Program Design contributors'}
+                text = json.dumps(payload, indent=2) + '\n'
+            except json.JSONDecodeError:
+                pass
+        if target == '.hermes/plugins/program-design/plugin.yaml':
+            text = re.sub(r'^version:.*$', 'version: ' + VERSION, text, flags=re.M)
+        if target == '.claude-plugin/marketplace.json':
+            payload = json.loads(text)
+            payload['owner'] = {'name': 'Program Design contributors'}
+            payload['description'] = DESCRIPTION
+            for entry in payload['plugins']:
+                entry.update(name=PRODUCT, version=VERSION, description=DESCRIPTION)
+            text = json.dumps(payload, indent=2) + '\n'
+        if target == '.hermes/plugins/program-design/__init__.py':
+            text = text.replace('name="program-design",\n', 'name="project-docs",\n')
+            text = text.replace('("pwf", "pwf-status", "plan-status")',
+                                '("pd-pwf", "pd-pwf-status", "pd-plan-status")')
+        if target == 'tests/test_hermes_first_class.py':
+            text = text.replace('"program-design", ctx.skills', '"project-docs", ctx.skills')
+            text = text.replace('ctx.skills["program-design"]', 'ctx.skills["project-docs"]')
+            if enhanced:
+                # Upstream test_hermes_first_class.py:763 assumed this bundle
+                # lacked inject-plan.sh. Self-contained Skills now include it.
+                # Prove the existing bundled fallback, then remove the bundle
+                # from the fixture rather than weakening the no-script contract.
+                missing_script_assertion = (
+                    '            self.assertEqual({}, run("pre_llm_call"), '
+                    '"no scripts found must stay a silent no-op")')
+                if text.count(missing_script_assertion) != 1:
+                    raise ValueError('Hermes no-script fixture changed; review the upstream test adaptation')
+                isolated_bridge = (
+                    '            self.assertIn("context", run("pre_llm_call"), '
+                    '"an invalid explicit root still permits the bundled fallback")\n'
+                    '            bundled_bridge = bridge\n'
+                    '            bridge = root / "uninstalled" / "plugins" / "program-design" / "shell_hook.py"\n'
+                    '            bridge.parent.mkdir(parents=True)\n'
+                    '            shutil.copyfile(bundled_bridge, bridge)\n')
+                text = text.replace(missing_script_assertion, isolated_bridge + missing_script_assertion)
+        if target == 'tests/test_codex_plugin_operations.py':
+            text = text.replace('["program-design"], sorted(path.name for path in skill_dirs)',
+                                '["project-docs"], sorted(path.name for path in skill_dirs)')
+        if target == 'CITATION.cff':
+            text = re.sub(r'^version:.*$', 'version: ' + VERSION, text, flags=re.M)
+        if target == '.opencode/packages/opencode-program-design/src/core.ts':
+            text = re.sub(r'export const VERSION = "[^"]+"', 'export const VERSION = "0.2.0"', text)
+        if ('/commands/' in '/' + target or '/prompts/' in '/' + target) and target.endswith(('.md', '.prompt')):
+            if text.startswith('---\n'):
+                front, body = text[4:].split('\n---\n', 1)
+                if target.endswith('.prompt'):
+                    front = re.sub(r'^name:.*$', 'name: pd-plan', front, flags=re.M)
+                if 'disable-model-invocation:' not in front:
+                    front += '\ndisable-model-invocation: true'
+                text = '---\n' + front + '\n---\n\n' + (
+                    'Follow project-docs scope rules: read-only requests and host plan mode do not '
+                    'initialize or update project files. Resolve the task-owned plan first; '
+                    'never create a competing root plan.\n\n') + body.lstrip()
+        result[target] = (text.encode('utf-8'), mode)
+    if enhanced:
+        canonical = 'skills/project-docs/'
+        for name in list(result):
+            if name.endswith('/SKILL.md'):
+                base = str(PurePosixPath(name).parent)
+                result[base + '/references/evidence.md'] = ((OVERLAY / 'references/evidence.md').read_bytes(), 0o644)
+                result[base + '/references/controls.md'] = ((OVERLAY / 'references/controls.md').read_bytes(), 0o644)
+                # A standalone install copies the skill folder, not its repo.
+                # Fill absent assets only; native/localized assets remain intact.
+                for asset, value in list(result.items()):
+                    if asset.startswith(canonical) and not asset.endswith('/SKILL.md'):
+                        suffix = asset[len(canonical):]
+                        if suffix.startswith(('scripts/', 'templates/')) or suffix in ('reference.md', 'examples.md'):
+                            result.setdefault(base + '/' + suffix, value)
+                result[base + '/LICENSE'] = result['LICENSE']
+    return result
+
+
+def subset(tree, prefixes):
+    return {p: v for p, v in tree.items() if any(p == x or p.startswith(x.rstrip('/') + '/') for x in prefixes)}
+
+
+def distributions(tree, upstream):
+    common = ['scripts', 'templates', 'skills']
+    result = {}
+    result['codex'] = subset(tree, ['.codex/hooks', 'hooks/codex-hooks.json', *common])
+    # Codex selects exactly one main root; native hooks come from its manifest,
+    # never from Claude's skill frontmatter or a migrated command skill.
+    key = 'skills/project-docs/SKILL.md'
+    _, body = result['codex'][key][0].decode()[4:].split('\n---\n', 1)
+    result['codex'][key] = (('---\nname: project-docs\ndescription: ' + json.dumps(DESCRIPTION) + '\nmetadata:\n  version: "0.2.0"\n---\n' + body).encode(), 0o644)
+    result['codex']['skills/project-docs/agents/openai.yaml'] = (b'interface:\n  display_name: "Project Docs"\n  short_description: "Persistent planning, project documents and evidence"\npolicy:\n  allow_implicit_invocation: true\n', 0o644)
+    for path in list(result['codex']):
+        if path.startswith('skills/i18n/') and path.endswith('/SKILL.md'):
+            # Codex discovers nested language variants. Its native policy is
+            # agents/openai.yaml, not Claude's disable-model-invocation flag.
+            policy_path = str(PurePosixPath(path).parent / 'agents/openai.yaml')
+            result['codex'][policy_path] = (b'policy:\n  allow_implicit_invocation: false\n', 0o644)
+    codex_manifest = {'name': PRODUCT, 'version': VERSION, 'description': DESCRIPTION,
+                      'skills': './skills/', 'hooks': './hooks/codex-hooks.json',
+                      'author': {'name': 'Program Design contributors'},
+                      'interface': {'displayName': 'Program Design', 'category': 'Productivity',
+                                    'shortDescription': 'Persistent planning and project documentation',
+                                    'longDescription': DESCRIPTION, 'developerName': 'Program Design contributors',
+                                    'capabilities': ['Read', 'Write'],
+                                    'defaultPrompt': ['Use $project-docs to continue this project.']}}
+    result['codex']['.codex-plugin/plugin.json'] = (json.dumps(codex_manifest, indent=2).encode() + b'\n', 0o644)
+    local_catalog = {'name': 'program-design-local', 'plugins': [{
+        'name': PRODUCT, 'source': {'source': 'local', 'path': './'},
+        'policy': {'installation': 'AVAILABLE', 'authentication': 'ON_INSTALL'},
+        'category': 'Productivity'}]}
+    result['codex']['.agents/plugins/marketplace.json'] = (json.dumps(local_catalog, indent=2).encode() + b'\n', 0o644)
+    result['claude'] = subset(tree, ['.claude-plugin', 'hooks/hooks.json', 'hooks/claude-hook.sh', 'commands', *common])
+    pi_prefix = '.pi/skills/project-docs/'
+    result['pi'] = {p[len(pi_prefix):]: v for p, v in tree.items() if p.startswith(pi_prefix)}
+    result['opencode'] = subset(tree, ['.opencode', *common])
+    # The source tree keeps its development entry; installation loads the locked
+    # local build, so users can copy the adapter without hand-writing a loader.
+    result['opencode']['.opencode/plugins/program-design.ts'] = (
+        b'// Local package: run npm ci --ignore-scripts and npm run build in its directory.\n'
+        b'export { PlanningWithFiles } from "../packages/opencode-program-design/dist/index.js"\n',
+        0o644)
+    for host in HOSTS:
+        if host in result:
+            continue
+        prefix = '.github/hooks' if host == 'copilot' else '.' + host
+        result[host] = subset(tree, [prefix, *common])
+    provenance = json.dumps({'product': PRODUCT, 'version': VERSION, 'upstream': upstream,
+                            'changes': ['product identity mapping', 'project-docs workflow and evidence',
+                                        'self-contained platform packaging'],
+                            'update_policy': 'Pinned source plus reviewed overlays; no runtime fetch.'}, indent=2).encode() + b'\n'
+    for host, files in result.items():
+        # Tests/build tooling remain in the reproducible source tree, not runtime packages.
+        for name in list(files):
+            if '__tests__' in PurePosixPath(name).parts or name.endswith('.test.ts'):
+                del files[name]
+            elif name.startswith('scripts/') and PurePosixPath(name).name in {
+                    'bump-version.py', 'sync-ide-folders.py', '_v240_update_hook_bodies.py', 'build-clawhub-upload.py'}:
+                del files[name]
+        files['LICENSE'] = tree['LICENSE']
+        files['UPSTREAM.json'] = (provenance, 0o644)
+        for path in list(files):
+            if path.endswith('/SKILL.md') or path == 'SKILL.md':
+                base = str(PurePosixPath(path).parent)
+                prefix = '' if base == '.' else base + '/'
+                files[prefix + 'LICENSE'] = tree['LICENSE']
+                files[prefix + 'UPSTREAM.json'] = (provenance, 0o644)
+        if host == 'hermes':
+            for name in ['LICENSE', 'UPSTREAM.json']:
+                files['.hermes/plugins/program-design/' + name] = files[name]
+        readme = (OVERLAY / 'README.md').read_text() if (OVERLAY / 'README.md').exists() else DESCRIPTION
+        files['README.md'] = (('# Program Design 0.2.0 — ' + host + '\n\n' + readme).encode(), 0o644)
+        install = OVERLAY / 'install/INSTALL.md'
+        if install.exists():
+            files['INSTALL.md'] = (('> 当前安装包：**' + host + '**。请选择本文对应宿主的章节；'
+                                   '其余章节用于说明平台差异。\n\n').encode()
+                                   + install.read_bytes(), 0o644)
+        # npm only packs files declared in its allowlist: make attribution ship too.
+        if host == 'pi':
+            payload = json.loads(files['package.json'][0])
+            payload['files'] = list(dict.fromkeys([*payload.get('files', []), 'LICENSE', 'UPSTREAM.json', 'references/']))
+            files['package.json'] = (json.dumps(payload, indent=2).encode() + b'\n', 0o644)
+        if host == 'opencode':
+            prefix = '.opencode/packages/opencode-program-design/'
+            for name in ['LICENSE', 'UPSTREAM.json']:
+                files[prefix + name] = files[name]
+            payload = json.loads(files[prefix + 'package.json'][0])
+            payload['files'] = list(dict.fromkeys([*payload.get('files', []), 'LICENSE', 'UPSTREAM.json']))
+            files[prefix + 'package.json'] = (json.dumps(payload, indent=2).encode() + b'\n', 0o644)
+        result[host] = files
+    return result
+
+
+def write_tree(files, destination, verify=False):
+    existing = {str(p.relative_to(destination)): p for p in destination.rglob('*') if p.is_file()} if destination.exists() else {}
+    differences = [p for p in existing if p not in files]
+    for name, (data, mode) in files.items():
+        path = destination / name
+        if not path.is_file() or path.read_bytes() != data or bool(path.stat().st_mode & 0o111) != bool(mode & 0o111):
+            differences.append(name)
+            if not verify:
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(data)
+                path.chmod(mode)
+    if not verify:
+        for name in existing.keys() - files.keys():
+            existing[name].unlink()
+        for path in sorted(destination.rglob('*'), reverse=True):
+            if path.is_dir() and not any(path.iterdir()):
+                path.rmdir()
+    return sorted(differences)
+
+
+def zip_bytes(files):
+    output = io.BytesIO()
+    with zipfile.ZipFile(output, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
+        for name, (data, mode) in sorted(files.items()):
+            entry = zipfile.ZipInfo(PRODUCT + '/' + name, date_time=(1980, 1, 1, 0, 0, 0))
+            entry.create_system = 3
+            entry.external_attr = (0o100000 | mode) << 16
+            entry.compress_type = zipfile.ZIP_DEFLATED
+            archive.writestr(entry, data)
+    return output.getvalue()
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--verify', action='store_true', help='Compare generated artifacts without changing them')
+    parser.add_argument('--tree', type=Path, help='Write full transformed tree (including upstream tests) to a NEW directory')
+    parser.add_argument('--identity-only', action='store_true', help='With --tree, omit workflow/template overlays')
+    args = parser.parse_args()
+    if args.identity_only and not args.tree:
+        parser.error('--identity-only requires --tree')
+    original, upstream = read_upstream()
+    tree = transform(original, enhanced=not args.identity_only)
+    if args.tree:
+        if args.verify:
+            parser.error('--tree cannot be combined with --verify')
+        if args.tree.exists():
+            parser.error('--tree destination must not exist')
+        write_tree(tree, args.tree)
+        print(json.dumps({'tree_files': len(tree), 'identity_only': args.identity_only}))
+        return
+    bundles = distributions(tree, upstream)
+    artifacts = {}
+    index = {'product': PRODUCT, 'version': VERSION, 'upstream_commit': upstream['commit'], 'platforms': {}}
+    for host, files in bundles.items():
+        name = PRODUCT + '-' + VERSION + '-' + host + '.zip'
+        packed = zip_bytes(files)
+        artifacts[name] = (packed, 0o644)
+        index['platforms'][host] = {'archive': name, 'sha256': sha(packed), 'file_count': len(files)}
+    artifacts['manifest.json'] = (json.dumps(index, indent=2, sort_keys=True).encode() + b'\n', 0o644)
+    differences = {'codex': write_tree(bundles['codex'], ROOT / 'plugins/program-design', args.verify),
+                   'artifacts': write_tree(artifacts, ROOT / 'dist', args.verify)}
+    print(json.dumps({'platforms': len(bundles), 'differences': {k: len(v) for k, v in differences.items()},
+                      'verified': args.verify and not any(differences.values())}, indent=2))
+    if args.verify and any(differences.values()):
+        for group, paths in differences.items():
+            for path in paths[:30]:
+                print(group + ': ' + path)
+        raise SystemExit(1)
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,77 @@
+{
+  "platforms": {
+    "agents": {
+      "archive": "program-design-0.2.0-agents.zip",
+      "file_count": 285,
+      "sha256": "ffd673f990bf311473f4cf6254c985a55bcf7200fe3fe8ceef65a0d3c09dd3cd"
+    },
+    "claude": {
+      "archive": "program-design-0.2.0-claude.zip",
+      "file_count": 266,
+      "sha256": "c494548466d10068710451faedf1dd3456d4f6b56949631aed50bf79a6115879"
+    },
+    "codebuddy": {
+      "archive": "program-design-0.2.0-codebuddy.zip",
+      "file_count": 287,
+      "sha256": "d0c070335d99b7974bfbdaa89d3dfc085c6347ab0fd00dc75beccf7aaee26947"
+    },
+    "codex": {
+      "archive": "program-design-0.2.0-codex.zip",
+      "file_count": 274,
+      "sha256": "d0ca7189f34676d32e76a77159261c6e6af9e8d4cce1839800dc2a85ec759d2c"
+    },
+    "continue": {
+      "archive": "program-design-0.2.0-continue.zip",
+      "file_count": 286,
+      "sha256": "e5377f5b0b4dadc0c174411cc3f41021f85531f9e11288c8333d81b7af84df6f"
+    },
+    "copilot": {
+      "archive": "program-design-0.2.0-copilot.zip",
+      "file_count": 260,
+      "sha256": "b5997e598fff936113c9461cc3e161c4919fbd8effd772777a804402c5bbaa67"
+    },
+    "cursor": {
+      "archive": "program-design-0.2.0-cursor.zip",
+      "file_count": 295,
+      "sha256": "4e0039d7a32dfcbf677486dfea7fda6c0c4d1eb7acc6af980859fcb5f3ff8deb"
+    },
+    "factory": {
+      "archive": "program-design-0.2.0-factory.zip",
+      "file_count": 286,
+      "sha256": "1987505ec7d37e9e3f2273b4a975970794c011bfec4a76f27ea6d50a437d1366"
+    },
+    "gemini": {
+      "archive": "program-design-0.2.0-gemini.zip",
+      "file_count": 293,
+      "sha256": "e191a84caec5ad26fb0ca8e21b05a34b24742bc36f1ba8628b1b7e2a406dbefc"
+    },
+    "hermes": {
+      "archive": "program-design-0.2.0-hermes.zip",
+      "file_count": 301,
+      "sha256": "314b1690c59bba7ea095fabc0020af185dc95ba8f0c5fa8e25aecdc1c8ba4228"
+    },
+    "kiro": {
+      "archive": "program-design-0.2.0-kiro.zip",
+      "file_count": 297,
+      "sha256": "d7cfb2e904df9162fc8015afd0f986a903cbac4cff3272c5ffdf3fafc2889087"
+    },
+    "mastracode": {
+      "archive": "program-design-0.2.0-mastracode.zip",
+      "file_count": 288,
+      "sha256": "f778bd12599abf8bf75e878d3638eb7d7aab8f93443fb584d5803c354da79e7f"
+    },
+    "opencode": {
+      "archive": "program-design-0.2.0-opencode.zip",
+      "file_count": 297,
+      "sha256": "604717e481f9a06a38b4dac8a17cfd2a0646e96e7d83bc10c96152069e43fc43"
+    },
+    "pi": {
+      "archive": "program-design-0.2.0-pi.zip",
+      "file_count": 48,
+      "sha256": "cf5a9b0f3f8a8e7c8cfb8de5ef44066d1f9c84df5f73cd521b43002594c605bb"
+    }
+  },
+  "product": "program-design",
+  "upstream_commit": "0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7",
+  "version": "0.2.0"
+}

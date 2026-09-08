@@ -1,32 +1,28 @@
-# Program Design 插件
+# Program Design 0.2.0 — codex
 
-提供 `project-docs` Skill：在已启用项目中按任务读取资料、维护受影响的普通文档，保存交接及验证证据。沿用已有目录，只为实际工作创建必要记录。自动匹配依赖 Codex 判断，不能保证每次触发。
+# Program Design 0.2.0
 
-## 安装与使用
+Program Design combines the planning-with-files v3.17.0 runtime with project documentation, design evidence and verifiable handoff. It is an independent derivative pinned to upstream commit `0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7`. The distribution retains upstream MIT attribution and contains the runtime, templates and references needed by its adapter.
 
-需要支持 plugins 的 Codex。从本仓库根目录执行；无需初始化研究子模块。repo marketplace 使用官方生成器默认名称 `personal`，这是此目录的 catalog 名，不代表已安装到个人配置。若已有同名 marketplace，先用 `codex plugin list` 核查来源，避免安装错误目录的同名插件。
+## Workflow
 
-```bash
-codex plugin marketplace add .
-codex plugin add program-design@personal
-codex plugin list
-```
+The main Skill is `project-docs`. A supporting host may select it for substantive implementation, maintenance and continuation of documented work; explicit invocation remains available. Automatic matching does not require a project opt-in, but loading depends on the host. Read-only requests remain read-only, simple work does not require a planning hierarchy, and project rules and task scope take precedence.
 
-安装后开始新会话。显式调用示例：“使用 $project-docs 根据当前计划接续工作”。这只授权当前任务；规划模式仍不写文件。
+Complex implementation uses one selected PWF plan directory. `task_plan.md` owns current status and the next action, `findings.md` holds discoveries and sources, and `progress.md` records actions and observed validation. Existing specifications, ADRs and reproduction records retain stable requirements, decisions and evidence. Create or update these only when useful to the authorized task.
 
-希望相关任务自动使用时，由维护者在宿主实际加载的项目 AGENTS 中加入：
+## Runtime controls
 
-> 本项目启用 project-docs：相关任务使用该 Skill 读取和维护受影响的普通文档，沿用现有目录并记录交接与验证；遵守当前任务的授权范围。
+- Default runtime behavior is advisory. Autonomous and gated modes are explicit choices with host-specific behavior; Skill matching alone does not enable continuation.
+- Helper commands have `pd-` names; OpenCode tool names have `pd_` names. Use the installed adapter's command listing for available native controls. `PLAN_ID`, `PWF_*`, `PLANNING_DISABLED` and PWF state formats remain compatible.
+- Set `PLANNING_DISABLED=1` before starting a strict read-only session when the host cannot reliably identify that mode. Private hook caches are separate from project records; automatic natural-language intent detection is not guaranteed.
+- Only one planning plugin should run execution hooks in a session. Inspect the installed doctor output and active host configuration for detectable overlap; this package does not automatically uninstall another plugin.
+- Automatic recovery uses project files. Reading host session history requires an explicit request for metadata or bounded replay.
+- Attestation checks file bytes and does not prove approval. Completion gating checks runtime state and does not certify requirements or code correctness.
 
-本插件不会自行插入启用声明。项目若使用 AGENTS.override.md，应放在实际生效的指令中；同目录 override 不自动叠加 AGENTS.md。插件安装与项目启用是两个步骤。已有项目无需迁移文件；缺少文档时按实际任务创建记录。
+## Platform and installation limits
 
-## 卸载
+Use the installation instructions and compatibility matrix delivered with this build. Preserve each host's native activation and trust requirements: adding plugin files is not proof that Skills or hooks loaded. Codex hook installation and host trust are separate steps. Pi and OpenCode retain their native extension/plugin behavior. Do not assume every adapter can block stopping or automatically load a Skill.
 
-```bash
-codex plugin remove program-design@personal
-codex plugin marketplace remove personal
-```
+Verification distinguishes static inspection, protocol tests and real host runs; unavailable operating systems or hosts are reported as Not Run. No package installation changes global configuration automatically. A target project adopts a PWF task state by explicitly relocating its active status entry once and linking the historical plan, without two-way synchronization.
 
-第二条只在该 marketplace 不再需要时执行。卸载保留项目文档；维护者可移除对应启用语句。注册、安装、加载和卸载分别验证；结果见仓库 REP-0003。
-
-源码为本目录中的 manifest、Skill 和参考说明，无生成分发副本，无 CLI、hooks、后台服务和运行时包依赖。首版试用不代表本研究仓库已通过自身接管门槛。
+See the installed Skill's `references/evidence.md` for source review, requirement preservation, verification and fresh-reader handoff guidance.
