@@ -113,3 +113,15 @@ Pi 0.84.3 精确镜像源码确认 agent_settled 在扩展 followUp 后发出。
 进程归因初稿的 PID/FD 复用、参数提及和异步 syscall 反例会产生假阳性，未用于放行。新模块以实际脚本摘要、fork 时身份、进程代际和精确计数路径绑定证据，正负样本都要求完整解析；原始 trace 只留容器私有 tmpfs，不导出任意 argv。12 项离线回归 Passed。固定 strace 6.1 派生镜像的无模型样本及真实 `check-complete.sh --gate` cap=1 正向测试 Passed，两个计数读取均归因到摘要匹配的 gate；这不代替实际模型门槛。
 
 OpenCode 同一准确包的默认停止、cap/stall 与禁用对照 Passed；gated 场景未观察到后续回应，继续 Failed。Claude 新进程归因模型复验被自动审批拒绝，原因是 Claude 目的地/负载的授权范围需要明确；没有绕过执行。其已有模型结果与新的无模型正向测试分开记录。
+
+## RC3 公开产物与原生续跑
+
+`7d690010fbf8705129d3fb44b2556bb6a0fa7de6` 冻结的 `0.4.0-rc.3` 已由 [OIDC](https://github.com/psiQAQ/planweft/actions/runs/34264091642) 发布到 next，CI 和真实 npm 下载均为 SHA-256 `09ea0e4dceb88c9b845af851916356c44f3447071e0d1311dc38841639705060`。五个固定容器的准确包 preflight/lifecycle 全 Passed，[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34262987621) Passed。先前同版本的本地未发布归档保留，不能用于声称远端准确字节。
+
+OpenCode 官方 1.18.22 `run` 在首次 idle 结束收集，而插件的事件回调不被等待。新增独立原生 serve + SSE 采集，只发送一次初始 prompt，要求插件第二 user reason、对应 parentID 的 assistant 完成和后续 idle，再观察至少 5 秒无新活动。真实六场景均 Passed；未参与实现的独立 reviewer 对照原始 SSE/消息/状态确认，观察窗 5.003–5.250 秒。服务器在观察后由 harness 结束，退出 -15；不冒充自然退出、原生 settled 或无限期无后续事件。cap/stall 负对照无计数读取，正例均有两个计数读取；此路线无 PID 归因，边界保留。全量 Python 90 tests Passed。
+
+DSH 同包 flash 的单一计划已建立，但 discovery 命令失败的泛化表述不准确；[独立复核](evidence/0010/dsh-routing-independent-review.json) 将历史语义 Passed 与文档准确性 Failed 分开记录，不改原自动结果。Pro 对照仍未建立唯一 PWF 计划，维护 Failed、冷读自动断言 Passed。当前没有满足全部维护门槛的 DSH 新准确包结果，不继续以重复重试代替修复依据。
+
+远端 RC2→RC3→RC2→RC3→卸载：Codex、Claude、Pi、DSH 全流程及适用原生入口检查 Passed。OpenCode CLI 生命周期完成，但独立 npm 原生配置没有注册 `pw_*` 工具，因此该平台总结果 Failed。独立源码诊断：官方 resolver 读取 `exports["./server"]` 或 `main`，不会选择仅有的 `exports["."]`；根 manifest 缺失对应入口。需递增候选版修复，不能覆盖已发布 RC3。
+
+[RC3 发布、成功与失败附件](evidence/0010/rc3-release-and-native-observation.tar.gz)：1,199 项，SHA-256 `8799518eb4d6fd46c7a292033c50b98192bc3b7bf3fee0125956fcabd506e239`。附 sources.json 映射原始运行相对路径；检查已知认证值无命中、脱敏私人路径并规范归档身份。Claude 实际配置使用 DeepSeek 官方 `https://api.deepseek.com/anthropic/v1`，此前授权问题误写 Anthropic 地址已更正；新模型命令尚未获明确补充授权、未执行。

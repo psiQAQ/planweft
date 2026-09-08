@@ -202,3 +202,5 @@ python3 scripts/run-opencode-tests.py --output /tmp/planweft-opencode-regression
 # 进程归因补充
 
 `run-five-agent-release.py --trace-gate-processes` 仅接受 Codex/Claude 的停止场景和记录 `gate_trace.strace=6.1` 的固定派生镜像锁。不会自动安装 strace 或更换原镜像。使用 `gate_process_trace.py` 的 syscall 集合和摘要绑定解析；正负对照都要求完整 trace，原始 argv 不导出。`test_gate_process_trace.py` 覆盖快照误归因、异步调用、PID/FD 复用等反例。该可选 Linux 证据路线不代表 Windows/macOS 的真实宿主验证。
+
+OpenCode 停止场景使用 `opencode_server_probe.py`，固定 1.18.22 的原生 serve/SSE/Session API。仅发送一次初始提示，保留消息 parentID、idle 和状态对账，观察至少 5 秒静默；不把原生 CLI 首次 idle 当作异步续跑完成，也不宣称存在 native settled。超时、权限请求、工具调用、断流、模型错误和清理异常均失败；原始事件先经 runtime 脱敏再保存。`test_opencode_server_probe.py` 为离线 transport/process fixtures，真实 HTTP/模型证据见 REP-0010。

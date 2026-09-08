@@ -1,6 +1,6 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
-RC2 已通过 OIDC 发布及三系统 CI；OpenCode 九项模型场景与独立冷读通过，Pi context/recovery 复验通过。DSH 实际启动通过，但上下文与维护失败；RC3 沙箱修复仅完成协议检查，准确包模型复验待完成。五平台稳定门槛未通过。见[发布状态：中文](releasing.md) / [English](releasing.en.md)。
+RC3 已通过 OIDC 发布、远端字节核对及三系统 CI；五个固定 Linux 容器的准确包安装/生命周期通过。OpenCode 六项原生 server 停止观察通过独立审查；DSH 上下文已修复，但维护采用及文档准确性仍有失败。五平台稳定门槛未通过。见[发布状态：中文](releasing.md) / [English](releasing.en.md)。
 
 ## 0.4.0 候选验证
 
@@ -17,7 +17,7 @@ PlanWeft 0.4.0 将同一套文件规划与文档协作规则，生成适合 15 �
 | Codex | Passed | Passed | Passed | Passed |
 | Claude Code | Passed | Passed | Passed | Passed (RC1) |
 | Pi | Passed | Passed | Passed | Passed (RC1; reviewed reassessment) |
-| OpenCode V1 | Passed | Passed | Passed (RC2) | Passed (RC2) |
+| OpenCode V1 | Passed | Passed | Passed (RC3 local) | Passed (RC2; RC3 stopping separately passed) |
 | Cursor | Passed | Passed | Not Run | Not Run |
 | Copilot CLI | Passed | Passed | Not Run | Not Run |
 | Gemini CLI | Passed | Passed | Not Run | Not Run |
@@ -28,7 +28,7 @@ PlanWeft 0.4.0 将同一套文件规划与文档协作规则，生成适合 15 �
 | Continue | Passed | Not Run | Not Run | Not Run |
 | Mastra Code | Passed | Not Run | Not Run | Not Run |
 | Agents | Passed | Not Run | Not Run | Not Run |
-| DeepSeek Harness / DSH | Passed | Passed (RC3 sandbox protocol) | Passed (RC2 boot) | Failed (RC2 workflow) |
+| DeepSeek Harness / DSH | Passed | Passed (RC3 sandbox protocol) | Passed (RC3 local) | Failed (RC3 workflow/doc accuracy) |
 
 远端 npm/Git 生命周期及 Windows/macOS 真实宿主尚待单独记录。Pi RPC 与 OpenCode debug 是实际宿主加载，不是模型调用；非核心宿主的 0.3.0 安装结果不冒充 0.4.0 实测。
 

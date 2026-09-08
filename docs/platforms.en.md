@@ -1,6 +1,6 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
-RC2 passed OIDC publishing and three-OS CI. OpenCode passed nine model scenarios and independent cold review; Pi context/recovery passed on retry. DSH boot passed, but context and maintenance failed. RC3 sandbox fixes have protocol evidence only; exact-package model trials remain pending. The five-host stable gate is not cleared. See [release status: 中文](releasing.md) / [English](releasing.en.md).
+RC3 passed OIDC publishing, remote byte verification and three-OS CI; exact-package installation/lifecycle passed in all five fixed Linux containers. OpenCode passed six native-server stopping observations and independent review. DSH context is repaired, but maintenance adoption and documentation accuracy still have failures. The five-host stable gate is not cleared. See [release status: 中文](releasing.md) / [English](releasing.en.md).
 
 ## 0.4.0 candidate validation
 
@@ -17,7 +17,7 @@ For project goals and design sources, read the project introduction: [简体中�
 | Codex | Passed | Passed | Passed | Passed |
 | Claude Code | Passed | Passed | Passed | Passed (RC1) |
 | Pi | Passed | Passed | Passed | Passed (RC1; reviewed reassessment) |
-| OpenCode V1 | Passed | Passed | Passed (RC2) | Passed (RC2) |
+| OpenCode V1 | Passed | Passed | Passed (RC3 local) | Passed (RC2; RC3 stopping separately passed) |
 | Cursor | Passed | Passed | Not Run | Not Run |
 | Copilot CLI | Passed | Passed | Not Run | Not Run |
 | Gemini CLI | Passed | Passed | Not Run | Not Run |
@@ -28,7 +28,7 @@ For project goals and design sources, read the project introduction: [简体中�
 | Continue | Passed | Not Run | Not Run | Not Run |
 | Mastra Code | Passed | Not Run | Not Run | Not Run |
 | Agents | Passed | Not Run | Not Run | Not Run |
-| DeepSeek Harness / DSH | Passed | Passed (RC3 sandbox protocol) | Passed (RC2 boot) | Failed (RC2 workflow) |
+| DeepSeek Harness / DSH | Passed | Passed (RC3 sandbox protocol) | Passed (RC3 local) | Failed (RC3 workflow/doc accuracy) |
 
 RC1 remote npm same-version lifecycle passed for Codex, Claude and Pi; OpenCode Skill pairing failed, and DSH composed-config discovery did not prove boot. Remote multi-version and Git marketplace lifecycles and real Windows/macOS host sessions remain Not Run. Pi RPC and OpenCode debug discovery are actual host loading, not model calls. Non-core native runs from 0.3.0 are not reused as 0.4.0 results.
 

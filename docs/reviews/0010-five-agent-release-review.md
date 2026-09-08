@@ -62,3 +62,7 @@ DSH reviewer 确认 HOME 缓存在原沙箱不可写，且 bwrap 每次调用会
 独立 reviewer 检查了 `a8f0e1b` 的 DSH 完整 Skill 及后续工作区修订。确认一般最小修改规则并未禁止 PWF，但 reuse、无计划初始化和单文件排除项存在可收敛的歧义；修订后的范围与分支已核查。跨宿主操作长段、Continue tier、重复 catchup 和人工批准措辞同步修正；未把这些文字问题断言为模型失败的已证根因。
 
 首版 strace 解析存在五种实际复现的误归因，及异步 read 漏计。独立 reviewer 提供新的有界模块和 12 项反例回归；主 Agent 用固定 strace 6.1 镜像运行无认证的实际 gate，确认摘要绑定的两个计数读取与完整解析。模型采集接入和最终包验收仍须独立核查，不能用解析器自身测试代替宿主门槛。
+
+OpenCode server 采集由 container_release_plan_review 实现，未参与实现的 release_audit 独立检查源码、7 项离线测试与六项真实证据，通过。原生 SSE gated 两次 assistant 完成索引 154/203，idle 156/205；仅一次初始请求，第二 user reason 与 parentID 可追溯，窗口/清理/权限失败边界准确。该审查不将有限观察提升为原生 settled。
+
+release_audit 独立定位 RC3 远端 npm 入口缺失：[shared.ts](https://github.com/anomalyco/opencode/blob/v1.18.22/packages/opencode/src/plugin/shared.ts#L95) 只选择 ./server 或 main；[loader.ts](https://github.com/anomalyco/opencode/blob/v1.18.22/packages/opencode/src/plugin/loader.ts#L95) 与 [missing 回调](https://github.com/anomalyco/opencode/blob/v1.18.22/packages/opencode/src/plugin/index.ts#L173) 解释了退出 0 却无工具。现有 CLI 直接 loader 成功不代替 npm 原生入口。本次仅诊断；后续修复和准确新包需另验。

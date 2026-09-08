@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "version": "0.4.0-rc.3",
+  "npm_sha256": "09ea0e4dceb88c9b845af851916356c44f3447071e0d1311dc38841639705060",
+  "run": "dsh-rc3-routing",
+  "reviewer": "independent container_release_plan_review agent",
+  "original_results_unchanged": true,
+  "attachments": {
+    "summary.json": "5b4f708b7472042e0fce64df063547329296a35d57d9d29d39a5bc379052780e",
+    "dsh/maintenance/before.json": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1",
+    "dsh/maintenance/after.json": "714d2332e1586fcfce899c9b25a5057e50e123691be49f00926a9fbc10e60404",
+    "dsh/maintenance/assessment.json": "876163a7b5b812d7c1a8b1b2ec5ca42b3fc29b4860238a68253b9cc38c18ccb5",
+    "dsh/maintenance/raw/native-events.jsonl": "4a2d228a73b1c305457353b600ecc5aa26944cf4791dbe33c8e9dba940c32620",
+    "dsh/maintenance/raw/offline-tests.json": "6ccd1f28a303073f7c556d59f9aae9139662bf9ea714986f15d2b6b3580be814",
+    "dsh/maintenance/raw/offline-tests.stderr": "2c1c7ee9427bc1a4b58c8576118f5b7e5ef247ba5c1d7a2484a4bfdae27f71dd",
+    "dsh/cold-reader/before.json": "714d2332e1586fcfce899c9b25a5057e50e123691be49f00926a9fbc10e60404",
+    "dsh/cold-reader/after.json": "714d2332e1586fcfce899c9b25a5057e50e123691be49f00926a9fbc10e60404",
+    "dsh/cold-reader/assessment.json": "23b240f833883fb40ba492032add2de9f982041bd8d02735a56363a2ba9c969f",
+    "dsh/cold-reader/raw/native-events.jsonl": "41fab1ddb3a7b5aa1d4a54b2fb4a116263a7f747c52e8698a151efe6ca92b2da"
+  },
+  "checks": {
+    "historical_observation": {
+      "status": "Passed",
+      "reason": "The same paragraph retains the date, Linux manual example, Passed, and history-only/not-current qualifier. The original contiguous-string check failed after date relocation."
+    },
+    "single_dynamic_plan": {
+      "status": "Passed",
+      "reason": "One selected PWF plan; README reaches the old entry which now links one way to it; prior goal/next step explicitly archived."
+    },
+    "approved_requirements_and_user_edit": {
+      "status": "Passed",
+      "reason": "contract.md and user-note.txt bytes match the before snapshot."
+    },
+    "fix_and_actual_verification": {
+      "status": "Passed",
+      "reason": "Native trace contains reproduction and red/green regression; controller ran four tests and independent byte checks."
+    },
+    "cold_read": {
+      "status": "Passed",
+      "reason": "Separate fresh session recovers current files and next Windows check; no edits or independent test execution claimed."
+    },
+    "verification_document_accuracy": {
+      "status": "Failed",
+      "reason": "The actual failing discovery command included -t .; project records overgeneralize failure to discover -s tests, while controller discover -s tests -v passes four tests."
+    }
+  },
+  "status": "Failed",
+  "limits": [
+    "Windows actual verification Not Run",
+    "This review does not rewrite the original assessment or authorize stable promotion"
+  ]
+}

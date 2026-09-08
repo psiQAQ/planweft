@@ -48,6 +48,8 @@ npm publish /tmp/planweft-release-new/npm/planweft-0.4.0-rc.1.tgz --tag next --a
 
 本轮已备份并清理公开 master 历史，GitHub 仓库已公开；旧记录中的“尚未推送”仅属于当时状态。原始历史和清理后附件通过内部 [映射](reproduction/evidence/0010/history-sanitization.json) 关联。清理不撤回其他人的旧副本。
 
-RC1 已于本轮发布，远端 SHA-256 与验收归档一致。首次发布在指定 next 后仍自动生成 latest，认证完成后的标签删除请求仍返回 HTTP 400，尚未更正；不将候选标签状态视为稳定验收通过。GitHub trusted publisher 已建立，release 环境只允许 master。配置命令使用 npm 11.19.1 的 `--allow-publish`（旧 11.11.0 的 trust 请求缺少当前 API 必填 permissions 字段）；发布工作流仍固定 npm 11.11.0。下一步以修复 DSH 启动和 OpenCode Skill 配对的新 RC 验证 OIDC，再补齐五宿主门槛。
+RC1 已于本轮发布，远端 SHA-256 与验收归档一致。首次发布在指定 next 后仍自动生成 latest，认证完成后的标签删除请求仍返回 HTTP 400，尚未更正；不将候选标签状态视为稳定验收通过。GitHub trusted publisher 已建立，release 环境只允许 master。配置命令使用 npm 11.19.1 的 `--allow-publish`（旧 11.11.0 的 trust 请求缺少当前 API 必填 permissions 字段）；发布工作流仍固定 npm 11.11.0。后续 RC2/RC3 已验证 OIDC；五宿主最终门槛继续补齐。
 
-RC2 已通过 [GitHub OIDC](https://github.com/psiQAQ/planweft/actions/runs/34248506886) 发布到 next，CI 重建及真实 npm 下载均匹配冻结 SHA-256 `3948cb9c4cd03f1505966b95e22729177cb09a4af28296fd1ef7be2dd0349754`。OpenCode 维护通过独立审查；DSH 上下文与维护失败需要 RC3 修复，稳定 0.4.0 仍未发布。
+RC2 已通过 [GitHub OIDC](https://github.com/psiQAQ/planweft/actions/runs/34248506886) 发布到 next，CI 重建及真实 npm 下载均匹配冻结 SHA-256 `3948cb9c4cd03f1505966b95e22729177cb09a4af28296fd1ef7be2dd0349754`。OpenCode 维护通过独立审查；当时 DSH 上下文与维护失败留待后续修复。
+
+RC3 已通过 [OIDC 工作流](https://github.com/psiQAQ/planweft/actions/runs/34264091642) 发布到 `next`。干净源码 `7d690010fbf8705129d3fb44b2556bb6a0fa7de6`、CI 重建及 npm 远端归档均绑定 SHA-256 `09ea0e4dceb88c9b845af851916356c44f3447071e0d1311dc38841639705060`；[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34262987621) 通过。DSH 修复后的注入与恢复已有实际证据，但维护采用/文档准确性仍有失败；OpenCode 六项停止场景通过原生 server 的 5 秒静默观察，不宣称宿主提供 settled。正式 `0.4.0` 尚未发布，`latest` 仍是 RC1；试用明确选择 `planweft@0.4.0-rc.3` 或 `@next`。详细状态：[中文](platforms.md) / [English](platforms.en.md)。
