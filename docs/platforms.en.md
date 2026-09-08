@@ -2,11 +2,11 @@
 
 ## 0.4.0 candidate validation
 
-One npm package now exposes the installer, Pi resources and OpenCode V1 entry. Local native lifecycle tests on Linux passed for the four core hosts; model and remote-channel validation remain separate gates. Other ten adapters retain their implementations but are experimental in 0.4.0. Windows/macOS installer CI is configured, not yet run. [Release: 中文](releasing.md) / [English](releasing.en.md). The 0.3.0 evidence below remains historical.
+One npm package now exposes the installer, Pi resources and OpenCode V1 entry. Local native lifecycle tests on Linux passed for the four core hosts; model and remote-channel validation remain separate gates. Other eleven adapters retain their implementations but are experimental in 0.4.0. Windows/macOS installer CI is configured, not yet run. [Release: 中文](releasing.md) / [English](releasing.en.md). The 0.3.0 evidence below remains historical.
 
 # Cross-platform design
 
-PlanWeft 0.4.0 generates independent distributions for 14 hosts from one set of file-planning and documentation rules. The workflow and state protocol are shared; installation entry points, event formats, caches, trust, and continuation follow each host's native mechanisms.
+PlanWeft 0.4.0 generates independent distributions for 15 hosts from one set of file-planning and documentation rules. The workflow and state protocol are shared; installation entry points, event formats, caches, trust, and continuation follow each host's native mechanisms.
 
 For project goals and design sources, read the project introduction: [简体中文](../README.md) | [English](../README.en.md). For installation, updates, rollback, and removal, read the installation guide: [简体中文](installation.md) | [English](installation.en.md). This page explains platform structure and capability boundaries without repeating installation procedures.
 
@@ -26,6 +26,7 @@ For project goals and design sources, read the project introduction: [简体中�
 | Continue | Passed | Not Run | Not Run | Not Run |
 | Mastra Code | Passed | Not Run | Not Run | Not Run |
 | Agents | Passed | Not Run | Not Run | Not Run |
+| DeepSeek Harness / DSH | Passed | Passed (Skill provider) | Not Run (full plugin) | Not Run |
 
 All remote npm/Git lifecycles and real Windows/macOS host sessions remain Not Run until separately recorded. Pi RPC and OpenCode debug discovery are actual host loading, not model calls. Non-core native runs from 0.3.0 are not reused as 0.4.0 results.
 

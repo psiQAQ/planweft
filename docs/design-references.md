@@ -199,3 +199,10 @@ vendor 四文件是导入器产物，dist 与 plugins 由 builder 生成；证�
 - 根 npm `pi` 字段依据 [Pi packages](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/packages.md)；OpenCode 根 exports 与 loader 依据 [V1 plugins](https://opencode.ai/docs/plugins/)。
 - scope 独立 catalog、逐步失败收据、拷贝 staging 与用户修改保护是本地组合设计，见 ADR-0008；不声称这些通用机制为首创。
 - npm 发布认证依据 [trusted publishers](https://docs.npmjs.com/trusted-publishers/)。真实宿主与 npm 认证结果单独记录，不能由源码结构推定。
+
+## DSH 增量适配（2026-09-08）
+
+- `scripts/build-plugin.py`、`overlays/planweft/native/adapters.py`：沿用既有 portable Skill，按 [DSH filesystem provider](https://github.com/deepseek-ai/deepseek-harness/blob/c389f96bf3a9b6807cb71ed6bdad5849be0df6d8/packages/skill/skill-filesystem/README.md) 的单层扫描布局生成；不复制 DSH 源码。
+- `lib/installer.mjs`：DSH Git 根、DSH_HOME 规则以官方 provider 与 [home-paths](https://github.com/deepseek-ai/deepseek-harness/blob/c389f96bf3a9b6807cb71ed6bdad5849be0df6d8/packages/util/home-paths/src/index.ts) 为依据；本地选择是在 Git 根执行安装，以复用现有 scope/锁/所有权而不新增第二套安装记录。
+- 完整集成的候选依据：[官方 hook bridge](https://github.com/deepseek-ai/deepseek-harness/blob/c389f96bf3a9b6807cb71ed6bdad5849be0df6d8/packages/hooks/hooks-claude-code/README.md)、[原生 profile CLI](https://github.com/deepseek-ai/deepseek-harness/blob/c389f96bf3a9b6807cb71ed6bdad5849be0df6d8/apps/cli/README.md)。两个运行依赖尚未获确认，因此当前不声称原生 bundle/hooks 已实现。
+- 运行证据：`tests/run-dsh-skill-smoke.mjs` 用隔离安装的官方 npm 0.1.2-rc.1 组件执行；这与源码参考版本分开记录。安装器测试证明本地生命周期，provider runtime 证明 Skill 发现/加载，两者都不是模型使用证据。
