@@ -5,24 +5,43 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import assert from 'node:assert/strict';
-const [packageRoot, output] = process.argv.slice(2);
+import {createHash} from 'node:crypto';
+const [packageRoot, output, sdkModules] = process.argv.slice(2);
 if (!packageRoot || !output || fs.existsSync(output)) throw Error('Provide installed package root and new output directory');
 const root=path.resolve(packageRoot),out=path.resolve(output);
 if(out===root || out.startsWith(root+path.sep)) throw Error('Keep test output outside installed package');
 const adapter=await import(pathToFileURL(path.join(root,'dist/dsh/planweft/index.mjs')).href);
 fs.mkdirSync(out,{recursive:true});
-const env={PATH:process.env.PATH,HOME:path.join(out,'home'),XDG_CACHE_HOME:path.join(out,'cache'),LANG:'C.UTF-8',PYTHONDONTWRITEBYTECODE:'1'};
+const env={PATH:process.env.PATH,HOME:path.join(out,'home'),XDG_CACHE_HOME:path.join(out,'cache'),LANG:'C.UTF-8',PYTHONDONTWRITEBYTECODE:'1',PWF_FAST_PATH:process.env.PWF_FAST_PATH||'1'};
 const handlers=new Map(),events=[],runs=[],warnings=[],effects=[],plugins=[];
 const ctx={logger:{warn:msg=>warnings.push(msg)},get:()=>undefined,
   sessionProjections:{stateOf:()=>({lastTurn:1})},
   on:(name,fn)=>handlers.set(name,fn),effect:fn=>effects.push(fn()),
-  plugin:(plugin,config)=>{plugins.push({name:plugin.name,config});if(plugin.name==='hooks-claude-code')plugin.apply(ctx,config);},
+  isolate: function(){return Object.create(this);},
+  provide: function(name,value){this[name]=value;},
+  plugin: function(plugin,config){plugins.push({name:plugin.name,config});if(plugin.name==='hooks-claude-code')plugin.apply(this,config);},
   shell:{resolve:r=>r,run:async r=>{
     const result=spawnSync('sh',['-c',r.command],{cwd:r.workdir,env:{...env,...r.env},input:r.stdin,encoding:'utf8',timeout:r.timeoutMs});
     runs.push({cwd:r.workdir,event:JSON.parse(r.stdin).hook_event_name,exit:result.status,stdout:result.stdout,stderr:result.stderr});
     return {exitCode:result.status,stdout:{text:result.stdout||''},stderr:{text:result.stderr||''}};
   }}
 };
+const fibers=[];
+if(sdkModules) {
+  const load=name=>import(pathToFileURL(path.resolve(sdkModules,name,'lib/index.js')).href);
+  const {Context}=await load('@deepseek-ai/cordis');
+  const runtime=new Context();
+  for(const name of ['@deepseek-ai/dsh-subprocess-local','@deepseek-ai/dsh-sandbox-local']) {
+    const plugin=(await load(name)).default, fiber=runtime.plugin(plugin,{});await fiber.await();fibers.push(fiber);
+  }
+  runtime.provide('sandboxPolicy',{defaultMode:'workspace-write',resolve:()=>({mode:'workspace-write',workspaceRoot:out})});
+  const fiber=runtime.plugin((await load('@deepseek-ai/dsh-bash-sandbox')).default,{});await fiber.await();fibers.push(fiber);
+  ctx.shell={resolve:r=>runtime.shell.resolve({...r,sandboxPolicy:{mode:'workspace-write',workspaceRoot:r.workdir},env:{...env,...r.env}}),run:async spec=>{
+    const result=await runtime.shell.run(spec);
+    runs.push({cwd:spec.workdir,event:JSON.parse(spec.stdin).hook_event_name,exit:result.exitCode,stdout:result.stdout.text,stderr:result.stderr.text,sandbox:result.sandbox});
+    return result;
+  }};
+}
 adapter.apply(ctx);
 assert.equal(plugins.filter(p=>p.name==='hooks-claude-code').length,1);
 const hook=plugins.find(p=>p.name==='hooks-claude-code');assert.ok(!('projectDir' in hook.config));
@@ -40,6 +59,11 @@ try {
     const first=await run();assert.ok(JSON.stringify(first).includes('DSH_MARKER_'+id));
     assert.ok(!JSON.stringify(first).includes('DSH_MARKER_'+(id==='A'?'B':'A')));
     const second=await run();assert.ok(JSON.stringify(second).includes('DSH_MARKER_'+id)); // PWF refreshes each prompt.
+    const post=()=>handlers.get('tools/post-execute')({agent,name:'write',arguments:{},callId:'write-1',signal},{content:[{type:'text',text:'ok'}]},async()=>({kind:'pass',additionalContexts:[{content:[{type:'text',text:'other plugin context'}]}]}));
+    const postFirst=await post();assert.equal(postFirst.additionalContexts.length,2);
+    const postSecond=await post();assert.equal(postSecond.additionalContexts.length,1);
+    assert.ok(JSON.stringify(postSecond).includes('other plugin context'));
+    await run();assert.equal((await post()).additionalContexts.length,2);
     // A downstream permission denial remains unchanged.
     const denied=await handlers.get('tools/pre-execute')({agent,name:'read',arguments:{},callId:'read-1',signal},async()=>({kind:'deny',reason:'fixture-policy'}));
     assert.deepEqual(denied,{kind:'deny',reason:'fixture-policy'});
@@ -49,16 +73,39 @@ try {
     agent.session.header.id+='-fresh';handlers.get('agent/session-start')({agent,source:'resume'});
     for(let i=0;i<100 && !injected.length;i++) await new Promise(r=>setTimeout(r,20));
     assert.ok(JSON.stringify(injected).includes('DSH_MARKER_'+id));
+    // Gate counters and stall state remain in the selected plan, even when
+    // the host recreates its temporary filesystem for every hook invocation.
+    fs.writeFileSync(path.join(cwd,'.mode'),'autonomous gate\n');
+    fs.writeFileSync(path.join(cwd,'.plan-attestation'),createHash('sha256').update(plan).digest('hex')+'\n');
+    env.PWF_GATE_CAP='2';
+    const stop=()=>handlers.get('agent/turn-stopping')({agent,turn:1,signal});
+    await stop();assert.equal(steered.length,1);
+    await stop();assert.equal(steered.length,1); // no new ledger observation: release stop
+    fs.writeFileSync(path.join(cwd,'ledger-owner.jsonl'),'{"observation":"advanced"}\n');
+    await stop();assert.equal(steered.length,2);
+    fs.appendFileSync(path.join(cwd,'ledger-owner.jsonl'),'{"observation":"advanced again"}\n');
+    await stop();assert.equal(steered.length,2); // cap reached
+    assert.equal(fs.readFileSync(path.join(cwd,'.stop_blocks'),'utf8').trim(),'2');
+    assert.equal(fs.readFileSync(path.join(cwd,'task_plan.md'),'utf8'),plan);
   }
+  const empty=path.join(out,'empty');fs.mkdirSync(empty);
+  const agent={session:{header:{id:'empty',cwd:empty},append(){}}};
+  const messages=[{content:[{type:'text',text:'Read-only diagnosis.'}]}];
+  const unplanned=()=>handlers.get('agent/pre-step')({agent,messages,turn:1,signal},async()=>({kind:'enter',messages}));
+  assert.ok(JSON.stringify(await unplanned()).includes('project-docs'));
+  assert.deepEqual(fs.readdirSync(empty),[]);
+  fs.symlinkSync('missing',path.join(empty,'.planning'));
+  assert.ok(!JSON.stringify(await unplanned()).includes('first load the installed'));
   const previous=process.env.PLANNING_DISABLED;process.env.PLANNING_DISABLED='1';
   const disabled=[];adapter.apply({plugin:p=>disabled.push(p.name)});
   if(previous===undefined)delete process.env.PLANNING_DISABLED;else process.env.PLANNING_DISABLED=previous;
   assert.ok(!disabled.includes('hooks-claude-code'));
   assert.ok(runs.every(r=>r.exit===0));
   assert.ok(warnings.every(w=>w.includes('Stop hook emitted a systemMessage'))); // Explicit official bridge limitation.
-  fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({status:'Passed',kind:'protocol fixture with real DSH bridge and subprocesses',projectIsolation:true,promptRefresh:true,recovery:true,defaultStop:true,stopSystemMessage:'not surfaced by DSH',permissionPreserved:true,disabled:true},null,2));
+  fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({status:'Passed',kind:sdkModules?'protocol fixture with real DSH bridge and sandbox':'protocol fixture with real DSH bridge and subprocesses',fastPath:env.PWF_FAST_PATH,projectIsolation:true,promptRefresh:true,postToolDedup:true,recovery:true,defaultStop:true,gatedCap:true,gatedStall:true,unplannedReadOnly:true,brokenStatePreserved:true,stopSystemMessage:'not surfaced by DSH',permissionPreserved:true,disabled:true},null,2));
   console.log('Passed');
 } finally {
   for(const dispose of effects) if(typeof dispose==='function') await dispose();
+  for(const fiber of fibers.reverse())await fiber.dispose();
   fs.writeFileSync(path.join(out,'trace.json'),JSON.stringify({events,runs,warnings},null,2));
 }

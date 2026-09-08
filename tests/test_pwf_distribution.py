@@ -237,7 +237,12 @@ class PackageContractTest(unittest.TestCase):
                     stale = re.search(r'skills[/\\]planweft(?:[/\\]|["\'])', normalized)
                     self.assertIsNone(stale, 'skill fallback should name project-docs')
                     self.assertTrue('/home/psi/' not in text, 'personal workspace path leaked')
-                    self.assertTrue('/tmp/planweft-' not in text, 'build scratch path leaked')
+                    # This one literal is a runtime mktemp template inside the
+                    # DSH sandbox, not the builder's scratch directory.
+                    scratch_text = text
+                    if host == 'dsh' and path == PurePosixPath('hooks/dsh-hook.sh'):
+                        scratch_text = text.replace('mktemp -d /tmp/planweft-hook.XXXXXX', 'mktemp -d RUNTIME_CACHE')
+                    self.assertTrue('/tmp/planweft-' not in scratch_text, 'build scratch path leaked')
 
     def test_auxiliary_command_files_are_namespaced_and_explicit(self):
         seen = 0

@@ -28,6 +28,7 @@ jobs:
       - run: npm install --global npm@11.11.0 --ignore-scripts
       - run: python3 scripts/build-plugin.py --verify
       - run: node tests/installer.test.mjs
+      - run: node tests/dsh-hook-shell.test.mjs
       - run: python3 -m unittest discover -s tests -p 'test_*.py'
       - run: python3 scripts/prepare-native-release.py --release --output "$RUNNER_TEMP/planweft-release" --repository-url https://github.com/psiQAQ/planweft
       - name: Gate and publish to next (never promotes latest)

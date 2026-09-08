@@ -14,6 +14,7 @@ jobs:
         with:
           node-version: '24'
       - run: node tests/installer.test.mjs
+      - run: node tests/dsh-hook-shell.test.mjs
   distribution:
     runs-on: ubuntu-latest
     steps:
