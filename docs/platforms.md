@@ -1,5 +1,7 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
+RC1 结果不代表五平台门槛通过：Pi context 在已观察到注入时仍回答失败，OpenCode 维护遗漏任务计划，DSH 启动失败。RC2 修复须使用新准确归档复验。见[发布状态：中文](releasing.md) / [English](releasing.en.md)。
+
 ## 0.4.0 候选验证
 
 单 npm 包提供安装器、Pi 资源和 OpenCode V1 入口。正式发布要求 Codex、Claude Code、Pi、OpenCode 和 DSH 五个平台全部通过；其余十个平台仍为实验性。已有本地生命周期证据保留，准确归档、真实模型与远端安装分别验收。Linux、Windows、macOS 安装器 CI 已通过，首次 Windows 故障注入路径问题已修复；[运行记录](https://github.com/psiQAQ/planweft/actions/runs/34242500572)。[发布：中文](releasing.md) / [English](releasing.en.md)。下方 0.3.0 证据继续作为历史记录。
@@ -13,9 +15,9 @@ PlanWeft 0.4.0 将同一套文件规划与文档协作规则，生成适合 15 �
 | 平台 | 静态检查 | 协议检查 | 原生生命周期（Linux） | 模型维护（Linux） |
 | --- | --- | --- | --- | --- |
 | Codex | Passed | Passed | Passed | Passed |
-| Claude Code | Passed | Passed | Passed | Not Run |
-| Pi | Passed | Passed | Passed | Not Run |
-| OpenCode V1 | Passed | Passed | Passed | Not Run |
+| Claude Code | Passed | Passed | Passed | Passed (RC1) |
+| Pi | Passed | Passed | Passed | Passed (RC1; reviewed reassessment) |
+| OpenCode V1 | Passed | Passed | Passed | Failed (RC1) |
 | Cursor | Passed | Passed | Not Run | Not Run |
 | Copilot CLI | Passed | Passed | Not Run | Not Run |
 | Gemini CLI | Passed | Passed | Not Run | Not Run |
@@ -26,7 +28,7 @@ PlanWeft 0.4.0 将同一套文件规划与文档协作规则，生成适合 15 �
 | Continue | Passed | Not Run | Not Run | Not Run |
 | Mastra Code | Passed | Not Run | Not Run | Not Run |
 | Agents | Passed | Not Run | Not Run | Not Run |
-| DeepSeek Harness / DSH | Passed | Passed (bridge/Skill) | Passed | Not Run |
+| DeepSeek Harness / DSH | Passed | Passed (bridge/Skill) | Failed (RC1 boot) | Failed (RC1 boot) |
 
 远端 npm/Git 生命周期及 Windows/macOS 真实宿主尚待单独记录。Pi RPC 与 OpenCode debug 是实际宿主加载，不是模型调用；非核心宿主的 0.3.0 安装结果不冒充 0.4.0 实测。
 

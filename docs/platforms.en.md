@@ -1,5 +1,7 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
+RC1 results do not clear the five-host release gate: Pi context failed despite observed injection; OpenCode maintenance missed the task plan; DSH failed during boot. RC2 fixes require a new exact-artifact trial. See [release status: 中文](releasing.md) / [English](releasing.en.md).
+
 ## 0.4.0 candidate validation
 
 One npm package now exposes the installer, Pi resources and OpenCode V1 entry. Stable publication requires all five hosts: Codex, Claude Code, Pi, OpenCode and DSH. The other ten adapters remain experimental. Existing local lifecycle evidence is retained; exact artifacts, model sessions and remote installations are tested separately. Linux, Windows and macOS installer CI passed after correcting the Windows failure-injection path; [run record](https://github.com/psiQAQ/planweft/actions/runs/34242500572). [Release: 中文](releasing.md) / [English](releasing.en.md). The 0.3.0 evidence below remains historical.
@@ -13,9 +15,9 @@ For project goals and design sources, read the project introduction: [简体中�
 | Platform | Static | Protocol | Native lifecycle (Linux) | Model maintenance (Linux) |
 | --- | --- | --- | --- | --- |
 | Codex | Passed | Passed | Passed | Passed |
-| Claude Code | Passed | Passed | Passed | Not Run |
-| Pi | Passed | Passed | Passed | Not Run |
-| OpenCode V1 | Passed | Passed | Passed | Not Run |
+| Claude Code | Passed | Passed | Passed | Passed (RC1) |
+| Pi | Passed | Passed | Passed | Passed (RC1; reviewed reassessment) |
+| OpenCode V1 | Passed | Passed | Passed | Failed (RC1) |
 | Cursor | Passed | Passed | Not Run | Not Run |
 | Copilot CLI | Passed | Passed | Not Run | Not Run |
 | Gemini CLI | Passed | Passed | Not Run | Not Run |
@@ -26,9 +28,9 @@ For project goals and design sources, read the project introduction: [简体中�
 | Continue | Passed | Not Run | Not Run | Not Run |
 | Mastra Code | Passed | Not Run | Not Run | Not Run |
 | Agents | Passed | Not Run | Not Run | Not Run |
-| DeepSeek Harness / DSH | Passed | Passed (bridge/Skill) | Passed | Not Run |
+| DeepSeek Harness / DSH | Passed | Passed (bridge/Skill) | Failed (RC1 boot) | Failed (RC1 boot) |
 
-All remote npm/Git lifecycles and real Windows/macOS host sessions remain Not Run until separately recorded. Pi RPC and OpenCode debug discovery are actual host loading, not model calls. Non-core native runs from 0.3.0 are not reused as 0.4.0 results.
+RC1 remote npm same-version lifecycle passed for Codex, Claude and Pi; OpenCode Skill pairing failed, and DSH composed-config discovery did not prove boot. Remote multi-version and Git marketplace lifecycles and real Windows/macOS host sessions remain Not Run. Pi RPC and OpenCode debug discovery are actual host loading, not model calls. Non-core native runs from 0.3.0 are not reused as 0.4.0 results.
 
 The Codex model scenario uses an isolated container and an explicit hook trust bypass. It validates the reviewed hooks at runtime, not the default interactive trust confirmation flow.
 

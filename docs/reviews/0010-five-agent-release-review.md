@@ -37,3 +37,13 @@
 ```
 
 容器基线检查的复跑发现 Docker `ps` 不支持负 label filter；主 Agent 已改为全体 ID 减去正 label 查询的 ID，保留失败尝试并复验。
+
+## RC2 原生修复与模型语义复核
+
+独立 reviewer `container_release_plan_review` 核查 DSH Cordis 相对插件定位（宿主 anchorInsertedPluginNames 会将 patch 中相对文件名绑定到包根）、OpenCode 同版本 npm 插件独立 Skill 配对以及仅包含官方 URL/key 的临时模型输入，未发现新的设计阻塞。已有 PWF 状态协议和上游固定源码保留。
+
+Pi 维护记录保存了完整历史事实，仅重排“历史：”展示标题，原断言误报；使用明确重判附件，不能宣称重跑模型。Pi context 的原生消息包含 token 但模型未返回，仍为 Failed。Claude 维护与独立冷读语义 Passed；冷读“未执行任何命令”的自述不准确，应限定为未写文件、未重跑测试。
+
+OpenCode 未自动读取 Skill 的实际维护失败需要修复，reviewer 同意在现有 chat.message 无计划/无冲突分支加入条件式指引。保留禁用、有效根检查与去重，不新增调度或直接初始化。要求实际维护、simple 和 readonly 复验；协议测试不能放行稳定版。
+
+后续复审提出两项增强，主 Agent 已处理：非空但失效的 PLAN_ID 保持原有静默，不被当作新任务提醒；对照入口保存 Vitest JSON 并机械检查 raw 失败集合恰为两项有意差异，额外失败或 pending 不能放行。新增显式绑定 hook 测试。typecheck 仅覆盖运行时 src，不声称覆盖测试 TypeScript。

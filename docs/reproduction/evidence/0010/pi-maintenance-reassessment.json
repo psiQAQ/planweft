@@ -1,0 +1,40 @@
+{
+  "status": "Passed",
+  "assertions": {
+    "container_succeeded": true,
+    "model_answer_present": true,
+    "no_model_errors": true,
+    "approved_requirement_preserved": true,
+    "user_edit_preserved": true,
+    "tests_passed": true,
+    "fixed_bom": true,
+    "historical_observation_preserved": true,
+    "user_guide_updated": true,
+    "single_task_plan": true
+  },
+  "image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b",
+  "seconds": 227.653,
+  "controller": {
+    "host": "pi",
+    "case": "maintenance",
+    "status": "Passed",
+    "model_session": "Passed",
+    "versions": {
+      "pi": "0.84.3",
+      "node": "v24.19.0",
+      "python3": "Python 3.11.2"
+    },
+    "version": "0.4.0-rc.1",
+    "npm_sha256": "d72ef1e786f8aa0c63041026e716ac19f527d083f51e0b4d80624fba97c1dfdf",
+    "exact_artifact": "Passed",
+    "offline_tests": "Passed",
+    "independent_bytes": "Passed",
+    "uninstall": "Passed",
+    "credential_redactions": 0
+  },
+  "semantic_review": "Required",
+  "evaluation": "Post-run correction of display-prefix-only assertion; not a model rerun",
+  "reviewer": "container_release_plan_review",
+  "original_assessment_sha256": "d243f9d4eb7e5110d1cf18513fa28cfe69f0d1955363bb7bf01bb3de2765ef53",
+  "after_sha256": "57d8493ee8faf16d10f6b12c96d589b74b37bcdca0af70a206a2ebd8ae2dceb1"
+}
