@@ -53,8 +53,10 @@ def main():
     a = a / 'package'
     import shutil
     b = out / 'B/package'; shutil.copytree(a, b)
-    original = json.loads((a / 'package.json').read_text())['version']; next_version = '0.4.0-rc.2'
-    if original == next_version: raise ValueError('Fixture version must differ')
+    original = json.loads((a / 'package.json').read_text())['version']
+    # Local fixtures must work for every candidate and never impersonate the
+    # next real published version.
+    next_version = original + ('.fixture.1' if '-' in original else '-fixture.1')
     for p in b.rglob('*'):
         if not p.is_file(): continue
         try: text = p.read_bytes().decode('utf-8')
@@ -86,7 +88,7 @@ def main():
             linked = (home / '.dsh/profiles/headless/node_modules/planweft').resolve()
             if linked != package_root: raise RuntimeError('DSH native link selects the wrong version')
             composed = run('native-config-' + label, ['dsh', '--profile', 'headless', '--dump-config'])
-            if 'planweft/dsh' not in composed: raise RuntimeError('DSH did not compose the native bundle')
+            if 'planweft/dsh' not in composed and '/dist/dsh/planweft/index.mjs' not in composed: raise RuntimeError('DSH did not compose the native bundle')
             skill = linked / 'dist/dsh/planweft/skills/project-docs'
         elif args.host in ['codex', 'claude']:
             manifest_name = '.codex-plugin/plugin.json' if args.host == 'codex' else '.claude-plugin/plugin.json'

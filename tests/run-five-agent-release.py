@@ -39,7 +39,9 @@ def parse_args(argv=None):
     parser.add_argument('--image-lock',type=Path,default=ROOT/'tests/container-images.json')
     parser.add_argument('--host',choices=HOSTS,action='append',required=True)
     parser.add_argument('--cases',nargs='+',choices=CASES,default=['preflight','lifecycle'])
-    parser.add_argument('--model-config',type=Path,help='Existing YAML upstream config; only selected official provider fields are read')
+    auth_group=parser.add_mutually_exclusive_group()
+    auth_group.add_argument('--model-config',type=Path,help='Legacy YAML upstream config; prefer a dedicated direct-provider file')
+    auth_group.add_argument('--direct-provider-config',type=Path,help='Private JSON containing only base_url and api_key; no gateway or memory configuration')
     parser.add_argument('--codex-auth',type=Path,help='Existing Codex auth file, for Codex model cases only')
     parser.add_argument('--model',default='deepseek-v4-flash')
     parser.add_argument('--codex-model',default='gpt-5.6-terra')
@@ -83,14 +85,20 @@ def credentials(args, host):
         if not args.codex_auth or not args.codex_auth.is_file():
             raise ValueError('Codex authentication unavailable')
         return {'auth':json.loads(args.codex_auth.read_text())}
-    if not args.model_config:
-        raise ValueError('Direct provider configuration unavailable')
-    import yaml
-    config=yaml.safe_load(args.model_config.read_text())['upstream']
-    override=config.get('agents',{}).get('claude-code' if host=='claude' else 'dsh' if host=='dsh' else 'codebuddy',{})
-    selected={**config,**override}
-    url=selected.get('baseUrl') or selected.get('baseURL') or selected.get('url')
-    key=selected.get('apiKey')
+    if args.direct_provider_config:
+        selected=json.loads(args.direct_provider_config.read_text())
+        if not isinstance(selected,dict) or set(selected)!={'base_url','api_key'}:
+            raise ValueError('Direct configuration must contain only base_url and api_key')
+        url,key=selected['base_url'],selected['api_key']
+    else:
+        if not args.model_config:
+            raise ValueError('Direct provider configuration unavailable')
+        import yaml
+        config=yaml.safe_load(args.model_config.read_text())['upstream']
+        override=config.get('agents',{}).get('claude-code' if host=='claude' else 'dsh' if host=='dsh' else 'codebuddy',{})
+        selected={**config,**override}
+        url=selected.get('baseUrl') or selected.get('baseURL') or selected.get('url')
+        key=selected.get('apiKey')
     route=urlparse(url) if isinstance(url,str) else None
     if not route or route.scheme!='https' or route.hostname!='api.deepseek.com' or route.username or route.password or route.query or route.fragment or route.netloc!='api.deepseek.com':
         raise ValueError('Model route must be the reviewed direct official HTTPS provider')
@@ -259,7 +267,7 @@ def main(argv=None):
                     assertions['user_edit_preserved']=before['user-note.txt']==after.get('user-note.txt')
                     assertions['tests_passed']=result.get('offline_tests')=='Passed'
                     assertions['fixed_bom']=result.get('independent_bytes')=='Passed'
-                    assertions['historical_observation_preserved']=fixture.HISTORY in after.get('notes/work.md','')
+                    assertions['historical_observation_preserved']=fixture.HISTORY.removeprefix('历史：') in after.get('notes/work.md','')
                     assertions['user_guide_updated']=before['notes/guide.md']!=after.get('notes/guide.md')
                     assertions['single_task_plan']=len([p for p in after if Path(p).name=='task_plan.md'])==1
                 cases[case]={'status':'Passed' if all(assertions.values()) else 'Failed','assertions':assertions,

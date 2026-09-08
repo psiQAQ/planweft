@@ -35,6 +35,22 @@ class ContainerReleaseTest(unittest.TestCase):
                     self.assertEqual(result.returncode,2)
                     self.assertFalse(output.exists())
 
+    def test_direct_provider_rejects_memory_configuration_and_nonofficial_routes(self):
+        from types import SimpleNamespace
+        runner=module('pw_direct_provider','tests/run-five-agent-release.py')
+        with tempfile.TemporaryDirectory() as temporary:
+            config=Path(temporary)/'provider.json'
+            args=SimpleNamespace(cases=['context'],direct_provider_config=config,model_config=None)
+            approved={'base_url':'https://api.deepseek.com/v1','api_key':'fixture-only-secret'}
+            config.write_text(json.dumps(approved))
+            self.assertEqual(runner.credentials(args,'pi'),approved)
+            for rejected in [{**approved,'memory':{'enabled':True}},
+                             {**approved,'base_url':'https://memory.example/v1'},
+                             {**approved,'base_url':'https://api.deepseek.com/v1?gateway=example'},
+                             {**approved,'base_url':'https://user@api.deepseek.com/v1'}]:
+                config.write_text(json.dumps(rejected))
+                with self.assertRaises(ValueError): runner.credentials(args,'dsh')
+
     def test_archive_symlink_is_rejected_before_output(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary);archive=root/'package.tgz';output=root/'absent'

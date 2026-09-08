@@ -182,3 +182,13 @@ python3 tests/run-five-agent-release.py \
 远端回归接受 `--version/--sha256` 和成对的 `--previous-version/--previous-sha256`；只有真实下载的两个版本才能证明远端 A→B→A→B→卸载。单版本只证明幂等。模型新会话和公开 Git marketplace 是独立验收项。
 
 以上为内部开发文档；对外说明见 [发布：中文](../docs/releasing.md) / [English](../docs/releasing.en.md)。
+
+Model trials can use `--direct-provider-config /private/tmpfs/provider.json` instead of the legacy `--model-config`. The private JSON must contain exactly `base_url` and `api_key`; only the official DeepSeek HTTPS hostname is accepted, without user info, query strings, or gateway fields. Keep this file outside projects and evidence, restrict it to the current user, and remove it after trials. Credentials reach containers via stdin and remain in tmpfs. No private configuration should be committed.
+
+OpenCode 实际平台运行时对照（锁定依赖安装在新临时目录）：
+
+```bash
+python3 scripts/run-opencode-tests.py --output /tmp/planweft-opencode-regression-new
+```
+
+保留上游原字节测试、原生未调整结果，以及两项明确本地差异的适配结果：无计划 Skill 提醒、安装包/显式模板来源。附加测试验证无写盘、去重、禁用及项目模板不能替换安装资源；协议通过不代替模型验收。

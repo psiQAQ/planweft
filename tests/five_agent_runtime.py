@@ -104,7 +104,7 @@ def prepare_model(host, secret, model):
         text += '        models:\n          - id: '+json.dumps(model)+'\n            name: DeepSeek\n            contextWindow: 1048576\n            maxTokens: 65536\n'
         # Preserve real native events for verification; this affects local log
         # encoding only. No observer extension or synthetic event carrier.
-        text += '- id: session-persistence-jsonl\n  config:\n    compression: none\n'
+        text += '- id: session-persistence-jsonl\n  config:\n    root: /home/agent/.dsh/sessions\n    compression: none\n'
         (HOME/'.dsh/cordis.patch.yml').write_text(text)
 
 
@@ -134,8 +134,9 @@ def native_load(host, package_root):
     if manifest.get('dsh',{}).get('profile',{}).get('bundles',[]).count('planweft')!=1 or (profile/'node_modules/planweft').resolve()!=package_root:
         raise RuntimeError('DSH did not select the exact native bundle once')
     text=run('native-load', ['dsh', '--profile', 'headless', '--dump-config']).stdout
-    if 'planweft/dsh' not in text:
+    if 'planweft/dsh' not in text and '/dist/dsh/planweft/index.mjs' not in text:
         raise RuntimeError('DSH native bundle did not compose')
+    run('native-boot', ['dsh', '--profile', 'headless', '--help'])
     return text
 
 

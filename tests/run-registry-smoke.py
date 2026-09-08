@@ -16,6 +16,15 @@ import tarfile
 
 ROOT = Path(__file__).resolve().parents[1]
 
+def extract_package(archive, output):
+    # The fixed host images include Python 3.11, before extraction filters.
+    with tarfile.open(archive) as tar:
+        for member in tar:
+            name=Path(member.name)
+            if name.is_absolute() or '..' in name.parts or not name.parts or name.parts[0]!='package' or not (member.isfile() or member.isdir()):
+                raise ValueError('Unsafe package archive member')
+        tar.extractall(output)
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--version', required=True)
@@ -46,7 +55,7 @@ def main():
                npm_config_prefix=str(profile/'npm-prefix'), npm_config_registry='https://registry.npmjs.org',
                PATH=os.pathsep.join([*map(str,args.cli_dir),env['PATH']]))
     summary = {'version':args.version, 'npm_sha256':args.sha256, 'status':'In Progress', 'steps':[],
-               'remote_cross_version_lifecycle':'Pending' if args.previous_version else 'Not Run: one published candidate', 'model_sessions':'Not Run'}
+               'remote_cross_version_lifecycle':'Pending' if args.previous_version else 'Not Run: one published candidate', 'model_sessions':'Not Run','runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
     def save(): (out/'summary.json').write_text(json.dumps(summary,indent=2))
     def run(label,argv,cwd=out,input_data='y\ny\ny\n',timeout=240):
         r=subprocess.run(argv,cwd=cwd,env=env,input=input_data,text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=timeout)
@@ -59,7 +68,7 @@ def main():
         archive=out/packed['filename']
         if hashlib.sha256(archive.read_bytes()).hexdigest()!=args.sha256: raise RuntimeError('Remote artifact digest differs')
         run('npx-help',['npm','exec','--yes','--package=planweft@'+args.version,'--','planweft','--help'])
-        with tarfile.open(archive) as tar: tar.extractall(out,filter='data')
+        extract_package(archive,out)
         cli=out/'package/bin/planweft.mjs'
         previous_cli=None
         if args.previous_version:
@@ -67,7 +76,7 @@ def main():
             previous=json.loads(run('download-previous',['npm','pack','planweft@'+args.previous_version,'--ignore-scripts','--json'],old))[0]
             previous_archive=old/previous['filename']
             if hashlib.sha256(previous_archive.read_bytes()).hexdigest()!=args.previous_sha256: raise RuntimeError('Previous remote artifact digest differs')
-            with tarfile.open(previous_archive) as tar: tar.extractall(old,filter='data')
+            extract_package(previous_archive,old)
             previous_cli=old/'package/bin/planweft.mjs'
         packages={args.version:out/'package'}
         if previous_cli: packages[args.previous_version]=previous_cli.parent.parent
@@ -117,6 +126,7 @@ def main():
                     if data['dsh']['profile']['bundles'].count('planweft')!=1 or (prof/'node_modules/planweft').resolve()!=root:
                         raise RuntimeError('DSH did not select downloaded version')
                     run(host+'-compose-'+label,['dsh','--profile','headless','--dump-config'],project)
+                    run(host+'-boot-'+label,['dsh','--profile','headless','--help'],project)
                 elif host=='pi':
                     if str(root/'dist/pi/planweft') not in run(host+'-list-'+label,['pi','list','--approve'],project):
                         raise RuntimeError('Pi did not select downloaded version')
@@ -164,7 +174,8 @@ def main():
         if 'dsh' in hosts:
             run('dsh-npm-install',['dsh','plugin','--profile','headless','add','planweft@'+args.version])
             composed=run('dsh-npm-compose',['dsh','--profile','headless','--dump-config'])
-            if 'planweft/dsh' not in composed: raise RuntimeError('DSH npm bundle did not compose')
+            if 'planweft/dsh' not in composed and '/dist/dsh/planweft/index.mjs' not in composed: raise RuntimeError('DSH npm bundle did not compose')
+            run('dsh-npm-boot',['dsh','--profile','headless','--help'])
             run('dsh-npm-remove',['dsh','plugin','--profile','headless','remove','planweft'])
         if args.previous_version: summary['remote_cross_version_lifecycle']='Passed'
         summary['status']='Passed'
