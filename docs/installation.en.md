@@ -313,3 +313,28 @@ Continue CLI's `/import-skill <url-or-name>` asks a model to help download and c
 Directories, manifests and native installation commands solve distribution; they do not make all host lifecycles equivalent. Some inherited behavior in Cursor, Gemini, Copilot and Mastra still centers on a root `task_plan.md`. Named-plan, read-only and disable support depend on the corresponding implementation and its actual validation records. For a complete shutdown, use the host's disable mechanism. `PLANNING_DISABLED=1` is sufficient only on routes where that implementation has been verified.
 
 If an update fails, restore the previous verified complete package, reinstall/reload at the same scope and recheck hook trust. Do not overlay old files on a newer directory and leave a mixed version. Rolling back an installation does not automatically roll back plans or documents; handle project-state differences separately for the task. Existing `PLAN_ID`, `PWF_*`, three-file records, `.planning`, attestation and ledger formats remain compatible. There is no general state migrator.
+
+## DeepSeek Harness (DSH)
+
+This adapter provides the complete `project-docs` Skill, scripts, templates and language resources; DSH profile hooks are not enabled yet.
+Use the platform ID `dsh` with explicit `--skill-only`. After the npm candidate is published:
+
+```bash
+npx planweft@0.4.0-rc.1 add -a dsh --skill-only
+npx planweft@0.4.0-rc.1 doctor -a dsh
+npx planweft@0.4.0-rc.1 update -a dsh
+npx planweft@0.4.0-rc.1 remove -a dsh
+```
+
+Add `--global` to each command for a user installation. `--copy`, `--symlink` and `--dry-run` follow the unified installer rules.
+Project Skills go under `.dsh/skills/project-docs/` in the nearest ancestor containing `.git`, or the invoking directory when no Git root exists.
+User Skills go under `$DSH_HOME/skills/project-docs/`, defaulting to `~/.dsh/skills/project-docs/`.
+Run project commands from the Git root so Skills and receipts share one project scope; installation from a nested directory is rejected before writes. Without Git, use the same invoking directory for installation, updates and removal.
+Alternatively copy the complete `dist/dsh/planweft/skills/project-docs/` directory into the matching Skill root. The CLI does not adopt manual copies.
+
+DSH profiles with the official filesystem provider discover this Skill automatically. Skill loading does not imply hook execution.
+This adapter does not modify `cordis.patch.yml` or register a marketplace; full profile integration currently fails explicitly as unsupported.
+Existing project/user Skills with the same name follow DSH priority rules. Check for duplicate planning workflows when original PWF is also installed.
+
+Sources: [official DSH Skill provider](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/skill/skill-filesystem/README.md),
+[CLI profiles and native plugin management](https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/README.md).

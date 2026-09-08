@@ -17,3 +17,5 @@ Windows/macOS CI、默认交互 trust 确认、远端多版本生命周期、npm
 8 个历史证据附件含本机路径或 owner/group；历史重写需用户对具体方案确认，尚未擅自改写。
 
 依据与证据：[REP-0008](../reproduction/0008-planweft-candidate.md)、[REV-0008](../reviews/0008-installer-and-release-review.md)。
+
+新增范围：用户要求 DSH；原 npm 发布认证等待已取消，以免先发布缺少新增平台的旧包。后续使用 PLAN-0009 完成 DSH 后重新构建，原 rc.1 tarball 仅为历史候选，不能作为新分发。

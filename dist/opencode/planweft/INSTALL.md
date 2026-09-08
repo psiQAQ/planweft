@@ -306,3 +306,28 @@ Continue CLI 的 `/import-skill <url-or-name>` 是由模型协助下载复制的
 目录、manifest 和原生安装命令解决分发问题，不使所有宿主生命周期等价。Cursor、Gemini、Copilot、Mastra 的部分继承行为仍以根 `task_plan.md` 为中心；命名计划、只读和关闭支持以对应实现与实际验证记录为准。需要完全关闭时使用宿主的禁用机制；`PLANNING_DISABLED=1` 只在相应实现已验证的路径作为充分开关。
 
 更新失败时恢复上一份经验证的完整包，按同一 scope 重新安装/加载，重新检查 hook trust；不要将旧文件覆盖在新版目录上留下混合版本。安装包回滚不会自动回滚计划和文档，项目状态按任务差异单独处理。原 `PLAN_ID`、`PWF_*`、三文件、`.planning`、attestation、ledger 的格式保持兼容，没有通用状态迁移器。
+
+## DeepSeek Harness（DSH）
+
+当前适配提供完整 `project-docs` Skill 及其脚本、模板、语言资源；尚未启用 DSH profile hooks。
+使用平台 ID `dsh` 并显式选择 `--skill-only`。npm 候选包发布后：
+
+```bash
+npx planweft@0.4.0-rc.1 add -a dsh --skill-only
+npx planweft@0.4.0-rc.1 doctor -a dsh
+npx planweft@0.4.0-rc.1 update -a dsh
+npx planweft@0.4.0-rc.1 remove -a dsh
+```
+
+用户级操作在各命令上添加 `--global`；`--copy`、`--symlink`、`--dry-run` 沿用统一安装器规则。
+项目 Skill 放到最近含 `.git` 的祖先目录下 `.dsh/skills/project-docs/`，没有 Git 根时使用调用目录；
+用户 Skill 放到 `$DSH_HOME/skills/project-docs/`，默认 `~/.dsh/skills/project-docs/`。
+为使 Skill 与安装记录拥有同一项目范围，请在 Git 根执行项目级命令；从子目录安装会在写入前明确拒绝。无 Git 仓库时，在同一调用目录执行安装、更新和卸载。
+也可将 `dist/dsh/planweft/skills/project-docs/` 完整复制到上述 Skill 目录；手工复制的文件不由 CLI 接管。
+
+启用官方 filesystem provider 的 DSH profile 可自动发现该 Skill。读取 Skill 不代表已执行 hooks；
+本适配不会改写 `cordis.patch.yml` 或注册 marketplace。完整 profile 集成当前明确返回不支持。
+已有项目/用户同名 Skill 按 DSH 优先级选择；安装原版 PWF 时应检查重复规划工作流。
+
+依据：[DSH 官方 Skill provider](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/skill/skill-filesystem/README.md)、
+[CLI profile 与原生插件管理](https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/README.md)。
