@@ -1,0 +1,293 @@
+{
+  "archive": "skill-discovery.tar.gz",
+  "archive_sha256": "ac3f0d93a6adc3c266996654feca42eedfc08fa8b287fbec07889617645c05cd",
+  "file_count": 71,
+  "files": {
+    "skills-before/cleanup.json": {
+      "bytes": 215,
+      "sha256": "4b1410c7a7e94830d77f2b0d54a0a972afb5c3d3d8d3273e6ba5b2902f51d387"
+    },
+    "skills-before/discovery-observation.json": {
+      "bytes": 2484,
+      "sha256": "7fa3df9c3eedc89b73b4d3e2540919b678fb132be06e526fc9e5dadd622fcd00"
+    },
+    "skills-before/environment.json": {
+      "bytes": 3816,
+      "sha256": "d12ef034d7a84bd8243403bcb3120ecdb7146ef04ecf030ebd1b05ca485c451d"
+    },
+    "skills-before/frozen-codex-package.zip": {
+      "bytes": 945254,
+      "sha256": "8177bbdb04f766f72afeb77acdafbd4bfc010a8f30ee79ed6326ab80cff35b22"
+    },
+    "skills-before/preflight/after.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "skills-before/preflight/assessment.json": {
+      "bytes": 503,
+      "sha256": "ba97b33cc865f3068abcfa9777362f01be41de900aecf8dbc0edc6e9a43fd5ff"
+    },
+    "skills-before/preflight/before.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "skills-before/preflight/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "skills-before/preflight/cache-verification.json": {
+      "bytes": 53212,
+      "sha256": "f828b6d3b3720edc9612da8b488a9059ae2b87d0eb54ade27fef0234852f1ac3"
+    },
+    "skills-before/preflight/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "skills-before/preflight/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "skills-before/preflight/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "skills-before/preflight/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "skills-before/preflight/git-status.txt": {
+      "bytes": 17,
+      "sha256": "938e2d236ffdefc4bcbe4f395c586970cac17bc8f8c4adc2d4e8451d1a4c406e"
+    },
+    "skills-before/preflight/hook-schemas.json": {
+      "bytes": 16159,
+      "sha256": "a8f3491a3152a1a503bf91cfc6dda01d2e612767753b05dd4de4d5b61d6849e0"
+    },
+    "skills-before/preflight/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "skills-before/preflight/installed-hooks-before.json": {
+      "bytes": 31833,
+      "sha256": "e2d39d327418836d95c132ca34791da25e9dec36e95811ced3ce4afbe84a12e7"
+    },
+    "skills-before/preflight/installed-skills-before.json": {
+      "bytes": 14935,
+      "sha256": "8c9133a90fd890be1ec5bb5af66c755081dd79b01cf6ec5c54ea2e00955e5be8"
+    },
+    "skills-before/preflight/invocation.json": {
+      "bytes": 566,
+      "sha256": "87174704b4dbbfc03ac0c628aa01aac3b23f2e7567ec8806a850bcd7d51c1c14"
+    },
+    "skills-before/preflight/model-not-run.json": {
+      "bytes": 49,
+      "sha256": "9d042bfac2957185d70cdd7ca357c91c7e6a3fac4839da1419307608b34f6408"
+    },
+    "skills-before/preflight/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "skills-before/preflight/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "skills-before/preflight/process.json": {
+      "bytes": 70,
+      "sha256": "4bd7185122072be89f32522808e3283301695f3cc256d8be26dcf160d9f93ef4"
+    },
+    "skills-before/preflight/prompt.txt": {
+      "bytes": 405,
+      "sha256": "ded0372bcf5a098f5cd082b6fa9ad6014b15c031538c5ba8ad4c07b508893fab"
+    },
+    "skills-before/preflight/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "skills-before/preflight/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "skills-before/preflight/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "skills-before/preflight/schema-generation.json": {
+      "bytes": 185,
+      "sha256": "818c99a1ff7ba52de4c0c94b22aacf1b626595d854dbe69f4c923d12a4ca51c2"
+    },
+    "skills-before/preflight/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "skills-before/preflight/stdout.jsonl": {
+      "bytes": 111037,
+      "sha256": "cb31e406e9b6f276aa5d6eace1e90c08d6d60d798bfb79d97df574ecd155115b"
+    },
+    "skills-before/preflight/trace-analysis.json": {
+      "bytes": 166,
+      "sha256": "e25ea6ad1a1f0f235720e05e5308194746a6a9c966cb0077b67a75fd6259fd24"
+    },
+    "skills-before/preflight/tracked.diff": {
+      "bytes": 173,
+      "sha256": "873eef57ff41addcfbce936154988d7527fe64778bc8949f9f1c2129e421562f"
+    },
+    "skills-before/preflight/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "skills-before/summary.json": {
+      "bytes": 652,
+      "sha256": "459693df337e677e81f41c7c83e97c22754187facd1cfab745a4b51932abfee1"
+    },
+    "skills-final/cleanup.json": {
+      "bytes": 215,
+      "sha256": "4b1410c7a7e94830d77f2b0d54a0a972afb5c3d3d8d3273e6ba5b2902f51d387"
+    },
+    "skills-final/discovery-observation.json": {
+      "bytes": 3388,
+      "sha256": "7e5c9c97e0e3792a1e544194761094be339c3cf0797be9eee337e99b84b25154"
+    },
+    "skills-final/distribution-manifest.json": {
+      "bytes": 2715,
+      "sha256": "6c3d6787602b708d017374b3e11466cd70c0ad560c21f608928288f47396e92b"
+    },
+    "skills-final/environment.json": {
+      "bytes": 3816,
+      "sha256": "e22446e3ba6a83311e74f5af3ce9d5121d6d654ab91c88a151a41a305ef6db48"
+    },
+    "skills-final/frozen-codex-package.zip": {
+      "bytes": 946466,
+      "sha256": "4fa81f93c4b6dfdc839f0ad34731afdab0d9a37f6a27056a76c76f64f5c91044"
+    },
+    "skills-final/preflight/after.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "skills-final/preflight/assessment.json": {
+      "bytes": 503,
+      "sha256": "ba97b33cc865f3068abcfa9777362f01be41de900aecf8dbc0edc6e9a43fd5ff"
+    },
+    "skills-final/preflight/before.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "skills-final/preflight/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "skills-final/preflight/cache-verification.json": {
+      "bytes": 53823,
+      "sha256": "14e2ea7bda4ad93e372f31e9c00d7e47980cb5b602e2bc7b1d86213ae15b0ee6"
+    },
+    "skills-final/preflight/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "skills-final/preflight/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "skills-final/preflight/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "skills-final/preflight/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "skills-final/preflight/git-status.txt": {
+      "bytes": 17,
+      "sha256": "938e2d236ffdefc4bcbe4f395c586970cac17bc8f8c4adc2d4e8451d1a4c406e"
+    },
+    "skills-final/preflight/hook-schemas.json": {
+      "bytes": 16159,
+      "sha256": "a8f3491a3152a1a503bf91cfc6dda01d2e612767753b05dd4de4d5b61d6849e0"
+    },
+    "skills-final/preflight/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "skills-final/preflight/installed-hooks-before.json": {
+      "bytes": 31833,
+      "sha256": "e806b1723a626802ea63500ec1310363ceff1ac40e5664728e79ebd68ade04a4"
+    },
+    "skills-final/preflight/installed-skills-before.json": {
+      "bytes": 14935,
+      "sha256": "8c9133a90fd890be1ec5bb5af66c755081dd79b01cf6ec5c54ea2e00955e5be8"
+    },
+    "skills-final/preflight/invocation.json": {
+      "bytes": 566,
+      "sha256": "87174704b4dbbfc03ac0c628aa01aac3b23f2e7567ec8806a850bcd7d51c1c14"
+    },
+    "skills-final/preflight/model-not-run.json": {
+      "bytes": 49,
+      "sha256": "9d042bfac2957185d70cdd7ca357c91c7e6a3fac4839da1419307608b34f6408"
+    },
+    "skills-final/preflight/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "skills-final/preflight/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "skills-final/preflight/process.json": {
+      "bytes": 70,
+      "sha256": "2642779b4ff89534b404b7854aee68e06b028c0b03d793971d9cf590bb2e53ad"
+    },
+    "skills-final/preflight/prompt.txt": {
+      "bytes": 405,
+      "sha256": "ded0372bcf5a098f5cd082b6fa9ad6014b15c031538c5ba8ad4c07b508893fab"
+    },
+    "skills-final/preflight/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "skills-final/preflight/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "skills-final/preflight/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "skills-final/preflight/schema-generation.json": {
+      "bytes": 185,
+      "sha256": "818c99a1ff7ba52de4c0c94b22aacf1b626595d854dbe69f4c923d12a4ca51c2"
+    },
+    "skills-final/preflight/skill-schemas.json": {
+      "bytes": 10390,
+      "sha256": "002f38f85fc767d738e4480cd30a3e1d5b6b34993e45e26ac7260957982469d5"
+    },
+    "skills-final/preflight/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "skills-final/preflight/stdout.jsonl": {
+      "bytes": 118472,
+      "sha256": "be1945ddff06f6b7ed478bca8857c1e938a95f6e682b9ac12b81da665298618d"
+    },
+    "skills-final/preflight/trace-analysis.json": {
+      "bytes": 166,
+      "sha256": "e25ea6ad1a1f0f235720e05e5308194746a6a9c966cb0077b67a75fd6259fd24"
+    },
+    "skills-final/preflight/tracked.diff": {
+      "bytes": 173,
+      "sha256": "873eef57ff41addcfbce936154988d7527fe64778bc8949f9f1c2129e421562f"
+    },
+    "skills-final/preflight/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "skills-final/runner.py": {
+      "bytes": 35181,
+      "sha256": "18c89629c801b9a067191698cf7e0d940e420166c89722af4cff2c8e6569fdf0"
+    },
+    "skills-final/summary.json": {
+      "bytes": 652,
+      "sha256": "43de68232542b488080fbf52accc26fcb214a6a50c18ad4211c78dc105826230"
+    }
+  },
+  "credential_marker_findings": [],
+  "audit_scope": "Limited explicit credential-marker scan, including ZIP contents; no credentials or ephemeral personal config archived."
+}

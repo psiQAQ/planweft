@@ -1,0 +1,70 @@
+{
+  "baseline-test_plugin_skill_surface.log": {
+    "sha256": "c5c3a413e4f962fbaf219e6347fba175a7d67ec0316021b78ff5d24d4140e6d1",
+    "bytes": 871
+  },
+  "baseline-test_skill_frontmatter_valid.log": {
+    "sha256": "59133a71716f62dff590d2b00c6c9caf6f190c7cb77dac645ca5a54dab80d96e",
+    "bytes": 624
+  },
+  "baseline-test_skill_md_version_parity.log": {
+    "sha256": "8a88314f68197078293d0c9ebe71d247447bc27734941199672179bed4751737",
+    "bytes": 702
+  },
+  "build-verify.json": {
+    "sha256": "cb895770f25a42052a62cd9c4b2f7ff101a9d31916ea5a1decf04390787db49d",
+    "bytes": 101
+  },
+  "codex-package-delta.json": {
+    "sha256": "ad848e6b8dcebfa33ad823a1308854a4736758ae32b59b1b938eb4a3e9cf3229",
+    "bytes": 855
+  },
+  "codex-preflight-manifest.json": {
+    "sha256": "0d6a54f1d922b71c44d219d2e0db2a51ee7bba8f38c834e89318bcd12b4cbd6e",
+    "bytes": 4931
+  },
+  "codex-preflight.tar.gz": {
+    "sha256": "91c01eeaa0ab6ec9b2836fbc06025ee20298e6362d57a3fb9d4582e14c05e3c4",
+    "bytes": 46388
+  },
+  "distribution-manifest.json": {
+    "sha256": "2b42c50f302eacffeb31a9d2794062ef24eb31e4dbb5ed0403b3cb6793650e4b",
+    "bytes": 2715
+  },
+  "document-links.json": {
+    "sha256": "d95f522e10abe1aa48131240b5b3165a139f343df4ff4934ad3702eee434c8e2",
+    "bytes": 38
+  },
+  "migrated-test_plugin_skill_surface.log": {
+    "sha256": "8737b77137081bc76315481ffbc09d1cf6045b54fe3116434b03e26282bf0491",
+    "bytes": 871
+  },
+  "migrated-test_skill_frontmatter_valid.log": {
+    "sha256": "5c89401f212d7a80a3a8f56a025384b96e44bdae78f2f0f68122f10b6d7fd4a8",
+    "bytes": 624
+  },
+  "migrated-test_skill_md_version_parity.log": {
+    "sha256": "49aa066459496138f210f0338cdcddf973b1f36a622f04d06a7b744b83c52231",
+    "bytes": 702
+  },
+  "program-design-installation-full-tests-passed.log": {
+    "sha256": "031fd17ca27c728ad5dff1d87cf5621f529cda3ea637ca6edd3d44e032f65b0a",
+    "bytes": 5079
+  },
+  "program-design-installation-tests-executable-bits-failure.log": {
+    "sha256": "3f7912c705e81c9bdf5466dde271403b74a001652748576863b714b5885195be",
+    "bytes": 6114
+  },
+  "program-design-installation-tests-final.log": {
+    "sha256": "63ff6dcab15db12396ee4049ee9dc709cd4721e7335bba291ce845518439dd47",
+    "bytes": 818
+  },
+  "skill-regression.json": {
+    "sha256": "59bf2bfb990f8fc387c3c420ec0eb52b259cef9a186aa96fab6b095b4542147c",
+    "bytes": 1731
+  },
+  "source-delta.json": {
+    "sha256": "3b68f2a9d202226e72ab0778b4702556e8b9b5eb1569fae2fe490808b64c8c3d",
+    "bytes": 2745
+  }
+}

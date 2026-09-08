@@ -1,0 +1,66 @@
+{
+  "scope": "Two native, model-free Codex installation/discovery preflights; no personal installation or auth mount.",
+  "before_package_sha256": "8177bbdb04f766f72afeb77acdafbd4bfc010a8f30ee79ed6326ab80cff35b22",
+  "current_final_package_sha256": "4fa81f93c4b6dfdc839f0ad34731afdab0d9a37f6a27056a76c76f64f5c91044",
+  "current_final_manifest_sha256": "6c3d6787602b708d017374b3e11466cd70c0ad560c21f608928288f47396e92b",
+  "delta": {
+    "added_paths": [
+      "program-design/skills/i18n/project-docs-ar/agents/openai.yaml",
+      "program-design/skills/i18n/project-docs-de/agents/openai.yaml",
+      "program-design/skills/i18n/project-docs-es/agents/openai.yaml",
+      "program-design/skills/i18n/project-docs-zh/agents/openai.yaml",
+      "program-design/skills/i18n/project-docs-zht/agents/openai.yaml"
+    ],
+    "existing_package_bytes_unchanged": true,
+    "runtime_changed": false
+  },
+  "installed_native_policy_files": {
+    "program-design/skills/i18n/project-docs-ar/agents/openai.yaml": "policy:\n  allow_implicit_invocation: false\n",
+    "program-design/skills/i18n/project-docs-de/agents/openai.yaml": "policy:\n  allow_implicit_invocation: false\n",
+    "program-design/skills/i18n/project-docs-es/agents/openai.yaml": "policy:\n  allow_implicit_invocation: false\n",
+    "program-design/skills/i18n/project-docs-zh/agents/openai.yaml": "policy:\n  allow_implicit_invocation: false\n",
+    "program-design/skills/i18n/project-docs-zht/agents/openai.yaml": "policy:\n  allow_implicit_invocation: false\n",
+    "program-design/skills/project-docs/agents/openai.yaml": "interface:\n  display_name: \"Project Docs\"\n  short_description: \"Persistent planning, project documents and evidence\"\npolicy:\n  allow_implicit_invocation: true\n"
+  },
+  "native_discovery": {
+    "names": [
+      "program-design:project-docs",
+      "program-design:project-docs-ar",
+      "program-design:project-docs-de",
+      "program-design:project-docs-es",
+      "program-design:project-docs-zh",
+      "program-design:project-docs-zht"
+    ],
+    "all_enabled": true,
+    "errors": [],
+    "observed": "Codex 0.149.1 recursively discovers all five nested variants and the main Skill with no i18n directory error."
+  },
+  "native_metadata_schema_properties": [
+    "dependencies",
+    "description",
+    "enabled",
+    "interface",
+    "name",
+    "path",
+    "scope",
+    "shortDescription"
+  ],
+  "implicit_policy_observability": "The API exposes no policy or implicit field; enabled is the Skill enable state. Installed false policies are verified by cache/source hashes, but skills/list cannot directly prove implicit selection suppression. No additional model selection trial was performed.",
+  "legacy_validator": "The old helper rejects hooks and the i18n container without SKILL.md; native hooks/list and skills/list succeed. System helper unchanged.",
+  "cleanup": {
+    "before": {
+      "remaining_test_containers": [],
+      "original_containers_preserved": true,
+      "temporary_workspace_removed": true,
+      "image_preserved": true,
+      "auth_copies": "container tmpfs only; removed with each container"
+    },
+    "after": {
+      "remaining_test_containers": [],
+      "original_containers_preserved": true,
+      "temporary_workspace_removed": true,
+      "image_preserved": true,
+      "auth_copies": "container tmpfs only; removed with each container"
+    }
+  }
+}

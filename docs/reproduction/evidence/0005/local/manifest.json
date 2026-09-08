@@ -1,0 +1,38 @@
+{
+  "entry-contract.json": {
+    "sha256": "da44ec0f5782c6da14a9528494d54f2c99c8f45204ecc567f500ed439907139c",
+    "bytes": 13465
+  },
+  "document-links.json": {
+    "sha256": "05d07b467db3eff6dc47efe598600f0908092683c071e4ceaf8b7194634a2ef0",
+    "bytes": 43
+  },
+  "legacy-plugin-validator.log": {
+    "sha256": "827053864577064e1062c59ea9c76ed1ab2c2adcdd9db20eae274c326791d6a0",
+    "bytes": 128
+  },
+  "python-source-check.json": {
+    "sha256": "cddeee17acb2a25bc935987ea3f542ca8ee9267b2a8749ba43b73c880ab63f4a",
+    "bytes": 599
+  },
+  "unittest.log": {
+    "sha256": "82c7facfeefec39eacdb5400fae2ddc0d49102a302ab04aec7a51f5a27c8a123",
+    "bytes": 4359
+  },
+  "build-verify.json": {
+    "sha256": "cb895770f25a42052a62cd9c4b2f7ff101a9d31916ea5a1decf04390787db49d",
+    "bytes": 101
+  },
+  "earlier-attempts/program-design-02-local-tests-02.log": {
+    "sha256": "3a5b0709268af55173e937da38ab0041ba2a19023ffdbb2c3db6a7f2e9b800aa",
+    "bytes": 3827
+  },
+  "earlier-attempts/program-design-02-local-tests.log": {
+    "sha256": "2c645c5e0bfa40d014663a6d48d253f5371e5ea7e0d177d41054197768aed2d8",
+    "bytes": 125793
+  },
+  "earlier-attempts/program-design-02-dist-check.log": {
+    "sha256": "01cb9443f56206280d146ada1ea190ae936f1155eb98c0dd00df17fe6f218e80",
+    "bytes": 3006
+  }
+}

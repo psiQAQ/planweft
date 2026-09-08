@@ -1,0 +1,2011 @@
+{
+  "archive": "raw-evidence.tar.gz",
+  "archive_sha256": "9b1050cde48e812525ef09ef0fd9153d6ab887681a9010337b04105f4c2f2c8d",
+  "file_count": 501,
+  "files": {
+    "preflight-01/cleanup.json": {
+      "bytes": 215,
+      "sha256": "4b1410c7a7e94830d77f2b0d54a0a972afb5c3d3d8d3273e6ba5b2902f51d387"
+    },
+    "preflight-01/environment.json": {
+      "bytes": 3816,
+      "sha256": "9dfe2940a091aa9ed3f0dde17889b305d2a26421798e9c16fb32418270c977a3"
+    },
+    "preflight-01/preflight/after.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "preflight-01/preflight/assessment.json": {
+      "bytes": 503,
+      "sha256": "ba97b33cc865f3068abcfa9777362f01be41de900aecf8dbc0edc6e9a43fd5ff"
+    },
+    "preflight-01/preflight/before.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "preflight-01/preflight/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "preflight-01/preflight/cache-verification.json": {
+      "bytes": 32429,
+      "sha256": "b03cae11d6a260cc9a98615d83971b3a13e518dfd46d505d714cc32565d489f2"
+    },
+    "preflight-01/preflight/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "preflight-01/preflight/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "preflight-01/preflight/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "preflight-01/preflight/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "preflight-01/preflight/git-status.txt": {
+      "bytes": 17,
+      "sha256": "938e2d236ffdefc4bcbe4f395c586970cac17bc8f8c4adc2d4e8451d1a4c406e"
+    },
+    "preflight-01/preflight/hook-schemas.json": {
+      "bytes": 16159,
+      "sha256": "a8f3491a3152a1a503bf91cfc6dda01d2e612767753b05dd4de4d5b61d6849e0"
+    },
+    "preflight-01/preflight/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "preflight-01/preflight/invocation.json": {
+      "bytes": 566,
+      "sha256": "87174704b4dbbfc03ac0c628aa01aac3b23f2e7567ec8806a850bcd7d51c1c14"
+    },
+    "preflight-01/preflight/model-not-run.json": {
+      "bytes": 49,
+      "sha256": "9d042bfac2957185d70cdd7ca357c91c7e6a3fac4839da1419307608b34f6408"
+    },
+    "preflight-01/preflight/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "preflight-01/preflight/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "preflight-01/preflight/process.json": {
+      "bytes": 69,
+      "sha256": "a59e592ca5290cd79efe9a0cdec8cd84313b954f55b7e5fa118f76ef25a1f458"
+    },
+    "preflight-01/preflight/prompt.txt": {
+      "bytes": 249,
+      "sha256": "00231beee1cca62375d55dc8053e4bca5c8af999e5667d8b5f5313f14b9d882c"
+    },
+    "preflight-01/preflight/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "preflight-01/preflight/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "preflight-01/preflight/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "preflight-01/preflight/schema-generation.json": {
+      "bytes": 185,
+      "sha256": "818c99a1ff7ba52de4c0c94b22aacf1b626595d854dbe69f4c923d12a4ca51c2"
+    },
+    "preflight-01/preflight/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preflight-01/preflight/stdout.jsonl": {
+      "bytes": 56657,
+      "sha256": "d6207bbf5ad3ccf7da2d3e7b2f07258baf1f360a937947b5ba5b6640e12395e9"
+    },
+    "preflight-01/preflight/trace-analysis.json": {
+      "bytes": 166,
+      "sha256": "e25ea6ad1a1f0f235720e05e5308194746a6a9c966cb0077b67a75fd6259fd24"
+    },
+    "preflight-01/preflight/tracked.diff": {
+      "bytes": 173,
+      "sha256": "873eef57ff41addcfbce936154988d7527fe64778bc8949f9f1c2129e421562f"
+    },
+    "preflight-01/preflight/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "preflight-01/summary.json": {
+      "bytes": 651,
+      "sha256": "3f989c39882beffded52b1d6ed7acb60232958e5f0137b3a071245c6d5b63f37"
+    },
+    "preflight-02/cleanup.json": {
+      "bytes": 215,
+      "sha256": "4b1410c7a7e94830d77f2b0d54a0a972afb5c3d3d8d3273e6ba5b2902f51d387"
+    },
+    "preflight-02/environment.json": {
+      "bytes": 3816,
+      "sha256": "9aa820701e8f7697b351e1efa07612fcd1799b256519b4d98ab135f6d88e9330"
+    },
+    "preflight-02/preflight/after.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "preflight-02/preflight/assessment.json": {
+      "bytes": 503,
+      "sha256": "ba97b33cc865f3068abcfa9777362f01be41de900aecf8dbc0edc6e9a43fd5ff"
+    },
+    "preflight-02/preflight/before.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "preflight-02/preflight/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "preflight-02/preflight/cache-verification.json": {
+      "bytes": 32429,
+      "sha256": "b03cae11d6a260cc9a98615d83971b3a13e518dfd46d505d714cc32565d489f2"
+    },
+    "preflight-02/preflight/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "preflight-02/preflight/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "preflight-02/preflight/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "preflight-02/preflight/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "preflight-02/preflight/git-status.txt": {
+      "bytes": 17,
+      "sha256": "938e2d236ffdefc4bcbe4f395c586970cac17bc8f8c4adc2d4e8451d1a4c406e"
+    },
+    "preflight-02/preflight/hook-schemas.json": {
+      "bytes": 16159,
+      "sha256": "a8f3491a3152a1a503bf91cfc6dda01d2e612767753b05dd4de4d5b61d6849e0"
+    },
+    "preflight-02/preflight/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "preflight-02/preflight/installed-hooks-before.json": {
+      "bytes": 16573,
+      "sha256": "bf1bf74c8b311915bfb5051979a4e22f5f4b5c08580ce713537d1b67ef259cbe"
+    },
+    "preflight-02/preflight/invocation.json": {
+      "bytes": 566,
+      "sha256": "87174704b4dbbfc03ac0c628aa01aac3b23f2e7567ec8806a850bcd7d51c1c14"
+    },
+    "preflight-02/preflight/model-not-run.json": {
+      "bytes": 49,
+      "sha256": "9d042bfac2957185d70cdd7ca357c91c7e6a3fac4839da1419307608b34f6408"
+    },
+    "preflight-02/preflight/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "preflight-02/preflight/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "preflight-02/preflight/process.json": {
+      "bytes": 70,
+      "sha256": "8c67dbab9ad720ad9d4f8f458653fec64ce6153a0fbd2ee7460f7cc933767aa5"
+    },
+    "preflight-02/preflight/prompt.txt": {
+      "bytes": 405,
+      "sha256": "ded0372bcf5a098f5cd082b6fa9ad6014b15c031538c5ba8ad4c07b508893fab"
+    },
+    "preflight-02/preflight/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "preflight-02/preflight/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "preflight-02/preflight/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "preflight-02/preflight/schema-generation.json": {
+      "bytes": 185,
+      "sha256": "818c99a1ff7ba52de4c0c94b22aacf1b626595d854dbe69f4c923d12a4ca51c2"
+    },
+    "preflight-02/preflight/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preflight-02/preflight/stdout.jsonl": {
+      "bytes": 68905,
+      "sha256": "5cbff7f323429a3412791a09d8a86078c483d9e532c6ef3f27c951b64f8d17be"
+    },
+    "preflight-02/preflight/trace-analysis.json": {
+      "bytes": 166,
+      "sha256": "e25ea6ad1a1f0f235720e05e5308194746a6a9c966cb0077b67a75fd6259fd24"
+    },
+    "preflight-02/preflight/tracked.diff": {
+      "bytes": 173,
+      "sha256": "873eef57ff41addcfbce936154988d7527fe64778bc8949f9f1c2129e421562f"
+    },
+    "preflight-02/preflight/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "preflight-02/summary.json": {
+      "bytes": 652,
+      "sha256": "00a73c22b12289f550adc520295dce4534654b350982b71907a5f764c2ae7911"
+    },
+    "preflight-03/cleanup.json": {
+      "bytes": 215,
+      "sha256": "4b1410c7a7e94830d77f2b0d54a0a972afb5c3d3d8d3273e6ba5b2902f51d387"
+    },
+    "preflight-03/environment.json": {
+      "bytes": 3816,
+      "sha256": "3bcd8d5ee9390d38dfb0e16028ff59a4d4325cf8283855252b0e3d2372cdbd27"
+    },
+    "preflight-03/preflight/after.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "preflight-03/preflight/assessment.json": {
+      "bytes": 503,
+      "sha256": "ba97b33cc865f3068abcfa9777362f01be41de900aecf8dbc0edc6e9a43fd5ff"
+    },
+    "preflight-03/preflight/before.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "preflight-03/preflight/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "preflight-03/preflight/cache-verification.json": {
+      "bytes": 53212,
+      "sha256": "ee90f66dd26b76950062e3cabdcde899deafdda595739677cc80d1e8fab889d0"
+    },
+    "preflight-03/preflight/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "preflight-03/preflight/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "preflight-03/preflight/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "preflight-03/preflight/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "preflight-03/preflight/git-status.txt": {
+      "bytes": 17,
+      "sha256": "938e2d236ffdefc4bcbe4f395c586970cac17bc8f8c4adc2d4e8451d1a4c406e"
+    },
+    "preflight-03/preflight/hook-schemas.json": {
+      "bytes": 16159,
+      "sha256": "a8f3491a3152a1a503bf91cfc6dda01d2e612767753b05dd4de4d5b61d6849e0"
+    },
+    "preflight-03/preflight/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "preflight-03/preflight/installed-hooks-before.json": {
+      "bytes": 16573,
+      "sha256": "280852aa5dd6b5b26295875c022e63ba4e62c9abc6762f92e338e676f16e1cb8"
+    },
+    "preflight-03/preflight/invocation.json": {
+      "bytes": 566,
+      "sha256": "87174704b4dbbfc03ac0c628aa01aac3b23f2e7567ec8806a850bcd7d51c1c14"
+    },
+    "preflight-03/preflight/model-not-run.json": {
+      "bytes": 49,
+      "sha256": "9d042bfac2957185d70cdd7ca357c91c7e6a3fac4839da1419307608b34f6408"
+    },
+    "preflight-03/preflight/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "preflight-03/preflight/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "preflight-03/preflight/process.json": {
+      "bytes": 70,
+      "sha256": "9a897d19771aaa3dcda3cdc34ae6a2eaa56f9c5e71e53c1bacf5fbe4a5837e5a"
+    },
+    "preflight-03/preflight/prompt.txt": {
+      "bytes": 405,
+      "sha256": "ded0372bcf5a098f5cd082b6fa9ad6014b15c031538c5ba8ad4c07b508893fab"
+    },
+    "preflight-03/preflight/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "preflight-03/preflight/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "preflight-03/preflight/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "preflight-03/preflight/schema-generation.json": {
+      "bytes": 185,
+      "sha256": "818c99a1ff7ba52de4c0c94b22aacf1b626595d854dbe69f4c923d12a4ca51c2"
+    },
+    "preflight-03/preflight/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preflight-03/preflight/stdout.jsonl": {
+      "bytes": 85906,
+      "sha256": "5610eef9ddbcaa968625ad14e280a4e2a96d20c0760e151a7f319f0b78344dec"
+    },
+    "preflight-03/preflight/trace-analysis.json": {
+      "bytes": 166,
+      "sha256": "e25ea6ad1a1f0f235720e05e5308194746a6a9c966cb0077b67a75fd6259fd24"
+    },
+    "preflight-03/preflight/tracked.diff": {
+      "bytes": 173,
+      "sha256": "873eef57ff41addcfbce936154988d7527fe64778bc8949f9f1c2129e421562f"
+    },
+    "preflight-03/preflight/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "preflight-03/summary.json": {
+      "bytes": 652,
+      "sha256": "f8b32e8f04945e255573f39846177e6af5c9c4d22c640e7f50d3e25e55e1fbf9"
+    },
+    "preflight-final/cleanup.json": {
+      "bytes": 215,
+      "sha256": "4b1410c7a7e94830d77f2b0d54a0a972afb5c3d3d8d3273e6ba5b2902f51d387"
+    },
+    "preflight-final/environment.json": {
+      "bytes": 3816,
+      "sha256": "021bedf301d8ad5a558a0dc18418de5664aba5dd30e815e4a9de236a976f616e"
+    },
+    "preflight-final/final-distribution-manifest.json": {
+      "bytes": 2715,
+      "sha256": "cc02d5ac19095b1500044007cab582969690bb7a192b9a0170359c54ee6368b6"
+    },
+    "preflight-final/frozen-codex-package.zip": {
+      "bytes": 945254,
+      "sha256": "8177bbdb04f766f72afeb77acdafbd4bfc010a8f30ee79ed6326ab80cff35b22"
+    },
+    "preflight-final/preflight/after.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "preflight-final/preflight/assessment.json": {
+      "bytes": 503,
+      "sha256": "ba97b33cc865f3068abcfa9777362f01be41de900aecf8dbc0edc6e9a43fd5ff"
+    },
+    "preflight-final/preflight/before.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "preflight-final/preflight/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "preflight-final/preflight/cache-verification.json": {
+      "bytes": 53212,
+      "sha256": "f828b6d3b3720edc9612da8b488a9059ae2b87d0eb54ade27fef0234852f1ac3"
+    },
+    "preflight-final/preflight/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "preflight-final/preflight/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "preflight-final/preflight/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "preflight-final/preflight/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "preflight-final/preflight/git-status.txt": {
+      "bytes": 17,
+      "sha256": "938e2d236ffdefc4bcbe4f395c586970cac17bc8f8c4adc2d4e8451d1a4c406e"
+    },
+    "preflight-final/preflight/hook-schemas.json": {
+      "bytes": 16159,
+      "sha256": "a8f3491a3152a1a503bf91cfc6dda01d2e612767753b05dd4de4d5b61d6849e0"
+    },
+    "preflight-final/preflight/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "preflight-final/preflight/installed-hooks-before.json": {
+      "bytes": 16573,
+      "sha256": "6141b6d82c96b3b60a32e781876ae6fbab695dac5b5770afb42c821cf1e10c1f"
+    },
+    "preflight-final/preflight/invocation.json": {
+      "bytes": 566,
+      "sha256": "87174704b4dbbfc03ac0c628aa01aac3b23f2e7567ec8806a850bcd7d51c1c14"
+    },
+    "preflight-final/preflight/model-not-run.json": {
+      "bytes": 49,
+      "sha256": "9d042bfac2957185d70cdd7ca357c91c7e6a3fac4839da1419307608b34f6408"
+    },
+    "preflight-final/preflight/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "preflight-final/preflight/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "preflight-final/preflight/process.json": {
+      "bytes": 70,
+      "sha256": "9b978e34d8d5aa7d5efd5c7aacab398b6317796ece05faa249c46cd9b2c5c6fe"
+    },
+    "preflight-final/preflight/prompt.txt": {
+      "bytes": 405,
+      "sha256": "ded0372bcf5a098f5cd082b6fa9ad6014b15c031538c5ba8ad4c07b508893fab"
+    },
+    "preflight-final/preflight/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "preflight-final/preflight/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "preflight-final/preflight/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "preflight-final/preflight/schema-generation.json": {
+      "bytes": 185,
+      "sha256": "818c99a1ff7ba52de4c0c94b22aacf1b626595d854dbe69f4c923d12a4ca51c2"
+    },
+    "preflight-final/preflight/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preflight-final/preflight/stdout.jsonl": {
+      "bytes": 85906,
+      "sha256": "ef4ef8d99bf07ecfcb75fb5802e80945a05374b4d978f47a78cc4c4206c84ec2"
+    },
+    "preflight-final/preflight/trace-analysis.json": {
+      "bytes": 166,
+      "sha256": "e25ea6ad1a1f0f235720e05e5308194746a6a9c966cb0077b67a75fd6259fd24"
+    },
+    "preflight-final/preflight/tracked.diff": {
+      "bytes": 173,
+      "sha256": "873eef57ff41addcfbce936154988d7527fe64778bc8949f9f1c2129e421562f"
+    },
+    "preflight-final/preflight/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "preflight-final/runner.py": {
+      "bytes": 34736,
+      "sha256": "d18678c4681b911b7d0de8a741205b118e72d313654307b099ab84e1b32f4adf"
+    },
+    "preflight-final/summary.json": {
+      "bytes": 652,
+      "sha256": "a06facae6534a3d2d3861e4dedd4ebeef3bd6dba4bacabae85d94b19caf19935"
+    },
+    "smoke-01/cleanup.json": {
+      "bytes": 215,
+      "sha256": "4b1410c7a7e94830d77f2b0d54a0a972afb5c3d3d8d3273e6ba5b2902f51d387"
+    },
+    "smoke-01/cold-reader/after.json": {
+      "bytes": 2485,
+      "sha256": "11618de74a346b44cb64957c96b8681e12a8b752b96e58b1674a2d9b58e40c37"
+    },
+    "smoke-01/cold-reader/assessment.json": {
+      "bytes": 601,
+      "sha256": "588af63da8a7fb0d427bee890160ece812def72c84fe5833537eecc08c8b91b5"
+    },
+    "smoke-01/cold-reader/before.json": {
+      "bytes": 2485,
+      "sha256": "11618de74a346b44cb64957c96b8681e12a8b752b96e58b1674a2d9b58e40c37"
+    },
+    "smoke-01/cold-reader/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "smoke-01/cold-reader/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "smoke-01/cold-reader/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "smoke-01/cold-reader/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "smoke-01/cold-reader/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "smoke-01/cold-reader/git-status.txt": {
+      "bytes": 81,
+      "sha256": "8da7f0b9092a0db8488f8c81f810153c0a1fb4d8a60b9759b522cb9d2e0eba45"
+    },
+    "smoke-01/cold-reader/invocation.json": {
+      "bytes": 544,
+      "sha256": "953a91dc5f78c45ea19c964a82844ca00255d9e9bb6edc8a2d1631fc14bbbf9b"
+    },
+    "smoke-01/cold-reader/model-exit.json": {
+      "bytes": 21,
+      "sha256": "81868a6e94ffc0178bf833deb1c9013d9fab4ee95ddb876a5e8ec4f1d26376d2"
+    },
+    "smoke-01/cold-reader/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-01/cold-reader/plugin-list-before.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-01/cold-reader/process.json": {
+      "bytes": 71,
+      "sha256": "9f78113bf9ada709438eae537017153fe3565a89f52fa304fb5f89232c13dbf1"
+    },
+    "smoke-01/cold-reader/prompt.txt": {
+      "bytes": 470,
+      "sha256": "dc71c60f218386fdfe2477efcdd5a292563d3a2e17bb6bd5d04433caef3be3d0"
+    },
+    "smoke-01/cold-reader/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "smoke-01/cold-reader/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-01/cold-reader/stdout.jsonl": {
+      "bytes": 20239,
+      "sha256": "0a57d09a153c0e74bdd762eb795d28fb98adf5989c532107c3e401fc19d193c3"
+    },
+    "smoke-01/cold-reader/trace-analysis.json": {
+      "bytes": 5566,
+      "sha256": "cac888f0313a7327fef96e563bf73f9829f15185a7795cee0b7632d7b84e2246"
+    },
+    "smoke-01/cold-reader/tracked.diff": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-01/environment.json": {
+      "bytes": 3816,
+      "sha256": "6fb0db2c37b829378a22e58496a9c6118cbc6ff0f11a57038be07143598aec0a"
+    },
+    "smoke-01/frozen-codex-package.zip": {
+      "bytes": 943726,
+      "sha256": "feff9eed21bdce9a4bc62338a9978091abb88230a5256fa03081a03adfea53c5"
+    },
+    "smoke-01/frozen-package-recovery.json": {
+      "bytes": 275,
+      "sha256": "b337c608c13ce8d2dba3b324540a15824edad124b81b0393aa07fe02e1902ba2"
+    },
+    "smoke-01/hook-recovery/after.json": {
+      "bytes": 472,
+      "sha256": "94c7a4441d90f296114711a69ce930fedbb405a8aeae384037d9f66686dbefb2"
+    },
+    "smoke-01/hook-recovery/assessment.json": {
+      "bytes": 561,
+      "sha256": "725e5e4b5c7a026795aa6eb4b9a6d712cdc8fa5a273ac1c973633ce8825c3e92"
+    },
+    "smoke-01/hook-recovery/before.json": {
+      "bytes": 472,
+      "sha256": "94c7a4441d90f296114711a69ce930fedbb405a8aeae384037d9f66686dbefb2"
+    },
+    "smoke-01/hook-recovery/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "smoke-01/hook-recovery/cache-verification.json": {
+      "bytes": 32429,
+      "sha256": "b03cae11d6a260cc9a98615d83971b3a13e518dfd46d505d714cc32565d489f2"
+    },
+    "smoke-01/hook-recovery/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "smoke-01/hook-recovery/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "smoke-01/hook-recovery/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "smoke-01/hook-recovery/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "smoke-01/hook-recovery/git-status.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-01/hook-recovery/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "smoke-01/hook-recovery/invocation.json": {
+      "bytes": 566,
+      "sha256": "87174704b4dbbfc03ac0c628aa01aac3b23f2e7567ec8806a850bcd7d51c1c14"
+    },
+    "smoke-01/hook-recovery/model-exit.json": {
+      "bytes": 21,
+      "sha256": "81868a6e94ffc0178bf833deb1c9013d9fab4ee95ddb876a5e8ec4f1d26376d2"
+    },
+    "smoke-01/hook-recovery/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-01/hook-recovery/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "smoke-01/hook-recovery/process.json": {
+      "bytes": 71,
+      "sha256": "9cf624d06cdc1b693087f0af1c516e1bbf6156d422c69ce26ee05accd54bf7f9"
+    },
+    "smoke-01/hook-recovery/prompt.txt": {
+      "bytes": 445,
+      "sha256": "99119cc9233b1dfae7cdf0e0c34cba46e323a3189dec9ee29ed258908093b43d"
+    },
+    "smoke-01/hook-recovery/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "smoke-01/hook-recovery/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "smoke-01/hook-recovery/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "smoke-01/hook-recovery/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-01/hook-recovery/stdout.jsonl": {
+      "bytes": 47865,
+      "sha256": "94819b14cbbcab51e2754caddd27cf5122b9e3629d57228459b505a089019e25"
+    },
+    "smoke-01/hook-recovery/trace-analysis.json": {
+      "bytes": 883,
+      "sha256": "d7ba81568db2f409f995042c244206f2c3785c0f68a8570a2e8d72bdc43d1408"
+    },
+    "smoke-01/hook-recovery/tracked.diff": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-01/hook-recovery/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "smoke-01/hook-trusted/after.json": {
+      "bytes": 472,
+      "sha256": "94c7a4441d90f296114711a69ce930fedbb405a8aeae384037d9f66686dbefb2"
+    },
+    "smoke-01/hook-trusted/assessment.json": {
+      "bytes": 561,
+      "sha256": "725e5e4b5c7a026795aa6eb4b9a6d712cdc8fa5a273ac1c973633ce8825c3e92"
+    },
+    "smoke-01/hook-trusted/before.json": {
+      "bytes": 472,
+      "sha256": "94c7a4441d90f296114711a69ce930fedbb405a8aeae384037d9f66686dbefb2"
+    },
+    "smoke-01/hook-trusted/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "smoke-01/hook-trusted/cache-verification.json": {
+      "bytes": 32429,
+      "sha256": "b03cae11d6a260cc9a98615d83971b3a13e518dfd46d505d714cc32565d489f2"
+    },
+    "smoke-01/hook-trusted/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "smoke-01/hook-trusted/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "smoke-01/hook-trusted/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "smoke-01/hook-trusted/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "smoke-01/hook-trusted/git-status.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-01/hook-trusted/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "smoke-01/hook-trusted/invocation.json": {
+      "bytes": 566,
+      "sha256": "87174704b4dbbfc03ac0c628aa01aac3b23f2e7567ec8806a850bcd7d51c1c14"
+    },
+    "smoke-01/hook-trusted/model-exit.json": {
+      "bytes": 21,
+      "sha256": "81868a6e94ffc0178bf833deb1c9013d9fab4ee95ddb876a5e8ec4f1d26376d2"
+    },
+    "smoke-01/hook-trusted/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-01/hook-trusted/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "smoke-01/hook-trusted/process.json": {
+      "bytes": 71,
+      "sha256": "3b277aeb34c2d4ed14d5443a57553807474bbd715080c7e3b78f065eabf31f0c"
+    },
+    "smoke-01/hook-trusted/prompt.txt": {
+      "bytes": 445,
+      "sha256": "99119cc9233b1dfae7cdf0e0c34cba46e323a3189dec9ee29ed258908093b43d"
+    },
+    "smoke-01/hook-trusted/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "smoke-01/hook-trusted/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "smoke-01/hook-trusted/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "smoke-01/hook-trusted/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-01/hook-trusted/stdout.jsonl": {
+      "bytes": 47865,
+      "sha256": "f2cf7d974abf790fd72a4ac1f50dce223eab8fa7aef6feab6ea3c711273ae1b3"
+    },
+    "smoke-01/hook-trusted/trace-analysis.json": {
+      "bytes": 883,
+      "sha256": "d7ba81568db2f409f995042c244206f2c3785c0f68a8570a2e8d72bdc43d1408"
+    },
+    "smoke-01/hook-trusted/tracked.diff": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-01/hook-trusted/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "smoke-01/hook-untrusted/after.json": {
+      "bytes": 472,
+      "sha256": "94c7a4441d90f296114711a69ce930fedbb405a8aeae384037d9f66686dbefb2"
+    },
+    "smoke-01/hook-untrusted/assessment.json": {
+      "bytes": 599,
+      "sha256": "d540c96616c57ee251d77426f0c62badba19393808bc7410f69d9b39cdf3b0ce"
+    },
+    "smoke-01/hook-untrusted/before.json": {
+      "bytes": 472,
+      "sha256": "94c7a4441d90f296114711a69ce930fedbb405a8aeae384037d9f66686dbefb2"
+    },
+    "smoke-01/hook-untrusted/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "smoke-01/hook-untrusted/cache-verification.json": {
+      "bytes": 32429,
+      "sha256": "b03cae11d6a260cc9a98615d83971b3a13e518dfd46d505d714cc32565d489f2"
+    },
+    "smoke-01/hook-untrusted/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "smoke-01/hook-untrusted/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "smoke-01/hook-untrusted/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "smoke-01/hook-untrusted/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "smoke-01/hook-untrusted/git-status.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-01/hook-untrusted/hook-schemas.json": {
+      "bytes": 16159,
+      "sha256": "a8f3491a3152a1a503bf91cfc6dda01d2e612767753b05dd4de4d5b61d6849e0"
+    },
+    "smoke-01/hook-untrusted/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "smoke-01/hook-untrusted/invocation.json": {
+      "bytes": 519,
+      "sha256": "6be645c8e8d81617f72530013c37c156824512a1c3340d44300c50b9488ed611"
+    },
+    "smoke-01/hook-untrusted/model-exit.json": {
+      "bytes": 21,
+      "sha256": "81868a6e94ffc0178bf833deb1c9013d9fab4ee95ddb876a5e8ec4f1d26376d2"
+    },
+    "smoke-01/hook-untrusted/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-01/hook-untrusted/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "smoke-01/hook-untrusted/process.json": {
+      "bytes": 71,
+      "sha256": "151813c3a0bb14fcc538db2fa86af5a07695eea55f0aca3682ba7c97c8aa256d"
+    },
+    "smoke-01/hook-untrusted/prompt.txt": {
+      "bytes": 445,
+      "sha256": "99119cc9233b1dfae7cdf0e0c34cba46e323a3189dec9ee29ed258908093b43d"
+    },
+    "smoke-01/hook-untrusted/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "smoke-01/hook-untrusted/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "smoke-01/hook-untrusted/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "smoke-01/hook-untrusted/schema-generation.json": {
+      "bytes": 185,
+      "sha256": "818c99a1ff7ba52de4c0c94b22aacf1b626595d854dbe69f4c923d12a4ca51c2"
+    },
+    "smoke-01/hook-untrusted/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-01/hook-untrusted/stdout.jsonl": {
+      "bytes": 56937,
+      "sha256": "2fa1be8f4b2b4df66d5174c73a7a045a1ed85a077faf773afaa2694e2fa25cdc"
+    },
+    "smoke-01/hook-untrusted/trace-analysis.json": {
+      "bytes": 365,
+      "sha256": "21a123689f2b7543658d8c29b98b3076a634a365abe8f9810269809401084b5e"
+    },
+    "smoke-01/hook-untrusted/tracked.diff": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-01/hook-untrusted/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "smoke-01/maintenance/after.json": {
+      "bytes": 2485,
+      "sha256": "11618de74a346b44cb64957c96b8681e12a8b752b96e58b1674a2d9b58e40c37"
+    },
+    "smoke-01/maintenance/assessment.json": {
+      "bytes": 865,
+      "sha256": "e5df924f648cd5253da96613d2ba8acfb564e97ffa1ecf2b75459a7a56d4d062"
+    },
+    "smoke-01/maintenance/before.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "smoke-01/maintenance/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "smoke-01/maintenance/cache-verification.json": {
+      "bytes": 32429,
+      "sha256": "b03cae11d6a260cc9a98615d83971b3a13e518dfd46d505d714cc32565d489f2"
+    },
+    "smoke-01/maintenance/changes.json": {
+      "bytes": 2887,
+      "sha256": "af1fb358765e34c2ad51d85efe93aa48703c453c2f3cec89ef88f77da55c7f9c"
+    },
+    "smoke-01/maintenance/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "smoke-01/maintenance/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "smoke-01/maintenance/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "smoke-01/maintenance/git-status.txt": {
+      "bytes": 99,
+      "sha256": "38c4fd4b7d1d684c86fc7eb3d89fd4af15b845d5f1add77983d7aaa3b0db3455"
+    },
+    "smoke-01/maintenance/independent-byte-checks.json": {
+      "bytes": 664,
+      "sha256": "abd79969eec62fe870ef9848f62550dbd1c0078e26f7998c89f9c93693a0cbf6"
+    },
+    "smoke-01/maintenance/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "smoke-01/maintenance/invocation.json": {
+      "bytes": 566,
+      "sha256": "87174704b4dbbfc03ac0c628aa01aac3b23f2e7567ec8806a850bcd7d51c1c14"
+    },
+    "smoke-01/maintenance/model-exit.json": {
+      "bytes": 21,
+      "sha256": "81868a6e94ffc0178bf833deb1c9013d9fab4ee95ddb876a5e8ec4f1d26376d2"
+    },
+    "smoke-01/maintenance/offline-tests.json": {
+      "bytes": 357,
+      "sha256": "9209571b25bfcdc40239ee67c2bb86c63859aa3603a8f2bafb5f8d1f89926cb8"
+    },
+    "smoke-01/maintenance/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-01/maintenance/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "smoke-01/maintenance/process.json": {
+      "bytes": 71,
+      "sha256": "7a88116b00ed0291f70f47cd6eede4f8a18923e1c18179b45063cbd054c829fc"
+    },
+    "smoke-01/maintenance/prompt.txt": {
+      "bytes": 694,
+      "sha256": "bcd515a829cb13f028af1d032d7ec5c3e1802e311d2d8622bbf0a203c13aaa01"
+    },
+    "smoke-01/maintenance/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "smoke-01/maintenance/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "smoke-01/maintenance/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "smoke-01/maintenance/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-01/maintenance/stdout.jsonl": {
+      "bytes": 80553,
+      "sha256": "07ce18254ed95a9fd029bbb86cbe356eb477c5cf3d934086133737bc5c37bd3d"
+    },
+    "smoke-01/maintenance/trace-analysis.json": {
+      "bytes": 48840,
+      "sha256": "0c088f651da2592fb13bd289165eab32c96071de95ea5e1cf491f64c5d302b33"
+    },
+    "smoke-01/maintenance/tracked.diff": {
+      "bytes": 2635,
+      "sha256": "6c43216eda65efbcec63b0642915e5cc79fb520342f6c7cb5667b59fcaeaed54"
+    },
+    "smoke-01/maintenance/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "smoke-01/readonly/after.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "smoke-01/readonly/assessment.json": {
+      "bytes": 563,
+      "sha256": "d77942f9258f8aee2aa56ace8d9dc4a59b462f18b3a08272e925bfc850b83965"
+    },
+    "smoke-01/readonly/before.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "smoke-01/readonly/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "smoke-01/readonly/cache-verification.json": {
+      "bytes": 32429,
+      "sha256": "b03cae11d6a260cc9a98615d83971b3a13e518dfd46d505d714cc32565d489f2"
+    },
+    "smoke-01/readonly/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "smoke-01/readonly/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "smoke-01/readonly/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "smoke-01/readonly/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "smoke-01/readonly/git-status.txt": {
+      "bytes": 17,
+      "sha256": "938e2d236ffdefc4bcbe4f395c586970cac17bc8f8c4adc2d4e8451d1a4c406e"
+    },
+    "smoke-01/readonly/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "smoke-01/readonly/invocation.json": {
+      "bytes": 565,
+      "sha256": "36a18d1cdabe8b93c5ac14016f0b02c64451a729dbd3410aa8e814ca9295dd2f"
+    },
+    "smoke-01/readonly/model-exit.json": {
+      "bytes": 21,
+      "sha256": "81868a6e94ffc0178bf833deb1c9013d9fab4ee95ddb876a5e8ec4f1d26376d2"
+    },
+    "smoke-01/readonly/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-01/readonly/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "smoke-01/readonly/process.json": {
+      "bytes": 71,
+      "sha256": "b5007329f334f9706fb2f90121af1566104d3405b3e35c73ebff2ca4d6c8c505"
+    },
+    "smoke-01/readonly/prompt.txt": {
+      "bytes": 414,
+      "sha256": "cc26ca15431759eda67642dec813801dd566f22e2c370ad878761b572812b0e3"
+    },
+    "smoke-01/readonly/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "smoke-01/readonly/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "smoke-01/readonly/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "smoke-01/readonly/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-01/readonly/stdout.jsonl": {
+      "bytes": 73316,
+      "sha256": "de99c44379753cf49127a0c33da154a6aeb9b0d31a72fbe0d3ce3be69cafa9b0"
+    },
+    "smoke-01/readonly/trace-analysis.json": {
+      "bytes": 44093,
+      "sha256": "24dde550e2a29a15d47f8e9fba6bc62eecec1adee5a507e01ebacda2d0e32aa6"
+    },
+    "smoke-01/readonly/tracked.diff": {
+      "bytes": 173,
+      "sha256": "873eef57ff41addcfbce936154988d7527fe64778bc8949f9f1c2129e421562f"
+    },
+    "smoke-01/readonly/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "smoke-01/semantic-review.json": {
+      "bytes": 2861,
+      "sha256": "31f18e67e44f07d00febdba088c27d5594c93a9ea82d188b8202677873c9efe7"
+    },
+    "smoke-01/simple/after.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "smoke-01/simple/assessment.json": {
+      "bytes": 551,
+      "sha256": "1d5f527ad0fac4729baa999de8566a6d383213c8890753a53f76fbd0f807ed52"
+    },
+    "smoke-01/simple/before.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "smoke-01/simple/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "smoke-01/simple/cache-verification.json": {
+      "bytes": 32429,
+      "sha256": "b03cae11d6a260cc9a98615d83971b3a13e518dfd46d505d714cc32565d489f2"
+    },
+    "smoke-01/simple/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "smoke-01/simple/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "smoke-01/simple/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "smoke-01/simple/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "smoke-01/simple/git-status.txt": {
+      "bytes": 17,
+      "sha256": "938e2d236ffdefc4bcbe4f395c586970cac17bc8f8c4adc2d4e8451d1a4c406e"
+    },
+    "smoke-01/simple/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "smoke-01/simple/invocation.json": {
+      "bytes": 566,
+      "sha256": "87174704b4dbbfc03ac0c628aa01aac3b23f2e7567ec8806a850bcd7d51c1c14"
+    },
+    "smoke-01/simple/model-exit.json": {
+      "bytes": 21,
+      "sha256": "81868a6e94ffc0178bf833deb1c9013d9fab4ee95ddb876a5e8ec4f1d26376d2"
+    },
+    "smoke-01/simple/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-01/simple/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "smoke-01/simple/process.json": {
+      "bytes": 71,
+      "sha256": "5c2d344af7be86997a67884e9c1a7e6369e6bd6faacf869767b6521b7ea9109a"
+    },
+    "smoke-01/simple/prompt.txt": {
+      "bytes": 340,
+      "sha256": "a336ee993eb2597ccd8070c64503652959dc478117e344b863f1d913c94e5028"
+    },
+    "smoke-01/simple/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "smoke-01/simple/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "smoke-01/simple/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "smoke-01/simple/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-01/simple/stdout.jsonl": {
+      "bytes": 47826,
+      "sha256": "dc2a886a52d8519ce85715e33f1961219051ad8878e4faf065cf3cf15f97b692"
+    },
+    "smoke-01/simple/trace-analysis.json": {
+      "bytes": 844,
+      "sha256": "e2f0c53fd2a0cddaf5a507672cbb91ab5f73497fc9aa8ef1aeeb845b28045ace"
+    },
+    "smoke-01/simple/tracked.diff": {
+      "bytes": 173,
+      "sha256": "873eef57ff41addcfbce936154988d7527fe64778bc8949f9f1c2129e421562f"
+    },
+    "smoke-01/simple/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "smoke-01/summary.json": {
+      "bytes": 5385,
+      "sha256": "3e774b9eaf6d15089c4f2d047b3181da59a7a396a6ae6f1a4e7f062f7b9c6c85"
+    },
+    "smoke-02/cleanup.json": {
+      "bytes": 215,
+      "sha256": "4b1410c7a7e94830d77f2b0d54a0a972afb5c3d3d8d3273e6ba5b2902f51d387"
+    },
+    "smoke-02/cold-reader/after.json": {
+      "bytes": 3152,
+      "sha256": "263166ae40b8a00df0f2d45723c6893b5e614c1e616fa6c1c27bdcad327e1654"
+    },
+    "smoke-02/cold-reader/assessment.json": {
+      "bytes": 601,
+      "sha256": "588af63da8a7fb0d427bee890160ece812def72c84fe5833537eecc08c8b91b5"
+    },
+    "smoke-02/cold-reader/before.json": {
+      "bytes": 3152,
+      "sha256": "263166ae40b8a00df0f2d45723c6893b5e614c1e616fa6c1c27bdcad327e1654"
+    },
+    "smoke-02/cold-reader/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "smoke-02/cold-reader/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "smoke-02/cold-reader/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "smoke-02/cold-reader/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "smoke-02/cold-reader/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "smoke-02/cold-reader/git-status.txt": {
+      "bytes": 81,
+      "sha256": "8da7f0b9092a0db8488f8c81f810153c0a1fb4d8a60b9759b522cb9d2e0eba45"
+    },
+    "smoke-02/cold-reader/invocation.json": {
+      "bytes": 544,
+      "sha256": "953a91dc5f78c45ea19c964a82844ca00255d9e9bb6edc8a2d1631fc14bbbf9b"
+    },
+    "smoke-02/cold-reader/model-exit.json": {
+      "bytes": 21,
+      "sha256": "81868a6e94ffc0178bf833deb1c9013d9fab4ee95ddb876a5e8ec4f1d26376d2"
+    },
+    "smoke-02/cold-reader/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-02/cold-reader/plugin-list-before.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-02/cold-reader/process.json": {
+      "bytes": 71,
+      "sha256": "05527f1c201ef1b55e92574d251f61dc32fc01f1136fe0df84a19275bb68db48"
+    },
+    "smoke-02/cold-reader/prompt.txt": {
+      "bytes": 626,
+      "sha256": "5d9b87569fa6b04b66facb7eb42a82b87f641e678a6dc73de2eb36e0cefb5a31"
+    },
+    "smoke-02/cold-reader/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "smoke-02/cold-reader/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-02/cold-reader/stdout.jsonl": {
+      "bytes": 20398,
+      "sha256": "7f102f74c34db2835fa56f2e2f7292c2abb3a5cc76a3b90a87166f7e6469a198"
+    },
+    "smoke-02/cold-reader/trace-analysis.json": {
+      "bytes": 5813,
+      "sha256": "dbef3bf05184282887992269e06fcbc46877f31b6f6171ffdcc281c3267b6adb"
+    },
+    "smoke-02/cold-reader/tracked.diff": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-02/conflict/after.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "smoke-02/conflict/assessment.json": {
+      "bytes": 563,
+      "sha256": "d77942f9258f8aee2aa56ace8d9dc4a59b462f18b3a08272e925bfc850b83965"
+    },
+    "smoke-02/conflict/before.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "smoke-02/conflict/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "smoke-02/conflict/cache-verification.json": {
+      "bytes": 32429,
+      "sha256": "b03cae11d6a260cc9a98615d83971b3a13e518dfd46d505d714cc32565d489f2"
+    },
+    "smoke-02/conflict/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "smoke-02/conflict/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "smoke-02/conflict/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "smoke-02/conflict/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "smoke-02/conflict/git-status.txt": {
+      "bytes": 17,
+      "sha256": "938e2d236ffdefc4bcbe4f395c586970cac17bc8f8c4adc2d4e8451d1a4c406e"
+    },
+    "smoke-02/conflict/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "smoke-02/conflict/installed-hooks-after.json": {
+      "bytes": 16573,
+      "sha256": "5cca86880e68dd1e3fadb33e357fcec5dd5b773732928b7c660b1e63f6544f5e"
+    },
+    "smoke-02/conflict/installed-hooks-before.json": {
+      "bytes": 16573,
+      "sha256": "0b87038c04de34a72495ac68d02c4104638a187e5b04249c20b1ff1462950ce6"
+    },
+    "smoke-02/conflict/invocation.json": {
+      "bytes": 565,
+      "sha256": "36a18d1cdabe8b93c5ac14016f0b02c64451a729dbd3410aa8e814ca9295dd2f"
+    },
+    "smoke-02/conflict/model-exit.json": {
+      "bytes": 21,
+      "sha256": "81868a6e94ffc0178bf833deb1c9013d9fab4ee95ddb876a5e8ec4f1d26376d2"
+    },
+    "smoke-02/conflict/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-02/conflict/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "smoke-02/conflict/process.json": {
+      "bytes": 71,
+      "sha256": "d646c22dc7458b5e188dde3d5939f1bd542fe5f83db6871b3376a5caccd91546"
+    },
+    "smoke-02/conflict/prompt.txt": {
+      "bytes": 600,
+      "sha256": "edb3c90c0498f50218e749552fa70c0ea704a1f7f44f1c4ad8f475abcf67bd7c"
+    },
+    "smoke-02/conflict/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "smoke-02/conflict/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "smoke-02/conflict/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "smoke-02/conflict/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-02/conflict/stdout.jsonl": {
+      "bytes": 94629,
+      "sha256": "f0fe7e8f5ebfabca8487e52ff635923684ce4c15d254780fc4e8348d42ddf53b"
+    },
+    "smoke-02/conflict/trace-analysis.json": {
+      "bytes": 41246,
+      "sha256": "5436e68a75eb151833dbd6f244f7e51584f2adfba7cd670933a769c80e685253"
+    },
+    "smoke-02/conflict/tracked.diff": {
+      "bytes": 173,
+      "sha256": "873eef57ff41addcfbce936154988d7527fe64778bc8949f9f1c2129e421562f"
+    },
+    "smoke-02/conflict/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "smoke-02/environment.json": {
+      "bytes": 3781,
+      "sha256": "b8ebfff9491063a6309642d2e68b89b3f638e0bce48999468d1f0ec8baa1ea05"
+    },
+    "smoke-02/evidence-gap/after.json": {
+      "bytes": 1969,
+      "sha256": "6af42ff7d17684490b2b8dbd81972a6fabe0b15d13c4497c551cea6f1ee9c3cc"
+    },
+    "smoke-02/evidence-gap/assessment.json": {
+      "bytes": 564,
+      "sha256": "8b4bfbe593192e7f185e16d2f642f18cddb7086c5c3d6b2326756b8854c2976c"
+    },
+    "smoke-02/evidence-gap/before.json": {
+      "bytes": 1969,
+      "sha256": "6af42ff7d17684490b2b8dbd81972a6fabe0b15d13c4497c551cea6f1ee9c3cc"
+    },
+    "smoke-02/evidence-gap/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "smoke-02/evidence-gap/cache-verification.json": {
+      "bytes": 32429,
+      "sha256": "b03cae11d6a260cc9a98615d83971b3a13e518dfd46d505d714cc32565d489f2"
+    },
+    "smoke-02/evidence-gap/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "smoke-02/evidence-gap/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "smoke-02/evidence-gap/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "smoke-02/evidence-gap/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "smoke-02/evidence-gap/git-status.txt": {
+      "bytes": 17,
+      "sha256": "938e2d236ffdefc4bcbe4f395c586970cac17bc8f8c4adc2d4e8451d1a4c406e"
+    },
+    "smoke-02/evidence-gap/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "smoke-02/evidence-gap/installed-hooks-after.json": {
+      "bytes": 16573,
+      "sha256": "48e185a80bafa29519c1e02cf1bbcc50a35b5d1134c7c2044a71b91ea6a80ef5"
+    },
+    "smoke-02/evidence-gap/installed-hooks-before.json": {
+      "bytes": 16573,
+      "sha256": "426ca8e74b1ac4f53fdc070bd485031a618e81c5bffd60fc97efaefe7a1b0e84"
+    },
+    "smoke-02/evidence-gap/invocation.json": {
+      "bytes": 565,
+      "sha256": "36a18d1cdabe8b93c5ac14016f0b02c64451a729dbd3410aa8e814ca9295dd2f"
+    },
+    "smoke-02/evidence-gap/model-exit.json": {
+      "bytes": 21,
+      "sha256": "81868a6e94ffc0178bf833deb1c9013d9fab4ee95ddb876a5e8ec4f1d26376d2"
+    },
+    "smoke-02/evidence-gap/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-02/evidence-gap/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "smoke-02/evidence-gap/process.json": {
+      "bytes": 71,
+      "sha256": "6eaf72e38d8d072fd2fb955b81832384149dd24aee550007baee3458f8f7e416"
+    },
+    "smoke-02/evidence-gap/prompt.txt": {
+      "bytes": 735,
+      "sha256": "b27641bca5f74b161908b4c0c312a08f49ccbec86e7c8e378637d3e5ba7d2467"
+    },
+    "smoke-02/evidence-gap/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "smoke-02/evidence-gap/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "smoke-02/evidence-gap/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "smoke-02/evidence-gap/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-02/evidence-gap/stdout.jsonl": {
+      "bytes": 73798,
+      "sha256": "3f8ea235bb2d91d23c556715f67425350979235e8b5cde6e1cc6f1df1aa9199c"
+    },
+    "smoke-02/evidence-gap/trace-analysis.json": {
+      "bytes": 2066,
+      "sha256": "b0ecaef8a69ce30ff45f3acca5d76da3c3fadf97013d9e20dd43dfbac9713609"
+    },
+    "smoke-02/evidence-gap/tracked.diff": {
+      "bytes": 173,
+      "sha256": "873eef57ff41addcfbce936154988d7527fe64778bc8949f9f1c2129e421562f"
+    },
+    "smoke-02/evidence-gap/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "smoke-02/hook-untrusted/after.json": {
+      "bytes": 472,
+      "sha256": "6907269e4eb4146a2debb5cdce8a42301449c7c40993746cc9d2cf384d0eb041"
+    },
+    "smoke-02/hook-untrusted/assessment.json": {
+      "bytes": 605,
+      "sha256": "47917bc1a489f02216bc587201d04e80e3462bd5d0a100623b23e9f3b2654343"
+    },
+    "smoke-02/hook-untrusted/before.json": {
+      "bytes": 472,
+      "sha256": "6907269e4eb4146a2debb5cdce8a42301449c7c40993746cc9d2cf384d0eb041"
+    },
+    "smoke-02/hook-untrusted/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "smoke-02/hook-untrusted/cache-verification.json": {
+      "bytes": 32429,
+      "sha256": "b03cae11d6a260cc9a98615d83971b3a13e518dfd46d505d714cc32565d489f2"
+    },
+    "smoke-02/hook-untrusted/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "smoke-02/hook-untrusted/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "smoke-02/hook-untrusted/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "smoke-02/hook-untrusted/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "smoke-02/hook-untrusted/git-status.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-02/hook-untrusted/hook-schemas.json": {
+      "bytes": 16159,
+      "sha256": "a8f3491a3152a1a503bf91cfc6dda01d2e612767753b05dd4de4d5b61d6849e0"
+    },
+    "smoke-02/hook-untrusted/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "smoke-02/hook-untrusted/installed-hooks-after.json": {
+      "bytes": 16573,
+      "sha256": "3e870533351c37d84152a07d896ea5c0048ce1a7b6483415e21f863ee71f86fd"
+    },
+    "smoke-02/hook-untrusted/installed-hooks-before.json": {
+      "bytes": 16573,
+      "sha256": "6c8cf051e92da26f50d685e8db4e5ebdd8778d862c41f206618b222116ca1bdf"
+    },
+    "smoke-02/hook-untrusted/invocation.json": {
+      "bytes": 519,
+      "sha256": "6be645c8e8d81617f72530013c37c156824512a1c3340d44300c50b9488ed611"
+    },
+    "smoke-02/hook-untrusted/model-exit.json": {
+      "bytes": 21,
+      "sha256": "81868a6e94ffc0178bf833deb1c9013d9fab4ee95ddb876a5e8ec4f1d26376d2"
+    },
+    "smoke-02/hook-untrusted/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-02/hook-untrusted/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "smoke-02/hook-untrusted/process.json": {
+      "bytes": 71,
+      "sha256": "7a916dcbb75588481d2435c51e9df0ed21493d25cee556a4116787f91a8e6b61"
+    },
+    "smoke-02/hook-untrusted/prompt.txt": {
+      "bytes": 601,
+      "sha256": "4f593e38824b8d9c795a131734238c2b5e227c50816532ef681280ec2aa80625"
+    },
+    "smoke-02/hook-untrusted/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "smoke-02/hook-untrusted/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "smoke-02/hook-untrusted/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "smoke-02/hook-untrusted/schema-generation.json": {
+      "bytes": 185,
+      "sha256": "818c99a1ff7ba52de4c0c94b22aacf1b626595d854dbe69f4c923d12a4ca51c2"
+    },
+    "smoke-02/hook-untrusted/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-02/hook-untrusted/stdout.jsonl": {
+      "bytes": 81430,
+      "sha256": "aa004254f658db30370c1eff0b229789f65e22dd8026f7525e31858ef1c1bb6f"
+    },
+    "smoke-02/hook-untrusted/trace-analysis.json": {
+      "bytes": 363,
+      "sha256": "e018b24db14f5c2076d7481e04928f97f3889db3aabf5ecc2fe6a44a353aa0ff"
+    },
+    "smoke-02/hook-untrusted/tracked.diff": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-02/hook-untrusted/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "smoke-02/maintenance/after.json": {
+      "bytes": 3152,
+      "sha256": "263166ae40b8a00df0f2d45723c6893b5e614c1e616fa6c1c27bdcad327e1654"
+    },
+    "smoke-02/maintenance/assessment.json": {
+      "bytes": 865,
+      "sha256": "e5df924f648cd5253da96613d2ba8acfb564e97ffa1ecf2b75459a7a56d4d062"
+    },
+    "smoke-02/maintenance/before.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "smoke-02/maintenance/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "smoke-02/maintenance/cache-verification.json": {
+      "bytes": 32429,
+      "sha256": "b03cae11d6a260cc9a98615d83971b3a13e518dfd46d505d714cc32565d489f2"
+    },
+    "smoke-02/maintenance/changes.json": {
+      "bytes": 3554,
+      "sha256": "fd9bf257c9172c8bb3a799c0acdde9786fca4013fb128657a040fbf1b66661f0"
+    },
+    "smoke-02/maintenance/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "smoke-02/maintenance/direct-script-permission-probe.json": {
+      "bytes": 139,
+      "sha256": "b449c6a58a9d38dfee046a0c54c79a7ad9e814eb8ad8ed4c04837cfa93b2654f"
+    },
+    "smoke-02/maintenance/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "smoke-02/maintenance/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "smoke-02/maintenance/git-status.txt": {
+      "bytes": 99,
+      "sha256": "38c4fd4b7d1d684c86fc7eb3d89fd4af15b845d5f1add77983d7aaa3b0db3455"
+    },
+    "smoke-02/maintenance/independent-byte-checks.json": {
+      "bytes": 664,
+      "sha256": "abd79969eec62fe870ef9848f62550dbd1c0078e26f7998c89f9c93693a0cbf6"
+    },
+    "smoke-02/maintenance/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "smoke-02/maintenance/installed-hooks-after.json": {
+      "bytes": 16573,
+      "sha256": "351d2e943409b26912edd09c95e79ebf6622790b1cc007c1087c9ff86bdbbda7"
+    },
+    "smoke-02/maintenance/installed-hooks-before.json": {
+      "bytes": 16573,
+      "sha256": "515e69588529d0951d01431127c3f848d1f1280be680cffec540a9d92f1088df"
+    },
+    "smoke-02/maintenance/invocation.json": {
+      "bytes": 566,
+      "sha256": "87174704b4dbbfc03ac0c628aa01aac3b23f2e7567ec8806a850bcd7d51c1c14"
+    },
+    "smoke-02/maintenance/model-exit.json": {
+      "bytes": 21,
+      "sha256": "81868a6e94ffc0178bf833deb1c9013d9fab4ee95ddb876a5e8ec4f1d26376d2"
+    },
+    "smoke-02/maintenance/offline-tests.json": {
+      "bytes": 460,
+      "sha256": "ff5418a5fe048088bd086442be035e497f79fe85de4efd77391784f23669d5b5"
+    },
+    "smoke-02/maintenance/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-02/maintenance/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "smoke-02/maintenance/process.json": {
+      "bytes": 71,
+      "sha256": "55868c9afc30579007073f406aded8f691fc85de3de23d7c4c8bca4e594816b4"
+    },
+    "smoke-02/maintenance/prompt.txt": {
+      "bytes": 850,
+      "sha256": "11f943d13e4a6074e390d845b98cb41d86488331230ea404b7102b968f1afdee"
+    },
+    "smoke-02/maintenance/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "smoke-02/maintenance/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "smoke-02/maintenance/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "smoke-02/maintenance/stderr.txt": {
+      "bytes": 436,
+      "sha256": "ce96ae764c6b649c3bf7171e02412fb3434d45d62cf6351d13a2416fe9d3d5e7"
+    },
+    "smoke-02/maintenance/stdout.jsonl": {
+      "bytes": 109878,
+      "sha256": "8fdf79b34366d666557fe9e3b53e24d35ca2e4bd6ec58776e063ef96f2653c10"
+    },
+    "smoke-02/maintenance/trace-analysis.json": {
+      "bytes": 50445,
+      "sha256": "9a0849c15688e84b778e494aa2b827567ca1e1f3484f976c5575eba1e1588032"
+    },
+    "smoke-02/maintenance/tracked.diff": {
+      "bytes": 3295,
+      "sha256": "dac781acbe36bb9fd880a3ac5795c22e266b54399f1eda6bafa9c6b4dd8b49e0"
+    },
+    "smoke-02/maintenance/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "smoke-02/semantic-review.json": {
+      "bytes": 2848,
+      "sha256": "e240e66840a8399bfccb7dd3ef7d672c8cd08a521512b954279ebfe2cef559cf"
+    },
+    "smoke-02/summary.json": {
+      "bytes": 3977,
+      "sha256": "7dff0f1927f9de8c2b08c22e362c23a7e21db63c71e70a073ded9c76b0dec434"
+    },
+    "smoke-03/cleanup.json": {
+      "bytes": 215,
+      "sha256": "4b1410c7a7e94830d77f2b0d54a0a972afb5c3d3d8d3273e6ba5b2902f51d387"
+    },
+    "smoke-03/cold-reader/after.json": {
+      "bytes": 8885,
+      "sha256": "4c63dbc9fc60997f95b45b1e5b8a3629c683e321a125a3b3bf20c24e4fcd549c"
+    },
+    "smoke-03/cold-reader/assessment.json": {
+      "bytes": 601,
+      "sha256": "588af63da8a7fb0d427bee890160ece812def72c84fe5833537eecc08c8b91b5"
+    },
+    "smoke-03/cold-reader/before.json": {
+      "bytes": 8885,
+      "sha256": "4c63dbc9fc60997f95b45b1e5b8a3629c683e321a125a3b3bf20c24e4fcd549c"
+    },
+    "smoke-03/cold-reader/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "smoke-03/cold-reader/changes.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "smoke-03/cold-reader/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "smoke-03/cold-reader/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "smoke-03/cold-reader/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "smoke-03/cold-reader/git-status.txt": {
+      "bytes": 95,
+      "sha256": "d743ee6e30e74a45912db08499eb18e2065321640da0a3ac5e7aead917621354"
+    },
+    "smoke-03/cold-reader/invocation.json": {
+      "bytes": 544,
+      "sha256": "953a91dc5f78c45ea19c964a82844ca00255d9e9bb6edc8a2d1631fc14bbbf9b"
+    },
+    "smoke-03/cold-reader/model-exit.json": {
+      "bytes": 21,
+      "sha256": "81868a6e94ffc0178bf833deb1c9013d9fab4ee95ddb876a5e8ec4f1d26376d2"
+    },
+    "smoke-03/cold-reader/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-03/cold-reader/plugin-list-before.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-03/cold-reader/process.json": {
+      "bytes": 71,
+      "sha256": "347cec9d7981895fbaa1a6d08b52d6e7f2261c6ec97dcc472e1f00c63d3275e5"
+    },
+    "smoke-03/cold-reader/prompt.txt": {
+      "bytes": 626,
+      "sha256": "5d9b87569fa6b04b66facb7eb42a82b87f641e678a6dc73de2eb36e0cefb5a31"
+    },
+    "smoke-03/cold-reader/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "smoke-03/cold-reader/stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-03/cold-reader/stdout.jsonl": {
+      "bytes": 36826,
+      "sha256": "baf1449bd910acd686dfba01c8eb472981418c17f4ffc679efa58c2fc713bca1"
+    },
+    "smoke-03/cold-reader/trace-analysis.json": {
+      "bytes": 20944,
+      "sha256": "3d37b5a0df5bcbeeced78cc013dc60128e2ce971b7101dbed9b45542dfe82eb7"
+    },
+    "smoke-03/cold-reader/tracked.diff": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-03/environment.json": {
+      "bytes": 3723,
+      "sha256": "aa596c2b49a0e7008a61ed8ffafb3c9c7d746fe2b64745f310f17ba0bd5b7821"
+    },
+    "smoke-03/final-package-delta.json": {
+      "bytes": 23766,
+      "sha256": "c7c3a4434dd0d9753627f06f2db007b08c5716821818d9b023f295ffa5163e05"
+    },
+    "smoke-03/frozen-codex-package.zip": {
+      "bytes": 944836,
+      "sha256": "4c47e2eb720d35eae6bf0250b6d8754787afa0ab265889c1637909893cfcf9f4"
+    },
+    "smoke-03/maintenance/after.json": {
+      "bytes": 8885,
+      "sha256": "4c63dbc9fc60997f95b45b1e5b8a3629c683e321a125a3b3bf20c24e4fcd549c"
+    },
+    "smoke-03/maintenance/assessment.json": {
+      "bytes": 863,
+      "sha256": "a13486b731d737b7c0a0fcade54c3ea57887adcb89d453375753aac2a3070a86"
+    },
+    "smoke-03/maintenance/before.json": {
+      "bytes": 1707,
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    "smoke-03/maintenance/cache-cleanup.json": {
+      "bytes": 118,
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f"
+    },
+    "smoke-03/maintenance/cache-verification.json": {
+      "bytes": 53212,
+      "sha256": "1ecadd359d2cf5071de17f399c089eec6ad6cf3b91e01b82536264c42f9fbfed"
+    },
+    "smoke-03/maintenance/changes.json": {
+      "bytes": 9443,
+      "sha256": "454461e82fc89d639ac51202538bad80870d161e404945884f82c97a1961c393"
+    },
+    "smoke-03/maintenance/cli-version.json": {
+      "bytes": 121,
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63"
+    },
+    "smoke-03/maintenance/exec-help.json": {
+      "bytes": 4181,
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7"
+    },
+    "smoke-03/maintenance/features.json": {
+      "bytes": 8044,
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7"
+    },
+    "smoke-03/maintenance/git-status.txt": {
+      "bytes": 113,
+      "sha256": "38fc7b107eaf43ae8c7a39087937468520581e5fed3e57ea6fbaac60df77e44c"
+    },
+    "smoke-03/maintenance/hook-schemas.json": {
+      "bytes": 16159,
+      "sha256": "a8f3491a3152a1a503bf91cfc6dda01d2e612767753b05dd4de4d5b61d6849e0"
+    },
+    "smoke-03/maintenance/independent-byte-checks.json": {
+      "bytes": 664,
+      "sha256": "abd79969eec62fe870ef9848f62550dbd1c0078e26f7998c89f9c93693a0cbf6"
+    },
+    "smoke-03/maintenance/install.json": {
+      "bytes": 477,
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e"
+    },
+    "smoke-03/maintenance/installed-hooks-after.json": {
+      "bytes": 16573,
+      "sha256": "c1c520362e72543190eb9da0005cb345410745b727fcc08df1ccf18d44aed366"
+    },
+    "smoke-03/maintenance/installed-hooks-before.json": {
+      "bytes": 16573,
+      "sha256": "f3c488bb293b268d0273aa0aa0418aa91fca7d07d87500390a0085a4a7db079e"
+    },
+    "smoke-03/maintenance/invocation.json": {
+      "bytes": 566,
+      "sha256": "87174704b4dbbfc03ac0c628aa01aac3b23f2e7567ec8806a850bcd7d51c1c14"
+    },
+    "smoke-03/maintenance/model-exit.json": {
+      "bytes": 21,
+      "sha256": "81868a6e94ffc0178bf833deb1c9013d9fab4ee95ddb876a5e8ec4f1d26376d2"
+    },
+    "smoke-03/maintenance/offline-tests.json": {
+      "bytes": 379,
+      "sha256": "b8fe136b6775e1ba17062b79eb45f2c794d1f71e4b3fc0951ea8fdd7ff2dce3f"
+    },
+    "smoke-03/maintenance/plugin-list-after.json": {
+      "bytes": 174,
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151"
+    },
+    "smoke-03/maintenance/plugin-list-before.json": {
+      "bytes": 726,
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c"
+    },
+    "smoke-03/maintenance/process.json": {
+      "bytes": 72,
+      "sha256": "fe1319967a5cf88327c0a421392739835d26aaefde8ea32dfcc39f6f6299a4be"
+    },
+    "smoke-03/maintenance/prompt.txt": {
+      "bytes": 850,
+      "sha256": "11f943d13e4a6074e390d845b98cb41d86488331230ea404b7102b968f1afdee"
+    },
+    "smoke-03/maintenance/python-version.json": {
+      "bytes": 128,
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20"
+    },
+    "smoke-03/maintenance/register.json": {
+      "bytes": 288,
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a"
+    },
+    "smoke-03/maintenance/remove.json": {
+      "bytes": 316,
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a"
+    },
+    "smoke-03/maintenance/schema-generation.json": {
+      "bytes": 185,
+      "sha256": "818c99a1ff7ba52de4c0c94b22aacf1b626595d854dbe69f4c923d12a4ca51c2"
+    },
+    "smoke-03/maintenance/stderr.txt": {
+      "bytes": 1596,
+      "sha256": "24e7e3b166bf392e5adac80313152647b73c956a60499014a547240ddeffadb4"
+    },
+    "smoke-03/maintenance/stdout.jsonl": {
+      "bytes": 159914,
+      "sha256": "7f3dfd1076d59355cb19743327592f98ce6c062936915224d116bb46a0ca4914"
+    },
+    "smoke-03/maintenance/trace-analysis.json": {
+      "bytes": 73201,
+      "sha256": "9d368a3ddfd07fcc0a02250825f5513b60e2a4f1d6b0b67dbce94eb5dfb91111"
+    },
+    "smoke-03/maintenance/tracked.diff": {
+      "bytes": 2320,
+      "sha256": "92a3e85d97965244fff0050e9adcb0e496ca663f588415d3b78f397accc9231a"
+    },
+    "smoke-03/maintenance/unregister.json": {
+      "bytes": 257,
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92"
+    },
+    "smoke-03/runner.py": {
+      "bytes": 34736,
+      "sha256": "d18678c4681b911b7d0de8a741205b118e72d313654307b099ab84e1b32f4adf"
+    },
+    "smoke-03/semantic-review.json": {
+      "bytes": 26533,
+      "sha256": "6ac1db020ea1aa0f69afd3ad620b464de7a2e689fffa337b9ff9dbf65a2aa2cc"
+    },
+    "smoke-03/summary.json": {
+      "bytes": 1786,
+      "sha256": "a61758f2eaafd1c301abbaec0aa6dd396180859cb84c7cdba523056bad6b0356"
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "upstream": {
+    "name": "planning-with-files",
+    "version": "3.17.0",
+    "commit": "0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7",
+    "source_worktree_clean": true
+  },
+  "environment": {
+    "os": "Linux x86_64",
+    "python": "3.12.14",
+    "pytest": "9.1.1",
+    "PyYAML": "6.0.3",
+    "node": "22.22.1",
+    "npm": "9.2.0",
+    "isolation": "venv on PATH and writable XDG_CACHE_HOME"
+  },
+  "results": {
+    "pytest": {
+      "status": "Passed",
+      "passed": 721,
+      "skipped": 63,
+      "subtests_passed": 798,
+      "failed": 0,
+      "duration_seconds": 132.64
+    },
+    "pi": {
+      "status": "Passed",
+      "passed": 54,
+      "files_passed": 3,
+      "typecheck_build": "Not Run: upstream provides neither scripts nor tsconfig"
+    },
+    "opencode": {
+      "status": "Passed",
+      "passed": 34,
+      "files_passed": 2,
+      "typecheck": "Passed",
+      "build": "Passed"
+    }
+  },
+  "skip_reasons": {
+    "Unix PowerShell is unavailable": 1,
+    "Windows PowerShell is unavailable": 15,
+    "Windows-shaped path; System32 comparison only meaningful on Windows": 1,
+    "Windows-shaped path; WindowsApps comparison only meaningful on Windows": 1,
+    "commandWindows execution is Windows-specific": 1,
+    "Windows path classification": 1,
+    "Darwin system alias regression": 1,
+    "Windows junction swap regression": 1,
+    "Windows junction regression": 1,
+    "Windows 8.3 alias regression": 1,
+    "PowerShell is not available": 4,
+    "requires PowerShell": 22,
+    "Windows junction behavior": 1,
+    "Windows junction redirection contract": 1,
+    "Windows Git Bash path contract": 1,
+    "PowerShell not available on this platform": 3,
+    "Windows junction containment contract": 1,
+    "Windows-shaped input; on POSIX Path.resolve() treats C:/... as relative and prepends the CWD": 2,
+    "Windows PowerShell unavailable": 2,
+    "Windows PowerShell 5.1 not available": 1,
+    "requires Windows PowerShell and sh for the cross-shell regression test": 1
+  },
+  "limitations": [
+    "Linux baseline only; Windows/macOS real runs Not Run",
+    "No interactive host integration was attempted in this baseline subtask",
+    "ini@7.0.0 declares Node >=22.22.2 (22.x branch); observed Node 22.22.1 emitted EBADENGINE but all OpenCode checks passed",
+    "Initial pytest attempt failed due read-only default cache and python absent from PATH; corrected environment rerun passed with no source changes"
+  ],
+  "commands": {
+    "pytest-isolated": [
+      "/tmp/program-design-02-baseline-venv/bin/python",
+      "-m",
+      "pytest",
+      "tests/",
+      "-q",
+      "--junitxml=/tmp/program-design-02-baseline-results/pytest-isolated.junit.xml"
+    ],
+    "pi-ci-and-test": [
+      "sh",
+      "-c",
+      "npm ci --no-audit --no-fund && npm test"
+    ],
+    "opencode-ci-and-check": [
+      "sh",
+      "-c",
+      "npm ci --no-audit --no-fund && npm run typecheck && npm run build && npm test"
+    ]
+  },
+  "reproducible_runner_validation": {
+    "status": "Passed",
+    "entry_point": "scripts/run-upstream-tests.py",
+    "mode": "baseline",
+    "from_pinned_archive": true,
+    "pytest_terminal_summary": "721 passed, 63 skipped, 798 subtests passed in 117.50s (0:01:57)",
+    "pi_passed": 54,
+    "opencode_passed": 34,
+    "opencode_typecheck": "Passed",
+    "opencode_build": "Passed",
+    "dependency_spec": "requirements-test.txt",
+    "reports": "/tmp/program-design-02-runner-baseline"
+  },
+  "later_environment_investigation": {
+    "native_mkdir": "uutils coreutils 0.8.0",
+    "native_concurrent_phase_updates": "Failed intermittently in both pristine and migrated code; a previously passing full run does not establish safe native concurrency.",
+    "controlled_tool": "GNU mkdir 9.7 via explicit --tool-path",
+    "controlled_pristine_full_pytest": "721 passed, 63 skipped, 798 subtests passed in 103.18s",
+    "evidence": "../regression/README.md"
+  }
+}

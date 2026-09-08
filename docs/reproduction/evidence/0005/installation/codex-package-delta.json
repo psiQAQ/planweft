@@ -1,0 +1,27 @@
+{
+  "compared_to": "host/skill-discovery.tar.gz:skills-final/frozen-codex-package.zip",
+  "before_zip_sha256": "4fa81f93c4b6dfdc839f0ad34731afdab0d9a37f6a27056a76c76f64f5c91044",
+  "after_zip_sha256": "d0ca7189f34676d32e76a77159261c6e6af9e8d4cce1839800dc2a85ec759d2c",
+  "changes": {
+    "program-design/INSTALL.md": {
+      "before": [
+        "478f30b7fb2bd6369d5e655afcb60f582865e3ed7b45afe4638d71a665f7085f",
+        33188
+      ],
+      "after": [
+        "e44aa25cafdcafcf157664ca832fc30a7642638bd6587b431620f9464ac21755",
+        33188
+      ]
+    },
+    "program-design/skills/project-docs/SKILL.md": {
+      "before": [
+        "867a2305d5608430c1a6f3bfb5142d87bd9ab7bbf4a3f0127b1a941104540f7c",
+        33188
+      ],
+      "after": [
+        "e0491b319ce6e04fc3a77bdfdc9488f17f68888618c7350ac0ab04339a2b33fb",
+        33188
+      ]
+    }
+  }
+}

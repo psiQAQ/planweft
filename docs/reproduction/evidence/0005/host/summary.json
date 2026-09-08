@@ -1,0 +1,502 @@
+{
+  "image": "sha256:aa46e31c71577eb37c1e1d856427d9d159ddd5a41aa92472af722838b1c3a159",
+  "cli": "0.149.1",
+  "model": "gpt-5.6-terra",
+  "real_model_sessions": 14,
+  "non_model_preflights": 4,
+  "sample_scope": "Linux-only isolated single-model samples; no comparative efficacy claim",
+  "packages": {
+    "initial_two_model_runs": "feff9eed21bdce9a4bc62338a9978091abb88230a5256fa03081a03adfea53c5",
+    "third_model_run": "4c47e2eb720d35eae6bf0250b6d8754787afa0ab265889c1637909893cfcf9f4",
+    "then_final_preflight": "8177bbdb04f766f72afeb77acdafbd4bfc010a8f30ee79ed6326ab80cff35b22"
+  },
+  "runtime_relation": "Third-model package and final package differ only in six SKILL.md adoption sentences and INSTALL.md; runtime/manifests/modes identical, verified in smoke-03/final-package-delta.json.",
+  "runs": {
+    "preflight-01": {
+      "preflight": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 1.13
+        },
+        "automated_status": "Passed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "model_not_called": true
+        },
+        "semantic_review": "Not required for exact token/arithmetic checks",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      }
+    },
+    "preflight-02": {
+      "preflight": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 1.032
+        },
+        "automated_status": "Passed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "model_not_called": true
+        },
+        "semantic_review": "Not required for exact token/arithmetic checks",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      }
+    },
+    "preflight-03": {
+      "preflight": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 1.033
+        },
+        "automated_status": "Passed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "model_not_called": true
+        },
+        "semantic_review": "Not required for exact token/arithmetic checks",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      }
+    },
+    "preflight-final": {
+      "preflight": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 0.981
+        },
+        "automated_status": "Passed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "model_not_called": true
+        },
+        "semantic_review": "Not required for exact token/arithmetic checks",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      }
+    },
+    "smoke-01": {
+      "hook-untrusted": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 12.074
+        },
+        "automated_status": "Failed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "no_tool_calls": true,
+          "project_unchanged": true,
+          "context_delivery": true,
+          "untrusted_skip_observed": false
+        },
+        "semantic_review": "Not required for exact token/arithmetic checks",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      },
+      "hook-trusted": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 14.728
+        },
+        "automated_status": "Passed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "no_tool_calls": true,
+          "project_unchanged": true,
+          "context_delivery": true
+        },
+        "semantic_review": "Not required for exact token/arithmetic checks",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      },
+      "hook-recovery": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 12.262
+        },
+        "automated_status": "Passed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "no_tool_calls": true,
+          "project_unchanged": true,
+          "context_delivery": true
+        },
+        "semantic_review": "Not required for exact token/arithmetic checks",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      },
+      "maintenance": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 93.477
+        },
+        "automated_status": "Failed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "skill_read_from_installed_cache": true,
+          "approved_contract_preserved": true,
+          "dirty_user_change_preserved": true,
+          "historical_observation_preserved": true,
+          "single_selected_task_plan": false,
+          "old_plan_points_to_task_plan": false,
+          "guide_updated": true,
+          "independent_byte_checks": true,
+          "offline_tests_passed_with_cases": true
+        },
+        "semantic_review": "Required: inspect cited behavior, Windows limitation and handoff accuracy",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      },
+      "cold-reader": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 34.672
+        },
+        "automated_status": "Passed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "project_unchanged": true,
+          "has_file_citations": true,
+          "reader_has_no_plugin": true,
+          "reader_has_no_skill_cache_read": true
+        },
+        "semantic_review": "Required: inspect cited behavior, Windows limitation and handoff accuracy",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      },
+      "simple": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 11.507
+        },
+        "automated_status": "Passed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "answer": true,
+          "no_tool_calls": true,
+          "project_unchanged": true
+        },
+        "semantic_review": "Not required for exact token/arithmetic checks",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      },
+      "readonly": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 41.532
+        },
+        "automated_status": "Passed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "project_unchanged": true,
+          "has_file_citations": true
+        },
+        "semantic_review": "Required: inspect cited behavior, Windows limitation and handoff accuracy",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      }
+    },
+    "smoke-02": {
+      "hook-untrusted": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 11.218
+        },
+        "automated_status": "Passed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "no_tool_calls": true,
+          "project_unchanged": true,
+          "context_delivery": true,
+          "untrusted_hook_status_observed": true
+        },
+        "semantic_review": "Not required for exact token/arithmetic checks",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      },
+      "maintenance": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 136.63
+        },
+        "automated_status": "Failed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "skill_read_from_installed_cache": true,
+          "approved_contract_preserved": true,
+          "dirty_user_change_preserved": true,
+          "historical_observation_preserved": true,
+          "single_selected_task_plan": false,
+          "old_plan_points_to_task_plan": false,
+          "guide_updated": true,
+          "independent_byte_checks": true,
+          "offline_tests_passed_with_cases": true
+        },
+        "semantic_review": "Required: inspect cited behavior, Windows limitation and handoff accuracy",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      },
+      "cold-reader": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 34.968
+        },
+        "automated_status": "Passed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "project_unchanged": true,
+          "has_file_citations": true,
+          "reader_has_no_plugin": true,
+          "reader_has_no_skill_cache_read": true
+        },
+        "semantic_review": "Required: inspect cited behavior, Windows limitation and handoff accuracy",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      },
+      "conflict": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 35.819
+        },
+        "automated_status": "Passed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "project_unchanged": true,
+          "has_file_citations": true
+        },
+        "semantic_review": "Required: inspect cited behavior, Windows limitation and handoff accuracy",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      },
+      "evidence-gap": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 21.435
+        },
+        "automated_status": "Failed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "project_unchanged": true,
+          "has_file_citations": false
+        },
+        "semantic_review": "Required: inspect cited behavior, Windows limitation and handoff accuracy",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      }
+    },
+    "smoke-03": {
+      "maintenance": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 206.505
+        },
+        "automated_status": "Passed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "installed_reviewed_version": true,
+          "skill_read_from_installed_cache": true,
+          "approved_contract_preserved": true,
+          "dirty_user_change_preserved": true,
+          "historical_observation_preserved": true,
+          "single_selected_task_plan": true,
+          "old_plan_points_to_task_plan": true,
+          "guide_updated": true,
+          "independent_byte_checks": true,
+          "offline_tests_passed_with_cases": true
+        },
+        "semantic_review": "Required: inspect cited behavior, Windows limitation and handoff accuracy",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      },
+      "cold-reader": {
+        "process": {
+          "timeout_limit": 600,
+          "exit_code": 0,
+          "wall_seconds": 53.528
+        },
+        "automated_status": "Passed",
+        "conditions": {
+          "model_process_succeeded": true,
+          "plugin_cache_removed": true,
+          "project_unchanged": true,
+          "has_file_citations": true,
+          "reader_has_no_plugin": true,
+          "reader_has_no_skill_cache_read": true
+        },
+        "semantic_review": "Required: inspect cited behavior, Windows limitation and handoff accuracy",
+        "limits": [
+          "Real Linux Codex only; no Windows/macOS host validation",
+          "One model sample per scenario; no comparative performance conclusion",
+          "Gated model continuation is not exercised; use offline protocol tests"
+        ]
+      }
+    }
+  },
+  "cleanup": {
+    "preflight-01": {
+      "remaining_test_containers": [],
+      "original_containers_preserved": true,
+      "temporary_workspace_removed": true,
+      "image_preserved": true,
+      "auth_copies": "container tmpfs only; removed with each container"
+    },
+    "preflight-02": {
+      "remaining_test_containers": [],
+      "original_containers_preserved": true,
+      "temporary_workspace_removed": true,
+      "image_preserved": true,
+      "auth_copies": "container tmpfs only; removed with each container"
+    },
+    "preflight-03": {
+      "remaining_test_containers": [],
+      "original_containers_preserved": true,
+      "temporary_workspace_removed": true,
+      "image_preserved": true,
+      "auth_copies": "container tmpfs only; removed with each container"
+    },
+    "preflight-final": {
+      "remaining_test_containers": [],
+      "original_containers_preserved": true,
+      "temporary_workspace_removed": true,
+      "image_preserved": true,
+      "auth_copies": "container tmpfs only; removed with each container"
+    },
+    "smoke-01": {
+      "remaining_test_containers": [],
+      "original_containers_preserved": true,
+      "temporary_workspace_removed": true,
+      "image_preserved": true,
+      "auth_copies": "container tmpfs only; removed with each container"
+    },
+    "smoke-02": {
+      "remaining_test_containers": [],
+      "original_containers_preserved": true,
+      "temporary_workspace_removed": true,
+      "image_preserved": true,
+      "auth_copies": "container tmpfs only; removed with each container"
+    },
+    "smoke-03": {
+      "remaining_test_containers": [],
+      "original_containers_preserved": true,
+      "temporary_workspace_removed": true,
+      "image_preserved": true,
+      "auth_copies": "container tmpfs only; removed with each container"
+    }
+  },
+  "conclusions": {
+    "automatic_main_skill_loading": "Passed in all three maintenance samples without skill name invocation or AGENTS opt-in.",
+    "pwf_task_adoption": "Failed in first two; Passed in third after default-adoption clarification, with goal/phase/next/blocker/evidence transferred and old plan redirected.",
+    "trusted_hook_context": "Passed: exact project-only token returned with no tool calls; normal untrusted invocation returns NO_CONTEXT.",
+    "fresh_session_recovery": "Passed: separate fresh ephemeral session returns same project-only token without tools.",
+    "normal_stop_and_uninstall": "Real CLI sessions ended normally, plugin removed and cache empty. Native per-event Stop notification is not exposed by CLI JSON and was not independently observed.",
+    "live_gate_loop": "Not Run intentionally; offline gate protocol checks are the validation surface.",
+    "conflict_and_evidence_gap": "Approved-requirement conflict respected. Candidate mechanism remained unimplemented/unadopted with no fabricated research; evidence-gap generic citation scorer Failed retained, semantic behavior passed.",
+    "cold_reader": "Third fresh reader recovered current behavior, next Windows action and evidence limits without plugin/history. First reader citation/provenance limitations retained.",
+    "external_platforms": "Windows/macOS and non-Codex actual hosts Not Run in this suite."
+  },
+  "current_final_appendix": "skill-discovery-summary.json",
+  "count_scope": "Main archive: 14 model sessions and 4 preflights. Appendix adds 2 model-free preflights; total 6.",
+  "then_final_manifest_sha256": "cc02d5ac19095b1500044007cab582969690bb7a192b9a0170359c54ee6368b6",
+  "current_final_package_sha256": "4fa81f93c4b6dfdc839f0ad34731afdab0d9a37f6a27056a76c76f64f5c91044",
+  "current_final_manifest_sha256": "6c3d6787602b708d017374b3e11466cd70c0ad560c21f608928288f47396e92b"
+}

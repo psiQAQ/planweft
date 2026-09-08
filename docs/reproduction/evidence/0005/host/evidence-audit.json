@@ -1,0 +1,6 @@
+{
+  "scope": "Targeted credential-marker scan of raw evidence and archived ZIP text members; not a general security certification.",
+  "findings": [],
+  "excluded": "No credential or ephemeral user config files were produced or archived; auth copies existed only inside removed container tmpfs.",
+  "checked_files": 501
+}

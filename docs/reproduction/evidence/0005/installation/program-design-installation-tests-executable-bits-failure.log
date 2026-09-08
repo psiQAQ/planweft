@@ -1,0 +1,64 @@
+test_each_platform_has_its_documented_installation_entries (test_pwf_installation.InstallationContractTest.test_each_platform_has_its_documented_installation_entries) ... ok
+test_gemini_disabled_commands_work_in_chinese_and_space_project_path (test_pwf_installation.InstallationContractTest.test_gemini_disabled_commands_work_in_chinese_and_space_project_path) ... 
+  test_gemini_disabled_commands_work_in_chinese_and_space_project_path (test_pwf_installation.InstallationContractTest.test_gemini_disabled_commands_work_in_chinese_and_space_project_path) (event='SessionStart') ... FAIL
+  test_gemini_disabled_commands_work_in_chinese_and_space_project_path (test_pwf_installation.InstallationContractTest.test_gemini_disabled_commands_work_in_chinese_and_space_project_path) (event='BeforeTool') ... FAIL
+  test_gemini_disabled_commands_work_in_chinese_and_space_project_path (test_pwf_installation.InstallationContractTest.test_gemini_disabled_commands_work_in_chinese_and_space_project_path) (event='AfterTool') ... FAIL
+  test_gemini_disabled_commands_work_in_chinese_and_space_project_path (test_pwf_installation.InstallationContractTest.test_gemini_disabled_commands_work_in_chinese_and_space_project_path) (event='BeforeModel') ... FAIL
+  test_gemini_disabled_commands_work_in_chinese_and_space_project_path (test_pwf_installation.InstallationContractTest.test_gemini_disabled_commands_work_in_chinese_and_space_project_path) (event='SessionEnd') ... FAIL
+test_installation_surfaces_do_not_advertise_unpublished_sources (test_pwf_installation.InstallationContractTest.test_installation_surfaces_do_not_advertise_unpublished_sources) ... ok
+test_opencode_loader_matches_the_documented_local_build (test_pwf_installation.InstallationContractTest.test_opencode_loader_matches_the_documented_local_build) ... ok
+
+======================================================================
+FAIL: test_gemini_disabled_commands_work_in_chinese_and_space_project_path (test_pwf_installation.InstallationContractTest.test_gemini_disabled_commands_work_in_chinese_and_space_project_path) (event='SessionStart')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/USER/workspace/program-design/tests/test_pwf_installation.py", line 214, in test_gemini_disabled_commands_work_in_chinese_and_space_project_path
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 126 != 0 : sh: 1: /tmp/pd-gemini-install-134ra0u8/中文项目 有空格/.gemini/hooks/session-start.sh: Permission denied
+
+
+======================================================================
+FAIL: test_gemini_disabled_commands_work_in_chinese_and_space_project_path (test_pwf_installation.InstallationContractTest.test_gemini_disabled_commands_work_in_chinese_and_space_project_path) (event='BeforeTool')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/USER/workspace/program-design/tests/test_pwf_installation.py", line 214, in test_gemini_disabled_commands_work_in_chinese_and_space_project_path
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 126 != 0 : sh: 1: /tmp/pd-gemini-install-134ra0u8/中文项目 有空格/.gemini/hooks/before-tool.sh: Permission denied
+
+
+======================================================================
+FAIL: test_gemini_disabled_commands_work_in_chinese_and_space_project_path (test_pwf_installation.InstallationContractTest.test_gemini_disabled_commands_work_in_chinese_and_space_project_path) (event='AfterTool')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/USER/workspace/program-design/tests/test_pwf_installation.py", line 214, in test_gemini_disabled_commands_work_in_chinese_and_space_project_path
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 126 != 0 : sh: 1: /tmp/pd-gemini-install-134ra0u8/中文项目 有空格/.gemini/hooks/after-tool.sh: Permission denied
+
+
+======================================================================
+FAIL: test_gemini_disabled_commands_work_in_chinese_and_space_project_path (test_pwf_installation.InstallationContractTest.test_gemini_disabled_commands_work_in_chinese_and_space_project_path) (event='BeforeModel')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/USER/workspace/program-design/tests/test_pwf_installation.py", line 214, in test_gemini_disabled_commands_work_in_chinese_and_space_project_path
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 126 != 0 : sh: 1: /tmp/pd-gemini-install-134ra0u8/中文项目 有空格/.gemini/hooks/before-model.sh: Permission denied
+
+
+======================================================================
+FAIL: test_gemini_disabled_commands_work_in_chinese_and_space_project_path (test_pwf_installation.InstallationContractTest.test_gemini_disabled_commands_work_in_chinese_and_space_project_path) (event='SessionEnd')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/USER/workspace/program-design/tests/test_pwf_installation.py", line 214, in test_gemini_disabled_commands_work_in_chinese_and_space_project_path
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 126 != 0 : sh: 1: /tmp/pd-gemini-install-134ra0u8/中文项目 有空格/.gemini/hooks/session-end.sh: Permission denied
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.223s
+
+FAILED (failures=5)

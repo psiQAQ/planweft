@@ -4,6 +4,16 @@
 
 先读 [规格](specs/0001-document-management.md) 与 [当前计划](plans/0004-paired-maintenance-trial.md)。按任务查 [资料索引](reference/README.md)，无需逐次通读所有文章和子模块。项目状态以计划为入口；规格描述目标行为，ADR 记录重要决定，reproduction 记录已观察到的结果。
 
+0.2.0 插件实施使用 [SPEC-0003](specs/0003-pwf-based-plugin.md) 与 [PLAN-0005](plans/0005-pwf-based-plugin.md)；这是沿用现有文档流程的后继工作，不在本仓创建或同步 PWF 根计划。
+
+## 插件源码与生成分发
+
+`vendor/planning-with-files/` 保存 PWF v3.17.0 原始归档、逐文件清单和许可；`overlays/program-design/` 保存本地规则与模板。`scripts/build-plugin.py` 负责统一身份映射、明确的运行时补丁和确定性分发。不要手改 `plugins/program-design/` 或 ZIP 内的共享副本。
+
+修改源后运行构建，再执行 `--verify` 与受影响的离线回归。变更身份映射、hook 或模板解析时，需要原始/迁移上游回归比较；不能删改失败断言来换取通过。详细命令见 [测试说明](../tests/README.md)，固定版本更新、导入及补丁边界见 [上游维护](upstream-maintenance.md)。
+
+每个安装包必须脱离本仓文档、研究子模块及个人缓存运行。包中安装步骤必须指向本地交付物，不假定衍生 npm/GitHub 包已经发布。许可证、来源和必要脚本应随独立复制的 Skill/平台包一同保留。
+
 ## 设计、实施、审查
 
 1. 明确需求或复现场景，定位相关资料和已有实现。重要选择比较适用先例和最小替代方案；只有一个相关来源时据实说明，不凑引用数量。

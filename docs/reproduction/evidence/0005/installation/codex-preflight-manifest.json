@@ -1,0 +1,138 @@
+{
+  "archive": "codex-preflight.tar.gz",
+  "sha256": "91c01eeaa0ab6ec9b2836fbc06025ee20298e6362d57a3fb9d4582e14c05e3c4",
+  "files": {
+    "cleanup.json": {
+      "sha256": "4b1410c7a7e94830d77f2b0d54a0a972afb5c3d3d8d3273e6ba5b2902f51d387",
+      "bytes": 215
+    },
+    "environment.json": {
+      "sha256": "803c80fb8bb0aa73b5a4f9c6743288d1565949c8cfc5652aee67b57d16fcba3e",
+      "bytes": 3816
+    },
+    "preflight/after.json": {
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1",
+      "bytes": 1707
+    },
+    "preflight/assessment.json": {
+      "sha256": "ba97b33cc865f3068abcfa9777362f01be41de900aecf8dbc0edc6e9a43fd5ff",
+      "bytes": 503
+    },
+    "preflight/before.json": {
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1",
+      "bytes": 1707
+    },
+    "preflight/cache-cleanup.json": {
+      "sha256": "49ec9ecd121aa69a5ee9b905f2d6ad4a1514c8981ee949097994ddf4439f7e7f",
+      "bytes": 118
+    },
+    "preflight/cache-verification.json": {
+      "sha256": "70d4858ccbc691527ee44722134c03ceaf1e8fe96a136a9579e85486730af0c9",
+      "bytes": 53823
+    },
+    "preflight/changes.json": {
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "bytes": 3
+    },
+    "preflight/cli-version.json": {
+      "sha256": "e2db9b5cb71acd6fa88f3b5c7d26b9d7758a3ac48bbdec55ed71d64a85047d63",
+      "bytes": 121
+    },
+    "preflight/exec-help.json": {
+      "sha256": "a2f2a9574cb8ff25480ebc5742e9a5988ff6c37e517281befd3df7b5fb8be7b7",
+      "bytes": 4181
+    },
+    "preflight/features.json": {
+      "sha256": "a8b6c4339be76b9936579eaba71df8db657079488d0e3bf734c7f23227e94da7",
+      "bytes": 8044
+    },
+    "preflight/git-status.txt": {
+      "sha256": "938e2d236ffdefc4bcbe4f395c586970cac17bc8f8c4adc2d4e8451d1a4c406e",
+      "bytes": 17
+    },
+    "preflight/hook-schemas.json": {
+      "sha256": "a8f3491a3152a1a503bf91cfc6dda01d2e612767753b05dd4de4d5b61d6849e0",
+      "bytes": 16159
+    },
+    "preflight/install.json": {
+      "sha256": "4c3ce0cdcd13d6d36552c4df2ff30129b10d0b8ae37e3cf3d5283bf3b19e7b1e",
+      "bytes": 477
+    },
+    "preflight/installed-hooks-before.json": {
+      "sha256": "b39aea28a261221dec53f4bd1beee6b395abd75efb99644a699c71126c53ce63",
+      "bytes": 31833
+    },
+    "preflight/installed-skills-before.json": {
+      "sha256": "8c9133a90fd890be1ec5bb5af66c755081dd79b01cf6ec5c54ea2e00955e5be8",
+      "bytes": 14935
+    },
+    "preflight/invocation.json": {
+      "sha256": "87174704b4dbbfc03ac0c628aa01aac3b23f2e7567ec8806a850bcd7d51c1c14",
+      "bytes": 566
+    },
+    "preflight/model-not-run.json": {
+      "sha256": "9d042bfac2957185d70cdd7ca357c91c7e6a3fac4839da1419307608b34f6408",
+      "bytes": 49
+    },
+    "preflight/plugin-list-after.json": {
+      "sha256": "ba4af53caea4d85f7987e87377ece6e812cd12185b55448ba17eff46cb535151",
+      "bytes": 174
+    },
+    "preflight/plugin-list-before.json": {
+      "sha256": "28f3b6518e58e46ec17d7f8664f8cc560513d8377c383e5b8a715e799acb316c",
+      "bytes": 726
+    },
+    "preflight/process.json": {
+      "sha256": "44fb64adfb20dd42d091112677d0c1910800255a2c1591ced89ef1ca3ff8fa19",
+      "bytes": 70
+    },
+    "preflight/prompt.txt": {
+      "sha256": "ded0372bcf5a098f5cd082b6fa9ad6014b15c031538c5ba8ad4c07b508893fab",
+      "bytes": 405
+    },
+    "preflight/python-version.json": {
+      "sha256": "d2bf7044d6d8c5f16bb5650591393f0caab278350f6d694b64a3d67c2ae6be20",
+      "bytes": 128
+    },
+    "preflight/register.json": {
+      "sha256": "b384feea6e8c628b66ad2530466d18f88bfb0c64b5d283bbf5488b8cd139be7a",
+      "bytes": 288
+    },
+    "preflight/remove.json": {
+      "sha256": "24712a0b175c6069bc673450ea4f53306686ab8426970c264867d73db8a4ec0a",
+      "bytes": 316
+    },
+    "preflight/schema-generation.json": {
+      "sha256": "818c99a1ff7ba52de4c0c94b22aacf1b626595d854dbe69f4c923d12a4ca51c2",
+      "bytes": 185
+    },
+    "preflight/skill-schemas.json": {
+      "sha256": "002f38f85fc767d738e4480cd30a3e1d5b6b34993e45e26ac7260957982469d5",
+      "bytes": 10390
+    },
+    "preflight/stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "preflight/stdout.jsonl": {
+      "sha256": "68b84f16e0f805cc66fedbb67c93082baa9fbcd7dc82ae719c40213fb93756b8",
+      "bytes": 118472
+    },
+    "preflight/trace-analysis.json": {
+      "sha256": "e25ea6ad1a1f0f235720e05e5308194746a6a9c966cb0077b67a75fd6259fd24",
+      "bytes": 166
+    },
+    "preflight/tracked.diff": {
+      "sha256": "873eef57ff41addcfbce936154988d7527fe64778bc8949f9f1c2129e421562f",
+      "bytes": 173
+    },
+    "preflight/unregister.json": {
+      "sha256": "abda1397b8265800aed3c7a0b9ec15036a20050160fa1776d3be40158e790a92",
+      "bytes": 257
+    },
+    "summary.json": {
+      "sha256": "ab027049b1460ced159749a8f50100cc27448d5c33a2eb422d5ca3ce1e18a38c",
+      "bytes": 652
+    }
+  }
+}

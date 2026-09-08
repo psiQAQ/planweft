@@ -1,0 +1,10 @@
+test_language_variants_present_and_installable (test_plugin_skill_surface.PluginSkillSurfaceTests.test_language_variants_present_and_installable) ... ok
+test_manual_skill_copies_create_destination_first (test_plugin_skill_surface.PluginSkillSurfaceTests.test_manual_skill_copies_create_destination_first) ... ok
+test_no_doc_installs_by_copying_the_skills_directory (test_plugin_skill_surface.PluginSkillSurfaceTests.test_no_doc_installs_by_copying_the_skills_directory) ... ok
+test_plugin_registers_canonical_skill_only (test_plugin_skill_surface.PluginSkillSurfaceTests.test_plugin_registers_canonical_skill_only) ... ok
+test_variant_skill_name_matches_its_directory (test_plugin_skill_surface.PluginSkillSurfaceTests.test_variant_skill_name_matches_its_directory) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.026s
+
+OK

@@ -1,0 +1,91 @@
+{
+  "compared_to": "regression-evidence.tar.gz:final-skill-delta/source-sha256-final.json",
+  "previous_count": 924,
+  "current_count": 924,
+  "changes": {
+    ".agents/skills/project-docs/SKILL.md": {
+      "before": {
+        "sha256": "684065c7cec83a4345610fc2680f4a6f63f29fed21f91bfc0598729d5722d834",
+        "size": 44490,
+        "mode": "0o664"
+      },
+      "after": {
+        "sha256": "1e595b9799150643b44e28a3ed3f874cc75ba433c2887adf723fb765e2158895",
+        "size": 44608,
+        "mode": "0o664"
+      }
+    },
+    ".gemini/settings.json": {
+      "before": {
+        "sha256": "97c8d5c3342bcbe61ac9403dfc6d839ace6769a6c4e8eee818eadd165ba0dade",
+        "size": 1966,
+        "mode": "0o664"
+      },
+      "after": {
+        "sha256": "b6b7bddc4713a11f56265cbcb788228aeeff9fa12aaad9e047b3c56227d964ee",
+        "size": 2011,
+        "mode": "0o664"
+      }
+    },
+    ".hermes/skills/project-docs/SKILL.md": {
+      "before": {
+        "sha256": "7c6f374420573e4b557535b390a5fd9e678f6d4af408f8f6cac0b2e3fcb22061",
+        "size": 21908,
+        "mode": "0o664"
+      },
+      "after": {
+        "sha256": "325f728051be185c91267ef179e01488bcc085a16a620951a70d8081b35b388c",
+        "size": 22023,
+        "mode": "0o664"
+      }
+    },
+    ".opencode/packages/opencode-program-design/README.md": {
+      "before": {
+        "sha256": "6ad956b4c56b34db69e7b41dec95ae6608a88ddfba1481a4da6b3a1df1026235",
+        "size": 2656,
+        "mode": "0o664"
+      },
+      "after": {
+        "sha256": "8069322fb9ab4017c239deacab7ab0663eea32e3c342fa103bab81f16e2ff655",
+        "size": 3375,
+        "mode": "0o664"
+      }
+    },
+    ".opencode/skills/project-docs/SKILL.md": {
+      "before": {
+        "sha256": "38d7aa01c5f1c96968ffcf619dbbb9c4dfb182f273bcfbcc62880a24c8b9341b",
+        "size": 23142,
+        "mode": "0o664"
+      },
+      "after": {
+        "sha256": "77114b142ecd7b230df4eb9550d90b6f24d5c92bf3aac088403101223d623522",
+        "size": 23457,
+        "mode": "0o664"
+      }
+    },
+    ".pi/skills/project-docs/SKILL.md": {
+      "before": {
+        "sha256": "addb810ab3e4cea250374c59797b48276960fc1e87ecb5ceb44d1f5172dab451",
+        "size": 47420,
+        "mode": "0o664"
+      },
+      "after": {
+        "sha256": "4cd165800a3ec0f99d7d4be32fc05f7e169c04fa732372a30fe0c2055c613a0e",
+        "size": 47538,
+        "mode": "0o664"
+      }
+    },
+    "skills/project-docs/SKILL.md": {
+      "before": {
+        "sha256": "8e3b91c500933a3e29e95f819a958120c73675277aa122ef0ff22a89eb500ad6",
+        "size": 47617,
+        "mode": "0o664"
+      },
+      "after": {
+        "sha256": "9fd0acfa33cfb3367faf6359c6c07880c2e0a1c3ccdab64add06c44fbffb6826",
+        "size": 47735,
+        "mode": "0o664"
+      }
+    }
+  }
+}

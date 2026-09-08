@@ -54,7 +54,7 @@
 
 源文件定位以固定项目索引为准：[P-03 concepts](../.submodule/Fission-AI/OpenSpec/docs/concepts.md)、[P-06 doc-coauthoring](../.submodule/anthropics/skills/skills/doc-coauthoring/SKILL.md)、[P-12 完整模板](../.submodule/adr/madr/template/adr-template.md)、[P-12 最小模板](../.submodule/adr/madr/template/adr-template-minimal.md)。
 
-来源可访问、内容支持该借鉴和本仓库效果验证是三种不同状态。基础文档依据见 [REV-0001](reviews/0001-evidence-review.md)；首版 Skill 的状态以 REP-0003/REV-0003 为准，专用 CLI、hooks 与自身接管未实施。未通过 review 的新条目不能标为已验证设计。
+来源可访问、内容支持该借鉴和本仓库效果验证是三种不同状态。基础文档依据见 [REV-0001](reviews/0001-evidence-review.md)；首版 Skill 的历史状态以 REP-0003/REV-0003 为准，该阶段未实施专用 CLI、hooks 与自身接管。后继版本以其规格和复现记录为准；未通过 review 的新条目不能标为已验证设计。
 
 ## 首版插件阶段（2026-09-07）
 
@@ -115,3 +115,49 @@
 | [证据说明](reproduction/evidence/0004/README.md) | 完整轨迹体积大但须可恢复，不能只保存成功结论 | 用户保留全量输入/轨迹/失败与清理要求；P-01 `Reproducing` 的材料限制作为反面核对；tar/gzip 只用于保存生成证据，不是产品数据格式 | 146 个原始文件逐 SHA 回查；REV-0004 |
 
 README、AGENTS 和 development 本轮仅补当前计划/测试/结果导航，沿用原入口依据并关联用户当前任务；PLAN-0004、REP-0004 和 REV-0004 保留真实结果与明确限制。参考索引补 R-22 和既有 P-01 的插件入口。没有新增产品机制或创新声明。
+
+## PWF 底座移植阶段（2026-09-08）
+
+需求来源是用户明确批准的 Program Design 0.2.0 实施计划。P-01 的研究 gitlink 继续固定 3.16.1；本轮移植另用下列 PWF-317 来源，不能把两个快照混为同一版本。上文“无 hooks”“单 Skill”“项目显式启用”等均保留为 0.1.0 及对应实验的历史范围，由 SPEC-0003/ADR-0006 明确替代。高 star 仅是用户选择背景，不是本地正确性或效果证据。
+
+| 本轮来源 | 精确定位与实际支持范围 | 许可/时效 |
+| --- | --- | --- |
+| PWF-317：PWF v3.17.0 | [固定提交](https://github.com/OthmanAdi/planning-with-files/tree/0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7)；`skills/planning-with-files/SKILL.md` 的 Restore Project State、Quick Start、File Purposes，`docs/workflow.md` 的 After Completion；支持当前工作记录、计划选择、owner 与长期知识另存 | MIT；`Copyright (c) 2026 Ahmad Adi`；源码阅读 2026-09-08；来源导入核验与实测另记 REP-0005 |
+| PWF-317 运行时与宿主 | 同一固定提交的 `scripts/resolve-plan-dir.sh`、`check-complete.sh`、`plan-doctor.sh`，`.codex-plugin/plugin.json`、`hooks/codex-hooks.json`，`.pi/skills/planning-with-files/extensions/planning-with-files/`、`.opencode/packages/opencode-planning-with-files/` 及配套测试 | 上游具体实现为移植依据；源码存在不等于测试或宿主运行通过 |
+| HOOKS-20260908：Codex 官方 hooks | [Hooks](https://learn.chatgpt.com/docs/hooks)：Runtime behavior、Where Codex looks for hooks、Review and trust hooks、Plugin-bundled hooks；支持插件 manifest `hooks`、包内路径、多个来源共同执行及独立 trust | OpenAI 官方说明，在线读取 2026-09-08；仅作有出处的摘要与协议依据，不推定全文转载许可 |
+| SKILLS-20260908：Codex调用策略 | [构建技能](https://learn.chatgpt.com/zh-Hans/docs/build-skills) 的可选元数据：`agents/openai.yaml` 中 `policy.allow_implicit_invocation: false` 禁止隐式调用，保留显式调用 | OpenAI官方说明，在线读取2026-09-08；不能以Claude frontmatter或skills/list的enabled替代此策略 |
+
+| 本仓库目标文件 | 问题与本地设计 | 精确依据和差异 | 验证/审查 |
+| --- | --- | --- | --- |
+| [SPEC-0003](specs/0003-pwf-based-plugin.md) | 独立衍生插件的版本、接口、维护边界与分层验收 | 用户批准计划；PWF-317 Skill/运行时为移植来源；本地文档治理继承 PD-03～07；自动匹配替代 PD-02 来自本轮需求 | PDB-01～10；REP-0005；实现与交付独立审查按REV范围登记 |
+| [ADR-0006](adr/0006-pwf-derived-runtime.md) | 固定上游、扩展及生成分发；保留原生语言，明确替代历史 | 用户批准计划、PWF-317 具体实现；上游 `docs/workflow.md` After Completion 支持长期知识另存；HOOKS-20260908 支持 trust/重复来源边界；确定性构建为本地维护选择 | REP-0005；实现与交付独立审查按REV范围登记 |
+| [PLAN-0005](plans/0005-pwf-based-plugin.md) | 当前实施进度和唯一接续位置，避免本仓提前自身接管 | 用户本轮边界；R-04 Progress；ADR-0003 的既有迁移约束 | 实际进度与 REP-0005；本计划不等于产品三文件启用 |
+| [REP-0005](reproduction/0005-pwf-based-plugin.md) | 原始/移植回归、协议/宿主、只读项目/私有缓存和 OS 分层，避免证据混用 | 用户批准的四层验证；PWF-317 配套测试为回归入口；R-18 预期与实际、P-06 Stage 3 为新读者方法 | 各项由实际执行填 Passed/Failed/Not Run；预设表格不算运行 |
+
+本轮生成运行时逐文件追溯到导入清单与身份映射/补丁；它们的批量来源是 PWF-317 的固定文件，不逐份虚构第一方原创依据。本地扩展与构建脚本应另列其实际入口和设计来源。REP-0005 中的测试输出是本轮观察证据，不是外部权威来源；历史 REP-0003/0004 不作为 0.2.0 兼容通过的依据。
+
+### 0.2.0 实施文件映射
+
+| 第一方入口 | 具体设计及精确依据 | 本地差异与验证 |
+| --- | --- | --- |
+| [import-pwf.py](../scripts/import-pwf.py) | 用户固定 tag/commit、原始快照和完整清单要求；Git `rev-parse <tag>^{commit}`、`archive`、clean status；PWF-317 LICENSE | 标准库导入胶水；699 文件 SHA/size/mode、archive digest 与原始 baseline，研究 gitlink 不变 |
+| [build-plugin.py](../scripts/build-plugin.py) | 用户“固定上游+扩展+生成分发”、全平台自包含与单身份映射；PWF-317 各 adapter 源码与 manifests；HOOKS-20260908 插件相对路径与trust、SKILLS-20260908原生调用策略 | 不新增调度器；原生实现保留，补丁见PD-P01～10；重复构建、漂移检测、回归、真实skills/list与REV |
+| [workflow.md](../overlays/program-design/workflow.md) | PWF-317 Skill 的计划、恢复和 owner 协议；用户 PDB-04～06/08；既有 PD-03～07、P-03 Progressive Rigor、P-12 Confirmation | 前置范围优先于 PWF Create Plan First；不把 attestation/gate 当人工批准或语义正确性；真实维护与只读样例 |
+| [evidence.md](../overlays/program-design/references/evidence.md) | 用户准确来源、缺证检索及独立依据 review；P-12 More Information/Confirmation；P-06 Stage 3 为冷读方法 | 依据 review 与理解冷读分开，未检索不写已检索，缺宿主记 Not Run；REV-0005 与实际试用 |
+| [controls.md](../overlays/program-design/references/controls.md) | 用户辅助操作必须显式、保留原生平台能力；PWF-317 各 script、Pi registerCommand、OpenCode tools 定义 | Codex 无额外自动辅助 Skills，以主入口子操作映射真实脚本；命令/注册契约 |
+| [task_plan 增量](../overlays/program-design/templates/task_plan.append.md)、[findings 增量](../overlays/program-design/templates/findings.append.md)、[progress 增量](../overlays/program-design/templates/progress.append.md) | PWF-317 各模板及 check-complete/phase-status 解析格式；用户三文件/长期文档职责 | 只加必要记录槽，不新增 parser phase/status/checkbox；原模板与增量模板运行结果对照 |
+| [doctor-overlap.sh](../overlays/program-design/doctor-overlap.sh) | 用户可检测重复安装诊断；PWF-317 plan-doctor；HOOKS-20260908 多源共同执行 | 只读目录检测不等于激活判定，旧脚本不执行；独立具备可观察副作用的负样例 |
+| [BUILD.md](../overlays/program-design/BUILD.md)、[PATCHES.md](../overlays/program-design/PATCHES.md) | 用户禁止平台共享副本手改及保留本地补丁清单 | 逐补丁列实际位置/原因/验证；PD-P07保留原测试边界，PD-P08明确Codex原生implicit策略 |
+| [包 README](../overlays/program-design/README.md)、[包内安装说明](../overlays/program-design/install/INSTALL.md) | PWF-317 各安装表面，HOOKS-20260908；固定 Pi `packages.md`；本地包和原生注册实测 | 不使用未发布 npm 名称作为安装入口；相对链接/资源、Codex 隔离安装、其他宿主 Not Run |
+| [平台说明](platforms.md)、[上游维护](upstream-maintenance.md) | 同上及用户分级验证/一次性状态入口迁移要求 | 实现、静态/协议、真实宿主分别报告；无全局自动安装、无自身接管 |
+| [run-upstream-tests.py](../scripts/run-upstream-tests.py)、[requirements-test.txt](../requirements-test.txt) | PWF-317 `.github/workflows/tests.yml` 的 pytest/PyYAML 安装与三个 CI job、Pi/OpenCode package-lock 与 package scripts；首轮 PATH/cache 实际故障 | 新临时树与 Git index、独立缓存、完整日志/JUnit；本地固定实际使用的 pytest/PyYAML 版本；既有失败不被抹除 |
+| [test_pwf_distribution.py](../tests/test_pwf_distribution.py) | PDB-01～10 的可执行部分；PWF-317 生命周期/选择/attestation 协议 | 对实际 ZIP、实际脚本和 CLI 检查；不将静态正文匹配视为模型行为通过 |
+| [run-pwf-smoke.py](../tests/run-pwf-smoke.py) | 用户隔离安装/真实维护/无历史冷读要求；HOOKS-20260908 trust；既有 R-20 非交互、REP-0004 容器边界方法 | 新临时 HOME、固定包/CLI、随机未泄露标记、逐文件缓存核对、完整轨迹与清理；真实结果另判 |
+| [REV-0005](reviews/0005-pwf-migration-review.md) | 用户重要设计独立依据检查；上述原始具体来源、生成字节与本地补丁 | reviewer 不认领自己编写的规格/安装文档的独立审查；构建/分发9发现按内容关闭与披露 |
+| [独立交付review](reviews/0005-delivery-review.md) | 用户实质设计/交接核查要求；SPEC/ADR、实际源码、ZIP及全量证据为具体输入 | 新的独立reviewer核查文档主张与实际字节/轨迹；未执行的检查和最终模型包差异明确列出 |
+| [首页](../README.md)、[开发说明](development.md)、[测试说明](../tests/README.md)、[.gitignore](../.gitignore) | 用户新插件、架构、安装流程与可接续交付要求；本轮源码和实际命令 | 导航/运行说明，保留旧历史与 books 忽略规则；只增加本次 Python 缓存排除 |
+
+vendor 四文件是导入器产物，dist 与 plugins 由 builder 生成；证据归档由实际运行输出生成，均通过对应清单逐项追溯。这里不为普通打包、测试胶水新增“创新”声明。SPEC/ADR 作者与源实现 reviewer 的职责和实际范围见 REV-0005；主 Agent 负责最终证据整合。
+
+
+安装补充：用户要求解释并落实各Agent安装方式；PWF-317的`sync-ide-folders.py`、各平台manifest、Gemini settings和脚本原mode为准确源证据。PD-P09将继承发布式说明改为本地ZIP路径，PD-P10针对实际127/126退出修复Gemini命令。新增[test_pwf_installation.py](../tests/test_pwf_installation.py)与[独立安装review](reviews/0005-installation-review.md)检查实际包入口和命令；[补充证据](reproduction/evidence/0005/installation/README.md)区分静态、协议与当前Codex无模型安装预检。[.gitattributes](../.gitattributes)保护可重复构建所需换行和上游Windows CRLF，不代表Windows宿主已实测。
