@@ -26,7 +26,7 @@ PlanWeft 0.4.0 将同一套文件规划与文档协作规则，生成适合 15 �
 | Continue | Passed | Not Run | Not Run | Not Run |
 | Mastra Code | Passed | Not Run | Not Run | Not Run |
 | Agents | Passed | Not Run | Not Run | Not Run |
-| DeepSeek Harness / DSH | Passed | Passed (Skill provider) | Not Run (full plugin) | Not Run |
+| DeepSeek Harness / DSH | Passed | Passed (bridge/Skill) | Passed | Not Run |
 
 远端 npm/Git 生命周期及 Windows/macOS 真实宿主尚待单独记录。Pi RPC 与 OpenCode debug 是实际宿主加载，不是模型调用；非核心宿主的 0.3.0 安装结果不冒充 0.4.0 实测。
 

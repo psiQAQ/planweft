@@ -10,3 +10,8 @@ canonical resource storage and links. Installer code is independently implemente
 
 Research documents and referenced publications are not covered by the local MIT
 grant unless explicitly stated. Their original notices and attribution apply.
+
+DSH integration uses @deepseek-ai/dsh-hooks-claude-code and
+@deepseek-ai/dsh-skill-filesystem 0.1.2-rc.1 (MIT) from DeepSeek AI.
+These are npm runtime dependencies with their own notices; their source is
+not copied into the pinned PWF archive.

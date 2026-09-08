@@ -72,7 +72,7 @@ PWF 的[任务完成后指导](https://github.com/OthmanAdi/planning-with-files/
 
 ## 当前交付与使用边界
 
-当前候选版 **0.4.0-rc.1** 提供 15 个平台目录（新增 DSH Skill-only）、6 种原生 marketplace 入口，以及 Pi/OpenCode npm 和 Gemini/Hermes Git 发布树准备。安装方法见[中文指南](docs/installation.md) / [English guide](docs/installation.en.md)，平台能力与验证范围见[中文设计](docs/platforms.md) / [English design](docs/platforms.en.md)。
+当前候选版 **0.4.0-rc.1** 提供 15 个平台目录（新增 DSH 原生 bundle）、6 种原生 marketplace 入口，以及 Pi/OpenCode npm 和 Gemini/Hermes Git 发布树准备。安装方法见[中文指南](docs/installation.md) / [English guide](docs/installation.en.md)，平台能力与验证范围见[中文设计](docs/platforms.md) / [English design](docs/platforms.en.md)。
 
 0.3.0 的记录包含八个宿主的本地安装生命周期验证；Hermes 被默认扫描器拒绝安装。GUI、Windows/macOS、公开远程渠道以及新版真实模型维护/冷读仍有 Not Run 项。历史验证不随文档修改自动变成新一轮实测，具体边界见上述跨平台文档。
 

@@ -72,7 +72,7 @@ This project contributes the concrete workflow integration and engineering:
 
 ## Current delivery and boundaries
 
-Candidate **0.4.0-rc.1** provides 15 host directories (including DSH Skill-only), six native marketplace entry points, and preparation of Pi/OpenCode npm artifacts and Gemini/Hermes Git release trees. See the [中文安装指南](docs/installation.md) / [English installation guide](docs/installation.en.md), and the [中文跨平台设计](docs/platforms.md) / [English cross-platform design](docs/platforms.en.md) for capabilities and validation scope.
+Candidate **0.4.0-rc.1** provides 15 host directories (including the native DSH bundle), six native marketplace entry points, and preparation of Pi/OpenCode npm artifacts and Gemini/Hermes Git release trees. See the [中文安装指南](docs/installation.md) / [English installation guide](docs/installation.en.md), and the [中文跨平台设计](docs/platforms.md) / [English cross-platform design](docs/platforms.en.md) for capabilities and validation scope.
 
 The 0.3.0 record includes local installation lifecycle checks for eight hosts. Hermes installation was rejected by its default scanner. GUI, Windows/macOS, public remote channels and new-version real-model maintenance/fresh-reader checks retain Not Run items. Historical evidence does not become a new host run when documentation changes; the cross-platform documents explain these boundaries.
 

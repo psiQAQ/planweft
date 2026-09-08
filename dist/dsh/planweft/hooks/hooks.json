@@ -1,0 +1,53 @@
+{
+  "description": "PlanWeft through the official DSH Claude command-hook bridge",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/dsh-hook.sh\" \"session-start\"",
+            "timeout": 10,
+            "statusMessage": "Restoring planning context"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/dsh-hook.sh\" \"user-prompt-submit\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/dsh-hook.sh\" \"post-tool-use\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/dsh-hook.sh\" \"stop\"",
+            "timeout": 10,
+            "statusMessage": "Checking planning completion"
+          }
+        ]
+      }
+    ]
+  }
+}
