@@ -7,5 +7,9 @@
 *.zip -text
 *.tar.gz -text
 
+# Generated distributions are verified byte-for-byte against dist/manifest.json.
+# Preserve upstream line endings and whitespace instead of normalizing on add.
+dist/** -text -whitespace
+
 # Captured evidence must retain its exact bytes, including diagnostic whitespace.
 docs/reproduction/evidence/** -text -whitespace

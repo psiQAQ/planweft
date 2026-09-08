@@ -1,14 +1,14 @@
 {
-  "name": "personal",
+  "name": "program-design",
   "interface": {
-    "displayName": "Personal"
+    "displayName": "Program Design"
   },
   "plugins": [
     {
       "name": "program-design",
       "source": {
         "source": "local",
-        "path": "./plugins/program-design"
+        "path": "./dist/codex/program-design"
       },
       "policy": {
         "installation": "AVAILABLE",

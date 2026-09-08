@@ -1,64 +1,48 @@
 #!/usr/bin/env python3
-"""Offline installation contracts for the platform ZIPs; no host or network use.
+"""Offline installation contracts for the native platform directories; no host or network use.
 
 Run: python3 -m unittest discover -s tests -p 'test_pwf_installation.py' -v
 """
 import json
 import os
 from pathlib import Path, PurePosixPath
-import posixpath
 import re
 import shutil
 import subprocess
 import tempfile
 import unittest
-import zipfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
 INSTALL_SURFACES = {
-    'codex': ['.codex-plugin/plugin.json', '.agents/plugins/marketplace.json',
-              'hooks/codex-hooks.json', '.codex/hooks/run_sh.py',
-              'skills/project-docs/SKILL.md'],
-    'claude': ['.claude-plugin/plugin.json', '.claude-plugin/marketplace.json',
-               'hooks/hooks.json', 'hooks/claude-hook.sh', 'commands/pd-plan.md',
-               'skills/project-docs/SKILL.md'],
+    'codex': ['.codex-plugin/plugin.json', 'hooks/codex-hooks.json',
+              '.codex/hooks/run_sh.py', 'skills/project-docs/SKILL.md'],
+    'claude': ['.claude-plugin/plugin.json', 'hooks/hooks.json',
+               'hooks/claude-hook.sh', 'commands/pd-plan.md', 'skills/project-docs/SKILL.md'],
     'pi': ['package.json', 'SKILL.md', 'extensions/program-design/index.ts'],
-    'opencode': ['.opencode/packages/opencode-program-design/package.json',
-                 '.opencode/packages/opencode-program-design/package-lock.json',
-                 '.opencode/packages/opencode-program-design/src/index.ts',
-                 '.opencode/plugins/program-design.ts',
-                 '.opencode/commands/pd-pwf.md',
-                 '.opencode/commands/pd-pwf-status.md',
-                 '.opencode/skills/project-docs/SKILL.md'],
-    'hermes': ['.hermes/plugins/program-design/plugin.yaml',
-               '.hermes/plugins/program-design/__init__.py',
-               '.hermes/skills/project-docs/SKILL.md'],
-    'cursor': ['.cursor/hooks.json', '.cursor/hooks.windows.json',
-               '.cursor/skills/project-docs/SKILL.md'],
-    'gemini': ['.gemini/settings.json', '.gemini/skills/project-docs/SKILL.md'],
-    'copilot': ['.github/hooks/program-design.json',
-                '.github/hooks/scripts/session-start.sh',
-                '.github/hooks/scripts/session-start.ps1',
-                'skills/project-docs/SKILL.md'],
-    'mastracode': ['.mastracode/hooks.json',
-                   '.mastracode/skills/project-docs/SKILL.md'],
-    'kiro': ['.kiro/skills/project-docs/SKILL.md',
-             '.kiro/skills/project-docs/assets/scripts/bootstrap.sh',
-             '.kiro/skills/project-docs/assets/scripts/bootstrap.ps1'],
-    'continue': ['.continue/skills/project-docs/SKILL.md',
-                 '.continue/prompts/pd-plan.prompt'],
-    'factory': ['.factory/skills/project-docs/SKILL.md'],
-    'codebuddy': ['.codebuddy/skills/project-docs/SKILL.md'],
+    'opencode': ['package.json', 'package-lock.json', 'src/index.ts', 'dist/index.js',
+                 'commands/pd-pwf.md', 'commands/pd-pwf-status.md',
+                 'skills/project-docs/SKILL.md'],
+    'hermes': ['plugin.yaml', '__init__.py', 'skills/project-docs/SKILL.md'],
+    'cursor': ['.cursor-plugin/plugin.json', 'hooks/hooks.json', 'skills/project-docs/SKILL.md'],
+    'gemini': ['gemini-extension.json', 'hooks/hooks.json', 'skills/project-docs/SKILL.md'],
+    'copilot': ['plugin.json', 'hooks.json', 'skills/project-docs/SKILL.md'],
+    'mastracode': ['.mastracode/hooks.json', '.mastracode/skills/project-docs/SKILL.md'],
+    'kiro': ['plugin.json', 'skills/project-docs/SKILL.md',
+             'skills/project-docs/assets/scripts/bootstrap.sh',
+             'skills/project-docs/assets/scripts/bootstrap.ps1'],
+    'continue': ['.continue/skills/project-docs/SKILL.md', '.continue/prompts/pd-plan.prompt'],
+    'factory': ['.factory-plugin/plugin.json', 'skills/project-docs/SKILL.md'],
+    'codebuddy': ['.codebuddy-plugin/plugin.json', 'skills/project-docs/SKILL.md'],
     'agents': ['.agents/skills/project-docs/SKILL.md'],
 }
 
 
 def package_files(host):
-    with zipfile.ZipFile(DIST / f'program-design-0.2.0-{host}.zip') as archive:
-        return {name.removeprefix('program-design/'): archive.read(name)
-                for name in archive.namelist()}
+    root = DIST / host / 'program-design'
+    return {path.relative_to(root).as_posix(): path.read_bytes()
+            for path in root.rglob('*') if path.is_file()}
 
 
 def snapshot(directory):
@@ -117,15 +101,6 @@ class InstallationContractTest(unittest.TestCase):
         codex = package_files('codex')
         plugin = json.loads(codex['.codex-plugin/plugin.json'])
         self.assertIn(plugin['hooks'].removeprefix('./'), codex)
-        catalog = json.loads(codex['.agents/plugins/marketplace.json'])
-        self.assertEqual(catalog['plugins'][0]['source'], {'source': 'local', 'path': './'})
-        claude = package_files('claude')
-        catalog = json.loads(claude['.claude-plugin/marketplace.json'])
-        self.assertEqual(catalog['name'], 'program-design')
-        self.assertEqual(catalog['plugins'][0]['source'], './')
-        self.assertEqual(json.loads(claude['.claude-plugin/plugin.json'])['name'],
-                         catalog['plugins'][0]['name'])
-
         pi = package_files('pi')
         package = json.loads(pi['package.json'])
         self.assertEqual(package['name'], 'program-design')
@@ -136,37 +111,29 @@ class InstallationContractTest(unittest.TestCase):
         self.assertFalse(any(name.startswith('.pi/') for name in pi),
                          'Pi installs the unpacked package root directly')
 
-    def test_opencode_loader_matches_the_documented_local_build(self):
+    def test_opencode_precompiled_entry_has_all_relative_runtime_modules(self):
         files = package_files('opencode')
-        prefix = '.opencode/packages/opencode-program-design/'
-        package = json.loads(files[prefix + 'package.json'])
-        config = json.loads(files[prefix + 'tsconfig.json'])
+        package = json.loads(files['package.json'])
+        config = json.loads(files['tsconfig.json'])
         options = config['compilerOptions']
-        self.assertEqual(package['scripts']['build'], 'tsc -p tsconfig.json')
+        self.assertEqual(package['type'], 'module')
         self.assertFalse(options.get('noEmit', False))
         self.assertFalse(options.get('emitDeclarationOnly', False))
-        self.assertEqual(package['type'], 'module')
         source = PurePosixPath('src/index.ts')
-        self.assertIn(prefix + str(source), files)
-        self.assertIn('PlanningWithFiles', files[prefix + str(source)].decode())
+        self.assertIn('PlanningWithFiles', files[str(source)].decode())
         output = (PurePosixPath(options['outDir']) /
                   source.relative_to(options['rootDir'])).with_suffix('.js')
         self.assertEqual(str(output), 'dist/index.js')
-        self.assertIn(options['rootDir'], config['include'])
         self.assertEqual(package['main'], str(output))
         self.assertEqual(package['exports']['.']['import'], './' + str(output))
-        entry = '.opencode/plugins/program-design.ts'
-        match = re.search(r'export\s*\{\s*PlanningWithFiles\s*\}\s*from\s*["\']([^"\']+)',
-                          files[entry].decode())
-        self.assertIsNotNone(match)
-        self.assertEqual(match.group(1),
-                         '../packages/opencode-program-design/dist/index.js')
-        target = posixpath.normpath(str(PurePosixPath(entry).parent / match.group(1)))
-        self.assertEqual(target, prefix + str(output))
-        for name in [prefix + 'README.md', 'INSTALL.md']:
-            with self.subTest(document=name):
-                self.assertRegex(files[name].decode(),
-                                 r'npm ci --ignore-scripts\s*\n\s*npm run build')
+        self.assertIn(str(output), files, 'npm entry must work without a user build step')
+        self.assertTrue(any(path.rstrip('/') == 'dist' for path in package['files']))
+        for name, data in files.items():
+            if not name.startswith('dist/') or not name.endswith('.js'):
+                continue
+            for target in re.findall(r"(?:from|import)\s*['\"](\.[^'\"]+)['\"]", data.decode()):
+                resolved = PurePosixPath(name).parent / target
+                self.assertIn(str(resolved), files, f'{name} references missing runtime module {target}')
 
     @unittest.skipUnless(shutil.which('bash') and shutil.which('sh'),
                          'Gemini command protocol test requires POSIX shells')
@@ -175,18 +142,8 @@ class InstallationContractTest(unittest.TestCase):
             root = Path(temporary)
             project = root / '中文项目 有空格'
             project.mkdir()
-            with zipfile.ZipFile(DIST / 'program-design-0.2.0-gemini.zip') as archive:
-                for member in archive.infolist():
-                    relative = member.filename.removeprefix('program-design/')
-                    if not relative.startswith('.gemini/'):
-                        continue
-                    path = project / relative
-                    path.parent.mkdir(parents=True, exist_ok=True)
-                    path.write_bytes(archive.read(member))
-                    # Restore exactly what the package ships. Adding execution
-                    # bits here would conceal an installation defect in hooks
-                    # whose configuration executes non-executable files directly.
-                    path.chmod((member.external_attr >> 16) & 0o777)
+            extension = root / '扩展 安装目录' / 'program-design'
+            shutil.copytree(DIST / 'gemini/program-design', extension)
             (project / 'task_plan.md').write_text(
                 '# Existing plan\n\n### Phase 1\n- **Status:** in_progress\n')
             (project / 'progress.md').write_text('User-owned progress.\n')
@@ -198,15 +155,15 @@ class InstallationContractTest(unittest.TestCase):
                    and key not in {'PLAN_ID', 'PLANNING_DISABLED'}}
             env.update(GEMINI_PROJECT_DIR=str(project), PLANNING_DISABLED='1',
                        XDG_CACHE_HOME=str(private_cache), PYTHONDONTWRITEBYTECODE='1')
-            settings = json.loads((project / '.gemini/settings.json').read_text())
-            commands = [(event, hook['command'])
+            settings = json.loads((extension / 'hooks/hooks.json').read_text())
+            commands = [(event, hook['command'].replace('${extensionPath}', str(extension)))
                         for event, groups in settings['hooks'].items()
                         for group in groups for hook in group['hooks']]
             self.assertEqual({event for event, _ in commands},
-                             {'SessionStart', 'BeforeTool', 'AfterTool',
-                              'BeforeModel', 'SessionEnd'})
-            self.assertEqual(len(commands), 5)
+                             {'SessionStart', 'BeforeAgent', 'AfterTool', 'PreCompress'})
+            self.assertEqual(len(commands), 4)
             before = snapshot(project)
+            installed_before = snapshot(extension)
             for event, command in commands:
                 with self.subTest(event=event):
                     result = subprocess.run(['sh', '-c', command], cwd=project,
@@ -217,6 +174,7 @@ class InstallationContractTest(unittest.TestCase):
                     self.assertEqual(json.loads(result.stdout), {})
                     self.assertEqual(snapshot(project), before,
                                      'a disabled hook must not change project files')
+            self.assertEqual(snapshot(extension), installed_before)
             self.assertEqual(snapshot(private_cache), {},
                              'disabled Gemini hooks must not create private cache')
 

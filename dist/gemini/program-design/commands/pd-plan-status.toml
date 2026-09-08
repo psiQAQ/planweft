@@ -1,0 +1,2 @@
+description = "Read the selected project plan and report its status without modifying files."
+prompt = "Read the selected project plan and report its status without modifying files. Resolve scripts and templates from the installed skill directory; keep task records in the project."

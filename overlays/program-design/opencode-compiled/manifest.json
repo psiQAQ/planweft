@@ -1,0 +1,45 @@
+{
+  "command": "tsc -p tsconfig.json",
+  "compiler": "typescript@5.9.3",
+  "files": {
+    "dist/core.d.ts": {
+      "executable": false,
+      "sha256": "19daaa989916cc4eb4509b4ab1390e97efc167fb93ecf53476214a540a838841"
+    },
+    "dist/core.js": {
+      "executable": false,
+      "sha256": "736f227747205469a7b42a663dcaf9f1b9dc50b84e85647b426baa9fdf6c0f17"
+    },
+    "dist/index.d.ts": {
+      "executable": false,
+      "sha256": "6ff0c1e7550ec31241c2860bc7c1734537fbbcc2d2090e2147edbe24d785fedc"
+    },
+    "dist/index.js": {
+      "executable": false,
+      "sha256": "657d3a179c03bed5a1ca7ff931b011c12bed8c70d616a8db40b0dfb99c86c417"
+    }
+  },
+  "inputs": {
+    "package-lock.json": {
+      "executable": false,
+      "sha256": "e394ca5fe6b9db47fc222162d72f67034c6b902826a8d8f71d6f055a03aaaa79"
+    },
+    "package.json": {
+      "executable": false,
+      "sha256": "15cdc9a06b60130ef12e2918237731cce5587a8284e42a4236e7855e5b38dfc5"
+    },
+    "src/core.ts": {
+      "executable": false,
+      "sha256": "b91ceebd3d2996a449aa218dd3970e252242a08f30f80fd3745491abe7c40ae0"
+    },
+    "src/index.ts": {
+      "executable": false,
+      "sha256": "a8dc99470e4937b8dcf06c1cbd1c76e179a64c1aa4f748cc4c4af65db7012b7b"
+    },
+    "tsconfig.json": {
+      "executable": false,
+      "sha256": "29abb8649f73c66d5b5f807103a8d591a878cc1ce2fe959ead50a4e7805950ca"
+    }
+  },
+  "source_sha256": "014ce47af2cc4f5d30a4d8af318789f000f9d7f45ea1b9cdf977aada958299e5"
+}

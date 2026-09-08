@@ -1,0 +1,5 @@
+interface:
+  display_name: "Project Docs"
+  short_description: "Persistent planning, project documents and evidence"
+policy:
+  allow_implicit_invocation: true

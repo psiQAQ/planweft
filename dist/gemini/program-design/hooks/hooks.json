@@ -1,0 +1,52 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "name": "program-design-sessionstart",
+            "type": "command",
+            "command": "python3 -I -B \"${extensionPath}/hooks/native-hook.py\" gemini SessionStart",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "BeforeAgent": [
+      {
+        "hooks": [
+          {
+            "name": "program-design-beforeagent",
+            "type": "command",
+            "command": "python3 -I -B \"${extensionPath}/hooks/native-hook.py\" gemini BeforeAgent",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "hooks": [
+          {
+            "name": "program-design-aftertool",
+            "type": "command",
+            "command": "python3 -I -B \"${extensionPath}/hooks/native-hook.py\" gemini AfterTool",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "PreCompress": [
+      {
+        "hooks": [
+          {
+            "name": "program-design-precompress",
+            "type": "command",
+            "command": "python3 -I -B \"${extensionPath}/hooks/native-hook.py\" gemini PreCompress",
+            "timeout": 10000
+          }
+        ]
+      }
+    ]
+  }
+}

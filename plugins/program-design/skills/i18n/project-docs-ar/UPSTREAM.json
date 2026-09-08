@@ -1,6 +1,6 @@
 {
   "product": "program-design",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "upstream": {
     "repository": "https://github.com/OthmanAdi/planning-with-files",
     "tag": "v3.17.0",
