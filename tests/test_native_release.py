@@ -21,6 +21,18 @@ def module(name, file):
 
 
 class NativeReleaseTest(unittest.TestCase):
+    def test_npm_native_entry_cannot_be_root_exports_only(self):
+        release = module('pw_npm_entry', 'scripts/prepare-native-release.py')
+        package = json.loads((ROOT / 'package.json').read_text())
+        self.assertEqual(release.validate_native_npm_entry(package),
+                         'dist/opencode/planweft/dist/index.js')
+        # Reproduce RC3: ordinary ESM import works, native npm plugin lookup
+        # ignores it. A successful npm pack must not hide this missing entry.
+        package.pop('main')
+        package['exports'].pop('./server')
+        with self.assertRaisesRegex(ValueError, 'OpenCode native entry'):
+            release.validate_native_npm_entry(package)
+
     def test_archive_cleanup_requires_recorded_ownership_and_matching_bytes(self):
         builder = module('pw_archive_owner', 'scripts/build-plugin.py')
         with tempfile.TemporaryDirectory(prefix='pw-archive-ownership-') as temporary:

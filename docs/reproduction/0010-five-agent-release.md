@@ -125,3 +125,11 @@ DSH 同包 flash 的单一计划已建立，但 discovery 命令失败的泛化�
 远端 RC2→RC3→RC2→RC3→卸载：Codex、Claude、Pi、DSH 全流程及适用原生入口检查 Passed。OpenCode CLI 生命周期完成，但独立 npm 原生配置没有注册 `pw_*` 工具，因此该平台总结果 Failed。独立源码诊断：官方 resolver 读取 `exports["./server"]` 或 `main`，不会选择仅有的 `exports["."]`；根 manifest 缺失对应入口。需递增候选版修复，不能覆盖已发布 RC3。
 
 [RC3 发布、成功与失败附件](evidence/0010/rc3-release-and-native-observation.tar.gz)：1,199 项，SHA-256 `8799518eb4d6fd46c7a292033c50b98192bc3b7bf3fee0125956fcabd506e239`。附 sources.json 映射原始运行相对路径；检查已知认证值无命中、脱敏私人路径并规范归档身份。Claude 实际配置使用 DeepSeek 官方 `https://api.deepseek.com/anthropic/v1`，此前授权问题误写 Anthropic 地址已更正；新模型命令尚未获明确补充授权、未执行。
+
+## RC4 npm 入口修复
+
+根 manifest 的 `main` 与 `exports["./server"]` 现指向原有 OpenCode V1 预编译入口，保留根 ESM/Pi/DSH 元数据。只有产品版本递增，无依赖变化；编译 JavaScript 除版本常量外不变。打包检查直接验证 tgz 中的 manifest 与入口文件，root-only 回归明确拒绝 RC3 形式。
+
+固定 OpenCode 1.18.22 容器在 network none 下分别复制 RC3 profile/cache，仍配置 `plugin:["planweft@0.4.0-rc.3"]`，只改副本 manifest。四组预期均满足：原始没有工具，main-only/server-only/both 均加载三个 pw_* 工具；包内其他文件摘要不变。原始缓存只读，未注入认证或调用模型。此为因果 fixture，不代替准确 RC4 或真实远端安装。
+
+[入口因果与回归附件](evidence/0010/rc4-entry-causal.tar.gz)：21 项，SHA-256 `350fd75e92e5b506b7980be81517bd6fad633699ab3a02267869e4b060b1fd3f`。全量 Python 91 tests、安装器 28 tests、DSH facade 3 tests Passed；构建一致性通过。RC4 精确归档与远端验收待执行，DSH/Claude 的未完成门槛保持。

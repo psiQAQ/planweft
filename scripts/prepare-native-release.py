@@ -36,6 +36,16 @@ def write_json(path, value):
     path.write_text(json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + '\n')
 
 
+def validate_native_npm_entry(package):
+    # OpenCode 1.18.22 resolves ./server, then main; root exports alone is
+    # silently ignored. Bind both native routes to the existing compiled V1
+    # entry so npm loading cannot differ from the managed local loader.
+    entry = './dist/opencode/planweft/dist/index.js'
+    if package.get('main') != entry or package.get('exports', {}).get('./server') != entry:
+        raise ValueError('npm manifest lacks the compiled OpenCode native entry')
+    return entry.removeprefix('./')
+
+
 def npm_archive(builder, source, npm_dir, env):
     records = json.loads(run(['npm', 'pack', '--ignore-scripts', '--json',
                               '--pack-destination', str(npm_dir)], source, env))
@@ -63,6 +73,7 @@ def npm_archive(builder, source, npm_dir, env):
                 'lib/installer.mjs', 'dist/manifest.json', 'docs/installation.md',
                 'docs/installation.en.md', *builder.CATALOGS.values()]
     package = json.loads(files['package.json'][0])
+    required.append(validate_native_npm_entry(package))
     required += [*package['pi']['skills'], *package['pi']['extensions'],
                  package['exports']['.']['import'].removeprefix('./'),
                  package['exports']['.']['types'].removeprefix('./'),

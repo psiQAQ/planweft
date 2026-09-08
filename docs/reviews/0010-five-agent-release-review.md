@@ -66,3 +66,5 @@ DSH reviewer 确认 HOME 缓存在原沙箱不可写，且 bwrap 每次调用会
 OpenCode server 采集由 container_release_plan_review 实现，未参与实现的 release_audit 独立检查源码、7 项离线测试与六项真实证据，通过。原生 SSE gated 两次 assistant 完成索引 154/203，idle 156/205；仅一次初始请求，第二 user reason 与 parentID 可追溯，窗口/清理/权限失败边界准确。该审查不将有限观察提升为原生 settled。
 
 release_audit 独立定位 RC3 远端 npm 入口缺失：[shared.ts](https://github.com/anomalyco/opencode/blob/v1.18.22/packages/opencode/src/plugin/shared.ts#L95) 只选择 ./server 或 main；[loader.ts](https://github.com/anomalyco/opencode/blob/v1.18.22/packages/opencode/src/plugin/loader.ts#L95) 与 [missing 回调](https://github.com/anomalyco/opencode/blob/v1.18.22/packages/opencode/src/plugin/index.ts#L173) 解释了退出 0 却无工具。现有 CLI 直接 loader 成功不代替 npm 原生入口。本次仅诊断；后续修复和准确新包需另验。
+
+RC4 定向修复复核 Passed：根 main 与 ./server 均指向原有预编译 V1 模块，Pi/DSH/根 ESM 导出保留，锁文件仅版本变化；实际 tgz 内的 manifest 与入口文件纳入发布准备检查。主 Agent 随后执行固定 1.18.22 容器无网络四组因果样本：原始缺工具、main-only/server-only/both 均有三个 pw_* 工具；副本除 package.json 外内容摘要完全不变。原始样本和补丁样本均不是准确 RC4 远端包。
