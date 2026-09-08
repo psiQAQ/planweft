@@ -155,3 +155,7 @@ python3 tests/run-codex-hook-probe.py --cli /absolute/path/to/codex --output /tm
 `test_public_docs.py` 核对首页、安装指南、跨平台设计、overlay 与全部平台包的语言切换和相对链接，并比较完整中英安装命令块。分发漂移测试另验证手改 `docs/installation.en.md` 会被 `--verify` 拒绝且不自动修复。实际 npm 打包由发布准备入口检查两种安装文档与英文 README 都随包携带。
 
 这些检查证明导航、命令与分发完整性；语义翻译、比较公平性和原创归属由独立 review 核查。安装正文只修改 overlays 的中英文源，再统一构建；仓库指南是生成镜像。公开入口：[项目介绍：中文](../README.md) / [English](../README.en.md)，[安装：中文](../docs/installation.md) / [English](../docs/installation.en.md)，[跨平台：中文](../docs/platforms.md) / [English](../docs/platforms.en.md)。
+
+## Published npm candidate
+
+`run-registry-smoke.py --version VERSION --sha256 SHA256 --output /tmp/new-registry-run --cli-dir /isolated/host/bin` downloads the exact registry tarball, verifies its digest, exercises scoped native installs for four core hosts, removes the disposable npx cache and checks the persistent runtime, and loads the direct Pi/OpenCode npm entries. It reads no personal model credentials. Single-version update idempotence is not cross-version remote lifecycle acceptance.
