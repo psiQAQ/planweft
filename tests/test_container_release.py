@@ -28,7 +28,8 @@ class ContainerReleaseTest(unittest.TestCase):
                 tar.addfile(info,io.BytesIO(data))
             base=[sys.executable,str(ROOT/'tests/run-five-agent-release.py'),'--archive',str(archive),'--output',str(output)]
             for flags in [['--host','unknown'],['--host','codex','--timeout','0'],
-                          ['--host','codex','--cases','cold-reader'],['--host','codex','--image-lock',str(root/'missing')]]:
+                          ['--host','codex','--cases','cold-reader'],
+                          ['--host','codex','--cases','cold-reader','maintenance'],['--host','codex','--image-lock',str(root/'missing')]]:
                 with self.subTest(flags=flags):
                     result=subprocess.run(base+flags,capture_output=True)
                     self.assertEqual(result.returncode,2)
@@ -74,6 +75,17 @@ class ContainerReleaseTest(unittest.TestCase):
             'stopReason':'error','errorMessage':'401: invalid fixture authentication'}})
         result=runner.model_text('pi',line)
         self.assertFalse(result['final']);self.assertTrue(result['errors'])
+
+    def test_dsh_requires_actual_session_events_for_tool_observation(self):
+        runner=module('pw_runner_dsh','tests/run-five-agent-release.py')
+        self.assertFalse(runner.model_text('dsh','prose alone')['tool_observation_supported'])
+        stream='\n'.join(json.dumps(e) for e in [
+            {'type':'tool/call','data':{'name':'read','arguments':'fixture'}},
+            {'type':'assistant/message','data':{'message':{'content':[{'type':'text','text':'42'}]}}},
+            {'type':'turn/end','data':{'reason':{'kind':'completed'}}}])
+        observed=runner.model_text('dsh',stream)
+        self.assertTrue(observed['tool_observation_supported']);self.assertEqual(len(observed['tool_calls']),1)
+        self.assertEqual(observed['final'],'42')
 
 
 if __name__=='__main__': unittest.main()

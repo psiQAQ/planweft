@@ -67,8 +67,8 @@ def parse_args(argv=None):
     args.output=args.output.resolve()
     if args.output.exists() or args.output==ROOT or ROOT in args.output.parents:
         parser.error('Output must be new and outside checkout')
-    if 'cold-reader' in args.cases and 'maintenance' not in args.cases:
-        parser.error('Cold reader requires maintenance in this run')
+    if 'cold-reader' in args.cases and ('maintenance' not in args.cases or args.cases.index('maintenance')>args.cases.index('cold-reader')):
+        parser.error('Cold reader requires an earlier maintenance session')
     if 'recovery' in args.cases and ('context' not in args.cases or args.cases.index('context')>args.cases.index('recovery')):
         parser.error('Recovery requires an earlier context session')
     args.images=images; args.package=package
@@ -91,7 +91,8 @@ def credentials(args, host):
     selected={**config,**override}
     url=selected.get('baseUrl') or selected.get('baseURL') or selected.get('url')
     key=selected.get('apiKey')
-    if not isinstance(url,str) or urlparse(url).scheme!='https' or urlparse(url).hostname not in {'api.deepseek.com'}:
+    route=urlparse(url) if isinstance(url,str) else None
+    if not route or route.scheme!='https' or route.hostname!='api.deepseek.com' or route.username or route.password or route.query or route.fragment or route.netloc!='api.deepseek.com':
         raise ValueError('Model route must be the reviewed direct official HTTPS provider')
     if not isinstance(key,str) or not key or '${' in key:
         raise ValueError('Direct provider authentication unavailable')
@@ -103,7 +104,7 @@ def write_json(path, data):
 
 
 def model_text(host, text):
-    final=[]; tools=[]; errors=[]
+    final=[]; tools=[]; errors=[]; native_end=False
     for line in text.splitlines():
         try: event=json.loads(line)
         except ValueError: continue
@@ -127,9 +128,18 @@ def model_text(host, text):
         elif host=='opencode':
             if event.get('type')=='text': final.append(event.get('part',{}).get('text',''))
             if event.get('type')=='tool_use': tools.append(event.get('part',{}))
-    # DSH headless prints native prose; its transport differs from JSONL hosts.
-    return {'final':'\n'.join(final).strip() if host!='dsh' else text.strip(),'tool_calls':tools,'errors':errors,
-            'tool_observation_supported':host!='dsh'}
+        elif host=='dsh':
+            if event.get('type')=='assistant/message':
+                for block in event.get('data',{}).get('message',{}).get('content',[]):
+                    if block.get('type')=='text': final.append(block.get('text',''))
+            if event.get('type')=='tool/call': tools.append(event['data'])
+            if event.get('type')=='turn/end':
+                native_end=True
+                reason=event.get('data',{}).get('reason')
+                kind=reason.get('kind') if isinstance(reason,dict) else reason
+                if kind!='completed': errors.append(event)
+    return {'final':'\n'.join(final).strip(),'tool_calls':tools,'errors':errors,
+            'tool_observation_supported':host!='dsh' or native_end}
 
 
 def project_snapshot(fixture, work):
@@ -149,7 +159,8 @@ def main(argv=None):
         'runtime_sha256':hashlib.sha256(runtime.read_bytes()).hexdigest(),
         'status':'In Progress','hosts':{},'semantic_review':'Not Run',
         'scope':'Linux amd64 real hosts; exact artifact, no external memory service'}
-    initial=set(subprocess.check_output(['docker','ps','-aq'],text=True).split())
+    # Concurrent labelled validation containers are not baseline services.
+    initial=set(subprocess.check_output(['docker','ps','-aq','--filter','label!=planweft.run'],text=True).split())
     run_id='pw-release-'+uuid.uuid4().hex[:12]
     try:
         for host in dict.fromkeys(args.host):
@@ -227,6 +238,8 @@ def main(argv=None):
                 if case=='context': prior_context=after
                 result=json.loads((results/'controller.json').read_text()) if (results/'controller.json').is_file() else {}
                 text=(results/'model.stdout').read_text() if (results/'model.stdout').exists() else ''
+                if host=='dsh':
+                    text=(results/'native-events.jsonl').read_text() if (results/'native-events.jsonl').exists() else ''
                 trace=model_text(host,text);write_json(base/'trace-analysis.json',trace)
                 assertions={'container_succeeded':status=='Passed'}
                 if case not in {'preflight','lifecycle'}:
@@ -259,9 +272,10 @@ def main(argv=None):
         remaining=subprocess.check_output(['docker','ps','-aq','--filter','label=planweft.run='+run_id],text=True).split()
         final=set(subprocess.check_output(['docker','ps','-aq'],text=True).split())
         report['cleanup']={'remaining_test_containers':remaining,'original_containers_preserved':initial<=final,
+                           'baseline_container_ids':sorted(initial),'missing_baseline_container_ids':sorted(initial-final),
                            'credentials':'container stdin/memory/tmpfs only'}
         complete=all(set(args.cases).issubset(report['hosts'].get(host,{})) for host in args.host)
-        report['status']='Passed' if complete and not report.get('error') and all(v.get('status')=='Passed' for cases in report['hosts'].values() for v in cases.values()) and not remaining else 'Incomplete'
+        report['status']='Passed' if complete and not report.get('error') and all(v.get('status')=='Passed' for cases in report['hosts'].values() for v in cases.values()) and not remaining and initial<=final else 'Incomplete'
         write_json(args.output/'summary.json',report)
     return 0 if report['status']=='Passed' else 1
 

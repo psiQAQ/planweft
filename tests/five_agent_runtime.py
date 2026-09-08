@@ -33,6 +33,8 @@ def safe_text(text):
 def secret_values(value):
     if isinstance(value,dict):
         return [s for child in value.values() for s in secret_values(child)]
+    if isinstance(value,list):
+        return [s for child in value for s in secret_values(child)]
     return [value] if isinstance(value,str) and len(value)>=16 and not value.startswith('https://') else []
 
 
@@ -100,6 +102,9 @@ def prepare_model(host, secret, model):
         text += '        baseURL: '+json.dumps(url)+'\n'
         text += '        compat:\n          thinkingFormat: deepseek\n          supportsDeveloperRole: false\n          maxTokensField: max_tokens\n'
         text += '        models:\n          - id: '+json.dumps(model)+'\n            name: DeepSeek\n            contextWindow: 1048576\n            maxTokens: 65536\n'
+        # Preserve real native events for verification; this affects local log
+        # encoding only. No observer extension or synthetic event carrier.
+        text += '- id: session-persistence-jsonl\n  config:\n    compression: none\n'
         (HOME/'.dsh/cordis.patch.yml').write_text(text)
 
 
@@ -275,16 +280,28 @@ def controller(payload):
                 raise RuntimeError('No isolated model authentication')
             if case not in {'readonly','simple','cold-reader','conflict','evidence-gap'}:
                 os.environ.pop('PLANNING_DISABLED',None)
+            if host=='pi' and case in {'context','recovery'}:
+                # DeepSeek defaults to cache-safe reminders, which deliberately
+                # omit plan contents. This full-content probe explicitly tests
+                # the supported parity mode without changing product defaults.
+                os.environ['PWF_MODE']='parity'
             prompt = payload['prompt']
             command, data = model_command(host,payload['model'],prompt,case)
             save('model-invocation',{'argv':command,'fresh_session':True,'case':case,
                 'plugin_installed':case!='cold-reader','external_memory':'direct-provider; no MemoryProxy or identity headers',
                 'codex_hook_trust':'invocation bypass' if '--dangerously-bypass-hook-trust' in command else 'normal',
                 'planning_disabled':os.environ.get('PLANNING_DISABLED')=='1'})
+            if host=='pi': save('pi-mode',{'configured':os.environ.get('PWF_MODE','auto'),
+                'default_deepseek_behavior':'cache-safe reminder; full plan content requires parity'})
             if host=='pi' and case in {'context','recovery'}:
                 process=pi_model(payload['model'],prompt,payload['timeout'])
             else:
                 process = run('model',command,input_data=data,timeout=payload['timeout'],required=False)
+            if host=='dsh':
+                logs=list((HOME/'.dsh/sessions').rglob('*.jsonl'))
+                content='\n'.join(p.read_text() for p in sorted(logs))
+                (OUT/'native-events.jsonl').write_text(safe_text(content))
+                result['native_session_logs']=len(logs)
             result['model_session'] = 'Passed' if process.returncode == 0 else 'Failed'
             if process.returncode:
                 raise RuntimeError('Real model process failed')
