@@ -184,7 +184,7 @@ def local_install_text(text, path):
             'your project\'s `.opencode/skills/project-docs/`. For user scope, '
             'install the same packages/plugins/skills layout under '
             '`~/.config/opencode/`. Keep the local package\'s `node_modules/`. '
-            'This derivative has no published npm installation route.')
+            'The unified npm package is planweft; use its version-matched installer after publication.')
         text = text.replace(
             '`~/.agents/skills/project-docs/templates/` after `npx skills add -g`',
             '`.opencode/skills/project-docs/templates/` after a project copy')
@@ -294,6 +294,11 @@ def transform(upstream, enhanced=True):
             text = text.replace('("pwf", "pwf-status", "plan-status")',
                                 '("pw-pwf", "pw-pwf-status", "pw-plan-status")')
         if target == 'tests/test_hermes_first_class.py':
+            # Upstream only releases numeric versions; our candidate is an exact
+            # semver prerelease. Assert this release's value rather than accepting
+            # arbitrary malformed versions or changing the original baseline.
+            text = text.replace(r'r"(?m)^version: \d+\.\d+\.\d+$"',
+                                'r"(?m)^version: ' + re.escape(VERSION) + '$"')
             text = text.replace('"planweft", ctx.skills', '"project-docs", ctx.skills')
             text = text.replace('ctx.skills["planweft"]', 'ctx.skills["project-docs"]')
             if enhanced:

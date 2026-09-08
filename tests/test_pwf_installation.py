@@ -19,10 +19,10 @@ INSTALL_SURFACES = {
     'codex': ['.codex-plugin/plugin.json', 'hooks/codex-hooks.json',
               '.codex/hooks/run_sh.py', 'skills/project-docs/SKILL.md'],
     'claude': ['.claude-plugin/plugin.json', 'hooks/hooks.json',
-               'hooks/claude-hook.sh', 'commands/pd-plan.md', 'skills/project-docs/SKILL.md'],
-    'pi': ['package.json', 'SKILL.md', 'extensions/program-design/index.ts'],
+               'hooks/claude-hook.sh', 'commands/pw-plan.md', 'skills/project-docs/SKILL.md'],
+    'pi': ['package.json', 'SKILL.md', 'extensions/planweft/index.ts'],
     'opencode': ['package.json', 'package-lock.json', 'src/index.ts', 'dist/index.js',
-                 'commands/pd-pwf.md', 'commands/pd-pwf-status.md',
+                 'commands/pw-pwf.md', 'commands/pw-pwf-status.md',
                  'skills/project-docs/SKILL.md'],
     'hermes': ['plugin.yaml', '__init__.py', 'skills/project-docs/SKILL.md'],
     'cursor': ['.cursor-plugin/plugin.json', 'hooks/hooks.json', 'skills/project-docs/SKILL.md'],
@@ -32,7 +32,7 @@ INSTALL_SURFACES = {
     'kiro': ['plugin.json', 'skills/project-docs/SKILL.md',
              'skills/project-docs/assets/scripts/bootstrap.sh',
              'skills/project-docs/assets/scripts/bootstrap.ps1'],
-    'continue': ['.continue/skills/project-docs/SKILL.md', '.continue/prompts/pd-plan.prompt'],
+    'continue': ['.continue/skills/project-docs/SKILL.md', '.continue/prompts/pw-plan.prompt'],
     'factory': ['.factory-plugin/plugin.json', 'skills/project-docs/SKILL.md'],
     'codebuddy': ['.codebuddy-plugin/plugin.json', 'skills/project-docs/SKILL.md'],
     'agents': ['.agents/skills/project-docs/SKILL.md'],
@@ -40,7 +40,7 @@ INSTALL_SURFACES = {
 
 
 def package_files(host):
-    root = DIST / host / 'program-design'
+    root = DIST / host / 'planweft'
     return {path.relative_to(root).as_posix(): path.read_bytes()
             for path in root.rglob('*') if path.is_file()}
 
@@ -57,12 +57,12 @@ class InstallationContractTest(unittest.TestCase):
         # Local package names and upstream attribution URLs remain valid. These
         # patterns target instructions that would fetch nonexistent releases.
         forbidden = {
-            'invented GitHub repository': re.compile(r'OthmanAdi/program-design'),
+            'invented GitHub repository': re.compile(r'OthmanAdi/planweft'),
             'unpublished OpenCode npm registration': re.compile(
-                r'["\']plugin["\']\s*:\s*\[[^\]]*["\']opencode-program-design["\']'),
+                r'["\']plugin["\']\s*:\s*\[[^\]]*["\']opencode-planweft["\']'),
             'unpublished npm installation': re.compile(
                 r'\b(?:pi\s+install\s+npm:|npm\s+(?:install|add|i)\s+)'
-                r'(?:opencode-)?program-design(?:\s|@|$)'),
+                r'(?:opencode-)?planweft(?:\s|@|$)'),
             'unpublished-package instruction': re.compile(
                 r'Users install the published package'),
         }
@@ -103,9 +103,9 @@ class InstallationContractTest(unittest.TestCase):
         self.assertIn(plugin['hooks'].removeprefix('./'), codex)
         pi = package_files('pi')
         package = json.loads(pi['package.json'])
-        self.assertEqual(package['name'], 'program-design')
+        self.assertEqual(package['name'], 'planweft')
         self.assertEqual(package['pi']['skills'], ['SKILL.md'])
-        self.assertEqual(package['pi']['extensions'], ['extensions/program-design/index.ts'])
+        self.assertEqual(package['pi']['extensions'], ['extensions/planweft/index.ts'])
         for name in package['pi']['skills'] + package['pi']['extensions']:
             self.assertIn(name, pi)
         self.assertFalse(any(name.startswith('.pi/') for name in pi),
@@ -138,12 +138,12 @@ class InstallationContractTest(unittest.TestCase):
     @unittest.skipUnless(shutil.which('bash') and shutil.which('sh'),
                          'Gemini command protocol test requires POSIX shells')
     def test_gemini_disabled_commands_work_in_chinese_and_space_project_path(self):
-        with tempfile.TemporaryDirectory(prefix='pd-gemini-install-') as temporary:
+        with tempfile.TemporaryDirectory(prefix='pw-gemini-install-') as temporary:
             root = Path(temporary)
             project = root / '中文项目 有空格'
             project.mkdir()
-            extension = root / '扩展 安装目录' / 'program-design'
-            shutil.copytree(DIST / 'gemini/program-design', extension)
+            extension = root / '扩展 安装目录' / 'planweft'
+            shutil.copytree(DIST / 'gemini/planweft', extension)
             (project / 'task_plan.md').write_text(
                 '# Existing plan\n\n### Phase 1\n- **Status:** in_progress\n')
             (project / 'progress.md').write_text('User-owned progress.\n')

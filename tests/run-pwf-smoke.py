@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Authorized, isolated Codex 0.3.0 trial. Never installs into the user's Codex.
+"""Authorized, isolated Codex 0.4.0-rc.1 trial. Never installs into the user's Codex.
 
 Requires the already reviewed local Docker image and explicit authorization for
 real model calls. Every call gets a new tmpfs home and no conversation history.
@@ -24,9 +24,9 @@ import uuid
 ROOT = Path(__file__).resolve().parents[1]
 IMAGE = 'sha256:aa46e31c71577eb37c1e1d856427d9d159ddd5a41aa92472af722838b1c3a159'
 MODEL = 'gpt-5.6-terra'
-PLUGIN_ID = 'program-design@program-design'
-MARKETPLACE = 'program-design'
-DISTRIBUTION_ROOT = Path('/marketplace/dist/codex/program-design')
+PLUGIN_ID = 'planweft@planweft'
+MARKETPLACE = 'planweft'
+DISTRIBUTION_ROOT = Path('/marketplace/dist/codex/planweft')
 DEFAULT_CASES = ['hook-untrusted', 'hook-trusted', 'hook-recovery', 'maintenance', 'simple', 'readonly']
 CASES = [*DEFAULT_CASES, 'conflict', 'evidence-gap']
 HISTORY = '历史：2026-09-01 Linux 手工示例 Passed，仅为历史观察，不代表本次验证。'
@@ -159,10 +159,10 @@ def verify_cache():
     cache = Path('/home/agent/.codex/plugins/cache')
     for manifest in cache.rglob('.codex-plugin/plugin.json'):
         parsed = json.loads(manifest.read_text())
-        if parsed.get('name') == 'program-design' and parsed.get('version') == '0.3.0':
+        if parsed.get('name') == 'planweft' and parsed.get('version') == '0.4.0-rc.1':
             candidates.append(manifest.parent.parent)
     if len(candidates) != 1:
-        raise RuntimeError('expected exactly one installed 0.3.0 plugin cache')
+        raise RuntimeError('expected exactly one installed 0.4.0-rc.1 plugin cache')
     installed = candidates[0]
     checked, mismatches, runtime_modes = {}, [], {}
     for source in DISTRIBUTION_ROOT.rglob('*'):
@@ -179,7 +179,7 @@ def verify_cache():
                                            'installed': oct(target.stat().st_mode) if target.exists() else None}
             if target.is_file() and bool(target.stat().st_mode & 0o111) != bool(source.stat().st_mode & 0o111):
                 mismatches.append(str(relative) + ':executable')
-    evidence = {'cache_root': str(installed), 'version': '0.3.0',
+    evidence = {'cache_root': str(installed), 'version': '0.4.0-rc.1',
                 'checked_source_sha256': checked, 'mismatches': mismatches,
                 'runtime_modes': runtime_modes,
                 'temporary_mounts': [line for line in Path('/proc/mounts').read_text().splitlines()
@@ -216,8 +216,8 @@ def capture_hooks_list(name):
         result = {}
         skills_result = {}
         try:
-            initialized = request(1, 'initialize', {'clientInfo': {'name': 'program-design-smoke',
-                                  'version': '0.3.0'}, 'capabilities': {'experimentalApi': True}})
+            initialized = request(1, 'initialize', {'clientInfo': {'name': 'planweft-smoke',
+                                  'version': '0.4.0-rc.1'}, 'capabilities': {'experimentalApi': True}})
             if 'error' in initialized:
                 raise RuntimeError('app-server initialize rejected')
             process.stdin.write(json.dumps({'method': 'initialized', 'params': {}}) + '\n')
@@ -324,8 +324,8 @@ print('Independent byte checks: 4 cases Passed; Linux only; Windows Not Run')
             capture('unregister.json', ['codex', 'plugin', 'marketplace', 'remove', MARKETPLACE, '--json'], required=False)
         capture('plugin-list-after.json', ['codex', 'plugin', 'list', '--json'], required=False)
         remaining = [str(path) for path in (config / 'plugins/cache').rglob('*')
-                     if path.is_file() and 'program-design' in path.parts]
-        emit('cache-cleanup.json', {'remaining_program_design_cache_files': remaining,
+                     if path.is_file() and 'planweft' in path.parts]
+        emit('cache-cleanup.json', {'remaining_planweft_cache_files': remaining,
              'auth_copy_location': 'disposable container tmpfs; never emitted'})
     return exit_code
 
@@ -348,12 +348,12 @@ def directory_inventory(directory):
 def prepare_reviewed_package(destination):
     """Stage the root catalog and verified native directory in a disposable repo layout."""
     manifest = json.loads((ROOT / 'dist/manifest.json').read_text())
-    if (manifest.get('schema_version') != 2 or manifest.get('version') != '0.3.0'
-            or manifest.get('product') != 'program-design'):
+    if (manifest.get('schema_version') != 2 or manifest.get('version') != '0.4.0-rc.1'
+            or manifest.get('product') != 'planweft'):
         raise RuntimeError('unsupported distribution manifest')
     item = manifest['platforms']['codex']
     relative = PurePosixPath(item['path'])
-    if relative != PurePosixPath('codex/program-design'):
+    if relative != PurePosixPath('codex/planweft'):
         raise RuntimeError('unexpected Codex distribution path')
     original = ROOT / 'dist' / relative
     files = directory_inventory(original)
@@ -364,9 +364,9 @@ def prepare_reviewed_package(destination):
     catalog_path = Path('.agents/plugins/marketplace.json')
     catalog = ROOT / catalog_path
     market = json.loads(catalog.read_text())
-    entries = [entry for entry in market.get('plugins', []) if entry.get('name') == 'program-design']
+    entries = [entry for entry in market.get('plugins', []) if entry.get('name') == 'planweft']
     if (market.get('name') != MARKETPLACE or len(entries) != 1
-            or entries[0].get('source') != {'source': 'local', 'path': './dist/codex/program-design'}):
+            or entries[0].get('source') != {'source': 'local', 'path': './dist/codex/planweft'}):
         raise RuntimeError('root marketplace does not resolve the reviewed Codex directory')
     source = destination / 'dist' / relative
     shutil.copytree(original, source)
@@ -405,7 +405,7 @@ def parse_trace(result_dir):
                 command = item.get('command', '')
                 output = item.get('aggregated_output', '')
                 if ('/plugins/cache/' in command and 'project-docs/SKILL.md' in command and
-                        'Program Design workflow and precedence' in output):
+                        'PlanWeft workflow and precedence' in output):
                     skill_reads.append({'id': item.get('id'), 'command': command})
         if 'hook' in json.dumps(event, ensure_ascii=False).lower():
             hooks.append(event)
@@ -422,10 +422,10 @@ def assess(case, before, after, trace, controls, token, process):
     final = '\n'.join(trace['final_messages']).strip()
     conditions = {'model_process_succeeded': process.get('exit_code') == 0}
     cache_cleanup = controls.get('cache-cleanup.json', {})
-    conditions['plugin_cache_removed'] = cache_cleanup.get('remaining_program_design_cache_files') == []
+    conditions['plugin_cache_removed'] = cache_cleanup.get('remaining_planweft_cache_files') == []
     if case != 'cold-reader':
         verified = controls.get('cache-verification.json', {})
-        conditions['installed_reviewed_version'] = verified.get('version') == '0.3.0' and verified.get('mismatches') == []
+        conditions['installed_reviewed_version'] = verified.get('version') == '0.4.0-rc.1' and verified.get('mismatches') == []
     if case == 'preflight':
         conditions['model_not_called'] = 'model-not-run.json' in controls
     elif case.startswith('hook-'):
@@ -492,7 +492,7 @@ def main(argv=None):
     scratch = None
     names = []
     try:
-        with tempfile.TemporaryDirectory(prefix='program-design-pwf-smoke-') as temporary:
+        with tempfile.TemporaryDirectory(prefix='planweft-pwf-smoke-') as temporary:
             scratch = Path(temporary)
             source, package = prepare_reviewed_package(scratch / 'marketplace')
             token = 'PD_PROBE_' + uuid.uuid4().hex
@@ -518,10 +518,10 @@ def main(argv=None):
                 before = snapshot(work)
                 save(result_dir / 'before.json', before)
                 (result_dir / 'prompt.txt').write_text(prompt + BOUNDARY, encoding='utf-8')
-                name = 'pd-' + label + '-' + case
+                name = 'pw-' + label + '-' + case
                 names.append(name)
                 command = ['docker', 'run', '-i', '--rm', '--name', name,
-                    '--label', 'program-design.run=' + label, '--read-only',
+                    '--label', 'planweft.run=' + label, '--read-only',
                     '--user', f'{os.getuid()}:{os.getgid()}', '--cap-drop=ALL',
                     '--security-opt=no-new-privileges', '--cpus=2', '--memory=4g', '--network=host',
                     '--tmpfs', f'/home/agent:uid={os.getuid()},gid={os.getgid()},mode=700',
@@ -589,7 +589,7 @@ def main(argv=None):
     finally:
         for name in names:
             subprocess.run(['docker', 'rm', '-f', name], capture_output=True)
-        remaining = call(['docker', 'ps', '-aq', '--filter', 'label=program-design.run=' + label]).stdout.split()
+        remaining = call(['docker', 'ps', '-aq', '--filter', 'label=planweft.run=' + label]).stdout.split()
         final_containers = set(call(['docker', 'ps', '-aq']).stdout.split())
         cleanup = {'remaining_test_containers': remaining,
                    'original_containers_preserved': initial_containers <= final_containers,

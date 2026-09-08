@@ -25,7 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def load_builder():
     sys.dont_write_bytecode = True
-    spec = importlib.util.spec_from_file_location('program_design_builder', ROOT / 'scripts/build-plugin.py')
+    spec = importlib.util.spec_from_file_location('planweft_builder', ROOT / 'scripts/build-plugin.py')
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -165,7 +165,7 @@ def main():
             record('npm-version', [npm, '--version'], output)
             record('node-version', [shutil.which('node') or 'node', '--version'], output)
             package = 'planning-with-files' if args.mode == 'baseline' else 'project-docs'
-            extension = 'planning-with-files' if args.mode == 'baseline' else 'program-design'
+            extension = 'planning-with-files' if args.mode == 'baseline' else 'planweft'
             packages = {
                 'pi': tree / '.pi' / 'skills' / package / 'extensions' / extension,
                 'opencode': tree / '.opencode' / 'packages' / ('opencode-' + extension),

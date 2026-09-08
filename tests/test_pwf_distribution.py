@@ -20,14 +20,14 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
-PLUGIN = DIST / 'codex/program-design'
+PLUGIN = DIST / 'codex/planweft'
 COMMIT = '0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7'
 HOSTS = {'codex', 'claude', 'pi', 'opencode', 'hermes', 'cursor', 'gemini',
          'copilot', 'mastracode', 'kiro', 'continue', 'factory', 'codebuddy', 'agents'}
 
 
 def package_contents(host):
-    root = DIST / host / 'program-design'
+    root = DIST / host / 'planweft'
     return {path.relative_to(root).as_posix(): path.read_bytes()
             for path in root.rglob('*') if path.is_file()}
 
@@ -67,7 +67,7 @@ def frontmatter(body):
 
 class PackageContractTest(unittest.TestCase):
     def test_rebuild_is_deterministic_and_verify_detects_drift_without_writing(self):
-        with tempfile.TemporaryDirectory(prefix='pd-build-contract-') as temporary:
+        with tempfile.TemporaryDirectory(prefix='pw-build-contract-') as temporary:
             root = Path(temporary) / 'independent source'
             copy_build_inputs(root)
             command = [sys.executable, str(root / 'scripts/build-plugin.py')]
@@ -83,7 +83,7 @@ class PackageContractTest(unittest.TestCase):
                                      text=True, capture_output=True, timeout=90)
             self.assertEqual(checked.returncode, 0, checked.stdout + checked.stderr)
             assert_snapshots_equal(self, distribution_snapshot(root / 'dist'), expected)
-            target = root / 'dist/codex/program-design/skills/project-docs/SKILL.md'
+            target = root / 'dist/codex/planweft/skills/project-docs/SKILL.md'
             original, mode = target.read_bytes(), target.stat().st_mode
             for change in ['content', 'missing', 'extra', 'executable', 'mirror', 'public-docs']:
                 with self.subTest(change=change):
@@ -102,7 +102,7 @@ class PackageContractTest(unittest.TestCase):
                         document = changed.read_bytes()
                         changed.write_text('Generated installation-guide drift.\n')
                     else:
-                        changed = root / 'plugins/program-design/skills/project-docs/SKILL.md'
+                        changed = root / 'plugins/planweft/skills/project-docs/SKILL.md'
                         changed.write_text('Compatibility mirror drift.\n')
                     before = snapshot(root)
                     checked = subprocess.run([*command, '--verify'], env=env,
@@ -122,15 +122,15 @@ class PackageContractTest(unittest.TestCase):
     def test_platform_inventory_and_directory_integrity(self):
         manifest = json.loads((DIST / 'manifest.json').read_text())
         self.assertEqual(manifest['schema_version'], 2)
-        self.assertEqual(manifest['product'], 'program-design')
+        self.assertEqual(manifest['product'], 'planweft')
         self.assertEqual(manifest['upstream_commit'], COMMIT)
         self.assertEqual(set(manifest['platforms']), HOSTS)
-        self.assertEqual(manifest['version'], '0.3.0')
+        self.assertEqual(manifest['version'], '0.4.0-rc.1')
         self.assertEqual(list(DIST.rglob('*.zip')), [], 'old ZIPs must not remain distributable')
         self.assertEqual({path.name for path in DIST.iterdir() if path.is_dir()}, HOSTS)
         for host, item in manifest['platforms'].items():
             with self.subTest(host=host):
-                self.assertEqual(item['path'], f'{host}/program-design')
+                self.assertEqual(item['path'], f'{host}/planweft')
                 package = DIST / item['path']
                 actual = {}
                 for path in package.rglob('*'):
@@ -143,7 +143,7 @@ class PackageContractTest(unittest.TestCase):
                 self.assertEqual(len(actual), item['file_count'])
                 encoded = json.dumps(actual, sort_keys=True, separators=(',', ':')).encode()
                 self.assertEqual(hashlib.sha256(encoded).hexdigest(), item['sha256'])
-        mirror = ROOT / 'plugins/program-design'
+        mirror = ROOT / 'plugins/planweft'
         mirrored_files = {path.relative_to(mirror).as_posix(): {
             'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
             'executable': bool(path.stat().st_mode & 0o111)}
@@ -175,8 +175,8 @@ class PackageContractTest(unittest.TestCase):
 
     def test_codex_has_one_automatic_main_skill_and_its_own_hooks(self):
         manifest = json.loads((PLUGIN / '.codex-plugin/plugin.json').read_text())
-        self.assertEqual(manifest['name'], 'program-design')
-        self.assertEqual(manifest['version'], '0.3.0')
+        self.assertEqual(manifest['name'], 'planweft')
+        self.assertEqual(manifest['version'], '0.4.0-rc.1')
         skills_root = PLUGIN / manifest['skills']
         automatic = []
         for path in skills_root.rglob('SKILL.md'):
@@ -233,10 +233,10 @@ class PackageContractTest(unittest.TestCase):
                     self.assertTrue('planning-with-files' not in text,
                                     'original plugin identity remains in a runtime/install surface')
                     normalized = text.replace('\\\\', '\\')
-                    stale = re.search(r'skills[/\\]program-design(?:[/\\]|["\'])', normalized)
+                    stale = re.search(r'skills[/\\]planweft(?:[/\\]|["\'])', normalized)
                     self.assertIsNone(stale, 'skill fallback should name project-docs')
                     self.assertTrue('/home/psi/' not in text, 'personal workspace path leaked')
-                    self.assertTrue('/tmp/program-design-' not in text, 'build scratch path leaked')
+                    self.assertTrue('/tmp/planweft-' not in text, 'build scratch path leaked')
 
     def test_auxiliary_command_files_are_namespaced_and_explicit(self):
         seen = 0
@@ -247,7 +247,7 @@ class PackageContractTest(unittest.TestCase):
                     continue
                 with self.subTest(host=host, path=name):
                     seen += 1
-                    self.assertTrue(path.stem.startswith('pd-'), name)
+                    self.assertTrue(path.stem.startswith('pw-'), name)
                     text = content.decode()
                     if text.startswith('---\n'):
                         self.assertIn('disable-model-invocation: true', frontmatter(text))
@@ -256,25 +256,25 @@ class PackageContractTest(unittest.TestCase):
     def test_pi_package_entries_and_registered_commands_are_local(self):
         files = package_contents('pi')
         package = json.loads(files['package.json'])
-        self.assertEqual(package['name'], 'program-design')
-        self.assertEqual(package['version'], '0.3.0')
+        self.assertEqual(package['name'], 'planweft')
+        self.assertEqual(package['version'], '0.4.0-rc.1')
         for path in package['pi']['skills'] + package['pi']['extensions']:
             self.assertIn(path, files)
         self.assertTrue({'LICENSE', 'UPSTREAM.json', 'references/'}.issubset(package['files']))
         source = '\n'.join(data.decode() for name, data in files.items() if name.endswith('.ts'))
         commands = re.findall(r'registerCommand\(\s*["\']([^"\']+)', source)
         self.assertTrue(commands)
-        self.assertTrue(all(name.startswith('pd-') for name in commands), commands)
-        self.assertIn('pd-plan-status', commands)
+        self.assertTrue(all(name.startswith('pw-') for name in commands), commands)
+        self.assertIn('pw-plan-status', commands)
         self.assertNotIn('planning-with-files', source)
 
     def test_opencode_tools_are_namespaced_and_package_retains_attribution(self):
         files = package_contents('opencode')
         source = files['src/index.ts'].decode()
         names = re.findall(r'\b([A-Za-z_]\w*):\s*tool\(', source)
-        self.assertEqual(set(names), {'pd_init', 'pd_status', 'pd_check'})
+        self.assertEqual(set(names), {'pw_init', 'pw_status', 'pw_check'})
         package = json.loads(files['package.json'])
-        self.assertEqual(package['name'], 'opencode-program-design')
+        self.assertEqual(package['name'], 'opencode-planweft')
         for path in ['LICENSE', 'UPSTREAM.json']:
             self.assertIn(path, package['files'])
             self.assertIn(path, files)
@@ -284,16 +284,16 @@ class PackageContractTest(unittest.TestCase):
 class PackagedRuntimeTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.installed = tempfile.TemporaryDirectory(prefix='pd-installed-')
+        cls.installed = tempfile.TemporaryDirectory(prefix='pw-installed-')
         cls.addClassCleanup(cls.installed.cleanup)
         install_parent = Path(cls.installed.name) / '插件 安装目录'
-        cls.plugin = install_parent / 'program-design'
+        cls.plugin = install_parent / 'planweft'
         shutil.copytree(PLUGIN, cls.plugin)
         cls.gemini = install_parent / 'Gemini 独立扩展'
-        shutil.copytree(DIST / 'gemini/program-design', cls.gemini)
+        shutil.copytree(DIST / 'gemini/planweft', cls.gemini)
 
     def setUp(self):
-        temporary = tempfile.TemporaryDirectory(prefix='pd-protocol-')
+        temporary = tempfile.TemporaryDirectory(prefix='pw-protocol-')
         self.addCleanup(temporary.cleanup)
         self.temporary = Path(temporary.name)
         self.project = self.temporary / '项目 工作目录'
@@ -338,7 +338,7 @@ class PackagedRuntimeTest(unittest.TestCase):
         return path
 
     def payload(self, event, **extra):
-        return json.dumps({'cwd': str(self.project), 'session_id': 'pd-protocol-session',
+        return json.dumps({'cwd': str(self.project), 'session_id': 'pw-protocol-session',
                            'hook_event_name': event, **extra})
 
     def test_no_plan_hooks_are_silent_and_do_not_create_project_state(self):

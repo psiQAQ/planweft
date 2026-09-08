@@ -30,10 +30,10 @@ class PublicDocsTest(unittest.TestCase):
 
     def test_public_documents_have_working_language_pairs_and_identical_commands(self):
         for base in ('README', 'docs/installation', 'docs/platforms',
-                     'overlays/program-design/README', 'overlays/program-design/install/INSTALL'):
+                     'overlays/planweft/README', 'overlays/planweft/install/INSTALL'):
             self.check_pair(ROOT / (base + '.md'), ROOT / (base + '.en.md'))
-        cn = ROOT / 'overlays/program-design/install/INSTALL.md'
-        en = ROOT / 'overlays/program-design/install/INSTALL.en.md'
+        cn = ROOT / 'overlays/planweft/install/INSTALL.md'
+        en = ROOT / 'overlays/planweft/install/INSTALL.en.md'
         self.assertTrue(commands(cn), 'the complete guide includes executable installation examples')
         self.assertEqual(commands(cn), commands(en), 'translations must not change installation commands')
         for filename in ('docs/installation.md', 'docs/installation.en.md'):

@@ -31,7 +31,7 @@ class NativeCatalogTest(unittest.TestCase):
         for host, (relative, plugin_manifest) in CATALOGS.items():
             with self.subTest(host=host):
                 catalog = json.loads((ROOT / relative).read_text())
-                entries = [entry for entry in catalog['plugins'] if entry['name'] == 'program-design']
+                entries = [entry for entry in catalog['plugins'] if entry['name'] == 'planweft']
                 self.assertEqual(len(entries), 1, 'registration must not duplicate the plugin')
                 source = entries[0]['source']
                 if host == 'codex':
@@ -39,13 +39,13 @@ class NativeCatalogTest(unittest.TestCase):
                     source = source['path']
                 self.assertIsInstance(source, str)
                 resolved = (ROOT / source).resolve()
-                self.assertEqual(resolved, ROOT / 'dist' / host / 'program-design')
+                self.assertEqual(resolved, ROOT / 'dist' / host / 'planweft')
                 plugin = json.loads((resolved / plugin_manifest).read_text())
                 self.assertEqual(plugin['name'], entries[0]['name'])
-                self.assertEqual(plugin['version'], '0.3.0')
+                self.assertEqual(plugin['version'], '0.4.0-rc.1')
 
     def test_build_preserves_other_catalog_entries_and_verify_is_read_only(self):
-        with tempfile.TemporaryDirectory(prefix='pd-catalog-contract-') as temporary:
+        with tempfile.TemporaryDirectory(prefix='pw-catalog-contract-') as temporary:
             root = Path(temporary)
             copy_build_inputs(root)
             retained = {}
@@ -58,7 +58,7 @@ class NativeCatalogTest(unittest.TestCase):
                 retained[host] = entry
                 target = root / relative
                 target.parent.mkdir(parents=True, exist_ok=True)
-                target.write_text(json.dumps({'name': 'program-design-local',
+                target.write_text(json.dumps({'name': 'planweft-local',
                     'owner': {'name': 'Fixture'}, 'plugins': [entry]}) + '\n')
             command = [sys.executable, str(root / 'scripts/build-plugin.py')]
             env = {**os.environ, 'PYTHONDONTWRITEBYTECODE': '1'}
@@ -68,7 +68,7 @@ class NativeCatalogTest(unittest.TestCase):
                 with self.subTest(host=host):
                     catalog = json.loads((root / relative).read_text())
                     self.assertIn(retained[host], catalog['plugins'])
-                    self.assertEqual(sum(entry['name'] == 'program-design'
+                    self.assertEqual(sum(entry['name'] == 'planweft'
                                          for entry in catalog['plugins']), 1)
             before = snapshot(root)
             checked = subprocess.run([*command, '--verify'], env=env,
@@ -80,15 +80,15 @@ class NativeCatalogTest(unittest.TestCase):
 class SmokeDirectoryBoundaryTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        spec = importlib.util.spec_from_file_location('pd_native_smoke', ROOT / 'tests/run-pwf-smoke.py')
+        spec = importlib.util.spec_from_file_location('pw_native_smoke', ROOT / 'tests/run-pwf-smoke.py')
         cls.runner = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(cls.runner)
 
     def setUp(self):
-        temporary = tempfile.TemporaryDirectory(prefix='pd-smoke-directory-')
+        temporary = tempfile.TemporaryDirectory(prefix='pw-smoke-directory-')
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name) / 'source'
-        self.package = self.root / 'dist/codex/program-design'
+        self.package = self.root / 'dist/codex/planweft'
         self.package.mkdir(parents=True)
         (self.package / 'LICENSE').write_text('Fixture license\n')
         script = self.package / 'hook.sh'
@@ -98,15 +98,15 @@ class SmokeDirectoryBoundaryTest(unittest.TestCase):
                             'executable': bool(path.stat().st_mode & 0o111)}
                  for path in self.package.iterdir()}
         digest = hashlib.sha256(json.dumps(files, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
-        self.item = {'path': 'codex/program-design', 'sha256': digest,
+        self.item = {'path': 'codex/planweft', 'sha256': digest,
                      'file_count': len(files), 'files': files}
-        self.manifest = {'schema_version': 2, 'product': 'program-design', 'version': '0.3.0',
+        self.manifest = {'schema_version': 2, 'product': 'planweft', 'version': '0.4.0-rc.1',
                          'platforms': {'codex': self.item}}
         self.write_manifest()
         self.catalog = self.root / '.agents/plugins/marketplace.json'
         self.catalog.parent.mkdir(parents=True)
         self.catalog.write_text(json.dumps({'name': self.runner.MARKETPLACE, 'plugins': [{
-            'name': 'program-design', 'source': {'source': 'local', 'path': './dist/codex/program-design'}}]}))
+            'name': 'planweft', 'source': {'source': 'local', 'path': './dist/codex/planweft'}}]}))
         self.destination = Path(temporary.name) / 'isolated marketplace 中文'
         root_patch = patch.object(self.runner, 'ROOT', self.root)
         root_patch.start()
@@ -120,7 +120,7 @@ class SmokeDirectoryBoundaryTest(unittest.TestCase):
         staged, evidence = self.runner.prepare_reviewed_package(self.destination)
         self.assertEqual(staged, self.destination)
         self.assertEqual(evidence['sha256'], self.item['sha256'])
-        self.assertEqual(snapshot(self.destination / 'dist/codex/program-design'), snapshot(self.package))
+        self.assertEqual(snapshot(self.destination / 'dist/codex/planweft'), snapshot(self.package))
         self.assertEqual((staged / '.agents/plugins/marketplace.json').read_bytes(), self.catalog.read_bytes())
         self.assertEqual(snapshot(self.root), before)
         self.assertFalse((staged / 'plugins').exists(), 'the mirror must not become the tested artifact')
@@ -150,14 +150,14 @@ class SmokeDirectoryBoundaryTest(unittest.TestCase):
                 script.chmod(mode)
 
     def test_staging_rejects_a_catalog_or_manifest_pointing_elsewhere(self):
-        self.item['path'] = '../plugins/program-design'
+        self.item['path'] = '../plugins/planweft'
         self.write_manifest()
         with self.assertRaisesRegex(RuntimeError, 'distribution path'):
             self.runner.prepare_reviewed_package(self.destination)
-        self.item['path'] = 'codex/program-design'
+        self.item['path'] = 'codex/planweft'
         self.write_manifest()
         catalog = json.loads(self.catalog.read_text())
-        catalog['plugins'][0]['source']['path'] = './plugins/program-design'
+        catalog['plugins'][0]['source']['path'] = './plugins/planweft'
         self.catalog.write_text(json.dumps(catalog))
         with self.assertRaisesRegex(RuntimeError, 'marketplace'):
             self.runner.prepare_reviewed_package(self.destination)

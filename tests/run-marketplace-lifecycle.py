@@ -15,7 +15,7 @@ import sys
 import tempfile
 
 HERE = Path(__file__).resolve().parent
-spec = importlib.util.spec_from_file_location('pd_native_lifecycle', HERE / 'run-native-lifecycle.py')
+spec = importlib.util.spec_from_file_location('pw_native_lifecycle', HERE / 'run-native-lifecycle.py')
 common = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(common)
 common.CATALOGS.update(copilot='.github/plugin/marketplace.json',
@@ -142,7 +142,7 @@ def main():
     if args.output == common.ROOT or common.ROOT in args.output.parents or args.output.exists():
         parser.error('--output must be a new evidence directory outside the repository')
     args.output.mkdir(parents=True)
-    with tempfile.TemporaryDirectory(prefix='pd-marketplace-lifecycle-') as temporary:
+    with tempfile.TemporaryDirectory(prefix='pw-marketplace-lifecycle-') as temporary:
         scratch = Path(temporary)
         lifecycle = MarketplaceLifecycle(args, scratch)
         try:
