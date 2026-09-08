@@ -2,7 +2,12 @@
 
 # Changelog
 
-## 0.4.0-rc.3 (in development)
+## 0.4.0-rc.4 (in development)
+
+- Add root npm main and ./server entries for the existing compiled OpenCode V1 plugin, fixing silent omission by the native npm resolver.
+- Preserve the RC3 npm failure; validate a new exact archive and remote version without replacing published bytes.
+
+## 0.4.0-rc.3
 
 - DSH hooks use sandbox-writable private temporary snapshots, host session binding and bounded per-turn reminder state. Permissions and Stop payloads remain native.
 - Unplanned DSH implementation tasks receive the same conditional Skill reminder as OpenCode. Broken state and explicit bindings remain fail-closed.

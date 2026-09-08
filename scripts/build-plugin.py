@@ -17,7 +17,7 @@ import tarfile
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR = ROOT / 'vendor/planning-with-files'
 OVERLAY = ROOT / 'overlays/planweft'
-VERSION = '0.4.0-rc.3'
+VERSION = '0.4.0-rc.4'
 PRODUCT = 'planweft'
 SKILL = 'project-docs'
 DESCRIPTION = ('Persistent file planning and task-relevant project documentation. '
