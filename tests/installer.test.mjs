@@ -32,6 +32,16 @@ function fixture(t) {
     const run=(argv) => {
       calls.push(argv);
       if (extra.fail?.(argv)) throw Error('injected native failure');
+      if(argv[0]==='dsh') {
+        const profile=argv[argv.indexOf('--profile')+1],dir=path.join(home,'.dsh/profiles',profile);
+        fs.mkdirSync(dir,{recursive:true});const file=path.join(dir,'package.json');
+        const manifest=fs.existsSync(file)?JSON.parse(fs.readFileSync(file)):{dependencies:{},dsh:{profile:{bundles:['@deepseek-ai/dsh-base']}}};
+        if(argv.includes('add')) {manifest.dependencies.planweft=argv.at(-1);if(!manifest.dsh.profile.bundles.includes('planweft'))manifest.dsh.profile.bundles.push('planweft');}
+        else if(argv.includes('remove')) {delete manifest.dependencies.planweft;manifest.dsh.profile.bundles=manifest.dsh.profile.bundles.filter(n=>n!=='planweft');}
+        if(extra.failDshAfterPersist && argv.includes('add')) manifest.dependencies.planweft='link:'+path.relative(dir,argv.at(-1).slice(5));
+        fs.writeFileSync(file,JSON.stringify(manifest));
+        if(extra.failDshAfterPersist && argv.includes('add')) throw Error('failure after native persistence');
+      }
       if(argv[0]==='npm') {
         const prefix=argv[argv.indexOf('--prefix')+1];
         fs.mkdirSync(path.join(prefix,'node_modules'),{recursive:true});
@@ -196,4 +206,72 @@ test('DSH home follows native whitespace and tilde expansion', t => {
   for (const [value,expected] of [['  ',path.join(f.home,'.dsh')],['~',f.home],['~/dsh custom',path.join(f.home,'dsh custom')],['~\\dsh',path.join(f.home,'dsh')]]) {
     assert.equal(f.create(['add','-a','dsh','--global','--skill-only'],undefined,{env:{DSH_HOME:value}}).hostRoot('dsh'),expected);
   }
+});
+
+
+test('DSH native profile installs updates rolls back and preserves foreign settings', async t => {
+  const f=fixture(t),args=['-a','dsh','--global','--dsh-profile','web'];
+  const run=(action,version) => f.create([action,...args],version).execute();
+  assert.equal(await run('add'),0);
+  const file=path.join(f.home,'.dsh/profiles/web/package.json');
+  const manifest=JSON.parse(fs.readFileSync(file));manifest.other='keep';fs.writeFileSync(file,JSON.stringify(manifest));
+  assert.equal(await run('update','0.4.0-rc.2'),0);
+  assert.equal(await run('update'),0);
+  await assert.rejects(f.create(['update','-a','dsh','--global','--dsh-profile','headless']).execute(),/(?:changing profile|differs from)/);
+  assert.equal(await run('remove'),0);
+  const after=JSON.parse(fs.readFileSync(file));assert.equal(after.other,'keep');assert.ok(!after.dependencies.planweft);
+  assert.deepEqual(after.dsh.profile.bundles,['@deepseek-ai/dsh-base']);
+});
+
+test('DSH native ownership and failed update keep the previous profile source', async t => {
+  const f=fixture(t),args=['-a','dsh','--global'];
+  assert.equal(await f.create(['add',...args]).execute(),0);
+  const file=path.join(f.home,'.dsh/profiles/headless/package.json'),before=fs.readFileSync(file,'utf8');
+  assert.equal(await f.create(['update',...args],'0.4.0-rc.2',{fail:a=>a[0]==='dsh' && a.includes('add') && a.at(-1).includes('rc.2')}).execute(),1);
+  assert.equal(fs.readFileSync(file,'utf8'),before);
+  assert.equal(await f.create(['update',...args]).execute(),0);
+  const manifest=JSON.parse(before);manifest.dependencies.planweft='npm:someone-else';fs.writeFileSync(file,JSON.stringify(manifest));
+  await assert.rejects(f.create(['remove',...args]).execute(),/User-modified DSH/);
+});
+
+test('DSH profile argument and foreign source are rejected before installation', async t => {
+  const f=fixture(t);
+  for(const value of ['../web','desktop','web/x'])assert.throws(()=>parse(['add','-a','dsh','--dsh-profile',value]),/Invalid/);
+  assert.throws(()=>parse(['add','-a','pi','--dsh-profile','web']),/requires/);
+  const file=path.join(f.home,'.dsh/profiles/headless/package.json');fs.mkdirSync(path.dirname(file),{recursive:true});
+  fs.writeFileSync(file,JSON.stringify({dependencies:{planweft:'0.3.0'}}));
+  await assert.rejects(f.create(['add','-a','dsh','--global']).execute(),/Foreign DSH/);
+  assert.equal(f.calls.length,0);
+});
+
+
+test('DSH partial native persistence accepts equivalent relative links for recovery', async t => {
+  const f=fixture(t),args=['-a','dsh','--global'];
+  assert.equal(await f.create(['add',...args],undefined,{failDshAfterPersist:true}).execute(),1);
+  assert.equal(await f.create(['update',...args]).execute(),0);
+  assert.equal(await f.create(['remove',...args]).execute(),0);
+});
+
+test('DSH explicit profile mismatch cannot remove or report another profile', async t => {
+  const f=fixture(t),args=['-a','dsh','--global'];await f.create(['add',...args]).execute();
+  const before=f.calls.length;
+  for(const action of ['remove','doctor','list'])await assert.rejects(f.create([action,...args,'--dsh-profile','web']).execute(),/differs from/);
+  assert.equal(f.calls.length,before);
+});
+
+
+test('DSH detects a second planning hook in a native user overlay before writes', async t => {
+  const f=fixture(t),file=path.join(f.home,'.dsh/cordis.patch.yml');fs.mkdirSync(path.dirname(file),{recursive:true});
+  fs.writeFileSync(file,'- insert:\n    - name: planweft/dsh\n');
+  await assert.rejects(f.create(['add','-a','dsh','--global']).execute(),/Another planning hook/);
+  assert.equal(f.calls.length,0);
+});
+
+
+test('DSH duplicate-hook hints ignore whole-line comments and skill-only operations', async t => {
+  const f=fixture(t),file=path.join(f.home,'.dsh/cordis.patch.yml');fs.mkdirSync(path.dirname(file),{recursive:true});
+  fs.writeFileSync(file,'# old program-design removed\n[]\n');
+  assert.equal(await f.create(['add','-a','dsh','--global','--dry-run']).execute(),0);
+  fs.writeFileSync(file,'- insert:\n    - name: planweft/dsh\n');
+  assert.equal(await f.create(['add','-a','dsh','--global','--skill-only']).execute(),0);
 });

@@ -159,3 +159,7 @@ python3 tests/run-codex-hook-probe.py --cli /absolute/path/to/codex --output /tm
 ## Published npm candidate
 
 `run-registry-smoke.py --version VERSION --sha256 SHA256 --output /tmp/new-registry-run --cli-dir /isolated/host/bin` downloads the exact registry tarball, verifies its digest, exercises scoped native installs for four core hosts, removes the disposable npx cache and checks the persistent runtime, and loads the direct Pi/OpenCode npm entries. It reads no personal model credentials. Single-version update idempotence is not cross-version remote lifecycle acceptance.
+
+## DeepSeek Harness
+
+`run-installer-lifecycle.py --host dsh` covers isolated official DSH/pnpm profile installation, A/B payload changes, rollback, removal and config composition. `run-dsh-skill-smoke.mjs` exercises the native provider; `run-dsh-hook-probe.mjs` uses the published bridge and real subprocesses with an explicit event carrier. These probes do not invoke a model or claim model-session acceptance. See REP-0009 for source versions and actual limits.

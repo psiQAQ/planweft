@@ -65,7 +65,9 @@ def npm_archive(builder, source, npm_dir, env):
     package = json.loads(files['package.json'][0])
     required += [*package['pi']['skills'], *package['pi']['extensions'],
                  package['exports']['.']['import'].removeprefix('./'),
-                 package['exports']['.']['types'].removeprefix('./')]
+                 package['exports']['.']['types'].removeprefix('./'),
+                 package['exports']['./dsh'].removeprefix('./'),
+                 package['dsh']['bundle']['patch'].removeprefix('./')]
     for path in required:
         if path not in files:
             raise ValueError('npm archive missing ' + path)

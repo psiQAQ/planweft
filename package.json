@@ -13,7 +13,9 @@
     ".": {
       "types": "./dist/opencode/planweft/dist/index.d.ts",
       "import": "./dist/opencode/planweft/dist/index.js"
-    }
+    },
+    "./dsh": "./dist/dsh/planweft/index.mjs",
+    "./package.json": "./package.json"
   },
   "pi": {
     "skills": [
@@ -55,7 +57,9 @@
     "test": "node --test tests/installer.test.mjs"
   },
   "dependencies": {
-    "@opencode-ai/plugin": "1.18.16"
+    "@opencode-ai/plugin": "1.18.16",
+    "@deepseek-ai/dsh-hooks-claude-code": "0.1.2-rc.1",
+    "@deepseek-ai/dsh-skill-filesystem": "0.1.2-rc.1"
   },
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*"
@@ -81,5 +85,10 @@
     "documentation"
   ],
   "author": "PlanWeft contributors",
-  "license": "MIT"
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./dist/dsh/planweft/cordis.patch.yml"
+    }
+  }
 }
