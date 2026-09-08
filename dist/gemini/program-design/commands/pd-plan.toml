@@ -1,0 +1,2 @@
+description = "Continue the authorized implementation using the installed project-docs skill."
+prompt = "Continue the authorized implementation using the installed project-docs skill. Resolve scripts and templates from the installed skill directory; keep task records in the project."

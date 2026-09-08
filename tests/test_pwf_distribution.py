@@ -16,27 +16,49 @@ import sys
 import tarfile
 import tempfile
 import unittest
-import zipfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
-PLUGIN = ROOT / 'plugins/program-design'
+PLUGIN = DIST / 'codex/program-design'
 COMMIT = '0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7'
 HOSTS = {'codex', 'claude', 'pi', 'opencode', 'hermes', 'cursor', 'gemini',
          'copilot', 'mastracode', 'kiro', 'continue', 'factory', 'codebuddy', 'agents'}
 
 
-def archive_contents(host):
-    with zipfile.ZipFile(DIST / f'program-design-0.2.0-{host}.zip') as archive:
-        return {name.removeprefix('program-design/'): archive.read(name)
-                for name in archive.namelist()}
+def package_contents(host):
+    root = DIST / host / 'program-design'
+    return {path.relative_to(root).as_posix(): path.read_bytes()
+            for path in root.rglob('*') if path.is_file()}
+
+
+def copy_build_inputs(root):
+    for source in ['scripts', 'overlays', 'vendor']:
+        shutil.copytree(ROOT / source, root / source,
+                        ignore=shutil.ignore_patterns('__pycache__'))
 
 
 def snapshot(directory):
-    """Include directory creation and file bytes, not timestamps or private cache."""
-    return {str(path.relative_to(directory)): path.read_bytes() if path.is_file() else None
+    """Include directory creation, file bytes and modes, but not timestamps."""
+    return {str(path.relative_to(directory)):
+            (path.stat().st_mode, path.read_bytes() if path.is_file() else None)
             for path in directory.rglob('*')}
+
+
+def assert_snapshots_equal(test, actual, expected, message='snapshot differs'):
+    # Comparing megabytes of file bodies through unittest's dictionary formatter
+    # creates an enormous diff. File paths identify actionable drift directly.
+    changed = sorted(name for name in actual.keys() | expected.keys()
+                     if actual.get(name) != expected.get(name))
+    test.assertEqual(changed, [], message)
+
+
+def distribution_snapshot(directory):
+    """The release contract hashes files and execution bits, independently of umask."""
+    return {path.relative_to(directory).as_posix(): {
+        'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+        'executable': bool(path.stat().st_mode & 0o111)}
+        for path in directory.rglob('*') if path.is_file()}
 
 
 def frontmatter(body):
@@ -47,52 +69,86 @@ class PackageContractTest(unittest.TestCase):
     def test_rebuild_is_deterministic_and_verify_detects_drift_without_writing(self):
         with tempfile.TemporaryDirectory(prefix='pd-build-contract-') as temporary:
             root = Path(temporary) / 'independent source'
-            for source in ['scripts', 'overlays', 'vendor']:
-                shutil.copytree(ROOT / source, root / source,
-                                ignore=shutil.ignore_patterns('__pycache__'))
+            copy_build_inputs(root)
             command = [sys.executable, str(root / 'scripts/build-plugin.py')]
             env = {**os.environ, 'PYTHONDONTWRITEBYTECODE': '1'}
             first = subprocess.run(command, env=env, text=True, capture_output=True, timeout=90)
             self.assertEqual(first.returncode, 0, first.stdout + first.stderr)
-            expected = snapshot(root / 'dist')
+            expected = distribution_snapshot(root / 'dist')
             second = subprocess.run(command, env=env, text=True, capture_output=True, timeout=90)
             self.assertEqual(second.returncode, 0, second.stdout + second.stderr)
-            self.assertEqual(snapshot(root / 'dist'), expected)
-            self.assertEqual(snapshot(root / 'dist'), snapshot(DIST))
-            changed = root / 'plugins/program-design/skills/project-docs/SKILL.md'
-            changed.write_text('Intentional generated-file drift.\n')
-            before = snapshot(root / 'plugins/program-design')
+            assert_snapshots_equal(self, distribution_snapshot(root / 'dist'), expected)
+            assert_snapshots_equal(self, distribution_snapshot(root / 'dist'), distribution_snapshot(DIST))
             checked = subprocess.run([*command, '--verify'], env=env,
                                      text=True, capture_output=True, timeout=90)
-            self.assertEqual(checked.returncode, 1, checked.stdout + checked.stderr)
-            self.assertIn('skills/project-docs/SKILL.md', checked.stdout)
-            self.assertEqual(snapshot(root / 'plugins/program-design'), before)
-            self.assertEqual(snapshot(root / 'dist'), expected)
+            self.assertEqual(checked.returncode, 0, checked.stdout + checked.stderr)
+            assert_snapshots_equal(self, distribution_snapshot(root / 'dist'), expected)
+            target = root / 'dist/codex/program-design/skills/project-docs/SKILL.md'
+            original, mode = target.read_bytes(), target.stat().st_mode
+            for change in ['content', 'missing', 'extra', 'executable', 'mirror']:
+                with self.subTest(change=change):
+                    changed = target
+                    if change == 'content':
+                        changed.write_text('Intentional generated-file drift.\n')
+                    elif change == 'missing':
+                        changed.unlink()
+                    elif change == 'extra':
+                        changed = target.parent / 'unexpected.txt'
+                        changed.write_text('Unexpected shipped file.\n')
+                    elif change == 'executable':
+                        changed.chmod(mode ^ 0o111)
+                    else:
+                        changed = root / 'plugins/program-design/skills/project-docs/SKILL.md'
+                        changed.write_text('Compatibility mirror drift.\n')
+                    before = snapshot(root)
+                    checked = subprocess.run([*command, '--verify'], env=env,
+                                             text=True, capture_output=True, timeout=90)
+                    self.assertNotEqual(checked.returncode, 0, checked.stdout + checked.stderr)
+                    self.assertIn(changed.name, checked.stdout + checked.stderr)
+                    assert_snapshots_equal(self, snapshot(root), before, '--verify must not repair or write files')
+                    if change == 'extra':
+                        changed.unlink()
+                    else:
+                        changed.write_bytes(original)
+                        changed.chmod(mode)
+            assert_snapshots_equal(self, distribution_snapshot(root / 'dist'), expected)
 
-    def test_platform_inventory_and_archive_integrity(self):
+    def test_platform_inventory_and_directory_integrity(self):
         manifest = json.loads((DIST / 'manifest.json').read_text())
+        self.assertEqual(manifest['schema_version'], 2)
+        self.assertEqual(manifest['product'], 'program-design')
         self.assertEqual(manifest['upstream_commit'], COMMIT)
         self.assertEqual(set(manifest['platforms']), HOSTS)
-        self.assertEqual(manifest['version'], '0.2.0')
+        self.assertEqual(manifest['version'], '0.3.0')
+        self.assertEqual(list(DIST.rglob('*.zip')), [], 'old ZIPs must not remain distributable')
+        self.assertEqual({path.name for path in DIST.iterdir() if path.is_dir()}, HOSTS)
         for host, item in manifest['platforms'].items():
             with self.subTest(host=host):
-                packed = DIST / item['archive']
-                self.assertEqual(hashlib.sha256(packed.read_bytes()).hexdigest(), item['sha256'])
-                with zipfile.ZipFile(packed) as archive:
-                    names = archive.namelist()
-                    self.assertEqual(len(names), len(set(names)))
-                    self.assertEqual(len(names), item['file_count'])
-                    self.assertIsNone(archive.testzip())
-                    for name in names:
-                        path = PurePosixPath(name)
-                        self.assertFalse(path.is_absolute())
-                        self.assertNotIn('..', path.parts)
-                        self.assertEqual(path.parts[0], 'program-design')
+                self.assertEqual(item['path'], f'{host}/program-design')
+                package = DIST / item['path']
+                actual = {}
+                for path in package.rglob('*'):
+                    self.assertFalse(path.is_symlink(), str(path))
+                    if path.is_file():
+                        actual[path.relative_to(package).as_posix()] = {
+                            'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                            'executable': bool(path.stat().st_mode & 0o111)}
+                self.assertEqual(actual, item['files'])
+                self.assertEqual(len(actual), item['file_count'])
+                encoded = json.dumps(actual, sort_keys=True, separators=(',', ':')).encode()
+                self.assertEqual(hashlib.sha256(encoded).hexdigest(), item['sha256'])
+        mirror = ROOT / 'plugins/program-design'
+        mirrored_files = {path.relative_to(mirror).as_posix(): {
+            'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+            'executable': bool(path.stat().st_mode & 0o111)}
+            for path in mirror.rglob('*') if path.is_file()}
+        self.assertEqual(mirrored_files, manifest['platforms']['codex']['files'],
+                         'Codex compatibility mirror must match the primary bytes and execution bits')
 
     def test_every_bundle_retains_license_provenance_and_evidence(self):
         for host in sorted(HOSTS):
             with self.subTest(host=host):
-                files = archive_contents(host)
+                files = package_contents(host)
                 license_text = files['LICENSE'].decode()
                 self.assertIn('MIT License', license_text)
                 self.assertIn('Copyright', license_text)
@@ -114,7 +170,7 @@ class PackageContractTest(unittest.TestCase):
     def test_codex_has_one_automatic_main_skill_and_its_own_hooks(self):
         manifest = json.loads((PLUGIN / '.codex-plugin/plugin.json').read_text())
         self.assertEqual(manifest['name'], 'program-design')
-        self.assertEqual(manifest['version'], '0.2.0')
+        self.assertEqual(manifest['version'], '0.3.0')
         skills_root = PLUGIN / manifest['skills']
         automatic = []
         for path in skills_root.rglob('SKILL.md'):
@@ -150,10 +206,10 @@ class PackageContractTest(unittest.TestCase):
 
     def test_runtime_and_skill_fallbacks_do_not_call_original_plugin(self):
         for host in sorted(HOSTS):
-            files = archive_contents(host)
+            files = package_contents(host)
             for name, content in files.items():
                 path = PurePosixPath(name)
-                if not (path.suffix in {'.sh', '.ps1', '.cmd', '.py', '.ts', '.json', '.yaml'}
+                if not (path.suffix in {'.sh', '.ps1', '.cmd', '.py', '.ts', '.js', '.json', '.yaml'}
                         or path.name == 'SKILL.md'):
                     continue
                 if path.name in {'UPSTREAM.json', 'package-lock.json'}:
@@ -179,7 +235,7 @@ class PackageContractTest(unittest.TestCase):
     def test_auxiliary_command_files_are_namespaced_and_explicit(self):
         seen = 0
         for host in sorted(HOSTS):
-            for name, content in archive_contents(host).items():
+            for name, content in package_contents(host).items():
                 path = PurePosixPath(name)
                 if path.suffix != '.md' or not {'commands', 'prompts'}.intersection(path.parts):
                     continue
@@ -192,10 +248,10 @@ class PackageContractTest(unittest.TestCase):
         self.assertGreater(seen, 0)
 
     def test_pi_package_entries_and_registered_commands_are_local(self):
-        files = archive_contents('pi')
+        files = package_contents('pi')
         package = json.loads(files['package.json'])
         self.assertEqual(package['name'], 'program-design')
-        self.assertEqual(package['version'], '0.2.0')
+        self.assertEqual(package['version'], '0.3.0')
         for path in package['pi']['skills'] + package['pi']['extensions']:
             self.assertIn(path, files)
         self.assertTrue({'LICENSE', 'UPSTREAM.json', 'references/'}.issubset(package['files']))
@@ -207,16 +263,15 @@ class PackageContractTest(unittest.TestCase):
         self.assertNotIn('planning-with-files', source)
 
     def test_opencode_tools_are_namespaced_and_package_retains_attribution(self):
-        files = archive_contents('opencode')
-        prefix = '.opencode/packages/opencode-program-design/'
-        source = files[prefix + 'src/index.ts'].decode()
+        files = package_contents('opencode')
+        source = files['src/index.ts'].decode()
         names = re.findall(r'\b([A-Za-z_]\w*):\s*tool\(', source)
         self.assertEqual(set(names), {'pd_init', 'pd_status', 'pd_check'})
-        package = json.loads(files[prefix + 'package.json'])
+        package = json.loads(files['package.json'])
         self.assertEqual(package['name'], 'opencode-program-design')
         for path in ['LICENSE', 'UPSTREAM.json']:
             self.assertIn(path, package['files'])
-            self.assertEqual(files[prefix + path], files[path])
+            self.assertIn(path, files)
 
 
 @unittest.skipUnless(shutil.which('bash') and shutil.which('sh'), 'POSIX runtime requires bash and sh')
@@ -226,13 +281,10 @@ class PackagedRuntimeTest(unittest.TestCase):
         cls.installed = tempfile.TemporaryDirectory(prefix='pd-installed-')
         cls.addClassCleanup(cls.installed.cleanup)
         install_parent = Path(cls.installed.name) / '插件 安装目录'
-        with zipfile.ZipFile(DIST / 'program-design-0.2.0-codex.zip') as archive:
-            archive.extractall(install_parent)
-            for item in archive.infolist():
-                mode = item.external_attr >> 16
-                if mode:
-                    (install_parent / item.filename).chmod(mode)
         cls.plugin = install_parent / 'program-design'
+        shutil.copytree(PLUGIN, cls.plugin)
+        cls.gemini = install_parent / 'Gemini 独立扩展'
+        shutil.copytree(DIST / 'gemini/program-design', cls.gemini)
 
     def setUp(self):
         temporary = tempfile.TemporaryDirectory(prefix='pd-protocol-')
@@ -403,16 +455,13 @@ class PackagedRuntimeTest(unittest.TestCase):
         self.assertIn('does not prove activation', result.stdout)
         self.assertFalse((self.project / 'OLD_PLUGIN_EXECUTED').exists())
 
-    def test_legacy_adapter_opt_out_suppresses_all_registered_reminders(self):
+    def test_mastracode_opt_out_suppresses_all_registered_reminders(self):
         self.plan()
         before = snapshot(self.project)
-        gemini = archive_contents('gemini')
-        commands = [('gemini:' + name, data.decode(), '{}') for name, data in gemini.items()
-                    if name.startswith('.gemini/hooks/') and name.endswith('.sh')]
-        mastra = json.loads(archive_contents('mastracode')['.mastracode/hooks.json'])
-        commands += [('mastracode:' + event, handler['command'], '')
-                     for event, handlers in mastra.items() for handler in handlers]
-        self.assertEqual(len(commands), 9)
+        mastra = json.loads(package_contents('mastracode')['.mastracode/hooks.json'])
+        commands = [('mastracode:' + event, handler['command'], '')
+                    for event, handlers in mastra.items() for handler in handlers]
+        self.assertEqual(len(commands), 4)
         for name, command, expected in commands:
             with self.subTest(hook=name):
                 result = subprocess.run(['bash', '-c', command], cwd=self.project,
@@ -421,22 +470,23 @@ class PackagedRuntimeTest(unittest.TestCase):
                 self.assertEqual(self.assert_ok(result).strip(), expected)
         self.assertEqual(snapshot(self.project), before)
 
-    def test_gemini_inline_python_ignores_project_json_module(self):
+    def test_gemini_native_hook_ignores_project_json_module(self):
         self.plan()
         # A normal project may contain json.py. Hooks must not import it while
         # escaping their own JSON protocol, even when PYTHONPATH names the cwd.
         (self.project / 'json.py').write_text(
             'from pathlib import Path\nPath("PROJECT_MODULE_EXECUTED").touch()\n'
             'raise RuntimeError("project json module imported by hook")\n')
-        files = archive_contents('gemini')
-        for name, field in [('before-tool.sh', 'systemMessage'),
-                            ('before-model.sh', 'additionalContext')]:
-            with self.subTest(hook=name):
-                result = subprocess.run(['bash', '-c', files['.gemini/hooks/' + name].decode()],
+        for event in ['SessionStart', 'BeforeAgent']:
+            with self.subTest(event=event):
+                result = subprocess.run([sys.executable, '-I', '-B',
+                                         str(self.gemini / 'hooks/native-hook.py'), 'gemini', event],
                                         cwd=self.project, env={**self.env, 'PYTHONPATH': str(self.project)},
                                         input='{}', text=True, capture_output=True, timeout=20)
                 message = json.loads(self.assert_ok(result))
-                self.assertTrue(message.get(field), 'enabled hook must still deliver its context')
+                self.assertIn('PACKAGED_PLAN_MARKER',
+                              message.get('hookSpecificOutput', {}).get('additionalContext', ''),
+                              'enabled hook must still deliver its context')
                 self.assertFalse((self.project / 'PROJECT_MODULE_EXECUTED').exists())
 
     def test_expanded_templates_keep_upstream_phase_semantics(self):

@@ -6,17 +6,17 @@ scripts run during generation. --verify compares bytes and executable modes.
 """
 import argparse
 import hashlib
+import importlib.util
 import io
 import json
 from pathlib import Path, PurePosixPath
 import re
 import tarfile
-import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR = ROOT / 'vendor/planning-with-files'
 OVERLAY = ROOT / 'overlays/program-design'
-VERSION = '0.2.0'
+VERSION = '0.3.0'
 PRODUCT = 'program-design'
 SKILL = 'project-docs'
 DESCRIPTION = ('Persistent file planning and task-relevant project documentation. '
@@ -164,22 +164,22 @@ def local_install_text(text, path):
             'Install it with `hermes plugins install '
             'OthmanAdi/program-design/.hermes/plugins/program-design`, then '
             '`hermes plugins enable program-design`. Full guide: docs/hermes.md in the repository.',
-            'From the Hermes ZIP, copy `.hermes/plugins/program-design/` and '
-            '`.hermes/skills/project-docs/` into `plugins/program-design/` and '
+            'From the Hermes platform directory, copy the complete plugin root and '
+            'its `skills/project-docs/` into `plugins/program-design/` and '
             '`skills/project-docs/` under the same `HERMES_HOME`. Then run '
             '`hermes plugins enable program-design` and restart Hermes. '
             'This derivative is installed from the local package.')
         text = text.replace(
             'add `"plugin": ["opencode-program-design"]` to `opencode.json`.',
-            'copy the ZIP\'s `.opencode/packages/opencode-program-design/` and '
-            '`.opencode/plugins/program-design.ts` to the same project paths, '
-            'then run `npm ci --ignore-scripts` and `npm run build` in that local '
+            'copy the complete OpenCode platform directory into a local package and '
+            'register its precompiled `dist/index.js` through a local loader; '
+            'run `npm ci --omit=dev --ignore-scripts` for runtime dependencies in that local '
             'package directory. The shipped entry loads its compiled `dist/index.js`.')
         text = text.replace(
             '`npx skills add OthmanAdi/program-design --skill program-design -g` '
             'installs this skill to `~/.agents/skills/project-docs/`, one of the '
             'paths OpenCode reads natively. Full guide: docs/opencode.md.',
-            'Copy the complete ZIP directory `.opencode/skills/project-docs/` to '
+            'Copy the platform package complete `skills/project-docs/` directory to '
             'your project\'s `.opencode/skills/project-docs/`. For user scope, '
             'install the same packages/plugins/skills layout under '
             '`~/.config/opencode/`. Keep the local package\'s `node_modules/`. '
@@ -195,7 +195,7 @@ def local_install_text(text, path):
                       text, flags=re.S)
         text = text.replace('`pwf.md` and `pwf-status.md`', '`pd-pwf.md` and `pd-pwf-status.md`')
         text = text.replace("from the repository's `.opencode/commands/`",
-                            "from the unpacked OpenCode ZIP's `.opencode/commands/`")
+                            "from the OpenCode platform package's `commands/`")
         text = text.replace('Full guide: [docs/opencode.md]', 'Upstream implementation reference: [docs/opencode.md]')
     return text
 
@@ -319,7 +319,7 @@ def transform(upstream, enhanced=True):
         if target == 'CITATION.cff':
             text = re.sub(r'^version:.*$', 'version: ' + VERSION, text, flags=re.M)
         if target == '.opencode/packages/opencode-program-design/src/core.ts':
-            text = re.sub(r'export const VERSION = "[^"]+"', 'export const VERSION = "0.2.0"', text)
+            text = re.sub(r'export const VERSION = "[^"]+"', 'export const VERSION = "' + VERSION + '"', text)
         if ('/commands/' in '/' + target or '/prompts/' in '/' + target) and target.endswith(('.md', '.prompt')):
             if text.startswith('---\n'):
                 front, body = text[4:].split('\n---\n', 1)
@@ -354,7 +354,7 @@ def subset(tree, prefixes):
     return {p: v for p, v in tree.items() if any(p == x or p.startswith(x.rstrip('/') + '/') for x in prefixes)}
 
 
-def distributions(tree, upstream):
+def distributions(tree, upstream, compiled=True):
     common = ['scripts', 'templates', 'skills']
     result = {}
     result['codex'] = subset(tree, ['.codex/hooks', 'hooks/codex-hooks.json', *common])
@@ -362,7 +362,7 @@ def distributions(tree, upstream):
     # never from Claude's skill frontmatter or a migrated command skill.
     key = 'skills/project-docs/SKILL.md'
     _, body = result['codex'][key][0].decode()[4:].split('\n---\n', 1)
-    result['codex'][key] = (('---\nname: project-docs\ndescription: ' + json.dumps(DESCRIPTION) + '\nmetadata:\n  version: "0.2.0"\n---\n' + body).encode(), 0o644)
+    result['codex'][key] = (('---\nname: project-docs\ndescription: ' + json.dumps(DESCRIPTION) + '\nmetadata:\n  version: "' + VERSION + '"\n---\n' + body).encode(), 0o644)
     result['codex']['skills/project-docs/agents/openai.yaml'] = (b'interface:\n  display_name: "Project Docs"\n  short_description: "Persistent planning, project documents and evidence"\npolicy:\n  allow_implicit_invocation: true\n', 0o644)
     for path in list(result['codex']):
         if path.startswith('skills/i18n/') and path.endswith('/SKILL.md'):
@@ -423,7 +423,7 @@ def distributions(tree, upstream):
             for name in ['LICENSE', 'UPSTREAM.json']:
                 files['.hermes/plugins/program-design/' + name] = files[name]
         readme = (OVERLAY / 'README.md').read_text() if (OVERLAY / 'README.md').exists() else DESCRIPTION
-        files['README.md'] = (('# Program Design 0.2.0 — ' + host + '\n\n' + readme).encode(), 0o644)
+        files['README.md'] = (('# Program Design ' + VERSION + ' — ' + host + '\n\n' + readme).encode(), 0o644)
         install = OVERLAY / 'install/INSTALL.md'
         if install.exists():
             files['INSTALL.md'] = (('> 当前安装包：**' + host + '**。请选择本文对应宿主的章节；'
@@ -432,7 +432,7 @@ def distributions(tree, upstream):
         # npm only packs files declared in its allowlist: make attribution ship too.
         if host == 'pi':
             payload = json.loads(files['package.json'][0])
-            payload['files'] = list(dict.fromkeys([*payload.get('files', []), 'LICENSE', 'UPSTREAM.json', 'references/']))
+            payload['files'] = list(dict.fromkeys([*payload.get('files', []), 'LICENSE', 'UPSTREAM.json', 'INSTALL.md', 'references/']))
             files['package.json'] = (json.dumps(payload, indent=2).encode() + b'\n', 0o644)
         if host == 'opencode':
             prefix = '.opencode/packages/opencode-program-design/'
@@ -442,20 +442,122 @@ def distributions(tree, upstream):
             payload['files'] = list(dict.fromkeys([*payload.get('files', []), 'LICENSE', 'UPSTREAM.json']))
             files[prefix + 'package.json'] = (json.dumps(payload, indent=2).encode() + b'\n', 0o644)
         result[host] = files
+    spec = importlib.util.spec_from_file_location('pd_native_adapters', OVERLAY / 'native/adapters.py')
+    native = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(native)
+    result = native.adapt(result, VERSION, DESCRIPTION)
+    if compiled:
+        attach_opencode_compiled(result['opencode'])
     return result
 
 
+def inventory(files):
+    return {name: {'sha256': sha(data), 'executable': bool(mode & 0o111)}
+            for name, (data, mode) in sorted(files.items())}
+
+
+def tree_digest(files):
+    return sha(json.dumps(inventory(files), sort_keys=True, separators=(',', ':')).encode())
+
+
+def opencode_inputs(files):
+    return {name: value for name, value in files.items()
+            if name.startswith('src/') or name in {'package.json', 'package-lock.json', 'tsconfig.json'}}
+
+
+def attach_opencode_compiled(files):
+    """Keep ordinary builds offline, but refuse precompiled code from stale source."""
+    root = OVERLAY / 'opencode-compiled'
+    path = root / 'manifest.json'
+    if not path.is_file():
+        raise ValueError('OpenCode compiler output missing; run scripts/compile-opencode.py --install')
+    manifest = json.loads(path.read_text())
+    if manifest['source_sha256'] != tree_digest(opencode_inputs(files)):
+        raise ValueError('OpenCode compiled source is stale; run scripts/compile-opencode.py --install')
+    actual = {}
+    for name, expected in manifest['files'].items():
+        safe_name(name)
+        source = root / name
+        reject_symlinks(source)
+        data = source.read_bytes()
+        if sha(data) != expected['sha256']:
+            raise ValueError('OpenCode compiled output digest mismatch: ' + name)
+        actual[name] = (data, 0o755 if expected['executable'] else 0o644)
+    extras = {p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file()} - {'manifest.json'} - actual.keys()
+    if extras:
+        raise ValueError('Unexpected OpenCode compiler output: ' + ', '.join(sorted(extras)))
+    if 'dist/index.js' not in actual:
+        raise ValueError('OpenCode compiler output has no entrypoint')
+    files.update(actual)
+    files['BUILD.json'] = (path.read_bytes(), 0o644)
+
+
+CATALOGS = {
+    'codex': '.agents/plugins/marketplace.json',
+    'claude': '.claude-plugin/marketplace.json',
+    'cursor': '.cursor-plugin/marketplace.json',
+    'copilot': '.github/plugin/marketplace.json',
+    'factory': '.factory-plugin/marketplace.json',
+    'codebuddy': '.codebuddy-plugin/marketplace.json',
+}
+
+
+def marketplace_files():
+    """Each host discovers its own catalog; only our entry is builder-owned."""
+    result = {}
+    for host, name in CATALOGS.items():
+        entry = {'name': PRODUCT, 'source': './dist/' + host + '/' + PRODUCT,
+                 'description': DESCRIPTION, 'version': VERSION}
+        if host == 'codex':
+            entry = {'name': PRODUCT, 'source': {'source': 'local', 'path': entry['source']},
+                     'policy': {'installation': 'AVAILABLE', 'authentication': 'ON_INSTALL'},
+                     'category': 'Productivity'}
+            payload = {'name': PRODUCT, 'interface': {'displayName': 'Program Design'}, 'plugins': [entry]}
+        else:
+            payload = {'name': PRODUCT, 'owner': {'name': 'Program Design contributors'}, 'plugins': [entry]}
+        path = ROOT / name
+        reject_symlinks(path)
+        if path.is_file():
+            old = json.loads(path.read_text())
+            if not isinstance(old.get('plugins'), list):
+                raise ValueError('Invalid existing marketplace: ' + name)
+            matches = [i for i, item in enumerate(old['plugins']) if item.get('name') == PRODUCT]
+            if len(matches) > 1:
+                raise ValueError('Duplicate program-design marketplace entries: ' + name)
+            entries = old['plugins'][:]
+            if matches:
+                entries[matches[0]] = entry
+            else:
+                entries.append(entry)
+            # Preserve unrelated metadata and plugin order, while migrating the
+            # product catalog identity explicitly approved for this release.
+            payload = {**old, **{key: value for key, value in payload.items() if key != 'plugins'}, 'plugins': entries}
+            if host == 'codex':
+                payload['interface'] = {**old.get('interface', {}), **payload['interface']}
+        result[name] = (json.dumps(payload, indent=2, ensure_ascii=False).encode() + b'\n', 0o644)
+    return result
+
+
+def safe_name(name):
+    path = PurePosixPath(name)
+    if path.is_absolute() or '..' in path.parts or '\\' in name or not path.parts:
+        raise ValueError('Unsafe generated path: ' + name)
+
+
+def reject_symlinks(path):
+    for candidate in [path, *path.parents]:
+        if candidate.is_symlink():
+            raise ValueError('Refusing symlink in generated path: ' + str(candidate))
+
+
 def write_tree(files, destination, verify=False):
+    reject_symlinks(destination)
+    for path in destination.rglob('*') if destination.exists() else []:
+        if path.is_symlink():
+            raise ValueError('Refusing symlink in generated tree: ' + str(path))
     existing = {str(p.relative_to(destination)): p for p in destination.rglob('*') if p.is_file()} if destination.exists() else {}
     differences = [p for p in existing if p not in files]
-    for name, (data, mode) in files.items():
-        path = destination / name
-        if not path.is_file() or path.read_bytes() != data or bool(path.stat().st_mode & 0o111) != bool(mode & 0o111):
-            differences.append(name)
-            if not verify:
-                path.parent.mkdir(parents=True, exist_ok=True)
-                path.write_bytes(data)
-                path.chmod(mode)
+    differences.extend(write_files(files, destination, verify))
     if not verify:
         for name in existing.keys() - files.keys():
             existing[name].unlink()
@@ -465,16 +567,55 @@ def write_tree(files, destination, verify=False):
     return sorted(differences)
 
 
-def zip_bytes(files):
-    output = io.BytesIO()
-    with zipfile.ZipFile(output, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
-        for name, (data, mode) in sorted(files.items()):
-            entry = zipfile.ZipInfo(PRODUCT + '/' + name, date_time=(1980, 1, 1, 0, 0, 0))
-            entry.create_system = 3
-            entry.external_attr = (0o100000 | mode) << 16
-            entry.compress_type = zipfile.ZIP_DEFLATED
-            archive.writestr(entry, data)
-    return output.getvalue()
+def write_files(files, destination, verify=False):
+    """Write only named files; root catalogs must never prune the repository."""
+    differences = []
+    for name, (data, mode) in files.items():
+        safe_name(name)
+        path = destination / name
+        reject_symlinks(path)
+        if not path.is_file() or path.read_bytes() != data or bool(path.stat().st_mode & 0o111) != bool(mode & 0o111):
+            differences.append(name)
+            if not verify:
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(data)
+                path.chmod(mode)
+    return sorted(differences)
+
+
+def read_tree(directory):
+    reject_symlinks(directory)
+    result = {}
+    for path in sorted(directory.rglob('*')):
+        if path.is_symlink():
+            raise ValueError('Refusing symlink in source tree: ' + str(path))
+        if path.is_file():
+            result[path.relative_to(directory).as_posix()] = (path.read_bytes(), path.stat().st_mode & 0o777)
+    return result
+
+
+def retired_archives():
+    """Only an old manifest and matching bytes establish ownership of a ZIP."""
+    path = ROOT / 'dist/manifest.json'
+    if not path.is_file():
+        return []
+    old = json.loads(path.read_text())
+    if old.get('product') != PRODUCT or old.get('schema_version', 1) != 1:
+        return []
+    version = old.get('version', '')
+    if not re.fullmatch(r'\d+\.\d+\.\d+(?:-[A-Za-z0-9.-]+)?', version):
+        raise ValueError('Unrecognized legacy distribution version')
+    result = []
+    for host, item in old.get('platforms', {}).items():
+        if host not in HOSTS or item.get('archive') != f'{PRODUCT}-{version}-{host}.zip':
+            raise ValueError('Unrecognized legacy archive ownership')
+        candidate = ROOT / 'dist' / item['archive']
+        reject_symlinks(candidate)
+        if candidate.exists():
+            if sha(candidate.read_bytes()) != item.get('sha256'):
+                raise ValueError('Modified legacy archive preserved: ' + candidate.name)
+            result.append(candidate)
+    return result
 
 
 def main():
@@ -496,16 +637,27 @@ def main():
         print(json.dumps({'tree_files': len(tree), 'identity_only': args.identity_only}))
         return
     bundles = distributions(tree, upstream)
-    artifacts = {}
-    index = {'product': PRODUCT, 'version': VERSION, 'upstream_commit': upstream['commit'], 'platforms': {}}
+    retired = retired_archives()
+    index = {'schema_version': 2, 'product': PRODUCT, 'version': VERSION,
+             'upstream_commit': upstream['commit'], 'platforms': {}}
+    catalogs = marketplace_files()
+    differences = {}
     for host, files in bundles.items():
-        name = PRODUCT + '-' + VERSION + '-' + host + '.zip'
-        packed = zip_bytes(files)
-        artifacts[name] = (packed, 0o644)
-        index['platforms'][host] = {'archive': name, 'sha256': sha(packed), 'file_count': len(files)}
-    artifacts['manifest.json'] = (json.dumps(index, indent=2, sort_keys=True).encode() + b'\n', 0o644)
-    differences = {'codex': write_tree(bundles['codex'], ROOT / 'plugins/program-design', args.verify),
-                   'artifacts': write_tree(artifacts, ROOT / 'dist', args.verify)}
+        relative = host + '/' + PRODUCT
+        index['platforms'][host] = {'path': relative, 'sha256': tree_digest(files),
+                                   'file_count': len(files), 'files': inventory(files)}
+        differences[host] = write_tree(files, ROOT / 'dist' / relative, args.verify)
+    differences['codex-mirror'] = write_tree(bundles['codex'], ROOT / 'plugins/program-design', args.verify)
+    manifest = {'manifest.json': (json.dumps(index, indent=2, sort_keys=True).encode() + b'\n', 0o644)}
+    differences['manifest'] = write_files(manifest, ROOT / 'dist', args.verify)
+    differences['marketplaces'] = write_files(catalogs, ROOT, args.verify)
+    # Only retire our previous named platform distributions, never vendor or
+    # evidence archives, nor unrelated files placed next to generated outputs.
+    differences['retired-archives'] = []
+    for path in retired:
+        differences['retired-archives'].append(path.name)
+        if not args.verify:
+            path.unlink()
     print(json.dumps({'platforms': len(bundles), 'differences': {k: len(v) for k, v in differences.items()},
                       'verified': args.verify and not any(differences.values())}, indent=2))
     if args.verify and any(differences.values()):

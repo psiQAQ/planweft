@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Authorized, isolated Codex 0.2.0 trial. Never installs into the user's Codex.
+"""Authorized, isolated Codex 0.3.0 trial. Never installs into the user's Codex.
 
 Requires the already reviewed local Docker image and explicit authorization for
 real model calls. Every call gets a new tmpfs home and no conversation history.
@@ -19,14 +19,14 @@ import tempfile
 import threading
 import time
 import uuid
-import zipfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
 IMAGE = 'sha256:aa46e31c71577eb37c1e1d856427d9d159ddd5a41aa92472af722838b1c3a159'
 MODEL = 'gpt-5.6-terra'
-PLUGIN_ID = 'program-design@program-design-local'
-MARKETPLACE = 'program-design-local'
+PLUGIN_ID = 'program-design@program-design'
+MARKETPLACE = 'program-design'
+DISTRIBUTION_ROOT = Path('/marketplace/dist/codex/program-design')
 DEFAULT_CASES = ['hook-untrusted', 'hook-trusted', 'hook-recovery', 'maintenance', 'simple', 'readonly']
 CASES = [*DEFAULT_CASES, 'conflict', 'evidence-gap']
 HISTORY = '历史：2026-09-01 Linux 手工示例 Passed，仅为历史观察，不代表本次验证。'
@@ -64,7 +64,7 @@ PROMPTS = {
 }
 PROBE_PROMPT = ('只根据本轮自动提供的项目上下文回答：RECOVERY_CODE 的值是什么？'
                 '如果没有提供该字段，只回答 NO_CONTEXT。不要猜测，不要读文件，不调用任何工具。')
-BOUNDARY = ('\n实验边界：仅操作 /workspace 项目及已安装的 Skill 文件；不读取凭据、完整环境变量列表、宿主配置、历史记录或 /distribution。'
+BOUNDARY = ('\n实验边界：仅操作 /workspace 项目及已安装的 Skill 文件；不读取凭据、完整环境变量列表、宿主配置、历史记录或 /marketplace。'
             '允许已安装规划脚本按公开接口使用 PLAN_ID、PWF_* 与 PLANNING_DISABLED 运行时变量，但不要打印凭据或完整环境。'
             '不安装软件、不访问网络资料、不提交 Git。模型服务通信由宿主负责。\n')
 
@@ -159,18 +159,16 @@ def verify_cache():
     cache = Path('/home/agent/.codex/plugins/cache')
     for manifest in cache.rglob('.codex-plugin/plugin.json'):
         parsed = json.loads(manifest.read_text())
-        if parsed.get('name') == 'program-design' and parsed.get('version') == '0.2.0':
+        if parsed.get('name') == 'program-design' and parsed.get('version') == '0.3.0':
             candidates.append(manifest.parent.parent)
     if len(candidates) != 1:
-        raise RuntimeError('expected exactly one installed 0.2.0 plugin cache')
+        raise RuntimeError('expected exactly one installed 0.3.0 plugin cache')
     installed = candidates[0]
     checked, mismatches, runtime_modes = {}, [], {}
-    for source in Path('/distribution').rglob('*'):
+    for source in DISTRIBUTION_ROOT.rglob('*'):
         if not source.is_file():
             continue
-        relative = source.relative_to('/distribution')
-        if relative.parts[0] == '.agents':
-            continue  # The distribution's marketplace is registration metadata.
+        relative = source.relative_to(DISTRIBUTION_ROOT)
         digest = hashlib.sha256(source.read_bytes()).hexdigest()
         target = installed / relative
         checked[str(relative)] = digest
@@ -179,7 +177,9 @@ def verify_cache():
         if source.suffix in {'.sh', '.py', '.ps1', '.cmd'}:
             runtime_modes[str(relative)] = {'source': oct(source.stat().st_mode),
                                            'installed': oct(target.stat().st_mode) if target.exists() else None}
-    evidence = {'cache_root': str(installed), 'version': '0.2.0',
+            if target.is_file() and bool(target.stat().st_mode & 0o111) != bool(source.stat().st_mode & 0o111):
+                mismatches.append(str(relative) + ':executable')
+    evidence = {'cache_root': str(installed), 'version': '0.3.0',
                 'checked_source_sha256': checked, 'mismatches': mismatches,
                 'runtime_modes': runtime_modes,
                 'temporary_mounts': [line for line in Path('/proc/mounts').read_text().splitlines()
@@ -217,7 +217,7 @@ def capture_hooks_list(name):
         skills_result = {}
         try:
             initialized = request(1, 'initialize', {'clientInfo': {'name': 'program-design-smoke',
-                                  'version': '0.2.0'}, 'capabilities': {'experimentalApi': True}})
+                                  'version': '0.3.0'}, 'capabilities': {'experimentalApi': True}})
             if 'error' in initialized:
                 raise RuntimeError('app-server initialize rejected')
             process.stdin.write(json.dumps({'method': 'initialized', 'params': {}}) + '\n')
@@ -274,7 +274,7 @@ def container_controller(argv):
                             for path in Path('/tmp/schema').rglob('*.json') if 'skill' in path.name.lower()}
             emit('skill-schemas.json', skill_schemas)
         if not reader:
-            capture('register.json', ['codex', 'plugin', 'marketplace', 'add', '/distribution', '--json'])
+            capture('register.json', ['codex', 'plugin', 'marketplace', 'add', '/marketplace', '--json'])
             capture('install.json', ['codex', 'plugin', 'add', PLUGIN_ID, '--json'])
             installed = True
             verify_cache()
@@ -330,28 +330,52 @@ print('Independent byte checks: 4 cases Passed; Linux only; Windows Not Run')
     return exit_code
 
 
-def unpack_reviewed_package(destination):
-    archive_path = ROOT / 'dist/program-design-0.2.0-codex.zip'
-    data = archive_path.read_bytes()
+def directory_inventory(directory):
+    """Hash the exact reviewed files and execution bits; never follow symlinks."""
+    if directory.is_symlink() or not directory.is_dir():
+        raise RuntimeError('unsupported distribution directory: ' + str(directory))
+    files = {}
+    for path in directory.rglob('*'):
+        if path.is_symlink() or not (path.is_file() or path.is_dir()):
+            raise RuntimeError('unsupported distribution entry: ' + str(path))
+        if path.is_file():
+            files[path.relative_to(directory).as_posix()] = {
+                'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                'executable': bool(path.stat().st_mode & 0o111)}
+    return files
+
+
+def prepare_reviewed_package(destination):
+    """Stage the root catalog and verified native directory in a disposable repo layout."""
     manifest = json.loads((ROOT / 'dist/manifest.json').read_text())
-    digest = hashlib.sha256(data).hexdigest()
-    if digest != manifest['platforms']['codex']['sha256']:
-        raise RuntimeError('Codex package digest differs from distribution manifest')
-    with zipfile.ZipFile(archive_path) as archive:
-        for item in archive.infolist():
-            path = PurePosixPath(item.filename)
-            if path.is_absolute() or '..' in path.parts or path.parts[0] != 'program-design':
-                raise RuntimeError('unsafe packaged path')
-        archive.extractall(destination)
-        for item in archive.infolist():
-            mode = item.external_attr >> 16
-            if mode:
-                (destination / item.filename).chmod(mode)
-    source = destination / 'program-design'
-    market = json.loads((source / '.agents/plugins/marketplace.json').read_text())
-    if market.get('name') != MARKETPLACE:
-        raise RuntimeError('self-contained marketplace name does not match trial')
-    return source, {'sha256': digest, 'archive': archive_path.name, 'manifest': manifest}
+    if (manifest.get('schema_version') != 2 or manifest.get('version') != '0.3.0'
+            or manifest.get('product') != 'program-design'):
+        raise RuntimeError('unsupported distribution manifest')
+    item = manifest['platforms']['codex']
+    relative = PurePosixPath(item['path'])
+    if relative != PurePosixPath('codex/program-design'):
+        raise RuntimeError('unexpected Codex distribution path')
+    original = ROOT / 'dist' / relative
+    files = directory_inventory(original)
+    digest = hashlib.sha256(json.dumps(files, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+    if (not files or files != item['files'] or len(files) != item['file_count']
+            or digest != item['sha256']):
+        raise RuntimeError('Codex directory differs from distribution manifest')
+    catalog_path = Path('.agents/plugins/marketplace.json')
+    catalog = ROOT / catalog_path
+    market = json.loads(catalog.read_text())
+    entries = [entry for entry in market.get('plugins', []) if entry.get('name') == 'program-design']
+    if (market.get('name') != MARKETPLACE or len(entries) != 1
+            or entries[0].get('source') != {'source': 'local', 'path': './dist/codex/program-design'}):
+        raise RuntimeError('root marketplace does not resolve the reviewed Codex directory')
+    source = destination / 'dist' / relative
+    shutil.copytree(original, source)
+    if directory_inventory(source) != files:
+        raise RuntimeError('staged Codex directory differs from reviewed files')
+    (destination / catalog_path).parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(catalog, destination / catalog_path)
+    return destination, {'sha256': digest, 'path': item['path'], 'manifest': manifest,
+                         'catalog_sha256': hashlib.sha256(catalog.read_bytes()).hexdigest()}
 
 
 def parse_trace(result_dir):
@@ -401,7 +425,7 @@ def assess(case, before, after, trace, controls, token, process):
     conditions['plugin_cache_removed'] = cache_cleanup.get('remaining_program_design_cache_files') == []
     if case != 'cold-reader':
         verified = controls.get('cache-verification.json', {})
-        conditions['installed_reviewed_version'] = verified.get('version') == '0.2.0' and verified.get('mismatches') == []
+        conditions['installed_reviewed_version'] = verified.get('version') == '0.3.0' and verified.get('mismatches') == []
     if case == 'preflight':
         conditions['model_not_called'] = 'model-not-run.json' in controls
     elif case.startswith('hook-'):
@@ -470,7 +494,7 @@ def main(argv=None):
     try:
         with tempfile.TemporaryDirectory(prefix='program-design-pwf-smoke-') as temporary:
             scratch = Path(temporary)
-            source, package = unpack_reviewed_package(scratch / 'distribution')
+            source, package = prepare_reviewed_package(scratch / 'marketplace')
             token = 'PD_PROBE_' + uuid.uuid4().hex
             metadata = {'image': image, 'model': args.model, 'label': label, 'timeout': args.timeout,
                         'runner_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -507,7 +531,7 @@ def main(argv=None):
                     '-e', 'HOME=/home/agent', '-e', 'HTTP_PROXY', '-e', 'HTTPS_PROXY', '-e', 'ALL_PROXY',
                     '--workdir', '/workspace', '--entrypoint', 'python3']
                 if case != 'cold-reader':
-                    command += ['--mount', f'type=bind,src={source},dst=/distribution,readonly']
+                    command += ['--mount', f'type=bind,src={source},dst=/marketplace,readonly']
                 if case != 'preflight':
                     command += ['--mount', f'type=bind,src={auth},dst=/run/codex-auth.json,readonly']
                 command += [IMAGE, '/runner/run.py', 'controller', '--case', case, '--model', args.model]

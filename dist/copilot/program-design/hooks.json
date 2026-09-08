@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": "python3 -I -B \"${PLUGIN_ROOT}/hooks/native-hook.py\" copilot sessionStart",
+        "powershell": "python -I -B \"${PLUGIN_ROOT}/hooks/native-hook.py\" copilot sessionStart",
+        "timeoutSec": 10
+      }
+    ],
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "python3 -I -B \"${PLUGIN_ROOT}/hooks/native-hook.py\" copilot postToolUse",
+        "powershell": "python -I -B \"${PLUGIN_ROOT}/hooks/native-hook.py\" copilot postToolUse",
+        "timeoutSec": 10
+      }
+    ],
+    "agentStop": [
+      {
+        "type": "command",
+        "bash": "python3 -I -B \"${PLUGIN_ROOT}/hooks/native-hook.py\" copilot agentStop",
+        "powershell": "python -I -B \"${PLUGIN_ROOT}/hooks/native-hook.py\" copilot agentStop",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}
