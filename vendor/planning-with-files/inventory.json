@@ -1,0 +1,3497 @@
+{
+  ".agents/skills/planning-with-files/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "903820eb26c789d511380419374f222d107b5e62b037416532753972c1862e52",
+    "size": 34124
+  },
+  ".agents/skills/planning-with-files/examples.md": {
+    "mode": "0o664",
+    "sha256": "450355fac69e0fac93453b6c7383c8fb9ba3470662f6c8291080028f73ce00dc",
+    "size": 4518
+  },
+  ".agents/skills/planning-with-files/reference.md": {
+    "mode": "0o664",
+    "sha256": "8f7d9cfe1971c5a32f3e5edb63ddfad73a11cc7de19d5065a6ec75fd118c0fdb",
+    "size": 8455
+  },
+  ".agents/skills/planning-with-files/scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  ".agents/skills/planning-with-files/scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  ".agents/skills/planning-with-files/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "667ddae114deb1b0b6048299bb404045cdcaa0ff9d59057ea060b88ff2c87f07",
+    "size": 10656
+  },
+  ".agents/skills/planning-with-files/scripts/check-complete.sh": {
+    "mode": "0o664",
+    "sha256": "82cdacd14b2e5b68437823fa0dc2de984e862266110b5cfe8c61497dfdbdceb3",
+    "size": 11555
+  },
+  ".agents/skills/planning-with-files/scripts/gate-stop.sh": {
+    "mode": "0o664",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  ".agents/skills/planning-with-files/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "4d854b872b9255412fee506b2438029c58b9cb4edcbae4fd29a60732cc83a4f6",
+    "size": 6490
+  },
+  ".agents/skills/planning-with-files/scripts/init-session.sh": {
+    "mode": "0o664",
+    "sha256": "c35d70ab28338eef36ef74c472fdcfd5ea044098a5a4b553a6022ddd9ad14559",
+    "size": 12883
+  },
+  ".agents/skills/planning-with-files/scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  ".agents/skills/planning-with-files/scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  ".agents/skills/planning-with-files/scripts/ledger-append.ps1": {
+    "mode": "0o664",
+    "sha256": "8d78d0f451f645f426fa3c6d2bff2bb22b5f7f63fb97c3a988cbdef728e21534",
+    "size": 6844
+  },
+  ".agents/skills/planning-with-files/scripts/ledger-append.sh": {
+    "mode": "0o664",
+    "sha256": "d918315f8b73a2a1e1dddef1c76798d1fd72f5f99644ff34115d0e7ac7e69290",
+    "size": 12190
+  },
+  ".agents/skills/planning-with-files/scripts/ledger-summary.ps1": {
+    "mode": "0o664",
+    "sha256": "5f483af95e0253688e7e5d14fba4da8c316a3568fa47d887edb6da0deb78de80",
+    "size": 5335
+  },
+  ".agents/skills/planning-with-files/scripts/ledger-summary.sh": {
+    "mode": "0o664",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  ".agents/skills/planning-with-files/scripts/phase-status.ps1": {
+    "mode": "0o664",
+    "sha256": "59d8e7d8232931177105155d2b2d3211c45b63f4a41e11c3ed1bb00278524fa6",
+    "size": 9412
+  },
+  ".agents/skills/planning-with-files/scripts/phase-status.sh": {
+    "mode": "0o664",
+    "sha256": "3eb6cee61556bc238411304fcf1052ef7920de3b719dba36f7a0c23d8ede61d3",
+    "size": 6866
+  },
+  ".agents/skills/planning-with-files/scripts/plan-doctor.sh": {
+    "mode": "0o664",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  ".agents/skills/planning-with-files/scripts/resolve-plan-dir.ps1": {
+    "mode": "0o664",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  ".agents/skills/planning-with-files/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  ".agents/skills/planning-with-files/scripts/session-catchup.py": {
+    "mode": "0o664",
+    "sha256": "a4a30a4de2d5513690f966eec80d823b5e2af8406205b65f6d23887a0b8f3ef3",
+    "size": 35868
+  },
+  ".agents/skills/planning-with-files/scripts/set-active-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  ".agents/skills/planning-with-files/scripts/set-active-plan.sh": {
+    "mode": "0o664",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  ".agents/skills/planning-with-files/scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  ".agents/skills/planning-with-files/templates/analytics_findings.md": {
+    "mode": "0o664",
+    "sha256": "cd46495d0a7d59f150f1ecc7f9528bb1b0856bec73a2d04e06f48cdb6798ec0f",
+    "size": 1803
+  },
+  ".agents/skills/planning-with-files/templates/analytics_task_plan.md": {
+    "mode": "0o664",
+    "sha256": "9339e575779a2e045073316c3deb8638ab49230a9b5f83143cbd4da7d6004981",
+    "size": 2352
+  },
+  ".agents/skills/planning-with-files/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "bb9237ccbf08148d7f7f23ad58fbc9bd7c879c6d0cbca1d533b5b5f21c26c529",
+    "size": 1161
+  },
+  ".agents/skills/planning-with-files/templates/loop.md": {
+    "mode": "0o664",
+    "sha256": "cb13b5f1030a015442a981da69fa0dc910f78f4782ebfa2fd0eac00d6e71a143",
+    "size": 2143
+  },
+  ".agents/skills/planning-with-files/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "28fc357000ed2b18910c4e436f0f2e02f4abf0acd29cce370a2670640974f31c",
+    "size": 1547
+  },
+  ".agents/skills/planning-with-files/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "3c4b61444270f689c3dab81b7113467fb87e9705175aea9c3a3b970bd4e777a3",
+    "size": 2257
+  },
+  ".agents/skills/planning-with-files/templates/task_plan_autonomous.md": {
+    "mode": "0o664",
+    "sha256": "5a93e639a15a3d0e4f89d915199cf09cdd211441547eba86bed34164edc25891",
+    "size": 3268
+  },
+  ".claude-plugin/marketplace.json": {
+    "mode": "0o664",
+    "sha256": "4f92ba9b11ae68f044385b937ac7bee34a6e7d194b10d9e78a745bf9dcc36a35",
+    "size": 1008
+  },
+  ".claude-plugin/plugin.json": {
+    "mode": "0o664",
+    "sha256": "992d20fc44485405c254b0df19ac15cbd757f4811ece33625306d9ab1975d76a",
+    "size": 1400
+  },
+  ".codebuddy/skills/planning-with-files/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "af388803e47184c50f9e59d8b7d2f485c57df99c79d6de2d46fc3205d9b09e5b",
+    "size": 11331
+  },
+  ".codebuddy/skills/planning-with-files/references/examples.md": {
+    "mode": "0o664",
+    "sha256": "450355fac69e0fac93453b6c7383c8fb9ba3470662f6c8291080028f73ce00dc",
+    "size": 4518
+  },
+  ".codebuddy/skills/planning-with-files/references/reference.md": {
+    "mode": "0o664",
+    "sha256": "8f7d9cfe1971c5a32f3e5edb63ddfad73a11cc7de19d5065a6ec75fd118c0fdb",
+    "size": 8455
+  },
+  ".codebuddy/skills/planning-with-files/scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  ".codebuddy/skills/planning-with-files/scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  ".codebuddy/skills/planning-with-files/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "667ddae114deb1b0b6048299bb404045cdcaa0ff9d59057ea060b88ff2c87f07",
+    "size": 10656
+  },
+  ".codebuddy/skills/planning-with-files/scripts/check-complete.sh": {
+    "mode": "0o775",
+    "sha256": "82cdacd14b2e5b68437823fa0dc2de984e862266110b5cfe8c61497dfdbdceb3",
+    "size": 11555
+  },
+  ".codebuddy/skills/planning-with-files/scripts/gate-stop.sh": {
+    "mode": "0o775",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  ".codebuddy/skills/planning-with-files/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "4d854b872b9255412fee506b2438029c58b9cb4edcbae4fd29a60732cc83a4f6",
+    "size": 6490
+  },
+  ".codebuddy/skills/planning-with-files/scripts/init-session.sh": {
+    "mode": "0o775",
+    "sha256": "c35d70ab28338eef36ef74c472fdcfd5ea044098a5a4b553a6022ddd9ad14559",
+    "size": 12883
+  },
+  ".codebuddy/skills/planning-with-files/scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  ".codebuddy/skills/planning-with-files/scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  ".codebuddy/skills/planning-with-files/scripts/ledger-summary.sh": {
+    "mode": "0o664",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  ".codebuddy/skills/planning-with-files/scripts/plan-doctor.sh": {
+    "mode": "0o664",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  ".codebuddy/skills/planning-with-files/scripts/resolve-plan-dir.ps1": {
+    "mode": "0o664",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  ".codebuddy/skills/planning-with-files/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  ".codebuddy/skills/planning-with-files/scripts/session-catchup.py": {
+    "mode": "0o775",
+    "sha256": "a4a30a4de2d5513690f966eec80d823b5e2af8406205b65f6d23887a0b8f3ef3",
+    "size": 35868
+  },
+  ".codebuddy/skills/planning-with-files/scripts/set-active-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  ".codebuddy/skills/planning-with-files/scripts/set-active-plan.sh": {
+    "mode": "0o664",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  ".codebuddy/skills/planning-with-files/scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  ".codebuddy/skills/planning-with-files/templates/analytics_findings.md": {
+    "mode": "0o664",
+    "sha256": "cd46495d0a7d59f150f1ecc7f9528bb1b0856bec73a2d04e06f48cdb6798ec0f",
+    "size": 1803
+  },
+  ".codebuddy/skills/planning-with-files/templates/analytics_task_plan.md": {
+    "mode": "0o664",
+    "sha256": "9339e575779a2e045073316c3deb8638ab49230a9b5f83143cbd4da7d6004981",
+    "size": 2352
+  },
+  ".codebuddy/skills/planning-with-files/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "bb9237ccbf08148d7f7f23ad58fbc9bd7c879c6d0cbca1d533b5b5f21c26c529",
+    "size": 1161
+  },
+  ".codebuddy/skills/planning-with-files/templates/loop.md": {
+    "mode": "0o664",
+    "sha256": "cb13b5f1030a015442a981da69fa0dc910f78f4782ebfa2fd0eac00d6e71a143",
+    "size": 2143
+  },
+  ".codebuddy/skills/planning-with-files/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "28fc357000ed2b18910c4e436f0f2e02f4abf0acd29cce370a2670640974f31c",
+    "size": 1547
+  },
+  ".codebuddy/skills/planning-with-files/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "3c4b61444270f689c3dab81b7113467fb87e9705175aea9c3a3b970bd4e777a3",
+    "size": 2257
+  },
+  ".codex-plugin/plugin.json": {
+    "mode": "0o664",
+    "sha256": "cc894f58c2efc15ed2515d4f2768abd763cf611f7c15a32471f2d363cf31f335",
+    "size": 716
+  },
+  ".codex/hooks.json": {
+    "mode": "0o664",
+    "sha256": "4133afe76858fc1cb4ecaa568bf39854c0219c592f911eb5648265fc6b64b2fc",
+    "size": 3073
+  },
+  ".codex/hooks/codex_hook_adapter.py": {
+    "mode": "0o664",
+    "sha256": "30cbfb9d8797ab2bc2009219ceb453513b03159c1a6fc074d12a90f8a79655c1",
+    "size": 13353
+  },
+  ".codex/hooks/context_frame.py": {
+    "mode": "0o664",
+    "sha256": "e391bb3f4007db1dc455e2ba6d6dc6a31057336e24bbcf8471c220f503f31147",
+    "size": 12179
+  },
+  ".codex/hooks/permission_request.py": {
+    "mode": "0o664",
+    "sha256": "38e0fb6ea5bbd9f51653b6d1b88ebf806cd46eb5edace1b82d44a1392c3229b0",
+    "size": 1448
+  },
+  ".codex/hooks/plugin_dispatch.py": {
+    "mode": "0o664",
+    "sha256": "9ed9c3e0e2ee3ee62899abc4bff791e2ab4d886ea8e4c2deac34249e9ec6743c",
+    "size": 1606
+  },
+  ".codex/hooks/post-tool-use.sh": {
+    "mode": "0o664",
+    "sha256": "7ffbcc202613903281531464fd1aa0b2983c0a7376ffa1971c568108fdfaaf53",
+    "size": 2479
+  },
+  ".codex/hooks/post_tool_use.py": {
+    "mode": "0o664",
+    "sha256": "1b15bcde9aed4ebed31286e1949cee0aea950ed079d47b0b2452bc51db84e45b",
+    "size": 1374
+  },
+  ".codex/hooks/pre-compact.sh": {
+    "mode": "0o664",
+    "sha256": "3bf60d8a076e8bdac7b255eb424ed21e28b9e441be2b9bd20b94cd85097c8523",
+    "size": 1421
+  },
+  ".codex/hooks/pre-tool-use.sh": {
+    "mode": "0o664",
+    "sha256": "fec98a92eab85e1dd3e5c1a139d7f45322a07f27eea3e8f86de4c9682bb14c8c",
+    "size": 2462
+  },
+  ".codex/hooks/pre_tool_use.py": {
+    "mode": "0o664",
+    "sha256": "1aa3f59d401249ff9ac98acf72f5331d57a3691dcc43b3659e9f1d81d0480778",
+    "size": 1115
+  },
+  ".codex/hooks/pwf-hook.cmd": {
+    "mode": "0o664",
+    "sha256": "3cb29c79355906ec6adbfe6403fd49a6083ae11d23cb182898bac8d282e23c2a",
+    "size": 1551
+  },
+  ".codex/hooks/resolve-plan-dir.sh": {
+    "mode": "0o775",
+    "sha256": "07a26a02c50c5654798805696e3191557675357cb19d9d9c46acffd8f456218f",
+    "size": 534
+  },
+  ".codex/hooks/run_sh.py": {
+    "mode": "0o664",
+    "sha256": "2d46219ad1ca9c4dedcd6f6f1d8c29114dc2f9df63668800a1d31ed54c608083",
+    "size": 2384
+  },
+  ".codex/hooks/session-start.sh": {
+    "mode": "0o664",
+    "sha256": "abbe3561375f99011e5eb7aec7abfe64872548879f79d786b8b8664f1d714027",
+    "size": 775
+  },
+  ".codex/hooks/stop.py": {
+    "mode": "0o664",
+    "sha256": "7fe23d40db9ed691bbeb1c5cd89af16a4431661e2bdcbf311443f5d1c406af64",
+    "size": 1490
+  },
+  ".codex/hooks/stop.sh": {
+    "mode": "0o664",
+    "sha256": "44464387ab002ceb7341144483a1047bd85af2b978c62bdd78d46e471da4c05b",
+    "size": 2697
+  },
+  ".codex/hooks/user-prompt-submit.sh": {
+    "mode": "0o664",
+    "sha256": "e54a3ac82fa9b8b896dea0114a8ca7d62e6127918fbcf829a7e577647a3e618f",
+    "size": 12430
+  },
+  ".codex/skills/planning-with-files/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "398a928551ce6db2dae4d23cb8bba8f4f232799a031894c9ac6f6646ecdec6cb",
+    "size": 11020
+  },
+  ".codex/skills/planning-with-files/references/examples.md": {
+    "mode": "0o664",
+    "sha256": "450355fac69e0fac93453b6c7383c8fb9ba3470662f6c8291080028f73ce00dc",
+    "size": 4518
+  },
+  ".codex/skills/planning-with-files/references/reference.md": {
+    "mode": "0o664",
+    "sha256": "8f7d9cfe1971c5a32f3e5edb63ddfad73a11cc7de19d5065a6ec75fd118c0fdb",
+    "size": 8455
+  },
+  ".codex/skills/planning-with-files/scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  ".codex/skills/planning-with-files/scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  ".codex/skills/planning-with-files/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "667ddae114deb1b0b6048299bb404045cdcaa0ff9d59057ea060b88ff2c87f07",
+    "size": 10656
+  },
+  ".codex/skills/planning-with-files/scripts/check-complete.sh": {
+    "mode": "0o775",
+    "sha256": "82cdacd14b2e5b68437823fa0dc2de984e862266110b5cfe8c61497dfdbdceb3",
+    "size": 11555
+  },
+  ".codex/skills/planning-with-files/scripts/gate-stop.sh": {
+    "mode": "0o775",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  ".codex/skills/planning-with-files/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "4d854b872b9255412fee506b2438029c58b9cb4edcbae4fd29a60732cc83a4f6",
+    "size": 6490
+  },
+  ".codex/skills/planning-with-files/scripts/init-session.sh": {
+    "mode": "0o775",
+    "sha256": "c35d70ab28338eef36ef74c472fdcfd5ea044098a5a4b553a6022ddd9ad14559",
+    "size": 12883
+  },
+  ".codex/skills/planning-with-files/scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  ".codex/skills/planning-with-files/scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  ".codex/skills/planning-with-files/scripts/ledger-summary.sh": {
+    "mode": "0o664",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  ".codex/skills/planning-with-files/scripts/plan-doctor.sh": {
+    "mode": "0o664",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  ".codex/skills/planning-with-files/scripts/resolve-plan-dir.ps1": {
+    "mode": "0o664",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  ".codex/skills/planning-with-files/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  ".codex/skills/planning-with-files/scripts/session-catchup.py": {
+    "mode": "0o775",
+    "sha256": "a4a30a4de2d5513690f966eec80d823b5e2af8406205b65f6d23887a0b8f3ef3",
+    "size": 35868
+  },
+  ".codex/skills/planning-with-files/scripts/set-active-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  ".codex/skills/planning-with-files/scripts/set-active-plan.sh": {
+    "mode": "0o664",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  ".codex/skills/planning-with-files/scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  ".codex/skills/planning-with-files/templates/analytics_findings.md": {
+    "mode": "0o664",
+    "sha256": "cd46495d0a7d59f150f1ecc7f9528bb1b0856bec73a2d04e06f48cdb6798ec0f",
+    "size": 1803
+  },
+  ".codex/skills/planning-with-files/templates/analytics_task_plan.md": {
+    "mode": "0o664",
+    "sha256": "9339e575779a2e045073316c3deb8638ab49230a9b5f83143cbd4da7d6004981",
+    "size": 2352
+  },
+  ".codex/skills/planning-with-files/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "bb9237ccbf08148d7f7f23ad58fbc9bd7c879c6d0cbca1d533b5b5f21c26c529",
+    "size": 1161
+  },
+  ".codex/skills/planning-with-files/templates/loop.md": {
+    "mode": "0o664",
+    "sha256": "cb13b5f1030a015442a981da69fa0dc910f78f4782ebfa2fd0eac00d6e71a143",
+    "size": 2143
+  },
+  ".codex/skills/planning-with-files/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "28fc357000ed2b18910c4e436f0f2e02f4abf0acd29cce370a2670640974f31c",
+    "size": 1547
+  },
+  ".codex/skills/planning-with-files/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "3c4b61444270f689c3dab81b7113467fb87e9705175aea9c3a3b970bd4e777a3",
+    "size": 2257
+  },
+  ".continue/prompts/planning-with-files.prompt": {
+    "mode": "0o664",
+    "sha256": "6978242b8b03ae028e55a44de815650e75b2fb90c360c185bd3329b0fc54146f",
+    "size": 1790
+  },
+  ".continue/skills/planning-with-files/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "c27b5c1792a5dda50e526d2ed5e06eceeb6ba0b58fe8ec1a5170c2995c603f4b",
+    "size": 10700
+  },
+  ".continue/skills/planning-with-files/examples.md": {
+    "mode": "0o664",
+    "sha256": "450355fac69e0fac93453b6c7383c8fb9ba3470662f6c8291080028f73ce00dc",
+    "size": 4518
+  },
+  ".continue/skills/planning-with-files/reference.md": {
+    "mode": "0o664",
+    "sha256": "8f7d9cfe1971c5a32f3e5edb63ddfad73a11cc7de19d5065a6ec75fd118c0fdb",
+    "size": 8455
+  },
+  ".continue/skills/planning-with-files/scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  ".continue/skills/planning-with-files/scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  ".continue/skills/planning-with-files/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "667ddae114deb1b0b6048299bb404045cdcaa0ff9d59057ea060b88ff2c87f07",
+    "size": 10656
+  },
+  ".continue/skills/planning-with-files/scripts/check-complete.sh": {
+    "mode": "0o775",
+    "sha256": "82cdacd14b2e5b68437823fa0dc2de984e862266110b5cfe8c61497dfdbdceb3",
+    "size": 11555
+  },
+  ".continue/skills/planning-with-files/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "4d854b872b9255412fee506b2438029c58b9cb4edcbae4fd29a60732cc83a4f6",
+    "size": 6490
+  },
+  ".continue/skills/planning-with-files/scripts/init-session.sh": {
+    "mode": "0o775",
+    "sha256": "c35d70ab28338eef36ef74c472fdcfd5ea044098a5a4b553a6022ddd9ad14559",
+    "size": 12883
+  },
+  ".continue/skills/planning-with-files/scripts/plan-doctor.sh": {
+    "mode": "0o664",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  ".continue/skills/planning-with-files/scripts/resolve-plan-dir.ps1": {
+    "mode": "0o664",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  ".continue/skills/planning-with-files/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  ".continue/skills/planning-with-files/scripts/session-catchup.py": {
+    "mode": "0o775",
+    "sha256": "a4a30a4de2d5513690f966eec80d823b5e2af8406205b65f6d23887a0b8f3ef3",
+    "size": 35868
+  },
+  ".continue/skills/planning-with-files/scripts/set-active-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  ".continue/skills/planning-with-files/scripts/set-active-plan.sh": {
+    "mode": "0o664",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  ".cursor/hooks.json": {
+    "mode": "0o664",
+    "sha256": "2cf5e82bdb845dee1a1e6a30555e12618a7794e1426a4f1f7ff794bd8f41cbd2",
+    "size": 603
+  },
+  ".cursor/hooks.windows.json": {
+    "mode": "0o664",
+    "sha256": "5025ce54c5f8cc9ce3ddb8bdfad2de1b37ea9f6ed1950128b6c89883343a9833",
+    "size": 771
+  },
+  ".cursor/hooks/post-tool-use.ps1": {
+    "mode": "0o664",
+    "sha256": "091c2b9ecadfc1f31681ce3c912a35b1afd957817da6d452da9e9333506fdc38",
+    "size": 504
+  },
+  ".cursor/hooks/post-tool-use.sh": {
+    "mode": "0o664",
+    "sha256": "1b2f3b0f1fe66c29131ffa782c6a0bf6bbbccf2af3648853f474291878e4bbb2",
+    "size": 491
+  },
+  ".cursor/hooks/pre-tool-use.ps1": {
+    "mode": "0o664",
+    "sha256": "d5a82285ccddc06b53a820be35d9f456378ee0419e5f410ace7d2bfe97079f41",
+    "size": 592
+  },
+  ".cursor/hooks/pre-tool-use.sh": {
+    "mode": "0o664",
+    "sha256": "942e63cb3fcc3ad1b017c55a21da7eec51c2a02505e20dd532a9761dd21c8c99",
+    "size": 610
+  },
+  ".cursor/hooks/stop.ps1": {
+    "mode": "0o664",
+    "sha256": "9bed354e2913aa26551af73f3e1b7bd763b1dcf97d666ff7c08573340a5398b7",
+    "size": 1927
+  },
+  ".cursor/hooks/stop.sh": {
+    "mode": "0o664",
+    "sha256": "892bdc2841d9141d90440c27cb6e5cdb6c3d074444d29d6d1f2a18eeff06d27f",
+    "size": 2043
+  },
+  ".cursor/hooks/user-prompt-submit.ps1": {
+    "mode": "0o664",
+    "sha256": "ccddba281b584a3f6835030753f6b336a036d4b24fe66de55a2721801ec1b42d",
+    "size": 4381
+  },
+  ".cursor/hooks/user-prompt-submit.sh": {
+    "mode": "0o664",
+    "sha256": "b486158bf30bc27bee001676f199042444d30998d2a34a0968bd00eeabebcd9b",
+    "size": 3568
+  },
+  ".cursor/skills/planning-with-files/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "9df99e1c1075e8f913a8a46bd6f9c94ccbb0735b2be5d003c86c0b53813ac566",
+    "size": 10979
+  },
+  ".cursor/skills/planning-with-files/examples.md": {
+    "mode": "0o664",
+    "sha256": "450355fac69e0fac93453b6c7383c8fb9ba3470662f6c8291080028f73ce00dc",
+    "size": 4518
+  },
+  ".cursor/skills/planning-with-files/reference.md": {
+    "mode": "0o664",
+    "sha256": "8f7d9cfe1971c5a32f3e5edb63ddfad73a11cc7de19d5065a6ec75fd118c0fdb",
+    "size": 8455
+  },
+  ".cursor/skills/planning-with-files/scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  ".cursor/skills/planning-with-files/scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  ".cursor/skills/planning-with-files/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "667ddae114deb1b0b6048299bb404045cdcaa0ff9d59057ea060b88ff2c87f07",
+    "size": 10656
+  },
+  ".cursor/skills/planning-with-files/scripts/check-complete.sh": {
+    "mode": "0o664",
+    "sha256": "82cdacd14b2e5b68437823fa0dc2de984e862266110b5cfe8c61497dfdbdceb3",
+    "size": 11555
+  },
+  ".cursor/skills/planning-with-files/scripts/gate-stop.sh": {
+    "mode": "0o775",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  ".cursor/skills/planning-with-files/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "4d854b872b9255412fee506b2438029c58b9cb4edcbae4fd29a60732cc83a4f6",
+    "size": 6490
+  },
+  ".cursor/skills/planning-with-files/scripts/init-session.sh": {
+    "mode": "0o664",
+    "sha256": "c35d70ab28338eef36ef74c472fdcfd5ea044098a5a4b553a6022ddd9ad14559",
+    "size": 12883
+  },
+  ".cursor/skills/planning-with-files/scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  ".cursor/skills/planning-with-files/scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  ".cursor/skills/planning-with-files/scripts/ledger-summary.sh": {
+    "mode": "0o664",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  ".cursor/skills/planning-with-files/scripts/plan-doctor.sh": {
+    "mode": "0o664",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  ".cursor/skills/planning-with-files/scripts/resolve-plan-dir.ps1": {
+    "mode": "0o664",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  ".cursor/skills/planning-with-files/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  ".cursor/skills/planning-with-files/scripts/session-catchup.py": {
+    "mode": "0o664",
+    "sha256": "a4a30a4de2d5513690f966eec80d823b5e2af8406205b65f6d23887a0b8f3ef3",
+    "size": 35868
+  },
+  ".cursor/skills/planning-with-files/scripts/set-active-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  ".cursor/skills/planning-with-files/scripts/set-active-plan.sh": {
+    "mode": "0o664",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  ".cursor/skills/planning-with-files/scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  ".cursor/skills/planning-with-files/templates/analytics_findings.md": {
+    "mode": "0o664",
+    "sha256": "cd46495d0a7d59f150f1ecc7f9528bb1b0856bec73a2d04e06f48cdb6798ec0f",
+    "size": 1803
+  },
+  ".cursor/skills/planning-with-files/templates/analytics_task_plan.md": {
+    "mode": "0o664",
+    "sha256": "9339e575779a2e045073316c3deb8638ab49230a9b5f83143cbd4da7d6004981",
+    "size": 2352
+  },
+  ".cursor/skills/planning-with-files/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "bb9237ccbf08148d7f7f23ad58fbc9bd7c879c6d0cbca1d533b5b5f21c26c529",
+    "size": 1161
+  },
+  ".cursor/skills/planning-with-files/templates/loop.md": {
+    "mode": "0o664",
+    "sha256": "cb13b5f1030a015442a981da69fa0dc910f78f4782ebfa2fd0eac00d6e71a143",
+    "size": 2143
+  },
+  ".cursor/skills/planning-with-files/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "28fc357000ed2b18910c4e436f0f2e02f4abf0acd29cce370a2670640974f31c",
+    "size": 1547
+  },
+  ".cursor/skills/planning-with-files/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "3c4b61444270f689c3dab81b7113467fb87e9705175aea9c3a3b970bd4e777a3",
+    "size": 2257
+  },
+  ".factory/skills/planning-with-files/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "7dc54b91bdf19c58c121f93d99c49a8d489bab01e72cb5c4661a8973b3b705ae",
+    "size": 11267
+  },
+  ".factory/skills/planning-with-files/examples.md": {
+    "mode": "0o664",
+    "sha256": "450355fac69e0fac93453b6c7383c8fb9ba3470662f6c8291080028f73ce00dc",
+    "size": 4518
+  },
+  ".factory/skills/planning-with-files/references.md": {
+    "mode": "0o664",
+    "sha256": "8f7d9cfe1971c5a32f3e5edb63ddfad73a11cc7de19d5065a6ec75fd118c0fdb",
+    "size": 8455
+  },
+  ".factory/skills/planning-with-files/scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  ".factory/skills/planning-with-files/scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  ".factory/skills/planning-with-files/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "667ddae114deb1b0b6048299bb404045cdcaa0ff9d59057ea060b88ff2c87f07",
+    "size": 10656
+  },
+  ".factory/skills/planning-with-files/scripts/check-complete.sh": {
+    "mode": "0o775",
+    "sha256": "82cdacd14b2e5b68437823fa0dc2de984e862266110b5cfe8c61497dfdbdceb3",
+    "size": 11555
+  },
+  ".factory/skills/planning-with-files/scripts/gate-stop.sh": {
+    "mode": "0o775",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  ".factory/skills/planning-with-files/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "4d854b872b9255412fee506b2438029c58b9cb4edcbae4fd29a60732cc83a4f6",
+    "size": 6490
+  },
+  ".factory/skills/planning-with-files/scripts/init-session.sh": {
+    "mode": "0o775",
+    "sha256": "c35d70ab28338eef36ef74c472fdcfd5ea044098a5a4b553a6022ddd9ad14559",
+    "size": 12883
+  },
+  ".factory/skills/planning-with-files/scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  ".factory/skills/planning-with-files/scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  ".factory/skills/planning-with-files/scripts/ledger-summary.sh": {
+    "mode": "0o664",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  ".factory/skills/planning-with-files/scripts/plan-doctor.sh": {
+    "mode": "0o664",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  ".factory/skills/planning-with-files/scripts/resolve-plan-dir.ps1": {
+    "mode": "0o664",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  ".factory/skills/planning-with-files/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  ".factory/skills/planning-with-files/scripts/session-catchup.py": {
+    "mode": "0o775",
+    "sha256": "a4a30a4de2d5513690f966eec80d823b5e2af8406205b65f6d23887a0b8f3ef3",
+    "size": 35868
+  },
+  ".factory/skills/planning-with-files/scripts/set-active-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  ".factory/skills/planning-with-files/scripts/set-active-plan.sh": {
+    "mode": "0o664",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  ".factory/skills/planning-with-files/scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  ".factory/skills/planning-with-files/templates/analytics_findings.md": {
+    "mode": "0o664",
+    "sha256": "cd46495d0a7d59f150f1ecc7f9528bb1b0856bec73a2d04e06f48cdb6798ec0f",
+    "size": 1803
+  },
+  ".factory/skills/planning-with-files/templates/analytics_task_plan.md": {
+    "mode": "0o664",
+    "sha256": "9339e575779a2e045073316c3deb8638ab49230a9b5f83143cbd4da7d6004981",
+    "size": 2352
+  },
+  ".factory/skills/planning-with-files/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "bb9237ccbf08148d7f7f23ad58fbc9bd7c879c6d0cbca1d533b5b5f21c26c529",
+    "size": 1161
+  },
+  ".factory/skills/planning-with-files/templates/loop.md": {
+    "mode": "0o664",
+    "sha256": "cb13b5f1030a015442a981da69fa0dc910f78f4782ebfa2fd0eac00d6e71a143",
+    "size": 2143
+  },
+  ".factory/skills/planning-with-files/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "28fc357000ed2b18910c4e436f0f2e02f4abf0acd29cce370a2670640974f31c",
+    "size": 1547
+  },
+  ".factory/skills/planning-with-files/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "3c4b61444270f689c3dab81b7113467fb87e9705175aea9c3a3b970bd4e777a3",
+    "size": 2257
+  },
+  ".gemini/hooks/after-tool.sh": {
+    "mode": "0o664",
+    "sha256": "7ae37d0d4771c543f6285661f213d5f38658997b1bbe555a94b0c882326b66f1",
+    "size": 427
+  },
+  ".gemini/hooks/before-model.sh": {
+    "mode": "0o664",
+    "sha256": "6b22c670183c04484aa27ee1b475f08ff2ed4436d26addebaf40f8988928020c",
+    "size": 904
+  },
+  ".gemini/hooks/before-tool.sh": {
+    "mode": "0o664",
+    "sha256": "b0f5d8e60065b9c779194ff2f3d1c06d6ccf3865732a76c958f0b13af62fea62",
+    "size": 758
+  },
+  ".gemini/hooks/session-end.sh": {
+    "mode": "0o664",
+    "sha256": "951cbd3b618e609f95ed6ce81492e12e1b66d59f3923de0c64e446d8b1736a3d",
+    "size": 836
+  },
+  ".gemini/hooks/session-start.sh": {
+    "mode": "0o664",
+    "sha256": "48fcf2fcf0628ef1aac60f9ebd23f1d2dd7cfd44befa5bde0e31c2c83f2323e1",
+    "size": 1278
+  },
+  ".gemini/settings.json": {
+    "mode": "0o664",
+    "sha256": "97c8d5c3342bcbe61ac9403dfc6d839ace6769a6c4e8eee818eadd165ba0dade",
+    "size": 1966
+  },
+  ".gemini/skills/planning-with-files/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "e9b5b78212278c99ce2bf91a6a2bfe2220d46f63869197bd92345e23cf8832e0",
+    "size": 10597
+  },
+  ".gemini/skills/planning-with-files/references/examples.md": {
+    "mode": "0o664",
+    "sha256": "450355fac69e0fac93453b6c7383c8fb9ba3470662f6c8291080028f73ce00dc",
+    "size": 4518
+  },
+  ".gemini/skills/planning-with-files/references/reference.md": {
+    "mode": "0o664",
+    "sha256": "8f7d9cfe1971c5a32f3e5edb63ddfad73a11cc7de19d5065a6ec75fd118c0fdb",
+    "size": 8455
+  },
+  ".gemini/skills/planning-with-files/scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  ".gemini/skills/planning-with-files/scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  ".gemini/skills/planning-with-files/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "667ddae114deb1b0b6048299bb404045cdcaa0ff9d59057ea060b88ff2c87f07",
+    "size": 10656
+  },
+  ".gemini/skills/planning-with-files/scripts/check-complete.sh": {
+    "mode": "0o775",
+    "sha256": "82cdacd14b2e5b68437823fa0dc2de984e862266110b5cfe8c61497dfdbdceb3",
+    "size": 11555
+  },
+  ".gemini/skills/planning-with-files/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "4d854b872b9255412fee506b2438029c58b9cb4edcbae4fd29a60732cc83a4f6",
+    "size": 6490
+  },
+  ".gemini/skills/planning-with-files/scripts/init-session.sh": {
+    "mode": "0o775",
+    "sha256": "c35d70ab28338eef36ef74c472fdcfd5ea044098a5a4b553a6022ddd9ad14559",
+    "size": 12883
+  },
+  ".gemini/skills/planning-with-files/scripts/plan-doctor.sh": {
+    "mode": "0o664",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  ".gemini/skills/planning-with-files/scripts/resolve-plan-dir.ps1": {
+    "mode": "0o664",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  ".gemini/skills/planning-with-files/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  ".gemini/skills/planning-with-files/scripts/session-catchup.py": {
+    "mode": "0o775",
+    "sha256": "a4a30a4de2d5513690f966eec80d823b5e2af8406205b65f6d23887a0b8f3ef3",
+    "size": 35868
+  },
+  ".gemini/skills/planning-with-files/scripts/set-active-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  ".gemini/skills/planning-with-files/scripts/set-active-plan.sh": {
+    "mode": "0o664",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  ".gemini/skills/planning-with-files/templates/analytics_findings.md": {
+    "mode": "0o664",
+    "sha256": "cd46495d0a7d59f150f1ecc7f9528bb1b0856bec73a2d04e06f48cdb6798ec0f",
+    "size": 1803
+  },
+  ".gemini/skills/planning-with-files/templates/analytics_task_plan.md": {
+    "mode": "0o664",
+    "sha256": "9339e575779a2e045073316c3deb8638ab49230a9b5f83143cbd4da7d6004981",
+    "size": 2352
+  },
+  ".gemini/skills/planning-with-files/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "bb9237ccbf08148d7f7f23ad58fbc9bd7c879c6d0cbca1d533b5b5f21c26c529",
+    "size": 1161
+  },
+  ".gemini/skills/planning-with-files/templates/loop.md": {
+    "mode": "0o664",
+    "sha256": "cb13b5f1030a015442a981da69fa0dc910f78f4782ebfa2fd0eac00d6e71a143",
+    "size": 2143
+  },
+  ".gemini/skills/planning-with-files/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "28fc357000ed2b18910c4e436f0f2e02f4abf0acd29cce370a2670640974f31c",
+    "size": 1547
+  },
+  ".gemini/skills/planning-with-files/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "3c4b61444270f689c3dab81b7113467fb87e9705175aea9c3a3b970bd4e777a3",
+    "size": 2257
+  },
+  ".gitattributes": {
+    "mode": "0o664",
+    "sha256": "be994aa9347fc74704f62a54678ba708c603261664506cf13237811c38c03082",
+    "size": 428
+  },
+  ".github/FUNDING.yml": {
+    "mode": "0o664",
+    "sha256": "0794d7d1c80e6cb2800136b9c8dba556e4e27fbe1aeae93447250670d1c540a5",
+    "size": 20
+  },
+  ".github/hooks/planning-with-files.json": {
+    "mode": "0o664",
+    "sha256": "f9249f0f52a8a2245f5e0cc671616c4af9bca13aea5ac217a23ed9302be5ac3f",
+    "size": 1107
+  },
+  ".github/hooks/scripts/agent-stop.ps1": {
+    "mode": "0o664",
+    "sha256": "9a22518edc2f571113e142c237bd60286ae9f7a78c999ea4a1c2a8b21e128d55",
+    "size": 2145
+  },
+  ".github/hooks/scripts/agent-stop.sh": {
+    "mode": "0o775",
+    "sha256": "cef09d3c5a2a9b770e662e6b94b0dd023bdf1108a460b9bb5c16b774acaf4055",
+    "size": 1963
+  },
+  ".github/hooks/scripts/error-occurred.ps1": {
+    "mode": "0o664",
+    "sha256": "6be6ed5712f8d5bbd973b0ec0ab38609decfd88785289b1e3dc11c6de379bedb",
+    "size": 1310
+  },
+  ".github/hooks/scripts/error-occurred.sh": {
+    "mode": "0o664",
+    "sha256": "fa506548659bac7bc7fa9fd389922ef7f76aaed3509d7000e1162caef6f275b3",
+    "size": 1455
+  },
+  ".github/hooks/scripts/post-tool-use.ps1": {
+    "mode": "0o664",
+    "sha256": "528e656343e5fc8b941456e2835fefc1cfc6c2bd264a0df5453b32baba284150",
+    "size": 745
+  },
+  ".github/hooks/scripts/post-tool-use.sh": {
+    "mode": "0o775",
+    "sha256": "f7c22106ee670c141730c6c4589530541a8cb7c7d9b860651f8f85b79660a8a9",
+    "size": 522
+  },
+  ".github/hooks/scripts/pre-tool-use.ps1": {
+    "mode": "0o664",
+    "sha256": "b89ae0cc49d5169d00f4c4658b22d735fe43fc8afe79d8c47c661e4ac29f52c1",
+    "size": 1255
+  },
+  ".github/hooks/scripts/pre-tool-use.sh": {
+    "mode": "0o775",
+    "sha256": "a4fb018f9eb0f8f5e22c736308b0abbf7ea53405f5041efc428da6768e99589e",
+    "size": 1363
+  },
+  ".github/hooks/scripts/session-start.ps1": {
+    "mode": "0o664",
+    "sha256": "78dd73a23b24faa5462a7ced5c0a29b855c999fa952f12b1ede3542dc10d0d58",
+    "size": 1829
+  },
+  ".github/hooks/scripts/session-start.sh": {
+    "mode": "0o775",
+    "sha256": "25b43ecaa72f2ee4e96ed1c648012f8ac31508c94fa5cf7a74943b096b4c1c7a",
+    "size": 1819
+  },
+  ".github/workflows/skill-optimize-apply.yml": {
+    "mode": "0o664",
+    "sha256": "f0b356dc97158b194046ca9870791d7e753b3489366abc90cb72e880f19e7cd6",
+    "size": 753
+  },
+  ".github/workflows/skill-review.yml": {
+    "mode": "0o664",
+    "sha256": "d83190d019bcbb581c6f1424ab25398ffeb219ba786e7f07453f8acb6e5479da",
+    "size": 820
+  },
+  ".github/workflows/tests.yml": {
+    "mode": "0o664",
+    "sha256": "84e31c7ce78aa17b32a1d0ee229a0249a2171796aae2f34e1241b8d69456a876",
+    "size": 2895
+  },
+  ".gitignore": {
+    "mode": "0o664",
+    "sha256": "e833049e46802e6943a2d537dcc01ef624544dee1b0347fe0672a3a068f3989a",
+    "size": 1450
+  },
+  ".hermes/commands/plan-status.md": {
+    "mode": "0o664",
+    "sha256": "d4976d3c91c80792a055ddf36b40081aba4a34fff44bf288455950ee9645ad07",
+    "size": 206
+  },
+  ".hermes/commands/plan.md": {
+    "mode": "0o664",
+    "sha256": "88b547dfe5c750e30b90b00342e4fa195256f3d2d87821efe009a078ff568a8d",
+    "size": 400
+  },
+  ".hermes/plugins/planning-with-files/__init__.py": {
+    "mode": "0o664",
+    "sha256": "89b75e47fe59b23d138a4f6ff80fb3228bc848afd1e17ae8285bd50b40867c88",
+    "size": 8839
+  },
+  ".hermes/plugins/planning-with-files/constants.py": {
+    "mode": "0o664",
+    "sha256": "69af9f9177b582a2e9d2d4895861d835da3545493f42b88e2ab821d93b44a37a",
+    "size": 208
+  },
+  ".hermes/plugins/planning-with-files/context_frame.py": {
+    "mode": "0o664",
+    "sha256": "e391bb3f4007db1dc455e2ba6d6dc6a31057336e24bbcf8471c220f503f31147",
+    "size": 12179
+  },
+  ".hermes/plugins/planning-with-files/hook_state.py": {
+    "mode": "0o664",
+    "sha256": "50ee3d75a75f7145735c1758d841a253f755c0283efefcd94d923417fdb9924d",
+    "size": 1651
+  },
+  ".hermes/plugins/planning-with-files/hooks.py": {
+    "mode": "0o664",
+    "sha256": "58ffeec01c3a10aa582ae6c27dfe9f9168d80617d2a00f8c91bd1edfad217e3d",
+    "size": 10930
+  },
+  ".hermes/plugins/planning-with-files/paths.py": {
+    "mode": "0o664",
+    "sha256": "dedc238957690adfc6b8f7aa8a6a7d2e2e21965c2804b19a352fc6c96e6a17d4",
+    "size": 12645
+  },
+  ".hermes/plugins/planning-with-files/planning_files.py": {
+    "mode": "0o664",
+    "sha256": "51ad9951f0d9789c3591e745abb3447253c30d810c5ad3b56a33f741560ebd00",
+    "size": 18636
+  },
+  ".hermes/plugins/planning-with-files/plugin.yaml": {
+    "mode": "0o664",
+    "sha256": "645cff793ec0ff1b9a5591ca82548d04d3ebb23af7620fccf542d3184afa6ee8",
+    "size": 770
+  },
+  ".hermes/plugins/planning-with-files/shell_hook.py": {
+    "mode": "0o664",
+    "sha256": "c15223cf0b5cd6c076ce0641153464a2c6b6011d41f999f5d52bbc8411af48d3",
+    "size": 4779
+  },
+  ".hermes/plugins/planning-with-files/tools.py": {
+    "mode": "0o664",
+    "sha256": "d1c1b44e733fdf0f01c7b8a6c94aaa9eb63b05ad13d59b0d8ba51fd79d42abdc",
+    "size": 3848
+  },
+  ".hermes/skills/planning-with-files/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "8baba5a89d9a23b5699d6ddf08d1761f3d16e3ccb8696ae8f4862e4d10ca16e4",
+    "size": 11655
+  },
+  ".hermes/skills/planning-with-files/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "055fb8a8cd88fa923fc496cbc9299143178f263d78d632010ee424cb62697811",
+    "size": 1985
+  },
+  ".hermes/skills/planning-with-files/scripts/check-complete.sh": {
+    "mode": "0o775",
+    "sha256": "7ac07371ff7154880dbc8123bff07ef5501bd11b7e99c8fac113951af6307fa2",
+    "size": 1923
+  },
+  ".hermes/skills/planning-with-files/scripts/check-continue.sh": {
+    "mode": "0o664",
+    "sha256": "5974b483d06ca2d2854daa5796cc8a0b833f36f3596468362499639671a325f3",
+    "size": 1013
+  },
+  ".hermes/skills/planning-with-files/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "565587f25d4960215c761d1ab7496f023fdc9a6d827554d4cc417f74c3aa3c3d",
+    "size": 5228
+  },
+  ".hermes/skills/planning-with-files/scripts/init-session.sh": {
+    "mode": "0o775",
+    "sha256": "99d362f9b3a21daf77926f030792aa7f47d56b77178e691d83eb3c85f1e61e93",
+    "size": 5128
+  },
+  ".hermes/skills/planning-with-files/scripts/session-catchup.py": {
+    "mode": "0o775",
+    "sha256": "44298d9c40994175c98b46d50e4ff1926e8ccb875021e59661ae7e5e26a653ee",
+    "size": 22155
+  },
+  ".hermes/skills/planning-with-files/scripts/sync-ide-folders.py": {
+    "mode": "0o664",
+    "sha256": "77cdb9fba06c6c4e8478fa37bd04f6f76f0ead346969caee4870b2e2b10a050c",
+    "size": 9718
+  },
+  ".hermes/skills/planning-with-files/templates/analytics_findings.md": {
+    "mode": "0o664",
+    "sha256": "2c673e2e5c527a0408b404673026079f5186bb88e13c65a5ad8774832e673b41",
+    "size": 1668
+  },
+  ".hermes/skills/planning-with-files/templates/analytics_task_plan.md": {
+    "mode": "0o664",
+    "sha256": "359032e933fdefae9d5b113856315b7dce3495b18ae5672ff08378c9e6d624fe",
+    "size": 2812
+  },
+  ".hermes/skills/planning-with-files/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "0fa74beaa427a8a5b750129b34a5c48ea413f8ef958efebde5b561a446f0d820",
+    "size": 1039
+  },
+  ".hermes/skills/planning-with-files/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "5da1602030d6913513956e6cbd4e3b64b575b93bd82d500cacb719eb8444a35d",
+    "size": 1541
+  },
+  ".hermes/skills/planning-with-files/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "3c4b61444270f689c3dab81b7113467fb87e9705175aea9c3a3b970bd4e777a3",
+    "size": 2257
+  },
+  ".kiro/skills/planning-with-files/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "dfa7297e6a96b7e0b13b38c0d1556dbd51c5ec5071e840a12ea67e860b21ee75",
+    "size": 8349
+  },
+  ".kiro/skills/planning-with-files/assets/scripts/bootstrap.ps1": {
+    "mode": "0o664",
+    "sha256": "bb7f6d551add63bcd5b7dd1acb7769f595b738f8374c1b4dcf4fa46903744f89",
+    "size": 1870
+  },
+  ".kiro/skills/planning-with-files/assets/scripts/bootstrap.sh": {
+    "mode": "0o775",
+    "sha256": "9223b22a0792c95a5836929e3c156ccc45269148328c14a037bafed608e85ea5",
+    "size": 1484
+  },
+  ".kiro/skills/planning-with-files/assets/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "c2c11acef1b9b4012c9ba35a2c0fc42658693bbb1c2fbef1a878da5a1e1085ef",
+    "size": 1604
+  },
+  ".kiro/skills/planning-with-files/assets/scripts/check-complete.sh": {
+    "mode": "0o775",
+    "sha256": "fb156ef719454bc916547a4efa732cb799dfdb09ba5cae4ab94d8aa82bc5f53c",
+    "size": 1765
+  },
+  ".kiro/skills/planning-with-files/assets/scripts/session-catchup.py": {
+    "mode": "0o664",
+    "sha256": "e4ec7a681c5f1e71132674ad3576ecb9f11e5aa9ed74da53f95c746405b48ae1",
+    "size": 3778
+  },
+  ".kiro/skills/planning-with-files/assets/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "0fa74beaa427a8a5b750129b34a5c48ea413f8ef958efebde5b561a446f0d820",
+    "size": 1039
+  },
+  ".kiro/skills/planning-with-files/assets/templates/planning-context.md": {
+    "mode": "0o664",
+    "sha256": "b78c97d7238cd92a4bd92f5c4c29490932e889712fcba9adeff1190647953638",
+    "size": 339
+  },
+  ".kiro/skills/planning-with-files/assets/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "5da1602030d6913513956e6cbd4e3b64b575b93bd82d500cacb719eb8444a35d",
+    "size": 1541
+  },
+  ".kiro/skills/planning-with-files/assets/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "3c4b61444270f689c3dab81b7113467fb87e9705175aea9c3a3b970bd4e777a3",
+    "size": 2257
+  },
+  ".kiro/skills/planning-with-files/references/manus-principles.md": {
+    "mode": "0o664",
+    "sha256": "65fbd9b6f23a06db9d33541d553414bd26de24cd929527e904fd373872d5b287",
+    "size": 3705
+  },
+  ".kiro/skills/planning-with-files/references/planning-rules.md": {
+    "mode": "0o664",
+    "sha256": "2a2f4eac3079e3a093b7ae7e724b804b5eefd5a47a8e72c7d0d494e8fd8df10d",
+    "size": 1277
+  },
+  ".kiro/skills/planning-with-files/references/planning-templates.md": {
+    "mode": "0o664",
+    "sha256": "b93e9d19baf0e64ff99f64551f0a6a992121b50916d456cf5b9ed5f9c72bbfee",
+    "size": 1814
+  },
+  ".mastracode/hooks.json": {
+    "mode": "0o664",
+    "sha256": "fec7bf5fdaca397f760b52dcfa36ccf8de6dc49f18dc0ceedde69d2ce2f75e68",
+    "size": 1688
+  },
+  ".mastracode/skills/planning-with-files/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "421d4547cb6346419642c2c5d7ca4fc1ed1983e34f41d76fd0330208110632b6",
+    "size": 11018
+  },
+  ".mastracode/skills/planning-with-files/references/examples.md": {
+    "mode": "0o664",
+    "sha256": "450355fac69e0fac93453b6c7383c8fb9ba3470662f6c8291080028f73ce00dc",
+    "size": 4518
+  },
+  ".mastracode/skills/planning-with-files/references/reference.md": {
+    "mode": "0o664",
+    "sha256": "8f7d9cfe1971c5a32f3e5edb63ddfad73a11cc7de19d5065a6ec75fd118c0fdb",
+    "size": 8455
+  },
+  ".mastracode/skills/planning-with-files/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "8560b6940aff479bcad1b90292f8cceac6be770ae041e54efdc054d34fd803df",
+    "size": 1866
+  },
+  ".mastracode/skills/planning-with-files/scripts/check-complete.sh": {
+    "mode": "0o664",
+    "sha256": "7ac07371ff7154880dbc8123bff07ef5501bd11b7e99c8fac113951af6307fa2",
+    "size": 1923
+  },
+  ".mastracode/skills/planning-with-files/scripts/gate-stop.sh": {
+    "mode": "0o775",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  ".mastracode/skills/planning-with-files/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "214c9c368326d6313a4afe037db19250dac692763d57385c16a7e46c772a84ec",
+    "size": 3853
+  },
+  ".mastracode/skills/planning-with-files/scripts/init-session.sh": {
+    "mode": "0o664",
+    "sha256": "e5971f3b1615ac5337afa431a38226961247c9b3d85f1b9064ea017650476148",
+    "size": 3676
+  },
+  ".mastracode/skills/planning-with-files/scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  ".mastracode/skills/planning-with-files/scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  ".mastracode/skills/planning-with-files/scripts/ledger-summary.sh": {
+    "mode": "0o664",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  ".mastracode/skills/planning-with-files/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  ".mastracode/skills/planning-with-files/scripts/session-catchup.py": {
+    "mode": "0o664",
+    "sha256": "c84f46171f4720adf9d20772dceb70e955e24c94852f4f5f83a03a27cb38c5f2",
+    "size": 17519
+  },
+  ".mastracode/skills/planning-with-files/scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  ".mastracode/skills/planning-with-files/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "0fa74beaa427a8a5b750129b34a5c48ea413f8ef958efebde5b561a446f0d820",
+    "size": 1039
+  },
+  ".mastracode/skills/planning-with-files/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "5da1602030d6913513956e6cbd4e3b64b575b93bd82d500cacb719eb8444a35d",
+    "size": 1541
+  },
+  ".mastracode/skills/planning-with-files/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "3c4b61444270f689c3dab81b7113467fb87e9705175aea9c3a3b970bd4e777a3",
+    "size": 2257
+  },
+  ".opencode/commands/pwf-status.md": {
+    "mode": "0o664",
+    "sha256": "bf8a12782a25c333a03331fce2d9b28a10c1ce4903641a01318094257265a666",
+    "size": 358
+  },
+  ".opencode/commands/pwf.md": {
+    "mode": "0o664",
+    "sha256": "33509744478efc4fdb12d7d38802a976714b1731506608335cf94aa247575d85",
+    "size": 949
+  },
+  ".opencode/package.json": {
+    "mode": "0o664",
+    "sha256": "bde69f88136e1feaed4a7509c0742cf47ccf7578d1989add675b4b2322c59876",
+    "size": 66
+  },
+  ".opencode/packages/opencode-planning-with-files/README.md": {
+    "mode": "0o664",
+    "sha256": "f487398bd592d469f8b9731e27e08d385a85e328f0c3842070606b8bd9c7a0c8",
+    "size": 2685
+  },
+  ".opencode/packages/opencode-planning-with-files/__tests__/core.test.ts": {
+    "mode": "0o664",
+    "sha256": "d1091add6ddd5643375e7ba1fb2ffd49be806c2aa9a9543e8bb1658c20fa830c",
+    "size": 17468
+  },
+  ".opencode/packages/opencode-planning-with-files/__tests__/plugin.test.ts": {
+    "mode": "0o664",
+    "sha256": "4ebab04cbb3f249c8072db712baaa96a68dd9fe461cb07616bf55990f1751e33",
+    "size": 11975
+  },
+  ".opencode/packages/opencode-planning-with-files/package-lock.json": {
+    "mode": "0o664",
+    "sha256": "64d6f10b2cb0954532d59a125f2ae5cd249a8f89c21352416bea4b1ee4981bcb",
+    "size": 62030
+  },
+  ".opencode/packages/opencode-planning-with-files/package.json": {
+    "mode": "0o664",
+    "sha256": "054752fa64e04b26b9452b7314d4582af2447d49fad02aab773f24ba2d3f630d",
+    "size": 1470
+  },
+  ".opencode/packages/opencode-planning-with-files/src/core.ts": {
+    "mode": "0o664",
+    "sha256": "fff362ece4324be0b2a8bf87b36f470614a4e5f34e0020661453760adb4c4b20",
+    "size": 30560
+  },
+  ".opencode/packages/opencode-planning-with-files/src/index.ts": {
+    "mode": "0o664",
+    "sha256": "77432116ccedba8a664719de42fd8f99436fb11f2c8af9289c80c59052f725cf",
+    "size": 8384
+  },
+  ".opencode/packages/opencode-planning-with-files/tsconfig.json": {
+    "mode": "0o664",
+    "sha256": "29abb8649f73c66d5b5f807103a8d591a878cc1ce2fe959ead50a4e7805950ca",
+    "size": 374
+  },
+  ".opencode/plugins/planning-with-files.ts": {
+    "mode": "0o664",
+    "sha256": "3f45e2f4b4d0f14898d60b535541de9fac6f0accfec25a4b11f0abc44eab4eb5",
+    "size": 245
+  },
+  ".opencode/skills/planning-with-files/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "21dabd149ff5875702a1c4de095430a4482ad1fdf7ef4bfcc51d2727178c1e5e",
+    "size": 13092
+  },
+  ".opencode/skills/planning-with-files/examples.md": {
+    "mode": "0o664",
+    "sha256": "450355fac69e0fac93453b6c7383c8fb9ba3470662f6c8291080028f73ce00dc",
+    "size": 4518
+  },
+  ".opencode/skills/planning-with-files/reference.md": {
+    "mode": "0o664",
+    "sha256": "8f7d9cfe1971c5a32f3e5edb63ddfad73a11cc7de19d5065a6ec75fd118c0fdb",
+    "size": 8455
+  },
+  ".opencode/skills/planning-with-files/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "8560b6940aff479bcad1b90292f8cceac6be770ae041e54efdc054d34fd803df",
+    "size": 1866
+  },
+  ".opencode/skills/planning-with-files/scripts/check-complete.sh": {
+    "mode": "0o664",
+    "sha256": "ad5aff7b13055f3ef55c28e9b277c086d9f225d87cc914278a3fc8d3c94f41ce",
+    "size": 1804
+  },
+  ".opencode/skills/planning-with-files/scripts/gate-stop.sh": {
+    "mode": "0o775",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  ".opencode/skills/planning-with-files/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "2bb8b117f5a8da752318238a7acec3ecc512dec7cc9784775c91c98fdb273e1e",
+    "size": 2509
+  },
+  ".opencode/skills/planning-with-files/scripts/init-session.sh": {
+    "mode": "0o664",
+    "sha256": "2ea385e068ba9b8f4b208a3d566deda17b831e5a94ec3590c22c14282bd927f0",
+    "size": 2332
+  },
+  ".opencode/skills/planning-with-files/scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  ".opencode/skills/planning-with-files/scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  ".opencode/skills/planning-with-files/scripts/ledger-summary.sh": {
+    "mode": "0o664",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  ".opencode/skills/planning-with-files/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  ".opencode/skills/planning-with-files/scripts/session-catchup.py": {
+    "mode": "0o664",
+    "sha256": "f8d35b02ca161467a1a6b1e1595e96fe8badeca897238014181464895bf0b4b7",
+    "size": 31492
+  },
+  ".opencode/skills/planning-with-files/scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  ".opencode/skills/planning-with-files/templates/analytics_findings.md": {
+    "mode": "0o664",
+    "sha256": "cd46495d0a7d59f150f1ecc7f9528bb1b0856bec73a2d04e06f48cdb6798ec0f",
+    "size": 1803
+  },
+  ".opencode/skills/planning-with-files/templates/analytics_task_plan.md": {
+    "mode": "0o664",
+    "sha256": "9339e575779a2e045073316c3deb8638ab49230a9b5f83143cbd4da7d6004981",
+    "size": 2352
+  },
+  ".opencode/skills/planning-with-files/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "bb9237ccbf08148d7f7f23ad58fbc9bd7c879c6d0cbca1d533b5b5f21c26c529",
+    "size": 1161
+  },
+  ".opencode/skills/planning-with-files/templates/loop.md": {
+    "mode": "0o664",
+    "sha256": "cb13b5f1030a015442a981da69fa0dc910f78f4782ebfa2fd0eac00d6e71a143",
+    "size": 2143
+  },
+  ".opencode/skills/planning-with-files/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "28fc357000ed2b18910c4e436f0f2e02f4abf0acd29cce370a2670640974f31c",
+    "size": 1547
+  },
+  ".opencode/skills/planning-with-files/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "3c4b61444270f689c3dab81b7113467fb87e9705175aea9c3a3b970bd4e777a3",
+    "size": 2257
+  },
+  ".pi/skills/planning-with-files/README.md": {
+    "mode": "0o664",
+    "sha256": "96f5d427520cdcaf82c0e2a93abcd4607b6c2f744ecf782fbc5e2be173ff173a",
+    "size": 4545
+  },
+  ".pi/skills/planning-with-files/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "ed6df478b71dfb9f729c6692de37eac82a8cd346a29d5053388c374402f99398",
+    "size": 37056
+  },
+  ".pi/skills/planning-with-files/examples.md": {
+    "mode": "0o664",
+    "sha256": "450355fac69e0fac93453b6c7383c8fb9ba3470662f6c8291080028f73ce00dc",
+    "size": 4518
+  },
+  ".pi/skills/planning-with-files/extensions/planning-with-files/README.md": {
+    "mode": "0o664",
+    "sha256": "aa4bbc86527f8ee1d6365458c204015458f96f3c15e8b3c36f59a4d374dc5ea8",
+    "size": 672
+  },
+  ".pi/skills/planning-with-files/extensions/planning-with-files/__tests__/attestation.test.ts": {
+    "mode": "0o664",
+    "sha256": "5689b6b302edeecbb681b66964f798d9683674474cfb0fbf529eeb4994e0e7f5",
+    "size": 2632
+  },
+  ".pi/skills/planning-with-files/extensions/planning-with-files/__tests__/plan-anchor.test.ts": {
+    "mode": "0o664",
+    "sha256": "eaec2b3b446df89a8b2712952c76caf6c6083ad44561df331b4f04da02719aad",
+    "size": 10937
+  },
+  ".pi/skills/planning-with-files/extensions/planning-with-files/__tests__/runtime.test.ts": {
+    "mode": "0o664",
+    "sha256": "7b637690b4cbb98eca71f44fca001723f337ecf2724b47098af47b9dda82be19",
+    "size": 23933
+  },
+  ".pi/skills/planning-with-files/extensions/planning-with-files/attestation.ts": {
+    "mode": "0o664",
+    "sha256": "73079b87f2dce4e5ba84f0c462188533c89a69754fab95a227262f51d876ff7a",
+    "size": 1396
+  },
+  ".pi/skills/planning-with-files/extensions/planning-with-files/constants.ts": {
+    "mode": "0o664",
+    "sha256": "db24a55a0bd22c791e4b00db20f6d85ac548d1c2f011abb198f91a75b26ae4e5",
+    "size": 1525
+  },
+  ".pi/skills/planning-with-files/extensions/planning-with-files/index.ts": {
+    "mode": "0o664",
+    "sha256": "8b55865e1f9970b39e5563f15d653d255f679ee4554676c84b8050aa71602eca",
+    "size": 211
+  },
+  ".pi/skills/planning-with-files/extensions/planning-with-files/package-lock.json": {
+    "mode": "0o664",
+    "sha256": "b43e84f002776f08550faa82816fd21d671a647f79ed53d6ee675f02dcaee4ae",
+    "size": 123406
+  },
+  ".pi/skills/planning-with-files/extensions/planning-with-files/package.json": {
+    "mode": "0o664",
+    "sha256": "cea6247930371bf1e24c02b537a1c182aac07e4750c78085235961bded21f5d7",
+    "size": 337
+  },
+  ".pi/skills/planning-with-files/extensions/planning-with-files/plan.ts": {
+    "mode": "0o664",
+    "sha256": "3818dba257a693e214c1f23e9a2ff1153cfaf203e67623a0dcd1e9f23c71811d",
+    "size": 11644
+  },
+  ".pi/skills/planning-with-files/extensions/planning-with-files/runtime.ts": {
+    "mode": "0o664",
+    "sha256": "5f9f0567a897dad84f43626395a7124f8baf2ade35586c09fb2b2ad7d71f5e03",
+    "size": 27394
+  },
+  ".pi/skills/planning-with-files/package.json": {
+    "mode": "0o664",
+    "sha256": "ab81ea007ca8c582238fdcb58b046eed54ba249ed048e798515b90806565db20",
+    "size": 1547
+  },
+  ".pi/skills/planning-with-files/reference.md": {
+    "mode": "0o664",
+    "sha256": "8f7d9cfe1971c5a32f3e5edb63ddfad73a11cc7de19d5065a6ec75fd118c0fdb",
+    "size": 8455
+  },
+  ".pi/skills/planning-with-files/scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  ".pi/skills/planning-with-files/scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  ".pi/skills/planning-with-files/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "667ddae114deb1b0b6048299bb404045cdcaa0ff9d59057ea060b88ff2c87f07",
+    "size": 10656
+  },
+  ".pi/skills/planning-with-files/scripts/check-complete.sh": {
+    "mode": "0o775",
+    "sha256": "82cdacd14b2e5b68437823fa0dc2de984e862266110b5cfe8c61497dfdbdceb3",
+    "size": 11555
+  },
+  ".pi/skills/planning-with-files/scripts/gate-stop.sh": {
+    "mode": "0o664",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  ".pi/skills/planning-with-files/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "4d854b872b9255412fee506b2438029c58b9cb4edcbae4fd29a60732cc83a4f6",
+    "size": 6490
+  },
+  ".pi/skills/planning-with-files/scripts/init-session.sh": {
+    "mode": "0o775",
+    "sha256": "c35d70ab28338eef36ef74c472fdcfd5ea044098a5a4b553a6022ddd9ad14559",
+    "size": 12883
+  },
+  ".pi/skills/planning-with-files/scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  ".pi/skills/planning-with-files/scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  ".pi/skills/planning-with-files/scripts/ledger-append.ps1": {
+    "mode": "0o664",
+    "sha256": "8d78d0f451f645f426fa3c6d2bff2bb22b5f7f63fb97c3a988cbdef728e21534",
+    "size": 6844
+  },
+  ".pi/skills/planning-with-files/scripts/ledger-append.sh": {
+    "mode": "0o664",
+    "sha256": "d918315f8b73a2a1e1dddef1c76798d1fd72f5f99644ff34115d0e7ac7e69290",
+    "size": 12190
+  },
+  ".pi/skills/planning-with-files/scripts/ledger-summary.ps1": {
+    "mode": "0o664",
+    "sha256": "5f483af95e0253688e7e5d14fba4da8c316a3568fa47d887edb6da0deb78de80",
+    "size": 5335
+  },
+  ".pi/skills/planning-with-files/scripts/ledger-summary.sh": {
+    "mode": "0o664",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  ".pi/skills/planning-with-files/scripts/phase-status.ps1": {
+    "mode": "0o664",
+    "sha256": "59d8e7d8232931177105155d2b2d3211c45b63f4a41e11c3ed1bb00278524fa6",
+    "size": 9412
+  },
+  ".pi/skills/planning-with-files/scripts/phase-status.sh": {
+    "mode": "0o664",
+    "sha256": "3eb6cee61556bc238411304fcf1052ef7920de3b719dba36f7a0c23d8ede61d3",
+    "size": 6866
+  },
+  ".pi/skills/planning-with-files/scripts/plan-doctor.sh": {
+    "mode": "0o664",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  ".pi/skills/planning-with-files/scripts/resolve-plan-dir.ps1": {
+    "mode": "0o664",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  ".pi/skills/planning-with-files/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  ".pi/skills/planning-with-files/scripts/session-catchup.py": {
+    "mode": "0o775",
+    "sha256": "a4a30a4de2d5513690f966eec80d823b5e2af8406205b65f6d23887a0b8f3ef3",
+    "size": 35868
+  },
+  ".pi/skills/planning-with-files/scripts/set-active-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  ".pi/skills/planning-with-files/scripts/set-active-plan.sh": {
+    "mode": "0o664",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  ".pi/skills/planning-with-files/scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  ".pi/skills/planning-with-files/scripts/verify-shell-line-endings.mjs": {
+    "mode": "0o664",
+    "sha256": "6bfe0ef2a0599ed77f45036380eaf94af0eaa2eff67997205ac4e269482a8201",
+    "size": 1350
+  },
+  ".pi/skills/planning-with-files/templates/analytics_findings.md": {
+    "mode": "0o664",
+    "sha256": "cd46495d0a7d59f150f1ecc7f9528bb1b0856bec73a2d04e06f48cdb6798ec0f",
+    "size": 1803
+  },
+  ".pi/skills/planning-with-files/templates/analytics_task_plan.md": {
+    "mode": "0o664",
+    "sha256": "9339e575779a2e045073316c3deb8638ab49230a9b5f83143cbd4da7d6004981",
+    "size": 2352
+  },
+  ".pi/skills/planning-with-files/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "bb9237ccbf08148d7f7f23ad58fbc9bd7c879c6d0cbca1d533b5b5f21c26c529",
+    "size": 1161
+  },
+  ".pi/skills/planning-with-files/templates/loop.md": {
+    "mode": "0o664",
+    "sha256": "cb13b5f1030a015442a981da69fa0dc910f78f4782ebfa2fd0eac00d6e71a143",
+    "size": 2143
+  },
+  ".pi/skills/planning-with-files/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "28fc357000ed2b18910c4e436f0f2e02f4abf0acd29cce370a2670640974f31c",
+    "size": 1547
+  },
+  ".pi/skills/planning-with-files/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "3c4b61444270f689c3dab81b7113467fb87e9705175aea9c3a3b970bd4e777a3",
+    "size": 2257
+  },
+  "AGENTS.md": {
+    "mode": "0o664",
+    "sha256": "651067324f176f4e4b58b52144399c9a2bf7618ed87a577da1b80b3ee34255ca",
+    "size": 4410
+  },
+  "CHANGELOG.md": {
+    "mode": "0o664",
+    "sha256": "de52e869b2aedacd2d84b0e520c224fdf54825c4f23331c31cda3a985358ad89",
+    "size": 223819
+  },
+  "CITATION.cff": {
+    "mode": "0o664",
+    "sha256": "7cabd56e45c772cfef737a99b4db8eb198f587db8b57ec526e745a8a9f292115",
+    "size": 1016
+  },
+  "CONTRIBUTING.md": {
+    "mode": "0o664",
+    "sha256": "34286371d6ba005f73df11fe500a897ad28a4950014bb07c435aca58dfdda373",
+    "size": 3953
+  },
+  "CONTRIBUTORS.md": {
+    "mode": "0o664",
+    "sha256": "2f15fdfb0473f9246467aa1850f21ad670c4b293af08e7bc958a9f2242c68980",
+    "size": 53675
+  },
+  "LICENSE": {
+    "mode": "0o664",
+    "sha256": "4f2e5ecfaa4e0833621cfe54c0bdc2f60f086c0925540d7bdc713517eafb3c84",
+    "size": 1066
+  },
+  "MIGRATION.md": {
+    "mode": "0o664",
+    "sha256": "bcfa9321c580939c92352f4ad5e06d7d0c248de96e6542d5ffc58807b8d507af",
+    "size": 9741
+  },
+  "README.md": {
+    "mode": "0o664",
+    "sha256": "274c60444fc6ebf007826b213e4cfeb44ca6da0a2a85ac2dc72345f6de1c07e0",
+    "size": 81469
+  },
+  "SECURITY.md": {
+    "mode": "0o664",
+    "sha256": "404bf19f582a96711a40f1b66fcecf6598bdbb518dab40224ebeb8ec9c65d5d4",
+    "size": 2869
+  },
+  "commands/plan-ar.md": {
+    "mode": "0o664",
+    "sha256": "69c3632f066afc311c397f0e3f48e1535087b9c0800175313abd85e65d6b6504",
+    "size": 1322
+  },
+  "commands/plan-attest.md": {
+    "mode": "0o664",
+    "sha256": "a5e6adb867c2f251e692dedf2efc6f79e916b61a5c492bfe9242c89dbb2857a0",
+    "size": 1858
+  },
+  "commands/plan-de.md": {
+    "mode": "0o664",
+    "sha256": "d6751401ef34a4aaaff32839658d60c07548952af437a967b30957c47cefc2d5",
+    "size": 1041
+  },
+  "commands/plan-doctor.md": {
+    "mode": "0o664",
+    "sha256": "b108ad5ea847764234fbfab7f734fe456f325d3e7a6b758015fd08ac4f551534",
+    "size": 1537
+  },
+  "commands/plan-es.md": {
+    "mode": "0o664",
+    "sha256": "82ba2562ef404850d622b626735921e3f17ace6f35d86741cebcf37e6cc49fb4",
+    "size": 1127
+  },
+  "commands/plan-goal.md": {
+    "mode": "0o664",
+    "sha256": "e148eefe8c8248500f8466c4924bae2565157a831db8b0f441c7dfea84d7ad78",
+    "size": 1804
+  },
+  "commands/plan-loop.md": {
+    "mode": "0o664",
+    "sha256": "e0d99651190ee4aa1adeb79cc87806ce93888ba56a423b02e4b69382a4d4c9d3",
+    "size": 2070
+  },
+  "commands/plan-zh.md": {
+    "mode": "0o664",
+    "sha256": "32dd233f903e89074b551b589b6a139b053eb5940c159299da654587724defb9",
+    "size": 967
+  },
+  "commands/plan-zht.md": {
+    "mode": "0o664",
+    "sha256": "b6a8f83f18598df53b5606f0a944417d3c09075bb095da2c89f822f2ae8cfd83",
+    "size": 993
+  },
+  "commands/plan.md": {
+    "mode": "0o664",
+    "sha256": "9cf192d71881eec69a32c47f7fb3f016b888a9b759a2cd0f74a733534ad69e28",
+    "size": 508
+  },
+  "commands/pwf.md": {
+    "mode": "0o664",
+    "sha256": "93d8a3c49cf2242f97f84f0c9929308272133e83a5fdf5858c571ee66d67934f",
+    "size": 823
+  },
+  "commands/start.md": {
+    "mode": "0o664",
+    "sha256": "599ccc7275dd67152b0971258d2227305b6b7a7d57ca022674ef8e25f8e8ac33",
+    "size": 417
+  },
+  "commands/status.md": {
+    "mode": "0o664",
+    "sha256": "81d9b2d49a8c1be8c8298d5eeb00c641dd50f0b1f10e7ac3309de4ec9da7d309",
+    "size": 1265
+  },
+  "docs/adal.md": {
+    "mode": "0o664",
+    "sha256": "fd99bd3814a74f7780c661d535eb2b174ad36f544dd7576ac95b13c0742539c2",
+    "size": 5249
+  },
+  "docs/agent-forgets-plan-after-clear.md": {
+    "mode": "0o664",
+    "sha256": "b3bec17f68b7de8c3bc832f71e48bc0aa1495154136b1aadbc63bd08afcea9fd",
+    "size": 4955
+  },
+  "docs/antigravity.md": {
+    "mode": "0o664",
+    "sha256": "bb11471ba49f9b52bc45f06b466e0fc1b388f13ca0236962ea53bf67c8557e5d",
+    "size": 6716
+  },
+  "docs/article-v2.md": {
+    "mode": "0o664",
+    "sha256": "930b39dcbcbf3fb621f025fb864153a30c25046a5e329a91e1af94b454c0911c",
+    "size": 5942
+  },
+  "docs/article.md": {
+    "mode": "0o664",
+    "sha256": "bfe88249ad46caab642ec9390de5e994752351df47aca3556da9b4d0cf6df62e",
+    "size": 10279
+  },
+  "docs/attestation-locking.md": {
+    "mode": "0o664",
+    "sha256": "c1732dc1434139e07f9bf9d53b319d4dff1624f049d3a0535f86d5a115e3a002",
+    "size": 3708
+  },
+  "docs/autohand.md": {
+    "mode": "0o664",
+    "sha256": "da133f0bd1d5e73893a07e1d4a7f6018d08c0f2238e068e5fa4d7c35d609baae",
+    "size": 2744
+  },
+  "docs/benchmark/index.html": {
+    "mode": "0o664",
+    "sha256": "1a441fc60ba39604e01918af7586d8e8b149fcbc40bbad01e005f01e4f5488ec",
+    "size": 18796
+  },
+  "docs/boxlite.md": {
+    "mode": "0o664",
+    "sha256": "d7cf95b2d8322fe3e41f15b5bb37abdf98a3c559a07be869f817fb33348624ca",
+    "size": 6836
+  },
+  "docs/cache-safe-diagram.md": {
+    "mode": "0o664",
+    "sha256": "949e4211b3fac139c0ecbdf757c9a2f73024b7a3c9c71ce03b9d70273252253c",
+    "size": 5631
+  },
+  "docs/claude-code-lost-context-after-compaction.md": {
+    "mode": "0o664",
+    "sha256": "dd3d54ed83dc1a9ece21916ca6bb0ec926ac04f118b3b7be9a86ae288fd65115",
+    "size": 5109
+  },
+  "docs/codebuddy.md": {
+    "mode": "0o664",
+    "sha256": "a3d3a5b2264c9a72ff1bc9cd22458f9db37eb9ccb3882474002a5473b02d81e2",
+    "size": 6629
+  },
+  "docs/codex.md": {
+    "mode": "0o664",
+    "sha256": "37fddb11386eb4c4cc77f19681a14182ff7f4ec62007533a811ee767abbf1a5e",
+    "size": 10241
+  },
+  "docs/continue.md": {
+    "mode": "0o664",
+    "sha256": "fd3fb1f0460777334d181e45c78d2f877dfef752bfa79ff1762b3350330d5f08",
+    "size": 2303
+  },
+  "docs/copilot.md": {
+    "mode": "0o664",
+    "sha256": "748d0838c161da8886c5fa45a5bf6b6a46c5421fc1ac596a2a1817226fad7af1",
+    "size": 4238
+  },
+  "docs/cursor.md": {
+    "mode": "0o664",
+    "sha256": "1e9da78ab9810f45c88034edf2e8404084019b7ac86e7d91f4511643a3e3afb7",
+    "size": 5523
+  },
+  "docs/evals.md": {
+    "mode": "0o664",
+    "sha256": "835b4e83ca977a85dcb27db86e608519739bf75b6a0b4af6486adcd91dd3e6db",
+    "size": 24535
+  },
+  "docs/factory.md": {
+    "mode": "0o664",
+    "sha256": "38e86f0292b046c2beb72ad21721d5b38ddada4779d9b4901bdb1de6cb4cf5b3",
+    "size": 6978
+  },
+  "docs/gemini.md": {
+    "mode": "0o664",
+    "sha256": "3905d07f9934e594fcd792c77adb914deea812eeed1b39df47eaad3c63b0c670",
+    "size": 7213
+  },
+  "docs/hermes.md": {
+    "mode": "0o664",
+    "sha256": "08b45bef00f8e643e498c9e75cfb9b66fd31ab07708ad1cc47fc1e3b00bd4483",
+    "size": 13255
+  },
+  "docs/installation.md": {
+    "mode": "0o664",
+    "sha256": "764b4315784f811cf0bf7cd4ee5d9b7c7d4bf3f6250e881c4449a96303721e04",
+    "size": 7113
+  },
+  "docs/kilocode.md": {
+    "mode": "0o664",
+    "sha256": "a2a352382b146651538a67fdb8313729badc1bb7961a77f1a33f5dd5892e0084",
+    "size": 6197
+  },
+  "docs/kiro.md": {
+    "mode": "0o664",
+    "sha256": "1c4197bde71a90b8154d72e3e7c502dcf0ad65d4e82fc62c07727e2a4bc761bf",
+    "size": 3637
+  },
+  "docs/languages.md": {
+    "mode": "0o664",
+    "sha256": "e7044efa6b1e9d40fd5ed791114a0cbf089adca562f260871803b95dacbeacca",
+    "size": 4472
+  },
+  "docs/long-running-agent-tasks.md": {
+    "mode": "0o664",
+    "sha256": "10def08c3ca77beab191d9338e85c3281190d61eba2ab47f3cc7a160cfdd8ba6",
+    "size": 5762
+  },
+  "docs/mastra.md": {
+    "mode": "0o664",
+    "sha256": "3a0752e9f986e827e5a7d2e1b9b40be525b2cf1988e965598eebd60a7b1e0372",
+    "size": 6134
+  },
+  "docs/openclaw.md": {
+    "mode": "0o664",
+    "sha256": "236afd19c80e17b4e7eb0b1108d0c363bf37a75e0604c11613fd034d38557499",
+    "size": 2920
+  },
+  "docs/opencode.md": {
+    "mode": "0o664",
+    "sha256": "a1807fec32035c548e968a6bd5e5337b67d6b382caa409fc8fd90db07d3d23ed",
+    "size": 11558
+  },
+  "docs/perf-notes.md": {
+    "mode": "0o664",
+    "sha256": "cd8884603b5fc330044009548d389d7ec74eedb9f3ee2226db0350e6a79b64e3",
+    "size": 2632
+  },
+  "docs/pi-agent.md": {
+    "mode": "0o664",
+    "sha256": "2a2e6c200215b85362155b2ce8cfa24b63d69c3e70ba56debf4d904ea44c285f",
+    "size": 3434
+  },
+  "docs/quickstart.md": {
+    "mode": "0o664",
+    "sha256": "e823a6bc37148cf8057976df4993f5821cf9d53a0c1531d05f04b451e7ec8a20",
+    "size": 9237
+  },
+  "docs/troubleshooting.md": {
+    "mode": "0o664",
+    "sha256": "7f4e3e1840d74da974603de0281785ff841360d6d875b622349566f73b38888d",
+    "size": 6557
+  },
+  "docs/windows.md": {
+    "mode": "0o664",
+    "sha256": "36ab6d4bed7a2f49bc79f7d4f2a30a66501b8b0ec504c910b6b7b8e68f3bbb80",
+    "size": 3079
+  },
+  "docs/workflow.md": {
+    "mode": "0o664",
+    "sha256": "42df04bd8d8872f9203afb87de160c5289e385e74e5b454a128a79b57cdd57d1",
+    "size": 15650
+  },
+  "examples/README.md": {
+    "mode": "0o664",
+    "sha256": "cde0368a4a19023390d0afd6197e88ac9ed10e3bcefd5b54249ce2f57e7891d4",
+    "size": 17721
+  },
+  "examples/boxlite/README.md": {
+    "mode": "0o664",
+    "sha256": "95c39474806db1fdd8eec60554a5ac38c94c977ae1598d654cf97170e52c1332",
+    "size": 616
+  },
+  "examples/boxlite/quickstart.py": {
+    "mode": "0o664",
+    "sha256": "ad4bd8e0f280afda4c56aec10a92c93eecbd9e00a037e5cd5eed9eb9888a5f4d",
+    "size": 3959
+  },
+  "hooks/claude-hook.sh": {
+    "mode": "0o664",
+    "sha256": "4f434d5a56b35cf5251efbe5ce7b5cab1701dc20d31ed084e303d60db68a5f7c",
+    "size": 13933
+  },
+  "hooks/codex-hooks.json": {
+    "mode": "0o664",
+    "sha256": "b137322fcf776bc240ee49aa0c63bd0869f569b9cd4d908aab27ea1cda91b740",
+    "size": 4212
+  },
+  "hooks/hooks.json": {
+    "mode": "0o664",
+    "sha256": "efdc9cb532b69f58cfc6c700789f77ea6fc3b644f5b559da464b9fb958732365",
+    "size": 2229
+  },
+  "llms.txt": {
+    "mode": "0o664",
+    "sha256": "ad92d04abf4ac2b17eebe046c3c04e4d64bf54c8cd5bc3bc8c360b1a5ef856ef",
+    "size": 4882
+  },
+  "media/banner.png": {
+    "mode": "0o664",
+    "sha256": "240db1b0d021e76b2cecb25597ea824df83a22e8f882ff341f511687f814007f",
+    "size": 1823958
+  },
+  "media/benchmark-skill-vs-baseline.svg": {
+    "mode": "0o664",
+    "sha256": "53fe252d36180a830351bf4307f2eed64296a096b269a415071189bdbc5365b2",
+    "size": 2780
+  },
+  "media/recovery-turns.svg": {
+    "mode": "0o664",
+    "sha256": "9c283dec6209d95291cd5eba68ebf2b53cf67227e965aa63c1ea334551f8b424",
+    "size": 1630
+  },
+  "media/social-preview.png": {
+    "mode": "0o664",
+    "sha256": "009dc148eb201c3b338eb928eb865154c3d5a15bdea807bf5ae613dc521acc58",
+    "size": 39889
+  },
+  "media/social-preview.svg": {
+    "mode": "0o664",
+    "sha256": "0114d53831742efa4700c858db31e72a84686ff2324bbdd7ea1562d383d25313",
+    "size": 924
+  },
+  "media/terminal-with-plan.svg": {
+    "mode": "0o664",
+    "sha256": "e0e28ef798b1ed89ca81f967915cf7d4023f281f5a7eb72a0a1c2d870492bfdd",
+    "size": 2172
+  },
+  "media/terminal-without-plan.svg": {
+    "mode": "0o664",
+    "sha256": "6a5b2c7f821915bbeb62d0ea4568c1192168d903c562baa3aeb8ab4b20591316",
+    "size": 1236
+  },
+  "media/v3-banner-1400.jpg": {
+    "mode": "0o664",
+    "sha256": "20002ec5187fe5ea524121b7a379b92a94f30c21e3cb2f432714064ab47d3eb6",
+    "size": 220479
+  },
+  "media/v3-banner.png": {
+    "mode": "0o664",
+    "sha256": "f4cd40dafd22aeaa45d5d930eb96574e5f961ca5fa5e48b0630fc6dba24bc407",
+    "size": 7596532
+  },
+  "scripts/_v240_update_hook_bodies.py": {
+    "mode": "0o664",
+    "sha256": "9446aa31593fa7b912ba4908b182f47e1e952a258b132d9331c52fb96352a93d",
+    "size": 10765
+  },
+  "scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  "scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  "scripts/build-clawhub-upload.py": {
+    "mode": "0o664",
+    "sha256": "20d09b53c65572194dcbc30c948fa61522c9a6a59ab33c77feb4c2059d7342ec",
+    "size": 9180
+  },
+  "scripts/bump-version.py": {
+    "mode": "0o664",
+    "sha256": "16389674bf863c281ee597d1bb88ac76ef83b5c082c97ae965b337f5e9fdc96c",
+    "size": 8568
+  },
+  "scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "667ddae114deb1b0b6048299bb404045cdcaa0ff9d59057ea060b88ff2c87f07",
+    "size": 10656
+  },
+  "scripts/check-complete.sh": {
+    "mode": "0o775",
+    "sha256": "82cdacd14b2e5b68437823fa0dc2de984e862266110b5cfe8c61497dfdbdceb3",
+    "size": 11555
+  },
+  "scripts/check-continue.sh": {
+    "mode": "0o664",
+    "sha256": "7eb9ee1aa03ad15b7f52bdadebad81e6fced59b137f4d95d2544362b68cee73e",
+    "size": 1021
+  },
+  "scripts/gate-stop.sh": {
+    "mode": "0o664",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  "scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "4d854b872b9255412fee506b2438029c58b9cb4edcbae4fd29a60732cc83a4f6",
+    "size": 6490
+  },
+  "scripts/init-session.sh": {
+    "mode": "0o664",
+    "sha256": "c35d70ab28338eef36ef74c472fdcfd5ea044098a5a4b553a6022ddd9ad14559",
+    "size": 12883
+  },
+  "scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  "scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  "scripts/ledger-append.ps1": {
+    "mode": "0o664",
+    "sha256": "8d78d0f451f645f426fa3c6d2bff2bb22b5f7f63fb97c3a988cbdef728e21534",
+    "size": 6844
+  },
+  "scripts/ledger-append.sh": {
+    "mode": "0o775",
+    "sha256": "d918315f8b73a2a1e1dddef1c76798d1fd72f5f99644ff34115d0e7ac7e69290",
+    "size": 12190
+  },
+  "scripts/ledger-summary.ps1": {
+    "mode": "0o664",
+    "sha256": "5f483af95e0253688e7e5d14fba4da8c316a3568fa47d887edb6da0deb78de80",
+    "size": 5335
+  },
+  "scripts/ledger-summary.sh": {
+    "mode": "0o775",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  "scripts/phase-status.ps1": {
+    "mode": "0o664",
+    "sha256": "59d8e7d8232931177105155d2b2d3211c45b63f4a41e11c3ed1bb00278524fa6",
+    "size": 9412
+  },
+  "scripts/phase-status.sh": {
+    "mode": "0o775",
+    "sha256": "3eb6cee61556bc238411304fcf1052ef7920de3b719dba36f7a0c23d8ede61d3",
+    "size": 6866
+  },
+  "scripts/plan-doctor.sh": {
+    "mode": "0o775",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  "scripts/resolve-plan-dir.ps1": {
+    "mode": "0o664",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  "scripts/resolve-plan-dir.sh": {
+    "mode": "0o775",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  "scripts/session-catchup.py": {
+    "mode": "0o775",
+    "sha256": "9ad9c372b9288d45ed63c919f0069a2e41ba4f3b405a85f052e3a18557e64de9",
+    "size": 28543
+  },
+  "scripts/set-active-plan.ps1": {
+    "mode": "0o775",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  "scripts/set-active-plan.sh": {
+    "mode": "0o775",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  "scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  "scripts/sync-ide-folders.py": {
+    "mode": "0o664",
+    "sha256": "bdf5e9a5c94d2ace54d49503bd44e3d0dcb5508e71901f65636a75dce2e032e3",
+    "size": 16416
+  },
+  "skills/i18n/planning-with-files-ar/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "de5b9ea146b803a9d5498df5f59a8ef48f048690c93aab578913e7acd290baea",
+    "size": 17778
+  },
+  "skills/i18n/planning-with-files-ar/scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  "skills/i18n/planning-with-files-ar/scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  "skills/i18n/planning-with-files-ar/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "56093d6663064a4c7f9157d5f134f61171d1fa1e36482032ccfb923baa566bc7",
+    "size": 2501
+  },
+  "skills/i18n/planning-with-files-ar/scripts/check-complete.sh": {
+    "mode": "0o664",
+    "sha256": "512622274b2cf269fb879294c31044f7e4cdd4e7f9b3fff7b4323e692f6129f5",
+    "size": 2555
+  },
+  "skills/i18n/planning-with-files-ar/scripts/gate-stop.sh": {
+    "mode": "0o664",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  "skills/i18n/planning-with-files-ar/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "b799fb6748af10562587386678af4a608c2dc58c944455e9a22436f61fb360dd",
+    "size": 4048
+  },
+  "skills/i18n/planning-with-files-ar/scripts/init-session.sh": {
+    "mode": "0o664",
+    "sha256": "61b21890c2081f2de5de928c90c3aa9bd30a06f2f63c106b90fe5bec47143559",
+    "size": 3870
+  },
+  "skills/i18n/planning-with-files-ar/scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  "skills/i18n/planning-with-files-ar/scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  "skills/i18n/planning-with-files-ar/scripts/ledger-append.ps1": {
+    "mode": "0o664",
+    "sha256": "8d78d0f451f645f426fa3c6d2bff2bb22b5f7f63fb97c3a988cbdef728e21534",
+    "size": 6844
+  },
+  "skills/i18n/planning-with-files-ar/scripts/ledger-append.sh": {
+    "mode": "0o664",
+    "sha256": "d918315f8b73a2a1e1dddef1c76798d1fd72f5f99644ff34115d0e7ac7e69290",
+    "size": 12190
+  },
+  "skills/i18n/planning-with-files-ar/scripts/ledger-summary.ps1": {
+    "mode": "0o664",
+    "sha256": "5f483af95e0253688e7e5d14fba4da8c316a3568fa47d887edb6da0deb78de80",
+    "size": 5335
+  },
+  "skills/i18n/planning-with-files-ar/scripts/ledger-summary.sh": {
+    "mode": "0o664",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  "skills/i18n/planning-with-files-ar/scripts/phase-status.ps1": {
+    "mode": "0o664",
+    "sha256": "59d8e7d8232931177105155d2b2d3211c45b63f4a41e11c3ed1bb00278524fa6",
+    "size": 9412
+  },
+  "skills/i18n/planning-with-files-ar/scripts/phase-status.sh": {
+    "mode": "0o664",
+    "sha256": "3eb6cee61556bc238411304fcf1052ef7920de3b719dba36f7a0c23d8ede61d3",
+    "size": 6866
+  },
+  "skills/i18n/planning-with-files-ar/scripts/plan-doctor.sh": {
+    "mode": "0o664",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  "skills/i18n/planning-with-files-ar/scripts/resolve-plan-dir.ps1": {
+    "mode": "0o664",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  "skills/i18n/planning-with-files-ar/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  "skills/i18n/planning-with-files-ar/scripts/session-catchup.py": {
+    "mode": "0o664",
+    "sha256": "205890397e6ecfd5aa753274c462c47148ba9bd892ffbf3ee074c4b082df8bb1",
+    "size": 26904
+  },
+  "skills/i18n/planning-with-files-ar/scripts/set-active-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  "skills/i18n/planning-with-files-ar/scripts/set-active-plan.sh": {
+    "mode": "0o664",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  "skills/i18n/planning-with-files-ar/scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  "skills/i18n/planning-with-files-ar/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "5575d52fea3ef8fbd0ede3edde8a66c8617bc8b8e47875fcede0eb196429f1a7",
+    "size": 2040
+  },
+  "skills/i18n/planning-with-files-ar/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "147e435c5ed414581e7df6d606d0fffa2d7a8bceb6bbb6c45373b20d4cdd13da",
+    "size": 2786
+  },
+  "skills/i18n/planning-with-files-ar/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "ea1a8d04b7707c900058fa977163b3b0899c3e1296ef1709613eb64c8cb00ad7",
+    "size": 3312
+  },
+  "skills/i18n/planning-with-files-de/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "4f38119b9497cac3dd7a1d1670a10ff35b94d085a5ca4a4aad91cab8ab8074e0",
+    "size": 14084
+  },
+  "skills/i18n/planning-with-files-de/scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  "skills/i18n/planning-with-files-de/scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  "skills/i18n/planning-with-files-de/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "0657b581321f53933017eb4be9705f918b81cff0cef3ad4b716d1632cdc1c1a1",
+    "size": 2133
+  },
+  "skills/i18n/planning-with-files-de/scripts/check-complete.sh": {
+    "mode": "0o664",
+    "sha256": "ecf33426da75566d72ba3c702a661a86dd82e6ef6f508995194ec7fb2301a3e2",
+    "size": 2177
+  },
+  "skills/i18n/planning-with-files-de/scripts/gate-stop.sh": {
+    "mode": "0o664",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  "skills/i18n/planning-with-files-de/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "58f3e7cda3b6395f2f2c2dd2b62fb2d92833d9511d67e70609085383802cfc0a",
+    "size": 3421
+  },
+  "skills/i18n/planning-with-files-de/scripts/init-session.sh": {
+    "mode": "0o664",
+    "sha256": "627dd7d254ed8f4b5413cd547a14cb2e87df438801693cd4addf9fb9cf99774b",
+    "size": 3249
+  },
+  "skills/i18n/planning-with-files-de/scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  "skills/i18n/planning-with-files-de/scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  "skills/i18n/planning-with-files-de/scripts/ledger-append.ps1": {
+    "mode": "0o664",
+    "sha256": "8d78d0f451f645f426fa3c6d2bff2bb22b5f7f63fb97c3a988cbdef728e21534",
+    "size": 6844
+  },
+  "skills/i18n/planning-with-files-de/scripts/ledger-append.sh": {
+    "mode": "0o664",
+    "sha256": "d918315f8b73a2a1e1dddef1c76798d1fd72f5f99644ff34115d0e7ac7e69290",
+    "size": 12190
+  },
+  "skills/i18n/planning-with-files-de/scripts/ledger-summary.ps1": {
+    "mode": "0o664",
+    "sha256": "5f483af95e0253688e7e5d14fba4da8c316a3568fa47d887edb6da0deb78de80",
+    "size": 5335
+  },
+  "skills/i18n/planning-with-files-de/scripts/ledger-summary.sh": {
+    "mode": "0o664",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  "skills/i18n/planning-with-files-de/scripts/phase-status.ps1": {
+    "mode": "0o664",
+    "sha256": "59d8e7d8232931177105155d2b2d3211c45b63f4a41e11c3ed1bb00278524fa6",
+    "size": 9412
+  },
+  "skills/i18n/planning-with-files-de/scripts/phase-status.sh": {
+    "mode": "0o664",
+    "sha256": "3eb6cee61556bc238411304fcf1052ef7920de3b719dba36f7a0c23d8ede61d3",
+    "size": 6866
+  },
+  "skills/i18n/planning-with-files-de/scripts/plan-doctor.sh": {
+    "mode": "0o664",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  "skills/i18n/planning-with-files-de/scripts/resolve-plan-dir.ps1": {
+    "mode": "0o664",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  "skills/i18n/planning-with-files-de/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  "skills/i18n/planning-with-files-de/scripts/session-catchup.py": {
+    "mode": "0o664",
+    "sha256": "385e203b276900ac2d12dede21f6103685dece47479315d21edaa61b4dce86ed",
+    "size": 26341
+  },
+  "skills/i18n/planning-with-files-de/scripts/set-active-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  "skills/i18n/planning-with-files-de/scripts/set-active-plan.sh": {
+    "mode": "0o664",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  "skills/i18n/planning-with-files-de/scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  "skills/i18n/planning-with-files-de/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "533d94fbcf2f4f263dac98c66b248641f8a119bed5f26a726511b66ac0ae14f7",
+    "size": 1513
+  },
+  "skills/i18n/planning-with-files-de/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "a7b373c7309056b8da2ad6bf88690e59f77042584049402038126ac5ce148fb5",
+    "size": 2110
+  },
+  "skills/i18n/planning-with-files-de/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "7f6b435911a21d60073b52778f17d057e00fa78cdd79e5f8037a269ae2bc22d3",
+    "size": 2729
+  },
+  "skills/i18n/planning-with-files-es/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "51bdc79ecb03ee89b850acad4f153835a4c67cc1769b78caeb43b55395316ac1",
+    "size": 14720
+  },
+  "skills/i18n/planning-with-files-es/scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  "skills/i18n/planning-with-files-es/scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  "skills/i18n/planning-with-files-es/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "befb4784aac1571e38e629c53cbf1fa9612d354f9c89d388d991376fd03c0913",
+    "size": 2153
+  },
+  "skills/i18n/planning-with-files-es/scripts/check-complete.sh": {
+    "mode": "0o664",
+    "sha256": "ebddb6c78ba8a079a622e56e95c94fd0d7c28f731a54888e51daa942c2dc1453",
+    "size": 2202
+  },
+  "skills/i18n/planning-with-files-es/scripts/gate-stop.sh": {
+    "mode": "0o664",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  "skills/i18n/planning-with-files-es/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "0d411b4ff07e8a2a0a127cdab4bb4647b11b9f55495fb21101788693dab6ba0e",
+    "size": 3001
+  },
+  "skills/i18n/planning-with-files-es/scripts/init-session.sh": {
+    "mode": "0o664",
+    "sha256": "aede8c3c74fb40019e57b5f840f16d0440541fdf2403d0726897d56734c8481a",
+    "size": 2829
+  },
+  "skills/i18n/planning-with-files-es/scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  "skills/i18n/planning-with-files-es/scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  "skills/i18n/planning-with-files-es/scripts/ledger-append.ps1": {
+    "mode": "0o664",
+    "sha256": "8d78d0f451f645f426fa3c6d2bff2bb22b5f7f63fb97c3a988cbdef728e21534",
+    "size": 6844
+  },
+  "skills/i18n/planning-with-files-es/scripts/ledger-append.sh": {
+    "mode": "0o664",
+    "sha256": "d918315f8b73a2a1e1dddef1c76798d1fd72f5f99644ff34115d0e7ac7e69290",
+    "size": 12190
+  },
+  "skills/i18n/planning-with-files-es/scripts/ledger-summary.ps1": {
+    "mode": "0o664",
+    "sha256": "5f483af95e0253688e7e5d14fba4da8c316a3568fa47d887edb6da0deb78de80",
+    "size": 5335
+  },
+  "skills/i18n/planning-with-files-es/scripts/ledger-summary.sh": {
+    "mode": "0o664",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  "skills/i18n/planning-with-files-es/scripts/phase-status.ps1": {
+    "mode": "0o664",
+    "sha256": "59d8e7d8232931177105155d2b2d3211c45b63f4a41e11c3ed1bb00278524fa6",
+    "size": 9412
+  },
+  "skills/i18n/planning-with-files-es/scripts/phase-status.sh": {
+    "mode": "0o664",
+    "sha256": "3eb6cee61556bc238411304fcf1052ef7920de3b719dba36f7a0c23d8ede61d3",
+    "size": 6866
+  },
+  "skills/i18n/planning-with-files-es/scripts/plan-doctor.sh": {
+    "mode": "0o664",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  "skills/i18n/planning-with-files-es/scripts/resolve-plan-dir.ps1": {
+    "mode": "0o664",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  "skills/i18n/planning-with-files-es/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  "skills/i18n/planning-with-files-es/scripts/session-catchup.py": {
+    "mode": "0o664",
+    "sha256": "295bdf660be4332f0f182a4107a54d39b4eaaa8ee42657e748a06d4dac348f1a",
+    "size": 26556
+  },
+  "skills/i18n/planning-with-files-es/scripts/set-active-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  "skills/i18n/planning-with-files-es/scripts/set-active-plan.sh": {
+    "mode": "0o664",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  "skills/i18n/planning-with-files-es/scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  "skills/i18n/planning-with-files-es/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "9bbb3ff1cae8dfbb2db8f8120f8db8ec294cb7817fd5c18b6ce6050711095988",
+    "size": 1736
+  },
+  "skills/i18n/planning-with-files-es/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "2ef23dbc56f057b5070c373186f4586f4bd5900c867ec546273b90de14de9820",
+    "size": 2110
+  },
+  "skills/i18n/planning-with-files-es/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "e0c8f681b5b9ffd12d72a2a665940d361281e837406c2bd87f2f0d861b9c468b",
+    "size": 2878
+  },
+  "skills/i18n/planning-with-files-zh/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "c2aa1738f6b69837fcbdf4092cdba8fe76c00ce873d1f391d8650824b4252ebb",
+    "size": 12543
+  },
+  "skills/i18n/planning-with-files-zh/scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  "skills/i18n/planning-with-files-zh/scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  "skills/i18n/planning-with-files-zh/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "d8cc9f8c01b36a3c2bbb79f12946e999916d668ebbe4bb7732fadbc8768db130",
+    "size": 2041
+  },
+  "skills/i18n/planning-with-files-zh/scripts/check-complete.sh": {
+    "mode": "0o664",
+    "sha256": "8ed62b320be36cb45d4ccfa3caaceb12c0a64cded57c72a48097e9a83bf131a3",
+    "size": 2092
+  },
+  "skills/i18n/planning-with-files-zh/scripts/gate-stop.sh": {
+    "mode": "0o664",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  "skills/i18n/planning-with-files-zh/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "3d32161c14237b50a3b633bac647d99f40ecb02590497597c0ab6c89722ce02f",
+    "size": 3562
+  },
+  "skills/i18n/planning-with-files-zh/scripts/init-session.sh": {
+    "mode": "0o664",
+    "sha256": "ec89572a75f19b1c6018792da7c656bf2f52816b3fa2bf998de0cd9e55e43f0c",
+    "size": 3378
+  },
+  "skills/i18n/planning-with-files-zh/scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  "skills/i18n/planning-with-files-zh/scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  "skills/i18n/planning-with-files-zh/scripts/ledger-append.ps1": {
+    "mode": "0o664",
+    "sha256": "8d78d0f451f645f426fa3c6d2bff2bb22b5f7f63fb97c3a988cbdef728e21534",
+    "size": 6844
+  },
+  "skills/i18n/planning-with-files-zh/scripts/ledger-append.sh": {
+    "mode": "0o664",
+    "sha256": "d918315f8b73a2a1e1dddef1c76798d1fd72f5f99644ff34115d0e7ac7e69290",
+    "size": 12190
+  },
+  "skills/i18n/planning-with-files-zh/scripts/ledger-summary.ps1": {
+    "mode": "0o664",
+    "sha256": "5f483af95e0253688e7e5d14fba4da8c316a3568fa47d887edb6da0deb78de80",
+    "size": 5335
+  },
+  "skills/i18n/planning-with-files-zh/scripts/ledger-summary.sh": {
+    "mode": "0o664",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  "skills/i18n/planning-with-files-zh/scripts/phase-status.ps1": {
+    "mode": "0o664",
+    "sha256": "59d8e7d8232931177105155d2b2d3211c45b63f4a41e11c3ed1bb00278524fa6",
+    "size": 9412
+  },
+  "skills/i18n/planning-with-files-zh/scripts/phase-status.sh": {
+    "mode": "0o664",
+    "sha256": "3eb6cee61556bc238411304fcf1052ef7920de3b719dba36f7a0c23d8ede61d3",
+    "size": 6866
+  },
+  "skills/i18n/planning-with-files-zh/scripts/plan-doctor.sh": {
+    "mode": "0o664",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  "skills/i18n/planning-with-files-zh/scripts/resolve-plan-dir.ps1": {
+    "mode": "0o664",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  "skills/i18n/planning-with-files-zh/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  "skills/i18n/planning-with-files-zh/scripts/session-catchup.py": {
+    "mode": "0o664",
+    "sha256": "40df51a99c12acbfd84d2c60ab303e185d2831bbb30b20b58eb0d3b8972d229e",
+    "size": 34927
+  },
+  "skills/i18n/planning-with-files-zh/scripts/set-active-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  "skills/i18n/planning-with-files-zh/scripts/set-active-plan.sh": {
+    "mode": "0o664",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  "skills/i18n/planning-with-files-zh/scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  "skills/i18n/planning-with-files-zh/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "57924e4c6c7d6fe8bf73a04cc8f475d20710be79101b0a836351b71f927773de",
+    "size": 503
+  },
+  "skills/i18n/planning-with-files-zh/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "85b1af4c99aea68c71a8eee3569712e4d0ab2498def5244308a1add2c439921c",
+    "size": 909
+  },
+  "skills/i18n/planning-with-files-zh/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "925ca8806ff70622c6c14bccb4e85c4de9dd51d46a658d64510b7c890b849ee6",
+    "size": 2043
+  },
+  "skills/i18n/planning-with-files-zht/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "7fa21970533e60b072aa06275451b1211133418fb4c72d51cf85f85ced8c929c",
+    "size": 12594
+  },
+  "skills/i18n/planning-with-files-zht/scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  "skills/i18n/planning-with-files-zht/scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  "skills/i18n/planning-with-files-zht/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "76c01eef34dda4d72269921588914825d63710b204844245e99d9dc63f62c723",
+    "size": 2044
+  },
+  "skills/i18n/planning-with-files-zht/scripts/check-complete.sh": {
+    "mode": "0o664",
+    "sha256": "f15aa42e4f5448ccfc51a7eaffb9f0878914b2716fc9d4ff43992ff5e4a8b930",
+    "size": 2095
+  },
+  "skills/i18n/planning-with-files-zht/scripts/gate-stop.sh": {
+    "mode": "0o664",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  "skills/i18n/planning-with-files-zht/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "928c7e11d8633e438d31121928b34eb25ba2ff0974c3e4ba581f84864c79661c",
+    "size": 3673
+  },
+  "skills/i18n/planning-with-files-zht/scripts/init-session.sh": {
+    "mode": "0o664",
+    "sha256": "b79d8e6fa74532cf5debc38ad5c534e12be501bbd14865db3de3a771c5100f2c",
+    "size": 3501
+  },
+  "skills/i18n/planning-with-files-zht/scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  "skills/i18n/planning-with-files-zht/scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  "skills/i18n/planning-with-files-zht/scripts/ledger-append.ps1": {
+    "mode": "0o664",
+    "sha256": "8d78d0f451f645f426fa3c6d2bff2bb22b5f7f63fb97c3a988cbdef728e21534",
+    "size": 6844
+  },
+  "skills/i18n/planning-with-files-zht/scripts/ledger-append.sh": {
+    "mode": "0o664",
+    "sha256": "d918315f8b73a2a1e1dddef1c76798d1fd72f5f99644ff34115d0e7ac7e69290",
+    "size": 12190
+  },
+  "skills/i18n/planning-with-files-zht/scripts/ledger-summary.ps1": {
+    "mode": "0o664",
+    "sha256": "5f483af95e0253688e7e5d14fba4da8c316a3568fa47d887edb6da0deb78de80",
+    "size": 5335
+  },
+  "skills/i18n/planning-with-files-zht/scripts/ledger-summary.sh": {
+    "mode": "0o664",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  "skills/i18n/planning-with-files-zht/scripts/phase-status.ps1": {
+    "mode": "0o664",
+    "sha256": "59d8e7d8232931177105155d2b2d3211c45b63f4a41e11c3ed1bb00278524fa6",
+    "size": 9412
+  },
+  "skills/i18n/planning-with-files-zht/scripts/phase-status.sh": {
+    "mode": "0o664",
+    "sha256": "3eb6cee61556bc238411304fcf1052ef7920de3b719dba36f7a0c23d8ede61d3",
+    "size": 6866
+  },
+  "skills/i18n/planning-with-files-zht/scripts/plan-doctor.sh": {
+    "mode": "0o664",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  "skills/i18n/planning-with-files-zht/scripts/resolve-plan-dir.ps1": {
+    "mode": "0o664",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  "skills/i18n/planning-with-files-zht/scripts/resolve-plan-dir.sh": {
+    "mode": "0o664",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  "skills/i18n/planning-with-files-zht/scripts/session-catchup.py": {
+    "mode": "0o664",
+    "sha256": "dad0a7a4b7e6d37e9d1593ee305861a445b5b5be372fff91945f9746f5f16cfc",
+    "size": 26070
+  },
+  "skills/i18n/planning-with-files-zht/scripts/set-active-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  "skills/i18n/planning-with-files-zht/scripts/set-active-plan.sh": {
+    "mode": "0o664",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  "skills/i18n/planning-with-files-zht/scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  "skills/i18n/planning-with-files-zht/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "7afa16e5842ce7d0f77af8135945c650e445bc55bfdf763902cf806445138b12",
+    "size": 454
+  },
+  "skills/i18n/planning-with-files-zht/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "49dc09690289a37450f676d649987d948f8b4347baa78bdbcd080f809623dc11",
+    "size": 919
+  },
+  "skills/i18n/planning-with-files-zht/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "4b97257e7eed4e92cb2e5da0dba4f7afeee98750bd283ff560c5be323a5d4f25",
+    "size": 2127
+  },
+  "skills/planning-with-files/SKILL.md": {
+    "mode": "0o664",
+    "sha256": "c6dc50bde20d1c166a1583f5d76855d1970046f0740548ada2fd1a9cd3b502c0",
+    "size": 37251
+  },
+  "skills/planning-with-files/examples.md": {
+    "mode": "0o664",
+    "sha256": "450355fac69e0fac93453b6c7383c8fb9ba3470662f6c8291080028f73ce00dc",
+    "size": 4518
+  },
+  "skills/planning-with-files/reference.md": {
+    "mode": "0o664",
+    "sha256": "8f7d9cfe1971c5a32f3e5edb63ddfad73a11cc7de19d5065a6ec75fd118c0fdb",
+    "size": 8455
+  },
+  "skills/planning-with-files/scripts/attest-plan.ps1": {
+    "mode": "0o664",
+    "sha256": "8a24ff621e1e5ca761676094c2610b9004a509931455e640965296d6fac5adce",
+    "size": 20912
+  },
+  "skills/planning-with-files/scripts/attest-plan.sh": {
+    "mode": "0o664",
+    "sha256": "43a9571cf2c7456c015b43836ff0a6b1a4a89ffd55c8b7bd949036aa437b5dd0",
+    "size": 10838
+  },
+  "skills/planning-with-files/scripts/check-complete.ps1": {
+    "mode": "0o664",
+    "sha256": "667ddae114deb1b0b6048299bb404045cdcaa0ff9d59057ea060b88ff2c87f07",
+    "size": 10656
+  },
+  "skills/planning-with-files/scripts/check-complete.sh": {
+    "mode": "0o775",
+    "sha256": "82cdacd14b2e5b68437823fa0dc2de984e862266110b5cfe8c61497dfdbdceb3",
+    "size": 11555
+  },
+  "skills/planning-with-files/scripts/gate-stop.sh": {
+    "mode": "0o664",
+    "sha256": "ed4f138ccd9ec727ccc5d966a523c8f8506779d93a30ec0329282b23c511c0e6",
+    "size": 1452
+  },
+  "skills/planning-with-files/scripts/init-session.ps1": {
+    "mode": "0o664",
+    "sha256": "4d854b872b9255412fee506b2438029c58b9cb4edcbae4fd29a60732cc83a4f6",
+    "size": 6490
+  },
+  "skills/planning-with-files/scripts/init-session.sh": {
+    "mode": "0o775",
+    "sha256": "c35d70ab28338eef36ef74c472fdcfd5ea044098a5a4b553a6022ddd9ad14559",
+    "size": 12883
+  },
+  "skills/planning-with-files/scripts/inject-plan.py": {
+    "mode": "0o664",
+    "sha256": "00ce185afce5f4284e17ccc77d152b4633ca75c18f4239508a73af977fd2e0fc",
+    "size": 59167
+  },
+  "skills/planning-with-files/scripts/inject-plan.sh": {
+    "mode": "0o664",
+    "sha256": "ee6344028bed339c466c686f84eadcfebd90220bab7368b28ff4afb386e97690",
+    "size": 60730
+  },
+  "skills/planning-with-files/scripts/ledger-append.ps1": {
+    "mode": "0o664",
+    "sha256": "8d78d0f451f645f426fa3c6d2bff2bb22b5f7f63fb97c3a988cbdef728e21534",
+    "size": 6844
+  },
+  "skills/planning-with-files/scripts/ledger-append.sh": {
+    "mode": "0o664",
+    "sha256": "d918315f8b73a2a1e1dddef1c76798d1fd72f5f99644ff34115d0e7ac7e69290",
+    "size": 12190
+  },
+  "skills/planning-with-files/scripts/ledger-summary.ps1": {
+    "mode": "0o664",
+    "sha256": "5f483af95e0253688e7e5d14fba4da8c316a3568fa47d887edb6da0deb78de80",
+    "size": 5335
+  },
+  "skills/planning-with-files/scripts/ledger-summary.sh": {
+    "mode": "0o664",
+    "sha256": "064486ba5c0519eb9df7e5fb2f8c98e121b9d4b454ccaa1550bab6dffb047839",
+    "size": 6705
+  },
+  "skills/planning-with-files/scripts/phase-status.ps1": {
+    "mode": "0o664",
+    "sha256": "59d8e7d8232931177105155d2b2d3211c45b63f4a41e11c3ed1bb00278524fa6",
+    "size": 9412
+  },
+  "skills/planning-with-files/scripts/phase-status.sh": {
+    "mode": "0o664",
+    "sha256": "3eb6cee61556bc238411304fcf1052ef7920de3b719dba36f7a0c23d8ede61d3",
+    "size": 6866
+  },
+  "skills/planning-with-files/scripts/plan-doctor.sh": {
+    "mode": "0o775",
+    "sha256": "5eb43fdc3da4f94f5e4f7e0fc912e508e0cc382b1f1150f5d51075f22c6ff0f5",
+    "size": 8531
+  },
+  "skills/planning-with-files/scripts/resolve-plan-dir.ps1": {
+    "mode": "0o775",
+    "sha256": "cc8b2b0025db8edf68399c9d6ec9a188ef8cb6997f3b37ca831b2bf3133ce94e",
+    "size": 8083
+  },
+  "skills/planning-with-files/scripts/resolve-plan-dir.sh": {
+    "mode": "0o775",
+    "sha256": "a04c842ba8efe5c737c4f0b20eaa23de278f84f01199bc11d6d2f150201ccf80",
+    "size": 14039
+  },
+  "skills/planning-with-files/scripts/session-catchup.py": {
+    "mode": "0o775",
+    "sha256": "a4a30a4de2d5513690f966eec80d823b5e2af8406205b65f6d23887a0b8f3ef3",
+    "size": 35868
+  },
+  "skills/planning-with-files/scripts/set-active-plan.ps1": {
+    "mode": "0o775",
+    "sha256": "31d99a29389cbfe0ab7c097729a7289ef622f261c3b70fd7712a43e2d37aece1",
+    "size": 1645
+  },
+  "skills/planning-with-files/scripts/set-active-plan.sh": {
+    "mode": "0o775",
+    "sha256": "72e3e2b3dcd9cb40018ebd86491f54deb84b540f723dd4a0e78ac47931c5db6c",
+    "size": 1505
+  },
+  "skills/planning-with-files/scripts/skill-hook.sh": {
+    "mode": "0o775",
+    "sha256": "923aa675c840c7cb9a89202c4185d9472fbb66288e742302090360c497e3a961",
+    "size": 17435
+  },
+  "skills/planning-with-files/templates/analytics_findings.md": {
+    "mode": "0o664",
+    "sha256": "cd46495d0a7d59f150f1ecc7f9528bb1b0856bec73a2d04e06f48cdb6798ec0f",
+    "size": 1803
+  },
+  "skills/planning-with-files/templates/analytics_task_plan.md": {
+    "mode": "0o664",
+    "sha256": "9339e575779a2e045073316c3deb8638ab49230a9b5f83143cbd4da7d6004981",
+    "size": 2352
+  },
+  "skills/planning-with-files/templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "bb9237ccbf08148d7f7f23ad58fbc9bd7c879c6d0cbca1d533b5b5f21c26c529",
+    "size": 1161
+  },
+  "skills/planning-with-files/templates/loop.md": {
+    "mode": "0o664",
+    "sha256": "cb13b5f1030a015442a981da69fa0dc910f78f4782ebfa2fd0eac00d6e71a143",
+    "size": 2143
+  },
+  "skills/planning-with-files/templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "28fc357000ed2b18910c4e436f0f2e02f4abf0acd29cce370a2670640974f31c",
+    "size": 1547
+  },
+  "skills/planning-with-files/templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "3c4b61444270f689c3dab81b7113467fb87e9705175aea9c3a3b970bd4e777a3",
+    "size": 2257
+  },
+  "skills/planning-with-files/templates/task_plan_autonomous.md": {
+    "mode": "0o664",
+    "sha256": "5a93e639a15a3d0e4f89d915199cf09cdd211441547eba86bed34164edc25891",
+    "size": 3268
+  },
+  "templates/analytics_findings.md": {
+    "mode": "0o664",
+    "sha256": "cd46495d0a7d59f150f1ecc7f9528bb1b0856bec73a2d04e06f48cdb6798ec0f",
+    "size": 1803
+  },
+  "templates/analytics_task_plan.md": {
+    "mode": "0o664",
+    "sha256": "9339e575779a2e045073316c3deb8638ab49230a9b5f83143cbd4da7d6004981",
+    "size": 2352
+  },
+  "templates/findings.md": {
+    "mode": "0o664",
+    "sha256": "bb9237ccbf08148d7f7f23ad58fbc9bd7c879c6d0cbca1d533b5b5f21c26c529",
+    "size": 1161
+  },
+  "templates/loop.md": {
+    "mode": "0o664",
+    "sha256": "cb13b5f1030a015442a981da69fa0dc910f78f4782ebfa2fd0eac00d6e71a143",
+    "size": 2143
+  },
+  "templates/progress.md": {
+    "mode": "0o664",
+    "sha256": "28fc357000ed2b18910c4e436f0f2e02f4abf0acd29cce370a2670640974f31c",
+    "size": 1547
+  },
+  "templates/task_plan.md": {
+    "mode": "0o664",
+    "sha256": "3c4b61444270f689c3dab81b7113467fb87e9705175aea9c3a3b970bd4e777a3",
+    "size": 2257
+  },
+  "tests/test_attest_plan_powershell.py": {
+    "mode": "0o664",
+    "sha256": "9887ba4136f50cfe46b35f13585c6a696e45e72f6bb3e96b4e68cbbe2033eb7e",
+    "size": 20923
+  },
+  "tests/test_automatic_catchup_callers.py": {
+    "mode": "0o664",
+    "sha256": "25410967355d5292107f14e4216e93eb0c16f3f6a15f9171628fcf608339983d",
+    "size": 1311
+  },
+  "tests/test_bsd_userland_sim.py": {
+    "mode": "0o664",
+    "sha256": "11025886b5cb05cc8da3c4d99246114aad6a9435cf709aa097b0f35530921d51",
+    "size": 15760
+  },
+  "tests/test_build_clawhub_upload.py": {
+    "mode": "0o664",
+    "sha256": "d898a012a8b3bf8442d4eb030784bfc2bad6eb1db3cfb889ed2d5644f15f8631",
+    "size": 5433
+  },
+  "tests/test_bump_version.py": {
+    "mode": "0o664",
+    "sha256": "2c665abaca6d6dafc25b9909804022732b696b8650560ae003170b7da0004ec8",
+    "size": 3656
+  },
+  "tests/test_canonical_script_sync.py": {
+    "mode": "0o664",
+    "sha256": "0991cb0c2a6b9779bae1ca53af4a6211bd5738e131544fb0c95dc9ff7762757d",
+    "size": 4334
+  },
+  "tests/test_catchup_cross_project_guard.py": {
+    "mode": "0o664",
+    "sha256": "a09f2985c7662782c25769ca98d42f492704ce8242cae3035faf8b210be4863a",
+    "size": 12409
+  },
+  "tests/test_catchup_i18n_security.py": {
+    "mode": "0o664",
+    "sha256": "0d0f428b5b2f7ebfa32d4635a0e5f9ab5a95456a94677146612c62e8bdff089d",
+    "size": 13270
+  },
+  "tests/test_catchup_project_dir.py": {
+    "mode": "0o664",
+    "sha256": "be16f585a3adbaf052f59e7db685e2afba5e58a0647c0e850df0f02bc0431edb",
+    "size": 4137
+  },
+  "tests/test_catchup_store_resolution_parity.py": {
+    "mode": "0o664",
+    "sha256": "e03fb3db220937a38693c76273c45f65c65fd4a72d15c8ba18efeea7e03c271c",
+    "size": 8387
+  },
+  "tests/test_check_complete_resolver.py": {
+    "mode": "0o664",
+    "sha256": "fdbfe71529bc51e59046c0e9b423142675e2ae3edbb4b1f5f08569b6cc4a2936",
+    "size": 11279
+  },
+  "tests/test_claude_plugin_operations.py": {
+    "mode": "0o664",
+    "sha256": "ab0327c2cdf7ea1f336315901b64e9e9f1d3f8cbe0dfbb22fc74cfc9e552cdee",
+    "size": 10805
+  },
+  "tests/test_clear_recovery.sh": {
+    "mode": "0o664",
+    "sha256": "54bf61e0dccc4ca55944ff300a27f76ea61e59f22ab30c8de5e56197e50e44a4",
+    "size": 6880
+  },
+  "tests/test_codex_hooks.py": {
+    "mode": "0o664",
+    "sha256": "c100e7975e58283c736d62e8c10822aba078c253d64dd8045e058ce32b5d4ed4",
+    "size": 20956
+  },
+  "tests/test_codex_nested_root_isolation.py": {
+    "mode": "0o664",
+    "sha256": "1f4906aaf18c9b364d0cb20e0ac4ec71932a378a6c833a376e107d27b14fab1c",
+    "size": 23361
+  },
+  "tests/test_codex_plugin_operations.py": {
+    "mode": "0o664",
+    "sha256": "838b0adac1c9134f5f749671f997510b3aa64d8311c13f4389acf202f91b7f0a",
+    "size": 10589
+  },
+  "tests/test_codex_session_isolation.py": {
+    "mode": "0o664",
+    "sha256": "23bd05e8786d21d072209e4037f083653ca56c11ea10baf5cda2d3c4707f00b9",
+    "size": 17402
+  },
+  "tests/test_containment.py": {
+    "mode": "0o664",
+    "sha256": "fb58cd4616ea637da9c19a3a147122c85d844de6b03cfb91e17f0bda0cf13c0a",
+    "size": 14264
+  },
+  "tests/test_context_frame_security.py": {
+    "mode": "0o664",
+    "sha256": "0c8af23b55cfda897967a0af4296115f92eee78510b2ed4903ea5a85125423ef",
+    "size": 17643
+  },
+  "tests/test_copilot_agent_stop.py": {
+    "mode": "0o664",
+    "sha256": "fffc09d6710fc7ca5be36082f4ee8ad1a513cbc6401535c285d513512b0b59f6",
+    "size": 1576
+  },
+  "tests/test_cursor_nested_root_isolation.py": {
+    "mode": "0o664",
+    "sha256": "bb242c9ad7f4428159147868dc2df2d243a487ef882c6e398705cc76cde25424",
+    "size": 8155
+  },
+  "tests/test_custom_adapter_catchup_privacy.py": {
+    "mode": "0o664",
+    "sha256": "7ecd6d5b89bff7658df6886f9db10fd776787fdde77fdb733a7b300a5ff62824",
+    "size": 11170
+  },
+  "tests/test_gate.py": {
+    "mode": "0o664",
+    "sha256": "81cec0b6e78f5a98fcdd2d36b9b82c99741703728d9640c5e7abafd29a22473e",
+    "size": 9969
+  },
+  "tests/test_hermes_adapter.py": {
+    "mode": "0o664",
+    "sha256": "d4846e169cde6cad65f89d1f00bf7f57b8b7647367edf6b71bc0a660945a78b4",
+    "size": 34127
+  },
+  "tests/test_hermes_first_class.py": {
+    "mode": "0o664",
+    "sha256": "082c51a9452baa36fa35fc18411f68ddb8f83e8241674107396586ae15159841",
+    "size": 39980
+  },
+  "tests/test_hook_body_v240.py": {
+    "mode": "0o664",
+    "sha256": "73f1eba0851a828516d7f5ec9d6f112ae38f3c69a2d3d9f7a5d40bcf778fea99",
+    "size": 41063
+  },
+  "tests/test_hook_resolver_integration.py": {
+    "mode": "0o664",
+    "sha256": "61952e53567520a0152f64defc0f318e282a6079f82a24b970aa990eb6444ff8",
+    "size": 20989
+  },
+  "tests/test_init_modes.py": {
+    "mode": "0o664",
+    "sha256": "9c4addafe56f270f2b1f25c3f1769304ca9555459c549d44c0119f7da1d4e7af",
+    "size": 7101
+  },
+  "tests/test_init_session_slug.py": {
+    "mode": "0o664",
+    "sha256": "46ffa745747c5852a895c1a152f0de0587e52fad63eea82dd3df6e033d81713a",
+    "size": 4758
+  },
+  "tests/test_inject_plan_python_parity.py": {
+    "mode": "0o664",
+    "sha256": "8f740be39bbae4cf5629c85344d0132ccdd8c9d6e8970ca75ad27bfa0488babf",
+    "size": 40325
+  },
+  "tests/test_inject_smart.py": {
+    "mode": "0o664",
+    "sha256": "adab1b463e1d18e2c1e9bb13e57fdf2ccbdbddd81b94041c34966d9e36405462",
+    "size": 8515
+  },
+  "tests/test_injection_determinism.py": {
+    "mode": "0o664",
+    "sha256": "4c8f32cae9d96dc1fa4e191a234ae4ad84202edc770eafc2e074f3cecb930aa1",
+    "size": 16118
+  },
+  "tests/test_ledger.py": {
+    "mode": "0o664",
+    "sha256": "a832a31f02433d81553f527b0213c3319f0e521d081e986b5c7ccc8655703ce4",
+    "size": 13198
+  },
+  "tests/test_ledger_utf8.py": {
+    "mode": "0o664",
+    "sha256": "933ce4ab55a50dbf0dc9d9f1b16e1c284992ef5ac4e5c6c7d1383545a96aaa55",
+    "size": 13537
+  },
+  "tests/test_line_endings.py": {
+    "mode": "0o664",
+    "sha256": "0a41fd7f89d52c6d27f7851b96cb7037a3b8a9a63750519cd8b93395daadf151",
+    "size": 5432
+  },
+  "tests/test_llms_txt.py": {
+    "mode": "0o664",
+    "sha256": "2516235fc4696c17c8c256710f065db56a890f695360d2cafbcfece1104d273f",
+    "size": 4464
+  },
+  "tests/test_nested_plan_isolation.py": {
+    "mode": "0o664",
+    "sha256": "ea9a66a42df28c2262954bd20fcc83561c966ad85d7ae771e86d2522b23f588f",
+    "size": 31319
+  },
+  "tests/test_npm_package_line_endings.py": {
+    "mode": "0o664",
+    "sha256": "ca64294e2d48abc337cbaec2c43eba2519d6684476ac48373dec3b02d0e79e4a",
+    "size": 5689
+  },
+  "tests/test_path_fix.py": {
+    "mode": "0o664",
+    "sha256": "5bbb13cf078b9af03f7a28cf2fd281e2acfcd2a6389d6e7060412ab2e3d843cd",
+    "size": 2476
+  },
+  "tests/test_phase_status_locking.py": {
+    "mode": "0o664",
+    "sha256": "d34822e1fd8ed2b745bd3f860248634bb857032789283fd3fa829b01ee4a3c89",
+    "size": 7778
+  },
+  "tests/test_pi_docs_hook_support.py": {
+    "mode": "0o664",
+    "sha256": "5fcf058118928a348b2343e749a4a7805c21f9b2357820545d4c73b115a8a503",
+    "size": 1555
+  },
+  "tests/test_pi_extension_capabilities.py": {
+    "mode": "0o664",
+    "sha256": "a2e343daca2f1cdfa837105c107ff9d84b369a9ee14468bae0a43d0928ea7278",
+    "size": 5198
+  },
+  "tests/test_pi_extension_packaging.py": {
+    "mode": "0o664",
+    "sha256": "c8ef8634f2aa88fcfa29dcf21f4af9916427163c6e650484de5dd0ae386007a8",
+    "size": 1407
+  },
+  "tests/test_plan_attestation.py": {
+    "mode": "0o664",
+    "sha256": "100bf4b657e21e4f821eef7afd19ad60da6c7a909ad434ea866664d881059d28",
+    "size": 8834
+  },
+  "tests/test_plan_doctor_classification.py": {
+    "mode": "0o664",
+    "sha256": "95dd3c548efae3b29035355c5612b54aafd48da7dad66e34eaed8d967dc4ac26",
+    "size": 6490
+  },
+  "tests/test_plan_regression_guard.py": {
+    "mode": "0o664",
+    "sha256": "3de2de85a0faf9ce6574fb0518c896e82f32d913192dbb9bae36a1ca2a505c98",
+    "size": 5098
+  },
+  "tests/test_plan_selector_binding.py": {
+    "mode": "0o664",
+    "sha256": "f254f15240ad274196b10dec8a39861435fd49893f897e1e1bc8f79f12ef717e",
+    "size": 7712
+  },
+  "tests/test_planning_disabled_optout.py": {
+    "mode": "0o664",
+    "sha256": "26dd4e489e4e158a4188a2362957375a16d99b7e35eebb692f9d4ca34041f14d",
+    "size": 15527
+  },
+  "tests/test_plugin_skill_surface.py": {
+    "mode": "0o664",
+    "sha256": "a3d243efcda3bed9dd58b9d7835e60c491e85b858bc27d8f01867a33fc44e4f7",
+    "size": 6021
+  },
+  "tests/test_post_tool_nudge.py": {
+    "mode": "0o664",
+    "sha256": "bf2b116158dabf106c85b42009a870d842770f80eb9504617ceda2af7f0f72a7",
+    "size": 8812
+  },
+  "tests/test_precompact_hook.py": {
+    "mode": "0o664",
+    "sha256": "10f3ec62ec1caf79f22cde817697f1a8b1de771dfa1830b1d43d3dfe2156775c",
+    "size": 6930
+  },
+  "tests/test_ps1_windows_encoding.py": {
+    "mode": "0o664",
+    "sha256": "03edfc5ed6352c56b5f8b124f02bda12c96c43b5575a0355d5a0d5fbe6b5ab34",
+    "size": 5759
+  },
+  "tests/test_public_capability_disclosure.py": {
+    "mode": "0o664",
+    "sha256": "bce54e9a28ba41ac40d558730121797785f39e0c320b8495f524a59a3fb3e804",
+    "size": 3913
+  },
+  "tests/test_resolve_plan_dir.py": {
+    "mode": "0o664",
+    "sha256": "661aaa37044a15d7c1304e66737d99e149db9a469869a6c6ea77fdb882b6b581",
+    "size": 10798
+  },
+  "tests/test_resolver_parity.py": {
+    "mode": "0o664",
+    "sha256": "1236f65c6a6a3a2d5c80b7fd49ac061b92aae5b9cc97cffecac9871989ae04ab",
+    "size": 7953
+  },
+  "tests/test_resolver_plan_root_pin.py": {
+    "mode": "0o664",
+    "sha256": "6e06f2025321e4ecfa9a48dc540d2012b65fb9de30095bcff8b3a649a1a8697f",
+    "size": 8508
+  },
+  "tests/test_root_mode_floor.py": {
+    "mode": "0o664",
+    "sha256": "defb10d5e8ef87a3d7686569dfc19d32114ed338cfc17f75e8c4474bd1cf4317",
+    "size": 9405
+  },
+  "tests/test_script_location_parity.py": {
+    "mode": "0o664",
+    "sha256": "da1c7577db26166a8c1a3693069047491fe4b22962f84df5fe22e6fa16e75d7e",
+    "size": 3460
+  },
+  "tests/test_script_permissions.py": {
+    "mode": "0o664",
+    "sha256": "4972bc459d4bda98c4502276791f089a41eaeaaf4f38a5cdf6cfe9b4a6ca0a4d",
+    "size": 953
+  },
+  "tests/test_seo_docs_pages.py": {
+    "mode": "0o664",
+    "sha256": "62e1fb23be952b5220f863f48a0fecff91ca2457ab1b4e0db3749cd1a82b467a",
+    "size": 4263
+  },
+  "tests/test_session_catchup.py": {
+    "mode": "0o664",
+    "sha256": "8176a39616cf3642c7d5f4534c12089c819d4f18935f2d06b5a7baf4ee033fba",
+    "size": 26531
+  },
+  "tests/test_session_catchup_opencode.py": {
+    "mode": "0o664",
+    "sha256": "ecfbe11e0c04c71ba036a7fc9b75cb59a7236e109eb0f5128b798d70cea7d58a",
+    "size": 7742
+  },
+  "tests/test_session_plan_ambiguity.py": {
+    "mode": "0o664",
+    "sha256": "43e5cc5fa8f2872b98424b4f48d98d7cfc51f905c3c860f610088793245ceb0e",
+    "size": 14048
+  },
+  "tests/test_set_active_plan.py": {
+    "mode": "0o664",
+    "sha256": "b15b3b36f7bd1aed80002042ef782cb546efa0466e4fa271fe8026fc29c6579f",
+    "size": 7270
+  },
+  "tests/test_skill_frontmatter_valid.py": {
+    "mode": "0o664",
+    "sha256": "65d856e0e90be8fc34522f05e704c36c541efe651c79d9addfa5e32332793a1f",
+    "size": 3537
+  },
+  "tests/test_skill_hook_dispatch_parity.py": {
+    "mode": "0o664",
+    "sha256": "f510b03a23f24b0e2ebab89883d3ba74c709dfbab9a467bfb38e12b56291bdbe",
+    "size": 25666
+  },
+  "tests/test_skill_md_version_parity.py": {
+    "mode": "0o664",
+    "sha256": "79adb08e4b588b00539e13f71fde52fdbaa00a486feb48feac15392944dd58da",
+    "size": 6187
+  },
+  "tests/test_standalone_post_tool_nudge.py": {
+    "mode": "0o664",
+    "sha256": "57d274a84b0ccb1040d7e830e3d8a28961d97a026ba068a9bc659e2f734464bf",
+    "size": 14780
+  },
+  "tests/test_standalone_skill_references.py": {
+    "mode": "0o664",
+    "sha256": "f1c6e41d528cb9cee71d2f3ddefa1e11c21eda7c153ef40c76d3ddbce375cabc",
+    "size": 1103
+  },
+  "tests/test_stop_hook_dispatch.py": {
+    "mode": "0o664",
+    "sha256": "f8bc181cdf0a153e4a5ead2bbe937f2ae55d68bc1eaada001daaa5f8e987d823",
+    "size": 11376
+  },
+  "tests/test_template_transparency.py": {
+    "mode": "0o664",
+    "sha256": "114ad98e9d4682463cca2ac3e1a235198d21420a76a8d6c371fa1419a0de6a61",
+    "size": 7312
+  },
+  "tests/test_v238_command_files.py": {
+    "mode": "0o664",
+    "sha256": "dfaf8c4cb5ea9b1ef63683a8aaeb3a71d5b97d15f61153ca9e4b12b41e55c1a4",
+    "size": 3662
+  },
+  "tests/test_verified_plan_snapshot.py": {
+    "mode": "0o664",
+    "sha256": "5a1886d51ecd17f3e88bd175b4cf3eb825403bb2b74bba4d9978bcbf82c643ea",
+    "size": 5782
+  }
+}
