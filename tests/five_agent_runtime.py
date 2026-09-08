@@ -196,41 +196,91 @@ def model_command(host, model, prompt, case):
 
 
 def pi_model(model, prompt, timeout):
-    """Activate through Pi's native command in the same fresh RPC session."""
+    """Keep native follow-ups until Pi 0.84.3 settles, then verify idle state."""
     command=['pi','--mode','rpc','--no-session','--approve','--provider','release','--model',model]
-    messages=[]; inbox=queue.Queue(); started=time.monotonic()
+    messages=[]; inbox=queue.Queue(); started=time.monotonic(); deadline=started+timeout
+    counts={'agent_start':0,'agent_end':0,'agent_settled':0}
+    state=None; completion='Failed'; failure=None; model_error=False; forced=False
     with tempfile.TemporaryFile(mode='w+') as errors:
         proc=subprocess.Popen(command,cwd=WORK,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=errors,text=True)
         def read():
             for line in proc.stdout:
                 inbox.put(line)
             inbox.put(None)
-        threading.Thread(target=read,daemon=True).start()
+        reader=threading.Thread(target=read,daemon=True);reader.start()
         def send(value):
             proc.stdin.write(json.dumps(value)+'\n');proc.stdin.flush()
+        def record(line):
+            nonlocal model_error
+            messages.append(line)
+            try: value=json.loads(line)
+            except ValueError: return {}
+            if not isinstance(value,dict): return {}
+            kind=value.get('type')
+            if kind in counts: counts[kind]+=1
+            if kind=='agent_end':
+                model_error |= any(m.get('role')=='assistant' and m.get('stopReason') in {'error','aborted'}
+                                   for m in value.get('messages',[]) if isinstance(m,dict))
+            return value
+        def event():
+            remaining=deadline-time.monotonic()
+            if remaining<=0: raise TimeoutError('Pi RPC did not settle before deadline')
+            try: line=inbox.get(timeout=remaining)
+            except queue.Empty: raise TimeoutError('Pi RPC did not settle before deadline') from None
+            if line is None: raise RuntimeError('Pi RPC closed before verified completion')
+            return record(line)
         def until(predicate):
-            while time.monotonic()-started<timeout:
-                line=inbox.get(timeout=max(0.1,timeout-(time.monotonic()-started)))
-                if line is None: raise RuntimeError('Pi RPC closed before completion')
-                messages.append(line)
-                try: value=json.loads(line)
-                except ValueError: continue
+            while True:
+                value=event()
                 if predicate(value): return value
-            raise TimeoutError('Pi RPC model timed out')
         try:
             send({'id':'activate','type':'prompt','message':'/pw-plan-execute'})
             activation=until(lambda x:x.get('id')=='activate')
-            if not activation.get('success'): raise RuntimeError('Pi explicit activation failed')
+            if activation.get('success') is not True: raise RuntimeError('Pi explicit activation failed')
             send({'id':'task','type':'prompt','message':prompt})
-            ended=until(lambda x:x.get('type')=='agent_end')
-            returncode=1 if any(m.get('role')=='assistant' and m.get('stopReason') in {'error','aborted'} for m in ended.get('messages',[])) else 0
-        finally:
+            until(lambda x:x.get('type')=='agent_settled' and counts['agent_end']>0 and counts['agent_start']>0)
+            settled_starts=counts['agent_start']
+            send({'id':'settled-state','type':'get_state'})
+            response=until(lambda x:x.get('id')=='settled-state')
+            state=response.get('data')
+            if response.get('success') is not True or not isinstance(state,dict) or not (
+                    state.get('isStreaming') is False and state.get('isCompacting') is False
+                    and type(state.get('pendingMessageCount')) is int and state['pendingMessageCount']==0):
+                raise RuntimeError('Pi settled event did not confirm idle state')
+            if counts['agent_start']!=settled_starts:
+                raise RuntimeError('Pi restarted before verified shutdown')
+            # stdin EOF is the native RPC shutdown signal, only after settled.
             proc.stdin.close()
-            try: proc.wait(timeout=5)
-            except subprocess.TimeoutExpired: proc.terminate();proc.wait(timeout=5)
+            proc.wait(timeout=min(5,max(0.1,deadline-time.monotonic())))
+            reader.join(timeout=1)
+            if reader.is_alive(): raise RuntimeError('Pi stdout did not reach EOF')
+            while not inbox.empty():
+                line=inbox.get_nowait()
+                if line is not None: record(line)
+            if counts['agent_start']!=settled_starts:
+                raise RuntimeError('Pi restarted during shutdown')
+            if proc.returncode!=0: raise RuntimeError('Pi RPC exited nonzero')
+            if model_error: raise RuntimeError('Pi model error in collected turns')
+            completion='settled and idle; native EOF shutdown'
+        except Exception as error:
+            failure=str(error)
+        finally:
+            if proc.poll() is None:
+                forced=True;proc.terminate()
+                try: proc.wait(timeout=5)
+                except subprocess.TimeoutExpired: proc.kill();proc.wait(timeout=5)
+            if not proc.stdin.closed: proc.stdin.close()
+            reader.join(timeout=1)
+            while not inbox.empty():
+                line=inbox.get_nowait()
+                if line is not None: record(line)
             (OUT/'model.stdout').write_text(safe_text(''.join(messages)))
             errors.seek(0);(OUT/'model.stderr').write_text(safe_text(errors.read()))
-    save('model',{'argv':command,'exit_code':returncode,'seconds':time.monotonic()-started,
+            proc.stdout.close()
+    returncode=0 if failure is None and not forced and not model_error else 1
+    save('model',{'argv':command,'exit_code':returncode,'process_exit_code':proc.returncode,
+                  'seconds':time.monotonic()-started,'completion':completion,'failure':failure,
+                  'forced_termination':forced,'event_counts':counts,'final_state':state,
                   'activation':'native /pw-plan-execute in same fresh RPC session'})
     return subprocess.CompletedProcess(command,returncode)
 
