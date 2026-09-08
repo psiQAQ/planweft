@@ -10,10 +10,10 @@ Use `--skill-only` explicitly for a complete portable Skill; it does not registe
 npx planweft@0.4.0-rc.1 add -a claude -a pi
 npx planweft@0.4.0-rc.1 add -a codex --global
 npx planweft@0.4.0-rc.1 add -a opencode --skill-only --symlink
-npx planweft@latest list
-npx planweft@latest doctor
-npx planweft@latest update -a pi
-npx planweft@latest remove -a pi
+npx planweft@0.4.0-rc.1 list
+npx planweft@0.4.0-rc.1 doctor
+npx planweft@0.4.0-rc.1 update -a pi
+npx planweft@0.4.0-rc.1 remove -a pi
 ```
 
 | Option | Default | Purpose |
@@ -22,12 +22,13 @@ npx planweft@latest remove -a pi
 | `--project / --global` | project | Project or user scope; unsupported scopes fail without escalation |
 | `--skill-only` | Off | Complete portable Skill without another host's executable frontmatter |
 | `--copy / --symlink` | Prefer links | Auto mode reports copy fallback; explicit symlink failures are errors |
+| `--dsh-profile NAME` | headless | User-level profile for full DSH integration; updates retain the installed profile |
 | `--dry-run` | Off | Show choices and paths without installation or state writes |
 | `--source FILE.tgz` | Exact npm version | Local npm artifact for validation; identity/version must match the running CLI |
 
 Pi project package operations retain native trust checks. For an untrusted project, explicitly add `--approve-pi-project` to pass `--approve` for this Pi command only. This trusts project-local files for that command; it is off by default and does not change other hosts’ trust.
 
-Platform IDs: `codex claude pi opencode hermes cursor gemini copilot mastracode kiro continue factory codebuddy agents`.
+Platform IDs: `codex claude pi opencode hermes cursor gemini copilot mastracode kiro continue factory codebuddy agents dsh`.
 Requires Node.js 22+; Node.js 24 LTS is recommended. Runtime helpers may additionally require Python 3, Bash or PowerShell.
 
 Project versions live in `.planweft/versions/`, with receipts in `.planweft/installations.json`. User storage uses
@@ -312,8 +313,29 @@ If an update fails, restore the previous verified complete package, reinstall/re
 
 ## DeepSeek Harness (DSH)
 
-This adapter provides the complete `project-docs` Skill, scripts, templates and language resources; DSH profile hooks are not enabled yet.
-Use the platform ID `dsh` with explicit `--skill-only`. After the npm candidate is published:
+The adapter provides a native DSH bundle, complete Skill and the official Claude command-hook bridge. DSH `0.1.2-rc.1` was tested; native plugin management also requires `pnpm` on PATH. The npm commands below become available after the candidate is published.
+
+Full integration belongs to a user-level **profile**, defaulting to `headless`; select `web` explicitly when needed. The installer manages one DSH profile at a time. Updates retain the recorded profile; remove it before switching. The native source links to the persistent version directory through DSH/pnpm, independently of the CLI's `--copy` option. Starting the selected profile loads its bundled Skill and hooks.
+
+```bash
+npx planweft@0.4.0-rc.1 add -a dsh --global --dsh-profile headless
+npx planweft@0.4.0-rc.1 doctor -a dsh --global
+npx planweft@0.4.0-rc.1 update -a dsh --global
+npx planweft@0.4.0-rc.1 remove -a dsh --global
+```
+
+Alternatively use DSH native commands with the single npm package. This is a separate ownership channel; do not mix it with the PlanWeft CLI:
+
+```bash
+dsh plugin --profile headless add planweft@0.4.0-rc.1
+dsh --profile headless --dump-config
+dsh --profile headless "Use project-docs for this maintenance task."
+dsh plugin --profile headless remove planweft
+```
+
+A local platform directory can be installed with `dsh plugin --profile headless add file:/absolute/path/to/dist/dsh/planweft`. Its manifest declares `dsh.bundle.patch`; no marketplace is involved. Use `add` with an exact new or old version for upgrades or rollback, then start a new session. No background update is enabled. Removal drops only the PlanWeft dependency and bundle, preserving the profile, other user settings and project records.
+
+Project-level Skill-only installation:
 
 ```bash
 npx planweft@0.4.0-rc.1 add -a dsh --skill-only
@@ -322,15 +344,16 @@ npx planweft@0.4.0-rc.1 update -a dsh
 npx planweft@0.4.0-rc.1 remove -a dsh
 ```
 
-Add `--global` to each command for a user installation. `--copy`, `--symlink` and `--dry-run` follow the unified installer rules.
-Project Skills go under `.dsh/skills/project-docs/` in the nearest ancestor containing `.git`, or the invoking directory when no Git root exists.
-User Skills go under `$DSH_HOME/skills/project-docs/`, defaulting to `~/.dsh/skills/project-docs/`.
-Run project commands from the Git root so Skills and receipts share one project scope; installation from a nested directory is rejected before writes. Without Git, use the same invoking directory for installation, updates and removal.
-Alternatively copy the complete `dist/dsh/planweft/skills/project-docs/` directory into the matching Skill root. The CLI does not adopt manual copies.
+Add `--global` to every command for user-level Skill-only management. `--copy`, `--symlink` and `--dry-run` retain their shared semantics.
+Project Skills live in `.dsh/skills/project-docs/` at the nearest Git root. Run commands from that root so receipts and locks share the same project; without Git, use the invoking directory.
+User Skills live in `$DSH_HOME/skills/project-docs/`, defaulting to `~/.dsh/skills/project-docs/`, with native tilde expansion.
+For manual installation copy the complete `dist/dsh/planweft/skills/project-docs/` directory; the CLI does not adopt existing copies. Same-name Skills follow DSH provider priorities.
 
-DSH profiles with the official filesystem provider discover this Skill automatically. Skill loading does not imply hook execution.
-This adapter does not modify `cordis.patch.yml` or register a marketplace; full profile integration currently fails explicitly as unsupported.
-Existing project/user Skills with the same name follow DSH priority rules. Check for duplicate planning workflows when original PWF is also installed.
+Assets resolve from the installed package; task state uses each session's cwd. SessionStart, UserPromptSubmit, PostToolUse and Stop are bridged. There is no PreCompact bridge. DSH drops context-only PreToolUse output, so that reminder is not registered. Default Stop does not force continuation, and DSH does not display PWF's `systemMessage` reminder. Gated mode uses the native Stop decision channel; full model continuation acceptance has not been run. PWF refreshes the plan on each prompt; UserPromptSubmit deduplication is not claimed.
+Set `PLANNING_DISABLED=1` when starting a read-only host session to disable execution hooks while retaining the Skill's read-only rules. Enable one planning hook source per session. The installer refuses to overwrite foreign PlanWeft profile registrations.
 
-Sources: [official DSH Skill provider](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/skill/skill-filesystem/README.md),
-[CLI profiles and native plugin management](https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/README.md).
+Linux native install/A-B update/rollback/removal and config composition passed. Protocol probes use the real official bridge and subprocesses to check injection, project isolation, recovery and permission preservation. These are not DSH model-session or Windows/macOS results.
+
+Sources: [official Skill provider](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/skill/skill-filesystem/README.md), [official hook bridge](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/hooks/hooks-claude-code/README.md), [CLI profiles](https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/README.md).
+
+Full integration also checks home/profile patches for known planning-hook text, ignoring whole-line comments. This is a conservative hint check, not resolved runtime configuration; inspect the actual source when warned. Skill-only skips this hook-duplication check.

@@ -26,7 +26,7 @@ For project goals and design sources, read the project introduction: [简体中�
 | Continue | Passed | Not Run | Not Run | Not Run |
 | Mastra Code | Passed | Not Run | Not Run | Not Run |
 | Agents | Passed | Not Run | Not Run | Not Run |
-| DeepSeek Harness / DSH | Passed | Passed (Skill provider) | Not Run (full plugin) | Not Run |
+| DeepSeek Harness / DSH | Passed | Passed (bridge/Skill) | Passed | Not Run |
 
 All remote npm/Git lifecycles and real Windows/macOS host sessions remain Not Run until separately recorded. Pi RPC and OpenCode debug discovery are actual host loading, not model calls. Non-core native runs from 0.3.0 are not reused as 0.4.0 results.
 

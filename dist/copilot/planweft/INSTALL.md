@@ -11,10 +11,10 @@
 npx planweft@0.4.0-rc.1 add -a claude -a pi
 npx planweft@0.4.0-rc.1 add -a codex --global
 npx planweft@0.4.0-rc.1 add -a opencode --skill-only --symlink
-npx planweft@latest list
-npx planweft@latest doctor
-npx planweft@latest update -a pi
-npx planweft@latest remove -a pi
+npx planweft@0.4.0-rc.1 list
+npx planweft@0.4.0-rc.1 doctor
+npx planweft@0.4.0-rc.1 update -a pi
+npx planweft@0.4.0-rc.1 remove -a pi
 ```
 
 | 参数 | 默认值 | 作用 |
@@ -23,12 +23,13 @@ npx planweft@latest remove -a pi
 | `--project / --global` | project | 项目级或用户级；宿主不支持时拒绝，不悄悄升级范围 |
 | `--skill-only` | 关闭 | 安装完整、无其他宿主执行 frontmatter 的便携 Skill |
 | `--copy / --symlink` | 优先链接 | 自动模式链接失败时报告复制；显式 symlink 失败则报错 |
+| `--dsh-profile NAME` | headless | DSH 完整集成使用的用户级 profile；更新沿用已安装记录 |
 | `--dry-run` | 关闭 | 只显示选择和路径，不安装、不写状态 |
 | `--source FILE.tgz` | 精确 npm 版本 | 本地验收的 npm 包，身份/版本必须与正在运行的 CLI 一致 |
 
 Pi 项目级包操作遵循原生信任检查；遇到未信任项目时，可显式追加 `--approve-pi-project`，仅为本次 Pi 命令传入 `--approve`。它会信任该项目的本地文件，不默认开启，也不改变其他宿主的信任。
 
-平台标识：`codex claude pi opencode hermes cursor gemini copilot mastracode kiro continue factory codebuddy agents`。
+平台标识：`codex claude pi opencode hermes cursor gemini copilot mastracode kiro continue factory codebuddy agents dsh`。
 Node.js 22+；建议使用 Node.js 24 LTS。运行脚本还按平台需要 Python 3、Bash 或 PowerShell。
 
 项目版本存储在 `.planweft/versions/`，安装记录在 `.planweft/installations.json`；用户级使用
@@ -309,8 +310,29 @@ Continue CLI 的 `/import-skill <url-or-name>` 是由模型协助下载复制的
 
 ## DeepSeek Harness（DSH）
 
-当前适配提供完整 `project-docs` Skill 及其脚本、模板、语言资源；尚未启用 DSH profile hooks。
-使用平台 ID `dsh` 并显式选择 `--skill-only`。npm 候选包发布后：
+提供原生 DSH bundle、完整 Skill 和官方 Claude command-hook 桥接。使用已验证的 DSH `0.1.2-rc.1`；原生插件管理还需要 `pnpm` 在 PATH 中。以下 npm 命令在候选版发布后可用。
+
+完整集成是用户级 **profile** 配置；默认 `headless`，可显式选 `web`。安装器一次管理一个 DSH profile，更新沿用记录中的 profile，切换前先卸载。CLI 将原生来源链接到持久版本目录；这属于 DSH/pnpm 管理的链接，不受 CLI `--copy` 影响。启动该 profile 后，bundle 注册 Skill 与 hooks。
+
+```bash
+npx planweft@0.4.0-rc.1 add -a dsh --global --dsh-profile headless
+npx planweft@0.4.0-rc.1 doctor -a dsh --global
+npx planweft@0.4.0-rc.1 update -a dsh --global
+npx planweft@0.4.0-rc.1 remove -a dsh --global
+```
+
+用户可直接使用 DSH 原生命令，来源为单一 npm 包；此路线独立于 PlanWeft CLI，不能混用所有权：
+
+```bash
+dsh plugin --profile headless add planweft@0.4.0-rc.1
+dsh --profile headless --dump-config
+dsh --profile headless "Use project-docs for this maintenance task."
+dsh plugin --profile headless remove planweft
+```
+
+本地平台目录可使用 `dsh plugin --profile headless add file:/absolute/path/to/dist/dsh/planweft` 安装。原生包声明 `dsh.bundle.patch`；无需 marketplace。升级用所需精确版本的 `add`，回退同样安装旧版本，再开启新会话；不启用后台更新。卸载只移除 PlanWeft 的 profile 依赖和 bundle，保留 profile、用户其他设置及项目记录。
+
+项目级仅安装 Skill：
 
 ```bash
 npx planweft@0.4.0-rc.1 add -a dsh --skill-only
@@ -319,15 +341,16 @@ npx planweft@0.4.0-rc.1 update -a dsh
 npx planweft@0.4.0-rc.1 remove -a dsh
 ```
 
-用户级操作在各命令上添加 `--global`；`--copy`、`--symlink`、`--dry-run` 沿用统一安装器规则。
-项目 Skill 放到最近含 `.git` 的祖先目录下 `.dsh/skills/project-docs/`，没有 Git 根时使用调用目录；
-用户 Skill 放到 `$DSH_HOME/skills/project-docs/`，默认 `~/.dsh/skills/project-docs/`。
-为使 Skill 与安装记录拥有同一项目范围，请在 Git 根执行项目级命令；从子目录安装会在写入前明确拒绝。无 Git 仓库时，在同一调用目录执行安装、更新和卸载。
-也可将 `dist/dsh/planweft/skills/project-docs/` 完整复制到上述 Skill 目录；手工复制的文件不由 CLI 接管。
+用户级 Skill-only 在每个命令上添加 `--global`。`--copy`、`--symlink`、`--dry-run` 沿用统一安装器规则。
+项目 Skill 位于最近 Git 根的 `.dsh/skills/project-docs/`；为保证安装记录与锁同属一个项目，必须从 Git 根执行；无 Git 时使用调用目录。
+用户路径为 `$DSH_HOME/skills/project-docs/`，默认 `~/.dsh/skills/project-docs/`，支持原生 tilde 展开。
+手工路线复制完整 `dist/dsh/planweft/skills/project-docs/`；CLI 不接管已有手工副本。同名 Skill 按 DSH provider 优先级选择。
 
-启用官方 filesystem provider 的 DSH profile 可自动发现该 Skill。读取 Skill 不代表已执行 hooks；
-本适配不会改写 `cordis.patch.yml` 或注册 marketplace。完整 profile 集成当前明确返回不支持。
-已有项目/用户同名 Skill 按 DSH 优先级选择；安装原版 PWF 时应检查重复规划工作流。
+运行资源按包内绝对路径定位，项目状态取每个会话 cwd。支持 SessionStart、UserPromptSubmit、PostToolUse 和 Stop；没有 PreCompact，PreToolUse 纯上下文会被官方桥接丢弃，故不注册该事件的提醒。默认 Stop 不强制继续，且 DSH 不展示 PWF 的 `systemMessage` 提醒；gated 使用官方 Stop 决策通道，完整模型续跑验收尚未进行。PWF 保留每次提示刷新计划的行为，不宣称 UserPromptSubmit 去重。
+只读会话可在启动宿主时设置 `PLANNING_DISABLED=1`，关闭执行 hooks；保留 Skill 的只读规则。单会话只启用一个规划 hook 来源，安装器拒绝覆盖非自有的 PlanWeft profile 注册。
 
-依据：[DSH 官方 Skill provider](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/skill/skill-filesystem/README.md)、
-[CLI profile 与原生插件管理](https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/README.md)。
+Linux 原生安装/A-B 更新/回退/卸载与配置加载已验证；官方桥接加真实子进程的协议测试已验证注入、跨项目隔离、恢复及权限保持。这些不代表 DSH 模型会话或 Windows/macOS 已通过。
+
+依据：[官方 Skill provider](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/skill/skill-filesystem/README.md)、[官方 hook bridge](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/hooks/hooks-claude-code/README.md)、[CLI profile](https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/README.md)。
+
+完整集成还检查 home/profile patch 中已知规划 hook 的文本线索，忽略整行注释；这是保守提示检查，不是执行后的配置解析，遇到提示需核对实际来源。Skill-only 不执行此 hook 重复检查。
