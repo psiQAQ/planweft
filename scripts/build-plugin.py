@@ -133,16 +133,44 @@ def enhance_skill(text, path):
     workflow = (OVERLAY / 'workflow.md').read_text()
     # Installed skills need their own sibling helper, irrespective of host.
     # Preserve all consent options while removing another host's assumed path.
+    catchup_replaced = False
     def portable_catchup(match):
+        nonlocal catchup_replaced
         block = match.group(0)
         if 'session-catchup.py' not in block or '.claude' not in block:
             return block
+        if catchup_replaced:
+            return ''
+        catchup_replaced = True
         return ('Locate the absolute directory containing the installed `SKILL.md` you just read. '
                 'Run its sibling `scripts/session-catchup.py --metadata <absolute-project-directory>` '
                 'with an available Python 3 interpreter only when metadata was explicitly requested. '
                 'Use `--replay` only when bounded transcript replay was explicitly authorized. '
                 'Resolve that same installed helper on Windows; do not assume another host\'s installation path.\n')
     body = re.sub(r'```[^\n]*\n.*?```', portable_catchup, body, flags=re.S)
+    body = body.replace('- Single-file edits',
+                        '- Trivial single-file edits without investigation, regression verification or a persistent handoff')
+    body = body.replace('a baseline a human approved once', 'a previously recorded byte baseline')
+    body = body.replace('This skill uses PreToolUse and UserPromptSubmit hooks to inject plan context.',
+                        'The activated adapter uses its supported lifecycle events to inject plan context.')
+    body = body.replace('Reuse the selected plan when resuming. For a separate task,',
+                        'Reuse an existing task-owned PWF plan when resuming. If none exists after valid selection, initialize one for this current task, including maintenance continued from old notes. To initialize,')
+    # Claude's turn-loop instructions are not portable host capabilities.
+    # The upstream snapshot retains its full manual; installed controls route
+    # to the native adapter instead of advertising these events on every host.
+    body = re.sub(r'## Claude Code Turn-Loop Integration[^\n]*\n.*?(?=## Autonomous and Gated Modes)',
+                  '## Host-specific operations\n\nRead [explicit controls](references/controls.md) '
+                  'when goal, loop or other native commands are requested. Use only the current '
+                  'host\'s supported operations; Skill installation does not add missing lifecycle events.\n\n',
+                  body, flags=re.S)
+    body = re.sub(r'### Host capability tiers\n.*?(?=### Runaway guards)',
+                  '### Host capability boundaries\n\nThe adapters do not share one stopping protocol. '
+                  'Claude Code and Codex use native Stop decisions; DSH uses its Stop bridge; '
+                  'Pi and OpenCode use native follow-up mechanisms. Continue has no execution hooks. '
+                  'Use the installed platform\'s INSTALL.md and [explicit controls](references/controls.md) '
+                  'for actual availability and activation. Shell counter limits do not describe Pi\'s '
+                  'extension counter. Protocol checks do not prove real host enforcement.\n\n',
+                  body, flags=re.S)
     return '---\n' + front + '\n---\n\n' + workflow.rstrip() + '\n\n' + body.lstrip()
 
 
