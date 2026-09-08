@@ -2,6 +2,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import * as filesystem from '@deepseek-ai/dsh-skill-filesystem';
 import * as hooks from '@deepseek-ai/dsh-hooks-claude-code';
+import {hookShell} from './hook-shell.mjs';
 
 export const name = 'planweft';
 export const inject = ['skills', ...hooks.inject];
@@ -13,5 +14,8 @@ export function apply(ctx) {
   if (process.env.PLANNING_DISABLED === '1') return;
   // Package assets use absolute paths. Omit projectDir so each session keeps
   // its own workspace, including different projects in one web profile.
-  ctx.plugin(hooks, {configPath: path.join(root, 'hooks/hooks.json'), pluginRoot: root});
+  const shell = ctx.shell;
+  const scoped = ctx.isolate('shell');
+  scoped.provide('shell', hookShell(shell));
+  scoped.plugin(hooks, {configPath: path.join(root, 'hooks/hooks.json'), pluginRoot: root});
 }

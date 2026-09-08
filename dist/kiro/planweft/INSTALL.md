@@ -8,13 +8,13 @@
 默认安装完整原生集成，项目级为默认 scope。仅安装 Skill 必须显式 `--skill-only`；不会因此注册插件 hooks。
 
 ```bash
-npx planweft@0.4.0-rc.1 add -a claude -a pi
-npx planweft@0.4.0-rc.1 add -a codex --global
-npx planweft@0.4.0-rc.1 add -a opencode --skill-only --symlink
-npx planweft@0.4.0-rc.1 list
-npx planweft@0.4.0-rc.1 doctor
-npx planweft@0.4.0-rc.1 update -a pi
-npx planweft@0.4.0-rc.1 remove -a pi
+npx planweft@0.4.0-rc.3 add -a claude -a pi
+npx planweft@0.4.0-rc.3 add -a codex --global
+npx planweft@0.4.0-rc.3 add -a opencode --skill-only --symlink
+npx planweft@0.4.0-rc.3 list
+npx planweft@0.4.0-rc.3 doctor
+npx planweft@0.4.0-rc.3 update -a pi
+npx planweft@0.4.0-rc.3 remove -a pi
 ```
 
 | 参数 | 默认值 | 作用 |
@@ -136,7 +136,7 @@ pi list
 npm 发布完成后，使用唯一的无 scope 包：
 
 ```bash
-pi install -l npm:planweft@0.4.0-rc.1
+pi install -l npm:planweft@0.4.0-rc.3
 pi install -l npm:planweft@NEW_VERSION
 # Remove the project installation:
 pi remove -l npm:planweft@NEW_VERSION
@@ -315,16 +315,16 @@ Continue CLI 的 `/import-skill <url-or-name>` 是由模型协助下载复制的
 完整集成是用户级 **profile** 配置；默认 `headless`，可显式选 `web`。安装器一次管理一个 DSH profile，更新沿用记录中的 profile，切换前先卸载。CLI 将原生来源链接到持久版本目录；这属于 DSH/pnpm 管理的链接，不受 CLI `--copy` 影响。启动该 profile 后，bundle 注册 Skill 与 hooks。
 
 ```bash
-npx planweft@0.4.0-rc.1 add -a dsh --global --dsh-profile headless
-npx planweft@0.4.0-rc.1 doctor -a dsh --global
-npx planweft@0.4.0-rc.1 update -a dsh --global
-npx planweft@0.4.0-rc.1 remove -a dsh --global
+npx planweft@0.4.0-rc.3 add -a dsh --global --dsh-profile headless
+npx planweft@0.4.0-rc.3 doctor -a dsh --global
+npx planweft@0.4.0-rc.3 update -a dsh --global
+npx planweft@0.4.0-rc.3 remove -a dsh --global
 ```
 
 用户可直接使用 DSH 原生命令，来源为单一 npm 包；此路线独立于 PlanWeft CLI，不能混用所有权：
 
 ```bash
-dsh plugin --profile headless add planweft@0.4.0-rc.1
+dsh plugin --profile headless add planweft@0.4.0-rc.3
 dsh --profile headless --dump-config
 dsh --profile headless "Use project-docs for this maintenance task."
 dsh plugin --profile headless remove planweft
@@ -335,10 +335,10 @@ dsh plugin --profile headless remove planweft
 项目级仅安装 Skill：
 
 ```bash
-npx planweft@0.4.0-rc.1 add -a dsh --skill-only
-npx planweft@0.4.0-rc.1 doctor -a dsh
-npx planweft@0.4.0-rc.1 update -a dsh
-npx planweft@0.4.0-rc.1 remove -a dsh
+npx planweft@0.4.0-rc.3 add -a dsh --skill-only
+npx planweft@0.4.0-rc.3 doctor -a dsh
+npx planweft@0.4.0-rc.3 update -a dsh
+npx planweft@0.4.0-rc.3 remove -a dsh
 ```
 
 用户级 Skill-only 在每个命令上添加 `--global`。`--copy`、`--symlink`、`--dry-run` 沿用统一安装器规则。
@@ -348,6 +348,8 @@ npx planweft@0.4.0-rc.1 remove -a dsh
 
 运行资源按包内绝对路径定位，项目状态取每个会话 cwd。支持 SessionStart、UserPromptSubmit、PostToolUse 和 Stop；没有 PreCompact，PreToolUse 纯上下文会被官方桥接丢弃，故不注册该事件的提醒。默认 Stop 不强制继续，且 DSH 不展示 PWF 的 `systemMessage` 提醒；gated 使用官方 Stop 决策通道，完整模型续跑验收尚未进行。PWF 保留每次提示刷新计划的行为，不宣称 UserPromptSubmit 去重。
 只读会话可在启动宿主时设置 `PLANNING_DISABLED=1`，关闭执行 hooks；保留 Skill 的只读规则。单会话只启用一个规划 hook 来源，安装器拒绝覆盖非自有的 PlanWeft profile 注册。
+
+RC3 的 DSH hook 使用每次调用独立的私有临时缓存，因为 workspace-write 不允许写 HOME 缓存。原生桥接的 shell 适配绑定宿主 session ID，并用有界进程内状态去重 PostToolUse 提醒；执行仍交给原沙箱，不改权限或 Stop payload。Stop 计数与停滞 ledger 保留在选定计划中。上游 `pwf-prog` 跨调用缓存告警不跨隔离 hook 保留，不将其视为 DSH 上的进度回退保护。
 
 Linux 原生安装/A-B 更新/回退/卸载与配置加载已验证；官方桥接加真实子进程的协议测试已验证注入、跨项目隔离、恢复及权限保持。这些不代表 DSH 模型会话或 Windows/macOS 已通过。
 

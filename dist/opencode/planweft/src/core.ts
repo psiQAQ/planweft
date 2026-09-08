@@ -22,7 +22,7 @@ import * as os from "node:os"
 import * as path from "node:path"
 import { fileURLToPath } from "node:url"
 
-export const VERSION = "0.4.0-rc.2"
+export const VERSION = "0.4.0-rc.3"
 export const BANNER = "[planweft] ACTIVE PLAN — current state:"
 export const REMINDER =
   "[planweft] Update progress.md with what you just did. If a phase is now complete, update task_plan.md status."

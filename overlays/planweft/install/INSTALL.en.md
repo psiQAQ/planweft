@@ -7,13 +7,13 @@ the repository release evidence states current acceptance status. Full native in
 Use `--skill-only` explicitly for a complete portable Skill; it does not register plugin hooks.
 
 ```bash
-npx planweft@0.4.0-rc.1 add -a claude -a pi
-npx planweft@0.4.0-rc.1 add -a codex --global
-npx planweft@0.4.0-rc.1 add -a opencode --skill-only --symlink
-npx planweft@0.4.0-rc.1 list
-npx planweft@0.4.0-rc.1 doctor
-npx planweft@0.4.0-rc.1 update -a pi
-npx planweft@0.4.0-rc.1 remove -a pi
+npx planweft@0.4.0-rc.3 add -a claude -a pi
+npx planweft@0.4.0-rc.3 add -a codex --global
+npx planweft@0.4.0-rc.3 add -a opencode --skill-only --symlink
+npx planweft@0.4.0-rc.3 list
+npx planweft@0.4.0-rc.3 doctor
+npx planweft@0.4.0-rc.3 update -a pi
+npx planweft@0.4.0-rc.3 remove -a pi
 ```
 
 | Option | Default | Purpose |
@@ -139,7 +139,7 @@ pi list
 After publication, use the single unscoped package:
 
 ```bash
-pi install -l npm:planweft@0.4.0-rc.1
+pi install -l npm:planweft@0.4.0-rc.3
 pi install -l npm:planweft@NEW_VERSION
 # Remove the project installation:
 pi remove -l npm:planweft@NEW_VERSION
@@ -318,16 +318,16 @@ The adapter provides a native DSH bundle, complete Skill and the official Claude
 Full integration belongs to a user-level **profile**, defaulting to `headless`; select `web` explicitly when needed. The installer manages one DSH profile at a time. Updates retain the recorded profile; remove it before switching. The native source links to the persistent version directory through DSH/pnpm, independently of the CLI's `--copy` option. Starting the selected profile loads its bundled Skill and hooks.
 
 ```bash
-npx planweft@0.4.0-rc.1 add -a dsh --global --dsh-profile headless
-npx planweft@0.4.0-rc.1 doctor -a dsh --global
-npx planweft@0.4.0-rc.1 update -a dsh --global
-npx planweft@0.4.0-rc.1 remove -a dsh --global
+npx planweft@0.4.0-rc.3 add -a dsh --global --dsh-profile headless
+npx planweft@0.4.0-rc.3 doctor -a dsh --global
+npx planweft@0.4.0-rc.3 update -a dsh --global
+npx planweft@0.4.0-rc.3 remove -a dsh --global
 ```
 
 Alternatively use DSH native commands with the single npm package. This is a separate ownership channel; do not mix it with the PlanWeft CLI:
 
 ```bash
-dsh plugin --profile headless add planweft@0.4.0-rc.1
+dsh plugin --profile headless add planweft@0.4.0-rc.3
 dsh --profile headless --dump-config
 dsh --profile headless "Use project-docs for this maintenance task."
 dsh plugin --profile headless remove planweft
@@ -338,10 +338,10 @@ A local platform directory can be installed with `dsh plugin --profile headless 
 Project-level Skill-only installation:
 
 ```bash
-npx planweft@0.4.0-rc.1 add -a dsh --skill-only
-npx planweft@0.4.0-rc.1 doctor -a dsh
-npx planweft@0.4.0-rc.1 update -a dsh
-npx planweft@0.4.0-rc.1 remove -a dsh
+npx planweft@0.4.0-rc.3 add -a dsh --skill-only
+npx planweft@0.4.0-rc.3 doctor -a dsh
+npx planweft@0.4.0-rc.3 update -a dsh
+npx planweft@0.4.0-rc.3 remove -a dsh
 ```
 
 Add `--global` to every command for user-level Skill-only management. `--copy`, `--symlink` and `--dry-run` retain their shared semantics.
@@ -350,6 +350,8 @@ User Skills live in `$DSH_HOME/skills/project-docs/`, defaulting to `~/.dsh/skil
 For manual installation copy the complete `dist/dsh/planweft/skills/project-docs/` directory; the CLI does not adopt existing copies. Same-name Skills follow DSH provider priorities.
 
 Assets resolve from the installed package; task state uses each session's cwd. SessionStart, UserPromptSubmit, PostToolUse and Stop are bridged. There is no PreCompact bridge. DSH drops context-only PreToolUse output, so that reminder is not registered. Default Stop does not force continuation, and DSH does not display PWF's `systemMessage` reminder. Gated mode uses the native Stop decision channel; full model continuation acceptance has not been run. PWF refreshes the plan on each prompt; UserPromptSubmit deduplication is not claimed.
+RC3 uses a private disposable temporary cache for each DSH hook; workspace-write cannot write HOME caches. The native bridge facade binds the host session ID and deduplicates PostToolUse reminders in bounded process memory. It delegates to the original sandbox executor without changing permissions or Stop payloads. Stop counters and stall ledgers remain in the selected plan. The upstream `pwf-prog` cross-call cache warning is not retained across isolated hook invocations; do not treat it as a DSH progress-regression safeguard.
+
 Set `PLANNING_DISABLED=1` when starting a read-only host session to disable execution hooks while retaining the Skill's read-only rules. Enable one planning hook source per session. The installer refuses to overwrite foreign PlanWeft profile registrations.
 
 Linux native install/A-B update/rollback/removal and config composition passed. Protocol probes use the real official bridge and subprocesses to check injection, project isolation, recovery and permission preservation. These are not DSH model-session or Windows/macOS results.

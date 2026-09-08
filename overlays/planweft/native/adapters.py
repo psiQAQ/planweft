@@ -10,6 +10,7 @@ import re
 HERE = Path(__file__).resolve().parent
 PRODUCT = 'planweft'
 SKILL = 'project-docs'
+UNPLANNED_GUIDANCE = '[planweft] For an authorized multi-step implementation task, first load the installed project-docs Skill and follow its plan-selection workflow. Simple tasks, read-only review, diagnosis and planning mode must not initialize project records. User scope and project rules take precedence.'
 
 
 def json_file(value):
@@ -230,7 +231,7 @@ def opencode(files, version, description):
     # Discovery alone did not activate the Skill in the RC1 maintenance trial.
     # The native event only reminds; task scope and any initialization stay with
     # the Skill. Existing opt-out, conflict handling and per-message dedup apply.
-    text = text.replace(needle, needle + '        else if (!(env.PLAN_ID ?? "").trim()) text = "[planweft] For an authorized multi-step implementation task, first load the installed project-docs Skill and follow its plan-selection workflow. Simple tasks, read-only review, diagnosis and planning mode must not initialize project records. User scope and project rules take precedence."\n')
+    text = text.replace(needle, needle + '        else if (!(env.PLAN_ID ?? "").trim()) text = ' + json.dumps(UNPLANNED_GUIDANCE) + '\n')
     result['src/index.ts'] = (text.encode(), mode)
     result['install/loader-template.ts'] = (
         b'// Replace this file URL with the absolute path to the built package.\n'
@@ -314,6 +315,7 @@ def adapt(bundles, version, description):
     # DSH mounts a native bundle through its profile manager, not a marketplace.
     files = shared(result['dsh'], version)
     files['index.mjs'] = ((HERE / 'dsh/index.mjs').read_bytes(), 0o644)
+    files['hook-shell.mjs'] = ((HERE / 'dsh/hook-shell.mjs').read_bytes(), 0o644)
     # DSH anchors relative inserted names to the bundle patch directory. Bare
     # package names resolve from Cordis itself and fail for profile-local installs.
     files['cordis.patch.yml'] = (b'- insert:\n    - id: planweft\n      name: ./index.mjs\n', 0o644)
@@ -335,7 +337,10 @@ def adapt(bundles, version, description):
         for group in groups:
             for hook in group['hooks']:
                 hook['command'] = hook['command'].replace('/hooks/claude-hook.sh', '/hooks/dsh-hook.sh')
-    files['hooks/dsh-hook.sh'] = ((HERE / 'dsh/hook.sh').read_bytes(), 0o755)
+    reminder = json.dumps({'hookSpecificOutput': {'hookEventName': 'UserPromptSubmit',
+                           'additionalContext': UNPLANNED_GUIDANCE}})
+    launcher = (HERE / 'dsh/hook.sh').read_text().replace('__UNPLANNED_CONTEXT__', reminder.replace("'", "'\"'\"'"))
+    files['hooks/dsh-hook.sh'] = (launcher.encode(), 0o755)
     files['hooks/hooks.json'] = json_file(config)
     result['dsh'] = files
     return result

@@ -28,7 +28,7 @@ hooks:
         - type: command
           command: "SH=\"${CLAUDE_SKILL_DIR}/scripts/skill-hook.sh\"; [ -f \"$SH\" ] || SH=$(ls \"$HOME/.claude/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/plugins/marketplaces/planweft/scripts/skill-hook.sh\" 2>/dev/null | head -1); [ -n \"$SH\" ] && [ -f \"$SH\" ] && sh \"$SH\" --event=precompact; exit 0"
 metadata:
-  version: "0.4.0-rc.2"
+  version: "0.4.0-rc.3"
 ---
 
 ## PlanWeft workflow and precedence

@@ -1,6 +1,6 @@
 {
   "name": "planweft",
-  "version": "0.4.0-rc.2",
+  "version": "0.4.0-rc.3",
   "description": "Persistent planning, project documentation and evidence for coding agents",
   "type": "module",
   "bin": {
@@ -53,8 +53,8 @@
   ],
   "scripts": {
     "build": "python3 scripts/build-plugin.py",
-    "check": "python3 scripts/build-plugin.py --verify && node --test tests/installer.test.mjs",
-    "test": "node --test tests/installer.test.mjs"
+    "check": "python3 scripts/build-plugin.py --verify && npm test",
+    "test": "node tests/installer.test.mjs && node tests/dsh-hook-shell.test.mjs"
   },
   "dependencies": {
     "@opencode-ai/plugin": "1.18.16",
