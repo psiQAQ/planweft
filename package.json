@@ -1,0 +1,85 @@
+{
+  "name": "planweft",
+  "version": "0.4.0-rc.1",
+  "description": "Persistent planning, project documentation and evidence for coding agents",
+  "type": "module",
+  "bin": {
+    "planweft": "bin/planweft.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/opencode/planweft/dist/index.d.ts",
+      "import": "./dist/opencode/planweft/dist/index.js"
+    }
+  },
+  "pi": {
+    "skills": [
+      "dist/pi/planweft/SKILL.md"
+    ],
+    "extensions": [
+      "dist/pi/planweft/extensions/planweft/index.ts"
+    ]
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "dist/",
+    ".agents/plugins/marketplace.json",
+    ".claude-plugin/marketplace.json",
+    ".cursor-plugin/marketplace.json",
+    ".github/plugin/marketplace.json",
+    ".factory-plugin/marketplace.json",
+    ".codebuddy-plugin/marketplace.json",
+    "README.md",
+    "README.en.md",
+    "docs/installation.md",
+    "docs/installation.en.md",
+    "docs/platforms.md",
+    "docs/platforms.en.md",
+    "LICENSE",
+    "NOTICE",
+    "CHANGELOG.md",
+    "!**/__pycache__/**",
+    "!**/*.pyc",
+    "!**/node_modules/**",
+    "CHANGELOG.en.md",
+    "docs/releasing.md",
+    "docs/releasing.en.md"
+  ],
+  "scripts": {
+    "build": "python3 scripts/build-plugin.py",
+    "check": "python3 scripts/build-plugin.py --verify && node --test tests/installer.test.mjs",
+    "test": "node --test tests/installer.test.mjs"
+  },
+  "dependencies": {
+    "@opencode-ai/plugin": "1.18.16"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psiQAQ/planweft.git"
+  },
+  "homepage": "https://github.com/psiQAQ/planweft#readme",
+  "bugs": {
+    "url": "https://github.com/psiQAQ/planweft/issues"
+  },
+  "keywords": [
+    "pi-package",
+    "opencode-plugin",
+    "agent-skills",
+    "planning",
+    "documentation"
+  ],
+  "author": "PlanWeft contributors",
+  "license": "MIT"
+}
