@@ -47,3 +47,9 @@ Pi 维护记录保存了完整历史事实，仅重排“历史：”展示标�
 OpenCode 未自动读取 Skill 的实际维护失败需要修复，reviewer 同意在现有 chat.message 无计划/无冲突分支加入条件式指引。保留禁用、有效根检查与去重，不新增调度或直接初始化。要求实际维护、simple 和 readonly 复验；协议测试不能放行稳定版。
 
 后续复审提出两项增强，主 Agent 已处理：非空但失效的 PLAN_ID 保持原有静默，不被当作新任务提醒；对照入口保存 Vitest JSON 并机械检查 raw 失败集合恰为两项有意差异，额外失败或 pending 不能放行。新增显式绑定 hook 测试。typecheck 仅覆盖运行时 src，不声称覆盖测试 TypeScript。
+
+## RC2 OpenCode 与 RC3 DSH 复审
+
+OpenCode RC2 维护与独立冷读语义 Passed，附 REP-0010 中的错误日志和措辞差异。reviewer 先从维护后的文件重建结果，再核对 trace；两个会话身份不同，冷读未安装插件、输入完全等于维护输出、冷读前后项目不变。
+
+DSH reviewer 确认 HOME 缓存在原沙箱不可写，且 bwrap 每次调用会替换 /tmp，故仅改缓存不足以保存去重。所提临时缓存、session 映射和有界进程状态方案不修改原生权限；指出的 JSON null 透明传递、有效 Stop stdin 和容量边界已经补回归。临时 pwf-prog 限制明确公开，不据协议测试放行稳定版。

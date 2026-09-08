@@ -1,6 +1,6 @@
 [简体中文](README.md) | [English](README.en.md)
 
-> PlanWeft 0.4.0-rc.2 为候选版；稳定 0.4.0 须通过 Codex、Claude Code、Pi、OpenCode、DSH 五个平台真实验收。见[发布清单：中文](docs/releasing.md) / [English](docs/releasing.en.md)。
+> PlanWeft 0.4.0-rc.3 为候选版；稳定 0.4.0 须通过 Codex、Claude Code、Pi、OpenCode、DSH 五个平台真实验收。见[发布清单：中文](docs/releasing.md) / [English](docs/releasing.en.md)。
 
 # PlanWeft
 

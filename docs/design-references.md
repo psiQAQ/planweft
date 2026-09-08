@@ -206,3 +206,5 @@ vendor 四文件是导入器产物，dist 与 plugins 由 builder 生成；证�
 - `lib/installer.mjs`：DSH Git 根、DSH_HOME 规则以官方 provider 与 [home-paths](https://github.com/deepseek-ai/deepseek-harness/blob/c389f96bf3a9b6807cb71ed6bdad5849be0df6d8/packages/util/home-paths/src/index.ts) 为依据；本地选择是在 Git 根执行安装，以复用现有 scope/锁/所有权而不新增第二套安装记录。
 - 完整集成的候选依据：[官方 hook bridge](https://github.com/deepseek-ai/deepseek-harness/blob/c389f96bf3a9b6807cb71ed6bdad5849be0df6d8/packages/hooks/hooks-claude-code/README.md)、[原生 profile CLI](https://github.com/deepseek-ai/deepseek-harness/blob/c389f96bf3a9b6807cb71ed6bdad5849be0df6d8/apps/cli/README.md)。用户已确认两个运行依赖，当前已实现原生 bundle 与官方 hooks 桥接；未支持的事件及真实模型验收分别记录。
 - 运行证据：`tests/run-dsh-skill-smoke.mjs` 用隔离安装的官方 npm 0.1.2-rc.1 组件执行；这与源码参考版本分开记录。安装器测试证明本地生命周期，provider runtime 证明 Skill 发现/加载，两者都不是模型使用证据。
+
+- RC3 `native/dsh/hook.sh`、`hook-shell.mjs`、`index.mjs`：依据上述官方 bridge 的 shell resolve/run 与 stdin session 协议，以及官方 npm 0.1.2-rc.1 SandboxBash 实测。私有临时缓存与有界宿主会话去重是本地兼容组合，不宣称上游提供此实现；保留沙箱权限、其他插件输出与项目 Stop ledger。因果复现、Python/Shell 双路径及独立 review 见 REP-0010 / REV-0010；跨调用 pwf-prog 告警不支持，模型验收另列。

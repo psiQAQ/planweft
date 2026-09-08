@@ -2,7 +2,13 @@
 
 # Changelog
 
-## 0.4.0-rc.2 (in development)
+## 0.4.0-rc.3 (in development)
+
+- DSH hooks use sandbox-writable private temporary snapshots, host session binding and bounded per-turn reminder state. Permissions and Stop payloads remain native.
+- Unplanned DSH implementation tasks receive the same conditional Skill reminder as OpenCode. Broken state and explicit bindings remain fail-closed.
+- RC2 was published through GitHub OIDC with an exact matching npm archive; its OpenCode maintenance trial passed. DSH model failures remain recorded until a new archive passes.
+
+## 0.4.0-rc.2
 
 - OpenCode now reminds authorized multi-step tasks to load project-docs when no plan exists; simple/read-only tasks remain outside initialization.
 

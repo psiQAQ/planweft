@@ -48,10 +48,10 @@ Pi 的全计划内容探针显式采用 parity 模式并通过原生命令激活
 
 ## 尚未完成
 
-- RC2 修复后准确包的 DSH/OpenCode 模型复验，以及 Pi context 失败调查尚待完成。
-- npm latest 标签删除失败，OIDC 发布与稳定门槛待完成。
+- RC2 OpenCode 与 Pi 复验结果见下；RC3 DSH 准确包模型复验待完成。
+- npm latest 标签删除失败；OIDC RC2 发布已完成，稳定门槛待完成。
 - 五宿主最终准确归档的维护、冷读、正常信任、停止限制及语义审查尚未全部通过。
-- 远端真实两版本生命周期、Git marketplace、新会话加载、OIDC 候选、稳定提升与 GitHub Release 均待完成。
+- 远端真实两版本生命周期、Git marketplace、新会话加载、稳定提升与 GitHub Release 均待完成。
 - Windows/macOS 真实宿主仍为 Not Run；CI 不替代真实宿主。
 
 RC2 修改了本地运行时 overlays；PWF 固定源码与状态协议未改。OpenCode 当前原始对照 34 项 Passed，原生未调整测试 32 Passed/2 Failed（两项有意的协议差异），显式适配断言并加入本地边界测试后 37 项 Passed；不删除原始失败日志。此前其他上游证据仍属历史定位。
@@ -59,3 +59,25 @@ RC2 修改了本地运行时 overlays；PWF 固定源码与状态协议未改。
 对外说明：[发布：中文](../releasing.md) / [English](../releasing.en.md)，[平台：中文](../platforms.md) / [English](../platforms.en.md)。
 
 [RC2 OpenCode 对照附件](evidence/0010/rc2-opencode-regression.tar.gz)，SHA-256 `849f0d46e2326033456666027b04a16380451d3a68f0a5cfee00aefa5d1e2fbe`；包含结构化原始结果、准确输入清单及运行日志。原始失败集合经机器核对，无额外失败或 pending。
+
+## RC2 远端与真实模型更新
+
+`0.4.0-rc.2` 从干净提交 `e707becc821709a59958a3f5a6267f476bfcf612` 冻结，SHA-256 `3948cb9c4cd03f1505966b95e22729177cb09a4af28296fd1ef7be2dd0349754`。本地固定 Node 24 镜像/npm 11.11.0 与 GitHub CI 重建字节一致；[OIDC 发布](https://github.com/psiQAQ/planweft/actions/runs/34248506886) Passed，真实 npm 下载逐字匹配。[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34248437017) Passed。
+
+- OpenCode：preflight、lifecycle、context、recovery、maintenance、cold-reader、readonly、simple、skill-loading 九项自动断言 Passed。独立 review 先冷读文件，再核对事件与输入输出，确认首个工具读取 project-docs、唯一计划、历史与批准需求保留、三项 Linux 回归及 Windows Not Run。
+- Pi：新隔离 RC2 context/recovery 均 Passed。旧 RC1 context Failed 保留；本次成功不证明旧失败已找到确定性根因。
+- DSH：实际启动、幂等生命周期、cold-reader、readonly、simple、skill-loading Passed；context/recovery Failed（模型未收到字段），maintenance Failed（未建立 PWF 计划且改变历史表述）。模型进程本身成功，不能据退出码改写行为结果。
+
+独立 OpenCode review 注记：模型的 Error Log 写 none，但 trace 有一次已恢复的 edit 匹配失败；“全部验证 Passed”应限定为已执行 Linux 检查，Windows 未运行。迁移文字 still/will 和 Windows 下一步位置引用有小偏差，未阻断从文件恢复；原始证据不回写美化。
+
+## RC3 DSH 沙箱修复（未发布）
+
+在官方 LocalBash + runHook 离线调用中，RC2 hook 能注入；换成官方 SandboxBash workspace-write，HOME 缓存不可写，PWF 快照创建静默失败。同样请求仅把快照放在允许的临时目录即可返回上下文，已形成因果复现。没有关闭或放宽沙箱。
+
+RC3 的每次 hook 用私有 mktemp 缓存并清理，native shell facade 绑定宿主 session ID、按提示轮次去重本插件 PostToolUse 上下文；保留其他输出字段、权限、stdin 和 Stop 标志。原生 shell resolve/run 完整委托。状态有界为 1,024 个最近会话。Stop 上限和停滞 ledger 继续留在计划目录。`pwf-prog` 跨调用缓存告警不跨隔离 hook 保留，作为 DSH 差异明确记录。
+
+真实沙箱协议探针（显式事件 carrier，不是模型）在 Python/Shell 两条路径均 Passed：上下文、双项目隔离、恢复、同轮工具提醒去重、新轮提醒、Stop cap=2、无 ledger 前进时退出、其他插件上下文与权限决定保留、无计划只读提示不写项目、损坏链接不当作新项目、PLANNING_DISABLED 禁用。新准确 RC3 模型及远端验收仍待完成。
+
+[RC2 模型与 RC3 协议附件](evidence/0010/rc2-models-and-rc3-protocol.tar.gz)，733 项，SHA-256 `c8d2f77804c4ca7798b0a9f7d7ad3044ac4b737836987ad5559a972b10e57459`。包含原始失败、成功、官方沙箱因果探针及摘要映射；已检查认证值无命中。
+
+RC3 本地最终回归：Python 66 项、安装器 28 项、DSH shell facade 3 项 Passed；构建一致性与 diff whitespace 检查 Passed。首轮路径泄漏断言误报了合法 mktemp 路径，修正为仅允许 DSH launcher 的该模板后全量复验通过；未扩大其他平台或路径豁免。
