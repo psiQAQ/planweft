@@ -27,6 +27,8 @@ This installed `project-docs` skill combines the PWF execution workflow below wi
 - Initialization may produce the upstream compact records. Add only useful goal, constraints, acceptance/evidence links and handoff fields from the installed templates; do not replace existing records with blank templates. Preserve `### Phase` headings and literal `**Status:** pending`, `in_progress` or `complete` values used by runtime parsers.
 - Assign one plan owner to update shared status and summaries. Workers use assigned files or per-agent ledgers and report findings to the owner. Independent tasks bind distinct plans or worktrees; the advisory parallel-write guard is not a lock and cannot merge edits.
 
+Before completing a task that initialized its first PWF plan, check the project's existing active-plan entry. Initializing the task-owned PWF plan is adoption for that task: replace the old entry's current-status/next-action fields with a one-way relative Markdown link to the selected `task_plan.md`, while retaining dated history and approved requirements. The old entry must no longer invite future updates to a second current status. Verify the link resolves and that a new reader can follow the project entrypoint to the sole dynamic plan. Do not apply this migration during read-only work or to this plugin's own development repository unless its adoption was separately authorized.
+
 ### Promote stable knowledge only when useful
 
 Use the existing project records. If a missing record is necessary for the authorized work, create the smallest useful one; absent conventions, use `docs/specs`, `docs/adr` and `docs/reproduction` according to purpose. Do not pre-create all directories or turn each edit into an ADR.

@@ -130,16 +130,16 @@ pi list
 
 `-l` 写项目 `.pi/settings.json`；省略则写用户 `~/.pi/agent/settings.json`。本地路径只记录引用、不复制文件，因此来源目录须保留；更新该目录后 `/reload` 或重启。卸载使用 `pi remove -l /abs/repo/dist/pi/planweft`，用户安装省略 `-l`。
 
-npm 发布完成后，使用真实 scope：
+npm 发布完成后，使用唯一的无 scope 包：
 
 ```bash
 pi install -l npm:planweft@0.4.0-rc.1
 pi install -l npm:planweft@NEW_VERSION
 # Remove the project installation:
-pi remove -l npm:planweft@0.4.0-rc.1
+pi remove -l npm:planweft@NEW_VERSION
 ```
 
-固定版本用 `npm:planweft@0.4.0-rc.1@VERSION`，升级时再次 `pi install -l` 指定新版本。当前官方 `pi update` 单独执行更新 Pi 本体；`pi update --extensions` 更新包，定向更新如上。npm/Git 安装由 Pi 处理包依赖；本地包不要求用户运行开发测试。[官方 packages](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/packages.md)
+固定版本用 `npm:planweft@VERSION`，升级时再次 `pi install -l` 指定新版本。当前官方 `pi update` 单独执行更新 Pi 本体；`pi update --extensions` 更新包，定向更新如上。npm/Git 安装由 Pi 处理包依赖；本地包不要求用户运行开发测试。[官方 packages](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/packages.md)
 
 加载后检查 `/skill:project-docs` 和 `/pw-plan-status`。显式 `/pw-plan-execute` 才启用注入与执行循环，`/pw-plan-execute reset` 恢复被动状态。配置名仍为 `planningWithFiles`，`PWF_MODE` 支持 `auto`、`parity`、`cache-safe`、`notify`；执行循环受平台限制。
 

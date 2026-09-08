@@ -192,3 +192,10 @@ vendor 四文件是导入器产物，dist 与 plugins 由 builder 生成；证�
 | innovations.md、开发约定、BUILD说明 | 已登记来源与0.2/0.3具体代码 | 修正历史候选尚未实施被误读为当前状态的问题；本地代码贡献与方法新颖性分开 |
 
 源码比较由独立成员实际读取固定归档/子模块；浏览器也复核 OpenSpec、Superpowers 和 MADR 固定页面，PWF 页面抓取失败时使用已校验归档，不将抓取失败写成来源不存在。review 范围与参与比较草稿者的独立性限制见 [公开文档审查](reviews/0007-public-docs-review.md) 及 [README/分发独立复核](reviews/0007-readme-distribution-review.md)。
+
+## PlanWeft 统一 npm 安装器（0.4.0）
+
+- `lib/installer.mjs` 的集中存储、链接与显式 scope 借鉴 Vercel Skills 固定提交 [installer.ts](https://github.com/vercel-labs/skills/blob/1682051d48c34f5eb135e6475c1a965dce05e820/src/installer.ts) 和 [skill-lock.ts](https://github.com/vercel-labs/skills/blob/1682051d48c34f5eb135e6475c1a965dce05e820/src/skill-lock.ts)。代码独立实现。
+- 根 npm `pi` 字段依据 [Pi packages](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/packages.md)；OpenCode 根 exports 与 loader 依据 [V1 plugins](https://opencode.ai/docs/plugins/)。
+- scope 独立 catalog、逐步失败收据、拷贝 staging 与用户修改保护是本地组合设计，见 ADR-0008；不声称这些通用机制为首创。
+- npm 发布认证依据 [trusted publishers](https://docs.npmjs.com/trusted-publishers/)。真实宿主与 npm 认证结果单独记录，不能由源码结构推定。

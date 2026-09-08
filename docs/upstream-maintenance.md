@@ -1,6 +1,6 @@
 # 固定上游、扩展与原生分发维护
 
-Program Design 0.3.0 继续固定 PWF v3.17.0、提交 `0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7`。来源快照、扩展与确定性生成沿用 [ADR-0006](adr/0006-pwf-derived-runtime.md)；目录分发和原生更新渠道见 [ADR-0007](adr/0007-native-distributions.md)。研究子模块仍保留 3.16.1 历史版本，普通构建不读取研究子模块、个人缓存或网络。
+PlanWeft 0.3.0 继续固定 PWF v3.17.0、提交 `0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7`。来源快照、扩展与确定性生成沿用 [ADR-0006](adr/0006-pwf-derived-runtime.md)；目录分发和原生更新渠道见 [ADR-0007](adr/0007-native-distributions.md)。研究子模块仍保留 3.16.1 历史版本，普通构建不读取研究子模块、个人缓存或网络。
 
 ## 维护入口
 
@@ -8,17 +8,17 @@ Program Design 0.3.0 继续固定 PWF v3.17.0、提交 `0d21b6c4aa5f2c5bdd3d042e
 | --- | --- | --- |
 | `vendor/planning-with-files/upstream.json` | 仓库、tag、commit、tree、archive、摘要与许可 | 导入器生成；版本号不能代替提交及摘要验证 |
 | `vendor/planning-with-files/v3.17.0.tar.gz`、`inventory.json`、`LICENSE` | 原始归档、逐文件 SHA/size/mode、MIT 许可 | 不直接修补 archive；更新来源需干净固定 checkout |
-| `overlays/program-design/` | 共享产品文案、规则、模板、安装说明 | 修改生成源，不分别编辑平台副本 |
-| `overlays/program-design/native/` | 宿主原生 manifest、hooks、资产路径适配 | 原生包装变更须与官方协议及真实加载验证对应 |
-| `overlays/program-design/opencode-compiled/` | 与 source hash 绑定的预编译 V1 文件 | 使用编译脚本更新，不手改 JS 或摘要 |
-| [PATCHES.md](../overlays/program-design/PATCHES.md) | 运行时补丁与对应上游位置 | 与 builder 中实际变更保持一致 |
+| `overlays/planweft/` | 共享产品文案、规则、模板、安装说明 | 修改生成源，不分别编辑平台副本 |
+| `overlays/planweft/native/` | 宿主原生 manifest、hooks、资产路径适配 | 原生包装变更须与官方协议及真实加载验证对应 |
+| `overlays/planweft/opencode-compiled/` | 与 source hash 绑定的预编译 V1 文件 | 使用编译脚本更新，不手改 JS 或摘要 |
+| [PATCHES.md](../overlays/planweft/PATCHES.md) | 运行时补丁与对应上游位置 | 与 builder 中实际变更保持一致 |
 | [import-pwf.py](../scripts/import-pwf.py) | 从已有固定 checkout 导入 | 不下载；检查 HEAD、tag、clean status 和许可 |
 | [build-plugin.py](../scripts/build-plugin.py) | 身份映射、运行时补丁、14 个目录及六种 catalog | Python 标准库，正常构建不编译、不联网 |
 | [compile-opencode.py](../scripts/compile-opencode.py) | 维护者预编译与复验 | 使用临时目录和已有锁文件；不改业务项目依赖 |
 | [prepare-native-release.py](../scripts/prepare-native-release.py) | npm 包与 Git 发布树的本地准备 | 不 push、npm publish 或写个人宿主配置 |
-| `dist/`、`plugins/program-design/`、六个原生 catalog | 目录分发、manifest、Codex 兼容镜像、发现入口 | 生成物；每次源变化重建并 verify |
+| `dist/`、`plugins/planweft/`、六个原生 catalog | 目录分发、manifest、Codex 兼容镜像、发现入口 | 生成物；每次源变化重建并 verify |
 
-每个分发保留上游 MIT 的 `Copyright (c) 2026 Ahmad Adi`、许可全文及 `UPSTREAM.json`。本地 metadata 不把上游作者、仓库或版本当作 Program Design 发布身份；原 URL 是来源证据，不能字符串替换成不存在的安装地址。
+每个分发保留上游 MIT 的 `Copyright (c) 2026 Ahmad Adi`、许可全文及 `UPSTREAM.json`。本地 metadata 不把上游作者、仓库或版本当作 PlanWeft 发布身份；原 URL 是来源证据，不能字符串替换成不存在的安装地址。
 
 ## 重建与回归
 
@@ -46,8 +46,8 @@ python3 scripts/build-plugin.py --verify
 完整回归开发树继续用新目录：
 
 ```bash
-python3 scripts/build-plugin.py --tree /tmp/program-design-regression-new
-python3 scripts/build-plugin.py --tree /tmp/program-design-identity-new --identity-only
+python3 scripts/build-plugin.py --tree /tmp/planweft-regression-new
+python3 scripts/build-plugin.py --tree /tmp/planweft-identity-new --identity-only
 ```
 
 `--tree` 不是发布包，不能与 `--verify` 混用，目标已存在时拒绝。`--identity-only` 仍含适配器禁用、内联 Python 隔离及 doctor 补丁，不等于未修改原始基线；原始基线从固定 archive 单独解压。测试入口、运行依赖和不同验证层见 [tests/README.md](../tests/README.md)。
@@ -56,15 +56,15 @@ python3 scripts/build-plugin.py --tree /tmp/program-design-identity-new --identi
 
 ## 准备原生发布
 
-普通 build 直接生成 `dist/<host>/program-design/`，不产出 ZIP。六种 catalog 位于仓库根，统一名 `program-design`，指向相应平台目录；Git marketplace 必须发布 catalog 和被引用 payload。Codex 的 `plugins/program-design/` 保持兼容镜像。
+普通 build 直接生成 `dist/<host>/planweft/`，不产出 ZIP。六种 catalog 位于仓库根，统一名 `planweft`，指向相应平台目录；Git marketplace 必须发布 catalog 和被引用 payload。Codex 的 `plugins/planweft/` 保持兼容镜像。
 
 ```bash
 # 仅准备本地候选，不提供或假设远端身份
-python3 scripts/prepare-native-release.py --output /tmp/program-design-release-new
+python3 scripts/prepare-native-release.py --output /tmp/planweft-release-new
 
 # 下一候选承接先前生成的 Git 分支历史
-python3 scripts/prepare-native-release.py --output /tmp/program-design-release-next \
-  --previous-release /tmp/program-design-release-new
+python3 scripts/prepare-native-release.py --output /tmp/planweft-release-next \
+  --previous-release /tmp/planweft-release-new
 ```
 
 | 参数 | 默认值 | 说明 |
@@ -72,7 +72,7 @@ python3 scripts/prepare-native-release.py --output /tmp/program-design-release-n
 | `--output` | 必填 | 仓库外尚不存在的输出目录，避免覆盖已有发布或递归打包 |
 | `--previous-release` | 不提供 | 读取先前准备输出，沿用发布分支历史，后续发布可正常快进 |
 | `--repository-url` | 不提供 | 真实 Git 仓库 URL；与 npm scope 成对提供，不自动设置 remote |
-| `--npm-scope` | 不提供 | 真实 npm scope；与仓库 URL 成对提供，生成 `@scope/program-design-pi` 和 `@scope/program-design-opencode` |
+| `--npm-scope` | 不提供 | 真实 npm scope；与仓库 URL 成对提供，生成 `@scope/planweft-pi` 和 `@scope/planweft-opencode` |
 
 准备器校验真实 npm tar 内容，跳过包生命周期脚本，产出来源与内容清单。没有真实身份时仍可本地审阅/安装，不输出已存在的远端地址或可直接公开安装结论。即使提供身份，也只是待发布坐标，必须在获得发布授权并实际发布后再次核验。
 
@@ -93,7 +93,7 @@ Pi 原生 npm 更新依赖已发布包，OpenCode 配置使用已发布预编译
 
 0.2.0 用户先记录宿主列表里的实际 ID、scope、安装路径和本地修改，选择本会话唯一一套规划 hooks。新版本直接使用目录与原生来源，旧解压目录不会自动转成可更新安装。
 
-Codex 旧 ID 可能是 `program-design@personal` 或 `program-design@program-design-local`。移除实际旧 ID，向仓库根注册新 `program-design` catalog，再安装 `program-design@program-design` 并新建会话；不同时保留旧来源执行 hooks。旧 catalog 无其他使用者时再清理。其余宿主按 [安装说明](../overlays/program-design/install/INSTALL.md) 保持 scope，先保存修改，再替换本插件拥有的完整路径，避免旧文件残留。
+Codex 旧 ID 可能是 `planweft@personal` 或 `planweft@planweft-local`。移除实际旧 ID，向仓库根注册新 `planweft` catalog，再安装 `planweft@planweft` 并新建会话；不同时保留旧来源执行 hooks。旧 catalog 无其他使用者时再清理。其余宿主按 [安装说明](../overlays/planweft/install/INSTALL.md) 保持 scope，先保存修改，再替换本插件拥有的完整路径，避免旧文件残留。
 
 0.1.0 是单 Skill 和显式项目启用，后继版本引入 PWF 三文件与宿主生命周期；升级不会批准新任务或删除项目规则的启用条件。已有长期 Markdown 不批量转换；实际采用工作流时才承接目标、下一步、阻塞和证据，将旧活跃入口改成单向指针，保留历史。项目明确要求保留旧计划权威时遵守；本仓自身不因插件更新迁移到根 PWF 计划。
 
