@@ -1,0 +1,94 @@
+{
+  "original_head": "c2f6c0655dc9d57ad3575faf471e7d8b5f967eb2",
+  "public_head": "52dcacac9efafbe7b309283ed44ac1d32d730155",
+  "commits": {
+    "7b45c64f711952512a1dca19d67df3b0e565ca83": "7b45c64f711952512a1dca19d67df3b0e565ca83",
+    "affbff9c5b7e7ddbe0bd1a6e41214a3dd850fce1": "affbff9c5b7e7ddbe0bd1a6e41214a3dd850fce1",
+    "4041f467b91e3628d826c729ec12972edc77af92": "4041f467b91e3628d826c729ec12972edc77af92",
+    "a5f072e5bca0f27c33264ce4562fd08c4ffbbd18": "a5f072e5bca0f27c33264ce4562fd08c4ffbbd18",
+    "2dca0f6deb041e9d81ef18204c88dd4e6d684521": "1d79b7a659268c193b0ca67c83a7ae26192718f0",
+    "f24557fba495866ad786be9903a64c6430fd3d52": "4416bc3b6103bfabc9e6f252faafdb8c9405b49c",
+    "f85d4fa5fcab79702cd131687d2d79351c6c29ba": "fab95d5ed81420fefae80f5e16af0894500daf48",
+    "62def7545c18ed083853d7b87f227d766a9706c8": "7ad3528ea501fdb21e25290e5f009d705fc1fadc",
+    "e101440b6d94c4cdbac056239973cb182b9f69fa": "4646b9017a27f720138ed2eb4fa9a89394f1bc99",
+    "3197f8151932849908a277af06219334b66693a1": "0e3a1137c7e54b924686785c8d1d245e53890253",
+    "cbf276afbb928b3aa520cc5ef80a60802bdca2a7": "2254a61afe277af537edf2342fd36d581a743f0e",
+    "e7c5f6607a8a64f521941a583017d4119809e025": "1f42da0710ffeee83806962c51761b70afc33a49",
+    "87e4b7cf29421b5e5aab6c2426f52e4a2900e970": "bada16a9e81276a875f9e75e8808fb7638333a6e",
+    "ff9e6a4a13500c2c8e0f2169af04cacf5e5fe8bf": "319631535755754656242e4cd7b640ad4466b49e",
+    "7dbae89897533437095897ab78b9f229cd43b063": "39b863f27262d28af025b1316e8d1e9432411061",
+    "07e79c07de0bc4a9c1629e2a01ec73b714978c8a": "38ee5a1cfdbf2d6021e431abf0b1038ff2e80532",
+    "fc0c3b1ae485248606e753e5cae30db8069d0fe4": "94d94efc600485f6381b47b66de73a9eabd936e6",
+    "ce0bdc465804c6ba70cfca0a938d5a428f4303b2": "5be183485e94bfe1d36e7215d6c2770fbee13298",
+    "f339862aa7af9747ae001716400a983d2c405cd5": "3c2982d1785dbf3bf491b6a728d44841fd9c6cc3",
+    "165b061042f43461d53ac9298c72c5f7db9e77ac": "a4608f54068f6968f53b827cd812c3060812d883",
+    "9bc0bea5b3693a30405b42c2bbdd931cd577d758": "abbd0df241a33bfa5905c5243028dc4349824131",
+    "40e2668e9ce95768a53dc4b223f4160f2993ec11": "5f20aed4ea1fd8aa8297c45499cad5a338e98d88",
+    "eed7e9a32cdbe7806a5fe1754653808774bce959": "594ecc4642cf0ba0b491e355f91b428b82366ea8",
+    "20cc5fd91f7afeff00901abb1f72036231a6625a": "5e4d3a9b53fc24e5b6b965e12be2be9161423729",
+    "e2c37ec2ae217f6dcb8afee952b4a177ad0762c8": "db753c7e0aeb79b7899de7d09a98ca4c912025e7",
+    "92e0d3e41972a5ef209a72780fec1ddaf0da8b29": "7a11ddc377909a59ce81bf79c6d3181c14341e05",
+    "c2f6c0655dc9d57ad3575faf471e7d8b5f967eb2": "52dcacac9efafbe7b309283ed44ac1d32d730155"
+  },
+  "changed_blobs": [
+    {
+      "path": "docs/reproduction/evidence/0004/raw-evidence.tar.gz",
+      "original_blob": "30438e93ff3abafcd61aba14ccfdc4984bba848b",
+      "public_blob": "04eec9b0ac61f1fb5936b43ce9083b963ccd5feb",
+      "original_sha256": "7a9868b774a01b239b2b6d4e15e2e4d5b3303ad3731823c99eed3af4db462689",
+      "public_sha256": "4e38322fa34bf4b89424d2048403b42bbe5319fecb9ad41a35d8fbb92e7ab038"
+    },
+    {
+      "path": "docs/reproduction/evidence/0005/host-environment.json",
+      "original_blob": "9abaf6b1a7ab36dd65c900d6b864884a0d26bbcb",
+      "public_blob": "aec7c03e6e44daffba0a02904e9bcbc0b8a857d4",
+      "original_sha256": "c85e294381baeb83ea373faa9e50e226d222495b2b1d800f24f37f3fc0dba36f",
+      "public_sha256": "b341aefac83c44f02de5881ae2379f6b9cc0ba98c62b99860776fede3819fe81"
+    },
+    {
+      "path": "docs/reproduction/evidence/0005/installation/codex-preflight.tar.gz",
+      "original_blob": "df763b98495e06e7ad9fac5c44929b93d3e703c1",
+      "public_blob": "9645bd74a20600ead0f465a20f2c981592b3bb9d",
+      "original_sha256": "91c01eeaa0ab6ec9b2836fbc06025ee20298e6362d57a3fb9d4582e14c05e3c4",
+      "public_sha256": "6e40a6500cc1d4e6e94a5de973ea0290723d01c8bfa671744bedda7800c1c583"
+    },
+    {
+      "path": "docs/reproduction/evidence/0005/installation/program-design-installation-tests-executable-bits-failure.log",
+      "original_blob": "36124822bbabe0ea0a74addae8980c6faa954d64",
+      "public_blob": "8c0b17935efdf053510aa06fc35a1b5af3378590",
+      "original_sha256": "3f7912c705e81c9bdf5466dde271403b74a001652748576863b714b5885195be",
+      "public_sha256": "53be76c6949033ec7dd5d312f767cbe3505c3eb1744cae2c31b775ea48421bb1"
+    },
+    {
+      "path": "docs/reproduction/evidence/0005/local/earlier-attempts/program-design-02-local-tests.log",
+      "original_blob": "b734be958d9f1b2e119750fe9f467b943ab12cea",
+      "public_blob": "5f4ff3784735495fc236bd9e087900925ae23137",
+      "original_sha256": "2c645c5e0bfa40d014663a6d48d253f5371e5ea7e0d177d41054197768aed2d8",
+      "public_sha256": "6559048d035d1c16f4cabd3d7cd54f49dcacc1c567d5badb555271ad33b1ad48"
+    },
+    {
+      "path": "docs/reproduction/evidence/0005/regression/regression-evidence.tar.gz",
+      "original_blob": "8ac22beebe09ae898853617233a3dc626f54eb22",
+      "public_blob": "b05e7e5ca9482f223ac120e436fc3a9de73fccf5",
+      "original_sha256": "f0936ca2999b5c4db2c83d0e3312ddafb2ab9cabe4033823dc916d20933f38c5",
+      "public_sha256": "2a35ab31765667355c51692281e1565629f23b2ceca753e4c0475d2b675912dc"
+    },
+    {
+      "path": "docs/reproduction/evidence/0006/raw-evidence.tar.gz",
+      "original_blob": "fcba33dffd63f3cf35d3cfc5d0a4a12ab72b0931",
+      "public_blob": "a1b2327c397f1691c853a04cd552e5ede31aa6c2",
+      "original_sha256": "ddcae7064423e04e9e227afd9195d3ca75ad886d002943aa529a9743b5920537",
+      "public_sha256": "322f91e31b57cc23dcac8fdd9c48687e09c114cd7e942a68b286c40134177696"
+    },
+    {
+      "path": "docs/reproduction/evidence/0007/unittest-initial.log",
+      "original_blob": "74bc637878561f62769bc7deb24621f4a2b76380",
+      "public_blob": "b5e07181f8ff23f84f32847d2a43c773acc4d133",
+      "original_sha256": "d3540fd2a25e617ba9db520a7e45ace932b7647f5d13b1459b1da4f26025b18c",
+      "public_sha256": "bc967a52265690167f290e72c0472736d962c030a6a2afe78b76baf56748a3ca"
+    }
+  ],
+  "scope": "docs/reproduction/evidence only",
+  "historical_digest_policy": "Original digests remain historical; consult this mapping.",
+  "remote_updated": false
+}
