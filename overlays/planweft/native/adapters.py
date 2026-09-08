@@ -301,6 +301,29 @@ def adapt(bundles, version, description):
     manifest['$schema'] = 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json'
     manifest['keywords'] = ['planning', 'project documentation', 'requirements', 'decisions', 'evidence', 'handoff']
     result['kiro']['plugin.json'] = json_file(manifest)
-    # DSH's native filesystem provider discovers one level of Skill bundles.
-    result['dsh'] = shared(result['dsh'], version)
+    # DSH mounts a native bundle through its profile manager, not a marketplace.
+    files = shared(result['dsh'], version)
+    files['index.mjs'] = ((HERE / 'dsh/index.mjs').read_bytes(), 0o644)
+    files['cordis.patch.yml'] = (b'- insert:\n    - id: planweft\n      name: planweft/dsh\n', 0o644)
+    files['package.json'] = json_file({'name': PRODUCT, 'version': version, 'type': 'module',
+        'exports': {'./dsh': './index.mjs', './package.json': './package.json'},
+        'dsh': {'bundle': {'patch': './cordis.patch.yml'}},
+        'dependencies': {'@deepseek-ai/dsh-hooks-claude-code': '0.1.2-rc.1',
+                         '@deepseek-ai/dsh-skill-filesystem': '0.1.2-rc.1'}, 'license': 'MIT'})
+    files.update(subset(result['claude'], ['hooks/claude-hook.sh']))
+    config = json.loads(result['claude']['hooks/hooks.json'][0])
+    config['description'] = 'PlanWeft through the official DSH Claude command-hook bridge'
+    config['hooks'].pop('PreCompact', None)  # No DSH bridge for this event.
+    config['hooks'].pop('PreToolUse', None)  # DSH drops context-only pre-tool output.
+    for event, groups in config['hooks'].items():
+        for group in groups:
+            if event in ['SessionStart', 'PreToolUse', 'PostToolUse']:
+                group['matcher'] = '.*'  # DSH tool names differ from Claude.
+    for groups in config['hooks'].values():
+        for group in groups:
+            for hook in group['hooks']:
+                hook['command'] = hook['command'].replace('/hooks/claude-hook.sh', '/hooks/dsh-hook.sh')
+    files['hooks/dsh-hook.sh'] = ((HERE / 'dsh/hook.sh').read_bytes(), 0o755)
+    files['hooks/hooks.json'] = json_file(config)
+    result['dsh'] = files
     return result

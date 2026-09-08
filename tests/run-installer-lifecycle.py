@@ -18,7 +18,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--archive', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
-    parser.add_argument('--host', choices=['agents', 'codex', 'claude', 'pi', 'opencode'], required=True)
+    parser.add_argument('--host', choices=['agents', 'codex', 'claude', 'pi', 'opencode', 'dsh'], required=True)
     parser.add_argument('--cli-dir', type=Path, action='append', default=[])
     args = parser.parse_args()
     out = args.output.resolve()
@@ -34,7 +34,7 @@ def main():
     env = {k: v for k, v in os.environ.items() if k in {'PATH', 'SYSTEMROOT', 'WINDIR', 'HTTPS_PROXY', 'HTTP_PROXY', 'ALL_PROXY', 'NO_PROXY', 'https_proxy', 'http_proxy', 'all_proxy', 'no_proxy'}}
     env.update(HOME=str(home), USERPROFILE=str(home), XDG_CONFIG_HOME=str(home / '.config'),
                XDG_DATA_HOME=str(home / '.local/share'), XDG_CACHE_HOME=str(home / '.cache'),
-               CODEX_HOME=str(home / '.codex'), CLAUDE_CONFIG_DIR=str(home / '.claude'),
+               DSH_HOME=str(home / '.dsh'), CODEX_HOME=str(home / '.codex'), CLAUDE_CONFIG_DIR=str(home / '.claude'),
                PI_CODING_AGENT_DIR=str(home / '.pi/agent'), npm_config_cache=str(out / 'npm-cache'),
                npm_config_userconfig=os.devnull, PLANNING_DISABLED='1',
                PATH=os.pathsep.join([*map(str, args.cli_dir), env['PATH']]))
@@ -62,7 +62,7 @@ def main():
         p.write_bytes(text.replace(original, next_version).encode())
     # Actual payload delta affects installed resources, not just manifest version.
     for package, version in [(a, 'A'), (b, 'B')]:
-        for host in ['agents', 'codex', 'claude', 'pi', 'opencode']:
+        for host in ['agents', 'codex', 'claude', 'pi', 'opencode', 'dsh']:
             platform = package / 'dist' / host / 'planweft'
             skill = platform if host == 'pi' else platform / 'skills/project-docs'
             (skill / 'lifecycle-changed.txt').write_text(version)
@@ -71,16 +71,24 @@ def main():
     for label, package in [('A', a), ('B', b)]:
         result = json.loads(run('pack-' + label, ['npm', 'pack', '--ignore-scripts', '--json', '--pack-destination', str(out)], package))
         archives[label] = out / result[0]['filename']
-    scope = ['--global'] if args.host == 'codex' else ['--approve-pi-project'] if args.host == 'pi' else []
+    scope = ['--global'] if args.host in ['codex', 'dsh'] else ['--approve-pi-project'] if args.host == 'pi' else []
     def invoke(label, package, action, source=None):
         argv = ['node', str(package / 'bin/planweft.mjs'), action, '-a', args.host, *scope]
         if source: argv += ['--source', str(source)]
         return run(label, argv)
     def verify(label, version, marker):
-        state_dir = home / '.local/share/planweft' if args.host == 'codex' else project / '.planweft'
+        state_dir = home / '.local/share/planweft' if args.host in ['codex', 'dsh'] else project / '.planweft'
         rec = json.loads((state_dir / 'installations.json').read_text())['agents'][args.host]
         package_root = Path(rec['packageRoot'])
-        if args.host in ['codex', 'claude']:
+        if args.host == 'dsh':
+            manifest = json.loads((home / '.dsh/profiles/headless/package.json').read_text())
+            if manifest['dsh']['profile']['bundles'].count('planweft') != 1: raise RuntimeError('DSH bundle was not registered once')
+            linked = (home / '.dsh/profiles/headless/node_modules/planweft').resolve()
+            if linked != package_root: raise RuntimeError('DSH native link selects the wrong version')
+            composed = run('native-config-' + label, ['dsh', '--profile', 'headless', '--dump-config'])
+            if 'planweft/dsh' not in composed: raise RuntimeError('DSH did not compose the native bundle')
+            skill = linked / 'dist/dsh/planweft/skills/project-docs'
+        elif args.host in ['codex', 'claude']:
             manifest_name = '.codex-plugin/plugin.json' if args.host == 'codex' else '.claude-plugin/plugin.json'
             cache = home / ('.codex/plugins/cache' if args.host == 'codex' else '.claude/plugins/cache')
             candidates = [p.parent.parent for p in cache.rglob(manifest_name) if json.loads(p.read_text()).get('version') == version]
