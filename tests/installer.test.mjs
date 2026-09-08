@@ -18,6 +18,7 @@ function fixture(t) {
     fs.writeFileSync(path.join(p,'package.json'),JSON.stringify({name:'planweft',version}));
     const skill = path.join(p,'dist/opencode/planweft/skills/project-docs'); fs.mkdirSync(skill,{recursive:true});
     for (const [name, content] of Object.entries(files)) fs.writeFileSync(path.join(skill,name),content);
+    fs.cpSync(path.join(p,'dist/opencode/planweft'),path.join(p,'dist/dsh/planweft'),{recursive:true});
     for (const host of ['claude','codex']) {
       const platform = path.join(p,`dist/${host}/planweft`); fs.mkdirSync(platform,{recursive:true}); fs.writeFileSync(path.join(platform,'version.txt'),version);
       const cat = path.join(p,host==='claude'?'.claude-plugin/marketplace.json':'.agents/plugins/marketplace.json'); fs.mkdirSync(path.dirname(cat),{recursive:true});
@@ -38,7 +39,7 @@ function fixture(t) {
         fs.writeFileSync(path.join(prefix,'package-lock.json'),'{}');
       }
     };
-    return new Installer(parse(argv),{cwd:extra.cwd||project,env:{HOME:home,PATH:process.env.PATH},packageRoot,run,log:()=>{}});
+    return new Installer(parse(argv),{cwd:extra.cwd||project,env:{HOME:home,PATH:process.env.PATH,...extra.env},packageRoot,run,log:()=>{}});
   };
   return {root,home,project,packages,calls,create};
 }
@@ -161,4 +162,38 @@ test('partial copy failure restores the previous complete component', async t =>
   try { assert.equal(await f.create(['update','-a','agents'],'0.4.0-rc.2').execute(),1); } finally { fs.cpSync=cp; }
   const target=path.join(f.project,'.agents/skills/project-docs'); assert.equal(fs.readFileSync(path.join(target,'SKILL.md'),'utf8'),'A'); assert.equal(fs.existsSync(path.join(target,'partial')),false);
   assert.equal(await f.create(['update','-a','agents'],'0.4.0-rc.2').execute(),0);
+});
+
+
+test('DSH skill lifecycle follows nearest Git root and protects user records', async t => {
+  const f=fixture(t);fs.mkdirSync(path.join(f.project,'.git'));
+  const nested=path.join(f.project,'nested');fs.mkdirSync(nested);
+  await assert.rejects(f.create(['add','-a','dsh','--skill-only'],undefined,{cwd:nested}).execute(),/Git root/);
+  const run=(action,version='0.4.0-rc.1') => f.create([action,'-a','dsh','--skill-only','--copy'],version).execute();
+  await run('add');
+  const skill=path.join(f.project,'.dsh/skills/project-docs');
+  assert.equal(fs.readFileSync(path.join(skill,'SKILL.md'),'utf8'),'A');
+  await run('update','0.4.0-rc.2');assert.equal(fs.existsSync(path.join(skill,'removed.txt')),false);
+  await run('update');assert.equal(fs.existsSync(path.join(skill,'added.txt')),false);
+  fs.writeFileSync(path.join(skill,'SKILL.md'),'user edit');
+  await assert.rejects(run('remove'),/User changes preserved/);
+  fs.writeFileSync(path.join(skill,'SKILL.md'),'A');await run('remove');
+  assert.equal(fs.existsSync(skill),false);
+  assert.equal(fs.readFileSync(path.join(f.project,'task_plan.md'),'utf8'),'approved task\r\n');
+});
+
+test('DSH global skill uses DSH_HOME and unsupported full integration fails before writes', async t => {
+  const f=fixture(t),dshHome=path.join(f.root,'custom-dsh');
+  await assert.rejects(f.create(['add','-a','dsh']).execute(),/--skill-only/);
+  assert.equal(fs.existsSync(path.join(f.project,'.planweft')),false);
+  await f.create(['add','-a','dsh','--global','--skill-only','--copy'],undefined,{env:{DSH_HOME:dshHome}}).execute();
+  assert.equal(fs.existsSync(path.join(dshHome,'skills/project-docs/SKILL.md')),true);
+  await f.create(['remove','-a','dsh','--global'],undefined,{env:{DSH_HOME:dshHome}}).execute();
+});
+
+test('DSH home follows native whitespace and tilde expansion', t => {
+  const f=fixture(t);
+  for (const [value,expected] of [['  ',path.join(f.home,'.dsh')],['~',f.home],['~/dsh custom',path.join(f.home,'dsh custom')],['~\\dsh',path.join(f.home,'dsh')]]) {
+    assert.equal(f.create(['add','-a','dsh','--global','--skill-only'],undefined,{env:{DSH_HOME:value}}).hostRoot('dsh'),expected);
+  }
 });

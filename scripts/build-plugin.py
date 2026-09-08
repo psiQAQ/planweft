@@ -32,7 +32,7 @@ COMMANDS = ['plan', 'start', 'status', 'pwf', 'pwf-status', 'plan-status',
             'plan-attest', 'plan-doctor', 'plan-execute', 'plan-goal', 'plan-loop',
             'plan-ar', 'plan-de', 'plan-es', 'plan-zh', 'plan-zht']
 HOSTS = ['codex', 'claude', 'pi', 'opencode', 'hermes', 'cursor', 'gemini',
-         'copilot', 'mastracode', 'kiro', 'continue', 'factory', 'codebuddy', 'agents']
+         'copilot', 'mastracode', 'kiro', 'continue', 'factory', 'codebuddy', 'agents', 'dsh']
 
 
 def sha(data):
