@@ -19,3 +19,5 @@ Windows/macOS CI、默认交互 trust 确认、远端多版本生命周期、npm
 依据与证据：[REP-0008](../reproduction/0008-planweft-candidate.md)、[REV-0008](../reviews/0008-installer-and-release-review.md)。
 
 新增范围：用户要求 DSH；原 npm 发布认证等待已取消，以免先发布缺少新增平台的旧包。后续使用 PLAN-0009 完成 DSH 后重新构建，原 rc.1 tarball 仅为历史候选，不能作为新分发。
+
+DSH 完整集成已完成并合并 master（PLAN-0009）；新的 rc.1 候选来源 e2c37ec，摘要 c3d7191c6f4a0775b0fbc660536d3d911feba5d0ba0d274472f3338e832c9bdd。此前 fd1f7e0f... 归档已被本次候选取代，未发布。正在重试 npm next 发布；Git 历史处理确认仍未收到。
