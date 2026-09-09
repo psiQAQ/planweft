@@ -130,13 +130,15 @@ def _return_number(value):
 
 
 def _events(text):
-    pending={}; events=[]; errors=[]
+    pending={}; events=[]; errors=[]; exits={}
     for index,line in enumerate(text.splitlines()):
         match=re.match(r'^(\d+)(?:<[^>]*>)?\s+(.*)$',line)
         if not match:
             if line.strip(): errors.append('unrecognized trace line')
             continue
         pid=int(match[1]); call=match[2]; finished=index
+        if call.startswith('+++ exited with ') or call.startswith('+++ killed by '):
+            exits[pid]=index
         if call.endswith('<unfinished ...>'):
             if pid in pending: errors.append('overlapping unfinished syscall')
             pending[pid]=(index,call[:-len('<unfinished ...>')]); continue
@@ -150,7 +152,19 @@ def _events(text):
     if pending: errors.append('unfinished syscalls at EOF')
     # A child can run before its parent's clone return is printed. A completed
     # clone belongs at its start, before the child's exec/open/read events.
-    return sorted(events),errors
+    # Keep bounded numeric diagnostics after the private trace is destroyed.
+    # A later exit does not resolve the missing return value or make it safe.
+    samples=[]
+    for pid,(start,call) in sorted(pending.items())[:32]:
+        name=call.split('(',1)[0]
+        item={'pid':pid,'start_event':start,
+              'operation':name if name in TRACE_SYSCALLS.split(',') else 'unknown',
+              'later_exit_event':exits[pid] if exits.get(pid,-1)>start else None}
+        if name in {'read','close','dup','dup2','dup3','fcntl','fchdir'}:
+            match=re.match(r'^\w+\((0x[0-9a-fA-F]+|[0-9]+)(?=[,\s)])',call)
+            if match: item['descriptor']=int(match[1],0)
+        samples.append(item)
+    return sorted(events),errors,{'count':len(pending),'samples':samples}
 
 
 def _replay(text, expected_script_hash, *, read_script=None, hazards=None, fd_numbers=None):
@@ -160,7 +174,7 @@ def _replay(text, expected_script_hash, *, read_script=None, hazards=None, fd_nu
     with lost, unsupported or malformed relevant events cannot prove absence.
     """
     reader=read_script or (lambda path: Path(path).read_bytes())
-    events,errors=_events(text)
+    events,errors,unfinished=_events(text)
     hazards=hazards or {}
     process_events={}
     for index,pid,_,_ in events:
@@ -334,6 +348,7 @@ def _replay(text, expected_script_hash, *, read_script=None, hazards=None, fd_nu
     if processes: errors.append('missing process exit records')
     return {'kind':'script-digest-bound process-generation counter I/O',
             'trace_complete':not errors,'errors':sorted(set(errors)),
+            'unfinished_syscalls':unfinished,
             'source_sha256':hashlib.sha256(text.encode()).hexdigest(),
             'source_bytes':len(text.encode()),'gates':gates,'reads':reads,
             'attributed_files':sorted({r['file'] for r in reads if r['gate']})},accesses

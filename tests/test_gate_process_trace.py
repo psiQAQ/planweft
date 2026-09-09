@@ -26,6 +26,20 @@ def parse(text,**kwargs):
 
 
 class GateProcessTraceTest(unittest.TestCase):
+    def test_unfinished_diagnostics_are_bounded_and_do_not_resolve_exit(self):
+        text=GATE+'20<bash> read(0x3, <unfinished ...>\n'+ending(20)
+        result=parse(text)
+        self.assertFalse(result['trace_complete'])
+        self.assertIn('unfinished syscalls at EOF',result['errors'])
+        self.assertEqual(result['unfinished_syscalls'],{'count':1,'samples':[
+            {'pid':20,'start_event':1,'operation':'read','later_exit_event':2,'descriptor':3}]})
+        text=''.join(f'{pid}<SECRET> execve("/SECRET", ["SECRET"], <unfinished ...>\n' for pid in range(100,140))
+        result=parse(text)
+        self.assertEqual(result['unfinished_syscalls']['count'],40)
+        self.assertEqual(len(result['unfinished_syscalls']['samples']),32)
+        self.assertNotIn('SECRET',json.dumps(result))
+        self.assertTrue(all(s['later_exit_event'] is None for s in result['unfinished_syscalls']['samples']))
+
     def test_two_pass_unknown_snapshot_reaches_later_gate_exec(self):
         prefix=('10<host> execve("/bin/host", ["host"], 0x1) = 0\n'
                 '10<host> clone(child_stack=NULL, flags=CLONE_FILES|SIGCHLD) = 11\n'

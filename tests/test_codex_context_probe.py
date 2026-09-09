@@ -111,6 +111,17 @@ class ContextProbeTests(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
+    def test_high_before_raw_completion_order_is_already_supported(self):
+        # Fixed Codex 0.149.1 real RC15 stopping stream emits high completion
+        # before raw completion; context never required the reverse order.
+        _, events = fixture(self.work, self.native)
+        raw = next(e for e in events if e['method'] == 'rawResponseItem/completed'
+                   and e['params']['item']['id'] == 'a')
+        high = next(e for e in events if e['method'] == 'item/completed'
+                    and e['params']['item']['id'] == 'a')
+        events.remove(raw); events.insert(events.index(high) + 1, raw)
+        self.assertEqual(self.check(events)['status'], 'Passed')
+
     def check(self, events, token=TOKEN):
         return probe.assess(events, 'thread-1', 'turn-1', PROMPT,
                             str(self.native / 'hooks/codex-hooks.json'), token, OLD)
