@@ -136,6 +136,23 @@ class GateProcessTraceTest(unittest.TestCase):
                      GATE+'20<host> +++ superseded by execve in pid 21 +++\n'+ending(20)]:
             with self.subTest(text=text): self.assertFalse(parse(text)['trace_complete'])
 
+    def test_real_bun_thread_comm_preserves_child_and_gate_identity(self):
+        # Minimized from offline Claude 2.1.241 --help, strace --decode-pids=comm.
+        # Its actual clone result and parent_tid annotation contain spaces.
+        clone=('20<bash> clone(child_stack=0x7bb209d724b0, '
+               'flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, '
+               'parent_tid=[21<Bun Pool 0>], tls=0x7bb209d796c0, '
+               'child_tidptr=0x7bb209d79990) = 21<Bun Pool 0>\n')
+        text=GATE+clone+io(21).replace('21<cat>','21<Bun Pool 0>')+ending(21,20)
+        result=parse(text)
+        self.assertTrue(result['trace_complete'],result)
+        self.assertEqual(result['attributed_files'],['.stop_blocks'])
+        self.assertEqual(result['reads'][0]['gate']['pid'],20)
+        for token in ['21<Bun Pool 0','21<Bun Pool 0>garbage','21garbage']:
+            with self.subTest(token=token):
+                broken=text.replace(') = 21<Bun Pool 0>',') = '+token)
+                self.assertFalse(parse(broken)['trace_complete'])
+
     def test_cloexec_does_not_close_other_threads_shared_table(self):
         text=(GATE+'20<bash> openat(AT_FDCWD, "/workspace/.stop_blocks", O_RDONLY|O_CLOEXEC) = 3\n'
               +'20<bash> clone(child_stack=NULL, flags=CLONE_FILES|SIGCHLD) = 21\n'

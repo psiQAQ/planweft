@@ -43,6 +43,14 @@ def _number(value):
     return int(re.sub(r'<[^>]*>$','',value), 0)
 
 
+def _return_number(value):
+    # comm can contain spaces (e.g. 21<Bun Pool 0>); splitting on whitespace
+    # first truncates the annotation and loses the child's process identity.
+    match=re.match(r'^(-?(?:0x[0-9a-fA-F]+|[0-9]+))(?:<[^>]*>)?(?=\s|$)',value)
+    if not match: raise ValueError('invalid syscall return token')
+    return int(match[1],0)
+
+
 def _events(text):
     pending={}; events=[]; errors=[]
     for index,line in enumerate(text.splitlines()):
@@ -117,7 +125,7 @@ def attributed_gate_reads(text, expected_script_hash, *, read_script=None):
         if result.startswith('?'):
             errors.append('unresolved syscall result'); continue
         try:
-            returned=_number(result.split()[0]); args=_arguments(body)
+            returned=_return_number(result); args=_arguments(body)
             # Shared-table operations that overlap another task's operation
             # have no total ordering in strace. Do not guess which descriptor
             # or cwd was visible to a concurrent read.
