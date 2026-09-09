@@ -245,3 +245,5 @@ python3 tests/run-fixture-containers.py --scenario native-duplicate \
 该场景目前支持 Pi/OpenCode：从准确归档完成真实 global 安装及原生发现，然后执行同包 project `add --dry-run`，要求拒绝并保持原生配置和项目文件；再检查自有 doctor/update 预检与移除记录。Pi 的 `list` 仅证明包注册，不替代 RPC Extension 实际加载。OpenCode 的工具及 Skill 发现也不证明两个 handlers 已执行。此项称为“防止第二套原生注册”，不称为运行时提醒去重；实际模型消息投递另行验收。
 
 包装器在创建输出和 Docker 调用前校验归档、参数与资源，串行限制 2 CPU、3 GiB、无额外 Swap、256 PID、600 秒；失败中止后续宿主，保留失败和原始记录并核对容器清理。默认 `--scenario payload-delta` 仍是修改后 A/B fixtures，与准确发布归档的此项预检证据分开。
+
+Codex `--cases reminder-dedup` 使用同一 app-server thread 的两个串行 turn，原生 TUI 信任，不使用信任绕过。收集 `hook/started` / `hook/completed`、fileChange 与 raw protocol；按线程、轮次、hook ID、准确安装源绑定，检查每轮首次提醒与后续抑制。仅支持 Codex，其他宿主启动前报错。模型文字复述、背景读取计数器或第二次 SessionStart 不作为提醒去重证据；首次 SessionStart 可以位于第一 turn/started 后，但必须早于任何 reset/tool 且完整成功。观察结束后关闭所属服务器，不冒充服务器自然退出。原始检查器失败的重判须新建带摘要的派生审查，不覆盖原结果。

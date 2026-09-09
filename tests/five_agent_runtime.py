@@ -258,7 +258,7 @@ def model_command(host, model, prompt, case):
         if case == 'cold-reader':
             command += ['--disable', 'plugins']
         # This separate lane is explicitly not normal persisted trust acceptance.
-        if case not in {'untrusted','cold-reader','readonly','simple','persisted-trust'}:
+        if case not in {'untrusted','cold-reader','readonly','simple','persisted-trust','reminder-dedup'}:
             command += ['--dangerously-bypass-hook-trust']
         return command+['-'], prompt
     if host == 'claude':
@@ -624,6 +624,8 @@ def controller(payload):
                 result['native_policy_loaded']=json.loads(policy.stdout).get('decision')=='forbidden'
                 if not result['native_policy_loaded']: raise RuntimeError('Native execpolicy did not forbid the synthetic command')
             command, data = model_command(host,payload['model'],prompt,case)
+            if case=='reminder-dedup':
+                command=['codex','--disable','memories','--disable','multi_agent','app-server']
             server_probe=host=='opencode' and case in {'stopping','gated-continuation','gate-cap','gate-stall','gate-cap-disabled','gate-stall-disabled'}
             if server_probe:
                 command=['opencode','serve','--hostname','127.0.0.1','--port','0']
@@ -644,7 +646,17 @@ def controller(payload):
                 'probe_scope':payload.get('probe_scope')})
             gate_watch=watch_gate_reads() if case in {'gate-cap','gate-stall','gate-cap-disabled','gate-stall-disabled'} else None
             try:
-                if host=='codex' and case=='persisted-trust':
+                if host=='codex' and case=='reminder-dedup':
+                    from codex_reminder_probe import run_probe
+                    native=Path(json.loads((OUT/'installed-content.json').read_text())['native_root'])
+                    process,observation=run_probe(payload['model'],WORK,OUT,package,native,payload['timeout'],safe_text)
+                    result['native_reminder_deduplication']=observation.get('status')=='Passed'
+                    (OUT/'model.stdout').write_text(safe_text(process.stdout))
+                    (OUT/'model.stderr').write_text(safe_text(process.stderr))
+                    save('model',{'argv':command,'exit_code':process.returncode,
+                        'stdout_format':'Agent messages projected from native app-server; full notifications in reminder-protocol.jsonl',
+                        'completion':'two native turns in one thread; harness closes server afterward'})
+                elif host=='codex' and case=='persisted-trust':
                     process,trust=codex_trusted_model(payload['model'],prompt,payload['timeout'])
                     result['native_persisted_trust']=all(trust[k] for k in ['before_no_context','after_context','fresh_context','no_tool_reads'])
                     result['trust_recovery_token']=trust['new_owner_token']
