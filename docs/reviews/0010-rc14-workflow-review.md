@@ -60,3 +60,17 @@
 - `overlays/planweft/references/local-operations.zh.md` 当前 SHA-256 `34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5`
 
 - `scripts/build-plugin.py` 当前 SHA-256 `ceca2ba68a04f564d428af6a4062ea9075e0d2379f066048de7ffcfe9294a32a`
+
+## Windows 默认编码失败的最小修复复核
+
+主 Agent 保留 RC14 Check 34381099599 的 Windows 默认 cp1252读取中文参考失败日志 `/tmp/planweft-rc14-ci-failure.log`。此次本地diff已把文档读取明确为UTF-8；两份示例同步 `sys.stdout.reconfigure(encoding="utf-8")`，不受管道默认ASCII／Windows代码页影响。测试用子进程 `PYTHONIOENCODING=ascii` 再按UTF-8接收，能在Linux离线覆盖原先隐式stdout编码前提；两语言代码仍完全相同，授权、链接解析与清理机制未变。
+
+Reviewer 定向执行3项测试全部Passed（Linux），包含中文／空格和相对链接、错误路径、正常及异常清理。该结果不冒充修复后Windows真实CI；必须等待新CI结果。此次包内容确有变化，应重冻准确归档；之前包摘要及失败证据保留，不直接替换已发布版本。
+
+更新源码摘要：
+
+- `overlays/planweft/references/local-operations.md`: `d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8`
+
+- `overlays/planweft/references/local-operations.zh.md`: `71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342`
+
+- `tests/test_local_operations.py`: `0c07463187c9f1a89828f04a9dfce4bba8d746aa41dd0a51ce0ec3e658983751`

@@ -11,6 +11,7 @@
 ```python
 from pathlib import Path
 import sys
+sys.stdout.reconfigure(encoding="utf-8")
 
 skill = Path(sys.argv[1]).resolve(strict=True)
 if not skill.is_file() or skill.name != "SKILL.md":
@@ -27,6 +28,7 @@ print(skill.parent)
 ```python
 from pathlib import Path
 import sys
+sys.stdout.reconfigure(encoding="utf-8")
 import tempfile
 
 project = Path(sys.argv[1]).resolve(strict=True)

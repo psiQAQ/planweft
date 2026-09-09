@@ -1,6 +1,7 @@
 """Execute the shipped examples across linked installs and bounded scratch."""
 from pathlib import Path
 import re
+import os
 import subprocess
 import sys
 import tempfile
@@ -16,13 +17,14 @@ class LocalOperationsTest(unittest.TestCase):
         self.root=Path(self.temporary.name)
         self.project=self.root/'项目 with spaces';self.project.mkdir()
         (self.project/'user-note.txt').write_text('preserve user edit\n')
-        self.examples=re.findall(r'```python\n(.*?)\n```',(ROOT/'overlays/planweft/references/local-operations.md').read_text(),re.S)
+        self.examples=re.findall(r'```python\n(.*?)\n```',(ROOT/'overlays/planweft/references/local-operations.md').read_text(encoding="utf-8"),re.S)
 
     def execute(self,example,argument):
-        return subprocess.run([sys.executable,'-c',example,str(argument)],cwd=self.project,text=True,capture_output=True)
+        return subprocess.run([sys.executable,'-c',example,str(argument)],cwd=self.project,
+                              env={**os.environ,'PYTHONIOENCODING':'ascii'},encoding='utf-8',capture_output=True)
 
     def test_bilingual_examples_match_and_resolve_chained_relative_link(self):
-        localized=re.findall(r'```python\n(.*?)\n```',(ROOT/'overlays/planweft/references/local-operations.zh.md').read_text(),re.S)
+        localized=re.findall(r'```python\n(.*?)\n```',(ROOT/'overlays/planweft/references/local-operations.zh.md').read_text(encoding="utf-8"),re.S)
         self.assertEqual(self.examples,localized)
         self.assertEqual(len(self.examples),2)
         installed=self.root/'安装 cache'/'skills'/'project-docs';installed.mkdir(parents=True)
@@ -59,7 +61,7 @@ class LocalOperationsTest(unittest.TestCase):
             self.assertTrue(relative.startswith('.pw-scratch-'))
             self.assertEqual(Path(relative).name,relative)
             self.assertFalse((self.project/relative).exists())
-            self.assertEqual((self.project/'user-note.txt').read_text(),'preserve user edit\n')
+            self.assertEqual((self.project/'user-note.txt').read_text(encoding="utf-8"),'preserve user edit\n')
             self.assertEqual(sorted(p.name for p in self.project.iterdir()),['user-note.txt'])
 
 

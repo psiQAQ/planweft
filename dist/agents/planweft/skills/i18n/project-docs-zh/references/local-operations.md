@@ -11,6 +11,7 @@ A relative symlink target is relative to the link's parent, not the project's cw
 ```python
 from pathlib import Path
 import sys
+sys.stdout.reconfigure(encoding="utf-8")
 
 skill = Path(sys.argv[1]).resolve(strict=True)
 if not skill.is_file() or skill.name != "SKILL.md":
@@ -27,6 +28,7 @@ For an authorized manual reproduction or counterfactual check, make the allocati
 ```python
 from pathlib import Path
 import sys
+sys.stdout.reconfigure(encoding="utf-8")
 import tempfile
 
 project = Path(sys.argv[1]).resolve(strict=True)

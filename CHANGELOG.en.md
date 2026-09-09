@@ -6,7 +6,7 @@
 
 - Express plan adoption as a source-backed branch decision across all six languages; retain read-only, trivial-task and explicit adoption restrictions without adding automatic file-writing hooks.
 - Add bilingual packaged examples for resolving the host-listed Skill link and allocating/cleaning manual scratch inside the authorized project, without looking up host settings or changing the entire host's temporary directory.
-- Examples have offline coverage for linked paths, Chinese/spaced paths and exception cleanup. Automatic matching, scope compliance and final stable-artifact model acceptance remain pending. Dependency versions retain the RC13 lock.
+- Examples explicitly emit UTF-8, and tests read documentation as UTF-8. They have offline coverage for linked paths, Chinese/spaced paths and exception cleanup. Automatic matching, scope compliance and final stable-artifact model acceptance remain pending. Dependency versions retain the RC13 lock.
 
 ## 0.4.0-rc.13 — Candidate source (check the official registry)
 

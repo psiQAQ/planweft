@@ -33,11 +33,11 @@
         },
         ".agents/skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         ".agents/skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         ".agents/skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -313,11 +313,11 @@
         },
         "skills/i18n/project-docs-ar/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-ar/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-ar/references/plan-selection.md": {
           "executable": false,
@@ -477,11 +477,11 @@
         },
         "skills/i18n/project-docs-de/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-de/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-de/references/plan-selection.md": {
           "executable": false,
@@ -641,11 +641,11 @@
         },
         "skills/i18n/project-docs-es/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-es/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-es/references/plan-selection.md": {
           "executable": false,
@@ -805,11 +805,11 @@
         },
         "skills/i18n/project-docs-zh/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-zh/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-zh/references/plan-selection.md": {
           "executable": false,
@@ -969,11 +969,11 @@
         },
         "skills/i18n/project-docs-zht/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-zht/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-zht/references/plan-selection.md": {
           "executable": false,
@@ -1133,11 +1133,11 @@
         },
         "skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -1293,7 +1293,7 @@
         }
       },
       "path": "agents/planweft",
-      "sha256": "4c99191a82cf19903afc1a6c1e3d0b3021b8efdfba540b9d3536672d0cedcb1e"
+      "sha256": "07a7087367bbf19b2c84b4e9dd09dbd409eacb36f33a2b15f4534639487657df"
     },
     "claude": {
       "file_count": 298,
@@ -1512,11 +1512,11 @@
         },
         "skills/i18n/project-docs-ar/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-ar/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-ar/references/plan-selection.md": {
           "executable": false,
@@ -1676,11 +1676,11 @@
         },
         "skills/i18n/project-docs-de/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-de/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-de/references/plan-selection.md": {
           "executable": false,
@@ -1840,11 +1840,11 @@
         },
         "skills/i18n/project-docs-es/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-es/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-es/references/plan-selection.md": {
           "executable": false,
@@ -2004,11 +2004,11 @@
         },
         "skills/i18n/project-docs-zh/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-zh/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-zh/references/plan-selection.md": {
           "executable": false,
@@ -2168,11 +2168,11 @@
         },
         "skills/i18n/project-docs-zht/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-zht/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-zht/references/plan-selection.md": {
           "executable": false,
@@ -2332,11 +2332,11 @@
         },
         "skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -2492,7 +2492,7 @@
         }
       },
       "path": "claude/planweft",
-      "sha256": "3f532b5e77c7897a45c428cc4378af925ceb4cc06bc0b23e4dc3fdf21a9682e5"
+      "sha256": "9c27b0d5c651f97fe744570a109bad1cf8a2196b4ea1ceafc1b419b42b14c8d8"
     },
     "codebuddy": {
       "file_count": 282,
@@ -2675,11 +2675,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/plan-selection.md": {
           "executable": false,
@@ -2839,11 +2839,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/plan-selection.md": {
           "executable": false,
@@ -3003,11 +3003,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/plan-selection.md": {
           "executable": false,
@@ -3167,11 +3167,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/plan-selection.md": {
           "executable": false,
@@ -3331,11 +3331,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/plan-selection.md": {
           "executable": false,
@@ -3467,11 +3467,11 @@
         },
         "skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -3627,7 +3627,7 @@
         }
       },
       "path": "codebuddy/planweft",
-      "sha256": "2f5773e6ba574446beb9d28adf863bf59997e8ff1fc4976da468c1744cb13b33"
+      "sha256": "52c3d859cc12e3f6176f3715e05568fbb7ee0980d0182186b43764b25f9f4c23"
     },
     "codex": {
       "file_count": 306,
@@ -3858,11 +3858,11 @@
         },
         "skills/i18n/project-docs-ar/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-ar/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-ar/references/plan-selection.md": {
           "executable": false,
@@ -4026,11 +4026,11 @@
         },
         "skills/i18n/project-docs-de/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-de/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-de/references/plan-selection.md": {
           "executable": false,
@@ -4194,11 +4194,11 @@
         },
         "skills/i18n/project-docs-es/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-es/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-es/references/plan-selection.md": {
           "executable": false,
@@ -4362,11 +4362,11 @@
         },
         "skills/i18n/project-docs-zh/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-zh/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-zh/references/plan-selection.md": {
           "executable": false,
@@ -4530,11 +4530,11 @@
         },
         "skills/i18n/project-docs-zht/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-zht/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-zht/references/plan-selection.md": {
           "executable": false,
@@ -4698,11 +4698,11 @@
         },
         "skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -4858,7 +4858,7 @@
         }
       },
       "path": "codex/planweft",
-      "sha256": "c34a22b3515739d77ffd815963412532f6761d4fc6fc6921dc576a5137d0ae7c"
+      "sha256": "29c3bc4a3046109686cf3810fa346fb28d5b334f36a9990eca576c0299abc383"
     },
     "continue": {
       "file_count": 323,
@@ -4897,11 +4897,11 @@
         },
         ".continue/skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         ".continue/skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         ".continue/skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -5177,11 +5177,11 @@
         },
         "skills/i18n/project-docs-ar/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-ar/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-ar/references/plan-selection.md": {
           "executable": false,
@@ -5341,11 +5341,11 @@
         },
         "skills/i18n/project-docs-de/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-de/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-de/references/plan-selection.md": {
           "executable": false,
@@ -5505,11 +5505,11 @@
         },
         "skills/i18n/project-docs-es/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-es/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-es/references/plan-selection.md": {
           "executable": false,
@@ -5669,11 +5669,11 @@
         },
         "skills/i18n/project-docs-zh/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-zh/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-zh/references/plan-selection.md": {
           "executable": false,
@@ -5833,11 +5833,11 @@
         },
         "skills/i18n/project-docs-zht/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-zht/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-zht/references/plan-selection.md": {
           "executable": false,
@@ -5997,11 +5997,11 @@
         },
         "skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -6157,7 +6157,7 @@
         }
       },
       "path": "continue/planweft",
-      "sha256": "3c963b3fecd0d0eb87dbe9722e4d8f8f9dc20a2bda6c54df73134d96a8d35eef"
+      "sha256": "ce99aed7b42d57173bae2099ac423c32d24a42aab09648e67c2f30726a048e6a"
     },
     "copilot": {
       "file_count": 284,
@@ -6348,11 +6348,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/plan-selection.md": {
           "executable": false,
@@ -6512,11 +6512,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/plan-selection.md": {
           "executable": false,
@@ -6676,11 +6676,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/plan-selection.md": {
           "executable": false,
@@ -6840,11 +6840,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/plan-selection.md": {
           "executable": false,
@@ -7004,11 +7004,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/plan-selection.md": {
           "executable": false,
@@ -7140,11 +7140,11 @@
         },
         "skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -7300,7 +7300,7 @@
         }
       },
       "path": "copilot/planweft",
-      "sha256": "795978c3c651685e41e108ab49b34ca5f0c762c73b326082930832816e23e5db"
+      "sha256": "f2df0800bb1a30a18902e594514de2f6e634ed8d764d91e550bced1697a855be"
     },
     "cursor": {
       "file_count": 284,
@@ -7491,11 +7491,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/plan-selection.md": {
           "executable": false,
@@ -7655,11 +7655,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/plan-selection.md": {
           "executable": false,
@@ -7819,11 +7819,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/plan-selection.md": {
           "executable": false,
@@ -7983,11 +7983,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/plan-selection.md": {
           "executable": false,
@@ -8147,11 +8147,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/plan-selection.md": {
           "executable": false,
@@ -8283,11 +8283,11 @@
         },
         "skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -8443,7 +8443,7 @@
         }
       },
       "path": "cursor/planweft",
-      "sha256": "ab01b742e879488806222697774b65f20b2258b1228ddd8f5203e95e18e82328"
+      "sha256": "38fef566df058cad01c72c4e7f7b630d80e5df1e3914397ee4f5477d0d9428a2"
     },
     "dsh": {
       "file_count": 288,
@@ -8650,11 +8650,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/plan-selection.md": {
           "executable": false,
@@ -8814,11 +8814,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/plan-selection.md": {
           "executable": false,
@@ -8978,11 +8978,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/plan-selection.md": {
           "executable": false,
@@ -9142,11 +9142,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/plan-selection.md": {
           "executable": false,
@@ -9306,11 +9306,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/plan-selection.md": {
           "executable": false,
@@ -9442,11 +9442,11 @@
         },
         "skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -9602,7 +9602,7 @@
         }
       },
       "path": "dsh/planweft",
-      "sha256": "9d8d4225f5af60ed3eedc9a6728cffc07b2353d0df7bf32453381f243e7e05ac"
+      "sha256": "cf6d1620ec38d334c01c5820615505837f32df00af149c81436b1ee7b0180b24"
     },
     "factory": {
       "file_count": 282,
@@ -9785,11 +9785,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/plan-selection.md": {
           "executable": false,
@@ -9949,11 +9949,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/plan-selection.md": {
           "executable": false,
@@ -10113,11 +10113,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/plan-selection.md": {
           "executable": false,
@@ -10277,11 +10277,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/plan-selection.md": {
           "executable": false,
@@ -10441,11 +10441,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/plan-selection.md": {
           "executable": false,
@@ -10577,11 +10577,11 @@
         },
         "skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -10737,7 +10737,7 @@
         }
       },
       "path": "factory/planweft",
-      "sha256": "b210b78a0adafbad3a2668d0d5a342662bc15591219476eff0b51002a8422a5a"
+      "sha256": "20039f90c2f5bb371e8296bc57c6a13427156e8bf45366d6ff5b81d03f017147"
     },
     "gemini": {
       "file_count": 286,
@@ -10936,11 +10936,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/plan-selection.md": {
           "executable": false,
@@ -11100,11 +11100,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/plan-selection.md": {
           "executable": false,
@@ -11264,11 +11264,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/plan-selection.md": {
           "executable": false,
@@ -11428,11 +11428,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/plan-selection.md": {
           "executable": false,
@@ -11592,11 +11592,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/plan-selection.md": {
           "executable": false,
@@ -11728,11 +11728,11 @@
         },
         "skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -11888,7 +11888,7 @@
         }
       },
       "path": "gemini/planweft",
-      "sha256": "7e5040d1fc616474172509b36ff6d2c8b3605b6a298310b9e08ec5d6c492dffb"
+      "sha256": "3c2f613feffb529a129e9dc11d6fa7c1ef3fe1ad6afec37de297cca4ab683348"
     },
     "hermes": {
       "file_count": 291,
@@ -12103,11 +12103,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/plan-selection.md": {
           "executable": false,
@@ -12267,11 +12267,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/plan-selection.md": {
           "executable": false,
@@ -12431,11 +12431,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/plan-selection.md": {
           "executable": false,
@@ -12595,11 +12595,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/plan-selection.md": {
           "executable": false,
@@ -12759,11 +12759,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/plan-selection.md": {
           "executable": false,
@@ -12895,11 +12895,11 @@
         },
         "skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -13059,7 +13059,7 @@
         }
       },
       "path": "hermes/planweft",
-      "sha256": "4c1f1848a5e6ca5f41ab8d087de0c83446071b7556439c680a09a473f521a2c4"
+      "sha256": "140c481386f0ecc34e42be5df4252a899460b7c5bd7edc7ac77c0efd89a3b4ee"
     },
     "kiro": {
       "file_count": 294,
@@ -13278,11 +13278,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/plan-selection.md": {
           "executable": false,
@@ -13442,11 +13442,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/plan-selection.md": {
           "executable": false,
@@ -13606,11 +13606,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/plan-selection.md": {
           "executable": false,
@@ -13770,11 +13770,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/plan-selection.md": {
           "executable": false,
@@ -13934,11 +13934,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/plan-selection.md": {
           "executable": false,
@@ -14070,11 +14070,11 @@
         },
         "skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/manus-principles.md": {
           "executable": false,
@@ -14242,7 +14242,7 @@
         }
       },
       "path": "kiro/planweft",
-      "sha256": "c1d3c94db8ca551bbbd916f43c7cd022587380969847ce118faab1bc18c0a95c"
+      "sha256": "e4cfc1a1dbc3e81f1f133ed13225604311305e56c8c22bd6b5ae3412dc22dd46"
     },
     "mastracode": {
       "file_count": 325,
@@ -14285,11 +14285,11 @@
         },
         ".mastracode/skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         ".mastracode/skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         ".mastracode/skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -14569,11 +14569,11 @@
         },
         "skills/i18n/project-docs-ar/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-ar/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-ar/references/plan-selection.md": {
           "executable": false,
@@ -14733,11 +14733,11 @@
         },
         "skills/i18n/project-docs-de/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-de/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-de/references/plan-selection.md": {
           "executable": false,
@@ -14897,11 +14897,11 @@
         },
         "skills/i18n/project-docs-es/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-es/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-es/references/plan-selection.md": {
           "executable": false,
@@ -15061,11 +15061,11 @@
         },
         "skills/i18n/project-docs-zh/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-zh/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-zh/references/plan-selection.md": {
           "executable": false,
@@ -15225,11 +15225,11 @@
         },
         "skills/i18n/project-docs-zht/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/i18n/project-docs-zht/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/i18n/project-docs-zht/references/plan-selection.md": {
           "executable": false,
@@ -15389,11 +15389,11 @@
         },
         "skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -15549,7 +15549,7 @@
         }
       },
       "path": "mastracode/planweft",
-      "sha256": "f1fab3ef15987288a97a078d82f8342387ee6a208e18e5b02f1832a26f389c1a"
+      "sha256": "bd0a04f195fbbd4e4f00ec3036aeccf72034277ab1262d4cf3bf4930f372f9a6"
     },
     "opencode": {
       "file_count": 294,
@@ -15768,11 +15768,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/plan-selection.md": {
           "executable": false,
@@ -15932,11 +15932,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/plan-selection.md": {
           "executable": false,
@@ -16096,11 +16096,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/plan-selection.md": {
           "executable": false,
@@ -16260,11 +16260,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/plan-selection.md": {
           "executable": false,
@@ -16424,11 +16424,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/plan-selection.md": {
           "executable": false,
@@ -16560,11 +16560,11 @@
         },
         "skills/project-docs/references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "skills/project-docs/references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "skills/project-docs/references/plan-selection.md": {
           "executable": false,
@@ -16732,7 +16732,7 @@
         }
       },
       "path": "opencode/planweft",
-      "sha256": "c5a505e8f9713d081a24719cd9a867bb1124964c62575976fbbc12d7dda38937"
+      "sha256": "6d53ec907b735bd3f10e99d74656368ef6b4513037fde998be4a0b1b4d678931"
     },
     "pi": {
       "file_count": 55,
@@ -16819,11 +16819,11 @@
         },
         "references/local-operations.md": {
           "executable": false,
-          "sha256": "87bae340e7c33931bc2170b47dbe7e6cc74de24850f2f63ca2a476c6751ba131"
+          "sha256": "d29f2732969427b53ec158749ff1b9f4f2c701b4f82580f0413054103de21dc8"
         },
         "references/local-operations.zh.md": {
           "executable": false,
-          "sha256": "34530e9e5d9095190054b7b00e643df9d7f38d488f81a6d2a3248b3cfe2835a5"
+          "sha256": "71ed05b4984bcfd89eedd5ea6ed8c41d4c33aad5bec0942baafc87b834210342"
         },
         "references/plan-selection.md": {
           "executable": false,
@@ -16959,7 +16959,7 @@
         }
       },
       "path": "pi/planweft",
-      "sha256": "63c086e0e8043f1a7db77682ab9aa764b811e4d4168fb08cae4afadacdea345d"
+      "sha256": "24a7d1826917214a93455e3d64d6e0c0339650d328de9da40232d05aec2a7b61"
     }
   },
   "product": "planweft",
