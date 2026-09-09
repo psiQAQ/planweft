@@ -17,16 +17,14 @@ import tarfile
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR = ROOT / 'vendor/planning-with-files'
 OVERLAY = ROOT / 'overlays/planweft'
-VERSION = '0.4.0-rc.5'
+VERSION = '0.4.0-rc.6'
 PRODUCT = 'planweft'
 SKILL = 'project-docs'
-DESCRIPTION = ('Persistent file planning and task-relevant project documentation. '
-               'Use for multi-step implementation, documented work and handoffs; '
-               'maintain requirements, decisions and observed evidence as needed. '
-               'Reading, diagnosis and host plan mode remain read-only. '
-               'No project opt-in is required; respect applicable project rules. '
-               'Hooks inject selected project context; session history access is explicit. '
-               'Optional host-aware continuation; no network upload path.')
+DESCRIPTION = ('Plan and document implementation or maintenance with investigation, fixes, '
+               'regression tests and handoff, including work continued from existing notes. '
+               'Use task_plan.md, findings.md and progress.md as persistent task records. '
+               'Read-only and trivial tasks do not initialize records; respect project restrictions. '
+               'Hooks provide project context; explicit history access and host-dependent continuation; no network upload path.')
 UPSTREAM_URL = 'https://github.com/OthmanAdi/planning-with-files'
 COMMANDS = ['plan', 'start', 'status', 'pwf', 'pwf-status', 'plan-status',
             'plan-attest', 'plan-doctor', 'plan-execute', 'plan-goal', 'plan-loop',
@@ -120,12 +118,17 @@ def enhance_skill(text, path):
     language = re.search(r'/i18n/(project-docs-[^/]+)/', path)
     name = language.group(1) if language else SKILL
     front = re.sub(r'^name:.*$', 'name: ' + name, front, flags=re.M)
+    # Keep host-specific consent/capability disclosure, especially no-Stop
+    # adapters. Put the maintenance trigger first without repeating the old
+    # generic introduction or advertising every long research task as writable.
     description = re.search(r'^description:\s*(.*)$', front, re.M).group(1)
-    if description.startswith('"'):
-        description = json.loads(description)
-    else:
-        description = description.strip("'")
-    description += ' Automatic matching adds project docs and evidence maintenance; read-only and plan mode do not write records.'
+    description = json.loads(description) if description.startswith('"') else description.strip("'")
+    for redundant in ('Persistent file-based planning for multi-step AI-agent work. ',
+                      'Keeps task_plan.md, findings.md, and progress.md on disk; ',
+                      'Use for research or work needing 5+ tool calls.'):
+        description = description.replace(redundant, '')
+    description = ('Use for implementation or maintenance with investigation, fixes, regression tests '
+                   'and persistent handoff, including work continued from old notes. ' + description.strip())
     front = re.sub(r'^description:.*$', lambda _: 'description: ' + json.dumps(description, ensure_ascii=False), front, flags=re.M)
     front = re.sub(r'^(\s+version:) .+$', r'\1 "' + VERSION + '"', front, flags=re.M)
     if language and 'disable-model-invocation:' not in front:
@@ -245,6 +248,22 @@ def transform(upstream, enhanced=True):
             text = local_install_text(text, target)
         if enhanced and source.endswith('/SKILL.md'):
             text = enhance_skill(text, target)
+            if not target.startswith('.kiro/'):
+                # Retain the transformed upstream manual beside the entrypoint;
+                # neither translating the entry nor moving the manual can make
+                # another platform's install path a runtime dependency.
+                front, full = text[4:].split('\n---\n', 1)
+                base = str(PurePosixPath(target).parent)
+                manual = full.removeprefix('\n').removeprefix((OVERLAY / 'workflow.md').read_text().rstrip()).lstrip()
+                manual = re.sub(r'\]\((?![a-z]+:|/|#)([^)]+)\)', r'](../\1)', manual)
+                result[base + '/references/pwf-workflow.md'] = (
+                    ('# PWF implementation reference\n\nApply the scope and workflow in the installed Skill entry first. '
+                     'Script commands are relative to the installed Skill root, not this reference directory.\n\n'
+                     + manual).encode(), 0o644)
+                language = re.search(r'/i18n/project-docs-([^/]+)/', target)
+                locale = language.group(1) if language else 'en'
+                entry = (OVERLAY / 'entrypoints' / (locale + '.md')).read_text()
+                text = '---\n' + front + '\n---\n\n' + entry
         # Local, source-reviewed adapter patches. Keep event payloads and the
         # upstream state protocol; only remove implicit cwd imports/opt-out gaps.
         if '/hooks/' in '/' + target and target.endswith('.sh'):

@@ -53,6 +53,8 @@ Save scope, inspected revision or workspace state, findings and disposition in t
 
 Record commands or scenarios with enough environmental detail to reproduce the material result. Distinguish **Passed**, **Failed** and **Not Run** with reasons. For platform work, report static checks, protocol fixtures and actual host execution separately. A simulated lifecycle event is not a real host run; an installed package is not proof of Skill selection or hook delivery. Missing environments remain Not Run, not inferred success.
 
+Keep historical verification and the current reader's work separate. Cite the project record for a historical result, including its environment and limits. A new reader who does not repeat a recorded Passed test should say it was not rerun in this session, not relabel the historical result Not Run. If the record is contradictory or insufficient, report that uncertainty rather than inventing a result.
+
 For an important handoff, ask an independent fresh reader to use only the project entrypoint, task and files. Do not provide old chat, expected answers or the owner's conclusion. Ask for the current behavior, remaining uncertainty and the single next action with file citations. Check the citations against actual state, resolve contradictions and repeat only what changed. This tests recoverability; it does not substitute for source review or runtime validation.
 
 Finish with a concrete next action or completion state in the selected plan, links to evidence, unresolved blockers and actual verification limits. Keep detailed historical results in progress or reproduction records. SHA attestation and runtime gating cannot approve a design or certify correctness.
