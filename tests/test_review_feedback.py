@@ -142,6 +142,27 @@ class ReviewFeedbackTest(unittest.TestCase):
         for step in ['ps','rm','recheck','final']:
             with self.subTest(step=step): self._owner_chain(cleanup_error=step)
 
+    def test_dsh_uses_native_events_and_requires_completed_turn(self):
+        runner=feedback.load_module('pw_feedback_native_parser',feedback.ROOT/'tests/run-five-agent-release.py')
+        assistant={'type':'assistant/message','data':{'message':{'content':[{'type':'text','text':'Native final answer'}]}}}
+        completed={'type':'turn/end','data':{'reason':{'kind':'completed'}}}
+        failed={'type':'turn/end','data':{'reason':{'kind':'error'}}}
+        cases=[('missing',None,False,False,True),('plain',['Plain non-JSON output'],False,False,True),
+               ('answer-only',[assistant],True,False,True),('completed',[assistant,completed],True,True,True),
+               ('error',[assistant,failed],True,False,False)]
+        for name,events,answer,ended,no_errors in cases:
+            with self.subTest(name=name),tempfile.TemporaryDirectory() as temporary:
+                raw=Path(temporary)
+                # Even structured events on stdout cannot stand in for DSH's
+                # absent native stream (nor can its ordinary human output).
+                (raw/'model.stdout').write_text('Human final answer\n'+json.dumps(assistant)+'\n'+json.dumps(completed))
+                if events is not None:
+                    (raw/'native-events.jsonl').write_text('\n'.join(e if isinstance(e,str) else json.dumps(e) for e in events))
+                trace,checks=feedback.model_trace(runner,'dsh',raw)
+                self.assertEqual(checks,{'model_answer_present':answer,'no_model_errors':no_errors,'native_turn_completed':ended})
+                self.assertEqual(trace['final'],'Native final answer' if answer else '')
+                self.assertEqual(all(checks.values()),name=='completed')
+
     def test_model_and_time_budget_validated_before_input_auth_or_docker(self):
         with tempfile.TemporaryDirectory() as temporary:
             args,_,_=self.fixture(Path(temporary))

@@ -144,6 +144,19 @@ SNAPSHOT_SCOPE={'coverage':'project_snapshot text entries only',
                 'limitation':'Snapshot assertions do not prove the entire directory unchanged; independent semantic trace review is required.'}
 
 
+def model_trace(runner,host,raw):
+    # DSH stdout is human output, not its native event stream. A missing stream
+    # must fail closed rather than fall back to that unstructured output.
+    path=raw/('native-events.jsonl' if host=='dsh' else 'model.stdout')
+    trace=runner.model_text(host,path.read_text() if path.is_file() else '')
+    checks={'model_answer_present':bool(trace['final']),'no_model_errors':not trace['errors']}
+    if host=='dsh':
+        # The shared parser marks observation supported only after turn/end;
+        # non-completed turn/end reasons also populate errors above.
+        checks['native_turn_completed']=trace['tool_observation_supported'] and not trace['errors']
+    return trace,checks
+
+
 def owner_prompt(review):
     return ('这是一次明确授权的独立 review 反馈闭环。你是新的 owner 会话，仅依据当前项目文件、以下原任务范围和事实反馈，对允许的已有记录进行最小修正。'
             '不得改代码、测试、批准需求、用户文件、README/AGENTS，不得新增/删除文件，不得重新执行实现或测试。不得读取旧聊天、缓存、旧容器、凭据或外部历史。'
@@ -207,9 +220,9 @@ def main(argv=None):
                 'bootstrap_output_archived':False,'diagnostic_limit':'Bootstrap stdout/stderr intentionally not archived; use native runtime redacted files when available.'})
             controller=read_json(raw/'controller.json') if (raw/'controller.json').is_file() else {}
             after=runner.project_snapshot(fixture,work);write_json(stage/'after.json',after)
-            trace=runner.model_text(args.host,(raw/'model.stdout').read_text() if (raw/'model.stdout').exists() else '')
+            trace,model_checks=model_trace(runner,args.host,raw)
             checks={'container_succeeded':result.returncode==0 and controller.get('status')=='Passed',
-                    'exact_source':controller.get('npm_sha256')==args.archive_sha256,'model_answer_present':bool(trace['final']),'no_model_errors':not trace['errors']}
+                    'exact_source':controller.get('npm_sha256')==args.archive_sha256,**model_checks}
             if case=='review-correction': checks.update(protected_result(before,after,args.review_data['allowed_documents']))
             else: checks['project_unchanged']=before==after
             item={'automated_status':'Passed' if all(checks.values()) else 'Failed','semantic_review':'Required','assertions':checks,'controller':controller,'changed_paths':changes(before,after),
