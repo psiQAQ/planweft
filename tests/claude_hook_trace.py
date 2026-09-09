@@ -58,7 +58,7 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
         if matched:
             timestamps[number] = matched[2]; line = matched[1] + matched[3]
         normalized.append(line)
-    events, errors = base._events('\n'.join(normalized))
+    events, errors, _unfinished = base._events('\n'.join(normalized))
     hazards = hazards or {}
     if len(events) > 250000:
         return {'errors': ['trace event budget exceeded'], 'hooks': []}, []
