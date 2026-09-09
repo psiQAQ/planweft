@@ -17,15 +17,17 @@ import tarfile
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR = ROOT / 'vendor/planning-with-files'
 OVERLAY = ROOT / 'overlays/planweft'
-VERSION = '0.4.0-rc.8'
+VERSION = '0.4.0-rc.9'
 PRODUCT = 'planweft'
 SKILL = 'project-docs'
 SKILL_TRIGGER = ('Use for implementation/maintenance with investigation, fixes, regression tests '
                  'and handoff, including existing notes. Read-only/trivial tasks do not initialize files. ')
+SKILL_LOOKUP = ('Use the host-listed Skill path; read it before resource lookup. '
+                'Do not use host settings or installation receipts to locate resources. ')
 SKILL_RECOVERY = ('Uses selected project planning context. Automatic recovery reads project planning files only. '
                   'Explicit requests only: --metadata / --replay. ')
 SKILL_BOUNDARY = 'It never runs commands declared in Markdown; no network upload path. '
-SKILL_DESCRIPTION = (SKILL_TRIGGER + SKILL_RECOVERY + SKILL_BOUNDARY
+SKILL_DESCRIPTION = (SKILL_TRIGGER + SKILL_LOOKUP + SKILL_RECOVERY + SKILL_BOUNDARY
                      + 'Optional gated mode can request continuation only when the host supports it.')
 DESCRIPTION = ('Plan and document implementation or maintenance with investigation, fixes, '
                'regression tests and handoff, including work continued from existing notes. '
@@ -122,15 +124,15 @@ def skill_description(path):
     # Discovery metadata must disclose consent and host limits before the
     # agent chooses to read the longer manual. Do not advertise shared hooks.
     if path.startswith('.kiro/'):
-        return (SKILL_TRIGGER
+        return (SKILL_TRIGGER + SKILL_LOOKUP
                 + 'Kiro skill instructions and steering state read selected project planning context; '
                 'recovery reads project files and timestamps only, not agent transcript stores. '
                 'It registers no Stop hook and never requests continuation. ' + SKILL_BOUNDARY)
     if path.startswith('.continue/'):
-        return (SKILL_TRIGGER + SKILL_RECOVERY + SKILL_BOUNDARY
+        return (SKILL_TRIGGER + SKILL_LOOKUP + SKILL_RECOVERY + SKILL_BOUNDARY
                 + 'It registers no lifecycle or Stop hook and never requests continuation.')
     if path.startswith('.gemini/'):
-        return (SKILL_TRIGGER + SKILL_RECOVERY + SKILL_BOUNDARY
+        return (SKILL_TRIGGER + SKILL_LOOKUP + SKILL_RECOVERY + SKILL_BOUNDARY
                 + 'Its session-end hook reports status only and does not request continuation.')
     return SKILL_DESCRIPTION
 

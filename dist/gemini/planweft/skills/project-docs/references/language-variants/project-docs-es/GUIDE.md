@@ -1,8 +1,8 @@
 ---
 name: project-docs-es
-description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Its session-end hook reports status only and does not request continuation."
+description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Its session-end hook reports status only and does not request continuation."
 metadata:
-  version: "0.4.0-rc.8"
+  version: "0.4.0-rc.9"
 ---
 
 # Documentación y planificación del proyecto
@@ -31,6 +31,10 @@ Tras transferir el estado de la tarea, reemplaza solo el estado dinámico y el s
 
 3. **Trabajar y registrar.** `task_plan.md` es la única fuente dinámica: objetivo, fases, siguiente acción, bloqueos y evidencias. `findings.md`: fuentes, fecha/revisión de observación, estado anterior/posterior y supuestos. `progress.md`: acciones, errores, pruebas reales y cambios anteriores a la tarea. Releer antes de decidir, registrar tras pequeños bloques de investigación y actualizar cada fase. Conservar fallos y cambiar el enfoque antes de repetir. Mantener `### Phase` y `**Status:** pending`, `in_progress`, `complete`. Un owner mantiene el estado compartido; workers usan registros asignados; tareas independientes usan planes o worktrees distintos.
 4. **Verificar y entregar.** Actualizar mínimamente especificaciones, ADR y reproducciones existentes; crear solo documentos útiles que falten. No cambiar requisitos aprobados para justificar código. Contrastar las afirmaciones sobre el comportamiento actual con los archivos finales; fechar las observaciones anteriores y añadir correcciones sin borrar evidencia. Revisar diff y comportamiento; distinguir **Passed**, **Failed**, **Not Run** con evidencia. Un Passed histórico no pasa a Not Run porque el nuevo lector no repita la prueba. Revisar diseños importantes de forma independiente; comprobar entregas importantes con un lector nuevo que reciba solo archivos, sin chat anterior ni respuestas esperadas. Ver [guía de evidencia](references/evidence.md). Marcar revisiones independientes no disponibles como Not Run y dejar la siguiente acción.
+
+Guardar copias temporales manuales y pruebas contrafactuales en un directorio propio de la tarea dentro del proyecto autorizado. No vaciar una ruta temporal fija sin comprobar su pertenencia.
+
+Para cada prueba ejecutada, registrar el comando o la acción real, el resultado observado y el estado de salida disponible. Leer código no ejecuta una prueba. Citar el registro original de resultados heredados; marcar comandos no ejecutados como **Not Run**. No presentar una ejecución posterior como anterior. El estado actual en progreso/reinicio enlaza a `task_plan.md`; conservar las instantáneas fechadas como historia.
 
 Selección, recuperación, plantillas y ledgers: [manual PWF](references/pwf-workflow.md), sujeto a este alcance; los scripts siguen siendo relativos a la raíz instalada del Skill. Modos autonomous/gated explícitos, attestation, doctor e historial: [controles](references/controls.md). Por defecto solo recordatorios; attestation acredita bytes, no aprobación ni corrección.
 

@@ -43,6 +43,10 @@ Compare actual behavior and the final diff with the requirements. Check every re
 
 For significant design, use an independent evidence reviewer; for important handoff, use a fresh reader with only project files and no old conversation or expected answers. Read [evidence guidance](references/evidence.md) for these reviews. Resolve findings, verify the old entry points to the sole live plan, and leave an explicit next action. If an independent check is unavailable, record Not Run rather than self-certifying it.
 
+Keep manually created scratch copies and counterfactual tests in a task-owned directory inside the authorized project. Do not clear a fixed temporary path without proving ownership.
+
+For each executed test, record its actual command or test action, relevant observed result and exit status when available. Code inspection is not test execution. Cite the original record for an inherited result; mark an unexecuted command **Not Run**. A later execution cannot be reported as an earlier one. Current-state answers in progress/reboot notes should link to `task_plan.md`; retain dated historical snapshots as history.
+
 ## Conditional operations
 
 - For named plans, recovery details, templates, ledgers or error handling, read the [PWF manual](references/pwf-workflow.md). Its examples stay within the scope above. Scripts remain relative to the installed Skill root.

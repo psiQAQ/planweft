@@ -1,6 +1,6 @@
 ---
 name: project-docs-ar
-description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
+description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
 user-invocable: true
 allowed-tools: "Read Write Edit Bash Glob Grep"
 hooks:
@@ -36,7 +36,7 @@ hooks:
         - type: command
           command: "SH=\"\"; for c in \"${PWF_SCRIPT_DIR}/skill-hook.sh\" \"${CLAUDE_SKILL_DIR}/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs-ar/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/plugins/marketplaces/planweft/scripts/skill-hook.sh\"; do [ -f \"$c\" ] && { SH=\"$c\"; break; }; done; [ -n \"$SH\" ] && sh \"$SH\" --event=precompact; exit 0"
 metadata:
-  version: "0.4.0-rc.8"
+  version: "0.4.0-rc.9"
 disable-model-invocation: true
 ---
 
@@ -66,6 +66,10 @@ disable-model-invocation: true
 
 3. **نفّذ وسجّل الأدلة.** `task_plan.md` هو المصدر الديناميكي الوحيد للهدف والمراحل والخطوة التالية والعوائق وروابط الأدلة. `findings.md` للمصادر وتاريخ/نسخة الملاحظة وحالة ما قبل/بعد التغيير والافتراضات؛ `progress.md` للأعمال والأخطاء والاختبارات الفعلية والتعديلات الموجودة قبل المهمة. أعد قراءة الخطة قبل القرار، وسجّل بعد دفعات بحث قصيرة وحدّث كل مرحلة. احفظ الفشل وغيّر النهج قبل التكرار. حافظ على `### Phase` و`**Status:** pending` و`in_progress` و`complete`. مالك واحد يحدّث الحالة المشتركة؛ العمال يستخدمون سجلات مخصصة، والمهام المستقلة خططاً أو worktrees منفصلة.
 4. **تحقق وسلّم.** حدّث المواصفات وADR وسجلات إعادة الإنتاج المتأثرة في أماكنها بأقل تعديل لازم؛ أنشئ فقط الوثائق الناقصة المفيدة. لا تغيّر المتطلبات المعتمدة لتناسب الشفرة. قارن ادعاءات السلوك الحالي بالملفات النهائية؛ أرّخ الملاحظات السابقة وأضف التصحيحات دون محو الأدلة. راجع الفرق والسلوك وميّز **Passed** و**Failed** و**Not Run** مع الأدلة. نجاح اختبار سابق لا يتحول إلى Not Run لمجرد أن القارئ الجديد لم يكرره. استخدم مراجعاً مستقلاً للتصميم المهم وقارئاً جديداً للتسليم المهم لا يستلم إلا ملفات المشروع دون المحادثة القديمة أو الإجابات المتوقعة. راجع [دليل الأدلة](references/evidence.md). المراجعة المستقلة غير المتاحة تسجل Not Run مع خطوة تالية واضحة.
+
+ضع النسخ المؤقتة المنشأة يدويًا واختبارات النسخة السابقة في دليل تملكه المهمة داخل المشروع المصرح به. لا تمسح مسارًا مؤقتًا ثابتًا دون التحقق من ملكيته.
+
+لكل اختبار منفذ، سجّل الأمر أو إجراء الاختبار الفعلي والنتيجة المرصودة وحالة الخروج إن توفرت. قراءة الشفرة ليست تنفيذ اختبار. أشر إلى السجل الأصلي للنتائج الموروثة، ووسم الأوامر غير المنفذة **Not Run**. لا تعرض تنفيذًا لاحقًا على أنه حدث سابقًا. اجعل إجابات الحالة الحالية في سجل التقدم أو إعادة البدء روابط إلى `task_plan.md`؛ واحتفظ باللقطات المؤرخة كتاريخ.
 
 تفاصيل الاختيار والاستعادة والقوالب وledgers في [دليل PWF](references/pwf-workflow.md)، ضمن النطاق أعلاه؛ مسارات السكربتات تبقى نسبة إلى جذر Skill المثبت. أوضاع autonomous/gated الصريحة وattestation وdoctor وسجل الجلسة في [التحكم](references/controls.md). الافتراضي تذكير فقط؛ attestation يثبت البايتات وليس الموافقة أو الصحة.
 

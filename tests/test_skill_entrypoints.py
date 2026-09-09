@@ -46,6 +46,8 @@ class SkillEntrypointTest(unittest.TestCase):
                     self.assertIn('selected project planning context',description)
                     self.assertIn('never runs commands declared in Markdown',description)
                     self.assertIn('no network upload path',description)
+                    self.assertIn('Use the host-listed Skill path; read it before resource lookup',description)
+                    self.assertIn('Do not use host settings or installation receipts to locate resources',description)
                     if host=='kiro':
                         self.assertIn('timestamps only, not agent transcript stores',description)
                         self.assertIn('registers no Stop hook',description)

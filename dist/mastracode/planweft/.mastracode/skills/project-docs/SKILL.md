@@ -1,6 +1,6 @@
 ---
 name: project-docs
-description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
+description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
 user-invocable: true
 allowed-tools: "Read Write Edit Bash Glob Grep"
 hooks:
@@ -36,7 +36,7 @@ hooks:
         - type: command
           command: "SH=\"\"; for c in \"${PWF_SCRIPT_DIR}/skill-hook.sh\" \"${CLAUDE_SKILL_DIR}/scripts/skill-hook.sh\" \"$HOME/.mastracode/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/plugins/marketplaces/planweft/scripts/skill-hook.sh\"; do [ -f \"$c\" ] && { SH=\"$c\"; break; }; done; [ -n \"$SH\" ] && sh \"$SH\" --event=precompact; exit 0"
 metadata:
-  version: "0.4.0-rc.8"
+  version: "0.4.0-rc.9"
 
 ---
 
@@ -84,6 +84,10 @@ Maintain affected specifications, ADRs and reproduction records in their existin
 Compare actual behavior and the final diff with the requirements. Check every retained claim about current behavior against the final files; date earlier observations and append their corrections without erasing the evidence. Record **Passed**, **Failed** and **Not Run**, with evidence and limitations. Separate historical results recorded in project files from checks executed in this session: a fresh reader not repeating a historical Passed test does not turn that test into Not Run.
 
 For significant design, use an independent evidence reviewer; for important handoff, use a fresh reader with only project files and no old conversation or expected answers. Read [evidence guidance](references/evidence.md) for these reviews. Resolve findings, verify the old entry points to the sole live plan, and leave an explicit next action. If an independent check is unavailable, record Not Run rather than self-certifying it.
+
+Keep manually created scratch copies and counterfactual tests in a task-owned directory inside the authorized project. Do not clear a fixed temporary path without proving ownership.
+
+For each executed test, record its actual command or test action, relevant observed result and exit status when available. Code inspection is not test execution. Cite the original record for an inherited result; mark an unexecuted command **Not Run**. A later execution cannot be reported as an earlier one. Current-state answers in progress/reboot notes should link to `task_plan.md`; retain dated historical snapshots as history.
 
 ## Conditional operations
 

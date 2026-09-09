@@ -1,8 +1,8 @@
 ---
 name: project-docs-de
-description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
+description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
 metadata:
-  version: "0.4.0-rc.8"
+  version: "0.4.0-rc.9"
 ---
 
 # Projektdokumentation und Aufgabenplanung
@@ -31,6 +31,10 @@ Initialisiere mit `bash "<installierter Skill>/scripts/init-session.sh" "Task Na
 
 3. **Arbeiten und belegen.** `task_plan.md`: einzige dynamische Quelle für Ziel, Phasen, nächste Aktion, Blockaden und Belege. `findings.md`: Quellen, Beobachtungsdatum/Revision, Zustand vor/nach der Änderung und Annahmen. `progress.md`: Aktionen, Fehler, tatsächliche Tests und vor Aufgabenbeginn vorhandene Änderungen. Vor Entscheidungen den Plan lesen, nach kurzen Rechercheblöcken Erkenntnisse und nach Phasen den Status aktualisieren. Fehler festhalten und vor Wiederholung die Methode ändern. `### Phase` und `**Status:** pending`, `in_progress`, `complete` erhalten. Ein Owner pflegt gemeinsamen Status; Worker verwenden zugewiesene Aufzeichnungen, unabhängige Aufgaben eigene Pläne oder Worktrees.
 4. **Prüfen und übergeben.** Betroffene Spezifikationen, ADRs und Reproduktionen am vorhandenen Ort minimal pflegen; nur nützliche fehlende Dokumente erstellen. Genehmigte Anforderungen nicht dem Code anpassen. Aussagen zum aktuellen Verhalten mit den finalen Dateien abgleichen; frühere Beobachtungen datieren und Korrekturen ergänzen, ohne Belege zu löschen. Diff und Verhalten prüfen; **Passed**, **Failed**, **Not Run** mit Belegen unterscheiden. Ein historisches Passed wird nicht zu Not Run, weil der neue Leser den Test nicht wiederholt. Wesentliches Design unabhängig prüfen; wichtige Übergaben mit einem neuen Leser nur anhand der Projektdateien, ohne alten Chat oder erwartete Antworten prüfen. Siehe [Belegregeln](references/evidence.md). Nicht verfügbare unabhängige Prüfungen als Not Run melden und die nächste Aktion angeben.
+
+Manuell erstellte Arbeitskopien und Gegenproben gehören in ein aufgabeneigenes Verzeichnis im autorisierten Projekt. Einen festen temporären Pfad nicht ohne Nachweis der Eigentümerschaft leeren.
+
+Für ausgeführte Tests den tatsächlichen Befehl oder Testschritt, das beobachtete Ergebnis und verfügbaren Exitstatus festhalten. Code lesen ist keine Testausführung. Übernommene Ergebnisse mit dem ursprünglichen Protokoll belegen; nicht ausgeführte Befehle als **Not Run** markieren. Spätere Ausführung nicht als frühere ausgeben. Antworten zum aktuellen Status in Fortschritts-/Neustartnotizen verweisen auf `task_plan.md`; datierte alte Zustände bleiben Historie.
 
 Details zu Auswahl, Wiederherstellung, Vorlagen und Ledgers: [PWF-Handbuch](references/pwf-workflow.md), stets innerhalb dieses Umfangs; Skriptpfade beziehen sich auf das installierte Skill-Verzeichnis. Explizite autonome/gated Modi, Attestation, Doctor und Sitzungsverlauf: [Steuerung](references/controls.md). Standard ist ein Hinweis; Attestation bestätigt Bytes, keine Genehmigung oder Korrektheit.
 

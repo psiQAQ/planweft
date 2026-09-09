@@ -58,3 +58,6 @@ Keep historical verification and the current reader's work separate. Cite the pr
 For an important handoff, ask an independent fresh reader to use only the project entrypoint, task and files. Do not provide old chat, expected answers or the owner's conclusion. Ask for the current behavior, remaining uncertainty and the single next action with file citations. Check the citations against actual state, resolve contradictions and repeat only what changed. This tests recoverability; it does not substitute for source review or runtime validation.
 
 Finish with a concrete next action or completion state in the selected plan, links to evidence, unresolved blockers and actual verification limits. Keep detailed historical results in progress or reproduction records. SHA attestation and runtime gating cannot approve a design or certify correctness.
+
+
+Test execution requires an actual command or test action and relevant observed results, with exit status when available. Static inspection can establish a code fact, but cannot establish that an unexecuted test Passed. Cite the original record for inherited results; label proposed commands Not Run. Correct unsupported execution claims explicitly without backdating a later test.

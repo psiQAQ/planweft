@@ -1,6 +1,6 @@
 ---
 name: project-docs-zh
-description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. It registers no lifecycle or Stop hook and never requests continuation."
+description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. It registers no lifecycle or Stop hook and never requests continuation."
 user-invocable: true
 allowed-tools: "Read Write Edit Bash Glob Grep"
 hooks:
@@ -37,7 +37,7 @@ hooks:
           command: "SH=\"\"; for c in \"${PWF_SCRIPT_DIR}/skill-hook.sh\" \"${CLAUDE_SKILL_DIR}/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs-zh/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/plugins/marketplaces/planweft/scripts/skill-hook.sh\"; do [ -f \"$c\" ] && { SH=\"$c\"; break; }; done; [ -n \"$SH\" ] && sh \"$SH\" --event=precompact; exit 0"
 metadata:
 
-  version: "0.4.0-rc.8"
+  version: "0.4.0-rc.9"
 
 disable-model-invocation: true
 ---
@@ -86,6 +86,10 @@ disable-model-invocation: true
 核对实际行为、最终 diff 与需求。逐项对照最终文件检查保留的“当前行为”陈述；旧观察标记日期，追加更正但不抹去证据。记录 **Passed**、**Failed**、**Not Run**、依据及限制。区分项目文件记载的历史结果和本会话执行的检查：新读者没有重复历史 Passed 测试，并不使该测试变为 Not Run。
 
 重要设计使用独立依据 reviewer，重要交接使用只接收项目文件的新读者，不提供旧聊天或预期答案。按需读取[依据指导](references/evidence.md)，处理发现，确认旧入口指向唯一动态计划，留下明确下一步。独立检查不可用时记 Not Run，不以自审替代。
+
+手动创建的临时副本和反事实测试放在授权项目内本任务拥有的目录中。不得在未确认归属时清理固定临时路径。
+
+每项已执行测试记录实际命令或测试操作、相关观察结果及可获取的退出状态。读码不是执行测试。继承的结果引用原记录，未执行命令标记 **Not Run**；不得把后来的执行写成先前已执行。progress 或重启笔记的当前状态答案链接到 `task_plan.md`；带时点的旧快照作为历史保留。
 
 ## 按需操作
 

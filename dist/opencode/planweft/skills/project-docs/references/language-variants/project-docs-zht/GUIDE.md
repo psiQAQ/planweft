@@ -1,8 +1,8 @@
 ---
 name: project-docs-zht
-description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
+description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
 metadata:
-  version: "0.4.0-rc.8"
+  version: "0.4.0-rc.9"
 ---
 
 # 專案文件與任務規劃
@@ -31,6 +31,10 @@ metadata:
 
 3. **執行與記錄。** `task_plan.md` 是唯一動態狀態，含目標、階段、下一步、阻塞及證據；`findings.md` 記錄來源、觀察日期或版本、修改前後範圍及假設；`progress.md` 記錄操作、錯誤、實際測試與任務開始前已有的修改。決策前重讀，調研小批次後記錄，階段結束後更新；失敗後改變方法再重試。保留 `### Phase` 與 `**Status:** pending`、`in_progress`、`complete` 格式。一個 owner 更新共享狀態，worker 使用分配記錄，獨立任務用不同計畫或 worktree。
 4. **維護與交接。** 最小更新現有規格、ADR 和復現記錄，按需建立缺失文件，不改寫批准需求迎合程式碼。核對最終 diff，逐項以最終檔案檢查「目前行為」陳述；舊觀察標記日期並追加更正，不抹去證據。區分 **Passed**、**Failed**、**Not Run**。歷史 Passed 不因本次新讀者未重跑而變成 Not Run。重要設計獨立審查；重要交接由只接收專案檔案的新讀者進行，不提供舊聊天或答案。見[依據指引](references/evidence.md)。不可用的獨立檢查記 Not Run，留下明確下一步。
+
+手動建立的暫存副本與反事實測試放在授權專案內本任務擁有的目錄中。未確認歸屬時不得清理固定暫存路徑。
+
+每項已執行測試記錄實際命令或測試操作、相關觀察結果及可取得的退出狀態。讀碼不是執行測試。沿用的結果引用原記錄，未執行命令標記 **Not Run**；不得把後來的執行寫成先前已執行。progress 或重啟筆記的目前狀態答案連結到 `task_plan.md`；附時間的舊快照作為歷史保留。
 
 命名計畫、模板、ledger 和恢復細節見 [PWF 手冊](references/pwf-workflow.md)，受上述範圍約束；腳本仍相對安裝 Skill 根目錄。顯式 autonomous/gated、attestation、doctor 和會話歷史見[控制說明](references/controls.md)。預設只提醒；attestation 是位元組基線，不是批准或正確性證明。
 
