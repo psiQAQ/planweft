@@ -498,7 +498,7 @@ def main(argv=None):
                 started=time.monotonic()
                 proc=None
                 try:
-                    proc=subprocess.run(command,input=json.dumps(payload),text=True,capture_output=True,timeout=args.timeout+540)
+                    proc=subprocess.run(command,input=json.dumps(payload),text=True,capture_output=True,timeout=min(600,args.timeout+540))
                     # Persist the Docker result before log processing/cleanup,
                     # independently of the controller's claimed outcome.
                     cases[case]['container_exit_code']=proc.returncode

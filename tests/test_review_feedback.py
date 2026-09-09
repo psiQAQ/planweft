@@ -16,18 +16,18 @@ feedback=importlib.util.module_from_spec(spec);spec.loader.exec_module(feedback)
 
 
 class ReviewFeedbackTest(unittest.TestCase):
-    def fixture(self,root):
+    def fixture(self,root,host='pi'):
         source=root/'original';source.mkdir()
         files={k:'protected:'+k+'\n' for k in feedback.PROTECTED}
         files.update({'notes/work.md':'# Old work\n','.planning/task/task_plan.md':'# Task\nCurrent phase stale\n','.planning/task/progress.md':'# Actual records\n'})
         archive=root/'archive.tgz';archive.write_bytes(b'synthetic archive only; no native execution')
-        assessment={'status':'Passed','controller':{'host':'pi','version':'0.4.0-rc.4','npm_sha256':feedback.digest(archive),'exact_artifact':'Passed','offline_tests':'Passed','independent_bytes':'Passed'},'assertions':{k:True for k in ['approved_requirement_preserved','user_edit_preserved','tests_passed','fixed_bom']}}
+        assessment={'status':'Passed','controller':{'host':host,'version':'0.4.0-rc.4','npm_sha256':feedback.digest(archive),'exact_artifact':'Passed','offline_tests':'Passed','independent_bytes':'Passed'},'assertions':{k:True for k in ['approved_requirement_preserved','user_edit_preserved','tests_passed','fixed_bom']}}
         after=source/'after.json';after.write_text(json.dumps(files))
         original=source/'assessment.json';original.write_text(json.dumps(assessment))
-        review={'schema_version':1,'host':'pi','npm_sha256':feedback.digest(archive),'source_after_sha256':feedback.digest(after),'source_assessment_sha256':feedback.digest(original),'original_semantic_status':'Failed','original_scope':'Fix export encoding and maintain accurate documentation.','allowed_documents':['.planning/task/task_plan.md'],
+        review={'schema_version':1,'host':host,'npm_sha256':feedback.digest(archive),'source_after_sha256':feedback.digest(after),'source_assessment_sha256':feedback.digest(original),'original_semantic_status':'Failed','original_scope':'Fix export encoding and maintain accurate documentation.','allowed_documents':['.planning/task/task_plan.md'],
                 'findings':[{'id':'R1','file':'.planning/task/task_plan.md','observation':'Current Phase contradicts completed phases.','correction':'Reconcile with existing phase completion evidence.','evidence':['Prior final tests Passed; no new test execution authorized.']}]}
         path=root/'review.json';path.write_text(json.dumps(review))
-        args=argparse.Namespace(after=after,after_sha256=feedback.digest(after),review=path,review_sha256=feedback.digest(path),original_assessment=original,assessment_sha256=feedback.digest(original),archive=archive,archive_sha256=feedback.digest(archive),host='pi',output=root/'new-run')
+        args=argparse.Namespace(after=after,after_sha256=feedback.digest(after),review=path,review_sha256=feedback.digest(path),original_assessment=original,assessment_sha256=feedback.digest(original),archive=archive,archive_sha256=feedback.digest(archive),host=host,output=root/'new-run')
         return args,files,review
     def rewrite_review(self,args,value):
         args.review.write_text(json.dumps(value));args.review_sha256=feedback.digest(args.review)
@@ -39,7 +39,7 @@ class ReviewFeedbackTest(unittest.TestCase):
             self.assertEqual(result[1]['original_semantic_status'],'Failed')
             self.assertFalse(args.output.exists())
     def test_unsafe_snapshot_and_modified_digests_rejected(self):
-        for name in ['../escape','/absolute','.git/config','.pi/settings.json','node_modules/x','sessions/history.json','auth.json','native-events.jsonl']:
+        for name in ['../escape','/absolute','opencode.json','opencode.jsonc','.git/config','.pi/settings.json','.opencode/opencode.json','node_modules/x','sessions/history.json','auth.json','native-events.jsonl']:
             with self.subTest(name=name),tempfile.TemporaryDirectory() as temporary:
                 args,files,review=self.fixture(Path(temporary));files[name]='forbidden'
                 args.after.write_text(json.dumps(files));args.after_sha256=feedback.digest(args.after)
@@ -79,11 +79,11 @@ class ReviewFeedbackTest(unittest.TestCase):
                 load.assert_not_called();docker.assert_not_called()
             self.assertFalse(args.output.exists())
 
-    def _owner_chain(self,residual=False,cleanup_error=None):
+    def _owner_chain(self,residual=False,cleanup_error=None,host='pi'):
         with tempfile.TemporaryDirectory() as temporary:
-            args,files,review=self.fixture(Path(temporary))
+            args,files,review=self.fixture(Path(temporary),host=host)
             args.files=files;args.review_data=review;args.assessment_data=feedback.read_json(args.original_assessment)
-            args.image='sha256:'+'a'*64;args.package={'version':'0.4.0-rc.4'};args.model='fake';args.timeout=30;args.direct_provider_config=Path('/not-read')
+            args.image='sha256:'+'a'*64;args.package={'version':'0.4.0-rc.4'};args.model='fake';args.timeout=600;args.direct_provider_config=Path('/not-read')
             snapshots=lambda fixture,root:{str(p.relative_to(root)):p.read_text() for p in root.rglob('*') if p.is_file()}
             fixture=SimpleNamespace(PROMPTS={'cold-reader':'Read only the project files and identify remaining work.'},BOUNDARY=' No history or cache access.')
             runner=SimpleNamespace(load_fixture_module=lambda:fixture,credentials=lambda *a:{'api_key':'FAKE_TEST_SECRET'},project_snapshot=snapshots,model_text=lambda host,text:{'final':text,'errors':[],'tool_calls':[]},
@@ -93,6 +93,7 @@ class ReviewFeedbackTest(unittest.TestCase):
                 if command[1:3]==['rm','-f']:
                     if cleanup_error=='rm': raise feedback.subprocess.CalledProcessError(1,command,stderr='FAKE_TEST_SECRET')
                     return SimpleNamespace(returncode=0)
+                self.assertEqual(kwargs['timeout'],min(600,args.timeout+240))
                 payload=json.loads(kwargs['input']);payloads.append(payload)
                 for limit in ['--cpus=2','--memory=3g','--memory-swap=3g','--pids-limit=256','/tmp:mode=1777,size=512m']:
                     self.assertIn(limit,command)
@@ -136,6 +137,20 @@ class ReviewFeedbackTest(unittest.TestCase):
             self.assertEqual(feedback.digest(args.after),args.after_sha256)
             self.assertNotIn('FAKE_TEST_SECRET',(args.output/'summary.json').read_text())
 
+    def test_opencode_uses_same_bounded_owner_and_cold_chain(self):
+        self._owner_chain(host='opencode')
+        with tempfile.TemporaryDirectory() as temporary:
+            args,_,_=self.fixture(Path(temporary),host='opencode')
+            argv=[]
+            for name in ['after','review','original_assessment','archive','after_sha256','review_sha256','assessment_sha256','archive_sha256','output']:
+                argv.extend(['--'+name.replace('_','-'),str(getattr(args,name))])
+            argv+=['--host','opencode','--direct-provider-config','/not-read']
+            checked=SimpleNamespace(images={'hosts':{'opencode':{'image':'sha256:'+'a'*64}}},package={'version':'0.4.0-rc.4'})
+            with patch.object(feedback,'load_module',return_value=SimpleNamespace(parse_args=lambda argv:checked)),patch.object(feedback.subprocess,'check_output') as docker:
+                parsed=feedback.parse_args(argv)
+                self.assertEqual(parsed.host,'opencode');docker.assert_not_called()
+                self.assertFalse(args.output.exists())
+
     def test_owner_cold_reader_chain_keeps_feedback_out_of_cold_prompt(self):
         self._owner_chain()
 
@@ -159,7 +174,7 @@ class ReviewFeedbackTest(unittest.TestCase):
                 args,files,review=self.fixture(Path(temporary))
                 args.files=files;args.review_data=review;args.assessment_data=feedback.read_json(args.original_assessment)
                 args.image='sha256:'+'a'*64;args.package={'version':'0.4.0-rc.4'}
-                args.model='fake';args.timeout=30;args.direct_provider_config=Path('/not-read')
+                args.model='fake';args.timeout=600;args.direct_provider_config=Path('/not-read')
                 calls=[]
                 def cleanup(project,name):
                     calls.append(name)

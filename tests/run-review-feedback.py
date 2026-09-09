@@ -22,7 +22,7 @@ import uuid
 ROOT=Path(__file__).resolve().parents[1]
 SHA=re.compile(r'[0-9a-f]{64}')
 PROTECTED={'AGENTS.md','README.md','notes/contract.md','user-note.txt','export_text.py','tests/test_export_text.py'}
-DENIED_PARTS={'.git','.pi','.dsh','.planweft','.codex','.claude','.cache','node_modules','__pycache__','.pytest_cache','auth.json','credentials.json','native-events.jsonl','sessions','transcripts'}
+DENIED_PARTS={'.git','.pi','.opencode','.dsh','.planweft','.codex','.claude','.cache','node_modules','__pycache__','.pytest_cache','auth.json','credentials.json','native-events.jsonl','sessions','transcripts'}
 
 
 def digest(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
@@ -44,7 +44,7 @@ def read_json(path):
 
 
 def safe_project_path(name):
-    if not isinstance(name,str) or not name or '\\' in name or ':' in name: return False
+    if not isinstance(name,str) or not name or '\\' in name or ':' in name or name in {'opencode.json','opencode.jsonc'}: return False
     path=PurePosixPath(name)
     return not path.is_absolute() and str(path)==name and not set(path.parts)&(DENIED_PARTS|{'..'}) and all(not p.startswith('.') or p=='.planning' or p in {'.active_plan','.mode','.plan-attestation','.attestation','.stop_blocks','.gate_last_ledger'} for p in path.parts)
 
@@ -100,7 +100,7 @@ def parse_args(argv=None):
         p.add_argument('--'+name,type=Path,required=True)
     for name in ['after-sha256','review-sha256','assessment-sha256','archive-sha256']:
         p.add_argument('--'+name,required=True)
-    p.add_argument('--host',choices=['pi','dsh'],required=True)
+    p.add_argument('--host',choices=['pi','opencode','dsh'],required=True)
     p.add_argument('--image-lock',type=Path,default=ROOT/'tests/container-images.json')
     p.add_argument('--model',default='deepseek-v4-flash')
     p.add_argument('--timeout',type=int,default=600)
@@ -211,9 +211,9 @@ def main(argv=None):
             payload={'host':args.host,'case':case,'secret':secret,'model':args.model,'prompt':prompt,'timeout':args.timeout}
             started=time.monotonic()
             try:
-                result=subprocess.run(command,input=json.dumps(payload),text=True,capture_output=True,timeout=args.timeout+240)
+                result=subprocess.run(command,input=json.dumps(payload),text=True,capture_output=True,timeout=min(600,args.timeout+240))
             except subprocess.TimeoutExpired:
-                write_json(stage/'container.json',{'name':name,'timed_out':True,'timeout_seconds':args.timeout+240,'seconds':time.monotonic()-started,
+                write_json(stage/'container.json',{'name':name,'timed_out':True,'timeout_seconds':min(600,args.timeout+240),'seconds':time.monotonic()-started,
                     'bootstrap_output_archived':False,'diagnostic_limit':'Bootstrap output can contain private configuration before runtime redaction; intentionally not archived. Native runtime files, when present, retain redacted diagnostics.'})
                 raise
             # Docker bootstrap diagnostics bypass the established native runtime
