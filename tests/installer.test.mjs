@@ -542,3 +542,31 @@ test('Pi Windows native separators and JSON escapes preserve one owned source on
   assert.equal(await f.create(['doctor','-a','pi']).execute(),1);
   assert.equal(fs.readFileSync(file,'utf8'),duplicate);
 });
+
+test('Pi UTF-8 BOM settings accept one owned source and retain duplicate checks', async t => {
+  for (const kind of ['owned doctor','owned update','duplicate','foreign']) await t.test(kind,async t=>{
+    const f=fixture(t);assert.equal(await f.create(['add','-a','pi']).execute(),0);
+    const stateFile=path.join(f.project,'.planweft/installations.json'),stateBefore=fs.readFileSync(stateFile,'utf8');
+    const source=JSON.parse(stateBefore).agents.pi.nativeSource,foreign=kind==='foreign';
+    const file=path.join(foreign?f.home:f.project,foreign?'.pi/agent/settings.json':'.pi/settings.json');
+    fs.mkdirSync(path.dirname(file),{recursive:true});
+    const relative=path.relative(path.dirname(file),source);
+    const packages=kind==='duplicate'?[relative,{source}]:kind==='owned update'?[{source:relative}]:[relative];
+    // Pi v0.84.3 parses settings with stripBom before JSON.parse. Keep the
+    // original BOM/CRLF bytes untouched while interpreting the owned entry.
+    const content='\uFEFF'+JSON.stringify({packages},null,2).replace(/\n/g,'\r\n');
+    fs.writeFileSync(file,content);const calls=f.calls.length;
+    try {
+      if(kind==='owned doctor') assert.equal(await f.create(['doctor','-a','pi']).execute(),0);
+      else if(kind==='owned update') assert.equal(await f.create(['update','-a','pi','--dry-run']).execute(),0);
+      else {
+        assert.equal(await f.create(['doctor','-a','pi']).execute(),1);
+        await assert.rejects(f.create(['update','-a','pi','--dry-run']).execute(),/Another planning registration/);
+      }
+    } finally {
+      assert.equal(fs.readFileSync(file,'utf8'),content);
+      assert.equal(fs.readFileSync(stateFile,'utf8'),stateBefore);
+      assert.equal(f.calls.length,calls);
+    }
+  });
+});
