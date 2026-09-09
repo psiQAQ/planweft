@@ -8,6 +8,7 @@ import sys
 import tarfile
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -19,6 +20,32 @@ def module(name,path):
 
 
 class ContainerReleaseTest(unittest.TestCase):
+    def test_project_snapshot_prunes_stores_before_reading_and_keeps_nested_docs(self):
+        runner=module('pw_snapshot_runner','tests/run-five-agent-release.py')
+        fixture=module('pw_snapshot_fixture','tests/run-pwf-smoke.py')
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary)
+            excluded={'.planweft','.pi','.opencode','.claude','opencode.json'}
+            for name in excluded-{'opencode.json'}:
+                (root/name/'cache').mkdir(parents=True)
+                (root/name/'cache/large.bin').write_bytes(b'not project evidence')
+            (root/'opencode.json').write_text('{}')
+            (root/'notes/.planweft').mkdir(parents=True)
+            (root/'notes/.planweft/design.md').write_text('Nested documentation stays visible.\n')
+            (root/'task_plan.md').write_bytes(b'Current plan\r\n')
+            (root/'result.bin').write_bytes(b'\xff')
+            # Establish the former filtered result on small files, then make
+            # any excluded read fail: equivalence alone would miss the OOM risk.
+            expected={p:v for p,v in fixture.snapshot(root).items() if p.split('/')[0] not in excluded}
+            original=Path.read_bytes
+            def bounded_read(path):
+                self.assertNotIn(path.relative_to(root).parts[0],excluded)
+                return original(path)
+            with patch.object(Path,'read_bytes',bounded_read):
+                self.assertEqual(runner.project_snapshot(fixture,root),expected)
+            self.assertIn('notes/.planweft/design.md',expected)
+            self.assertEqual(expected['task_plan.md'],'Current plan\r\n')
+
     def test_claude_stream_blocks_are_not_extra_model_responses(self):
         runner=module('pw_claude_responses','tests/run-five-agent-release.py')
         events=[{'type':'assistant','message':{'id':'one','content':[{'type':kind}]}} for kind in ['thinking','text']]

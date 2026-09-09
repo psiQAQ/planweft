@@ -77,10 +77,15 @@ def call(command, **kwargs):
     return subprocess.run(command, text=True, capture_output=True, check=True, **kwargs)
 
 
-def snapshot(directory):
+def snapshot(directory, *, excluded_roots=()):
     result = {}
     for parent, dirs, names in os.walk(directory):
         dirs[:] = sorted(name for name in dirs if name not in {'.git', '__pycache__', '.pytest_cache'})
+        if Path(parent) == Path(directory):
+            # Prune installation stores before reading files. Filtering a fully
+            # materialized snapshot afterwards can retain gigabytes of caches.
+            dirs[:] = [name for name in dirs if name not in excluded_roots]
+            names = [name for name in names if name not in excluded_roots]
         for name in sorted(names):
             path = Path(parent) / name
             relative = str(path.relative_to(directory))

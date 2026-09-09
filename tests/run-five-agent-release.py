@@ -253,8 +253,7 @@ def stop_assertions(case,host,before,after,trace,result,rpc,cases):
 
 
 def project_snapshot(fixture, work):
-    return {p:v for p,v in fixture.snapshot(work).items()
-            if p.split('/')[0] not in {'.planweft','.pi','.opencode','.claude'} and p!='opencode.json'}
+    return fixture.snapshot(work, excluded_roots={'.planweft','.pi','.opencode','.claude','opencode.json'})
 
 
 def main(argv=None):
@@ -278,6 +277,9 @@ def main(argv=None):
         'server_module_sha256':hashlib.sha256(server_module.read_bytes()).hexdigest(),
         'status':'In Progress','hosts':{},'semantic_review':'Not Run',
         'scope':'Linux amd64 real hosts; exact artifact, no external memory service'}
+    report['resource_limits']={'cpus':2,'memory':'3g','memory_swap_total':'3g',
+                               'pids':256,'home_tmpfs':'2g','tmp_tmpfs':'512m'}
+    write_json(args.output/'summary.json',report)
     # Concurrent labelled validation containers are not baseline services.
     initial=set(subprocess.check_output(['docker','ps','-aq'],text=True).split())
     concurrent_trials=set(subprocess.check_output(['docker','ps','-aq','--filter','label=planweft.run'],text=True).split())
@@ -313,6 +315,9 @@ def main(argv=None):
                 if case in STOP_CASES: files=stop_fixture(case)
                 fixture.fixture(work,files)
                 before=project_snapshot(fixture,work)
+                write_json(base/'before.json',before)
+                cases[case]={'status':'In Progress'}
+                write_json(args.output/'summary.json',report)
                 prompt=fixture.PROMPTS.get(case,'')
                 if case in {'context','recovery','untrusted'}: prompt=fixture.PROBE_PROMPT
                 if case=='skill-loading': prompt='请找到并实际读取已安装的 project-docs Skill，说明三份任务文件各自职责。只读，不修改项目。'
@@ -327,9 +332,10 @@ def main(argv=None):
                 name=run_id+'-'+host+'-'+case
                 command=['docker','run','--rm','-i','--name',name,'--label','planweft.run='+run_id,
                     '--read-only','--user',f'{os.getuid()}:{os.getgid()}','--cap-drop=ALL',
-                    '--security-opt=no-new-privileges','--cpus=2','--memory=4g','--network=host',
-                    '--tmpfs',f'/home/agent:uid={os.getuid()},gid={os.getgid()},mode=700',
-                    '--tmpfs','/tmp:mode=1777',
+                    '--security-opt=no-new-privileges','--cpus=2','--memory=3g',
+                    '--memory-swap=3g','--pids-limit=256','--network=host',
+                    '--tmpfs',f'/home/agent:uid={os.getuid()},gid={os.getgid()},mode=700,size=2g',
+                    '--tmpfs','/tmp:mode=1777,size=512m',
                     '--mount',f'type=bind,src={work},dst=/workspace',
                     '--mount',f'type=bind,src={results},dst=/results',
                     '--mount',f'type=bind,src={args.archive.resolve()},dst=/input/package.tgz,readonly',
