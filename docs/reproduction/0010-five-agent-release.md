@@ -453,3 +453,5 @@ Registry 执行器原先直接运行裸解包 CLI；直接 toml 依赖使这种�
 ## RC14 候选与进程采集检查点
 
 RC14 已按准确摘要通过三系统 CI、OIDC 和官方 registry 字节校验；稳定版仍未放行。完整结果、原始失败与范围见[中文检查点](0010-rc14-checkpoint.md) / [English checkpoint](0010-rc14-checkpoint.en.md)。Claude 真实收集 Passed、输出归因 Incomplete、提醒去重 Not Run，三者不混同。
+
+RC15 修复与 RC14 维护复核：[中文](0010-rc15-checkpoint.md) / [English](0010-rc15-checkpoint.en.md)。
