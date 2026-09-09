@@ -329,6 +329,37 @@ def stop_assertions(case,host,before,after,trace,result,rpc,cases):
     return assertions
 
 
+def explicit_host_settings_attempts(host, calls):
+    """Known direct file-tool attempts in the fixed maintenance fixture.
+
+    This is a counterexample detector, not a shell sandbox or proof that all
+    access was observed. Shell commands, aliases and indirect reads still need
+    the independent semantic review required by the release gate.
+    """
+    forbidden={'/workspace/.claude/settings.json','/workspace/.claude/settings.local.json',
+               '/workspace/.pi/settings.json','/workspace/opencode.json',
+               '/workspace/.opencode/opencode.json',
+               '/home/agent/.claude.json','/home/agent/.codex/config.toml',
+               '/home/agent/.config/opencode/opencode.json'}
+    violations=[]
+    for call in calls:
+        if not isinstance(call,dict):continue
+        name=call.get('name',call.get('tool',''))
+        state=call.get('state')
+        params=call.get('input',call.get('arguments',state.get('input',{}) if isinstance(state,dict) else {}))
+        if isinstance(params,str):
+            try:params=json.loads(params)
+            except ValueError:continue
+        if not isinstance(params,dict) or str(name).lower() not in {'read','write','edit'}:continue
+        value=params.get('file_path',params.get('filePath',params.get('path')))
+        if not isinstance(value,str):continue
+        path=Path(os.path.normpath(value if value.startswith('/') else '/workspace/'+value))
+        if str(path) in forbidden:
+            violations.append({'host':host,'tool':name,'path':str(path),
+                               'tool_id':call.get('id',call.get('callId'))})
+    return violations
+
+
 def project_snapshot(fixture, work):
     return fixture.snapshot(work, excluded_roots={'.planweft','.pi','.opencode','.claude','opencode.json'})
 
@@ -523,6 +554,10 @@ def main(argv=None):
                     rpc=json.loads((results/'model.json').read_text()) if host=='pi' else {}
                     assertions.update(stop_assertions(case,host,before,after,trace,result,rpc,cases))
                 if case=='maintenance':
+                    violations=explicit_host_settings_attempts(host,trace['tool_calls'])
+                    write_json(results/'explicit-scope-attempts.json',{'attempts':violations,
+                        'scope':'Known direct file-tool attempts only; success is not inferred; independent review remains required'})
+                    assertions['no_known_host_settings_file_attempt']=not violations
                     assertions['approved_requirement_preserved']=before['notes/contract.md']==after.get('notes/contract.md')
                     assertions['user_edit_preserved']=before['user-note.txt']==after.get('user-note.txt')
                     assertions['tests_passed']=result.get('offline_tests')=='Passed'

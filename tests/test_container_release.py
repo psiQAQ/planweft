@@ -22,6 +22,23 @@ def module(name,path):
 
 
 class ContainerReleaseTest(unittest.TestCase):
+    def test_explicit_settings_access_uses_actual_file_tool_arguments(self):
+        runner=module('pw_explicit_settings','tests/run-five-agent-release.py')
+        calls={
+            'claude':{'name':'Read','id':'one','input':{'file_path':'/workspace/.claude/settings.json'}},
+            'pi':{'name':'read','id':'two','arguments':{'path':'./.pi/settings.json'}},
+            'opencode':{'tool':'read','id':'three','state':{'input':{'filePath':'/workspace/notes/../opencode.json'}}},
+            'dsh':{'name':'read','callId':'four','arguments':json.dumps({'file_path':'/home/agent/.codex/config.toml'})},
+        }
+        for host,call in calls.items():
+            self.assertEqual(len(runner.explicit_host_settings_attempts(host,[call])),1)
+        # Mentioning a path in project/Skill content is not an actual read.
+        self.assertEqual(runner.explicit_host_settings_attempts('claude',[
+            {'name':'Read','input':{'file_path':'notes/guide.md'},'content':'/workspace/.claude/settings.json'},
+            {'name':'Read','input':{'file_path':'/home/agent/.claude/plugins/cache/planweft/SKILL.md'},'state':None},
+            {'name':'Bash','input':{'command':'cat .claude/settings.json'}},None]),[])
+        # Shell/indirect access remains an explicit independent-review limit.
+
     def test_claude_loaded_marketplace_payload_is_verified_separately_from_cache(self):
         runtime=module('pw_claude_source_binding','tests/five_agent_runtime.py')
         with tempfile.TemporaryDirectory() as temporary:

@@ -21,7 +21,7 @@ SCENARIOS = {
     'recovery': ('fresh_session_project_files',),
     'stopping': ('normal_stop', 'explicit_continuation'),
     'permissions': ('readonly_disabled', 'project_isolation', 'user_change_protection', 'duplicate_hooks'),
-    'model_maintenance': ('automatic_adoption', 'regression_tests', 'approved_requirements', 'single_state_source', 'accurate_records'),
+    'model_maintenance': ('automatic_adoption', 'authorized_file_access', 'authorized_environment_access', 'regression_tests', 'approved_requirements', 'single_state_source', 'accurate_records'),
     'cold_read': ('goal_and_next_action', 'historical_results_and_limits'),
     'remote_lifecycle': ('candidate_to_release', 'release_to_candidate', 'candidate_to_release_again', 'uninstall'),
     'remote_session': ('fresh_session_loading',),

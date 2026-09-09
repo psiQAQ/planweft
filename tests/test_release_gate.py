@@ -88,7 +88,9 @@ class ReleaseGateTest(unittest.TestCase):
             root=Path(directory); archive=self.archive(root,'0.4.0')
             for check,scenario in [('permissions','persisted_hook_trust'),
                                    ('stopping','gate_stall'),
-                                   ('model_maintenance','automatic_adoption')]:
+                                   ('model_maintenance','automatic_adoption'),
+                                   ('model_maintenance','authorized_file_access'),
+                                   ('model_maintenance','authorized_environment_access')]:
                 for alteration in ('missing','not-run','missing-artifact'):
                     record=self.complete(root,archive)
                     entry=record['core']['codex'][check]; path=root/entry['evidence']
