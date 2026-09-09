@@ -148,6 +148,54 @@ class StopProbeTests(unittest.TestCase):
                 self.assertEqual([m['method'] for m in sent],['initialize','initialized','thread/start','turn/start'])
                 self.assertEqual(len([m for m in sent if m['method']=='turn/start']),1)
 
+    def test_native_handler_id_reuse_has_distinct_sequential_generations(self):
+        # RC15 native journal lines 40/41 and 54/55 use the same stop:6
+        # configured ID for blocked then completed runs. Seconds can coincide.
+        for second_started in [1, 3]:
+            def mutate(events):
+                native_high_before_raw(events)
+                for e in events:
+                    run = e.get('params', {}).get('run', {})
+                    if run.get('id') == 'stop-1':
+                        run['id'] = 'stop-0'; run['startedAt'] = second_started
+                        if 'completedAt' in run: run['completedAt'] = second_started + 1
+            result, observed, _, _ = self.run_fake('gated-continuation', mutate=mutate)
+            self.assertEqual(result.returncode, 0, observed)
+            self.assertEqual([r['hook_id'] for r in observed['stop_runs']], ['stop-0', 'stop-0'])
+            self.assertEqual([r['generation'] for r in observed['stop_runs']], [1, 2])
+            self.assertEqual(observed['continuation_chain']['blocked_hook_generation'], 1)
+
+    def test_reused_id_cannot_cross_or_replay_hook_lifecycles(self):
+        for change in ['overlap', 'missing-start', 'duplicate-complete', 'stale-complete',
+                       'replay-blocked-pair', 'duplicate-startup', 'late-feedback',
+                       'feedback-before-block', 'extra-feedback']:
+            _, events = fixture(self.work, self.native, 'gated-continuation')
+            stops = [e for e in events if e.get('params', {}).get('run', {}).get('eventName') == 'stop']
+            first_start, first_end, last_start, last_end = stops
+            for e in (last_start, last_end):
+                e['params']['run']['id'] = 'stop-0'; e['params']['run']['startedAt'] = 3
+            if change == 'overlap':
+                events.remove(last_start); events.insert(events.index(first_end), last_start)
+            elif change == 'missing-start': events.remove(last_start)
+            elif change == 'duplicate-complete': events.insert(events.index(first_end)+1, copy.deepcopy(first_end))
+            elif change == 'stale-complete': events[events.index(last_end)] = copy.deepcopy(first_end)
+            elif change == 'replay-blocked-pair':
+                events[events.index(last_start)] = copy.deepcopy(first_start)
+                events[events.index(last_end)] = copy.deepcopy(first_end)
+            elif change == 'duplicate-startup':
+                startup = [copy.deepcopy(e) for e in events if e.get('params', {}).get('run', {}).get('id') == 'ss']
+                events[events.index(first_start):events.index(first_start)] = startup
+            else:
+                feedback = [e for e in events if e.get('params', {}).get('item', {}).get('id') == 'hp']
+                if change == 'extra-feedback':
+                    events[events.index(last_start):events.index(last_start)] = copy.deepcopy(feedback)
+                else:
+                    for e in feedback: events.remove(e)
+                    pos = events.index(first_end) if change == 'feedback-before-block' else events.index(last_end)+1
+                    events[pos:pos] = feedback
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                self.check(events, 'gated-continuation')
+
     def test_actual_high_before_raw_order_still_binds_each_response(self):
         for case in sorted(probe.CASES):
             with self.subTest(case=case):

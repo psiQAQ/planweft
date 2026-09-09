@@ -118,6 +118,7 @@ def assess(events, thread, turn, prompt, source, case):
     disabled = case.endswith('-disabled'); continuation = case == 'gated-continuation'
     started = ended = None
     items = {}; done = {}; raw = {}; hooks = {}; completed = {}; responses = []; threads = []
+    active_hooks = {}; hook_generations = {}; completion_keys = {}
     for index, event in enumerate(events):
         require(isinstance(event, dict), 'Nonobject native event')
         if 'id' in event:
@@ -175,11 +176,27 @@ def assess(events, thread, turn, prompt, source, case):
                     and run.get('executionMode') == 'sync' and run.get('scope') ==
                     ('thread' if name == 'sessionStart' else 'turn'), 'Unbound/tool/unknown hook')
             if method == 'hook/started':
-                require(ident not in hooks and run.get('status') == 'running' and run.get('startedAt') is not None, 'Invalid hook start')
-                hooks[ident] = (index, run)
+                # Fixed 0.149.1 dispatcher::{running,completed}_summary uses
+                # ConfiguredHandler::run_id(), not an invocation UUID. A later
+                # Stop can reuse it. Pair each sequential start/completion;
+                # startedAt has second precision, so it cannot be the key.
+                # https://raw.githubusercontent.com/openai/codex/rust-v0.149.1/codex-rs/hooks/src/engine/dispatcher.rs
+                require(ident not in active_hooks and run.get('status') == 'running'
+                        and run.get('startedAt') is not None, 'Invalid hook start')
+                generation = hook_generations.get(ident, 0) + 1
+                if generation > 1:
+                    prior = completed[(ident, generation - 1)][1]
+                    require(name == 'stop' and all(run.get(k) == prior.get(k) for k in
+                            ('eventName', 'sourcePath', 'source', 'handlerType', 'executionMode', 'scope')),
+                            'Changed/repeated startup hook identity')
+                key = (ident, generation)
+                hook_generations[ident] = generation
+                active_hooks[ident] = key
+                hooks[key] = (index, run)
             else:
-                require(ident in hooks and ident not in completed and run.get('completedAt') is not None
-                        and all(run.get(k) == hooks[ident][1].get(k) for k in
+                key = active_hooks.get(ident)
+                require(key in hooks and key not in completed and run.get('completedAt') is not None
+                        and all(run.get(k) == hooks[key][1].get(k) for k in
                                 ('id', 'eventName', 'sourcePath', 'source', 'handlerType', 'executionMode', 'scope', 'startedAt')),
                         'Incomplete/changed hook lifecycle')
                 blocked = name == 'stop' and continuation and run.get('status') == 'blocked'
@@ -191,7 +208,9 @@ def assess(events, thread, turn, prompt, source, case):
                 require(not disabled or entries == [], 'Disabled hook produced output')
                 if blocked:
                     require(sum(e['kind'] == 'feedback' for e in entries) == 1, 'Block lacks unique feedback')
-                completed[ident] = (index, run)
+                completed[key] = (index, run)
+                completion_keys[index] = key
+                del active_hooks[ident]
         else:
             raise ValueError('Unknown native event')
     require(len(threads) == 1 and threads[0].get('id') == thread and started is not None and ended is not None, 'Incomplete thread/turn')
@@ -222,7 +241,7 @@ def assess(events, thread, turn, prompt, source, case):
     require(len(stops) == wanted_count, 'Missing/duplicate Stop executions')
     for pos, (idx, run) in enumerate(stops):
         next_boundary = items[finals[pos+1][1]['id']][0] if pos+1 < len(finals) else ended
-        require(responses[pos][0] < hooks[run['id']][0] < idx < next_boundary, 'Stop is outside its response boundary')
+        require(responses[pos][0] < hooks[completion_keys[idx]][0] < idx < next_boundary, 'Stop is outside its response boundary')
     for name in ['sessionStart', 'userPromptSubmit']:
         runs = [(idx, r) for idx, r in completed.values() if r['eventName'] == name]
         require(len(runs) <= 1 and (disabled or len(runs) == 1), 'Missing/duplicate startup hook')
@@ -264,13 +283,14 @@ def assess(events, thread, turn, prompt, source, case):
         boundary = items[finals[1][1]['id']][0]
         require(first[0] < items[high['id']][0] < high_idx < boundary
                 and first[0] < raw_idx < boundary, 'Feedback not delivered before next response')
-        chain = {'blocked_hook_id':first[1]['id'], 'feedback_item_id':high['id'], 'feedback_event':raw_idx,
+        chain = {'blocked_hook_id':first[1]['id'], 'blocked_hook_generation':completion_keys[first[0]][1], 'feedback_item_id':high['id'], 'feedback_event':raw_idx,
                  'feedback_sha256':hashlib.sha256(feedback.encode()).hexdigest(), 'response_ids':[r[1] for r in responses]}
     else:
         require(not followups and not extra_users and all(r['status'] == 'completed' for _, r in stops), 'Unexpected continuation')
     return {'status':'Passed', 'case':case, 'answer':'STOP_PROBE', 'assistant_responses':wanted_count,
             'no_model_tool_calls':True, 'thread_id':thread, 'turn_id':turn, 'actual_followup':chain is not None,
-            'continuation_chain':chain, 'stop_runs':[{'hook_id':r['id'], 'status':r['status'], 'event':idx} for idx,r in stops],
+            'continuation_chain':chain, 'stop_runs':[{'hook_id':r['id'], 'generation':completion_keys[idx][1],
+                          'started_event':hooks[completion_keys[idx]][0], 'status':r['status'], 'event':idx} for idx,r in stops],
             'startup_injections':injected, 'native_bootstrap_context':bootstrap,
             'turn_started_event':started, 'turn_completed_event':ended,
             'scope':'Native no-model-tools and Stop/feedback/response lifecycle only; counter reads, project preservation, trust acquisition and dedup require separate evidence.'}
