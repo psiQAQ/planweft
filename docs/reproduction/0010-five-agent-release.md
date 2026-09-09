@@ -353,3 +353,24 @@ RC11 范围恢复修改沿用固定 PWF 选择器，实际纯函数对照2 tests
 OpenCode 的一次新模型命令在启动前被自动审批拒绝，要求明确平台/端点/负载；用户随后补充授权隔离 OpenCode 直连 `https://api.deepseek.com/v1`，仅发送合成任务、测试提示及公开插件。此前拒绝保留；尚未执行的新模型场景不能计 Passed。
 
 [RC11 开发回归日志](evidence/0010/rc11-development-regressions.tar.gz)：10项，SHA-256 `9161fac03944948b61d9f461c4e0bb6a7411d7752fa8f0b8528792ddc25695d0`。包含原始失败和修正后的相关检查，未把开发日志当作准确 npm 包验收。
+
+## RC11 准确本地包与 RC12 原生修复准备
+
+RC11 源码 `438e4a9cb7b3c33cf4abe3472bc232c67b0f1d62`，准确归档 SHA-256 `53f78985ae94c14ed589a67fb4342303ce14ea4748b825bca405e1bbf172325b`；[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34352955547) Passed，未发布到 npm。Pi 原生相对来源修复通过准确包 preflight/lifecycle，迁移回归 721 Passed / 63 Skipped（851 subtests）。后续发现原生有效 BOM settings 的另一处解析不兼容，保留 RC11 归档，转 RC12 最小修复，不覆盖旧字节。
+
+| RC11 场景 | 自动结果 | 独立结果及实际限制 |
+| --- | --- | --- |
+| Claude maintenance / cold-reader | Failed / Passed | 主 Skill 两次完整读取，仍把一般“沿用资料”当旧权威例外；三个手工固定项目外路径。代码及验证记录、用户修改保护通过。冷读 Passed，不能弥补无唯一计划。 |
+| Pi maintenance / cold-reader | Passed / Passed | 先读禁用 settings 后读 Skill，最终“未读配置”声明不实；手工临时目录缺少项目绑定。真实旧1测、新4测、反事实4失败成立。冷读 Passed；12文件前后完全一致。 |
+| OpenCode maintenance / cold-reader | Passed / Passed | 固定项目外反事实目录被写/清理；记录仍把旧实现与测试描述为现状；未选择便传 autonomous。冷读 Passed with limits（未指出记录矛盾），16文件完全一致。 |
+| DSH maintenance / cold-reader | Passed / Passed | 首工具即 Skill，Goal 与注入、真实旧1测/新2测和手写反事实成立；手工 TemporaryDirectory 没有 dir 绑定，实际随机路径未证，完整范围门槛未通过。冷读 Passed，12文件完全一致。 |
+
+[RC11 脱敏附件](evidence/0010/rc11-live-records.tar.gz)：390项，1,591,819字节，SHA-256 `7e859305c71f6da0ca5c5ffc9b4429f4dcb2df789a0286ee557ebdd37a1c5c90`。主 Agent 重核四组独立报告的75/101/75/101个附件摘要（共352）；归档保留自动评估、独立失败、原生trace和before/after项目快照，省略可重建依赖/私有HOME与实体安装树。
+
+RC10 DSH 后补：[原始附件及独立审查](evidence/0010/rc10-dsh-records.tar.gz)，79项，506,354字节，SHA-256 `702f3c22f517ca7c1192c68b82422b7ba40c568223956cd56d375cc5b827a4e3`；100个审查附件摘要重核。维护曾写固定项目外测试文件；冷读曾主动手工输出到项目外。保留原自动 Passed，独立范围 Failed 不更改为成功。
+
+RC12 产品改动：Pi 专用 settings parser 只移除一个开头 U+FEFF，匹配原生行为并保留重复/foreign 拒绝；OpenCode pw_init 原生两条描述补省略参数默认 advisory 和用户明确选择要求，不修改 initPlan/markers/gate 逻辑。源码审查分别见 [Pi BOM](../reviews/0010-rc12-pi-bom-review.md)、[OpenCode 模式](../reviews/0010-rc12-opencode-mode-review.md)。安装器81 Passed/1WindowsSkipped；Python221 Passed/1Skipped；原始 OpenCode34Passed、原始迁移32Passed/2预期差异Failed、按既有契约调整后37Passed，编译重现Passed。原始失败不删除；不把说明文案当运行时授权证明。
+
+RC12 开发回归[原始日志](evidence/0010/rc12-development-regressions.tar.gz)：29项，52,977字节，SHA-256 `e5ae60c11f09c1770a7f2f3d70840890b34d87552d2021bfec75716fa66c9fde`。包含 RC11 后完成的迁移日志、RC12 原始/迁移 OpenCode 对照、BOM 修复前/后与新worker4项/wrapper5项测试，以及最终分发24项/构建/编译检查；属于源码回归，未绑定尚未冻结的 RC12 npm 包。
+
+Pi 原生 BOM 准确 RC11 对照[两轮原始附件](evidence/0010/rc11-pi-bom-baselines.tar.gz)：63项，6,856,513字节，SHA-256 `f1542a7f673fc084bad33af5c147aa5db708f12b089d996debfd9f8b6f57e4bf`。每轮都确认安装字节/执行位、native list 能识别同一 BOM/CRLF 来源及配置字节保护；doctor/update 均因 JSON BOM 解析 Failed，重复/foreign 未到语义拒绝。第一轮测试器 remove 缺 `--approve-pi-project`，额外卸载 Failed；第二轮补该原生明确确认，remove Passed，产品失败仍保留。最终冻结 worker SHA-256 `6a1e514df462c11fce994f948051adcc38dbf7d7c5066c1979000c0c9aa55f1b`，随后 RC12 必须使用同一入口对照。两轮均无模型/凭据；scope是原生配置兼容，不是模型权限或停止门槛。

@@ -2,6 +2,8 @@
 
 # 发布 PlanWeft
 
+截至 RC12 源码准备时，官方 npm 的 `next` 为 `0.4.0-rc.10`，`latest` 仍为历史 RC1；正式 `0.4.0` 未发布。RC11 是未发布的准确本地归档，已通过[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34352955547)、Pi 原生生命周期及 721 项迁移回归，但四个 DeepSeek 宿主维护的完整验收仍未通过。RC12 修复 Pi 原生 BOM 配置兼容并补齐 OpenCode 初始化工具的默认模式说明；源码与离线测试通过不代表模型问题已解决。实时发布状态应查询官方 npm registry，不能把历史 `latest` 当作稳定发布。
+
 唯一包 `planweft`；公开 Git 源 `https://github.com/psiQAQ/planweft`。
 这些是发布目标，不代表当前版本已经上线。入口：[安装：中文](installation.md) / [English](installation.en.md)。
 
@@ -48,6 +50,10 @@ npm publish /tmp/planweft-release-new/npm/planweft-0.4.0-rc.1.tgz --tag next --a
 
 本轮已备份并清理公开 master 历史，GitHub 仓库已公开；旧记录中的“尚未推送”仅属于当时状态。原始历史和清理后附件通过内部 [映射](reproduction/evidence/0010/history-sanitization.json) 关联。清理不撤回其他人的旧副本。
 
+## 历史候选记录
+
+以下状态按当时版本保留；当前检查点见页首，不将历史的“准备中”理解为今日状态。
+
 RC1 已于本轮发布，远端 SHA-256 与验收归档一致。首次发布在指定 next 后仍自动生成 latest，认证完成后的标签删除请求仍返回 HTTP 400，尚未更正；不将候选标签状态视为稳定验收通过。GitHub trusted publisher 已建立，release 环境只允许 master。配置命令使用 npm 11.19.1 的 `--allow-publish`（旧 11.11.0 的 trust 请求缺少当前 API 必填 permissions 字段）；发布工作流仍固定 npm 11.11.0。后续 RC2/RC3/RC4 已验证 OIDC；五宿主最终门槛继续补齐。
 
 RC2 已通过 [GitHub OIDC](https://github.com/psiQAQ/planweft/actions/runs/34248506886) 发布到 next，CI 重建及真实 npm 下载均匹配冻结 SHA-256 `3948cb9c4cd03f1505966b95e22729177cb09a4af28296fd1ef7be2dd0349754`。OpenCode 维护通过独立审查；当时 DSH 上下文与维护失败留待后续修复。
@@ -79,4 +85,4 @@ RC8 已由 OIDC 发布到 next，Check 34339605601 三系统通过；远端 5386
 
 RC9 已由 OIDC 发布且准确归档校验、三系统 CI Passed。Claude 已获官方 DeepSeek 兼容端点直连授权并完成模型试验，但跳过计划初始化；Pi、OpenCode、DSH 的独立检查仍发现记录准确性或授权范围问题。RC10 正在修复，尚未发布；RC9 原始 Failed 保留，正式 0.4.0 未通过门槛。
 
-当前候选 RC10 已通过三系统 CI、OIDC 及官方归档字节验证；但 Claude 独立维护语义 Failed，Pi 原生相对路径触发 doctor 回归且维护模型未启动。RC11 修复在开发中。OpenCode 的具体模型直连授权已补齐；五宿主严格门槛未通过，正式 0.4.0 未发布。
+RC10 发布时已通过三系统 CI、OIDC 及官方归档字节验证；但 Claude 独立维护语义 Failed，Pi 原生相对路径触发 doctor 回归且维护模型未启动。RC11 修复在开发中。OpenCode 的具体模型直连授权已补齐；五宿主严格门槛未通过，正式 0.4.0 未发布。

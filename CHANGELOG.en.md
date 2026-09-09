@@ -2,11 +2,17 @@
 
 # Changelog
 
-## 0.4.0-rc.11 — in development
+## 0.4.0-rc.12 — candidate source (check official registry for publication)
+
+- Match native Pi support for UTF-8 BOM settings with a Pi-only parser fix; retain ownership, duplicate and cross-scope checks.
+- Disclose omitted-mode advisory behavior and explicit autonomous/gated selection in the OpenCode initialization tool; runtime logic and permissions are unchanged.
+- Add an exact-package native Pi BOM/CRLF positive/negative probe. Retain original and independent RC11 maintenance failures; stable 0.4.0 acceptance remains incomplete.
+
+## 0.4.0-rc.11 — locally verified archive, unpublished
 
 - Fix doctor rejecting Pi project-relative owned sources: resolve against the settings directory while retaining duplicate/cross-scope checks and object metadata.
 - Keep task scope in the extractable part of the existing Goal, with actual instruction sources and localized/protected-heading limitations.
-- Retain RC10 Claude semantic and Pi native-doctor failures. The new exact artifact has not been validated.
+- The exact RC11 archive passed three-OS CI, Pi native lifecycle and 721 migrated regressions. Full maintenance acceptance remains incomplete for Claude, Pi, OpenCode and DSH; original and independent results are retained.
 
 ## 0.4.0-rc.10 — published candidate with known defects
 

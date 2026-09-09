@@ -2,6 +2,8 @@
 
 # Releasing PlanWeft
 
+At the RC12 source-preparation checkpoint, official npm `next` is `0.4.0-rc.10` and `latest` remains historical RC1; stable `0.4.0` is unpublished. RC11 is an unpublished exact local archive with passing [three-OS CI](https://github.com/psiQAQ/planweft/actions/runs/34352955547), Pi native lifecycle and 721 migrated regressions, but full maintenance acceptance has not passed for the four DeepSeek hosts. RC12 fixes native Pi BOM settings compatibility and discloses the default mode in the OpenCode initialization tool. Source and offline checks do not prove model failures resolved. Query the official npm registry for live publication state; the historical `latest` tag is not a stable release.
+
 The single package is `planweft`; its public Git target is `https://github.com/psiQAQ/planweft`.
 These coordinates are release targets, not proof that a version is published. [Installation: 中文](installation.md) / [English](installation.en.md).
 
@@ -50,6 +52,10 @@ The publishing workflow compares CI bytes against its `expected_sha256` input, r
 
 Public master history has been backed up and sanitized; the GitHub repository is public. Earlier statements that it had not been pushed describe historical status only. An internal [mapping](reproduction/evidence/0010/history-sanitization.json) relates original history and sanitized attachments. Rewriting history does not recall existing third-party copies.
 
+## Historical candidate records
+
+The following records retain their version-specific checkpoints. Current preparation status is at the top; historical pending work is not today's status.
+
 RC1 is now public and its downloaded SHA-256 matches the accepted archive. The first publish created latest despite selecting next; authenticated tag-removal requests still return HTTP 400 and correction remains pending. A candidate tag is not stable acceptance. GitHub trusted publishing is configured with a master-only release environment. Configuration uses npm 11.19.1 and `--allow-publish`, because the old 11.11.0 trust request omits the API's required permissions field; the publishing workflow remains pinned to npm 11.11.0. RC2/RC3/RC4 subsequently verified OIDC; the final five-host gates remain incomplete.
 
 RC2 is now published to next through [GitHub OIDC](https://github.com/psiQAQ/planweft/actions/runs/34248506886); CI rebuilt the exact accepted archive and the real npm download matches SHA-256 `3948cb9c4cd03f1505966b95e22729177cb09a4af28296fd1ef7be2dd0349754`. OpenCode maintenance passed independent review. DSH context and maintenance failures at that point required subsequent fixes.
@@ -81,4 +87,4 @@ RC8 was published to next through OIDC; Check 34339605601 passed on all three sy
 
 RC9 is published through OIDC; exact archive verification and three-OS CI passed. Claude completed its authorized direct DeepSeek compatibility-endpoint trial but skipped plan initialization. Independent Pi, OpenCode and DSH checks still found record-accuracy or scope problems. RC10 fixes are in development and unpublished; original RC9 failures remain, and stable 0.4.0 has not passed its gates.
 
-Current candidate RC10 passed three-OS CI, OIDC and official archive-byte verification, but Claude independent maintenance semantics failed and Pi native relative paths caused a doctor regression before its maintenance model ran. RC11 fixes are in development. Explicit OpenCode direct-model authorization is now complete; the five-host gates have not passed and stable 0.4.0 is unpublished.
+At its publication checkpoint, RC10 passed three-OS CI, OIDC and official archive-byte verification, but Claude independent maintenance semantics failed and Pi native relative paths caused a doctor regression before its maintenance model ran. RC11 fixes are in development. Explicit OpenCode direct-model authorization is now complete; the five-host gates have not passed and stable 0.4.0 is unpublished.

@@ -1,8 +1,8 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
-RC7 已通过 [OIDC](https://github.com/psiQAQ/planweft/actions/runs/34333285542) 发布到 next，远端准确字节一致，五镜像无模型原生安装/移除/重装 Passed。固定 Node 24.20.0 后的[三系统安装器 CI](https://github.com/psiQAQ/planweft/actions/runs/34334806556) 也已 Passed；这不代表 Windows/macOS 真实 Agent 模型已验证。
+截至 RC12 源码准备时，官方 npm 的 `next` 为 `0.4.0-rc.10`，`latest` 仍为历史 RC1；正式 `0.4.0` 未发布。RC11 是未发布的准确本地归档，已通过[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34352955547)、Pi 原生生命周期及 721 项迁移回归，但四个 DeepSeek 宿主维护的完整验收仍未通过。RC12 修复 Pi 原生 BOM 配置兼容并补齐 OpenCode 初始化工具的默认模式说明；源码与离线测试通过不代表模型问题已解决。实时发布状态应查询官方 npm registry，不能把历史 `latest` 当作稳定发布。
 
-RC7 独立维护/冷读：Codex Passed；Pi 未采用计划、读取禁用配置且冷读有无依据归因，Failed；OpenCode 当前/历史实现记录矛盾且冷读漏报，Failed；DSH 功能与交接核心 Passed，但读取超出范围的宿主环境元数据，整体 Failed，未见凭据/业务/旧聊天内容。当前准备 RC8 入口决策与记录校验修复。Claude 兼容端点明确授权及模型验收仍待完成。下方表格是各历史版本的证据，不替代最终稳定验收。见[发布：中文](releasing.md) / [English](releasing.en.md)。
+详细结果与限制：[发布：中文](releasing.md) / [English](releasing.en.md)。以下各历史版本表格不替代当前准确包验收。
 
 ## 0.4.0 候选验证
 
@@ -167,6 +167,3 @@ Hermes 使用官方提交 `9fd44b4dfc44138b9e5d5689acb56c438364ff7b`，最终目
 RC4 补充：Codex/Claude 公开 Git 市场的安装、同提交刷新、缓存内容核对、卸载和注销 Passed；未调用模型，不表示 Git 跨版本升级已验收。Pi 完成态计划的 parity 注入和新会话恢复复验 Passed；进行中显式执行循环另有停止及上限证据，不能据完成态探针宣称进行中只读恢复。Pi 首次维护的主计划阶段/错误摘要不一致，独立语义检查该项 Failed；后续按独立反馈纠正两项记录并通过新冷读，原失败保留。这条明确反馈路线不单独证明自动 Skill 加载或自动触发审查。
 
 资源与隔离补充：测试器在快照读取前剪枝安装缓存，并限制容器 CPU、RAM、Swap、进程与 tmpfs。Claude/Pi/OpenCode 的同 HOME 实测中，更新/移除 A 保持 B 不变；Codex/DSH 拒绝不支持的项目 scope 且无写入。这证明隔离，不证明被移除侧所有原生缓存均消失。Claude Pro 实际读取中文 Skill 后仍未采用 PWF，中断的外层运行保持 Incomplete、冷读 Not Run；Flash 失败同样保留。
-
-
-当前候选 RC10 已通过三系统 CI、OIDC 及官方归档字节验证；但 Claude 独立维护语义 Failed，Pi 原生相对路径触发 doctor 回归且维护模型未启动。RC11 修复在开发中。OpenCode 的具体模型直连授权已补齐；五宿主严格门槛未通过，正式 0.4.0 未发布。

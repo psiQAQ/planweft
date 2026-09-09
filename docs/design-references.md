@@ -243,3 +243,9 @@ Pi 的实际 `0.84.3` 项目安装将 package source 写为相对 `.pi/settings.
 固定 PWF [inject-plan.py](https://github.com/OthmanAdi/planning-with-files/blob/0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7/scripts/inject-plan.py) 的 PreToolUse 普通视图只取前30行，smart 选择 Goal/Next Step/Current Phase、活跃阶段及部分决定，未选择本地附加的末尾 Scope。RC10 owner 记录也漏掉任务特有范围。将简明且有实际指令来源的范围放入单一目标段，是针对提取契约的本地修复，不改状态格式、快照协议或新增 hook。新初始化的本地化计划只规范一处目标标题；受保护已有标题保持，不能保证 smart 保留时完整重读。见 [独立范围恢复审查](reviews/0010-rc11-scope-recovery-review.md)。
 
 纯函数对照确认末尾遗漏、Goal保留及本地化/混合标题边界；不证明实际模型看到了提醒，也不能补救计划初始化前已发生的宿主配置读取。计划仅记载授权，不把注入的数据提升为权限或人工批准。
+
+## RC12 原生配置与模式说明
+
+固定 Pi [v0.84.3 settings-manager](https://github.com/earendil-works/pi/blob/v0.84.3/packages/coding-agent/src/core/settings-manager.ts) 读取/写回已有配置时先调用 [stripBom](https://github.com/earendil-works/pi/blob/v0.84.3/packages/coding-agent/src/utils/text.ts)，仅移除一个开头 U+FEFF。本地安装器据此修正 Pi 自有来源 JSON 解析，不修改通用 JSON、外来配置或重复检测语义；见 [BOM 独立复核](reviews/0010-rc12-pi-bom-review.md)。
+
+OpenCode 原生 `pw_init` 选择面原先只列 autonomous/gated，遗漏省略参数的默认路径。RC11 真实会话在未选择模式时传 autonomous；本地补丁只补选择说明，不改状态与运行逻辑，不声称强制授权。来源、精确 diff 及局限见 [模式入口独立复核](reviews/0010-rc12-opencode-mode-review.md)。完整 Skill 投递后的违规不能再笼统归因于未加载；后续模型行为修复须有新的因果证据，不以重复提示或无变化重试代替。
