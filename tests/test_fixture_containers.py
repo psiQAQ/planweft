@@ -27,7 +27,8 @@ class FixtureWrapperTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary);args=self.args(root)
             for extra in (['--sha256','0'*64],['--timeout','601'],['--host','unknown'],
-                          ['--scenario','native-duplicate','--host','claude']):
+                          ['--scenario','native-duplicate','--host','claude'],
+                          ['--scenario','pi-bom-settings','--host','opencode']):
                 with self.subTest(extra=extra),patch.object(runner.registry,'docker_output') as docker, \
                      contextlib.redirect_stderr(io.StringIO()),self.assertRaises(SystemExit):runner.main(args+extra)
                 docker.assert_not_called();self.assertFalse((root/'evidence').exists())
@@ -77,6 +78,37 @@ class FixtureWrapperTest(unittest.TestCase):
             report=json.loads((root/'evidence/summary.json').read_text())
             self.assertIn('not execution-time hook deduplication',report['scope'])
             self.assertEqual(report['scenario'],'native-duplicate')
+
+    def test_pi_bom_exact_worker_requires_complete_assertions_and_version(self):
+        required={'exact_installed_content','native_source_unchanged','settings_bom_crlf_preserved',
+                  'doctor_success','update_dry_run_success','owned_duplicate_rejected',
+                  'foreign_registration_rejected','owned_remove_complete'}
+        for variant in ['valid','missing','false','wrong-version','wrong-scenario']:
+            with self.subTest(variant=variant),tempfile.TemporaryDirectory() as temporary:
+                root=Path(temporary);args=self.args(root)+['--scenario','pi-bom-settings']
+                def launch(command,**kwargs):
+                    self.assertIn('/source/tests/run-pi-bom-settings.py',command)
+                    self.assertEqual(command[-2:],['--sha256',args[args.index('--sha256')+1]])
+                    run=root/'evidence/pi/run';run.mkdir()
+                    report={'status':'Passed','host':'pi','version':'0.4.0-rc.8',
+                        'project_records_unchanged':True,'input_archive_sha256':command[-1],
+                        'scenario':'pi_bom_settings_native_compatibility',
+                        'assertions':dict.fromkeys(required,True)}
+                    if variant=='missing':report['assertions'].pop('doctor_success')
+                    if variant=='false':report['assertions']['doctor_success']=False
+                    if variant=='wrong-version':report['version']='0.4.0-rc.9'
+                    if variant=='wrong-scenario':report['scenario']='prevention_of_second_native_registration'
+                    (run/'summary.json').write_text(json.dumps(report))
+                    return runner.subprocess.CompletedProcess(command,0)
+                with patch.object(runner.registry,'resource_preflight',return_value={'fixture':True}), \
+                     patch.object(runner.registry,'docker_output',side_effect=lambda a:a[2]), \
+                     patch.object(runner.registry,'cleanup_container',return_value={'status':'Passed','container_removed':True}), \
+                     patch.object(runner.subprocess,'run',side_effect=launch):
+                    self.assertEqual(runner.main(args),0 if variant=='valid' else 1)
+                report=json.loads((root/'evidence/summary.json').read_text())
+                self.assertEqual(report['scenario'],'pi-bom-settings')
+                self.assertIn('Exact archive',report['scope'])
+                self.assertTrue((root/'evidence/frozen/run-installer-lifecycle.py').is_file())
 
 
 if __name__=='__main__':unittest.main()

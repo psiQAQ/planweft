@@ -33,12 +33,14 @@ def main(argv=None):
     parser.add_argument('--sha256',required=True)
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--timeout',type=int,default=600)
-    parser.add_argument('--scenario',choices=['payload-delta','native-duplicate'],default='payload-delta')
+    parser.add_argument('--scenario',choices=['payload-delta','native-duplicate','pi-bom-settings'],default='payload-delta')
     given=parser.parse_args(argv)
     if given.scenario=='native-duplicate' and set(given.host)-{'pi','opencode'}:
         parser.error('Native cross-scope duplicate probe supports Pi/OpenCode only')
+    if given.scenario=='pi-bom-settings' and set(given.host)!={'pi'}:
+        parser.error('Native BOM settings probe supports Pi only')
     archive=given.archive.resolve()
-    if ',' in str(archive):parser.error('Archive mount path cannot contain a comma')
+    if any(c in str(archive) for c in [',','\n','\r']):parser.error('Unsupported archive mount path')
     try:version=isolation.inspect_archive(archive,given.sha256)
     except (OSError,ValueError,KeyError,isolation.tarfile.TarError) as error:parser.error(str(error))
     args=registry.parse_args(['--version',version,'--sha256',given.sha256,
@@ -50,18 +52,20 @@ def main(argv=None):
             raise RuntimeError('Locked image identity mismatch')
     args.output.mkdir(parents=True)
     frozen=args.output/'frozen';frozen.mkdir()
-    worker_name='run-native-duplicate.py' if given.scenario=='native-duplicate' else 'run-installer-lifecycle.py'
+    worker_name={'payload-delta':'run-installer-lifecycle.py','native-duplicate':'run-native-duplicate.py',
+                 'pi-bom-settings':'run-pi-bom-settings.py'}[given.scenario]
     worker=(ROOT/'tests'/worker_name).read_bytes()
     (frozen/worker_name).write_bytes(worker)
-    if given.scenario=='native-duplicate':
+    if given.scenario in {'native-duplicate','pi-bom-settings'}:
         (frozen/'run-installer-lifecycle.py').write_bytes((ROOT/'tests/run-installer-lifecycle.py').read_bytes())
     (frozen/'run-fixture-containers.py').write_bytes(Path(__file__).read_bytes())
     (frozen/'run-registry-containers.py').write_bytes(Path(registry.__file__).read_bytes())
     (frozen/'run-project-isolation.py').write_bytes(Path(isolation.__file__).read_bytes())
     (frozen/'container-images.json').write_bytes(args.lock_bytes)
     report={'status':'In Progress','input_version':version,'input_archive_sha256':given.sha256,
-        'scope':('Real native registration with exact archive; second-registration preflight only, not execution-time hook deduplication'
-                 if given.scenario=='native-duplicate' else 'Locally modified A/B fixtures, not exact release payload acceptance'),
+        'scope':{'native-duplicate':'Real native registration with exact archive; second-registration preflight only, not execution-time hook deduplication',
+                 'pi-bom-settings':'Exact archive, native Pi project settings with BOM/CRLF; no modified package or model session',
+                 'payload-delta':'Locally modified A/B fixtures, not exact release payload acceptance'}[given.scenario],
         'scenario':given.scenario,
         'model_sessions':'Not Run','credentials_mounted':False,'resource_preflight':resources,
         'worker_sha256':hashlib.sha256(worker).hexdigest(),
@@ -88,17 +92,28 @@ def main(argv=None):
             *[x for key in args.proxies for x in ['-e',key]],'--entrypoint','python3',
             args.images[host],'/source/tests/'+worker_name,'--host',host,
             '--archive','/input/package.tgz','--output','/results/run']
+        if given.scenario=='pi-bom-settings':command+=['--sha256',given.sha256]
         try:
             with (case/'container.stdout').open('w') as stdout,(case/'container.stderr').open('w') as stderr:
                 completed=subprocess.run(command,stdout=stdout,stderr=stderr,timeout=args.timeout)
             result['exit_code']=completed.returncode
             raw=(case/'run/summary.json').read_bytes();observed=json.loads(raw)
             result['raw_summary_sha256']=hashlib.sha256(raw).hexdigest()
+            if given.scenario=='pi-bom-settings':
+                required={'exact_installed_content','native_source_unchanged','settings_bom_crlf_preserved',
+                          'doctor_success','update_dry_run_success','owned_duplicate_rejected',
+                          'foreign_registration_rejected','owned_remove_complete'}
+                assertions=observed.get('assertions',{})
+                scenario_ok=(observed.get('scenario')=='pi_bom_settings_native_compatibility'
+                             and observed.get('version')==version and isinstance(assertions,dict)
+                             and set(assertions)==required and all(v is True for v in assertions.values()))
+            elif given.scenario=='native-duplicate':
+                scenario_ok=observed.get('scenario')=='prevention_of_second_native_registration'
+            else:scenario_ok=set(observed.get('fixture_archives',{}))=={'A','B'}
             if (completed.returncode==0 and observed.get('status')=='Passed'
                     and observed.get('host')==host and observed.get('project_records_unchanged') is True
                     and observed.get('input_archive_sha256')==given.sha256
-                    and (observed.get('scenario')=='prevention_of_second_native_registration'
-                         if given.scenario=='native-duplicate' else set(observed.get('fixture_archives',{}))=={'A','B'})):result['status']='Passed'
+                    and scenario_ok):result['status']='Passed'
         except (OSError,ValueError,subprocess.SubprocessError,KeyboardInterrupt) as error:
             result['error']=type(error).__name__
         finally:
