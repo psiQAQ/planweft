@@ -21,8 +21,10 @@ import uuid
 
 PREFIX='claude-reminder-'
 FILES={'stdout':'native.stdout.jsonl','stderr':'native.stderr','debug':'hooks.log',
-       'sent':'sent.jsonl','report':'observation.json'}
+       'sent':'sent.jsonl','trace':'trace-observation.json','report':'observation.json'}
 DEFAULT_LIMITS={'stdout':16*1024**2,'stderr':8*1024**2,'debug':8*1024**2,'line':1024**2,'total':48*1024**2}
+TRACE_LIMIT=16*1024**2
+TRACE_METADATA_LIMIT=256*1024
 RESOURCES=['.claude-plugin/plugin.json','hooks/hooks.json','hooks/claude-hook.sh',
            'scripts/inject-plan.py','scripts/inject-plan.sh']
 
@@ -271,7 +273,33 @@ def validate(model,work,out,package,native_root,plan_dir,private_dir,timeout,lim
     return protected,resources
 
 
-def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,private_dir,limits=None):
+
+def native_executable_identity():
+    """Bind executables in the caller's fixed, read-only image, not basenames."""
+    host=shutil.which('claude')
+    if not host or not Path(host).is_absolute():raise ValueError('Missing native Claude executable')
+    allowed={'shell':[], 'python':[]}
+    hashes={host:file_hash(Path(host))}
+    for category,names in [('shell',['sh','dash','bash']),('python',['python3','python'])]:
+        for name in names:
+            located=shutil.which(name)
+            if not located or not Path(located).is_absolute():continue
+            executable=Path(located)
+            # Native launchers may use /bin while PATH lists /usr/bin. Only
+            # include aliases proven to refer to the same installed file.
+            candidates=[executable,executable.resolve(strict=True)]
+            for directory in ['/bin','/usr/bin','/usr/local/bin']:
+                alias=Path(directory)/name
+                if alias.is_file() and alias.samefile(executable):candidates.append(alias)
+            for candidate in candidates:
+                value=str(candidate)
+                if value not in allowed[category]:
+                    allowed[category].append(value);hashes[value]=file_hash(candidate)
+    if not all(allowed.values()):raise ValueError('Missing fixed-image hook interpreter')
+    return host,allowed,hashes
+
+
+def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,private_dir,limits=None,trace_hooks=False):
     """Return (CompletedProcess, evidence); rc0 means collection, NOT dedup Passed.
 
     Caller supplies existing isolated host auth/config; this function neither
@@ -287,7 +315,9 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
     package=Path(package).resolve();native_root=Path(native_root).resolve();plan_dir=Path(plan_dir).resolve();private_dir=Path(private_dir).resolve()
     limits={**DEFAULT_LIMITS} if limits is None else dict(limits)
     if not callable(sanitize):raise ValueError('sanitize callback required')
+    if type(trace_hooks) is not bool:raise ValueError('trace_hooks must be boolean')
     protected,resources=validate(model,work,out,package,native_root,plan_dir,private_dir,timeout,limits)
+    executable_identity=native_executable_identity() if trace_hooks else None
     out.mkdir(parents=True,exist_ok=True)
     paths={key:out/(PREFIX+name) for key,name in FILES.items()}
     command=['claude','-p','--no-session-persistence','--permission-mode','acceptEdits',
@@ -300,7 +330,10 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
               'reason':'Pinned Claude PostToolUse empty-output/handler-to-tool debug correlation remains unvalidated; raw collection only.',
               'command':command,'timeout_seconds':timeout,'output_limits':limits,'resource_sha256':resources,
               'plan_before_sha256':{str(p.relative_to(work)):hashed(v) for p,v in protected.items()},
-              'diagnostic_only':True,'same_process':True,'model_route_changed':False,'trust_changed':False}
+              'diagnostic_only':True,'same_process':True,'model_route_changed':False,'trust_changed':False,
+              'private_process_trace_requested':trace_hooks}
+    if executable_identity:
+        evidence['executable_sha256']=executable_identity[2]
     privacy_errors=[]
     def redact(text):
         try:
@@ -311,23 +344,27 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
             privacy_errors.append(type(error).__name__)
             return '[redaction failed; content omitted]\n'
     sizes={'stdout':0,'stderr':0};buffers={'stdout':b'','stderr':b''};handles={};truncated=[];debug_parent=None;debug_path=None;debug_identity=None;debug_parent_fd=None;debug_fd=None;debug_file_identity=None
-    def checked_debug_size():
-        if debug_fd is None or debug_parent_fd is None:raise OSError('Private debug descriptor missing')
+    trace_fd=None;trace_path=None;trace_identity=None
+    def checked_private_size(descriptor,path,identity):
+        if descriptor is None or debug_parent_fd is None:raise OSError('Private descriptor missing')
         directory=debug_parent.lstat()
         if (not stat.S_ISDIR(directory.st_mode)
                 or (directory.st_dev,directory.st_ino,directory.st_uid)!=debug_identity):
             raise OSError('Private debug directory identity changed')
-        named=os.stat(debug_path.name,dir_fd=debug_parent_fd,follow_symlinks=False)
-        opened=os.fstat(debug_fd)
+        named=os.stat(path.name,dir_fd=debug_parent_fd,follow_symlinks=False)
+        opened=os.fstat(descriptor)
         if (not stat.S_ISREG(named.st_mode) or not stat.S_ISREG(opened.st_mode)
-                or (named.st_dev,named.st_ino,named.st_uid)!=debug_file_identity
-                or (opened.st_dev,opened.st_ino,opened.st_uid)!=debug_file_identity):
-            raise OSError('Private debug file identity changed')
+                or (named.st_dev,named.st_ino,named.st_uid)!=identity
+                or (opened.st_dev,opened.st_ino,opened.st_uid)!=identity):
+            raise OSError('Private file identity changed')
         return opened.st_size
+    def checked_debug_size():return checked_private_size(debug_fd,debug_path,debug_file_identity)
     def debug_size():
         size=checked_debug_size()
         if size>limits['debug']:raise RuntimeError('Bounded debug output exceeded')
-        if size+sum(sizes.values())>limits['total']-65536:raise RuntimeError('Total native output budget exceeded')
+        trace_size=checked_private_size(trace_fd,trace_path,trace_identity) if trace_fd is not None else 0
+        if trace_size>TRACE_LIMIT:raise RuntimeError('Bounded private process trace exceeded')
+        if size+trace_size+sum(sizes.values())>limits['total']-65536:raise RuntimeError('Total native output budget exceeded')
         return size
     def write_log(key,text):
         value=redact(text);count=len(value.encode())
@@ -359,6 +396,32 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
             if key=='stdout':protocol.accept(json.loads(text))
         if len(buffers[key])>limits['line']:raise RuntimeError('Bounded native line exceeded')
         if truncated:raise RuntimeError('Bounded native '+key+' output exceeded')
+    def export_private_trace():
+        from claude_hook_trace import analyze_trace
+        debug_size()
+        with os.fdopen(os.dup(trace_fd),'rb') as source:
+            source.seek(0);raw=source.read(TRACE_LIMIT+1)
+        if not raw or not raw.endswith(b'\n') or len(raw)>TRACE_LIMIT:
+            raise RuntimeError('Incomplete/bounded private process trace; nothing exported')
+        text=raw.decode('utf-8',errors='strict')
+        # The existing caller knows the injected secrets. A
+        # redaction change is a failure, not a sanitized pass.
+        if redact(text)!=text or privacy_errors:
+            raise RuntimeError('Private trace required redaction; nothing exported')
+        observed=analyze_trace(text,native_root,resources,max_bytes=TRACE_LIMIT,
+                               expected_host_executable=executable_identity[0],allowed_interpreters=executable_identity[1])
+        rendered_trace=json.dumps(observed,ensure_ascii=False,indent=2)+'\n'
+        # The frozen seven-hook native preflight already needs about 47 KiB
+        # to retain every script read and EOF. Keep a separate bounded budget
+        # instead of dropping provenance to fit the short summary limit.
+        if len(rendered_trace.encode())>TRACE_METADATA_LIMIT:
+            raise RuntimeError('Trace observation metadata budget exceeded')
+        with paths['trace'].open('x',encoding='utf-8') as target:
+            target.write(redact(rendered_trace))
+        evidence['hook_process_observation_complete']=observed.get('observation_complete') is True
+        # Complete output attribution alone is not delivery or
+        # dedup acceptance; native tool/context pairing remains.
+        del raw,text,observed,rendered_trace
     try:
         for key in ['stdout','stderr','sent']:handles[key]=paths[key].open('x',encoding='utf-8')
         debug_parent=Path(tempfile.mkdtemp(prefix='planweft-claude-reminder-',dir=private_dir))
@@ -368,6 +431,17 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
         debug_fd=os.open(debug_path.name,os.O_RDWR|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600,dir_fd=debug_parent_fd)
         created_file=os.fstat(debug_fd);debug_file_identity=(created_file.st_dev,created_file.st_ino,created_file.st_uid)
         command+=['--debug-file',str(debug_path)]
+        if trace_hooks:
+            from claude_hook_trace import TRACE_SYSCALLS,RAW_SYSCALLS
+            trace_path=debug_parent/'native-process.trace'
+            trace_fd=os.open(trace_path.name,os.O_RDWR|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600,dir_fd=debug_parent_fd)
+            trace_stat=os.fstat(trace_fd);trace_identity=(trace_stat.st_dev,trace_stat.st_ino,trace_stat.st_uid)
+            # raw=... records counts/pointers, never data buffers. Do not add
+            # strace read=/write= dumps; argv is private execution identity.
+            command=['strace','-f','-ttt','--decode-pids=comm','-s','4096',
+                     '-e','trace='+TRACE_SYSCALLS,'-e','raw='+RAW_SYSCALLS,
+                     '-o',str(trace_path),'--',*command]
+            evidence['command']=command
         process=subprocess.Popen(command,cwd=work,env={**os.environ,'CLAUDE_CODE_DEBUG_LOG_LEVEL':'verbose'},
                                  stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
         send('A');streams={process.stdout:'stdout',process.stderr:'stderr'};stdin_closed=False
@@ -428,6 +502,11 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
                     evidence.update(status='Failed',collection_status='Failed',log_export_error=type(error).__name__)
                 finally:handle.close()
             if debug_path is not None:
+                if trace_fd is not None:
+                    try:export_private_trace()
+                    except (Exception,KeyboardInterrupt) as error:
+                        evidence.update(status='Failed',collection_status='Failed',
+                                        trace_export_error=type(error).__name__,hook_process_observation_complete=False)
                 try:
                     # Bounded incremental export; no raw debug copy in results.
                     # Reserve metadata space inside the aggregate 48 MiB cap.
@@ -452,10 +531,10 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
                     if raw_size>budget:
                         truncated.append('debug')
                         evidence.update(status='Failed',collection_status='Failed',error='Bounded debug/total output exceeded')
-                except Exception as error:
+                except (Exception,KeyboardInterrupt) as error:
                     evidence.update(status='Failed',collection_status='Failed',debug_export_error=type(error).__name__+': '+str(error))
                 finally:
-                    for descriptor in [debug_fd,debug_parent_fd]:
+                    for descriptor in [trace_fd,debug_fd,debug_parent_fd]:
                         if descriptor is not None:os.close(descriptor)
                     try:
                         # The CLI can create additional private diagnostic
@@ -463,6 +542,7 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
                         # this probe; never traverse an exchanged root/link.
                         clean_private_tree(debug_parent,private_dir,debug_identity)
                         evidence['private_debug_removed']=not debug_parent.exists()
+                        if trace_hooks:evidence['private_trace_removed']=not debug_parent.exists()
                     except OSError as error:
                         evidence.update(status='Failed',collection_status='Failed',private_debug_removed=False,
                                         cleanup_error='Private debug cleanup: '+type(error).__name__)
@@ -473,7 +553,7 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
                 plan_unchanged=unchanged())
             if not evidence['plan_unchanged']:evidence.update(status='Failed',collection_status='Failed')
             evidence['artifacts']={key:{'file':p.name,'sha256':file_hash(p),'bytes':p.stat().st_size}
-                                  for key,p in paths.items() if key!='report' and p.is_file()}
+                                  for key,p in paths.items() if key!='report' and not p.is_symlink() and p.is_file()}
             if privacy_errors:
                 evidence.update(status='Failed',collection_status='Failed',redaction_errors=privacy_errors)
             rendered=redact(json.dumps(evidence,ensure_ascii=False,indent=2))+'\n'
@@ -486,5 +566,5 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
                           'private_debug_removed':evidence.get('private_debug_removed')}
                 rendered=json.dumps({'status':'Failed','collection_status':'Failed',
                     'error':'Metadata budget exceeded; variable content omitted'})+'\n'
-            paths['report'].write_text(rendered)
+            with paths['report'].open('x',encoding='utf-8') as target:target.write(rendered)
     return subprocess.CompletedProcess(command,0 if evidence['collection_status']=='Passed' else 1),evidence

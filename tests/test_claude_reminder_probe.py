@@ -199,6 +199,56 @@ class ClaudeReminderTest(unittest.TestCase):
                 # Duplicate result can arrive after valid A triggered B; only
                 # the eventual Failed verdict, not prediction of late data, is required.
 
+    def test_private_trace_is_bounded_verified_and_never_exported(self):
+        for mode in ['complete','incomplete','secret','truncated','replaced','oversized','analysis-error','output-symlink','interrupted','metadata-oversized']:
+            with self.subTest(mode=mode),tempfile.TemporaryDirectory() as temporary:
+                root=Path(temporary);work,out,package,native,private,script=self.fixture(root)
+                real=subprocess.Popen;seen=[]
+                def spawn(command,**kwargs):
+                    self.assertEqual(command[0],'strace')
+                    self.assertIn('raw=',next(x for x in command if x.startswith('raw=')))
+                    self.assertFalse(any(x.startswith(('read=','write=')) for x in command))
+                    debug=Path(command[command.index('--debug-file')+1])
+                    trace=Path(command[command.index('-o')+1])
+                    self.assertEqual(trace.parent,debug.parent)
+                    self.assertEqual(trace.stat().st_mode&0o777,0o600)
+                    if mode=='output-symlink':
+                        (out/(PREFIX+FILES['trace'])).symlink_to(root/'foreign.log')
+                    if mode=='replaced':
+                        trace.unlink();trace.symlink_to(root/'foreign.log')
+                    elif mode=='oversized':trace.write_bytes(b'x'*(16*1024**2+1))
+                    else:trace.write_text('SYNTHETIC_SECRET\n' if mode=='secret' else 'PRIVATE_TRACE' + ('' if mode=='truncated' else '\n'))
+                    return real([sys.executable,'-u',str(script),'normal',str(debug)],**kwargs)
+                def analyze(text,*args,**kwargs):
+                    seen.append(text)
+                    if mode=='analysis-error':raise ValueError('raw argv must not escape')
+                    if mode=='interrupted':raise KeyboardInterrupt()
+                    if mode=='metadata-oversized':return {'errors':['x'*(256*1024)]}
+                    return {'observation_complete':mode=='complete','hooks':[],
+                            'errors':[] if mode=='complete' else ['synthetic attribution gap']}
+                with patch('claude_reminder_probe.subprocess.Popen',side_effect=spawn),patch('claude_hook_trace.analyze_trace',side_effect=analyze),patch('claude_reminder_probe.native_executable_identity',return_value=('/synthetic/claude',{'shell':['/bin/sh'],'python':['/bin/python3']},{'/synthetic/claude':'a'*64})):
+                    result,evidence=run_probe('synthetic-model',work,out,package,native,3,
+                        lambda text:text.replace('SYNTHETIC_SECRET','[REDACTED]'),
+                        plan_dir=work,private_dir=private,trace_hooks=True)
+                self.assertEqual(list(private.iterdir()),[])
+                self.assertTrue(evidence['private_trace_removed'])
+                self.assertEqual((root/'foreign.log').read_text(),'FOREIGN_SYNTHETIC_PRIVATE_CONTENT\n')
+                for path in out.iterdir():
+                    if path.is_symlink():continue
+                    text=path.read_text()
+                    for prohibited in ['PRIVATE_TRACE','SYNTHETIC_SECRET','FOREIGN_SYNTHETIC_PRIVATE_CONTENT','raw argv must not escape']:
+                        self.assertNotIn(prohibited,text)
+                if mode in ['complete','incomplete']:
+                    self.assertEqual(result.returncode,0)
+                    self.assertEqual(evidence['collection_status'],'Passed')
+                    self.assertEqual(evidence['hook_process_observation_complete'],mode=='complete')
+                    self.assertEqual(evidence['status'],'Not Run')
+                    self.assertEqual(evidence['reminder_deduplication'],'Not Run')
+                else:
+                    self.assertEqual(result.returncode,1)
+                    self.assertEqual(evidence['status'],'Failed')
+                if mode in ['secret','truncated','replaced','oversized']:self.assertEqual(seen,[])
+
     def test_channel_and_total_limits_keep_private_source_out_of_evidence(self):
         for channel in ['stdout','stderr','debug','total']:
             with self.subTest(channel=channel),tempfile.TemporaryDirectory() as temporary:

@@ -698,9 +698,10 @@ def controller(payload):
                         'completion':'two native turns in one thread; harness closes server afterward'})
                 elif host=='claude' and case=='reminder-collection':
                     from claude_reminder_probe import run_probe
+                    if payload.get('trace_reminder_processes'):run('version-strace',['strace','--version'])
                     native=Path(json.loads((OUT/'installed-content.json').read_text())['native_root'])
                     process,observation=run_probe(payload['model'],WORK,OUT,package,native,payload['timeout'],safe_text,
-                        plan_dir=WORK,private_dir=Path('/tmp'))
+                        plan_dir=WORK,private_dir=Path('/tmp'),trace_hooks=payload.get('trace_reminder_processes',False))
                     save('model-invocation',{'argv':process.args,'fresh_session':True,'case':case,
                         'plugin_installed':True,'external_memory':'direct-provider; no MemoryProxy or identity headers',
                         'transport':'native stream-json; same process two serial turns',

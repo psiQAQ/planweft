@@ -35,7 +35,8 @@ def scenario_payload(args, host, case, prompt, secret):
     # it to the no-model installation container sharing that runner invocation.
     return {'host':host, 'case':case, 'secret':None if case in NO_MODEL_CASES else secret,
             'model':args.codex_model if host=='codex' else args.model, 'prompt':prompt,
-            'timeout':args.timeout, 'trace_gate_processes':args.trace_gate_processes}
+            'timeout':args.timeout, 'trace_gate_processes':args.trace_gate_processes,
+            'trace_reminder_processes':getattr(args,'trace_reminder_processes',False)}
 
 
 def reminder_collection_assessment(assertions):
@@ -110,7 +111,10 @@ def parse_args(argv=None):
     parser.add_argument('--codex-model',default='gpt-5.6-terra')
     parser.add_argument('--timeout',type=int,default=600)
     parser.add_argument('--trace-gate-processes',action='store_true',help='Use a fixed strace-enabled image to attribute shell gate reads; Codex/Claude stopping cases only')
+    parser.add_argument('--trace-reminder-processes',action='store_true',help='Private metadata-only strace for the Claude reminder diagnostic; not gate acceptance')
     args = parser.parse_args(argv)
+    if args.trace_reminder_processes and (set(args.host)!={'claude'} or set(args.cases)!={'reminder-collection'}):
+        parser.error('Reminder tracing is limited to the synthetic Claude reminder collection')
     if not 30 <= args.timeout <= 600:
         parser.error('Timeout must be 30..600 seconds')
     if args.trace_gate_processes and (set(args.host)-{'claude','codex'} or set(args.cases)-STOP_CASES):
@@ -147,7 +151,7 @@ def parse_args(argv=None):
         for host in args.host:
             if not re.fullmatch(r'sha256:[a-f0-9]{64}',images['hosts'][host]['image']):
                 raise ValueError('Image must be a full fixed digest')
-            if args.trace_gate_processes and images['hosts'][host].get('gate_trace',{}).get('strace')!='6.1':
+            if (args.trace_gate_processes or args.trace_reminder_processes) and images['hosts'][host].get('gate_trace',{}).get('strace')!='6.1':
                 raise ValueError('Process tracing requires the recorded fixed strace 6.1 image')
     except (OSError,ValueError,KeyError,tarfile.TarError) as error:
         parser.error(str(error))
@@ -350,6 +354,8 @@ def main(argv=None):
     context_module.write_bytes((ROOT/'tests/codex_context_probe.py').read_bytes())
     claude_reminder_module=args.output/'claude_reminder_probe.py'
     claude_reminder_module.write_bytes((ROOT/'tests/claude_reminder_probe.py').read_bytes())
+    claude_trace_module=args.output/'claude_hook_trace.py'
+    claude_trace_module.write_bytes((ROOT/'tests/claude_hook_trace.py').read_bytes())
     digest=hashlib.sha256(args.archive.read_bytes()).hexdigest()
     report={'schema_version':1,'version':args.package['version'],'npm_sha256':digest,
         'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -361,6 +367,7 @@ def main(argv=None):
         'reminder_module_sha256':hashlib.sha256(reminder_module.read_bytes()).hexdigest(),
         'context_module_sha256':hashlib.sha256(context_module.read_bytes()).hexdigest(),
         'claude_reminder_module_sha256':hashlib.sha256(claude_reminder_module.read_bytes()).hexdigest(),
+        'claude_trace_module_sha256':hashlib.sha256(claude_trace_module.read_bytes()).hexdigest(),
         'status':'In Progress','hosts':{},'semantic_review':'Not Run',
         'scope':'Linux amd64 real hosts; exact artifact, no external memory service'}
     report['resource_limits']={'cpus':2,'memory':'3g','memory_swap_total':'3g',
@@ -447,6 +454,7 @@ def main(argv=None):
                     '--mount',f'type=bind,src={trust_module},dst=/runner/codex_trust_probe.py,readonly',
                     '--mount',f'type=bind,src={reminder_module},dst=/runner/codex_reminder_probe.py,readonly',
                     '--mount',f'type=bind,src={claude_reminder_module},dst=/runner/claude_reminder_probe.py,readonly',
+                    '--mount',f'type=bind,src={claude_trace_module},dst=/runner/claude_hook_trace.py,readonly',
                     '--mount',f'type=bind,src={context_module},dst=/runner/codex_context_probe.py,readonly',
                     '-e','HOME=/home/agent','-e','HTTP_PROXY','-e','HTTPS_PROXY','-e','ALL_PROXY',
                     '--workdir','/workspace','--entrypoint','python3',image,'-c',

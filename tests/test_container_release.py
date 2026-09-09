@@ -118,6 +118,15 @@ class ContainerReleaseTest(unittest.TestCase):
                                    '--archive','absent.tgz','--output','absent'])
             resources.assert_not_called();files.assert_not_called()
 
+    def test_reminder_trace_scope_rejected_before_file_or_resource_access(self):
+        runner=module('pw_trace_scope','tests/run-five-agent-release.py')
+        for host,case in [('codex','reminder-collection'),('claude','maintenance'),('pi','reminder-collection')]:
+            with self.subTest(host=host,case=case),patch.object(runner,'resource_preflight') as resources,patch.object(Path,'is_file') as files:
+                with self.assertRaises(SystemExit):
+                    runner.parse_args(['--host',host,'--cases',case,'--trace-reminder-processes',
+                                       '--archive','absent.tgz','--output','absent'])
+                resources.assert_not_called();files.assert_not_called()
+
     def test_codex_exec_projection_never_claims_complete_tool_observation(self):
         runner=module('pw_codex_projection_scope','tests/run-five-agent-release.py')
         stream=json.dumps({'type':'item.completed','item':{'type':'agent_message','text':'NO_CONTEXT'}})
