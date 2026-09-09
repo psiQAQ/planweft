@@ -21,6 +21,7 @@ jobs:
         with:
           python-version: '3.14'
       - run: python -m unittest discover -s tests -p 'test_record_templates.py'
+      - run: python -m unittest discover -s tests -p 'test_local_operations.py'
   distribution:
     runs-on: ubuntu-latest
     steps:
