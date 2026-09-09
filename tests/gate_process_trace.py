@@ -5,7 +5,6 @@ in TRACE_SYSCALLS, retain process-exit records, and start in /workspace. Raw
 trace text stays private: the result contains no argv, buffers or environment.
 """
 import ast
-from bisect import bisect_right
 import hashlib
 import os
 from pathlib import Path
@@ -13,6 +12,69 @@ import re
 
 TRACE_SYSCALLS = 'execve,clone,clone3,fork,vfork,open,openat,openat2,read,close,close_range,dup,dup2,dup3,fcntl,chdir,fchdir'
 COUNTERS = {'/workspace/.stop_blocks', '/workspace/.gate_last_ledger'}
+ALL_FDS = (0, 4294967295)
+
+
+def _footprint(name, args, returned, body, state):
+    """Bindings read/written by a successful call, not file contents or offsets.
+
+    clone(2) copies non-shared tables; execve(2) unshares only the FD table.
+    Ranges avoid expanding close_range(~0U) and retain actual resource objects
+    so their Python ids cannot be reused after a process exits.
+    """
+    items=[]
+    def fd(number, write=False):
+        items.append((state['fds'], write, (number,number)))
+    def all_fds(write=False): items.append((state['fds'],write,ALL_FDS))
+    def cwd(write=False): items.append((state['cwd'],write,(0,0)))
+    def path(value, dirfd='AT_FDCWD'):
+        if not os.path.isabs(_string(value)):
+            if dirfd=='AT_FDCWD': cwd()
+            else: fd(_number(dirfd))
+    if name in {'clone','clone3','fork','vfork'} and returned>0:
+        if 'CLONE_FILES' not in body: all_fds()
+        if 'CLONE_FS' not in body: cwd()
+    elif name=='execve' and returned==0:
+        all_fds(); path(args[0])
+        # Shell script argv is resolved relative to cwd after exec as well.
+        cwd()
+    elif name in {'open','openat','openat2'} and returned>=0:
+        path(args[0] if name=='open' else args[1],
+             'AT_FDCWD' if name=='open' else args[0])
+        fd(returned,True)
+    elif name=='read' and returned>=0: fd(_number(args[0]))
+    elif name=='close' and returned==0: fd(_number(args[0]),True)
+    elif name=='close_range' and returned==0:
+        if 'CLOSE_RANGE_UNSHARE' in body:
+            # Only the snapshot touches the old shared table; changes are
+            # applied to the caller's newly private table.
+            all_fds()
+        else:
+            items.append((state['fds'],True,(_number(args[0]),_number(args[1].replace('~0U','4294967295')))))
+    elif name in {'dup','dup2','dup3'} and returned>=0:
+        fd(_number(args[0])); fd(returned,True)
+    elif name=='fcntl' and returned>=0:
+        fd(_number(args[0]), args[1]=='F_SETFD')
+        if args[1] in {'F_DUPFD','F_DUPFD_CLOEXEC'}: fd(returned,True)
+    elif name=='chdir' and returned==0:
+        path(args[0]); cwd(True)
+    elif name=='fchdir' and returned==0:
+        fd(_number(args[0])); cwd(True)
+    return items
+
+
+def _ambiguous(accesses):
+    # Events have already been sorted by start. Grouping by resource also
+    # catches threads born inside an unfinished operation's interval.
+    groups={}
+    for start,end,pid,resource,write,span in accesses:
+        group=groups.setdefault(id(resource),[])
+        group[:]=[entry for entry in group if entry[0]>=start]
+        for other_end,other_pid,other_write,other_span in group:
+            if pid!=other_pid and (write or other_write) and max(span[0],other_span[0])<=min(span[1],other_span[1]):
+                return True
+        group.append((end,pid,write,span))
+    return False
 
 
 def _arguments(value):
@@ -83,8 +145,7 @@ def attributed_gate_reads(text, expected_script_hash, *, read_script=None):
     """
     reader=read_script or (lambda path: Path(path).read_bytes())
     events,errors=_events(text)
-    positions={}
-    for index,pid,_,_ in events: positions.setdefault(pid,[]).append(index)
+    accesses=[]
     processes={}; generations={}; reads=[]; gates=[]; roots=set(); root_execs=set()
     if not re.fullmatch(r'[0-9a-f]{64}',expected_script_hash):
         errors.append('invalid expected script digest')
@@ -126,24 +187,16 @@ def attributed_gate_reads(text, expected_script_hash, *, read_script=None):
             errors.append('unresolved syscall result'); continue
         try:
             returned=_return_number(result); args=_arguments(body)
-            # Shared-table operations that overlap another task's operation
-            # have no total ordering in strace. Do not guess which descriptor
-            # or cwd was visible to a concurrent read.
-            if finished>index and name in {'open','openat','openat2','close','close_range','dup','dup2','dup3','fcntl','chdir','fchdir','read'}:
-                sharing=[other for other,other_state in processes.items()
-                         if other!=pid and (other_state['fds'] is state['fds'] or other_state['cwd'] is state['cwd'])]
-                if any((slot:=bisect_right(positions[other],index))<len(positions[other])
-                       and positions[other][slot]<finished for other in sharing):
-                    errors.append('ambiguous concurrent shared descriptor or cwd operation')
+            for resource,write,span in _footprint(name,args,returned,body,state):
+                accesses.append((index,finished,pid,resource,write,span))
             if name in {'clone','clone3','fork','vfork'}:
                 if returned>0:
                     if returned in processes: errors.append('child PID already active')
                     fresh(returned,state,body)
             elif name=='execve' and returned==0:
                 root_execs.add((pid,state['generation']))
-                # exec unshares descriptor/cwd state; CLOEXEC descriptors close.
+                # execve unshares FDs, while CLONE_FS sharing remains in effect.
                 state['fds']={fd:value for fd,value in state['fds'].items() if not value[1]}
-                state['cwd']=list(state['cwd'])
                 filename=absolute(_string(args[0]),state)
                 argv=ast.literal_eval(args[1])
                 if not isinstance(argv,list) or not all(isinstance(a,str) for a in argv):
@@ -204,6 +257,7 @@ def attributed_gate_reads(text, expected_script_hash, *, read_script=None):
         except (ValueError,SyntaxError,IndexError,TypeError):
             errors.append('unsupported or malformed syscall arguments')
     if not events or not roots: errors.append('empty process trace')
+    if _ambiguous(accesses): errors.append('ambiguous concurrent shared descriptor or cwd operation')
     if roots-root_execs: errors.append('root process lacks successful exec record')
     if processes: errors.append('missing process exit records')
     return {'kind':'script-digest-bound process-generation counter I/O',

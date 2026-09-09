@@ -34,7 +34,7 @@ class ReleaseGateTest(unittest.TestCase):
         spec = importlib.util.spec_from_file_location('gate', ROOT / 'scripts/check-release-gate.py')
         gate = importlib.util.module_from_spec(spec); spec.loader.exec_module(gate)
         digest = hashlib.sha256(archive.read_bytes()).hexdigest()
-        record = {'schema_version': 1, 'version': '0.4.0', 'npm_sha256': digest, 'core': {}}
+        record = {'schema_version': 2, 'version': '0.4.0', 'npm_sha256': digest, 'core': {}}
         (root/'trace.json').write_text('{"fixture":true}')
         raw={'evidence':'trace.json','sha256':hashlib.sha256((root/'trace.json').read_bytes()).hexdigest()}
         for host in gate.HOSTS:
@@ -45,6 +45,8 @@ class ReleaseGateTest(unittest.TestCase):
                     'model':'fixture-model','runner_sha256':'fixture-runner','session_id':host+'-'+check, 'external_memory':False,
                     'history_available':False,'plugin_available':False,'input_snapshot_sha256':'fixture-snapshot','output_snapshot_sha256':'fixture-snapshot',
                     'reviewer':'fixture-reviewer','reviewed_sha256':[r['sha256'] for r in record['core'][host].values()]}
+                details['scenarios']={name:{'status':'Passed','artifacts':[raw]}
+                    for name in gate.required_scenarios(host,check)}
                 data = json.dumps({'status':'Passed','host':host,'check':check,'version':'0.4.0',
                     'npm_sha256':digest,'observations':details}).encode()
                 (root/name).write_bytes(data)
@@ -80,6 +82,25 @@ class ReleaseGateTest(unittest.TestCase):
             attachment=root/complete['core']['codex']['exact_artifact']['evidence']
             attachment.write_text(attachment.read_text()+' ')
             self.assertNotEqual(self.check(a,evidence).returncode,0)
+
+    def test_overall_pass_cannot_hide_missing_or_unbound_scenarios(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); archive=self.archive(root,'0.4.0')
+            for check,scenario in [('permissions','persisted_hook_trust'),
+                                   ('stopping','gate_stall'),
+                                   ('model_maintenance','automatic_adoption')]:
+                for alteration in ('missing','not-run','missing-artifact'):
+                    record=self.complete(root,archive)
+                    entry=record['core']['codex'][check]; path=root/entry['evidence']
+                    payload=json.loads(path.read_text()); scenarios=payload['observations']['scenarios']
+                    if alteration=='missing': scenarios.pop(scenario)
+                    elif alteration=='not-run': scenarios[scenario]['status']='Not Run'
+                    else: scenarios[scenario]['artifacts']=[]
+                    path.write_text(json.dumps(payload));entry['sha256']=hashlib.sha256(path.read_bytes()).hexdigest()
+                    evidence=root/'acceptance.json';evidence.write_text(json.dumps(record))
+                    result=self.check(archive,evidence)
+                    self.assertNotEqual(result.returncode,0)
+                    self.assertIn(b'Required scenario missing:',result.stderr)
 
     def test_ci_cannot_publish_different_stable_bytes(self):
         import os

@@ -95,8 +95,8 @@ def parse_args(argv=None):
     parser.add_argument('--timeout',type=int,default=600)
     parser.add_argument('--trace-gate-processes',action='store_true',help='Use a fixed strace-enabled image to attribute shell gate reads; Codex/Claude stopping cases only')
     args = parser.parse_args(argv)
-    if not 30 <= args.timeout <= 1800:
-        parser.error('Timeout must be 30..1800 seconds')
+    if not 30 <= args.timeout <= 600:
+        parser.error('Timeout must be 30..600 seconds')
     if args.trace_gate_processes and (set(args.host)-{'claude','codex'} or set(args.cases)-STOP_CASES):
         parser.error('Process tracing is limited to Codex/Claude synthetic stopping cases')
     if 'pi' in args.host and set(args.cases)&(STOP_CASES-{'stopping','continuation-limit'}):
@@ -168,6 +168,43 @@ def credentials(args, host):
 
 def write_json(path, data):
     path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+
+
+def resource_preflight(output):
+    """Reserve headroom before reading auth or starting a bounded container."""
+    existing=output
+    while not existing.exists(): existing=existing.parent
+    free=shutil.disk_usage(existing).free
+    info=Path('/proc/meminfo').read_text()
+    available=int(re.search(r'^MemAvailable:\s+(\d+)',info,re.M)[1])*1024
+    if available<4*1024**3 or free<8*1024**3:
+        raise RuntimeError('Resource preflight: require 4 GiB available RAM and 8 GiB free output storage; no container started')
+    return {'available_memory_bytes':available,'free_disk_bytes':free}
+
+
+def clean_completed_store(project):
+    """Discard only this disposable project's unreferenced installer cache."""
+    root=project/'.planweft'
+    receipt=root/'installations.json'; versions=root/'versions'
+    if root.is_symlink() or receipt.is_symlink() or versions.is_symlink(): return False
+    if not receipt.is_file() or not versions.is_dir(): return False
+    record=json.loads(receipt.read_text())
+    if record.get('agents')!={}: return False
+    shutil.rmtree(versions)
+    return True
+
+
+def cleanup_finished_case(project, container):
+    # A failed docker rm is not proof that the process released its files.
+    # Query the exact owned name; daemon failure also means retain the cache.
+    try:
+        remaining=subprocess.check_output(['docker','ps','-aq','--filter','name=^/'+container+'$'],text=True).strip()
+    except (OSError,subprocess.CalledProcessError):
+        return {'status':'Failed','reason':'Cannot verify container removal; retained cache'}
+    if remaining:
+        return {'status':'Failed','reason':'Container still exists; retained cache'}
+    return {'status':'Passed','removed_unreferenced_versions':clean_completed_store(project),
+            'retained':'project records, receipt, raw logs and snapshots'}
 
 
 def model_text(host, text):
@@ -258,6 +295,7 @@ def project_snapshot(fixture, work):
 
 def main(argv=None):
     args=parse_args(argv)
+    resources=resource_preflight(args.output)
     fixture=load_fixture_module()
     args.output.mkdir(parents=True)
     (args.output/'runner.py').write_bytes(Path(__file__).read_bytes())
@@ -279,6 +317,7 @@ def main(argv=None):
         'scope':'Linux amd64 real hosts; exact artifact, no external memory service'}
     report['resource_limits']={'cpus':2,'memory':'3g','memory_swap_total':'3g',
                                'pids':256,'home_tmpfs':'2g','tmp_tmpfs':'512m'}
+    report['resource_preflight']=resources
     write_json(args.output/'summary.json',report)
     # Concurrent labelled validation containers are not baseline services.
     initial=set(subprocess.check_output(['docker','ps','-aq'],text=True).split())
@@ -330,6 +369,7 @@ def main(argv=None):
                 probe_scope=context_probe_scope(host,case)
                 if probe_scope: payload['probe_scope']=probe_scope
                 name=run_id+'-'+host+'-'+case
+                resource_preflight(args.output)
                 command=['docker','run','--rm','-i','--name',name,'--label','planweft.run='+run_id,
                     '--read-only','--user',f'{os.getuid()}:{os.getgid()}','--cap-drop=ALL',
                     '--security-opt=no-new-privileges','--cpus=2','--memory=3g',
@@ -395,6 +435,10 @@ def main(argv=None):
                     'semantic_review':'Required' if case in {'maintenance','cold-reader','skill-loading'} else 'Not applicable'}
                 if probe_scope: cases[case]['probe_scope']=probe_scope
                 write_json(base/'assessment.json',cases[case]);write_json(args.output/'summary.json',report)
+                cleanup=cleanup_finished_case(work,name)
+                write_json(base/'cache-cleanup.json',cleanup)
+                if cleanup['status']!='Passed':
+                    raise RuntimeError('Scenario resource cleanup incomplete; preserved cache and stopped new containers')
                 print(host,case,cases[case]['status'],flush=True)
     except Exception as error:
         report['error']=str(error)

@@ -20,6 +20,45 @@ def module(name,path):
 
 
 class ContainerReleaseTest(unittest.TestCase):
+    def test_resource_headroom_is_checked_without_creating_output(self):
+        from types import SimpleNamespace
+        runner=module('pw_headroom','tests/run-five-agent-release.py')
+        with tempfile.TemporaryDirectory() as temporary:
+            output=Path(temporary)/'absent'
+            for ram,storage,passes in [(3,20,False),(8,7,False),(6,12,True)]:
+                with patch.object(runner.shutil,'disk_usage',return_value=SimpleNamespace(free=storage*1024**3)), \
+                     patch.object(Path,'read_text',return_value=f'MemAvailable: {ram*1024**2} kB\n'):
+                    if passes: self.assertEqual(runner.resource_preflight(output)['available_memory_bytes'],ram*1024**3)
+                    else:
+                        with self.assertRaisesRegex(RuntimeError,'Resource preflight'): runner.resource_preflight(output)
+                self.assertFalse(output.exists())
+
+    def test_cache_cleanup_preserves_owned_records_and_referenced_versions(self):
+        runner=module('pw_cache_cleanup','tests/run-five-agent-release.py')
+        with tempfile.TemporaryDirectory() as temporary:
+            project=Path(temporary);store=project/'.planweft';versions=store/'versions'
+            versions.mkdir(parents=True);(versions/'cache.bin').write_bytes(b'cache')
+            (project/'progress.md').write_text('test evidence')
+            receipt=store/'installations.json';receipt.write_text('{"agents":{"pi":{"version":"old"}}}')
+            self.assertFalse(runner.clean_completed_store(project));self.assertTrue(versions.exists())
+            receipt.write_text('{"agents":{}}')
+            self.assertTrue(runner.clean_completed_store(project));self.assertFalse(versions.exists())
+            self.assertTrue(receipt.exists());self.assertEqual((project/'progress.md').read_text(),'test evidence')
+            versions.symlink_to(project,target_is_directory=True)
+            self.assertFalse(runner.clean_completed_store(project));self.assertTrue((project/'progress.md').exists())
+
+    def test_failed_removal_never_cleans_a_possibly_live_store(self):
+        runner=module('pw_live_cache','tests/run-five-agent-release.py')
+        for outcome in ['still-running-id\n',subprocess.CalledProcessError(1,['docker','ps'])]:
+            with patch.object(runner.subprocess,'check_output',side_effect=outcome if isinstance(outcome,Exception) else None,
+                              return_value=outcome), patch.object(runner,'clean_completed_store') as clean:
+                self.assertEqual(runner.cleanup_finished_case(Path('/unused'),'owned-case')['status'],'Failed')
+                clean.assert_not_called()
+        with patch.object(runner.subprocess,'check_output',return_value=''), \
+             patch.object(runner,'clean_completed_store',return_value=True) as clean:
+            self.assertEqual(runner.cleanup_finished_case(Path('/unused'),'owned-case')['status'],'Passed')
+            clean.assert_called_once()
+
     def test_project_snapshot_prunes_stores_before_reading_and_keeps_nested_docs(self):
         runner=module('pw_snapshot_runner','tests/run-five-agent-release.py')
         fixture=module('pw_snapshot_fixture','tests/run-pwf-smoke.py')

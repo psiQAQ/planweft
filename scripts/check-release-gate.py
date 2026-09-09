@@ -13,6 +13,33 @@ LOCAL_CHECKS = ('exact_artifact', 'native_lifecycle', 'skill_loading', 'context_
                 'independent_review')
 REMOTE_CHECKS = ('remote_lifecycle', 'remote_session', 'native_channels')
 MODEL_CHECKS = ('context_injection', 'recovery', 'stopping', 'model_maintenance', 'cold_read', 'remote_session')
+SCENARIOS = {
+    'exact_artifact': ('archive_bytes', 'installed_contents', 'runtime_dependencies'),
+    'native_lifecycle': ('install', 'update', 'rollback', 'remove', 'reinstall', 'fixture_add_modify_delete', 'partial_failure_recovery'),
+    'skill_loading': ('single_main_skill', 'actual_skill_read'),
+    'context_injection': ('context_delivery', 'reminder_deduplication'),
+    'recovery': ('fresh_session_project_files',),
+    'stopping': ('normal_stop', 'explicit_continuation'),
+    'permissions': ('readonly_disabled', 'project_isolation', 'user_change_protection', 'duplicate_hooks'),
+    'model_maintenance': ('automatic_adoption', 'regression_tests', 'approved_requirements', 'single_state_source', 'accurate_records'),
+    'cold_read': ('goal_and_next_action', 'historical_results_and_limits'),
+    'remote_lifecycle': ('candidate_to_release', 'release_to_candidate', 'candidate_to_release_again', 'uninstall'),
+    'remote_session': ('fresh_session_loading',),
+    'native_channels': ('native_install', 'native_update', 'native_remove'),
+}
+
+
+def required_scenarios(host, check):
+    required = SCENARIOS.get(check, ())
+    if check == 'stopping':
+        required += ('continuation_limit',) if host == 'pi' else ('gate_cap', 'gate_stall')
+    if check == 'permissions':
+        # Pi exposes extension/package approval, not a per-tool deny sandbox.
+        # Its scope/approval limitation is recorded separately, never relabeled
+        # as a successful native denial test.
+        required += ('package_approval',) if host == 'pi' else ('native_permission_denial',)
+        if host == 'codex': required += ('untrusted_hooks', 'persisted_hook_trust')
+    return required
 
 
 def read_attachment(root, record, label):
@@ -33,7 +60,7 @@ def read_attachment(root, record, label):
 def validate_evidence(archive, package, evidence_path, promotion=False):
     evidence = json.loads(evidence_path.read_text())
     digest = hashlib.sha256(archive.read_bytes()).hexdigest()
-    if evidence.get('schema_version') != 1:
+    if evidence.get('schema_version') != 2:
         raise ValueError('Unsupported acceptance schema')
     if evidence.get('version') != package['version'] or evidence.get('npm_sha256') != digest:
         raise ValueError('Stable evidence does not identify this exact npm artifact')
@@ -58,6 +85,16 @@ def validate_evidence(archive, package, evidence_path, promotion=False):
                 if artifact.get('evidence') == record['evidence']:
                     raise ValueError('Evidence cannot reference itself: ' + label)
                 read_attachment(root, artifact, label + '/raw')
+            scenarios = details.get('scenarios', {})
+            for scenario in required_scenarios(host, check):
+                item = scenarios.get(scenario, {}) if isinstance(scenarios, dict) else {}
+                scenario_label = label + '/' + scenario
+                if item.get('status') != 'Passed' or not item.get('artifacts'):
+                    raise ValueError('Required scenario missing: ' + scenario_label)
+                for artifact in item['artifacts']:
+                    if artifact.get('evidence') == record['evidence']:
+                        raise ValueError('Scenario cannot cite its own attestation: ' + scenario_label)
+                    read_attachment(root, artifact, scenario_label)
             if check in MODEL_CHECKS:
                 required = ('image', 'cli_version', 'model', 'runner_sha256', 'session_id')
                 if details.get('kind') != 'actual-host-model' or not all(isinstance(details.get(k), str) and details[k] for k in required):
