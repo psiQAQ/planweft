@@ -169,4 +169,4 @@ RC4 补充：Codex/Claude 公开 Git 市场的安装、同提交刷新、缓存�
 资源与隔离补充：测试器在快照读取前剪枝安装缓存，并限制容器 CPU、RAM、Swap、进程与 tmpfs。Claude/Pi/OpenCode 的同 HOME 实测中，更新/移除 A 保持 B 不变；Codex/DSH 拒绝不支持的项目 scope 且无写入。这证明隔离，不证明被移除侧所有原生缓存均消失。Claude Pro 实际读取中文 Skill 后仍未采用 PWF，中断的外层运行保持 Incomplete、冷读 Not Run；Flash 失败同样保留。
 
 
-RC9 已由 OIDC 发布且准确归档校验、三系统 CI Passed。Claude 已获官方 DeepSeek 兼容端点直连授权并完成模型试验，但跳过计划初始化；Pi、OpenCode、DSH 的独立检查仍发现记录准确性或授权范围问题。RC10 正在修复，尚未发布；RC9 原始 Failed 保留，正式 0.4.0 未通过门槛。
+当前候选 RC10 已通过三系统 CI、OIDC 及官方归档字节验证；但 Claude 独立维护语义 Failed，Pi 原生相对路径触发 doctor 回归且维护模型未启动。RC11 修复在开发中。OpenCode 的具体模型直连授权已补齐；五宿主严格门槛未通过，正式 0.4.0 未发布。

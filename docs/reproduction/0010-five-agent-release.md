@@ -337,3 +337,19 @@ RC10 将六语言主入口收敛为四步，详细解释器/绑定分支继续�
 RC10 开发回归：Python 219 tests Passed / 1 skipped，最终初始 SessionStart 守卫另以 20 tests 复验 Passed；安装器 64 tests、DSH shell 3 tests Passed。迁移上游 721 passed / 63 skipped / 851 subtests passed；固定原始上游未修改，既有基线保留。本次编译一致性、目录一致性 Passed；尚无 RC10 三系统 CI 或准确包模型结果。见 [开发日志](evidence/0010/rc10-development-regressions.tar.gz)，SHA-256 `327146c993583d4dfc01d3ed0f0f16c4ec5c20bd361072f3384533dcdb0b64be`。
 
 公开前审计发现初稿附件误含 run/tmp 的 Node 编译缓存并命中私钥格式标记；已知认证值无命中。缓存没有证据职责，导出器排除 tmp 后保留 352 项有效文件及全部 204 项审查依据，修正尚未公开的末次证据提交。原始模型失败和本地审计失败继续保留，不用格式标记推断凭据泄露。
+
+## RC10 发布、真实缺陷与 RC11 对照
+
+RC10 干净 `e79e08548c31ed8833da032f68766b36078779f4` 重建与初次冻结归档逐字一致，SHA-256 `fed540a7a27d9ce8e58d8535bbd1479b612ca0db8e2e62df7b9e9d9e875e8114`，5,357,766 bytes。[三系统 Check](https://github.com/psiQAQ/planweft/actions/runs/34349393062) 和 [OIDC](https://github.com/psiQAQ/planweft/actions/runs/34350081143) Passed，官方 registry 下载及 integrity 匹配。一次默认 npm mirror 元数据查询在 URL 白名单检查处停止，随后显式查询官方 registry，不修改个人 npm 配置。
+
+Claude 自动维护与冷读 Passed，初始化和实际填记录均先于实现修改；独立维护仍 Failed：禁读宿主配置实际送达、固定项目外 scratch 备份/恢复/删除、未执行旧测试却提前写为 Passed。后续新回归负向对照实际有效，不能回填旧测试执行时点。独立冷读正确报告历史结果与自身命令检查，维护后、冷读前后快照一致。独立审查 SHA-256 `998199a5d653d7a618b28a61d75d129bd07cbdec56ed9a6caa0ceb879d22c9d4`，主 Agent 重算75项附件。
+
+Pi 维护在模型前被 doctor 阻止。原生 `0.84.3` 保存 `../.planweft/versions/0.4.0-rc.10/node_modules/planweft/dist/pi/planweft`，相对 `.pi/settings.json`；RC10 检测只豁免绝对字符串，产生真实新回归。独立冷读只读取未维护的合成项目，不计维护交接通过。RC11 修复保留 foreign scope 与重复条目拒绝；离线首轮68项中1 Failed，修正后68 Passed，独立扩展后76 Passed/1 Windows Skipped。准确新包与 Windows CI仍待执行。
+
+上述准确发布、两宿主原始记录、75项独立依据及资源清理见 [RC10 附件](evidence/0010/rc10-claude-pi-records.tar.gz)：139项，SHA-256 `7dde0b677002d2eea41e1bd3a59606221d0274de8f29338ce72290886e8762f5`。只清理已结束且无容器引用的8个可重建目录，共328,284,755 bytes；准确归档、失败、快照与审查保留。
+
+RC11 范围恢复修改沿用固定 PWF 选择器，实际纯函数对照2 tests Passed，覆盖末尾 Scope 遗漏、Goal保留、纯本地化 fallback 和混合标题丢失及 LF/CRLF。全量 Python 221 tests 的首次检查有1项分发不同步失败/1 skipped；安装说明生成同步后相关24 tests Passed，不抹去首次失败。安装器76 Passed/1 Windows skipped、DSH shell3 Passed、最终目录一致性 Passed。源码记录与真实宿主/稳定验收分开。
+
+OpenCode 的一次新模型命令在启动前被自动审批拒绝，要求明确平台/端点/负载；用户随后补充授权隔离 OpenCode 直连 `https://api.deepseek.com/v1`，仅发送合成任务、测试提示及公开插件。此前拒绝保留；尚未执行的新模型场景不能计 Passed。
+
+[RC11 开发回归日志](evidence/0010/rc11-development-regressions.tar.gz)：10项，SHA-256 `9161fac03944948b61d9f461c4e0bb6a7411d7752fa8f0b8528792ddc25695d0`。包含原始失败和修正后的相关检查，未把开发日志当作准确 npm 包验收。

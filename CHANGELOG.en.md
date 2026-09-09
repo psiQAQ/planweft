@@ -2,7 +2,13 @@
 
 # Changelog
 
-## 0.4.0-rc.10 — in development
+## 0.4.0-rc.11 — in development
+
+- Fix doctor rejecting Pi project-relative owned sources: resolve against the settings directory while retaining duplicate/cross-scope checks and object metadata.
+- Keep task scope in the extractable part of the existing Goal, with actual instruction sources and localized/protected-heading limitations.
+- Retain RC10 Claude semantic and Pi native-doctor failures. The new exact artifact has not been validated.
+
+## 0.4.0-rc.10 — published candidate with known defects
 
 - Compact the six-language entry into four steps while preserving read-only, explicit restrictions and one live status source; load selection details on demand and re-read corrected claims.
 - Reject cross-scope Pi/OpenCode registrations in known native locations while preserving owned updates, version-matched Skill pairing and path-alias protection.
