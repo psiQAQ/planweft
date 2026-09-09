@@ -465,3 +465,80 @@ test('OpenCode same-root alias still rejects an additional unowned loader', asyn
   await assert.rejects(create(['update','--dry-run']).execute(),/planweft\.js/);
   assert.equal(fs.readFileSync(foreign,'utf8'),content);
 });
+
+test('Pi native project-relative owned source survives doctor and update', async t => {
+  const f=fixture(t);
+  assert.equal(await f.create(['add','-a','pi']).execute(),0);
+  const stateFile=path.join(f.project,'.planweft/installations.json');
+  const before=fs.readFileSync(stateFile,'utf8'),source=JSON.parse(before).agents.pi.nativeSource;
+  const file=path.join(f.project,'.pi/settings.json');fs.mkdirSync(path.dirname(file),{recursive:true});
+  const relative=path.relative(path.dirname(file),source);
+  fs.writeFileSync(file,JSON.stringify({packages:[relative]}));
+  assert.equal(await f.create(['doctor','-a','pi']).execute(),0);
+  assert.equal(await f.create(['update','-a','pi','--dry-run']).execute(),0);
+  assert.equal(fs.readFileSync(stateFile,'utf8'),before);
+});
+
+test('Pi relative source exemptions retain foreign scopes and repeated entries', async t => {
+  for (const foreign of [false,true]) await t.test(foreign?'other scope':'duplicate entry',async t=>{
+    const f=fixture(t);assert.equal(await f.create(['add','-a','pi']).execute(),0);
+    const source=JSON.parse(fs.readFileSync(path.join(f.project,'.planweft/installations.json'),'utf8')).agents.pi.nativeSource;
+    const file=path.join(foreign?f.home:f.project,foreign?'.pi/agent/settings.json':'.pi/settings.json');
+    fs.mkdirSync(path.dirname(file),{recursive:true});
+    const relative=path.relative(path.dirname(file),source);
+    fs.writeFileSync(file,JSON.stringify({packages:foreign?[relative]:[relative,relative]}));
+    const before=fs.readFileSync(file,'utf8');
+    assert.equal(await f.create(['doctor','-a','pi']).execute(),1);
+    assert.equal(fs.readFileSync(file,'utf8'),before);
+  });
+});
+
+test('Pi structured source exemption preserves object metadata and equivalent duplicates', async t => {
+  for (const kind of ['object','mixed duplicates','object duplicates','metadata duplicate','wrong base','foreign object']) {
+    await t.test(kind,async t=>{
+      const f=fixture(t);assert.equal(await f.create(['add','-a','pi']).execute(),0);
+      const stateFile=path.join(f.project,'.planweft/installations.json'),stateBefore=fs.readFileSync(stateFile,'utf8');
+      const source=JSON.parse(stateBefore).agents.pi.nativeSource;
+      const foreign=kind==='foreign object';
+      const file=path.join(foreign?f.home:f.project,foreign?'.pi/agent/settings.json':'.pi/settings.json');
+      fs.mkdirSync(path.dirname(file),{recursive:true});
+      const relative=path.relative(path.dirname(file),source),entry={source:relative,skills:['skills/project-docs'],extensions:[]};
+      let packages=[entry];
+      if(kind==='mixed duplicates') packages=[relative,{source}];
+      if(kind==='object duplicates') packages=[entry,{source:relative}];
+      if(kind==='metadata duplicate') entry.extensions=['./extensions/planning-with-files.ts'];
+      if(kind==='wrong base') entry.source='./'+path.relative(f.project,source);
+      const content=JSON.stringify({packages,unrelated:{enabled:true}},null,2).replace(/\n/g,'\r\n');
+      fs.writeFileSync(file,content);
+      const calls=f.calls.length;
+      assert.equal(await f.create(['doctor','-a','pi']).execute(),kind==='object'?0:1);
+      if(kind==='object') assert.equal(await f.create(['update','-a','pi','--dry-run']).execute(),0);
+      else await assert.rejects(f.create(['update','-a','pi','--dry-run']).execute(),/Another planning registration/);
+      assert.equal(fs.readFileSync(file,'utf8'),content);
+      assert.equal(fs.readFileSync(stateFile,'utf8'),stateBefore);
+      assert.equal(f.calls.length,calls);
+    });
+  }
+});
+
+test('Pi owned global home-relative source is scoped to the global settings file', async t => {
+  const f=fixture(t);assert.equal(await f.create(['add','-a','pi','--global']).execute(),0);
+  const installer=f.create(['doctor','-a','pi','--global']),source=installer.state.agents.pi.nativeSource;
+  const file=path.join(f.home,'.pi/agent/settings.json');fs.mkdirSync(path.dirname(file),{recursive:true});
+  const content=JSON.stringify({packages:[{source:'~/'+path.relative(f.home,source)}]});fs.writeFileSync(file,content);
+  assert.equal(await installer.execute(),0);
+  assert.equal(fs.readFileSync(file,'utf8'),content);
+});
+
+test('Pi Windows native separators and JSON escapes preserve one owned source only', {skip:process.platform!=='win32'}, async t => {
+  const f=fixture(t);assert.equal(await f.create(['add','-a','pi']).execute(),0);
+  const source=JSON.parse(fs.readFileSync(path.join(f.project,'.planweft/installations.json'),'utf8')).agents.pi.nativeSource;
+  const file=path.join(f.project,'.pi/settings.json'),relative=path.relative(path.dirname(file),source);
+  assert.match(relative,/^\.\.\\/);assert.ok(path.isAbsolute(source));
+  fs.mkdirSync(path.dirname(file),{recursive:true});
+  fs.writeFileSync(file,JSON.stringify({packages:[{source:relative}]}));
+  assert.equal(await f.create(['doctor','-a','pi']).execute(),0);
+  const duplicate=JSON.stringify({packages:[{source:relative},source]});fs.writeFileSync(file,duplicate);
+  assert.equal(await f.create(['doctor','-a','pi']).execute(),1);
+  assert.equal(fs.readFileSync(file,'utf8'),duplicate);
+});
