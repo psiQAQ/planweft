@@ -218,3 +218,9 @@ vendor 四文件是导入器产物，dist 与 plugins 由 builder 生成；证�
 - `scripts/build-plugin.py`、`overlays/planweft/entrypoints/`：依据 [Claude Skills 官方说明](https://code.claude.com/docs/en/skills#add-supporting-files) 的入口/按需引用组织及 description 匹配职责，将固定 PWF 手册保存在各完整 Skill 副本内，保留宿主能力与显式历史读取披露。六语言入口是本地维护的任务流程表达，不宣称能保证模型每次自动采用。
 - `tests/gate_process_trace.py`：依据 [clone(2)](https://man7.org/linux/man-pages/man2/clone.2.html) 的 CLONE_FILES/CLONE_FS 共享与复制，以及 [execve(2)](https://man7.org/linux/man-pages/man2/execve.2.html) 的 FD 表解除共享；核对 [Linux v6.12 fs/exec.c](https://github.com/torvalds/linux/blob/v6.12/fs/exec.c)。本地实现用重叠区间和资源读写集合判定归因歧义，是测试采集器，不修改插件 gate。未知返回和截断仍拒绝通过。
 - 历史结果与本次检查区分、schema 2 逐场景门槛、资源检查及已结束缓存清理是本轮用户批准的验收约束；具体实现与反例经独立审查，不宣称来自上游 PWF。
+
+## RC7 记录状态一致性修复
+
+固定 PWF v3.17.0 的 `skills/planning-with-files/scripts/init-session.sh` / `.ps1` 使用 here-doc 创建普通 progress，并硬编码初始 Current Status；`templates/progress.md` 另有动态阶段占位。本地“追加模板规则”因此没有覆盖实际默认初始化。这与已批准的 task_plan 唯一动态状态设计冲突，RC6 Codex 原生维护及独立审查确证了冲突；Pi/DSH findings 同样出现修复前观察仍称当前的缺陷。源码归档及版本摘要见 `vendor/planning-with-files/upstream.json`，独立依据与行为记录见 REV-0010 和对应 RC6 JSON。
+
+本地最小修复为生成时替换重复状态、指向同目录 task_plan，并在 findings 提供观察时间/修订提示。它组合已有 Markdown 相对链接、PWF 追加事件记录及本仓证据区分规则，不引入第二个状态服务、同步器或自动改写既有文件。任务阶段解析保持上游协议；实测初始化内容与既有字节保护分开验证。

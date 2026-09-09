@@ -56,10 +56,10 @@ RC3 曾通过 [OIDC 工作流](https://github.com/psiQAQ/planweft/actions/runs/3
 
 RC4 已通过 [OIDC 工作流](https://github.com/psiQAQ/planweft/actions/runs/34267947801) 发布到 `next`，修复 OpenCode 原生 npm 入口。冻结源码 `1d1c76c1d6048fd67fa6ef1b614e11b999106db6`，远端归档 SHA-256 为 `c6f54319befc8c43c559fd4c5af2eb6ca3d1b626e6c0b3fd65cb67c11d9d318b`，与本地和 CI 重建逐字一致；[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34267221127) 通过。当时试用版本为 `planweft@0.4.0-rc.4`；当前候选见下段。上述 RC3 记录保留历史归档身份；稳定版门槛仍未通过，`latest` 仍指向 RC1。
 
-RC5 已通过 [OIDC](https://github.com/psiQAQ/planweft/actions/runs/34317038628) 发布到 `next`，[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34316870816) 通过。冻结源码为 `c3bb9d870429e304149ca58b0e804ea55f4b537a`，准确 npm SHA-256 为 `f9123657773eb95cfe3df79b3f55669f12b37203bf2a593c1e749da1676069b3`，远端字节及 npm integrity 均匹配。当前候选试用请选择 `planweft@0.4.0-rc.5`。正式 0.4.0 未发布，latest 仍为 RC1。当前失败与收集器限制见[跨平台状态：中文](platforms.md) / [English](platforms.en.md)。
+RC5 已通过 [OIDC](https://github.com/psiQAQ/planweft/actions/runs/34317038628) 发布到 `next`，[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34316870816) 通过。冻结源码为 `c3bb9d870429e304149ca58b0e804ea55f4b537a`，准确 npm SHA-256 为 `f9123657773eb95cfe3df79b3f55669f12b37203bf2a593c1e749da1676069b3`，远端字节及 npm integrity 均匹配。该阶段试用版本为 `planweft@0.4.0-rc.5`。正式 0.4.0 未发布，latest 仍为 RC1。当前失败与收集器限制见[跨平台状态：中文](platforms.md) / [English](platforms.en.md)。
 
-## RC6 修复中的门槛更新
+## RC6 已发布与 RC7 修复准备
 
-当前源码准备 RC6，公开渠道仍以 registry 查询为准。稳定版清单升级为 schema 2：每个总项还必须提供逐场景 Passed 与准确附件，包括默认自动采用、去重、停止上限、权限隔离和远端升降级。Pi 使用原生包批准场景，不宣称具有逐工具拒绝沙箱。历史 RC 和 schema 1 不替代当前稳定归档的实际验收。
+RC6 已通过 [OIDC](https://github.com/psiQAQ/planweft/actions/runs/34322158954) 发布，准确归档 SHA-256 为 `c531188e46d268048ca0ab559baa358fc70af07277cb0001c521951234525799`，[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34322062209) Passed。当前源码准备 RC7，修复初始化 progress 重复状态及 findings 观察时点；不覆盖 RC6。公开渠道仍以 registry 查询为准。稳定版清单升级为 schema 2：每个总项还必须提供逐场景 Passed 与准确附件，包括默认自动采用、去重、停止上限、权限隔离和远端升降级。Pi 使用原生包批准场景，不宣称具有逐工具拒绝沙箱。历史 RC 和 schema 1 不替代当前稳定归档的实际验收。
 
 真实验收串行运行，场景最多 600 秒；不足 4 GiB 可用内存或 8 GiB 输出磁盘空间时不启动容器。容器限 2 CPU、3 GiB 且无额外 Swap、256 PID。确认场景容器消失后才清理自有未引用缓存；原始失败、项目记录、准确包和历史备份保留。

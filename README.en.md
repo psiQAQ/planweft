@@ -1,6 +1,6 @@
 [简体中文](README.md) | [English](README.en.md)
 
-> PlanWeft 0.4.0-rc.6 is a release candidate. Stable 0.4.0 requires live acceptance on Codex, Claude Code, Pi, OpenCode and DSH. See the [release checklist](docs/releasing.en.md) / [中文](docs/releasing.md).
+> PlanWeft 0.4.0 is still in candidate acceptance. Stable 0.4.0 requires live acceptance on Codex, Claude Code, Pi, OpenCode and DSH. See the [release checklist](docs/releasing.en.md) / [中文](docs/releasing.md).
 
 # PlanWeft
 
@@ -72,7 +72,7 @@ This project contributes the concrete workflow integration and engineering:
 
 ## Current delivery and boundaries
 
-Candidate **0.4.0-rc.5** provides one `planweft` npm package containing the installation CLI, Pi Extension, OpenCode V1 entry and resources for 15 hosts, including the native DSH bundle. It also provides six native marketplace entry points and preparation tools for Gemini/Hermes Git release trees. See the [中文安装指南](docs/installation.md) / [English installation guide](docs/installation.en.md), and the [中文跨平台设计](docs/platforms.md) / [English cross-platform design](docs/platforms.en.md) for capabilities and validation scope.
+The **0.4.0 candidate series** provides one `planweft` npm package containing the installation CLI, Pi Extension, OpenCode V1 entry and resources for 15 hosts, including the native DSH bundle. It also provides six native marketplace entry points and preparation tools for Gemini/Hermes Git release trees. See the [中文安装指南](docs/installation.md) / [English installation guide](docs/installation.en.md), and the [中文跨平台设计](docs/platforms.md) / [English cross-platform design](docs/platforms.en.md) for capabilities and validation scope.
 
 The 0.3.0 record includes local installation lifecycle checks for eight hosts. Hermes installation was rejected by its default scanner. RC4 remote npm lifecycles passed on all five core hosts, as did Codex/Claude public Git same-commit refreshes. Windows/macOS installer CI passed; real hosts and GUI cases retain Not Run items, and model maintenance/fresh-reader failures remain unresolved. Historical evidence does not become a new host run when documentation changes; the cross-platform documents explain these boundaries.
 

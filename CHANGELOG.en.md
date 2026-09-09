@@ -2,7 +2,12 @@
 
 # Changelog
 
-## 0.4.0-rc.6 (candidate in development)
+## 0.4.0-rc.7 (candidate in development)
+
+- Remove duplicate live phase state from progress templates and Shell/PowerShell initialization; refer to task_plan.md for dynamic state and date findings against their observed revision. Preserve existing project files and the PWF plan protocol.
+- Add live Codex persistent hook trust and four-host native denial/approval evidence. Replace the test-method count threshold with a counterfactual regression check against the original BOM implementation. Retain RC6 documentation and experiment-scope failures; collector repairs do not constitute stable acceptance.
+
+## 0.4.0-rc.6 (candidate)
 
 - Replace the long main Skill with a concise task workflow and five corresponding language variants; keep the detailed PWF manual inside every complete Skill copy. Preserve automatic matching, read-only scope, explicitly requested written artifacts and old-plan migration boundaries.
 - Distinguish historical verification from checks not repeated by a fresh reader; model revalidation is pending.

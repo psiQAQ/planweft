@@ -1,8 +1,8 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
-RC5 已经 OIDC 发布到 next，远端字节匹配、三系统 CI 通过。Codex 普通停止和 gated 续跑通过 invocation bypass 下的真实模型验证；cap/stall 因禁用对照也读取计数器，来源归因仍 Failed。Claude 计划采用及 OpenCode 冷读准确性继续阻止稳定验收；下方 RC4 维护结果保留原版本范围。见[发布状态：中文](releasing.md) / [English](releasing.en.md)。
+RC6 已经 OIDC 发布到 next，远端字节匹配、三系统 CI 通过。其 Codex 六项停止及独立审查通过；正常持久 hook 信任、Codex/OpenCode/DSH 原生拒绝和 Pi 项目批准已有实测。停止轨迹不替代权限或信任证明。
 
-RC5 修正 Codex 包内 Stop、resolver 和 SessionStart 路径。gated 探针观察到同一原生 turn 中两次 assistant 回复且仅计数变化，没有捕获原生 Stop decision 事件。正常持久 hook 信任和原生权限拒绝仍待补验；RC3/RC4 同 HOME 隔离已通过，不能替代当前稳定归档验收。Claude 进程归因仍未完成，不宣称正式 0.4.0 已发布。
+RC6 OpenCode 维护和冷读核心语义 Passed，保留历史字符串误报与冷读一处引用行号错误。Codex、Pi 和 DSH 维护在独立审查中仍有文档观察时点问题；Codex 另有 progress 旧阶段冲突，Pi 读取了实验禁止的项目宿主配置（未发现凭据泄露）。原自动结果和独立 Failed 均保留，正准备模板修复。Claude 兼容端点明确授权及实测仍待完成。以下表格保留历史版本范围，不代表稳定验收；状态见[发布：中文](releasing.md) / [English](releasing.en.md)。
 
 ## 0.4.0 候选验证
 

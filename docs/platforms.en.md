@@ -1,8 +1,8 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
-RC5 is published to next through OIDC, with matching remote bytes and passing three-OS CI. Its Codex normal stop and gated continuation passed actual invocation-bypass model checks. Cap/stall attribution remains Failed because disabled controls also read the counters. Claude planning adoption and OpenCode cold-read accuracy still block stable acceptance; RC4 maintenance results below retain their original version scope. See [release status: 中文](releasing.md) / [English](releasing.en.md).
+RC6 is published to next through OIDC, with matching remote bytes and passing three-OS CI. Its six Codex stopping scenarios passed independent review. Normal persisted hook trust, Codex/OpenCode/DSH native denial and Pi project approval have live observations. Stop traces do not substitute for permission or trust evidence.
 
-RC5 corrects the Codex packaged Stop, resolver and SessionStart resource paths. The gated probe observed two assistant replies within one native turn and only counter changes; it did not capture native Stop decision events. Normal persisted hook trust and native permission-denial checks remain pending. Shared-HOME isolation passed on RC3/RC4; it does not replace current stable-artifact acceptance. Claude process attribution is still incomplete. No stable 0.4.0 release is claimed.
+RC6 OpenCode maintenance and core cold-read semantics passed, with the original historical-string false negative and one cold-reader line-citation error retained. Independent review still found observation-timing defects in Codex, Pi and DSH records, a stale progress phase in Codex, and a Pi read of project host configuration prohibited by the experiment (no credential disclosure observed). Original automated results and independent failures remain; template fixes are being prepared. Explicit Claude-compatible endpoint authorization and live checks remain pending. The table below retains historical version scopes and is not stable acceptance; see [release status: 中文](releasing.md) / [English](releasing.en.md).
 
 ## 0.4.0 candidate validation
 

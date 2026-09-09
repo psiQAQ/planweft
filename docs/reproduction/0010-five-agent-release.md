@@ -231,3 +231,15 @@ RC6 从干净源码 `36dfe13cd03f48cbb74698c8c282732d13d19780` 冻结，[三系�
 两宿主自动检查均 Passed，但独立评审保留实质 Failed：findings 仍将调查时的 BOM 实现、旧说明或计划缺失称为当前事实。Pi 还读取了固定任务明确禁止的 `.pi/settings.json`，内容为安装资源路径，无凭据；DSH 打印额外 `DSH_*` 运行时元数据，未读取其指向的会话内容，不能夸大为历史正文访问。两者冷读能区分历史 Passed 与本次重跑/未重跑，不能以此覆盖 owner 记录缺陷。
 
 [RC6 Pi / DSH 原始记录](evidence/0010/rc6-pi-dsh-maintenance.tar.gz)，152 项，SHA-256 `177f1088e953b6e91e9f5b8936f73b1116df5f896d4ab6167ab546596ce63a05`。独立结论：[Codex](evidence/0010/codex-rc6-maintenance-independent-review.json)、[Pi](evidence/0010/pi-rc6-maintenance-independent-review.json)、[DSH](evidence/0010/dsh-rc6-maintenance-independent-review.json)。原始自动评估未改写。模型容器现已全部结束，无验收容器残留。owner 反馈入口也补齐相同 3 GiB/无额外 swap/256 PID/临时文件上限、运行前资源检查及场景结束缓存清理，12 项定向检查 Passed；该入口修复没有被记为新的真实反馈验收。
+
+### RC7 初始化记录修复与离线回归
+
+RC7 通过同一 overlay 修复六语言 progress 模板、Shell/PowerShell 内嵌初始化和 OpenCode fallback。progress 不再初始化第二个当前阶段；findings 指明来源和观察时点。`task_plan.md` 的阶段协议及既有项目记录跳过逻辑保持不变。没有修改已发布 RC6 或 vendor 源码。
+
+- 本地 Python：156 Passed / 1 Skipped / 2824 subtests。后续反馈异常清理反例 13 Passed；新增迁移契约测试所在组 7 Passed / 1 Skipped / 105 subtests。PowerShell 本机缺失，实际执行 Not Run，已加入三系统 installer CI。
+- Shell 实际初始化：普通、analytics、五语言路径；再次初始化保护原三文件及追加 CRLF 用户内容。
+- Node 安装器 28 Passed；DSH shell facade 3 Passed；TypeScript 5.9.3 编译及确定性目录检查 Passed。
+- 固定原始 PWF：721 Passed / 63 Skipped / 798 subtests。首次迁移：两个 progress 占位契约 SUBFAILED，其余 721 Passed；失败保留。独立审查后的两个 token 适配：721 Passed / 63 Skipped / 851 subtests。
+- OpenCode：原始 34 Passed；迁移原始 32 Passed / 2 既有设计差异 Failed，失败集合严格匹配既有两项；类型检查及适配后全部契约 Passed。已释放两份测试 node_modules 和下载缓存共 239,019,755 字节，保留源码、锁文件和日志。
+
+[离线记录](evidence/0010/rc7-offline-records.tar.gz) 共 28 项，SHA-256 `9eacf2a1f65e95023013e229c0ac0f34c6f880c7b55284e4d72610b3ab30f041`。这是候选准备证据，不是稳定准确归档或新宿主模型验收。RC7 发布后仍须按原固定任务复验，不采用显式调用或重复无变化试验替代自动匹配。

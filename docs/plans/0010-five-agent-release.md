@@ -2,11 +2,11 @@
 
 ## 当前状态（唯一当前入口）
 
-实施中，正式 `0.4.0` 未发布。公开候选为 `0.4.0-rc.6`（next），latest 仍是 RC1。RC6 冻结源码 `36dfe13cd03f48cbb74698c8c282732d13d19780`；CI、OIDC 及远端准确字节已通过。当前分支 `fix/rc6-native-trace-arguments` 继续修复验收器，不改已发布包。
+实施中，正式 `0.4.0` 未发布。公开候选为 `0.4.0-rc.6`（next），latest 仍是 RC1。RC6 冻结源码 `36dfe13cd03f48cbb74698c8c282732d13d19780`；CI、OIDC 及远端准确字节已通过。当前分支 `fix/rc6-native-trace-arguments` 已提交验收器修复，正在准备 RC7 的记录模板修复；不改已发布 RC6 包。
 
 - 本轮修复：主 Skill 渐进披露及五语言入口；历史验证/本次检查分离；停止轨迹按共享资源区间归因，覆盖 clone/exec 快照竞态；schema 2 逐场景门槛；4 GiB 可用内存与 8 GiB 输出磁盘前检、结束场景的未引用缓存清理。
-- 本地验证：Python 131 项 Passed；独立 Skill review 指出的书面研究产物例外已补回六语言；停止归因无认证真实轨迹两份完整解析。真实模型中的未知返回仍保持拒绝，不能推断完整停止门槛通过。
-- 当前动作：上游迁移回归已恢复 721 Passed / 63 Skipped；RC6 Codex 六项停止实测及独立审查 Passed；正常持久信任及 Codex/OpenCode/DSH 原生权限拒绝、Pi 项目批准已实测通过。OpenCode 冷读核心准确，Codex 维护发现初始化双状态缺陷，准备从 overlays 修复；Claude 明确端点授权仍待答复，未绕过自动审批拒绝。
+- 本地验证：RC7 Python 156 Passed / 1 PowerShell Not Run；Shell 普通/analytics/五语言实际初始化及原字节保护通过；固定原始与适配后迁移均 721 Passed / 63 Skipped；OpenCode 原始及适配契约通过。首次两项 progress 契约失败保留。准备冻结RC7并执行三系统 CI/OIDC与准确远端模型复验。
+- 当前动作：上游迁移回归已恢复 721 Passed / 63 Skipped；RC6 Codex 六项停止实测及独立审查 Passed；正常持久信任及 Codex/OpenCode/DSH 原生权限拒绝、Pi 项目批准已实测通过。OpenCode 冷读核心准确，Codex 维护发现初始化双状态，Codex/Pi/DSH 发现观察时点缺陷，正从 overlays 修复并递增 RC7；Claude 明确端点授权仍待答复，未绕过自动审批拒绝。
 - 剩余发布门槛：五平台准确稳定归档全量验收、三系统 CI、远端升降级与原生渠道、最终提升 latest 和 Release。当前没有 stable acceptance，全部原失败保留。
 
 资源：模型与重型容器串行，2 CPU、3 GiB 内存且无额外 Swap、256 PID；单模型场景最多 600 秒。只删除本次已结束、未被引用的可重建资源，保留项目记录、原始失败、准确归档和历史备份，不改其他服务。本仓继续原有文档入口，不做根三文件接管。

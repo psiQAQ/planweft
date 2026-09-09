@@ -11,13 +11,13 @@ the repository release evidence states current acceptance status. Full native in
 Use `--skill-only` explicitly for a complete portable Skill; it does not register plugin hooks.
 
 ```bash
-npx planweft@0.4.0-rc.4 add -a claude -a pi
-npx planweft@0.4.0-rc.4 add -a codex --global
-npx planweft@0.4.0-rc.4 add -a opencode --skill-only --symlink
-npx planweft@0.4.0-rc.4 list
-npx planweft@0.4.0-rc.4 doctor
-npx planweft@0.4.0-rc.4 update -a pi
-npx planweft@0.4.0-rc.4 remove -a pi
+npx planweft@0.4.0-rc.7 add -a claude -a pi
+npx planweft@0.4.0-rc.7 add -a codex --global
+npx planweft@0.4.0-rc.7 add -a opencode --skill-only --symlink
+npx planweft@0.4.0-rc.7 list
+npx planweft@0.4.0-rc.7 doctor
+npx planweft@0.4.0-rc.7 update -a pi
+npx planweft@0.4.0-rc.7 remove -a pi
 ```
 
 | Option | Default | Purpose |
@@ -143,7 +143,7 @@ pi list
 After publication, use the single unscoped package:
 
 ```bash
-pi install -l npm:planweft@0.4.0-rc.4
+pi install -l npm:planweft@0.4.0-rc.7
 pi install -l npm:planweft@NEW_VERSION
 # Remove the project installation:
 pi remove -l npm:planweft@NEW_VERSION
@@ -322,16 +322,16 @@ The adapter provides a native DSH bundle, complete Skill and the official Claude
 Full integration belongs to a user-level **profile**, defaulting to `headless`; select `web` explicitly when needed. The installer manages one DSH profile at a time. Updates retain the recorded profile; remove it before switching. The native source links to the persistent version directory through DSH/pnpm, independently of the CLI's `--copy` option. Starting the selected profile loads its bundled Skill and hooks.
 
 ```bash
-npx planweft@0.4.0-rc.4 add -a dsh --global --dsh-profile headless
-npx planweft@0.4.0-rc.4 doctor -a dsh --global
-npx planweft@0.4.0-rc.4 update -a dsh --global
-npx planweft@0.4.0-rc.4 remove -a dsh --global
+npx planweft@0.4.0-rc.7 add -a dsh --global --dsh-profile headless
+npx planweft@0.4.0-rc.7 doctor -a dsh --global
+npx planweft@0.4.0-rc.7 update -a dsh --global
+npx planweft@0.4.0-rc.7 remove -a dsh --global
 ```
 
 Alternatively use DSH native commands with the single npm package. This is a separate ownership channel; do not mix it with the PlanWeft CLI:
 
 ```bash
-dsh plugin --profile headless add planweft@0.4.0-rc.4
+dsh plugin --profile headless add planweft@0.4.0-rc.7
 dsh --profile headless --dump-config
 dsh --profile headless "Use project-docs for this maintenance task."
 dsh plugin --profile headless remove planweft
@@ -342,10 +342,10 @@ A local platform directory can be installed with `dsh plugin --profile headless 
 Project-level Skill-only installation:
 
 ```bash
-npx planweft@0.4.0-rc.4 add -a dsh --skill-only
-npx planweft@0.4.0-rc.4 doctor -a dsh
-npx planweft@0.4.0-rc.4 update -a dsh
-npx planweft@0.4.0-rc.4 remove -a dsh
+npx planweft@0.4.0-rc.7 add -a dsh --skill-only
+npx planweft@0.4.0-rc.7 doctor -a dsh
+npx planweft@0.4.0-rc.7 update -a dsh
+npx planweft@0.4.0-rc.7 remove -a dsh
 ```
 
 Add `--global` to every command for user-level Skill-only management. `--copy`, `--symlink` and `--dry-run` retain their shared semantics.
