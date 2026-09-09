@@ -158,3 +158,19 @@ Pi 首组 context 失败：测试显式 parity 与 /pw-plan-execute 激活了未
 修订 collector 的 DSH 新反馈组：R1/R2/R3 纠正与无 review 的新冷读独立 Passed，两原生会话 completed；原维护 Failed、第一反馈收集器 Failed 均保留。Pi/DSH 反馈和 DSH RC4 主组见 [rc4-dsh-and-review-feedback.tar.gz](evidence/0010/rc4-dsh-and-review-feedback.tar.gz)，483 文件，SHA-256 `a42ee4be786cbfa72ca7be23cd7b6c9b44d3d62694d92232b6336458188d233a`，sources.json 映射原运行相对路径。分别以 `pi-rc4-feedback-independent-review.json` 和 `dsh-rc4-feedback-independent-review.json` 记录独立结论，不修改原 summary 的 Awaiting 状态。原输入 SHA、容器清理、非允许文本保护均通过；无缓存/执行位或首轮无误的扩大承诺。
 
 本轮新增入口的全量 Python 回归为 107 Passed，之后两次定向修复的反馈回归分别 10/11 Passed；最终源码交由 CI 全量复验。正式 0.4.0 未发布：Codex 服务额度、Claude 明确模型端点授权、OpenCode 冷读状态误报及最终稳定准确归档的全部门槛仍未解决。候选下载与精确摘要不是稳定发布授权。
+
+## RC5 修复准备与 RC4 补充验收
+
+准确 RC4 的 Codex 普通停止复验 Passed，gated 的模型正常完成但无计数变化或第二轮响应，已排除先前额度错误作为当前原因。固定插件 `.codex/hooks` 三个辅助脚本沿用 standalone 的 `.codex/skills` 假设，而本插件资源位于包根 `skills`。构建器仅在 Codex 分发映射修正 Stop、resolver 和 SessionStart；独立复制的中文/空格路径包先复现五处失败，再通过 root/slug gate、递归/cap/stall/禁用、错误绑定及实际 catchup 调用。未修改固定上游源码或 standalone 比较树。
+
+Claude Flash 的主组完成，代码维护和冷读独立 Passed，但主 Skill 未实际读取、PWF 计划未采用为真实 Failed。Pro 单变量对照实际读取中文 Skill 后仍错误地将旧 notes 作为豁免，采用 Failed；一次根目录 find 超出实验边界，未观察到凭据内容读取。Pro 模型和安装器清理已完成，外层进程在保存快照/评估前中断，冷读 Not Run，整轮 Incomplete。两份独立审查分别见 `claude-rc4-independent-review.json`、`claude-rc4-pro-independent-review.json`；不能用局部 controller Passed 替代整轮验收。
+
+Claude 六项 Stop 溯源组均按失败保留：原始解析器无法完整归因多线程 syscall。无认证、无模型 CLI 命令复现了 `21<Bun Pool 0>` 返回值被空格截断的问题，修正后 13 项 parser 回归 Passed；其他共享描述符歧义及未解析返回仍未关闭，不宣称已完成实际溯源验收。
+
+用户报告内存上限中断后，确认 `/tmp` 为 tmpfs，结束的 0.3.0 验证依赖/下载缓存无进程引用，清理 13 目录、约 3.97 GiB 逻辑大小。日志、源码、准确归档和 Git 备份保留；当时 `/tmp` 从 70% 降到 20%。发现快照先读取安装目录再过滤的内存隐患，改为遍历前剪枝根级缓存，回归验证既不读取缓存又保留嵌套同名文档。容器增加 RAM/Swap/PID/tmpfs 硬限额并提前保存 before/In Progress；意外中断保持未完成。
+
+共享 HOME 无模型隔离：Claude/Pi/OpenCode 中 A 旧 RC3、B 新 RC4，更新/移除 A 后 B 原生来源、版本和完整项目内容保持不变；Codex/DSH project scope 拒绝且 HOME/项目未改变。Pi 首次错误比较相对与绝对源路径，Failed 保留；根据固定 0.84.3 `package-manager.js` 的 `getBaseDirForScope`/`relative` 语义以项目 `.pi` 解析后，新目录实测 Passed。原运行都保存各自 runner SHA，测试容器均已删除。独立 review 收窄结论：该入口只查被移除侧安装器收据和 B 的原生状态，不单独证明被移除侧原生缓存无残留；完整卸载另见 registry lifecycle，模型/hook 均 Not Run。
+
+本地全量 Python 117 tests Passed；后续 Pi 路径回归 4 tests Passed；安装器 28、DSH facade 3 Passed。原始与迁移上游各 721 Passed、63 skipped（平台或依赖条件保留），子测试数分别 798/851。确定性构建 Passed；该组不代替准确 RC5 包或新跨系统 CI。
+
+[本组附件](evidence/0010/rc5-path-resource-and-rc4-followup.tar.gz)：712 文件，SHA-256 `0623d06cc7cf2fb2971596b7b154d4241b9c19a98526f1b6455deca8f570ca63`，包括原始失败、停止组、Pro 中断标记、资源清理、隔离结果和回归日志；sources.json 映射各运行来源。没有覆盖原 RC4 或历史附件。RC5 准确归档、五宿主完整稳定门槛和正式发布仍未完成。

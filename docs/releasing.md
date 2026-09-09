@@ -55,3 +55,5 @@ RC2 已通过 [GitHub OIDC](https://github.com/psiQAQ/planweft/actions/runs/3424
 RC3 曾通过 [OIDC 工作流](https://github.com/psiQAQ/planweft/actions/runs/34264091642) 发布到 `next`。干净源码 `7d690010fbf8705129d3fb44b2556bb6a0fa7de6`、CI 重建及 npm 远端归档均绑定 SHA-256 `09ea0e4dceb88c9b845af851916356c44f3447071e0d1311dc38841639705060`；[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34262987621) 通过。DSH 修复后的注入与恢复已有实际证据，但维护采用/文档准确性仍有失败；OpenCode 六项停止场景通过原生 server 的 5 秒静默观察，不宣称宿主提供 settled。正式 `0.4.0` 尚未发布，`latest` 仍是 RC1；当时试用版本为 `planweft@0.4.0-rc.3`。详细状态：[中文](platforms.md) / [English](platforms.en.md)。
 
 RC4 已通过 [OIDC 工作流](https://github.com/psiQAQ/planweft/actions/runs/34267947801) 发布到 `next`，修复 OpenCode 原生 npm 入口。冻结源码 `1d1c76c1d6048fd67fa6ef1b614e11b999106db6`，远端归档 SHA-256 为 `c6f54319befc8c43c559fd4c5af2eb6ca3d1b626e6c0b3fd65cb67c11d9d318b`，与本地和 CI 重建逐字一致；[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34267221127) 通过。当前试用版本为 `planweft@0.4.0-rc.4`。上述 RC3 记录保留历史归档身份；稳定版门槛仍未通过，`latest` 仍指向 RC1。
+
+RC5 正在准备，修正 Codex 分发中的辅助资源路径。公开候选仍为 RC4；目前证据尚未放行准确稳定归档或提升发布。当前失败与收集器限制见[跨平台状态：中文](platforms.md) / [English](platforms.en.md)。

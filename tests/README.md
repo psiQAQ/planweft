@@ -218,3 +218,11 @@ Pi 的 `/pw-plan-execute` 同时启用 hooks 与未完成计划的续跑，parit
 `run-review-feedback.py` 复用实际五宿主 controller 的 owner 与冷读分支。输入必须提供准确包、原维护 `after.json`、原自动 assessment、独立 review JSON 及各自 SHA-256；目前限 Pi/DSH。review v1 绑定宿主、准确包、原快照和 assessment，并保存原语义 Failed、原任务范围、允许修正的已有记录路径与具体发现。代码、测试、批准需求及用户内容必须此前验证通过，本轮字节保持不变。新容器只获得原项目文件和简短事实反馈；后续冷读只获得修正后的项目文件，不获得 review、旧聊天、历史或安装缓存。
 
 所有输入/参数在创建输出、访问认证或 Docker 前校验，单模型场景限 30–600 秒。该入口不修改原运行；成功完成自动边界检查也仅标 `Awaiting independent semantic review`，仍需独立核对发现是否真正修正、状态与错误记录是否准确。Docker bootstrap 只记录退出/超时/耗时，不归档可能含私有配置的输出；原生 runtime 的脱敏诊断在可用时保留，报告明确此限制。两阶段与原失败分别留存，不能称首轮维护从未失误。
+
+### 资源约束与中断恢复
+
+五宿主模型测试保持串行。容器限制 2 CPU、3 GiB RAM、256 个进程，`--memory-swap=3g` 禁止额外占用 Swap；HOME tmpfs 上限 2 GiB，临时目录 512 MiB。共享 HOME 安装隔离使用同样 CPU/RAM/进程限制和 2 GiB tmpfs。限额导致的失败必须保留，不能标为宿主不支持；运行结束核对并清理本次容器。
+
+`/tmp` 可能是内存文件系统。大安装缓存、构建工作目录优先放在有余量的磁盘目录；仅清理确认不再被进程引用的本次可重建依赖/下载缓存，保留准确 tarball、原始失败、源码和日志。`project_snapshot` 在读取前剪枝顶层安装目录，避免把缓存全部载入内存后再过滤；嵌套同名文档仍被核对。模型启动前保存 before 与 In Progress，意外终止不能补写成 Passed。
+
+共享 HOME 原生隔离入口为 `tests/run-project-isolation.py`，显式传入 `--host`、新旧 `--archive`/`--old-archive`、对应 `--sha256`/`--old-sha256` 和新的 `--output`；超时 `--timeout` 默认 240 秒。Claude/Pi/OpenCode 检查 A 旧版本、B 新版本，更新/移除 A 后 B 的来源、版本和内容保持不变；Codex/DSH 检查不支持的项目 scope 在写入前拒绝。全程无模型、关闭 hooks，不作为 hook 去重或模型权限验收。

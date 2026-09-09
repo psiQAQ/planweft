@@ -101,3 +101,11 @@ Pi 反馈实测独立复核：首次记录一致性 Failed → R1/R2 纠正 Pass
 
 
 DSH 新反馈组独立复核 Passed：R1 删除过期当前状态、R2 明确历史拒绝与恢复来源、R3 主计划摘要及日志引用一致；实际读取 Skill/README，仅三次 edit 修改两允许记录。不同原生会话的新冷读准确恢复七阶段完成、历史测试、工具拒绝与 Windows Not Run，且说明无 Git 历史不能证明原“未提交”属性。首次错误 collector 的 owner 修正亦有独立证据，但冷读 Not Run；新组与旧组分别保存，不互相覆盖。来源见 [DSH 新反馈审查](../reproduction/evidence/0010/dsh-rc4-feedback-independent-review.json)。
+
+## RC5 Codex 资源定位与验收资源限制
+
+独立 reviewer `rc5_independent_review` 核查 `31e63c9` 后相关未提交源码：Codex 三处 helper 定位及独立包行为回归；快照在根级剪枝安装缓存且保留嵌套同名文档；测试容器 2 CPU/3 GiB RAM、无额外 Swap、256 pids 及有界 tmpfs；提前写入阶段快照。未发现具体功能缺陷，未把静态 review 作为真实宿主通过。源码与测试实际结果见 REP-0010。
+
+Claude Pro 单变量对照的独立结论见 `claude-rc4-pro-independent-review.json`：实际读取中文 Skill，但仍以旧 notes 为由拒绝 PWF 初始化，采用 Failed。代码和四项测试局部 Passed；一次根目录 find 超出实验范围。中断发生在外层快照/评估保存前，冷读 Not Run；不补写原始运行完成状态。
+
+共享 HOME 入口由 `rc5_independent_review` 只读审查：原生状态和 B 不变证据真实，Pi 相对路径修正符合固定宿主源码。发现 P2：被移除侧仅查安装器收据。已将产出命名改为 `two_project_isolation` 并显式限定卸载核查范围，未将其冒充原生卸载全验证；完整 lifecycle 仍由既有独立入口证明。实际测试使用的旧 runner 保留，最后标签/范围说明修订没有更改原始结果。

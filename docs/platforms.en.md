@@ -1,8 +1,8 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
-RC4 passed OIDC publishing, remote byte verification and three-OS CI. Exact-package installation and real npm upgrades, rollbacks and removal passed in all five fixed Linux containers. Pi/DSH initial record failures remain preserved; explicit feedback correction and fresh reading passed independent review. OpenCode cold-read accuracy still has a failure, Codex stopping hit a usage limit, and Claude RC4 model acceptance is incomplete. The five-host stable gate is not cleared. See [release status: 中文](releasing.md) / [English](releasing.en.md).
+RC4 passed OIDC publishing, remote byte verification and three-OS CI. Exact-package installation and real npm upgrades, rollbacks and removal passed in all five fixed Linux containers. Pi/DSH feedback corrections and fresh reading passed independent review, with initial failures retained. OpenCode cold-read accuracy and Claude Flash planning adoption still fail. Codex stopping passed a fresh test, but gated continuation exposed a package path defect; RC5 is in development. The five-host stable gate remains incomplete. See [release status: 中文](releasing.md) / [English](releasing.en.md).
 
-RC4 Codex injection, recovery, maintenance, cold reading, read-only and simple-task scenarios passed automated checks. Stopping and continuation failed because the service account exhausted its usage allowance; these failures do not establish hook correctness. Maintenance and cold reading passed independent semantic review. Passing results from other versions do not establish RC4 or final stable-package acceptance.
+RC4 Codex maintenance and cold reading passed independent review. The latest gated failure is unrelated to quota: Stop silently missed the packaged gate helper. RC5 corrects Stop, resolver and SessionStart resource paths, with copied-package regressions passed; exact candidate model verification remains pending. Claude Flash completed code maintenance and cold reading but did not read the discovered main Skill or create a PWF plan. Its process-attributed stop tests failed closed on collector parsing limitations. Normal persisted Codex trust, native permission denial and shared-HOME isolation still need current-artifact evidence; invocation bypass and separate containers do not prove these behaviors.
 
 ## 0.4.0 candidate validation
 
@@ -17,7 +17,7 @@ For project goals and design sources, read the project introduction: [简体中�
 | Platform | Static | Protocol | Native lifecycle (Linux) | Model maintenance (Linux) |
 | --- | --- | --- | --- | --- |
 | Codex | Passed | Passed | Passed (RC4 local + remote npm) | Passed (RC4; independent review) |
-| Claude Code | Passed | Passed | Passed (RC4 local + remote npm) | Passed (RC1; RC4 Not Run) |
+| Claude Code | Passed | Passed | Passed (RC4 local + remote npm) | RC4 Flash code Passed; planning adoption Failed |
 | Pi | Passed | Passed | Passed (RC4 local + remote npm) | RC4 initial consistency Failed; reviewed correction Passed |
 | OpenCode V1 | Passed | Passed | Passed (RC4 local + remote npm) | RC4 maintenance Passed; cold-read accuracy Failed |
 | Cursor | Passed | Passed | Not Run | Not Run |
@@ -167,3 +167,5 @@ Full reproduction details, raw logs, and limitations are in [REP-0006 (engineeri
 All five hosts passed real npm RC3 → RC4 → RC3 → RC4 → removal, including the native Pi/OpenCode/DSH package entries. These checks did not call models and do not establish model-session behavior. Public Git marketplaces and real Windows/macOS hosts are tracked separately.
 
 RC4 update: Codex/Claude public Git marketplace installation, same-commit refresh, cache content checks, uninstall and unregister passed. No models were called, and cross-version Git updates were not established. Pi parity injection and fresh-session recovery passed for completed plans; explicit execution of incomplete plans has separate stopping/limit evidence. The completed-plan probe does not establish read-only recovery of an incomplete plan with execution enabled. Pi initial maintenance failed independent plan-consistency review because its current phase and error summary were stale. Both findings were corrected after independent feedback, followed by a passing fresh read; the original failure remains. This explicit feedback route does not independently establish automatic Skill loading or automatic review activation.
+
+Resource and isolation follow-up: the runner prunes installation caches before reading project snapshots and caps container CPU, RAM, swap, processes and tmpfs. Claude/Pi/OpenCode shared-HOME tests preserved B during A update/removal; Codex/DSH rejected unsupported project scope without writes. This proves isolation, not absence of every removed-side native cache. Claude Pro read the Chinese Skill but still skipped PWF adoption; the interrupted outer run remains Incomplete and its cold read Not Run. The Flash failure remains recorded.

@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "host": "claude",
+  "version": "0.4.0-rc.4",
+  "npm_sha256": "c6f54319befc8c43c559fd4c5af2eb6ca3d1b626e6c0b3fd65cb67c11d9d318b",
+  "source_commit": "1d1c76c1d6048fd67fa6ef1b614e11b999106db6",
+  "reviewer": "release_audit",
+  "status": "Failed",
+  "scope": "Independent project-file cold read followed by native trace and snapshot review; Claude Code 2.1.241, Linux, Node 24.19.0, Python 3.11.2, DeepSeek V4 Flash; original automated results remain unchanged",
+  "code_and_protected_documents": "Passed",
+  "historical_preservation_semantic": "Passed",
+  "plugin_and_skill_discovery": "Passed",
+  "main_skill_reading": "Not observed: no Skill call or SKILL.md read in the native tool trace",
+  "plan_adoption_and_old_entry_migration": "Failed",
+  "original_single_task_plan_assertion": "Failed: no PWF task_plan/findings/progress or .planning plan; notes/work.md remains the dynamic state source",
+  "native_hook_execution": "Passed with limits: SessionStart succeeds with empty output; native Stop notice reports no task_plan.md; planning-body delivery is not established",
+  "cold_reader_state_and_limits": "Passed",
+  "tool_error_record_completeness": "Failed: one no-change Edit refusal is absent from the final task record",
+  "findings": [
+    "Native system/init lists planweft:project-docs and the RC4 plugin. File-name searches discover installed SKILL.md paths, but no tool call reads that content or invokes Skill. Discovery is not loading.",
+    "The model creates and completes five native TaskCreate/TaskUpdate tasks, edits notes/work.md with a continuing Windows next step, and never creates a PWF plan. This is a real adoption failure, not a fixture string mismatch.",
+    "Native informational Stop output says [planweft] No task_plan.md found — no active planning session. SessionStart hook_response reports exit_code 0 and empty output.",
+    "Actual maintenance trace shows four tests passing, four expected failures after temporarily restoring utf-8-sig, and passing tests after restoring the fix. Independent controller tests and raw-byte checks also pass.",
+    "The initial python3 -m unittest command collects zero tests; the model subsequently uses explicit tests-directory discovery. Zero tests are not used as final acceptance evidence.",
+    "Tool call call_00_buWkQTXMi4Wcv1Fa667h4855 is refused because old_string equals new_string. Work continues, but this tool error is not retained in notes/work.md.",
+    "Approved requirements, user-note.txt, README and AGENTS are byte-preserved. Historical 2026-09-01 observation remains explicitly historical.",
+    "A distinct cold-reader session reruns all four tests, preserves the Windows release requirement, and distinguishes current-file verification from unavailable pre-fix Git history. Maintenance after equals cold-reader before and after.",
+    "The host reports unrecognized_model for deepseek-v4-flash while the request completes. No causal link between that warning and failed Skill selection has been demonstrated."
+  ],
+  "limitations": [
+    "No Windows or macOS execution is established. Linux maintenance and cold reading do not satisfy the approved Windows release condition.",
+    "Snapshot comparisons cover recorded project text files, excluding native caches, Git metadata and executable bits; they do not prove the entire directory unchanged.",
+    "The successful cold read uses the legacy notes/work.md handoff and does not validate PWF adoption or context recovery.",
+    "A later controlled Pro comparison would be diagnostic evidence only; it must preserve this Flash failure and cannot retroactively pass it."
+  ],
+  "artifacts": [
+    {
+      "path": "maintenance/assessment.json",
+      "sha256": "db44fb4dfea46ba8983773eac583d89930932a5a8294f71fb467e0bc8dcdca0e"
+    },
+    {
+      "path": "maintenance/before.json",
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    {
+      "path": "maintenance/after.json",
+      "sha256": "d34fbc9d5412f6e01408268e46c386a6eb5cd44c5b0bd00fd5c185f9fa9397e0"
+    },
+    {
+      "path": "maintenance/raw/model-invocation.json",
+      "sha256": "a0ced473231392842799b01bae183f4395427f6df975486b32a4d798576fa44a"
+    },
+    {
+      "path": "maintenance/raw/model.stdout",
+      "sha256": "bb1ec651effd852f8e184ef2108f6e8ecc35c0ba8885039f67c0198297f79eaf"
+    },
+    {
+      "path": "maintenance/raw/model.stderr",
+      "sha256": "9a08d2e57983f1a3f9cf6d7c5f1b83b294d798c8b79b2c6bf711046181a1a707"
+    },
+    {
+      "path": "maintenance/raw/offline-tests.json",
+      "sha256": "7c0b8cbc76703bde9550797d157f1812af41e784aaf174290e77ab410faaf94f"
+    },
+    {
+      "path": "maintenance/raw/offline-tests.stderr",
+      "sha256": "9f8471ac11895f6d08e7c3b5ffbd448859bd8cb34dec0c52fb51ebf12068419e"
+    },
+    {
+      "path": "maintenance/raw/independent-byte-checks.json",
+      "sha256": "b5c03ad99524e92ba79cf49f085c4556df9ddc40e5b7e31d080aea1103b5140f"
+    },
+    {
+      "path": "cold-reader/assessment.json",
+      "sha256": "22395ba88747f329006705881d83dba6c1d1c4ab379b699c0222aa7826d309f3"
+    },
+    {
+      "path": "cold-reader/before.json",
+      "sha256": "d34fbc9d5412f6e01408268e46c386a6eb5cd44c5b0bd00fd5c185f9fa9397e0"
+    },
+    {
+      "path": "cold-reader/after.json",
+      "sha256": "d34fbc9d5412f6e01408268e46c386a6eb5cd44c5b0bd00fd5c185f9fa9397e0"
+    },
+    {
+      "path": "cold-reader/raw/model-invocation.json",
+      "sha256": "b3d825fa3df21e8a1f8de70902387384d3af45ae21bf40b9d7525b2bd09b02b2"
+    },
+    {
+      "path": "cold-reader/raw/model.stdout",
+      "sha256": "bff83198a7d1e726ca62df3901be4bed44f86b55bdbdb9a2dc218270e95b8eb4"
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
-RC4 已通过 OIDC 发布、远端字节核对及三系统 CI；五个固定 Linux 容器的准确包安装和真实 npm 升降级/卸载通过。Pi/DSH 首次记录问题保留，指定反馈修正与新冷读通过独立审查；OpenCode 冷读准确性仍有失败，Codex 停止测试遇额度限制，Claude RC4 模型补验尚未完成。五平台稳定门槛未通过。见[发布状态：中文](releasing.md) / [English](releasing.en.md)。
+RC4 已通过 OIDC 发布、远端字节核对及三系统 CI；五个固定 Linux 容器的准确包安装和真实 npm 升降级/卸载通过。Pi/DSH 指定反馈修正与新冷读通过独立审查，首次失败保留。OpenCode 冷读准确性与 Claude Flash 计划采用仍失败；Codex 普通停止复验通过，gated 续跑暴露包内路径缺陷，RC5 正在开发。五平台稳定门槛未通过。见[发布状态：中文](releasing.md) / [English](releasing.en.md)。
 
-RC4 的 Codex 注入、恢复、维护、冷读、只读和简单任务通过自动检查；停止与续跑场景因服务账号额度耗尽而失败，不作为 hooks 正确性结论。维护与冷读已通过独立语义审查。其他版本的通过项不得视为 RC4 或最终稳定包已通过。
+RC4 Codex 维护与冷读通过独立语义审查；最新 gated 失败与额度无关，Stop 静默跳过包内门禁脚本。RC5 已修正 Stop、resolver、SessionStart 资源路径，独立复制包回归 Passed，准确新候选包模型复验待完成。Claude Flash 完成代码维护及冷读，但没有读取已发现的主 Skill 或创建 PWF 计划；其停止进程溯源因收集器解析限制按失败保留。正常持久 Codex 信任、原生权限拒绝及同 HOME 项目隔离仍须当前归档证据，invocation bypass 与独立容器不能替代。
 
 ## 0.4.0 候选验证
 
@@ -17,7 +17,7 @@ PlanWeft 0.4.0 将同一套文件规划与文档协作规则，生成适合 15 �
 | 平台 | 静态检查 | 协议检查 | 原生生命周期（Linux） | 模型维护（Linux） |
 | --- | --- | --- | --- | --- |
 | Codex | Passed | Passed | Passed (RC4 local + remote npm) | Passed (RC4; independent review) |
-| Claude Code | Passed | Passed | Passed (RC4 local + remote npm) | Passed (RC1; RC4 Not Run) |
+| Claude Code | Passed | Passed | Passed (RC4 local + remote npm) | RC4 Flash code Passed; planning adoption Failed |
 | Pi | Passed | Passed | Passed (RC4 local + remote npm) | RC4 initial consistency Failed; reviewed correction Passed |
 | OpenCode V1 | Passed | Passed | Passed (RC4 local + remote npm) | RC4 maintenance Passed; cold-read accuracy Failed |
 | Cursor | Passed | Passed | Not Run | Not Run |
@@ -165,3 +165,5 @@ Hermes 使用官方提交 `9fd44b4dfc44138b9e5d5689acb56c438364ff7b`，最终目
 完整复现、原始日志及限制见 [REP-0006（工程记录，中文）](reproduction/0006-native-distributions.md)。设计契约见 [SPEC-0004（工程记录，中文）](specs/0004-native-distributions.md) 与 [ADR-0007（工程记录，中文）](adr/0007-native-distributions.md)。旧 0.2.0 记录保留为历史证据，不替代 0.3.0 分发验证。
 
 RC4 补充：Codex/Claude 公开 Git 市场的安装、同提交刷新、缓存内容核对、卸载和注销 Passed；未调用模型，不表示 Git 跨版本升级已验收。Pi 完成态计划的 parity 注入和新会话恢复复验 Passed；进行中显式执行循环另有停止及上限证据，不能据完成态探针宣称进行中只读恢复。Pi 首次维护的主计划阶段/错误摘要不一致，独立语义检查该项 Failed；后续按独立反馈纠正两项记录并通过新冷读，原失败保留。这条明确反馈路线不单独证明自动 Skill 加载或自动触发审查。
+
+资源与隔离补充：测试器在快照读取前剪枝安装缓存，并限制容器 CPU、RAM、Swap、进程与 tmpfs。Claude/Pi/OpenCode 的同 HOME 实测中，更新/移除 A 保持 B 不变；Codex/DSH 拒绝不支持的项目 scope 且无写入。这证明隔离，不证明被移除侧所有原生缓存均消失。Claude Pro 实际读取中文 Skill 后仍未采用 PWF，中断的外层运行保持 Incomplete、冷读 Not Run；Flash 失败同样保留。

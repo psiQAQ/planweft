@@ -208,3 +208,7 @@ vendor 四文件是导入器产物，dist 与 plugins 由 builder 生成；证�
 - 运行证据：`tests/run-dsh-skill-smoke.mjs` 用隔离安装的官方 npm 0.1.2-rc.1 组件执行；这与源码参考版本分开记录。安装器测试证明本地生命周期，provider runtime 证明 Skill 发现/加载，两者都不是模型使用证据。
 
 - RC3 `native/dsh/hook.sh`、`hook-shell.mjs`、`index.mjs`：依据上述官方 bridge 的 shell resolve/run 与 stdin session 协议，以及官方 npm 0.1.2-rc.1 SandboxBash 实测。私有临时缓存与有界宿主会话去重是本地兼容组合，不宣称上游提供此实现；保留沙箱权限、其他插件输出与项目 Stop ledger。因果复现、Python/Shell 双路径及独立 review 见 REP-0010 / REV-0010；跨调用 pwf-prog 告警不支持，模型验收另列。
+
+## RC5 Codex 分发路径修复
+
+`build-plugin.py` 的 Codex 专属生成映射根据固定 PWF `.codex/hooks/{stop,resolve-plan-dir,session-start}.sh` 和本仓根 `skills/` 布局修正三处相对路径，原始 standalone 比较树保持不变。固定 [Codex 0.149.1 Stop 源码](https://github.com/openai/codex/blob/rust-v0.149.1/codex-rs/hooks/src/events/stop.rs#L405) 支持 `decision:block`，不能把 RC4 跳过缺失脚本的失败归因为协议不支持。独立包正向/保护回归、原始/迁移对照及真实新归档结果分别记录；来源与行为 review 见 REV-0010。
