@@ -204,3 +204,8 @@ python3 scripts/run-opencode-tests.py --output /tmp/planweft-opencode-regression
 `run-five-agent-release.py --trace-gate-processes` 仅接受 Codex/Claude 的停止场景和记录 `gate_trace.strace=6.1` 的固定派生镜像锁。不会自动安装 strace 或更换原镜像。使用 `gate_process_trace.py` 的 syscall 集合和摘要绑定解析；正负对照都要求完整 trace，原始 argv 不导出。`test_gate_process_trace.py` 覆盖快照误归因、异步调用、PID/FD 复用等反例。该可选 Linux 证据路线不代表 Windows/macOS 的真实宿主验证。
 
 OpenCode 停止场景使用 `opencode_server_probe.py`，固定 1.18.22 的原生 serve/SSE/Session API。仅发送一次初始提示，保留消息 parentID、idle 和状态对账，观察至少 5 秒静默；不把原生 CLI 首次 idle 当作异步续跑完成，也不宣称存在 native settled。超时、权限请求、工具调用、断流、模型错误和清理异常均失败；原始事件先经 runtime 脱敏再保存。`test_opencode_server_probe.py` 为离线 transport/process fixtures，真实 HTTP/模型证据见 REP-0010。
+
+
+### Pi 上下文探针与执行循环
+
+Pi 的 `/pw-plan-execute` 同时启用 hooks 与未完成计划的续跑，parity 全文注入并不是独立的只读模式。`context` / `recovery` 新探针使用新建的完成态合成计划，完整采集到 `agent_settled`，并记录 `probe_scope`，仅证明完成态计划的注入和新会话文件恢复。不会把既有进行中计划改成完成态；该前置条件不满足时拒绝运行。`continuation-limit` 保持进行中计划，单独验证执行循环；默认未激活停止也单独验证。旧进行中只读探针产生的实际续跑与写入保留为 Failed，不通过截断首轮改判。

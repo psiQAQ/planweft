@@ -29,6 +29,38 @@ CASES = ('preflight','lifecycle','skill-loading','context','recovery','maintenan
 STOP_CASES = {'stopping','gated-continuation','gate-cap','gate-stall','continuation-limit','gate-cap-disabled','gate-stall-disabled'}
 
 
+def context_probe_scope(host,case):
+    if host=='pi' and case in {'context','recovery'}:
+        return {'plan_state_under_test':'complete',
+                'coverage':'Pi parity injection and fresh-session file recovery of a completed plan',
+                'excludes':'Read-only recovery while native execution of an incomplete plan is enabled; continuation-limit separately tests that execution loop'}
+    return {}
+
+
+def context_fixture(host,case,token,prior_context=None):
+    """Separate Pi read-only context delivery from its explicit execution loop.
+
+    /pw-plan-execute enables both injection and continuation in upstream Pi.
+    A new completed synthetic plan isolates delivery without disabling hooks or
+    truncating RPC collection. Never rewrite an existing in-progress plan to
+    manufacture this precondition. Other hosts retain their original fixture.
+    """
+    completed=bool(context_probe_scope(host,case))
+    if case=='recovery':
+        if prior_context is None: raise ValueError('Recovery requires earlier context files')
+        files=dict(prior_context)
+        if completed and ('**Status:** complete' not in files.get('task_plan.md','') or '**Status:** in_progress' in files.get('task_plan.md','')):
+            raise ValueError('Pi completed-plan recovery requires the completed context fixture; preserve in-progress evidence separately')
+        files['task_plan.md']=re.sub(r'PW_RECOVERY_[a-f0-9]+',token,files['task_plan.md'])
+        files['progress.md']+='\nTask owner changed the project plan after the previous session ended.\n'
+        return files
+    goal='Completed synthetic task retained for a read-only context-delivery probe.' if completed else 'Report automatically injected RECOVERY_CODE.'
+    return {'README.md':'# Context probe\n','task_plan.md':
+            '# Task Plan\n\n## Goal\n'+goal+'\n\nRECOVERY_CODE: '+token+
+            '\n\n### Phase 1: Probe\n- **Status:** '+('complete' if completed else 'in_progress')+'\n',
+            'findings.md':'# Findings\nProject files only.\n','progress.md':'# Progress\nPrepared fixture.\n'}
+
+
 def stop_fixture(case):
     case=case.removesuffix('-disabled')
     plan='# Task Plan\n\n## Goal\nSynthetic native stopping probe. External acceptance is pending.\n\n### Phase 1: External approval\n- **Status:** in_progress\n'
@@ -272,17 +304,10 @@ def main(argv=None):
                 token='PW_RECOVERY_'+uuid.uuid4().hex
                 files=dict(fixture.BASE)
                 if case in {'context','recovery','untrusted'}:
-                    files={'README.md':'# Context probe\n','task_plan.md':
-                        '# Task Plan\n\n## Goal\nReport automatically injected RECOVERY_CODE.\n\n'
-                        'RECOVERY_CODE: '+token+'\n\n### Phase 1: Probe\n- **Status:** in_progress\n',
-                        'findings.md':'# Findings\nProject files only.\n','progress.md':'# Progress\nPrepared fixture.\n'}
+                    files=context_fixture(host,case,token,prior_context)
                 if case=='cold-reader':
                     if previous is None: raise ValueError('Maintenance output missing')
                     files={k:v for k,v in previous.items() if isinstance(v,str)}
-                if case=='recovery':
-                    files=dict(prior_context)
-                    files['task_plan.md']=re.sub(r'PW_RECOVERY_[a-f0-9]+',token,files['task_plan.md'])
-                    files['progress.md']+='\nTask owner changed the project plan after the previous session ended.\n'
                 if case=='evidence-gap':
                     files['notes/design-candidate.md']='# Candidate only\n建议加入 SHA-256 内容指纹与写入锁；目前没有实现、试验或来源，本轮只读分析，不得声称已实现。\n'
                 if case in STOP_CASES: files=stop_fixture(case)
@@ -297,6 +322,8 @@ def main(argv=None):
                 (base/'prompt.txt').write_text(prompt)
                 payload={'host':host,'case':case,'secret':secret,'model':args.codex_model if host=='codex' else args.model,
                          'prompt':prompt,'timeout':args.timeout,'trace_gate_processes':args.trace_gate_processes}
+                probe_scope=context_probe_scope(host,case)
+                if probe_scope: payload['probe_scope']=probe_scope
                 name=run_id+'-'+host+'-'+case
                 command=['docker','run','--rm','-i','--name',name,'--label','planweft.run='+run_id,
                     '--read-only','--user',f'{os.getuid()}:{os.getgid()}','--cap-drop=ALL',
@@ -360,6 +387,7 @@ def main(argv=None):
                 cases[case]={'status':'Passed' if all(assertions.values()) else 'Failed','assertions':assertions,
                     'image':image,'seconds':round(time.monotonic()-started,3),'controller':result,
                     'semantic_review':'Required' if case in {'maintenance','cold-reader','skill-loading'} else 'Not applicable'}
+                if probe_scope: cases[case]['probe_scope']=probe_scope
                 write_json(base/'assessment.json',cases[case]);write_json(args.output/'summary.json',report)
                 print(host,case,cases[case]['status'],flush=True)
     except Exception as error:

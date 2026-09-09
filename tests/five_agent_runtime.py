@@ -337,6 +337,7 @@ def controller(payload):
     setup_environment()
     host, case = payload['host'], payload['case']
     result = {'host':host,'case':case,'status':'Failed','model_session':'Not Run'}
+    if payload.get('probe_scope'): result['probe_scope']=payload['probe_scope']
     try:
         versions = {}
         for command in [[host if host != 'claude' else 'claude','--version'], ['node','--version'],['python3','--version']]:
@@ -402,7 +403,8 @@ def controller(payload):
                 'codex_hook_trust':'invocation bypass' if '--dangerously-bypass-hook-trust' in command else 'normal',
                 'planning_disabled':os.environ.get('PLANNING_DISABLED')=='1'})
             if host=='pi': save('pi-mode',{'configured':os.environ.get('PWF_MODE','auto'),
-                'default_deepseek_behavior':'cache-safe reminder; full plan content requires parity'})
+                'default_deepseek_behavior':'cache-safe reminder; full plan content requires parity',
+                'probe_scope':payload.get('probe_scope')})
             gate_watch=watch_gate_reads() if case in {'gate-cap','gate-stall','gate-cap-disabled','gate-stall-disabled'} else None
             try:
                 if host=='pi' and case in {'context','recovery','continuation-limit','stopping'}:
