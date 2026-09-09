@@ -100,6 +100,14 @@ class RecordTemplatesTest(unittest.TestCase):
             self.assertIn(json.dumps(guidance), block)
             self.assertNotIn('Current Status', block)
 
+    def test_upstream_contract_adaptation_is_limited_to_two_progress_tokens(self):
+        path='tests/test_template_transparency.py'
+        original=self.upstream[path][0].decode()
+        expected=original.replace('"### Phase 1: [Title]"','"### Recorded work"').replace(
+            '"### Phase 2: [Title]"','"[task_plan.md](task_plan.md)"')
+        self.assertEqual(self.records.transform(path,original),expected)
+        with self.assertRaises(ValueError):self.records.transform(path,expected)
+
     def install_skill(self, directory, locale):
         root = directory / ('插件 files ' + locale)
         prefix = 'skills/' + ('project-docs' if locale == 'en' else 'i18n/project-docs-' + locale) + '/'

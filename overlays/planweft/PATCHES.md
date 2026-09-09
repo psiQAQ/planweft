@@ -34,3 +34,5 @@
 ## RC7 记录模板一致性
 
 `record_templates.py` 在身份变换后、追加片段前，以有数量断言的补丁更新六语言 progress/findings 模板、Shell/PowerShell 内嵌初始化以及 OpenCode findings fallback。progress 保留事件、时间、测试和错误，将目标/阶段/下一步指向 task_plan；findings 明确观察时点、来源及后继更正。固定 PWF task_plan 阶段和状态协议、文件位置及跳过既有文件的行为不变。此差异来自 RC6 多宿主真实维护中发现的初始化状态冲突，并非 PWF 上游承诺。实际回归入口为 `tests/test_record_templates.py`；Windows/macOS 运行状态以三系统 CI 为准。
+
+迁移对照保留 `tests/test_template_transparency.py` 的首次两项 SUBFAILED：旧契约要求 progress Phase 1/2 占位。仅在迁移树把这两个字面 token 改为 Recorded work 和 task_plan 相对链接，19 处断言及其循环保持原样；原始归档与原始基线不变。独立 reviewer 核对失败集合和仅两 token 差异，未增加 skip。

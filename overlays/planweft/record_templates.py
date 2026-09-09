@@ -99,6 +99,13 @@ def progress_template(text, words):
 
 def transform(path, text):
     """Apply guarded patches after identity mapping and before append overlays."""
+    if path == 'tests/test_template_transparency.py':
+        # Preserve the raw upstream regression separately. Only these two
+        # progress placeholders intentionally differ in the local contract.
+        for old, new in [('"### Phase 1: [Title]"', '"### Recorded work"'),
+                         ('"### Phase 2: [Title]"', '"[task_plan.md](task_plan.md)"')]:
+            text=replace(text,old,new,1,'progress transparency contract')
+        return text
     matched = re.search(r'/i18n/project-docs-([^/]+)/', '/' + path)
     locale = matched[1] if matched else 'en'
     words = LOCALES[locale]

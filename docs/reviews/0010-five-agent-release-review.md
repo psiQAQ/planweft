@@ -134,3 +134,5 @@ RC5 Codex 实测由 `rc5_independent_review` 独立复核，普通停止/gated �
 RC6 最新独立结果：[Codex](../reproduction/evidence/0010/codex-rc6-maintenance-independent-review.json)、[Pi](../reproduction/evidence/0010/pi-rc6-maintenance-independent-review.json)、[DSH](../reproduction/evidence/0010/dsh-rc6-maintenance-independent-review.json)。三者功能/冷读与文档语义分别记录；不改原自动结果，不通过重复相同请求选择成功样本。Pi 项目配置禁读违反与 DSH 额外运行时元数据观察都保留实际范围，无凭据或历史正文泄露推断。
 
 RC7 模板独立依据与实现审查：`skill_entry_review` 核查六语言、analytics、Shell/PowerShell here-doc 文字、OpenCode fallback 及原文件保护，未发现阻塞问题；本机 6 Passed / PowerShell 1 Not Run。对反馈执行器发现异常路径漏清无引用缓存的 P2，主 Agent 增加 finally 中确认容器退出后的逐阶段所有权检查，超时/损坏 controller 均保留场景 Failed 但释放可重建版本；独立复跑 13 Passed，P2 闭合。无法证实无引用的缓存记录保留原因，不把部分安装故障当成全量释放。
+
+RC7 上游对照适配复审：原始归档 721 Passed / 63 Skipped；首次迁移有两项 SUBFAILED，均为 progress Phase 1/2 占位检查，其他 721 Passed。`skill_entry_review` 核查仅两个迁移测试字符串替换，19 处断言及循环保持原样，无新增 skip、无 vendor 改动；新模板测试 7 Passed / PowerShell 1 Not Run，迁移模板透明性检查 7 Passed。首次原始失败保留，并与适配后全量结果分开报告。
