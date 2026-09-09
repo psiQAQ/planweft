@@ -26,7 +26,7 @@ class LocalOperationsTest(unittest.TestCase):
     def test_bilingual_examples_match_and_resolve_chained_relative_link(self):
         localized=re.findall(r'```python\n(.*?)\n```',(ROOT/'overlays/planweft/references/local-operations.zh.md').read_text(encoding="utf-8"),re.S)
         self.assertEqual(self.examples,localized)
-        self.assertEqual(len(self.examples),2)
+        self.assertEqual(len(self.examples),3)
         installed=self.root/'安装 cache'/'skills'/'project-docs';installed.mkdir(parents=True)
         (installed/'SKILL.md').write_text('# Real Skill\r\n')
         middle=self.root/'中间 link';middle.mkdir()
@@ -46,6 +46,26 @@ class LocalOperationsTest(unittest.TestCase):
                 result=self.execute(self.examples[0],target)
                 self.assertNotEqual(result.returncode,0)
                 self.assertEqual(result.stdout,'')
+        self.assertEqual(sorted(p.name for p in self.project.iterdir()),['user-note.txt'])
+
+    def test_planning_lookup_does_not_enumerate_environment(self):
+        # Reject iteration and access to any unrelated key, not just its output.
+        prefix = """import os
+class NamedEnvironment:
+    def get(self, key, default=None):
+        assert key in ('PLAN_ID', 'PWF_PLAN_ROOT', 'PLANNING_DISABLED'), key
+        return {'PLAN_ID': '计划 one', 'PWF_PLAN_ROOT': ''}.get(key, default)
+    def __iter__(self):
+        raise AssertionError('environment enumerated')
+    def items(self):
+        raise AssertionError('environment enumerated')
+os.environ = NamedEnvironment()
+"""
+        result=self.execute(prefix+self.examples[2],self.project)
+        self.assertEqual(result.returncode,0,result.stderr)
+        import json
+        self.assertEqual(json.loads(result.stdout),{
+            'PLAN_ID':'计划 one','PWF_PLAN_ROOT':'','PLANNING_DISABLED':None})
         self.assertEqual(sorted(p.name for p in self.project.iterdir()),['user-note.txt'])
 
     def test_manual_scratch_is_project_owned_and_cleaned_on_error(self):

@@ -42,4 +42,20 @@ with tempfile.TemporaryDirectory(prefix=".pw-scratch-", dir=project) as director
 
 Pass the authorized project directory as the first argument. Record the actual relative scratch path and result with the check; the context manager removes only the directory it created, including on an exception. This example does not itself perform a verification. Do not use an unowned fixed `/tmp` path or change the whole agent process's `TMPDIR`: host-private temporary data must remain separate. Existing test-framework temporary files and controller-owned fixtures are separate observations; do not infer their location from a manual check or change approved tests merely to claim scope coverage.
 
+## Inspect only named planning variables when needed
+
+The resolver normally consumes its documented settings itself. If diagnosing a binding requires inspecting values, choose the exact needed names from that helper’s documentation and look each one up directly. For example:
+
+```python
+import json
+import os
+import sys
+sys.stdout.reconfigure(encoding="utf-8")
+
+needed = ("PLAN_ID", "PWF_PLAN_ROOT", "PLANNING_DISABLED")
+print(json.dumps({key: os.getenv(key) for key in needed}, ensure_ascii=False))
+```
+
+Remove unneeded names; add a documented `PWF_*` name only for the operation being diagnosed. `null` means unset and differs from an empty value. Do not enumerate the environment with `env`, `printenv`, `set` or `os.environ.items()` and then filter it: filtering the output does not avoid the initial enumeration. This is a task-level lookup rule, not process environment isolation; Python and the host still inherit their normal environment. The example writes no project records. See Python [os.getenv](https://docs.python.org/3/library/os.html#os.getenv).
+
 Sources: Python documents [Path.resolve](https://docs.python.org/3/library/pathlib.html#pathlib.Path.resolve) for canonical link resolution and [TemporaryDirectory](https://docs.python.org/3/library/tempfile.html#tempfile.TemporaryDirectory) for explicit parent placement and context-manager cleanup. These APIs do not establish the task's authorization or prove that a model will follow the examples.

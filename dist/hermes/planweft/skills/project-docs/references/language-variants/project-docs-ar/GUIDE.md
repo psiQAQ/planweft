@@ -2,7 +2,7 @@
 name: project-docs-ar
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
 metadata:
-  version: "0.4.0-rc.14"
+  version: "0.4.0-rc.15"
 ---
 
 # وثائق المشروع وتخطيط المهمة
@@ -11,7 +11,9 @@ metadata:
 
 ## 1. تحديد النطاق وقراءة مدخل المشروع
 
-اقرأ تعليمات المشروع والمتطلبات المعتمدة والملاحظات الموجودة والفروق ذات الصلة؛ حافظ على تعديلات المستخدم. قبل الإعداد، اذكر الفرع المنطبق ومصدره الفعلي في الرد الحالي أو قسم الهدف:
+قبل استكشاف المستودع، اذكر في الرد الحالي مجموعة صغيرة من مداخل المشروع الأولية: المسارات المذكورة في المهمة، وتعليمات الجذر وملف README إن وجدت وكان نطاق المستخدم يسمح بقراءتها. صفِّ هذه المجموعة الأولية وفق قيود القراءة الصريحة قبل قراءتها. اقرأ هذه المداخل أولاً، ثم وسّع الاختيار عبر روابط الوثائق ذات الصلة أو العلاقات بين التنفيذ والاختبارات ضمن النطاق المصرّح به. قد تساعد قائمة سطحية للجذر في العثور على المداخل؛ العثور على إعدادات المضيف أو مجلد المثبّت لا يجعله مدخلاً للمهمة. أدرجه فقط عندما تصرّح المهمة صراحة بالعمل عليه، مع ذكر مصدر التصريح. تستخدم موارد الحزمة بصورة منفصلة مسار Skill الذي وفره المضيف أدناه.
+
+انطلاقاً من مداخل المشروع هذه، اقرأ المتطلبات المعتمدة والملاحظات الموجودة والفروق ذات الصلة؛ حافظ على تعديلات المستخدم. قبل الإعداد، اذكر الفرع المنطبق ومصدره الفعلي في الرد الحالي أو قسم الهدف:
 
 - القراءة فقط أو التشخيص أو وضع التخطيط: افحص وأبلغ دون تغيير سجلات المشروع. طلب وثيقة بحثية صراحة يسمح بتلك الوثيقة وحدها.
 - مهمة بسيطة أو قيد صريح على الملفات الجديدة أو الاعتماد أو مرجعية الخطة القديمة: حدّد النطاق البسيط أو اقتبس القيد ومصدره؛ احتفظ بمدخل الحالة الحالي.

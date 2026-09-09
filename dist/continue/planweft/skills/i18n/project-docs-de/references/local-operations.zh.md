@@ -42,4 +42,20 @@ with tempfile.TemporaryDirectory(prefix=".pw-scratch-", dir=project) as director
 
 把授权项目目录作为第一个参数。随检查记录实际相对临时路径和结果；context manager 仅清理它创建的目录，异常时也执行。示例本身没有完成任何验证。不使用非自有固定 `/tmp` 路径，也不修改整个 Agent 进程的 `TMPDIR`，避免宿主私有临时数据进入项目。既有测试框架临时文件、控制器自有夹具是不同观察，不从手工检查推断其位置，也不为宣称范围覆盖而改写批准的测试。
 
+## 仅在需要时查询明确命名的规划变量
+
+解析器通常自行读取其文档规定的设置。确需诊断绑定值时，从该 helper 的文档选择实际需要的准确变量名，再逐个查询。例如：
+
+```python
+import json
+import os
+import sys
+sys.stdout.reconfigure(encoding="utf-8")
+
+needed = ("PLAN_ID", "PWF_PLAN_ROOT", "PLANNING_DISABLED")
+print(json.dumps({key: os.getenv(key) for key in needed}, ensure_ascii=False))
+```
+
+删去不需要的名称；仅为当前诊断添加文档明确列出的 `PWF_*` 名称。`null` 表示未设置，与空值不同。不先使用 `env`、`printenv`、`set` 或 `os.environ.items()` 枚举环境再过滤：过滤输出并不能避免此前枚举。这是任务操作的查询规则，不是进程环境隔离；Python 和宿主仍继承其正常环境。示例不写项目记录。依据为 Python [os.getenv](https://docs.python.org/3/library/os.html#os.getenv)。
+
 依据：Python 官方 [Path.resolve](https://docs.python.org/3/library/pathlib.html#pathlib.Path.resolve) 说明链接规范解析，[TemporaryDirectory](https://docs.python.org/3/library/tempfile.html#tempfile.TemporaryDirectory) 说明显式父目录和 context manager 清理。这些 API 不提供任务授权，也不证明模型会遵循示例。

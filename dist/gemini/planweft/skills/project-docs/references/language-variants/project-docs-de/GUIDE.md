@@ -2,7 +2,7 @@
 name: project-docs-de
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Its session-end hook reports status only and does not request continuation."
 metadata:
-  version: "0.4.0-rc.14"
+  version: "0.4.0-rc.15"
 ---
 
 # Projektdokumentation und Aufgabenplanung
@@ -11,7 +11,9 @@ Nutze diese vier Schritte für Wartung oder Implementierung mit Untersuchung, Ä
 
 ## 1. Umfang klären und Projekteinstieg lesen
 
-Lies Projektanweisungen, genehmigte Anforderungen, vorhandene Notizen und relevante Diffs; bewahre Änderungen des Nutzers. Nenne vor der Vorbereitung in der vorhandenen Antwort oder im Ziel den zutreffenden Zweig und seine tatsächliche Quelle:
+Nenne vor der Erkundung des Repositorys in der vorhandenen Antwort eine kleine Menge anfänglicher Projekteinstiege: die in der Aufgabe genannten Pfade sowie Anweisungen im Stammverzeichnis und die README, sofern vorhanden und vom erlaubten Nutzerumfang gedeckt. Filtere diese Anfangsauswahl vor dem Lesen anhand ausdrücklicher Lesebeschränkungen. Lies zuerst diese Einstiege und erweitere die Auswahl über relevante Dokumentlinks oder Beziehungen zwischen Implementierung und Tests innerhalb des erlaubten Umfangs. Eine flache Auflistung des Stammverzeichnisses hilft beim Finden der Einstiege; eine entdeckte Hostkonfiguration oder ein Installationsverzeichnis wird dadurch nicht zur Aufgabeneingabe. Nimm es nur auf, wenn die Aufgabe seine Bearbeitung ausdrücklich erlaubt, und nenne diese Quelle. Paketressourcen bleiben beim separat vom Host gelieferten Skill-Pfad unten.
+
+Lies ausgehend von diesen Projekteinstiegen genehmigte Anforderungen, vorhandene Notizen und relevante Diffs; bewahre Änderungen des Nutzers. Nenne vor der Vorbereitung in der vorhandenen Antwort oder im Ziel den zutreffenden Zweig und seine tatsächliche Quelle:
 
 - Nur Lesen, Diagnose oder Planungsmodus: prüfen und berichten, ohne Projektaufzeichnungen zu ändern. Ein ausdrücklich gewünschtes Forschungsdokument erlaubt nur dieses Dokument.
 - Triviale Aufgabe oder ausdrückliche Einschränkung neuer Dateien, der Übernahme oder der Autorität des alten Plans: nenne den trivialen Umfang oder zitiere die Einschränkung samt Quelle; behalte den bisherigen Statuseinstieg.

@@ -2,7 +2,7 @@
 name: project-docs
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
 metadata:
-  version: "0.4.0-rc.14"
+  version: "0.4.0-rc.15"
 ---
 
 # Project Docs
@@ -11,7 +11,9 @@ Use this four-step workflow for maintenance or implementation combining investig
 
 ## 1. Establish scope and read the entrypoint
 
-Read project instructions, approved requirements, existing task notes and relevant diff; preserve user edits. Before preparation, state which branch applies in the existing response or goal, with the actual source:
+Before repository exploration, name a small initial set of project entries in the existing response: paths named by the task, plus root instructions and the README when present and permitted by the user’s scope. Filter this initial set against explicit read restrictions before reading it. Read those entries, then expand through relevant document links or implementation/test relationships within the authorized scope. A shallow root listing can locate entries; finding a host configuration or installer directory does not make it a task input. Include such a directory only when the task explicitly authorizes work on it, citing that source. Keep package resources on the separate host-provided Skill path below.
+
+From these project entries, read the approved requirements, existing task notes and relevant diff; preserve user edits. Before preparation, state which branch applies in the existing response or goal, with the actual source:
 
 - Read-only/diagnosis/host plan mode: inspect and report without changing project records. An explicitly requested research document authorizes that document alone.
 - Trivial task, or an explicit restriction on new files, adoption or the old plan's authority: name the trivial scope or quote the restricting instruction and its source; keep the existing state entry.

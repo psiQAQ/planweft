@@ -36,7 +36,7 @@ hooks:
         - type: command
           command: "SH=\"\"; for c in \"${PWF_SCRIPT_DIR}/skill-hook.sh\" \"${CLAUDE_SKILL_DIR}/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs-de/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/plugins/marketplaces/planweft/scripts/skill-hook.sh\"; do [ -f \"$c\" ] && { SH=\"$c\"; break; }; done; [ -n \"$SH\" ] && sh \"$SH\" --event=precompact; exit 0"
 metadata:
-  version: "0.4.0-rc.14"
+  version: "0.4.0-rc.15"
 disable-model-invocation: true
 ---
 
@@ -46,7 +46,9 @@ Nutze diese vier Schritte für Wartung oder Implementierung mit Untersuchung, Ä
 
 ## 1. Umfang klären und Projekteinstieg lesen
 
-Lies Projektanweisungen, genehmigte Anforderungen, vorhandene Notizen und relevante Diffs; bewahre Änderungen des Nutzers. Nenne vor der Vorbereitung in der vorhandenen Antwort oder im Ziel den zutreffenden Zweig und seine tatsächliche Quelle:
+Nenne vor der Erkundung des Repositorys in der vorhandenen Antwort eine kleine Menge anfänglicher Projekteinstiege: die in der Aufgabe genannten Pfade sowie Anweisungen im Stammverzeichnis und die README, sofern vorhanden und vom erlaubten Nutzerumfang gedeckt. Filtere diese Anfangsauswahl vor dem Lesen anhand ausdrücklicher Lesebeschränkungen. Lies zuerst diese Einstiege und erweitere die Auswahl über relevante Dokumentlinks oder Beziehungen zwischen Implementierung und Tests innerhalb des erlaubten Umfangs. Eine flache Auflistung des Stammverzeichnisses hilft beim Finden der Einstiege; eine entdeckte Hostkonfiguration oder ein Installationsverzeichnis wird dadurch nicht zur Aufgabeneingabe. Nimm es nur auf, wenn die Aufgabe seine Bearbeitung ausdrücklich erlaubt, und nenne diese Quelle. Paketressourcen bleiben beim separat vom Host gelieferten Skill-Pfad unten.
+
+Lies ausgehend von diesen Projekteinstiegen genehmigte Anforderungen, vorhandene Notizen und relevante Diffs; bewahre Änderungen des Nutzers. Nenne vor der Vorbereitung in der vorhandenen Antwort oder im Ziel den zutreffenden Zweig und seine tatsächliche Quelle:
 
 - Nur Lesen, Diagnose oder Planungsmodus: prüfen und berichten, ohne Projektaufzeichnungen zu ändern. Ein ausdrücklich gewünschtes Forschungsdokument erlaubt nur dieses Dokument.
 - Triviale Aufgabe oder ausdrückliche Einschränkung neuer Dateien, der Übernahme oder der Autorität des alten Plans: nenne den trivialen Umfang oder zitiere die Einschränkung samt Quelle; behalte den bisherigen Statuseinstieg.

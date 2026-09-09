@@ -2,7 +2,13 @@
 
 # Changelog
 
-## 0.4.0-rc.14 — Candidate source, not published
+## 0.4.0-rc.15 — Candidate (publication status follows the official registry)
+
+- Select a small initial set of project entries within the user's read scope before exploration, then follow relevant project relationships. Use the host-provided Skill path separately for package resources; a discovered installer directory is not automatically task input.
+- Add bilingual examples for looking up exact planning-variable names without enumerating and filtering the whole environment. Host process environments and automatic project-write behavior are unchanged.
+- Require separate file-access and environment-access evidence at the release gate, retaining the difference between RC14 automatic checks and independent review. Repair bounded Claude descriptor attribution; successful no-model collection does not prove model reminder deduplication. Dependency versions are unchanged.
+
+## 0.4.0-rc.14 — Published candidate; full maintenance acceptance not passed
 
 - Express plan adoption as a source-backed branch decision across all six languages; retain read-only, trivial-task and explicit adoption restrictions without adding automatic file-writing hooks.
 - Add bilingual packaged examples for resolving the host-listed Skill link and allocating/cleaning manual scratch inside the authorized project, without looking up host settings or changing the entire host's temporary directory.

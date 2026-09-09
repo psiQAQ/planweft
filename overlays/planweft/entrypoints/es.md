@@ -4,7 +4,9 @@ Sigue estos cuatro pasos para mantenimiento o implementación con investigación
 
 ## 1. Delimitar el alcance y leer la entrada
 
-Lee instrucciones, requisitos aprobados, notas existentes y el diff relevante; conserva los cambios del usuario. Antes de preparar la tarea, indica en la respuesta o el objetivo existente qué rama aplica y su fuente real:
+Antes de explorar el repositorio, indica en la respuesta existente un pequeño conjunto inicial de entradas del proyecto: las rutas nombradas en la tarea, y las instrucciones de la raíz y el README si existen y el alcance del usuario permite leerlos. Filtra este conjunto inicial según las restricciones explícitas de lectura antes de leerlo. Lee primero esas entradas y amplía la selección mediante enlaces de documentación relevantes o relaciones entre implementación y pruebas, dentro del alcance autorizado. Un listado superficial de la raíz ayuda a encontrar entradas; descubrir una configuración del agente o un directorio del instalador no lo convierte en una entrada de la tarea. Inclúyelo solo si la tarea autoriza explícitamente trabajar en él y cita esa autorización. Los recursos del paquete usan por separado la ruta del Skill proporcionada por el agente, indicada abajo.
+
+Desde esas entradas del proyecto, lee los requisitos aprobados, las notas existentes y el diff relevante; conserva los cambios del usuario. Antes de preparar la tarea, indica en la respuesta o el objetivo existente qué rama aplica y su fuente real:
 
 - Solo lectura, diagnóstico o modo de planificación: inspecciona e informa sin modificar registros. Un documento de investigación solicitado autoriza solo ese documento.
 - Tarea trivial o restricción explícita sobre archivos nuevos, adopción o autoridad del plan anterior: indica el alcance trivial o cita la restricción y su fuente; conserva la entrada de estado existente.

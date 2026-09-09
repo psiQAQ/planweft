@@ -2,7 +2,7 @@
 
 > 当前安装包：**codebuddy**。请选择本文对应宿主的安装章节。
 
-以下命令针对 RC13 候选，须在官方 registry 确认该版本已发布后执行。RC10 的 Pi 原生相对来源误报已在 RC11 本地归档修复，RC12 另修原生 BOM 配置兼容，RC13 修复 Codex 自有 marketplace 来源被 doctor 误报为重复安装；这些修复不代表五宿主模型门槛通过。不要把历史 latest=RC1 当作稳定发布。已知来源检查不保证发现任意自定义 loader，更新不会自动移除其他渠道安装。
+以下命令针对 RC15 候选，须在官方 registry 确认该版本已发布后执行。RC14 已发布，但独立维护验收发现范围越界与记录准确性问题；RC15 调整探索前入口选择，并提供按名查询规划变量的操作示例，真实行为须重新验证。候选发布和安装器通过不代表五宿主模型门槛通过；历史 latest=RC1 不是稳定发布。已知来源检查不保证发现任意自定义 loader，更新不会自动移除其他渠道安装。
 
 ## 统一安装器（0.4.0 候选）
 
@@ -10,13 +10,13 @@
 默认安装完整原生集成，项目级为默认 scope。仅安装 Skill 必须显式 `--skill-only`；不会因此注册插件 hooks。
 
 ```bash
-npx planweft@0.4.0-rc.13 add -a claude -a pi
-npx planweft@0.4.0-rc.13 add -a codex --global
-npx planweft@0.4.0-rc.13 add -a opencode --skill-only --symlink
-npx planweft@0.4.0-rc.13 list
-npx planweft@0.4.0-rc.13 doctor
-npx planweft@0.4.0-rc.13 update -a pi
-npx planweft@0.4.0-rc.13 remove -a pi
+npx planweft@0.4.0-rc.15 add -a claude -a pi
+npx planweft@0.4.0-rc.15 add -a codex --global
+npx planweft@0.4.0-rc.15 add -a opencode --skill-only --symlink
+npx planweft@0.4.0-rc.15 list
+npx planweft@0.4.0-rc.15 doctor
+npx planweft@0.4.0-rc.15 update -a pi
+npx planweft@0.4.0-rc.15 remove -a pi
 ```
 
 | 参数 | 默认值 | 作用 |
@@ -138,7 +138,7 @@ pi list
 npm 发布完成后，使用唯一的无 scope 包：
 
 ```bash
-pi install -l npm:planweft@0.4.0-rc.13
+pi install -l npm:planweft@0.4.0-rc.15
 pi install -l npm:planweft@NEW_VERSION
 # Remove the project installation:
 pi remove -l npm:planweft@NEW_VERSION
@@ -317,16 +317,16 @@ Continue CLI 的 `/import-skill <url-or-name>` 是由模型协助下载复制的
 完整集成是用户级 **profile** 配置；默认 `headless`，可显式选 `web`。安装器一次管理一个 DSH profile，更新沿用记录中的 profile，切换前先卸载。CLI 将原生来源链接到持久版本目录；这属于 DSH/pnpm 管理的链接，不受 CLI `--copy` 影响。启动该 profile 后，bundle 注册 Skill 与 hooks。
 
 ```bash
-npx planweft@0.4.0-rc.13 add -a dsh --global --dsh-profile headless
-npx planweft@0.4.0-rc.13 doctor -a dsh --global
-npx planweft@0.4.0-rc.13 update -a dsh --global
-npx planweft@0.4.0-rc.13 remove -a dsh --global
+npx planweft@0.4.0-rc.15 add -a dsh --global --dsh-profile headless
+npx planweft@0.4.0-rc.15 doctor -a dsh --global
+npx planweft@0.4.0-rc.15 update -a dsh --global
+npx planweft@0.4.0-rc.15 remove -a dsh --global
 ```
 
 用户可直接使用 DSH 原生命令，来源为单一 npm 包；此路线独立于 PlanWeft CLI，不能混用所有权：
 
 ```bash
-dsh plugin --profile headless add planweft@0.4.0-rc.13
+dsh plugin --profile headless add planweft@0.4.0-rc.15
 dsh --profile headless --dump-config
 dsh --profile headless "Use project-docs for this maintenance task."
 dsh plugin --profile headless remove planweft
@@ -337,10 +337,10 @@ dsh plugin --profile headless remove planweft
 项目级仅安装 Skill：
 
 ```bash
-npx planweft@0.4.0-rc.13 add -a dsh --skill-only
-npx planweft@0.4.0-rc.13 doctor -a dsh
-npx planweft@0.4.0-rc.13 update -a dsh
-npx planweft@0.4.0-rc.13 remove -a dsh
+npx planweft@0.4.0-rc.15 add -a dsh --skill-only
+npx planweft@0.4.0-rc.15 doctor -a dsh
+npx planweft@0.4.0-rc.15 update -a dsh
+npx planweft@0.4.0-rc.15 remove -a dsh
 ```
 
 用户级 Skill-only 在每个命令上添加 `--global`。`--copy`、`--symlink`、`--dry-run` 沿用统一安装器规则。

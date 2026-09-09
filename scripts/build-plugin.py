@@ -17,7 +17,7 @@ import tarfile
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR = ROOT / 'vendor/planning-with-files'
 OVERLAY = ROOT / 'overlays/planweft'
-VERSION = '0.4.0-rc.14'
+VERSION = '0.4.0-rc.15'
 PRODUCT = 'planweft'
 SKILL = 'project-docs'
 SKILL_TRIGGER = ('Use for implementation/maintenance with investigation, fixes, regression tests '

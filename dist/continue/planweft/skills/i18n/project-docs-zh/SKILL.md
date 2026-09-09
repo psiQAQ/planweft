@@ -37,7 +37,7 @@ hooks:
           command: "SH=\"\"; for c in \"${PWF_SCRIPT_DIR}/skill-hook.sh\" \"${CLAUDE_SKILL_DIR}/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs-zh/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/plugins/marketplaces/planweft/scripts/skill-hook.sh\"; do [ -f \"$c\" ] && { SH=\"$c\"; break; }; done; [ -n \"$SH\" ] && sh \"$SH\" --event=precompact; exit 0"
 metadata:
 
-  version: "0.4.0-rc.14"
+  version: "0.4.0-rc.15"
 
 disable-model-invocation: true
 ---
@@ -48,7 +48,9 @@ disable-model-invocation: true
 
 ## 1. 明确范围，读取项目入口
 
-阅读项目指令、批准需求、已有任务记录及相关 diff，保留用户修改。准备任务前，在已有回复或目标段中说明适用的分支及实际来源：
+探索仓库前，在已有回复中列出少量初始项目入口：任务指定的路径，以及用户范围允许读取且实际存在的根指令和 README。读取前先按明确的读取限制筛选这个初始集合。先读这些入口，再沿相关文档链接或实现／测试关系，在已授权范围内扩展。根目录浅层列举可以帮助定位入口；发现宿主配置或安装器目录，不代表它成为任务输入。仅在任务明确授权检查或修改该目录时加入，并注明授权来源。包内资源使用下方独立的宿主已提供 Skill 路径。
+
+从这些项目入口读取批准需求、已有任务记录及相关 diff，保留用户修改。准备任务前，在已有回复或目标段中说明适用的分支及实际来源：
 
 - 只读／诊断／宿主规划模式：只检查和报告，不修改项目记录；明确要求的书面调研只授权该产物。
 - 简单任务，或明确限制新增文件、采用流程、旧计划权威：说明简单任务的范围，或引用限制原句及来源；保留原状态入口。
