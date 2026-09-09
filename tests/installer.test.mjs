@@ -288,3 +288,180 @@ test('OpenCode npm runtime permits only a version-paired Skill without a second 
   assert.equal(await f.create(['remove','-a','opencode']).execute(),0);
   assert.equal(fs.readFileSync(file,'utf8'),config);
 });
+
+// Offline preflight contracts only: these settings fixtures and the fake runner
+// do not establish native discovery, activation or execution of two hooks.
+for (const host of ['pi', 'opencode']) {
+  test(`${host} cross-scope project preflight rejects a global planning registration`, async t => {
+    for (const customRoot of [false, true]) await t.test(customRoot ? 'configured root' : 'default root', async t => {
+      const f=fixture(t);
+      const globalRoot=customRoot ? path.join(f.root,'custom global config')
+        : path.join(f.home,host==='pi'?'.pi/agent':'.config/opencode');
+      const env=customRoot ? (host==='pi' ? {PI_CODING_AGENT_DIR:globalRoot}
+        : {XDG_CONFIG_HOME:path.dirname(globalRoot)}) : {};
+      // OpenCode appends /opencode to XDG_CONFIG_HOME.
+      const configRoot=host==='opencode' && customRoot
+        ? path.join(env.XDG_CONFIG_HOME,'opencode') : globalRoot;
+      const file=path.join(configRoot,host==='pi'?'settings.json':'opencode.json');
+      const content=JSON.stringify(host==='pi'
+        ? {packages:['npm:planweft@0.4.0-rc.1']}
+        : {plugin:['planweft@0.4.0-rc.1']});
+      fs.mkdirSync(configRoot,{recursive:true}); fs.writeFileSync(file,content);
+      try {
+        await assert.rejects(f.create(['add','-a',host,'--project','--dry-run'],undefined,{env}).execute(),
+          /Another planning registration/);
+      } finally {
+        assert.equal(f.calls.length,0);
+        assert.equal(fs.existsSync(path.join(f.project,'.planweft')),false);
+        assert.equal(fs.readFileSync(file,'utf8'),content);
+        assert.equal(fs.readFileSync(path.join(f.project,'task_plan.md'),'utf8'),'approved task\r\n');
+      }
+    });
+  });
+
+  test(`${host} cross-scope checks preserve the current owned registration`, async t => {
+    const f=fixture(t);
+    assert.equal(await f.create(['add','-a',host]).execute(),0);
+    if (host==='pi') {
+      const state=JSON.parse(fs.readFileSync(path.join(f.project,'.planweft/installations.json'),'utf8'));
+      const settings=path.join(f.project,'.pi/settings.json');
+      // Simulate the native manager's persistence; no real Pi process runs.
+      fs.mkdirSync(path.dirname(settings),{recursive:true});
+      fs.writeFileSync(settings,JSON.stringify({packages:[state.agents.pi.nativeSource]}));
+    }
+    const calls=f.calls.length;
+    assert.equal(await f.create(['doctor','-a',host]).execute(),0);
+    assert.equal(await f.create(['update','-a',host,'--dry-run']).execute(),0);
+    assert.equal(f.calls.length,calls);
+    assert.equal(fs.readFileSync(path.join(f.project,'task_plan.md'),'utf8'),'approved task\r\n');
+  });
+}
+
+test('pi cross-scope global reference to the owned project source remains foreign', async t => {
+  const f=fixture(t);
+  assert.equal(await f.create(['add','-a','pi']).execute(),0);
+  const receipt=path.join(f.project,'.planweft/installations.json');
+  const before=fs.readFileSync(receipt,'utf8');
+  const source=JSON.parse(before).agents.pi.nativeSource;
+  const content=JSON.stringify({packages:[source]});
+  const settings=[path.join(f.project,'.pi/settings.json'),path.join(f.home,'.pi/agent/settings.json')];
+  for (const file of settings) {
+    fs.mkdirSync(path.dirname(file),{recursive:true}); fs.writeFileSync(file,content);
+  }
+  const calls=f.calls.length;
+  assert.equal(await f.create(['doctor','-a','pi']).execute(),1);
+  await assert.rejects(f.create(['update','-a','pi','--dry-run']).execute(),/Another planning registration/);
+  assert.equal(f.calls.length,calls);
+  assert.equal(fs.readFileSync(receipt,'utf8'),before);
+  for (const file of settings) assert.equal(fs.readFileSync(file,'utf8'),content);
+});
+
+test('OpenCode cross-scope JSONC permits only the same-version Skill pairing', async t => {
+  const f=fixture(t),file=path.join(f.home,'.config/opencode/opencode.jsonc');
+  const content='// Synthetic global registration\n{ "plugin": ["planweft@0.4.0-rc.1"], }\n';
+  fs.mkdirSync(path.dirname(file),{recursive:true}); fs.writeFileSync(file,content);
+  await assert.rejects(f.create(['add','-a','opencode','--dry-run']).execute(),/Another planning registration/);
+  await assert.rejects(f.create(['add','-a','opencode','--skill-only','--dry-run'],'0.4.0-rc.2').execute(),/Another planning registration/);
+  assert.equal(f.calls.length,0);
+  assert.equal(await f.create(['add','-a','opencode','--skill-only']).execute(),0);
+  assert.equal(await f.create(['doctor','-a','opencode']).execute(),0);
+  assert.equal(await f.create(['update','-a','opencode','--dry-run']).execute(),0);
+  assert.equal(fs.existsSync(path.join(f.project,'.opencode/plugins/planweft.ts')),false);
+  assert.equal(await f.create(['remove','-a','opencode']).execute(),0);
+  assert.equal(fs.readFileSync(file,'utf8'),content);
+});
+
+test('cross-scope local package paths are recognized in global registrations', async t => {
+  for (const host of ['pi','opencode']) for (const source of ['/synthetic/packages/planweft/dist/index.js','C:\\synthetic\\packages\\planweft\\dist\\index.js']) {
+    await t.test(`${host}: ${source}`, async t => {
+      const f=fixture(t),file=path.join(f.home,host==='pi'?'.pi/agent/settings.json':'.config/opencode/opencode.json');
+      const content=JSON.stringify(host==='pi'?{packages:[source]}:{plugin:[source]});
+      fs.mkdirSync(path.dirname(file),{recursive:true}); fs.writeFileSync(file,content);
+      await assert.rejects(f.create(['add','-a',host,'--dry-run']).execute(),/Another planning registration/);
+      assert.equal(f.calls.length,0);
+      assert.equal(fs.existsSync(path.join(f.project,'.planweft')),false);
+      assert.equal(fs.readFileSync(file,'utf8'),content);
+    });
+  }
+});
+
+test('pi duplicate detection preserves a JSON-escaped owned native source', async t => {
+  // Exercise serialization independently of this test machine's OS. This is
+  // an ownership-filter unit test, not a Windows native installation trial.
+  for (const nativeSource of ['C:\\synthetic\\project\\.planweft\\versions\\0.4.0-rc.1\\node_modules\\planweft\\dist\\pi\\planweft',
+    '/synthetic/project "quoted"/node_modules/planweft/dist/pi/planweft']) await t.test(nativeSource, t => {
+    const f=fixture(t),file=path.join(f.project,'.pi/settings.json');
+    const content=JSON.stringify({packages:[nativeSource]});
+    fs.mkdirSync(path.dirname(file),{recursive:true}); fs.writeFileSync(file,content);
+    assert.doesNotThrow(()=>f.create(['add','-a','pi']).detectDuplicates('pi',{nativeSource}));
+    assert.equal(f.calls.length,0);
+    assert.equal(fs.readFileSync(file,'utf8'),content);
+  });
+});
+
+test('cross-scope known native loaders block both installation directions', async t => {
+  for (const host of ['pi','opencode']) for (const scope of ['project','global']) {
+    const names=host==='pi'?['extensions/planweft.ts','extensions/planweft/index.ts']
+      :['plugins/planweft.ts','plugins/planweft.js','plugins/planweft.mjs'];
+    for (const name of names) await t.test(`${host} ${scope}: ${name}`, async t => {
+      const f=fixture(t),installer=f.create(['add','-a',host,'--'+scope,'--dry-run']);
+      const other=installer.hostRoot(host,scope==='project'?'global':'project');
+      const file=path.join(other,name),content='throw new Error("offline fixture must not execute");\n';
+      fs.mkdirSync(path.dirname(file),{recursive:true}); fs.writeFileSync(file,content);
+      await assert.rejects(installer.execute(),/Another planning native loader/);
+      assert.equal(f.calls.length,0);
+      assert.equal(fs.existsSync(installer.base),false);
+      assert.equal(fs.readFileSync(file,'utf8'),content);
+    });
+  }
+});
+
+test('cross-scope global preflight rejects project settings in the native root', async t => {
+  for (const host of ['pi','opencode']) for (const name of host==='pi'?['settings.json']:['opencode.json','opencode.jsonc']) {
+    await t.test(`${host}: ${name}`, async t => {
+      const f=fixture(t),installer=f.create(['add','-a',host,'--global','--dry-run']);
+      const file=path.join(installer.hostRoot(host,'project'),name);
+      const content=JSON.stringify(host==='pi'?{packages:['npm:planweft@0.4.0-rc.1']}:{plugin:['planweft@0.4.0-rc.1']});
+      fs.mkdirSync(path.dirname(file),{recursive:true}); fs.writeFileSync(file,content);
+      await assert.rejects(installer.execute(),/Another planning registration/);
+      assert.equal(f.calls.length,0);
+      assert.equal(fs.existsSync(installer.base),false);
+      assert.equal(fs.readFileSync(file,'utf8'),content);
+    });
+  }
+});
+
+test('pi same-root alias preserves the current owned package registration', async t => {
+  const f=fixture(t),root=path.join(f.project,'.pi');
+  const env={PI_CODING_AGENT_DIR:path.join(root,'..','.pi')};
+  const create=args=>f.create([...args,'-a','pi'],undefined,{env});
+  assert.equal(await create(['add']).execute(),0);
+  const source=JSON.parse(fs.readFileSync(path.join(f.project,'.planweft/installations.json'),'utf8')).agents.pi.nativeSource;
+  fs.writeFileSync(path.join(root,'settings.json'),JSON.stringify({packages:[source]}));
+  assert.equal(await create(['doctor']).execute(),0);
+  assert.equal(await create(['update','--dry-run']).execute(),0);
+});
+
+test('OpenCode same-root symlink alias preserves the current owned loader', async t => {
+  const f=fixture(t),config=path.join(f.root,'global config'),root=path.join(f.project,'.opencode');
+  const env={XDG_CONFIG_HOME:config},create=args=>f.create([...args,'-a','opencode'],undefined,{env});
+  assert.equal(await create(['add']).execute(),0);
+  fs.mkdirSync(config,{recursive:true}); fs.symlinkSync(root,path.join(config,'opencode'),'dir');
+  const loader=path.join(root,'plugins/planweft.ts'),before=fs.readFileSync(loader,'utf8'),calls=f.calls.length;
+  assert.equal(await create(['doctor']).execute(),0);
+  assert.equal(await create(['update','--dry-run']).execute(),0);
+  assert.equal(f.calls.length,calls);
+  assert.equal(fs.readFileSync(loader,'utf8'),before);
+  assert.equal(fs.readlinkSync(path.join(config,'opencode')),root);
+});
+
+test('OpenCode same-root alias still rejects an additional unowned loader', async t => {
+  const f=fixture(t),config=path.join(f.root,'global config'),root=path.join(f.project,'.opencode');
+  const env={XDG_CONFIG_HOME:config},create=args=>f.create([...args,'-a','opencode'],undefined,{env});
+  assert.equal(await create(['add']).execute(),0);
+  fs.mkdirSync(config,{recursive:true}); fs.symlinkSync(root,path.join(config,'opencode'),'dir');
+  const foreign=path.join(root,'plugins/planweft.js'),content='throw new Error("foreign offline fixture");\n';
+  fs.writeFileSync(foreign,content);
+  await assert.rejects(create(['update','--dry-run']).execute(),/planweft\.js/);
+  assert.equal(fs.readFileSync(foreign,'utf8'),content);
+});
