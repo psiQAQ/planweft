@@ -86,13 +86,16 @@ class ReviewFeedbackTest(unittest.TestCase):
             args.image='sha256:'+'a'*64;args.package={'version':'0.4.0-rc.4'};args.model='fake';args.timeout=30;args.direct_provider_config=Path('/not-read')
             snapshots=lambda fixture,root:{str(p.relative_to(root)):p.read_text() for p in root.rglob('*') if p.is_file()}
             fixture=SimpleNamespace(PROMPTS={'cold-reader':'Read only the project files and identify remaining work.'},BOUNDARY=' No history or cache access.')
-            runner=SimpleNamespace(load_fixture_module=lambda:fixture,credentials=lambda *a:{'api_key':'FAKE_TEST_SECRET'},project_snapshot=snapshots,model_text=lambda host,text:{'final':text,'errors':[],'tool_calls':[]})
+            runner=SimpleNamespace(load_fixture_module=lambda:fixture,credentials=lambda *a:{'api_key':'FAKE_TEST_SECRET'},project_snapshot=snapshots,model_text=lambda host,text:{'final':text,'errors':[],'tool_calls':[]},
+                                   resource_preflight=lambda path:{'checked':True},cleanup_finished_case=lambda *a:{'status':'Passed'})
             payloads=[]
             def run(command,**kwargs):
                 if command[1:3]==['rm','-f']:
                     if cleanup_error=='rm': raise feedback.subprocess.CalledProcessError(1,command,stderr='FAKE_TEST_SECRET')
                     return SimpleNamespace(returncode=0)
                 payload=json.loads(kwargs['input']);payloads.append(payload)
+                for limit in ['--cpus=2','--memory=3g','--memory-swap=3g','--pids-limit=256','/tmp:mode=1777,size=512m']:
+                    self.assertIn(limit,command)
                 stage=args.output/payload['case'];raw=stage/'raw'
                 if payload['case']=='review-correction': (stage/'project/.planning/task/task_plan.md').write_text('Corrected Current Phase based on prior evidence.\n')
                 (raw/'model.stdout').write_text('Owner response' if payload['case']=='review-correction' else 'Independent file-only cold read')
@@ -123,6 +126,7 @@ class ReviewFeedbackTest(unittest.TestCase):
             self.assertIn('executable bits',report['snapshot_assertion_scope']['excluded'])
             for stage in report['stages'].values(): self.assertEqual(stage['snapshot_assertion_scope'],report['snapshot_assertion_scope'])
             self.assertEqual(report['original_semantic_status'],'Failed')
+            self.assertEqual(report['resource_preflight'],{'checked':True})
             self.assertEqual([p['case'] for p in payloads],['review-correction','cold-reader'])
             self.assertIn('Current Phase contradicts',payloads[0]['prompt'])
             self.assertNotIn('Current Phase contradicts',payloads[1]['prompt'])
@@ -134,6 +138,19 @@ class ReviewFeedbackTest(unittest.TestCase):
 
     def test_owner_cold_reader_chain_keeps_feedback_out_of_cold_prompt(self):
         self._owner_chain()
+
+    def test_resource_shortage_stops_before_auth_docker_or_output(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            args,_,_=self.fixture(Path(temporary))
+            from unittest.mock import Mock
+            runner=SimpleNamespace(load_fixture_module=lambda:None,
+                resource_preflight=Mock(side_effect=RuntimeError('Resource preflight')),
+                credentials=Mock())
+            with patch.object(feedback,'parse_args',return_value=args),patch.object(feedback,'load_module',return_value=runner), \
+                 patch.object(feedback.subprocess,'check_output') as docker:
+                with self.assertRaisesRegex(RuntimeError,'Resource preflight'):feedback.main([])
+            runner.credentials.assert_not_called();docker.assert_not_called()
+            self.assertFalse(args.output.exists())
 
     def test_cleanup_rechecks_own_container_residue(self):
         self._owner_chain(residual=True)

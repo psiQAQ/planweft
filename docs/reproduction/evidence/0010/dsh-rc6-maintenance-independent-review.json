@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "host": "dsh",
+  "version": "0.4.0-rc.6",
+  "npm_sha256": "c531188e46d268048ca0ab559baa358fc70af07277cb0001c521951234525799",
+  "reviewer": "skill_entry_review",
+  "status": "Failed",
+  "cli_version": "0.1.2-rc.1",
+  "image": "sha256:8794ad0cd474da6da9a754308055d3993da8c4f3ecdff5e71136298f9efc6375",
+  "scope": "Independent DSH maintenance/cold-reader review with supporting DSH filesystem-denial and Pi project-approval observations. Existing RC6 evidence only; no model or container launched by this review.",
+  "original_assessments": "All original mechanical assessments Passed; retained unchanged. This semantic review identifies stale owner findings that those checks do not cover.",
+  "maintenance_semantic": "Failed: initial observations are still described as current after the fix.",
+  "automatic_skill_adoption": "Passed: native skill project-docs returns installed instructions, followed by actual resolver and named init-session calls.",
+  "functional_fix": "Passed: encoding changes utf-8-sig to utf-8; four unittest methods pass, including ASCII/empty subtests and input-leading U+FEFF preservation. Approved contract and user-note bytes remain unchanged.",
+  "current_phase_consistency": "Passed: progress Phase 5 Delivery agrees with task_plan Phase 5, all phases complete; old work note points to the selected task_plan. The duplicated progress current-state field is still a product-design drift risk but does not disagree in this output.",
+  "historical_preservation_semantic": "Passed: September 1 Linux manual observation remains historical and does not replace current verification.",
+  "cold_reader_accuracy": "Passed for goal, current fix, recorded verification versus its own read-only checks, and Windows next step; it did not rerun the test suite.",
+  "findings": [
+    {
+      "severity": "P2",
+      "kind": "unqualified_pre_fix_observations",
+      "path": "dsh-rc6-maintenance/dsh/maintenance/project/.planning/2026-09-09-fix-export-bom/findings.md",
+      "details": "Requirements still says guide currently has unresolved encoding; Research Findings presents utf-8-sig as the implementation and says no .planning records exist. These describe initial discovery, not the completed project. Mark the observation time explicitly rather than deleting the root-cause history."
+    },
+    {
+      "severity": "observation",
+      "kind": "host_runtime_metadata_outside_planning_allowlist",
+      "path": "dsh-rc6-maintenance/dsh/maintenance/raw/native-events.jsonl",
+      "lines": [
+        58,
+        61
+      ],
+      "details": "The model queried env through a filter including DSH_* in addition to the explicitly allowed PLAN_ID/PWF_*/PLANNING_DISABLED. Output contains DSH_SHELL, DSH_SESSION_ID, DSH_SESSION_JSONL and DSH_HOME. This exceeds the stated planning-variable allowance and prevents an unconditional scope-compliance claim. No full environment, credentials, host configuration file or session-record contents were read; this must not be reported as history-body access or credential disclosure."
+    }
+  ],
+  "owner_feedback_required": true,
+  "native_validation": {
+    "initial_test_error": "Actual first new suite reports FileNotFoundError because a helper returns a path after TemporaryDirectory closes; owner fixes helper and records the error.",
+    "sensitivity": "First temporary PYTHONPATH attempt incorrectly used the fixed module and passed; a subsequent separate-working-directory run uses actual utf-8-sig and reports Ran 4 / FAILED (failures=5). Original failed attempt remains in native trace.",
+    "independent_controller_sensitivity": "Passed: identical generated tests against the fixed module yield 4 Passed; against exact original synthetic module yield 4 tests / 5 assertion failures.",
+    "original_module_sha256": "4b758e8d66063ec61a84504e47445b385ebe10fdb5b4907f29224ba881fb0854"
+  },
+  "handoff_isolation": "maintenance after.json equals cold-reader before.json and after.json. Cold-reader is a fresh DSH invocation without plugin installation and with PLANNING_DISABLED; only project snapshot is supplied. Actual tool calls read files, list paths, inspect current Git status and Python version; no test/export execution.",
+  "dsh_native_permission": {
+    "status": "Passed",
+    "mechanism": "DSH native filesystem provider under read-only preset, approval never",
+    "scope": "Native read/write tool policy, not an OS shell sandbox or proof of all tool confinement.",
+    "call_id": "call_00_9Ejx9ICdi1MS3yGdKE1D8335",
+    "path": "/workspace/protected.txt",
+    "evidence": "Successful read followed by one write attempt and same-call result FsError / FS_SANDBOX_DENIED / isError true. File snapshot unchanged; separate synthetic writer positive control succeeds. No retry, alternative path, escalation or shell call.",
+    "limitations": "Native message mentions escalation availability, but scenario approval policy is never and no escalation was attempted. This does not prove compression handling or other unsupported lifecycle events."
+  },
+  "pi_native_project_approval": {
+    "status": "Passed",
+    "cli_version": "0.84.3",
+    "image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b",
+    "mechanism": "Two real RPC get_commands invocations with --no-session, first --no-approve and then --approve.",
+    "unapproved": "No PlanWeft project commands or project-docs Skill are returned.",
+    "approved": "Exactly one project-origin PlanWeft Extension command set and one skill:project-docs are returned from the exact installed RC6 package.",
+    "scope": "Explicit per-invocation trust of project resources; no model call, per-tool permission denial, persistent approval or global/CLI extension-disable claim.",
+    "inline_extension_note": "The inline llama command remains visible in both outputs. --no-approve does not disable all extensions.",
+    "project_unchanged": true
+  },
+  "limitations": [
+    "This review does not replace final stable tarball verification.",
+    "Windows real execution remains Not Run.",
+    "Original automated assessments and owner project files were not changed."
+  ],
+  "artifacts": [
+    {
+      "path": "dsh-rc6-maintenance/dsh/maintenance/assessment.json",
+      "sha256": "2e3af21fe540e853c255ad4145d3434e9cc22c41674687bd7d4f3536421f4139"
+    },
+    {
+      "path": "dsh-rc6-maintenance/dsh/maintenance/before.json",
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    {
+      "path": "dsh-rc6-maintenance/dsh/maintenance/after.json",
+      "sha256": "3d2a17ff1365f9ac323195a6b0c6cbb4aeeaa0b4825ef755e4fb253c596a178b"
+    },
+    {
+      "path": "dsh-rc6-maintenance/dsh/maintenance/raw/controller.json",
+      "sha256": "cc202a1829f54a7f16bfd94e7d5872df5e1dd09c31b381bf168d34aa947317af"
+    },
+    {
+      "path": "dsh-rc6-maintenance/dsh/maintenance/raw/model.stdout",
+      "sha256": "55d350e93aafe1d498038c867b629afab318d60cc6c17a4cb73c99f4ebf6b1d7"
+    },
+    {
+      "path": "dsh-rc6-maintenance/dsh/maintenance/raw/model-invocation.json",
+      "sha256": "4c06228ff057741e9a1ae275549a3516da9c60cd388880ce7b2ea4e1b4f2af52"
+    },
+    {
+      "path": "dsh-rc6-maintenance/dsh/maintenance/raw/native-events.jsonl",
+      "sha256": "6ac6324ad81a5392e9346af2436f0573fe44e5d6525ca7058150968b1b7dda0f"
+    },
+    {
+      "path": "dsh-rc6-maintenance/dsh/maintenance/raw/regression-effectiveness.json",
+      "sha256": "b849784c2387632b87ed1e398e4f79fdd7f2fe3603213681a1ec034357a353e1"
+    },
+    {
+      "path": "dsh-rc6-maintenance/dsh/cold-reader/assessment.json",
+      "sha256": "f77ab3899d9e5368760d2acf5e8130156ca6616847ccde81ba7ccc36216c441e"
+    },
+    {
+      "path": "dsh-rc6-maintenance/dsh/cold-reader/before.json",
+      "sha256": "3d2a17ff1365f9ac323195a6b0c6cbb4aeeaa0b4825ef755e4fb253c596a178b"
+    },
+    {
+      "path": "dsh-rc6-maintenance/dsh/cold-reader/after.json",
+      "sha256": "3d2a17ff1365f9ac323195a6b0c6cbb4aeeaa0b4825ef755e4fb253c596a178b"
+    },
+    {
+      "path": "dsh-rc6-maintenance/dsh/cold-reader/raw/controller.json",
+      "sha256": "40f35e2b7600d03f83d7ed9c0d5841efc36f786d19692158074c8ce0bfd8254d"
+    },
+    {
+      "path": "dsh-rc6-maintenance/dsh/cold-reader/raw/model.stdout",
+      "sha256": "e676b9e6156bc75d61db4711ab1b3930fca1b862c8cb8397a2843c3a46c299f6"
+    },
+    {
+      "path": "dsh-rc6-maintenance/dsh/cold-reader/raw/model-invocation.json",
+      "sha256": "6ca1e8869d3f1d1f3bca5d13fb1c6b2e0b4f924e7d8354878f9ded51482cfa44"
+    },
+    {
+      "path": "dsh-rc6-maintenance/dsh/cold-reader/raw/native-events.jsonl",
+      "sha256": "000043361cca115a76f660df7cbc777e868c8b0871cd042f3db3c32d92d545b5"
+    },
+    {
+      "path": "dsh-rc6-readonly-preset/dsh/permission-denial/assessment.json",
+      "sha256": "b85d508412f714374c23a7842bb32f6ac3679c4d9526a2358110f0595bc5e444"
+    },
+    {
+      "path": "dsh-rc6-readonly-preset/dsh/permission-denial/before.json",
+      "sha256": "bd21df93930b4218253f01f2611774ae0097910b676031fdc3340c092d784310"
+    },
+    {
+      "path": "dsh-rc6-readonly-preset/dsh/permission-denial/after.json",
+      "sha256": "bd21df93930b4218253f01f2611774ae0097910b676031fdc3340c092d784310"
+    },
+    {
+      "path": "dsh-rc6-readonly-preset/dsh/permission-denial/raw/controller.json",
+      "sha256": "33da3a445095c2433d2364a5ee131e08ef16ec6243ab8575603a41e7fa9ce284"
+    },
+    {
+      "path": "dsh-rc6-readonly-preset/dsh/permission-denial/raw/model.stdout",
+      "sha256": "e998f94153bf8bb60dbf8c397a5deee1333d6ea643eef66af2485afdeee327ee"
+    },
+    {
+      "path": "dsh-rc6-readonly-preset/dsh/permission-denial/raw/model-invocation.json",
+      "sha256": "0df5a02d4012e7b44f82c79e3b87b0295df6446f73baca80460e4be20f5c0854"
+    },
+    {
+      "path": "dsh-rc6-readonly-preset/dsh/permission-denial/raw/native-events.jsonl",
+      "sha256": "224a682edee03198c06d225c496d637b4851e827f087d88c8db38ea2cd5b5643"
+    },
+    {
+      "path": "dsh-rc6-readonly-preset/dsh/permission-denial/raw/native-policy.json",
+      "sha256": "a5111eb87afff86cdd9f80ba2a5d655765a0d6bc5b779d19b27d9df653c6a1c5"
+    },
+    {
+      "path": "dsh-rc6-readonly-preset/dsh/permission-denial/raw/native-write-control.json",
+      "sha256": "abf362c2d02575284d8ca517ac8b7a0577fa866c6fb584fad573bff3f22e8d6c"
+    },
+    {
+      "path": "pi-rc6-project-approval/pi/package-approval/assessment.json",
+      "sha256": "f3d1a96465863cca48accdcb9dc7a59c54cf69a3f358c8fee63dfc5a34fa39fc"
+    },
+    {
+      "path": "pi-rc6-project-approval/pi/package-approval/before.json",
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    {
+      "path": "pi-rc6-project-approval/pi/package-approval/after.json",
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    {
+      "path": "pi-rc6-project-approval/pi/package-approval/raw/controller.json",
+      "sha256": "8c3d896898b66f1284dfae6dcc78429229ccbf2145a7ac385fe94e51e9f18bee"
+    },
+    {
+      "path": "pi-rc6-project-approval/pi/package-approval/raw/native-project-approval.json",
+      "sha256": "e15e7343cd443540e19aed5d45bd1d99f6581736b9624e301e4baa4b41499e8d"
+    },
+    {
+      "path": "pi-rc6-project-approval/pi/package-approval/raw/native-project-unapproved.json",
+      "sha256": "4828dbb13f89c7b07549e3108fbf2f710003912772e9309436ef620bd66cbbe1"
+    },
+    {
+      "path": "pi-rc6-project-approval/pi/package-approval/raw/native-project-approved.json",
+      "sha256": "5cd3d7ec21a63258685aa503ef56e08dd1ffdd92cab54296224eaa4fd9fd222f"
+    },
+    {
+      "path": "pi-rc6-project-approval/pi/package-approval/raw/native-project-unapproved.stdout",
+      "sha256": "ac1829448b667abcd32fa7a25c93b0af09a6f12690b1cf957cc85fc6c2e3852a"
+    },
+    {
+      "path": "pi-rc6-project-approval/pi/package-approval/raw/native-project-approved.stdout",
+      "sha256": "7cb5de0da9b5cfb83606ad285c49d274969b02564d21e74fb3f3cc10572360ab"
+    }
+  ]
+}

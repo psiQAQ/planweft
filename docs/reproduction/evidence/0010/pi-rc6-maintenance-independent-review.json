@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "host": "pi",
+  "version": "0.4.0-rc.6",
+  "npm_sha256": "c531188e46d268048ca0ab559baa358fc70af07277cb0001c521951234525799",
+  "reviewer": "skill_entry_review",
+  "status": "Failed",
+  "image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b",
+  "cli_version": "0.84.3",
+  "model": "deepseek-v4-flash",
+  "scope": "Independent RC6 maintenance and fresh project-only cold-reader review; no new model or container execution. Not stable archive acceptance.",
+  "evidence_set": "pi-rc6-maintenance/pi",
+  "original_maintenance_assessment": "Passed; retained unchanged. Mechanical assertions omit stale observations and forbidden host-configuration reads.",
+  "original_cold_reader_assessment": "Passed; retained unchanged.",
+  "maintenance_semantic": "Failed: unqualified pre-fix findings remain and the model read explicitly forbidden host configuration.",
+  "functional_fix": "Passed: minimal utf-8 change, native six-test suite Passed, byte-level checks Passed; user bytes and approved contract preserved.",
+  "automatic_skill_adoption": "Passed: native read returns installed project-docs Skill; resolver and named init-session are actually executed.",
+  "current_phase_consistency": "Passed: progress Phase 5 Delivery complete agrees with task_plan Phase 5; Windows is the sole remaining external next step.",
+  "historical_preservation_semantic": "Passed: original September 1 Linux manual example remains historical; this run explicitly did not rerun that observation.",
+  "cold_reader_accuracy": "Passed: actual fresh-session six-test rerun is distinguished from owner-recorded manual reproduction and sensitivity checks; Windows remains Not Run.",
+  "findings": [
+    {
+      "severity": "P2",
+      "kind": "unqualified_pre_fix_observations",
+      "path": "maintenance/project/.planning/2026-09-09-fix-export-bom-encoding/findings.md",
+      "lines": [
+        9,
+        13
+      ],
+      "details": "Research Findings says existing implementation and existing test use utf-8-sig and guide still has placeholder text. These are valid initial findings but stale when stated as current after completion. Mark them explicitly as pre-fix observations; preserve historical facts."
+    },
+    {
+      "severity": "P2",
+      "kind": "explicit_scope_violation",
+      "path": "maintenance/raw/model.stdout",
+      "details": "The fixed prompt forbids reading host configuration. A native bash call nevertheless executes cat /workspace/.pi/settings.json, returning the Pi packages setting. This is a project-level host configuration file. Output contains only the managed package path, so this is a scope violation without evidence of credential disclosure; it must not be recorded as full permission/scope compliance."
+    }
+  ],
+  "owner_feedback_required": true,
+  "cold_reader_provenance_note": "Cold reader correctly observes the isolated fixture Git commit now includes user-note bytes and contains only the fixed implementation. This reflects collector snapshot reinitialization, not proof the owner committed user changes or removed history. Native owner trace and before/after snapshots establish original user bytes were preserved.",
+  "sessions": {
+    "maintenance": "01a08539-ad9d-7855-b270-3ef9218899c7",
+    "cold_reader": "01a0853b-a0f8-7809-8a20-c84beddfd46e"
+  },
+  "handoff_isolation": "maintenance after.json equals cold-reader before.json and after.json; distinct no-session invocations, cold-reader receives project snapshot without prior chat or installed plugin.",
+  "limitations": [
+    "Windows remains Not Run.",
+    "Pi package approval is not a per-tool sandbox; no native tool-denial claim follows from this run.",
+    "The owner counterfactual check runs equivalent no-BOM and exact-byte assertions against a temporary old module; it is not the entire unchanged unittest suite.",
+    "Original automated Passed is retained alongside independent failed findings."
+  ],
+  "artifacts": [
+    {
+      "path": "maintenance/assessment.json",
+      "sha256": "9b4fe0443ca01329c6cdf7b83cc0a9546aba053c1a3701c8206622b7cb7e80ad"
+    },
+    {
+      "path": "maintenance/before.json",
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    {
+      "path": "maintenance/after.json",
+      "sha256": "9ed4f3a73f9d24fff60b385e2ecc9dae5f40cf4d0dfb9a1207125f66e4736ea6"
+    },
+    {
+      "path": "maintenance/raw/model.stdout",
+      "sha256": "48931e98afe758e387aefd4a771d70c51296dfad9e23194c016522bb9422dc49"
+    },
+    {
+      "path": "maintenance/raw/model-invocation.json",
+      "sha256": "a575582bf8302b312e5b9bae0441cf2e86ae3c5a4635c4415e046aa44b48f9f4"
+    },
+    {
+      "path": "maintenance/raw/controller.json",
+      "sha256": "52f7bc876504651e21d50ce89e3a3b7c73bd4eb94f74e836457a519ad43b90e1"
+    },
+    {
+      "path": "cold-reader/assessment.json",
+      "sha256": "5df91ec8130e9cb039f7abf14afb40a1db2c1c2f104a3f208bbc044868e74594"
+    },
+    {
+      "path": "cold-reader/before.json",
+      "sha256": "9ed4f3a73f9d24fff60b385e2ecc9dae5f40cf4d0dfb9a1207125f66e4736ea6"
+    },
+    {
+      "path": "cold-reader/after.json",
+      "sha256": "9ed4f3a73f9d24fff60b385e2ecc9dae5f40cf4d0dfb9a1207125f66e4736ea6"
+    },
+    {
+      "path": "cold-reader/raw/model.stdout",
+      "sha256": "7dc45094976d5a4f80d6589a6b152c631dc41d6dfba4182e69d14a631def474a"
+    },
+    {
+      "path": "cold-reader/raw/model-invocation.json",
+      "sha256": "2b779b67e9a0abda360a7063762acb37e9d73a094eb0c93783214aee6e365dbc"
+    },
+    {
+      "path": "cold-reader/raw/controller.json",
+      "sha256": "66bdc0bd9302b69e7d53d1704aad0243d306c24549a93856e21c7eb029215fee"
+    }
+  ]
+}

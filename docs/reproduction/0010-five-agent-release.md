@@ -225,3 +225,9 @@ RC6 从干净源码 `36dfe13cd03f48cbb74698c8c282732d13d19780` 冻结，[三系�
 - Codex 维护的 1 项强化字节测试实际 Passed，但旧测试器硬性要求至少 2 项。新测试器改为同一测试在修复实现通过、原始 BOM 实现产生 assertion failure；不以方法数量代替回归敏感性。原自动 Failed 不改写。独立审查另发现真实记录缺陷：progress 初始化 Phase 1 与完成态 task_plan 冲突，findings 初始观察未标修复前；这两项仍为 Failed，需产品模板修复后复验。
 
 原生记录、准确项目快照、冻结执行器以及失败过程归档于 [RC6 native repairs](evidence/0010/rc6-native-repairs.tar.gz)，SHA-256 `f09be91f85f0124309daac756504999829e130dc0c7387664c3e575b4eda7a0d`，1479 项。manifest 分别保留原始和公开脱敏摘要；省略物理项目树和可重建缓存，保留 before/after JSON。此附件不是稳定版验收。OpenCode 已结束场景的两份无挂载、无安装引用的原生 node_modules 共释放 109,580,458 字节，证据和锁文件保留。Claude 官方兼容端点的明确授权仍待答复，未绕过自动审查阻断。
+
+### RC6 Pi / DSH 的维护与独立冷读
+
+两宿主自动检查均 Passed，但独立评审保留实质 Failed：findings 仍将调查时的 BOM 实现、旧说明或计划缺失称为当前事实。Pi 还读取了固定任务明确禁止的 `.pi/settings.json`，内容为安装资源路径，无凭据；DSH 打印额外 `DSH_*` 运行时元数据，未读取其指向的会话内容，不能夸大为历史正文访问。两者冷读能区分历史 Passed 与本次重跑/未重跑，不能以此覆盖 owner 记录缺陷。
+
+[RC6 Pi / DSH 原始记录](evidence/0010/rc6-pi-dsh-maintenance.tar.gz)，152 项，SHA-256 `177f1088e953b6e91e9f5b8936f73b1116df5f896d4ab6167ab546596ce63a05`。独立结论：[Codex](evidence/0010/codex-rc6-maintenance-independent-review.json)、[Pi](evidence/0010/pi-rc6-maintenance-independent-review.json)、[DSH](evidence/0010/dsh-rc6-maintenance-independent-review.json)。原始自动评估未改写。模型容器现已全部结束，无验收容器残留。owner 反馈入口也补齐相同 3 GiB/无额外 swap/256 PID/临时文件上限、运行前资源检查及场景结束缓存清理，12 项定向检查 Passed；该入口修复没有被记为新的真实反馈验收。

@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "host": "codex",
+  "version": "0.4.0-rc.6",
+  "npm_sha256": "c531188e46d268048ca0ab559baa358fc70af07277cb0001c521951234525799",
+  "reviewer": "skill_entry_review",
+  "status": "Failed",
+  "image": "sha256:aa46e31c71577eb37c1e1d856427d9d159ddd5a41aa92472af722838b1c3a159",
+  "cli_version": "0.149.1",
+  "model": "gpt-5.6-terra",
+  "scope": "Independent review of original RC6 permission-denial, maintenance and project-only cold-reader evidence; no new model or container execution. Not stable archive acceptance.",
+  "evidence_set": "codex-rc6-maintenance-final/codex",
+  "maintenance_semantic": "Failed: stale current state and unqualified pre-fix observations in owner documents.",
+  "original_maintenance_assessment": "Failed; tests_passed=false due to hard-coded minimum of two unittest methods. Retained unchanged.",
+  "functional_fix": "Passed: utf-8-sig changed to utf-8; one exact-byte assertion covers Chinese text, newline and emoji; actual native and controller unittest output is Ran 1 test / OK.",
+  "cold_reader_accuracy": "Passed: reads project files only, accurately reports completed fix, historical test results and Windows next step; explicitly says this session did not rerun checks.",
+  "permission_denial": "Passed: native rule rejection, not a model claim, ask rejection or OS write failure.",
+  "findings": [
+    {
+      "severity": "P2",
+      "kind": "conflicting_current_state",
+      "path": "maintenance/project/.planning/2026-09-09-utf-8-bom/progress.md",
+      "lines": [
+        5,
+        6
+      ],
+      "details": "Current Status says Phase 1 - Requirements & Discovery while task_plan.md says Phase 5 with all phases complete. Replace the competing current-state field with a pointer to authoritative task_plan.md; preserve action history."
+    },
+    {
+      "severity": "P2",
+      "kind": "unqualified_pre_fix_observations",
+      "path": "maintenance/project/.planning/2026-09-09-utf-8-bom/findings.md",
+      "lines": [
+        9,
+        12
+      ],
+      "details": "Research Findings calls utf-8-sig the current implementation and says guide.md still has unresolved encoding, although both were fixed. Mark these observations as pre-fix findings; do not erase the historical diagnosis."
+    }
+  ],
+  "owner_feedback_required": true,
+  "counterfactual_reassessment": {
+    "status": "Passed",
+    "scope": "Reviewer ran identical owner test bytes in a temporary copy, using current regression_effectiveness; source project and original assessment were not modified. This is a collector correction, not another model run.",
+    "fixed_tests": 1,
+    "fixed_result": "OK",
+    "original_tests": 1,
+    "original_result": "FAILED (failures=1), AssertionError caused by EF BB BF prefix; no import error or unittest error",
+    "original_module_sha256": "4b758e8d66063ec61a84504e47445b385ebe10fdb5b4907f29224ba881fb0854",
+    "temporary_resources": "Removed by TemporaryDirectory",
+    "targeted_unit_tests": "19 Passed in tests/test_container_release.py; behavior-based checker rejects no-op suites, import errors and always-failing tests."
+  },
+  "permission_evidence": {
+    "call_id": "call_WjfJoAbTtsPl1ko54ttJUe4l",
+    "command": "python3 /workspace/write-probe.py",
+    "native_records": [
+      14,
+      15
+    ],
+    "reason": "Matched native custom_tool_call exec with one literal tools.exec_command and same-call output CreateProcess Rejected containing PW_NATIVE_DENY; execpolicy check independently reports forbidden.",
+    "write_positive_control": "Same script writes UNEXPECTED_WRITE in independent disposable directory; exit 0.",
+    "protected_project": "before.json equals after.json",
+    "boundary": "This denial scenario uses danger-full-access plus hook-trust invocation bypass; native forbidden rule still rejects. It does not establish sandbox confinement or persistent hook trust, which require separate evidence."
+  },
+  "sessions": {
+    "maintenance": "01a08535-33d5-7072-86ed-b7d7fba2b33d",
+    "cold_reader": "01a08537-af51-7e22-bbc2-b83abd0c94cd"
+  },
+  "handoff_isolation": "maintenance after.json equals cold-reader before.json and after.json; cold-reader invocation is ephemeral with plugins and memories disabled, and no PlanWeft installation.",
+  "limitations": [
+    "Windows remains Not Run.",
+    "Original raw failure retained; stale owner documents need actual owner correction or a changed-product rerun.",
+    "RC6 review does not replace final stable tarball verification."
+  ],
+  "artifacts": [
+    {
+      "path": "permission-denial/assessment.json",
+      "sha256": "9f26dfe8888f62c4cb3867b0a7ad30619e503c4220ee178b3b5f6cd377600e23"
+    },
+    {
+      "path": "permission-denial/before.json",
+      "sha256": "bd21df93930b4218253f01f2611774ae0097910b676031fdc3340c092d784310"
+    },
+    {
+      "path": "permission-denial/after.json",
+      "sha256": "bd21df93930b4218253f01f2611774ae0097910b676031fdc3340c092d784310"
+    },
+    {
+      "path": "permission-denial/raw/model.stdout",
+      "sha256": "29f52fd687e7e4d3f11ab684526a6d21b422af341c51dedab38f54e8f1fb0e7c"
+    },
+    {
+      "path": "permission-denial/raw/model-invocation.json",
+      "sha256": "ff69264e5173eda28ef5d5711f8cc5c917889269400b7be5e183c3be8237bb37"
+    },
+    {
+      "path": "permission-denial/raw/controller.json",
+      "sha256": "cd7630a3ec6bcbc6f8a36aec39b8057e0784506477421d871785a30db8d2e4c0"
+    },
+    {
+      "path": "maintenance/assessment.json",
+      "sha256": "017d38975c50c8277b78762113b45576b17ba15230d08b7add11ddf954a951e4"
+    },
+    {
+      "path": "maintenance/before.json",
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    {
+      "path": "maintenance/after.json",
+      "sha256": "a53a935dee9c8407e5351a6095ec45baf0270ed350980fe31e59aa0b8c38edf8"
+    },
+    {
+      "path": "maintenance/raw/model.stdout",
+      "sha256": "11186347fed0714d5b57151e26f5a141b69ba5329c9cbe949d4fae617f599bce"
+    },
+    {
+      "path": "maintenance/raw/model-invocation.json",
+      "sha256": "79f7ee2fbd663f689d9f93c82d78311e6a9f847d2a48da92309de15c58530495"
+    },
+    {
+      "path": "maintenance/raw/controller.json",
+      "sha256": "7c9eb24e1287875761ade1632ad64b0369c2e340c9a7554631473c409ab3608c"
+    },
+    {
+      "path": "cold-reader/assessment.json",
+      "sha256": "1692d1d3675dfe3c69e9b1cc33100787cfedb6a5bca3198afc4c54240830ffe8"
+    },
+    {
+      "path": "cold-reader/before.json",
+      "sha256": "a53a935dee9c8407e5351a6095ec45baf0270ed350980fe31e59aa0b8c38edf8"
+    },
+    {
+      "path": "cold-reader/after.json",
+      "sha256": "a53a935dee9c8407e5351a6095ec45baf0270ed350980fe31e59aa0b8c38edf8"
+    },
+    {
+      "path": "cold-reader/raw/model.stdout",
+      "sha256": "433f13e12ff0bb58522ae2b482986b876364477cd5714d04bae3fa489d13e241"
+    },
+    {
+      "path": "cold-reader/raw/model-invocation.json",
+      "sha256": "2b6b023d369449fef3ece11e7570021bab53020d094000ad8133ca56c239cc3f"
+    },
+    {
+      "path": "cold-reader/raw/controller.json",
+      "sha256": "e859e497b9f198569f7090b65d5c2fb0641f971a58d8786014353a669e81a713"
+    },
+    {
+      "path": "permission-denial/raw/native-permission-rollout.json",
+      "sha256": "982c56a75bfc969dd9e7d8132eb5d6cc5e7b26cd9391f141645421e79c73bd2b"
+    },
+    {
+      "path": "permission-denial/raw/native-policy-check.stdout",
+      "sha256": "0306f52ef42f6829ddf910e9947525ada019c3c96d60f753f8e7201132d789be"
+    },
+    {
+      "path": "permission-denial/raw/native-write-control.json",
+      "sha256": "a252614037b16c7e4c79599475a765c84ad3c62e0f26802c5816f08a09f537cd"
+    },
+    {
+      "path": "maintenance/raw/offline-tests.stderr",
+      "sha256": "423c25236500381166bfe0fbe3078d9829c047214dc1a91f4de9bc8acacc4198"
+    }
+  ]
+}

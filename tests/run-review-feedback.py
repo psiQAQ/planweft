@@ -170,6 +170,7 @@ def main(argv=None):
     args=parse_args(argv)
     runner=load_module('pw_review_runner',ROOT/'tests/run-five-agent-release.py')
     fixture=runner.load_fixture_module()
+    resources=runner.resource_preflight(args.output)
     auth_args=argparse.Namespace(cases=['review-correction'],direct_provider_config=args.direct_provider_config,model_config=None)
     try: secret=runner.credentials(auth_args,args.host)
     except Exception: raise SystemExit('Direct authentication unavailable; private configuration not printed')
@@ -182,7 +183,7 @@ def main(argv=None):
     shutil.copyfile(args.after,args.output/'original-after.json')
     shutil.copyfile(args.original_assessment,args.output/'original-assessment.json')
     shutil.copyfile(args.review,args.output/'review.json')
-    report={'schema_version':1,'status':'In Progress','semantic_review':'Required','npm_sha256':args.archive_sha256,'version':args.package['version'],'host':args.host,'image':args.image,
+    report={'schema_version':1,'status':'In Progress','semantic_review':'Required','npm_sha256':args.archive_sha256,'version':args.package['version'],'host':args.host,'image':args.image,'resource_preflight':resources,
             'provenance':{'original_after_sha256':args.after_sha256,'original_assessment_sha256':args.assessment_sha256,'review_sha256':args.review_sha256,'sources':sources},
             'original_automated_status':args.assessment_data['status'],'original_semantic_status':'Failed','original_results_unchanged':True,
             'input_boundary':'project text snapshot + concise review; no prior Git/history/cache/session imported',
@@ -193,6 +194,7 @@ def main(argv=None):
     files=args.files
     try:
         for case in ['review-correction','cold-reader']:
+            runner.resource_preflight(args.output)
             stage=args.output/case;stage.mkdir();work=stage/'project';raw=stage/'raw';raw.mkdir();materialize(work,files)
             before=runner.project_snapshot(fixture,work);write_json(stage/'before.json',before)
             if before!=files: raise ValueError('Materialized input differs from exact prior snapshot')
@@ -200,8 +202,8 @@ def main(argv=None):
             prompt+=fixture.BOUNDARY;(stage/'prompt.txt').write_text(prompt)
             name=run_id+'-'+case
             command=['docker','run','--rm','-i','--name',name,'--label','planweft.run='+run_id,'--read-only','--user',f'{os.getuid()}:{os.getgid()}',
-                '--cap-drop=ALL','--security-opt=no-new-privileges','--cpus=2','--memory=4g','--network=host',
-                '--tmpfs',f'/home/agent:uid={os.getuid()},gid={os.getgid()},mode=700','--tmpfs','/tmp:mode=1777',
+                '--cap-drop=ALL','--security-opt=no-new-privileges','--cpus=2','--memory=3g','--memory-swap=3g','--pids-limit=256','--network=host',
+                '--tmpfs',f'/home/agent:uid={os.getuid()},gid={os.getgid()},mode=700,size=2g','--tmpfs','/tmp:mode=1777,size=512m',
                 '--mount',f'type=bind,src={work},dst=/workspace','--mount',f'type=bind,src={raw},dst=/results',
                 '--mount',f'type=bind,src={args.archive.resolve()},dst=/input/package.tgz,readonly',
                 '--mount',f'type=bind,src={args.output/"runtime.py"},dst=/runner/runtime.py,readonly',
@@ -229,6 +231,9 @@ def main(argv=None):
                   'snapshot_assertion_scope':SNAPSHOT_SCOPE,'input_snapshot_sha256':digest(stage/'before.json'),'output_snapshot_sha256':digest(stage/'after.json')}
             report['stages'][case]=item;write_json(stage/'assessment.json',item)
             write_json(stage/'trace-analysis.json',trace);write_json(args.output/'summary.json',report)
+            cleanup=runner.cleanup_finished_case(work,name)
+            write_json(stage/'cache-cleanup.json',cleanup)
+            if cleanup['status']!='Passed': raise RuntimeError('Correction scenario resources not released')
             if not all(checks.values()): break
             files=after
         report['status']='Awaiting independent semantic review' if len(report['stages'])==2 and all(s['automated_status']=='Passed' for s in report['stages'].values()) else 'Failed'
