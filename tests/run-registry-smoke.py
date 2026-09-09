@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify published npm bytes, persistent CLI installs and direct Pi/OpenCode npm entries.
+"""Verify published npm bytes, persistent CLI installs and direct Pi/OpenCode/DSH npm entries.
 
 Uses isolated profiles without personal model credentials. Paired published versions
 verify real A -> B -> A -> B -> remove; one version proves idempotence only.
@@ -10,11 +10,244 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import tarfile
+from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def native_version_steps(version, previous=None):
+    return ([('install', previous), ('upgrade', version), ('rollback', previous),
+             ('reupgrade', version)] if previous else [('install', version)])
+
+
+def set_opencode_source(config, previous, version):
+    """Change only the owned npm entry; an unexpected registration is a conflict."""
+    data = json.loads(config.read_text())
+    entries = data.get('plugin', [])
+    if not isinstance(entries, list): raise RuntimeError('OpenCode plugin configuration is not a list')
+    owned = [x for x in entries if isinstance(x, str) and (x == 'planweft' or x.startswith('planweft@'))]
+    expected = ['planweft@' + previous] if previous else []
+    if owned != expected: raise RuntimeError('OpenCode native source changed or duplicated')
+    replacement = 'planweft@' + version if version else None
+    if previous:
+        updated = [replacement if x == expected[0] else x for x in entries]
+        data['plugin'] = [x for x in updated if x is not None]
+    else:
+        data['plugin'] = entries + ([replacement] if replacement else [])
+    config.write_text(json.dumps(data, indent=2) + '\n')
+
+
+def verify_native_package(root, expected):
+    """Bind native-resolved package bytes to the independently downloaded archive."""
+    if not (root / 'package.json').is_file(): raise RuntimeError('Native npm package is missing')
+    count = 0
+    for source in expected.rglob('*'):
+        if not source.is_file(): continue
+        actual = root / source.relative_to(expected)
+        if (not actual.is_file() or actual.read_bytes() != source.read_bytes()
+                or bool(actual.stat().st_mode & 0o111) != bool(source.stat().st_mode & 0o111)):
+            raise RuntimeError('Native npm package differs: ' + source.relative_to(expected).as_posix())
+        count += 1
+    expected_dist = {p.relative_to(expected / 'dist').as_posix()
+                     for p in (expected / 'dist').rglob('*') if p.is_file()}
+    actual_dist = {p.relative_to(root / 'dist').as_posix()
+                   for p in (root / 'dist').rglob('*') if p.is_file()}
+    if actual_dist != expected_dist:
+        raise RuntimeError('Removed distribution files survived native version switch')
+    return count
+
+
+def verify_skill_tree(actual, expected):
+    def inventory(root):
+        return {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in root.rglob('*') if p.is_file()}
+    if not actual.is_dir() or inventory(actual) != inventory(expected):
+        raise RuntimeError('Native Skill is missing, changed, or paired to another version')
+
+
+def pi_commands(project, env, log):
+    # RPC discovery invokes no model. EOF alone need not stop the Pi event loop.
+    proc = subprocess.Popen(['pi', '--mode', 'rpc', '--no-session', '--approve'],
+                            cwd=project, env=env, stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    terminated = False
+    try:
+        stdout, stderr = proc.communicate('{"id":"pw","type":"get_commands"}\n', timeout=20)
+    except subprocess.TimeoutExpired:
+        terminated = True
+        proc.terminate()
+        try: stdout, stderr = proc.communicate(timeout=5)
+        except subprocess.TimeoutExpired:
+            proc.kill(); stdout, stderr = proc.communicate()
+    finally:
+        if proc.poll() is None:
+            proc.kill(); proc.wait()
+    log.write_text(stdout + stderr)
+    if not terminated and proc.returncode != 0:
+        raise RuntimeError('Pi native command discovery process failed')
+    replies = [json.loads(line) for line in stdout.splitlines() if line.startswith('{')]
+    matches = [x for x in replies if x.get('id') == 'pw']
+    if len(matches) != 1 or not matches[0].get('success'):
+        raise RuntimeError('Pi native command discovery failed')
+    return matches[0].get('data', {}).get('commands', [])
+
+
+def verify_pi_commands(commands, version, root):
+    relevant = [c for c in commands if c.get('name', '').startswith('pw-')
+                or c.get('name') == 'skill:project-docs']
+    if version is None:
+        if relevant: raise RuntimeError('Pi commands or Skill survived native removal')
+        return
+    for name, kind, suffix in [('pw-plan-status', 'extension', 'extensions/planweft/index.ts'),
+                               ('skill:project-docs', 'skill', 'SKILL.md')]:
+        selected = [c for c in relevant if c.get('name') == name]
+        if len(selected) != 1: raise RuntimeError('Pi runtime or Skill did not load exactly once')
+        item = selected[0]; info = item.get('sourceInfo', {})
+        if (item.get('source') != kind or info.get('source') != 'npm:planweft@' + version
+                or Path(info.get('baseDir', '')).resolve() != root.resolve()
+                or Path(info.get('path', '')).resolve() != (root / 'dist/pi/planweft' / suffix).resolve()):
+            raise RuntimeError('Pi runtime and Skill sources do not match the selected npm version')
+    if len({c['name'] for c in relevant}) != len(relevant):
+        raise RuntimeError('Pi commands loaded more than once')
+
+
+def verify_opencode_discovery(agent, skills, skill=None):
+    active = {k for k, enabled in agent.get('tools', {}).items() if k.startswith('pw_') and enabled}
+    selected = [s for s in skills if s.get('name') == 'project-docs']
+    if skill is None:
+        if active or selected: raise RuntimeError('OpenCode npm tools or Skill survived native removal')
+    elif (active != {'pw_init', 'pw_status', 'pw_check'} or len(selected) != 1
+          or Path(selected[0].get('location', '')).resolve() != (skill / 'SKILL.md').resolve()):
+        raise RuntimeError('OpenCode npm runtime or paired Skill did not load uniquely')
+
+
+def verify_opencode_removed(project, *, managed=False):
+    targets = [project / '.opencode/skills/project-docs']
+    if managed: targets.append(project / '.opencode/plugins/planweft.ts')
+    # exists() follows links: a stale link to a removed package is still an
+    # installed component, even though its target no longer exists.
+    if any(target.exists() or target.is_symlink() for target in targets):
+        raise RuntimeError('OpenCode components survived removal')
+
+
+def opencode_package_root(profile, config, version):
+    """Resolve the pinned 1.18.22 layout, after actual native discovery succeeds.
+
+    Retained versions and the former unversioned cache are not candidates. Cache
+    presence is only a content check; the caller must also check native loading.
+    """
+    entries = json.loads(config.read_text()).get('plugin', [])
+    if not isinstance(entries, list): raise RuntimeError('OpenCode plugin configuration is not a list')
+    sources = [x for x in entries if isinstance(x, str) and (x == 'planweft' or x.startswith('planweft@'))]
+    if sources != ['planweft@' + version]:
+        raise RuntimeError('OpenCode npm source is missing, ambiguous, or selects another version')
+    cache = profile / '.cache/opencode/packages' / ('planweft@' + version)
+    root = cache / 'node_modules/planweft'
+    if not (cache / 'package.json').is_file() or not (root / 'package.json').is_file():
+        raise RuntimeError('OpenCode selected version cache is missing')
+    resolved = json.loads((cache / 'package.json').read_text())
+    installed = json.loads((root / 'package.json').read_text())
+    if (resolved.get('dependencies', {}).get('planweft') != version
+            or installed.get('name') != 'planweft' or installed.get('version') != version):
+        raise RuntimeError('OpenCode selected cache does not contain the requested version')
+    return root
+
+
+def direct_npm_lifecycle(host, version, previous, packages, out, profile, env, run):
+    """Native package manager/config operations; discovery only, never a model claim."""
+    project = out / ('native-' + host); project.mkdir()
+    protected = {n: (n + ' approved\r\n').encode() for n in
+                 ['task_plan.md', 'findings.md', 'progress.md', 'requirements.md']}
+    for name, data in protected.items(): (project / name).write_bytes(data)
+    observations = []
+    config = project / 'opencode.json'
+    if host == 'opencode':
+        # 1.18.22 adds this canonical schema during config normalization. Seed
+        # it explicitly so the final full-object comparison still catches every
+        # unrelated change (https://opencode.ai/docs/config/#schema).
+        baseline = {'$schema': 'https://opencode.ai/config.json', 'autoupdate': False,
+                    'share': 'disabled', 'permission': {'bash': 'ask'}, 'plugin': []}
+        config.write_text(json.dumps(baseline) + '\n')
+    current = None
+    for label, selected in native_version_steps(version, previous):
+        prefix = host + '-npm-' + label
+        cli = packages[selected] / 'bin/planweft.mjs'
+        source = ('npm:' if host == 'pi' else '') + 'planweft@' + selected
+        if host == 'pi':
+            run(prefix, ['pi', 'install', source, '--local', '--approve'], project)
+            run(prefix + '-list', ['pi', 'list', '--approve'], project)
+            settings = json.loads((project / '.pi/settings.json').read_text())
+            sources = [x.get('source') if isinstance(x, dict) else x for x in settings.get('packages', [])]
+            if [x for x in sources if isinstance(x, str) and x.startswith('npm:planweft')] != [source]:
+                raise RuntimeError('Pi native registration differs from selected version')
+            root = project / '.pi/npm/node_modules/planweft'
+            verify_pi_commands(pi_commands(project, env, out / (prefix + '-rpc.log')), selected, root)
+        elif host == 'opencode':
+            set_opencode_source(config, current, selected)
+            run(prefix + '-pair', ['node', str(cli), 'update' if current else 'add', '-a', 'opencode', '--skill-only'], project)
+            agent = json.loads(run(prefix + '-load', ['opencode', 'debug', 'agent', 'build'], project))
+            skills = json.loads(run(prefix + '-skills', ['opencode', 'debug', 'skill'], project))
+            skill = project / '.opencode/skills/project-docs'
+            verify_opencode_discovery(agent, skills, skill)
+            verify_skill_tree(skill, packages[selected] / 'dist/opencode/planweft/skills/project-docs')
+            # Locked OpenCode 1.18.22 uses a per-spec package directory. Bind it
+            # to the unique config and the fresh discovery above, not old cache existence.
+            root = opencode_package_root(profile, config, selected)
+        else:
+            # DSH 0.1.2-rc.1 forwards add/remove to pnpm and reconciles bundles
+            # from installed declarations (CLI lib/plugin-*.js), not just names.
+            run(prefix, ['dsh', 'plugin', '--profile', 'headless', 'add', source], project)
+            prof = profile / '.dsh/profiles/headless'
+            manifest = json.loads((prof / 'package.json').read_text())
+            if manifest.get('dsh', {}).get('profile', {}).get('bundles', []).count('planweft') != 1:
+                raise RuntimeError('DSH npm bundle is not uniquely registered')
+            root = prof / 'node_modules/planweft'
+            composed = run(prefix + '-compose', ['dsh', '--profile', 'headless', '--dump-config'], project)
+            blocks = re.findall(r'^- id: planweft\s*\n(.*?)(?=^- id:|\Z)', composed, re.M | re.S)
+            paths = re.findall(r'file://[^\s\'"<>]+', blocks[0]) if len(blocks) == 1 else []
+            if len(paths) != 1 or Path(unquote(urlsplit(paths[0]).path)).resolve() != (root / 'dist/dsh/planweft/index.mjs').resolve():
+                raise RuntimeError('DSH composed bundle does not identify selected npm package')
+            run(prefix + '-boot', ['dsh', '--profile', 'headless', '--help'], project)
+            # The bundle registers a filesystem provider rooted at this same package.
+            # This binds Skill bytes, not model-time Skill discovery (a separate lane).
+            verify_skill_tree(root / 'dist/dsh/planweft/skills', packages[selected] / 'dist/dsh/planweft/skills')
+        checked = verify_native_package(root, packages[selected])
+        observations.append({'step': label, 'version': selected, 'source': source,
+                             'files_checked': checked, 'status': 'Passed'})
+        current = selected
+    prefix = host + '-npm-remove'
+    if host == 'pi':
+        run(prefix, ['pi', 'remove', 'npm:planweft@' + current, '--local', '--approve'], project)
+        if 'planweft' in run(prefix + '-list', ['pi', 'list', '--approve'], project):
+            raise RuntimeError('Pi native registration survived removal')
+        verify_pi_commands(pi_commands(project, env, out / (prefix + '-rpc.log')), None, None)
+    elif host == 'opencode':
+        run(prefix + '-unpair', ['node', str(packages[current] / 'bin/planweft.mjs'), 'remove', '-a', 'opencode'], project)
+        set_opencode_source(config, current, None)
+        if json.loads(config.read_text()) != baseline: raise RuntimeError('Unrelated OpenCode configuration changed')
+        agent = json.loads(run(prefix + '-load', ['opencode', 'debug', 'agent', 'build'], project))
+        skills = json.loads(run(prefix + '-skills', ['opencode', 'debug', 'skill'], project))
+        verify_opencode_discovery(agent, skills)
+        verify_opencode_removed(project)
+    else:
+        run(prefix, ['dsh', 'plugin', '--profile', 'headless', 'remove', 'planweft'], project)
+        manifest = json.loads((profile / '.dsh/profiles/headless/package.json').read_text())
+        if ('planweft' in manifest.get('dependencies', {})
+                or 'planweft' in manifest.get('dsh', {}).get('profile', {}).get('bundles', [])):
+            raise RuntimeError('DSH native registration survived removal')
+        composed = run(prefix + '-compose', ['dsh', '--profile', 'headless', '--dump-config'], project)
+        if re.search(r'^- id: planweft\s*$', composed, re.M): raise RuntimeError('DSH bundle still composes after removal')
+        run(prefix + '-boot', ['dsh', '--profile', 'headless', '--help'], project)
+    if any((project / n).read_bytes() != data for n, data in protected.items()):
+        raise RuntimeError('Native npm lifecycle changed project records')
+    observations.append({'step': 'remove', 'status': 'Passed'})
+    return {'status': 'Passed', 'scope': 'cross-version' if previous else 'single-version-install-remove',
+            'model_sessions': 'Not Run', 'skill_verification': 'package-bound filesystem provider; model discovery separate' if host == 'dsh' else 'native discovery and package bytes',
+            'steps': observations}
 
 def extract_package(archive, output):
     # The fixed host images include Python 3.11, before extraction filters.
@@ -46,15 +279,18 @@ def main():
     if out.exists() or out == ROOT or ROOT in out.parents: p.error('Output must be new and outside checkout')
     out.mkdir(parents=True)
     profile = out / 'profile'; profile.mkdir()
+    temporary = out / 'tmp'; temporary.mkdir()
     env = {k:v for k,v in os.environ.items() if k.lower() in {'path','systemroot','windir','https_proxy','http_proxy','all_proxy','no_proxy'}}
     env.update(HOME=str(profile), USERPROFILE=str(profile), XDG_CONFIG_HOME=str(profile/'.config'),
                XDG_DATA_HOME=str(profile/'.local/share'), XDG_CACHE_HOME=str(profile/'.cache'),
                DSH_HOME=str(profile/'.dsh'), CODEX_HOME=str(profile/'.codex'), CLAUDE_CONFIG_DIR=str(profile/'.claude'),
                PI_CODING_AGENT_DIR=str(profile/'.pi/agent'), PLANNING_DISABLED='1',
                npm_config_userconfig=os.devnull, npm_config_cache=str(out/'npm-cache'),
+               TMPDIR=str(temporary),
                npm_config_prefix=str(profile/'npm-prefix'), npm_config_registry='https://registry.npmjs.org',
                PATH=os.pathsep.join([*map(str,args.cli_dir),env['PATH']]))
     summary = {'version':args.version, 'npm_sha256':args.sha256, 'status':'In Progress', 'steps':[],
+               'previous_version':args.previous_version, 'previous_npm_sha256':args.previous_sha256,
                'remote_cross_version_lifecycle':'Pending' if args.previous_version else 'Not Run: one published candidate', 'model_sessions':'Not Run','runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
     def save(): (out/'summary.json').write_text(json.dumps(summary,indent=2))
     def run(label,argv,cwd=out,input_data='y\ny\ny\n',timeout=240):
@@ -144,39 +380,16 @@ def main():
             if host in ['codex','claude'] and 'planweft' in run(host+'-removed',[host,'plugin','list','--json'],project): raise RuntimeError('Native registration survived removal')
             if host=='pi' and 'planweft' in run(host+'-removed',['pi','list','--approve'],project): raise RuntimeError('Pi registration survived removal')
             if host=='dsh' and 'planweft' in json.loads((profile/'.dsh/profiles/headless/package.json').read_text()).get('dsh',{}).get('profile',{}).get('bundles',[]): raise RuntimeError('DSH registration survived removal')
-            if host=='opencode' and ((project/'.opencode/plugins/planweft.ts').exists() or (project/'.opencode/skills/project-docs').exists()): raise RuntimeError('OpenCode components survived removal')
+            if host=='opencode': verify_opencode_removed(project, managed=True)
             if any((project/n).read_bytes()!=data for n,data in protected.items()): raise RuntimeError('Project records changed')
-        if 'pi' in hosts:
-            direct_pi=out/'native-pi';direct_pi.mkdir()
-            run('pi-npm-install',['pi','install','npm:planweft@'+args.version,'--local','--approve'],direct_pi)
-            run('pi-npm-list',['pi','list','--approve'],direct_pi)
-            proc=subprocess.Popen(['pi','--mode','rpc','--no-session','--approve'],cwd=direct_pi,env=env,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
-            try: stdout,stderr=proc.communicate('{"id":"pw","type":"get_commands"}\n',timeout=20)
-            except subprocess.TimeoutExpired:
-                proc.terminate()
-                try: stdout,stderr=proc.communicate(timeout=5)
-                except subprocess.TimeoutExpired: proc.kill();stdout,stderr=proc.communicate()
-            (out/'pi-npm-rpc.log').write_text(stdout+stderr)
-            replies=[json.loads(line) for line in stdout.splitlines() if line.startswith('{')]
-            reply=next((r for r in replies if r.get('id')=='pw'),{})
-            commands=reply.get('data',{}).get('commands',[])
-            if not reply.get('success') or sum(c.get('name')=='pw-plan-status' for c in commands)!=1: raise RuntimeError('Pi root npm Extension did not load once')
-            summary['steps'].append({'step':'pi-root-npm-load','status':'Passed'});save()
-            run('pi-npm-remove',['pi','remove','npm:planweft@'+args.version,'--local','--approve'],direct_pi)
-        if 'opencode' in hosts:
-            direct_oc=out/'native-opencode';direct_oc.mkdir()
-            (direct_oc/'opencode.json').write_text(json.dumps({'plugin':['planweft@'+args.version]}))
-            run('opencode-pair',['node',str(cli),'add','-a','opencode','--skill-only'],direct_oc)
-            agent=json.loads(run('opencode-npm-load',['opencode','debug','agent','build'],direct_oc))
-            if not all(agent.get('tools',{}).get(n) is True for n in ['pw_init','pw_status','pw_check']): raise RuntimeError('OpenCode root npm tools not loaded')
-            run('opencode-npm-skills',['opencode','debug','skill'],direct_oc)
-            run('opencode-unpair',['node',str(cli),'remove','-a','opencode'],direct_oc)
-        if 'dsh' in hosts:
-            run('dsh-npm-install',['dsh','plugin','--profile','headless','add','planweft@'+args.version])
-            composed=run('dsh-npm-compose',['dsh','--profile','headless','--dump-config'])
-            if 'planweft/dsh' not in composed and '/dist/dsh/planweft/index.mjs' not in composed: raise RuntimeError('DSH npm bundle did not compose')
-            run('dsh-npm-boot',['dsh','--profile','headless','--help'])
-            run('dsh-npm-remove',['dsh','plugin','--profile','headless','remove','planweft'])
+        summary['native_channels'] = {}
+        for host in ['pi', 'opencode', 'dsh']:
+            if host in hosts:
+                summary['native_channels'][host] = {'status': 'In Progress', 'model_sessions': 'Not Run'}
+                save()
+                summary['native_channels'][host] = direct_npm_lifecycle(
+                    host, args.version, args.previous_version, packages, out, profile, env, run)
+                save()
         if args.previous_version: summary['remote_cross_version_lifecycle']='Passed'
         summary['status']='Passed'
     except Exception as error:

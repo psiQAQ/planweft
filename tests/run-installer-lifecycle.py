@@ -14,16 +14,40 @@ import tarfile
 
 ROOT = Path(__file__).resolve().parents[1]
 
-def main():
+def validate_archive(path):
+    # Python 3.11 in the locked images has no extraction-filter parameter.
+    # Accept only regular package members, before creating any output.
+    with tarfile.open(path) as archive:
+        names = set()
+        for member in archive:
+            name = Path(member.name)
+            if (name.is_absolute() or '..' in name.parts or not name.parts
+                    or name.parts[0] != 'package' or member.name in names
+                    or not (member.isfile() or member.isdir())):
+                raise ValueError('Unsafe or duplicate package archive member')
+            names.add(member.name)
+        package = json.load(archive.extractfile('package/package.json'))
+        if package.get('name') != 'planweft' or not isinstance(package.get('version'), str):
+            raise ValueError('Expected a versioned planweft package')
+    return package
+
+
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--archive', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--host', choices=['agents', 'codex', 'claude', 'pi', 'opencode', 'dsh'], required=True)
     parser.add_argument('--cli-dir', type=Path, action='append', default=[])
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     out = args.output.resolve()
     if out.exists() or out == ROOT or ROOT in out.parents:
         parser.error('--output must be new and outside the checkout')
+    try:
+        validate_archive(args.archive)
+        if any(not path.is_dir() for path in args.cli_dir):
+            raise ValueError('--cli-dir must be an existing directory')
+    except (OSError, ValueError, KeyError, tarfile.TarError) as error:
+        parser.error(str(error))
     out.mkdir(parents=True)
     home, project = out / 'profile', out / '项目 with spaces'
     home.mkdir(); project.mkdir()
@@ -49,7 +73,8 @@ def main():
         return p.stdout
     # Start with the real packed bytes, then derive a clearly local test version.
     a = out / 'A'; a.mkdir()
-    with tarfile.open(args.archive) as tar: tar.extractall(a, filter='data')
+    validate_archive(args.archive)
+    with tarfile.open(args.archive) as tar: tar.extractall(a)
     a = a / 'package'
     import shutil
     b = out / 'B/package'; shutil.copytree(a, b)
