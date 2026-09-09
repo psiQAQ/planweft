@@ -47,6 +47,12 @@ class ContainerReleaseTest(unittest.TestCase):
                 (payload/'hooks/hook.sh').write_text('changed')
                 with self.assertRaisesRegex(RuntimeError,'Installed content differs'):runtime.verify_files('claude',package,record)
                 (payload/'hooks/hook.sh').write_bytes(files['hooks/hook.sh'])
+                external=root/'external';external.mkdir();(external/'hook.sh').write_bytes(files['hooks/hook.sh'])
+                target=payload/'hooks/hook.sh';target.unlink();target.symlink_to(external/'hook.sh')
+                with self.assertRaisesRegex(RuntimeError,'must not traverse symlinks'):runtime.verify_files('claude',package,record)
+                target.unlink();(payload/'hooks').rmdir();(payload/'hooks').symlink_to(external,target_is_directory=True)
+                with self.assertRaisesRegex(RuntimeError,'must not traverse symlinks'):runtime.verify_files('claude',package,record)
+                (payload/'hooks').unlink();(payload/'hooks').mkdir();target.write_bytes(files['hooks/hook.sh'])
                 data['plugins'][0]['source']='../foreign';catalog.write_text(json.dumps(data))
                 with self.assertRaisesRegex(RuntimeError,'marketplace source differs'):runtime.verify_files('claude',package,record)
 

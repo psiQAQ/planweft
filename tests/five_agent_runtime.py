@@ -255,6 +255,8 @@ def verify_files(host, package, record):
     for name, expected in manifest['files'].items():
         for base in {native, cache, expected_root}:
             p = base/name
+            if host == 'claude' and p.resolve() != p.absolute():
+                raise RuntimeError('Claude resource must not traverse symlinks: '+name)
             if not p.is_file() or hashlib.sha256(p.read_bytes()).hexdigest() != expected['sha256']:
                 raise RuntimeError('Installed content differs: '+name)
             if bool(p.stat().st_mode & 0o111) != expected['executable']:
