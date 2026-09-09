@@ -257,8 +257,12 @@ def model_text(host, text):
                 if not message_id or message_id not in response_ids: responses+=1
                 if message_id: response_ids.add(message_id)
             if event.get('type')=='result': final.append(event.get('result',''))
-            for block in event.get('message',{}).get('content',[]) if isinstance(event.get('message'),dict) else []:
-                if block.get('type')=='tool_use': tools.append(block)
+            content=event.get('message',{}).get('content',[]) if isinstance(event.get('message'),dict) else []
+            # --replay-user-messages emits the original string input, while
+            # assistant/tool messages use content blocks. Never iterate text
+            # as if each character were a structured tool event.
+            for block in content if isinstance(content,list) else []:
+                if isinstance(block,dict) and block.get('type')=='tool_use': tools.append(block)
         elif host=='pi':
             if event.get('type')=='message_end' and event.get('message',{}).get('role')=='user':
                 if any(b.get('type')=='text' and b.get('text','').startswith('[planweft] Task incomplete') for b in event['message'].get('content',[]) if isinstance(b,dict)): followups+=1

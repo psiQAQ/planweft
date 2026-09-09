@@ -268,6 +268,17 @@ class ContainerReleaseTest(unittest.TestCase):
         events.append({'type':'assistant','message':{'id':'followup','content':[{'type':'text'}]}})
         self.assertEqual(parse()['assistant_responses'],2)
 
+    def test_claude_input_replay_text_is_not_a_tool_block(self):
+        runner=module('pw_claude_replay_text','tests/run-five-agent-release.py')
+        events=[{'type':'user','isReplay':True,'message':{'role':'user','content':'Synthetic input with tool_use text'}},
+                {'type':'assistant','message':{'id':'a','content':[{'type':'tool_use','id':'one','name':'Write'}]}},
+                {'type':'user','message':{'content':None}},
+                {'type':'result','result':'DONE_A'}]
+        observed=runner.model_text('claude','\n'.join(map(json.dumps,events)))
+        self.assertEqual(observed['final'],'DONE_A')
+        self.assertEqual([x['id'] for x in observed['tool_calls']],['one'])
+        self.assertEqual(observed['errors'],[])
+
     @unittest.skipUnless(sys.platform=='linux','inotify observation is a Linux container lane')
     def test_gate_observer_distinguishes_read_from_no_hook(self):
         runtime=module('pw_gate_observer','tests/five_agent_runtime.py')
