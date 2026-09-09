@@ -2,6 +2,10 @@
 
 Apply the scope and workflow in the installed Skill entry first. Script commands are relative to the installed Skill root, not this reference directory.
 
+## Adapter metadata from the fixed upstream
+
+Persistente dateibasierte Planung für mehrstufige Arbeit mit KI-Agenten. Hält task_plan.md, findings.md und progress.md auf dem Datenträger; Lebenszyklus-Hooks speisen ausgewählten Planungskontext des Projekts ein. Die automatische Wiederherstellung liest nur die Planungsdateien des Projekts. Nur ein ausdrücklicher Aufruf von session-catchup.py --metadata darf lokale Sitzungsmetadaten desselben Projekts prüfen; --replay darf begrenzte, nonce-gerahmte Auszüge ausgeben. Der optionale Gate-Modus kann nur bei Unterstützung durch den Host eine Fortsetzung anfordern und führt niemals in Markdown angegebene Befehle aus. Der Skill hat keinen Netzwerk-Uploadpfad. Verwenden für Forschung oder Arbeit mit mehr als 5 Tool-Aufrufen.
+
 # Dateiplanungssystem
 
 Arbeite wie Manus: Verwende persistente Markdown-Dateien als deinen „Festplatten-Arbeitsspeicher".

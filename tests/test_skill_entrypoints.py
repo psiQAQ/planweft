@@ -24,6 +24,8 @@ class SkillEntrypointTest(unittest.TestCase):
                 with self.subTest(host=host,entry=name):
                     text=raw.decode(); base=PurePosixPath(name).parent
                     self.assertLess(len(text.splitlines()),110)
+                    description=re.search(r'^description: (.+)$',text,re.M).group(1)
+                    self.assertLess(len(description),300)
                     manual=str(base/'references/pwf-workflow.md')
                     self.assertIn(manual,files)
                     self.assertGreater(len(files[manual][0]),1000)
@@ -33,6 +35,7 @@ class SkillEntrypointTest(unittest.TestCase):
                             self.assertIn(str(base/target),files)
                     for helper in ('resolve-plan-dir.sh','init-session.sh'):
                         self.assertIn(str(base/'scripts'/helper),files)
+                    self.assertIn(str(base/'references/plan-selection.md'),files)
 
     def test_language_entries_are_explicit_and_use_the_same_resource_contract(self):
         for locale in ('ar','de','es','zh','zht'):

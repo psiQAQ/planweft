@@ -2,6 +2,10 @@
 
 Apply the scope and workflow in the installed Skill entry first. Script commands are relative to the installed Skill root, not this reference directory.
 
+## Adapter metadata from the fixed upstream
+
+Persistent file-based planning for multi-step AI-agent work. Keeps task_plan.md, findings.md, and progress.md on disk; agent instructions read selected project planning context when invoked. Automatic recovery reads project planning files only. Explicit session-catchup.py --metadata reads same-project local agent session records and emits aggregate counts only; --replay may emit bounded nonce-framed excerpts. This adapter registers no lifecycle or Stop hook, never requests continuation, and never runs commands declared in Markdown. The skill has no network upload path. Use for research or work needing 5+ tool calls.
+
 # Planning with Files
 
 Work like Manus: Use persistent markdown files as your "working memory on disk."

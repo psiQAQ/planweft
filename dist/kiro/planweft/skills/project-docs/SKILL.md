@@ -1,8 +1,8 @@
 ---
 name: project-docs
-description: "Use for implementation or maintenance with investigation, fixes, regression tests and persistent handoff, including work continued from old notes. Kiro skill instructions and steering state read selected project planning context. Recovery reads project planning files and their timestamps only, not agent transcript stores. This adapter registers no Stop hook, never requests continuation, and never runs commands declared in Markdown. The skill has no network upload path."
+description: "Use for implementation or maintenance combining investigation, fixes, regression tests and persistent handoff, including work continued from old notes. Read-only and trivial tasks do not initialize planning files."
 metadata:
-  version: "0.4.0-rc.7"
+  version: "0.4.0-rc.8"
 ---
 
 For an explicitly requested language variant, read its instructions from `references/language-variants/project-docs-<language>/GUIDE.md` relative to this Skill directory (ar, de, es, zh, zht). These are supporting resources of this single entry point. Resolve runtime assets from the installed Skill; keep task records in the user project.
@@ -66,6 +66,10 @@ Reuse the existing long-term requirements, design and verification records. If a
 - Automatic recovery reads selected project planning files only. Reading host session history requires an explicit user request: `session-catchup.py --metadata` returns same-project aggregate counts, and `--replay` requires explicit authorization for bounded excerpts. Never silently substitute history access when project files are incomplete.
 
 The retained PWF workflow follows. Apply it within these boundaries.
+
+## Adapter metadata from the fixed upstream
+
+Persistent file-based planning for multi-step AI-agent work. Keeps task_plan.md, findings.md, and progress.md on disk; Kiro skill instructions and steering state read selected project planning context. Recovery reads project planning files and their timestamps only, not agent transcript stores. This adapter registers no Stop hook, never requests continuation, and never runs commands declared in Markdown. The skill has no network upload path. Use for research or work needing 5+ tool calls.
 
 # Planning with Files (Kiro)
 

@@ -17,9 +17,12 @@ import tarfile
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR = ROOT / 'vendor/planning-with-files'
 OVERLAY = ROOT / 'overlays/planweft'
-VERSION = '0.4.0-rc.7'
+VERSION = '0.4.0-rc.8'
 PRODUCT = 'planweft'
 SKILL = 'project-docs'
+SKILL_DESCRIPTION = ('Use for implementation or maintenance combining investigation, fixes, regression '
+                     'tests and persistent handoff, including work continued from old notes. '
+                     'Read-only and trivial tasks do not initialize planning files.')
 DESCRIPTION = ('Plan and document implementation or maintenance with investigation, fixes, '
                'regression tests and handoff, including work continued from existing notes. '
                'Use task_plan.md, findings.md and progress.md as persistent task records. '
@@ -118,18 +121,11 @@ def enhance_skill(text, path):
     language = re.search(r'/i18n/(project-docs-[^/]+)/', path)
     name = language.group(1) if language else SKILL
     front = re.sub(r'^name:.*$', 'name: ' + name, front, flags=re.M)
-    # Keep host-specific consent/capability disclosure, especially no-Stop
-    # adapters. Put the maintenance trigger first without repeating the old
-    # generic introduction or advertising every long research task as writable.
-    description = re.search(r'^description:\s*(.*)$', front, re.M).group(1)
-    description = json.loads(description) if description.startswith('"') else description.strip("'")
-    for redundant in ('Persistent file-based planning for multi-step AI-agent work. ',
-                      'Keeps task_plan.md, findings.md, and progress.md on disk; ',
-                      'Use for research or work needing 5+ tool calls.'):
-        description = description.replace(redundant, '')
-    description = ('Use for implementation or maintenance with investigation, fixes, regression tests '
-                   'and persistent handoff, including work continued from old notes. ' + description.strip())
-    front = re.sub(r'^description:.*$', lambda _: 'description: ' + json.dumps(description, ensure_ascii=False), front, flags=re.M)
+    # Discovery needs the task trigger. Retain the original adapter's consent
+    # and capability details in its own manual, not in the matching sentence.
+    upstream_description = re.search(r'^description:\s*(.*)$', front, re.M).group(1)
+    upstream_description = json.loads(upstream_description) if upstream_description.startswith('"') else upstream_description.strip("'")
+    front = re.sub(r'^description:.*$', lambda _: 'description: ' + json.dumps(SKILL_DESCRIPTION), front, flags=re.M)
     front = re.sub(r'^(\s+version:) .+$', r'\1 "' + VERSION + '"', front, flags=re.M)
     if language and 'disable-model-invocation:' not in front:
         front += '\ndisable-model-invocation: true'
@@ -174,7 +170,9 @@ def enhance_skill(text, path):
                   'for actual availability and activation. Shell counter limits do not describe Pi\'s '
                   'extension counter. Protocol checks do not prove real host enforcement.\n\n',
                   body, flags=re.S)
-    return '---\n' + front + '\n---\n\n' + workflow.rstrip() + '\n\n' + body.lstrip()
+    return ('---\n' + front + '\n---\n\n' + workflow.rstrip() + '\n\n'
+            + '## Adapter metadata from the fixed upstream\n\n' + upstream_description
+            + '\n\n' + body.lstrip())
 
 
 def local_install_text(text, path):
@@ -400,6 +398,8 @@ def transform(upstream, enhanced=True):
                 base = str(PurePosixPath(name).parent)
                 result[base + '/references/evidence.md'] = ((OVERLAY / 'references/evidence.md').read_bytes(), 0o644)
                 result[base + '/references/controls.md'] = ((OVERLAY / 'references/controls.md').read_bytes(), 0o644)
+                result[base + '/references/plan-selection.md'] = ((OVERLAY / 'references/plan-selection.md').read_bytes(), 0o644)
+                result[base + '/references/plan-selection.zh.md'] = ((OVERLAY / 'references/plan-selection.zh.md').read_bytes(), 0o644)
                 # A standalone install copies the skill folder, not its repo.
                 # Fill absent assets only; native/localized assets remain intact.
                 for asset, value in list(result.items()):
@@ -436,7 +436,7 @@ def distributions(tree, upstream, compiled=True):
     # never from Claude's skill frontmatter or a migrated command skill.
     key = 'skills/project-docs/SKILL.md'
     _, body = result['codex'][key][0].decode()[4:].split('\n---\n', 1)
-    result['codex'][key] = (('---\nname: project-docs\ndescription: ' + json.dumps(DESCRIPTION) + '\nmetadata:\n  version: "' + VERSION + '"\n---\n' + body).encode(), 0o644)
+    result['codex'][key] = (('---\nname: project-docs\ndescription: ' + json.dumps(SKILL_DESCRIPTION) + '\nmetadata:\n  version: "' + VERSION + '"\n---\n' + body).encode(), 0o644)
     result['codex']['skills/project-docs/agents/openai.yaml'] = (b'interface:\n  display_name: "Project Docs"\n  short_description: "Persistent planning, project documents and evidence"\npolicy:\n  allow_implicit_invocation: true\n', 0o644)
     for path in list(result['codex']):
         if path.startswith('skills/i18n/') and path.endswith('/SKILL.md'):

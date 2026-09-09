@@ -1,8 +1,8 @@
 ---
 name: project-docs-zh
-description: "Use for implementation or maintenance with investigation, fixes, regression tests and persistent handoff, including work continued from old notes. 用于多步骤 AI 代理工作的持久化文件规划系统。将 task_plan.md、findings.md 和 progress.md 保存在磁盘上，生命周期钩子会注入选定的项目规划上下文。自动恢复只读取项目规划文件。只有显式运行 session-catchup.py --metadata 才会检查本机同项目的会话元数据；--replay 可输出有长度限制且由 nonce 框定的同项目摘录。可选门禁仅在宿主支持时请求继续，绝不执行 Markdown 中声明的命令。本技能没有网络上传路径。适用于研究或需要 5 次以上工具调用的工作。触发词：任务规划、项目计划、制定计划、分解任务、多步骤规划、进度跟踪、文件规划、帮我规划、拆解项目"
+description: "Use for implementation or maintenance combining investigation, fixes, regression tests and persistent handoff, including work continued from old notes. Read-only and trivial tasks do not initialize planning files."
 metadata:
-  version: "0.4.0-rc.7"
+  version: "0.4.0-rc.8"
 ---
 
 # 项目文档与任务规划
@@ -17,21 +17,28 @@ metadata:
 
 ## 2. 实施前解析或初始化本任务计划
 
-以刚读取的 `SKILL.md` 所在绝对目录定位脚本和模板；运行脚本时**工作目录保持为目标项目**。不要搜索整个文件系统，不把任务状态写入插件缓存。
+直接使用宿主 Skill 列表或读取工具给出的 `SKILL.md` 路径，其父目录就是资源目录；无需读取宿主配置、安装记录或搜索整个文件系统。运行脚本时**工作目录为目标项目**，不能是插件缓存。非空 `PWF_PLAN_ROOT` 必须指向这个已授权项目，写入前先纠正不一致。 仅按脚本需要查看 `PLAN_ID`、`PWF_*`、`PLANNING_DISABLED`，不枚举其他宿主环境变量。
 
-使用该目录的 `scripts/resolve-plan-dir.sh`（或 `.ps1`），按本任务的 `PLAN_ID`、`PWF_PLAN_ROOT` 解析计划。已有计划时读取所选目录中的 `task_plan.md`、`findings.md`、`progress.md`。选择器被拒绝或存在多个未选择的命名计划时，先纠正选择，不回退到其他任务。
+运行 `sh "<安装 Skill>/scripts/resolve-plan-dir.sh"`（或包内对应 PowerShell 脚本）。空输出且退出码 0 不能区分“没有计划”和“绑定被拒绝”；结合实际文件与选择器决定下一步：
 
-选择有效但本任务没有 PWF 计划时，运行安装目录内的 `scripts/init-session.sh "Task Name"`（或 `.ps1`），使用输出的任务目录和 `PLAN_ID`，根据实际任务及旧资料填写三份记录。**旧的非 PWF 计划是初始化资料，不是跳过初始化的理由。** 已获授权的复杂实施任务采用此任务流程，不需要另行声明 opt-in。
+| 第 1 步范围检查后的实际状态 | 下一步 |
+|---|---|
+| 非空 `PLAN_ID` 被拒绝、根绑定无效，或多个命名计划没有任务选择 | 纠正绑定或选择；不初始化、不使用其他任务计划。 |
+| 有有效的所选计划，或没有命名选择且项目根有 `task_plan.md` | 读取该计划及其 `findings.md`、`progress.md` 并恢复。 |
+| 没有 PWF 计划，且没有待纠正绑定，且复杂实施已授权 | 现在初始化。新任务未设置 `PLAN_ID` 属正常情况；旧资料用于填写新记录。 |
+| 第 1 步发现明确的采用例外 | 按该例外保留已有权威入口，不初始化。 |
 
-把本任务当前状态转入新计划后，将旧计划的动态状态和下一步入口一次性改为指向所选 `task_plan.md` 的相对链接；保留历史和批准需求，只保留一个动态状态源，不双向同步。明确禁止迁移时保留旧状态源。本插件自身开发仓库未经另外授权不执行接管。
+初始化使用 `bash "<安装 Skill>/scripts/init-session.sh" "Task Name"` 或包内 PowerShell 初始化器，检查实际创建位置：canonical 英文 Shell 创建命名目录并打印 `PLAN_ID`；PowerShell 和本地化 legacy 脚本在工作目录创建三文件，不保证返回 ID。实施修改前填好记录。绑定与脚本差异见[计划选择](references/plan-selection.zh.md)（[English](references/plan-selection.md)）。
+
+转入本任务状态后，仅将旧计划的动态状态和下一步改为指向所选 `task_plan.md` 的相对链接，保留历史和批准需求；一个动态状态源，不双向同步。明确禁止迁移时保留旧入口。本插件自身开发仓库未经另外授权不接管。
 
 ## 3. 执行并记录依据
 
 | 记录 | 职责 |
 |---|---|
 | `task_plan.md` | 目标、阶段、当前状态、下一步、阻塞和证据链接 |
-| `findings.md` | 来源、观察、假设和候选决定 |
-| `progress.md` | 操作、错误、实际测试命令和结果 |
+| `findings.md` | 来源、观察日期或版本、修改前后范围、假设和候选决定 |
+| `progress.md` | 操作、错误、实际测试命令与结果，以及任务开始前已有的修改 |
 
 决策前重读计划；每小批调研后记录发现，每阶段后更新状态。保留失败，调整方法后再重试。保留解析器识别的 `### Phase` 和 `**Status:** pending`、`in_progress`、`complete` 字面格式。
 
@@ -39,7 +46,7 @@ metadata:
 
 ## 4. 验证与交接
 
-核对实际行为、最终 diff 与需求，记录 **Passed**、**Failed**、**Not Run**、依据及限制。区分项目文件记载的历史结果和本会话执行的检查：新读者没有重复历史 Passed 测试，并不使该测试变为 Not Run。
+核对实际行为、最终 diff 与需求。逐项对照最终文件检查保留的“当前行为”陈述；旧观察标记日期，追加更正但不抹去证据。记录 **Passed**、**Failed**、**Not Run**、依据及限制。区分项目文件记载的历史结果和本会话执行的检查：新读者没有重复历史 Passed 测试，并不使该测试变为 Not Run。
 
 重要设计使用独立依据 reviewer，重要交接使用只接收项目文件的新读者，不提供旧聊天或预期答案。按需读取[依据指导](references/evidence.md)，处理发现，确认旧入口指向唯一动态计划，留下明确下一步。独立检查不可用时记 Not Run，不以自审替代。
 

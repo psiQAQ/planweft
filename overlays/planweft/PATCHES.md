@@ -36,3 +36,8 @@
 `record_templates.py` 在身份变换后、追加片段前，以有数量断言的补丁更新六语言 progress/findings 模板、Shell/PowerShell 内嵌初始化以及 OpenCode findings fallback。progress 保留事件、时间、测试和错误，将目标/阶段/下一步指向 task_plan；findings 明确观察时点、来源及后继更正。固定 PWF task_plan 阶段和状态协议、文件位置及跳过既有文件的行为不变。此差异来自 RC6 多宿主真实维护中发现的初始化状态冲突，并非 PWF 上游承诺。实际回归入口为 `tests/test_record_templates.py`；Windows/macOS 运行状态以三系统 CI 为准。
 
 迁移对照保留 `tests/test_template_transparency.py` 的首次两项 SUBFAILED：旧契约要求 progress Phase 1/2 占位。仅在迁移树把这两个字面 token 改为 Recorded work 和 task_plan 相对链接，19 处断言及其循环保持原样；原始归档与原始基线不变。独立 reviewer 核对失败集合和仅两 token 差异，未增加 skip。
+
+
+## RC8 计划选择入口
+
+六语言 `entrypoints` 用实际 resolver 输出、绑定与文件的分支替换抽象有效选择条件，直接采用宿主已提供的 Skill 路径，保留只读、旧权威及本仓不接管边界。新增随包 `references/plan-selection.md` / `.zh.md` 解释 canonical Bash 与 PowerShell/legacy 差异；不修改原始 helper。description 仅用于任务匹配，原宿主完整 metadata 移至该宿主的 PWF 手册。findings 观察时点与最终当前事实核对进入主流程，避免覆盖模板后丢失要求。真实失败来源、离线契约与独立 review 见 REP-0010 / REV-0010；候选模型复验不能省略。

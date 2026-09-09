@@ -1,6 +1,6 @@
 ---
 name: project-docs
-description: "Use for implementation or maintenance with investigation, fixes, regression tests and persistent handoff, including work continued from old notes. lifecycle hooks inject selected project planning context. Automatic recovery reads project planning files only. Explicit session-catchup.py --metadata reads same-project local agent session records and emits aggregate counts only; --replay may emit bounded nonce-framed excerpts. Optional gated mode can request continuation only when the host supports it and never runs commands declared in Markdown. The skill has no network upload path."
+description: "Use for implementation or maintenance combining investigation, fixes, regression tests and persistent handoff, including work continued from old notes. Read-only and trivial tasks do not initialize planning files."
 user-invocable: true
 allowed-tools: "Read Write Edit Bash Glob Grep"
 hooks:
@@ -28,7 +28,7 @@ hooks:
         - type: command
           command: "[ -n \"${CLAUDE_PLUGIN_ROOT:-}\" ] && exit 0; SH=\"${CLAUDE_SKILL_DIR}/scripts/skill-hook.sh\"; [ -f \"$SH\" ] || SH=$(ls \"$HOME/.claude/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/plugins/marketplaces/planweft/scripts/skill-hook.sh\" 2>/dev/null | head -1); [ -n \"$SH\" ] && [ -f \"$SH\" ] && sh \"$SH\" --event=precompact; exit 0"
 metadata:
-  version: "0.4.0-rc.7"
+  version: "0.4.0-rc.8"
 ---
 
 # Project Docs
@@ -43,11 +43,18 @@ If the user explicitly requests a written research artifact, produce that artifa
 
 ## 2. Resolve or initialize this task's plan before implementation
 
-Locate the absolute directory containing this installed `SKILL.md`. Scripts and templates come from that directory; run helpers with the **target project as the working directory**. Do not search the entire filesystem or write task state into the plugin cache.
+Use the `SKILL.md` location provided by the host's Skill listing or read tool. Its parent is the resource directory; no host configuration, installation receipt or filesystem-wide search is needed. Run helpers with the **target project as the working directory**, never the plugin cache. A nonempty `PWF_PLAN_ROOT` must identify that authorized project; resolve a mismatch before writing. Inspect only `PLAN_ID`, `PWF_*` and `PLANNING_DISABLED` when needed for these helpers; do not enumerate other host environment variables.
 
-Run its `scripts/resolve-plan-dir.sh` (or `.ps1`) with the task's `PLAN_ID` and `PWF_PLAN_ROOT`. Read the selected `task_plan.md`, `findings.md` and `progress.md` if present. A rejected selector or several unselected named plans requires correcting the selection; never fall back to another plan.
+Run `sh "<installed Skill>/scripts/resolve-plan-dir.sh"` (or its PowerShell counterpart). Empty output with exit code 0 does **not** distinguish a missing plan from a rejected binding. Choose the next action from the actual files and selector, not the exit code:
 
-If selection is valid and this task has no PWF plan, run the installed `scripts/init-session.sh "Task Name"` (or `.ps1`) and use its printed task directory and `PLAN_ID`. Fill the three records from the actual task and old notes. **An old non-PWF plan supplies starting context; it does not replace this initialization.** Task-local adoption needs no separate opt-in when this complex implementation is authorized.
+| Observed state, after the scope check in step 1 | Next action |
+|---|---|
+| Nonempty `PLAN_ID` is rejected, root binding is invalid, or several named plans lack a task selection | Correct the binding/selection; do not initialize or use a different plan. |
+| A valid task-selected plan exists, or no named selection applies and the project has a root `task_plan.md` | Read that plan and its `findings.md` and `progress.md`; resume it. |
+| No PWF plan or pending binding exists; complex implementation is authorized | Initialize the task now. An unset `PLAN_ID` is normal for a new task. Read old notes as input to the new records. |
+| Step 1 found an explicit exception to adoption | Keep the existing authority within that exception; do not initialize. |
+
+For initialization, run `bash "<installed Skill>/scripts/init-session.sh" "Task Name"`, or the package's PowerShell initializer. Verify the files actually created: the canonical English Shell helper creates a named directory and prints its `PLAN_ID`; PowerShell and localized legacy helpers create the three files in their working directory. Do not assume every helper returns an ID. Fill the records before implementing the change. See [selection details](references/plan-selection.md) for binding and helper differences.
 
 After transferring the current task's live state, replace the old plan's status/next-action entry with a relative link to the selected `task_plan.md`. Preserve its history and approved requirements. Keep one dynamic status source, with no bidirectional synchronization. If adoption is explicitly forbidden, retain the old source instead. This plugin's own development repository is not adopted without separate authorization.
 
@@ -56,8 +63,8 @@ After transferring the current task's live state, replace the old plan's status/
 | Record | Contents |
 |---|---|
 | `task_plan.md` | Goal, phases, current state, next action, blockers, evidence links |
-| `findings.md` | Sources, observations, assumptions and candidate decisions |
-| `progress.md` | Actions, errors, actual test commands and results |
+| `findings.md` | Sources, observation date/revision and before/after-change scope, assumptions and candidate decisions |
+| `progress.md` | Actions, errors, actual test commands/results and which edits were already present before this task |
 
 Re-read the plan before decisions. Record discoveries after a short batch of research, and update status after each phase. Log failures and change the approach before retrying. Preserve parser headings `### Phase` and literal `**Status:** pending`, `in_progress` or `complete`.
 
@@ -65,7 +72,7 @@ Maintain affected specifications, ADRs and reproduction records in their existin
 
 ## 4. Verify and leave a readable handoff
 
-Compare actual behavior and the final diff with the requirements. Record **Passed**, **Failed** and **Not Run**, with evidence and limitations. Separate historical results recorded in project files from checks executed in this session: a fresh reader not repeating a historical Passed test does not turn that test into Not Run.
+Compare actual behavior and the final diff with the requirements. Check every retained claim about current behavior against the final files; date earlier observations and append their corrections without erasing the evidence. Record **Passed**, **Failed** and **Not Run**, with evidence and limitations. Separate historical results recorded in project files from checks executed in this session: a fresh reader not repeating a historical Passed test does not turn that test into Not Run.
 
 For significant design, use an independent evidence reviewer; for important handoff, use a fresh reader with only project files and no old conversation or expected answers. Read [evidence guidance](references/evidence.md) for these reviews. Resolve findings, verify the old entry points to the sole live plan, and leave an explicit next action. If an independent check is unavailable, record Not Run rather than self-certifying it.
 
