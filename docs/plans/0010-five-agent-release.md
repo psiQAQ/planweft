@@ -2,16 +2,17 @@
 
 ## 当前状态（唯一当前入口）
 
-实施中，正式 `0.4.0` 未发布。公开 npm `next` 最近核查为 RC10，`latest` 历史 RC1 不代表稳定版。RC11 和 RC12 均未发布。RC12 准确本地归档 SHA-256 `7830a636cf5c36bca51883704abf8feeaf5c5a15f9583b9f8966db48da289dc3`，冻结源码 `17f56d15060cd549ba2797e68cdf53476fbb300b`；本节之后的开发修复不属于该归档。
+实施中，正式 `0.4.0` 未发布。RC13 已通过 OIDC 发布到 npm `next`，远端包与准确本地归档逐字一致；`latest` 历史 RC1 不代表稳定版。RC11/RC12 均未发布。RC13 冻结源码 `a9c0f948ea52534e446c3945dc9bfa3e5acdce92`，准确归档 SHA-256 `793e3f2c4d5f7e6e8f180494e1f05ea07db2ddd30426edf6c837b6b775e09bda`。后续测试器修改不改变该归档。
 
-- RC12 三系统 Check `34357068482`、公开审计 Passed；准确原生 Pi BOM 对照全部 Passed。五平台无模型组中 Claude、Pi、OpenCode、DSH 的 preflight/lifecycle Passed；Codex 两项 Failed，不发布 RC12。
-- Codex 安装及 294 个原生包文件通过，doctor 将自有 registry 路径误认为重复规划注册。独立合成复现后，再用同一未改归档及单独冻结的诊断执行器取得真实原生配置投影，确认同一原因；原失败不改写。诊断无认证、无模型，容器已清理。
-- `fix/rc13-codex-native-source` 准备结构化 TOML 校验与精确自有来源豁免。两个独立发现（完成态步骤缺失、记录 scope 不一致）已修；开发安装器 123 Passed / 1 Windows 本机 Skipped，执行器 21 tests Passed，全量 Python 228 项执行（1 Skipped、无失败），构建一致性 Passed。开发测试显式复用已有缓存中的锁定 parser；用户已允许将 `toml@4.3.0` 声明为直接依赖，已更新声明且 69 个非根 lock 条目完全不变；干净 npm 安装后的回归通过，RC13 准确包与真实宿主验收待完成。
-- RC12 OpenCode 维护仍 Failed，冷读 Passed（有限制）；75 项独立审查附件重新核对。历史实际保留，原自动逐字断言 Failed 保留为误报；双重动态状态、旧测试现状描述及漏记 File not found 仍是实质缺陷。手工临时目录实际位置未记录，不推定为固定 `/tmp` 越界，也不标为范围通过。本次使用 Shell 初始化且没有 `.mode`，未调用 `pw_init`，不能声称证明新增工具说明的模型效果。
-- RC11 四宿主维护失败、RC10 原始失败与历史冷读证据均保留。无新因果证据时不重复模型任务挑选成功，不追加同类提示冒充修复。
-- 原生信任/权限拒绝、各宿主去重与续跑、准确稳定包及远端全门槛仍未完成。不提升 latest 或创建正式 Release。待 RC13 准确新包验收后继续；已有发布与模型直连授权不重复询问。
+- 用户授权的直接依赖 `toml@4.3.0` 已落地，69 个非根 lock 条目完全不变。干净 npm 安装后的安装器 123 Passed / 1 本机 Windows Skipped、Python 228 项（1 Skipped、无失败）、构建一致性 Passed。RC13 三系统 Check `34371767391`、OIDC `34372409182`、公开审计和远端准确字节校验均 Passed。
+- RC13 五宿主准确原生 preflight/lifecycle 均 Passed；此组仅为同版本更新与卸载，不冒充两版本升级/回退或模型门槛。Codex 自有来源校验缺陷已通过准确新包实际修复，RC12 原失败和额外诊断保留。
+- 真实 npm RC4 → RC13 → RC4 → RC13 → 卸载五宿主均 Passed，Pi/OpenCode/DSH 另有原生 npm 入口/配对资源检查。该组不含模型会话或公开 Git marketplace；RC4 为历史已验证可用的旧版基线，RC10 的已知缺陷不撤销。正式版仍须另行执行 RC13 ↔ 稳定版全流程。
+- RC13 Codex 原三模型边界的自动结果均 Passed，但旧独立报告仍 Incomplete：提醒去重有原生序列，权限拒绝有保护文件证据（使用 hook trust bypass，不能计持久信任）；旧高层 exec 流不能排除 code-mode 工具。新完整 app-server 采集已独立 Passed：原生 TUI 授权前无上下文，授权后 SessionStart/UserPromptSubmit 输出进入模型上下文，第三个新进程/线程只从项目文件恢复 owner 的新值。三次都无模型工具；旧失败不改写。其他依赖高层流的停止/无工具断言仍须补齐原生证据。
+- Claude 双回合采集器修复并经独立审查：12 项采集器、25 项执行器离线测试 Passed。首轮真实 Failed 保留；修复后原生四次 Write、两回合请求绑定及私有日志清理通过独立采集审查。外层汇总因 replay 字符串误当 content blocks 崩溃，原 summary 仍 Incomplete；已最小修复，使用原始事件离线补充评估，不重跑模型。Docker 退出码未保留，不从 controller Passed 推断。去重仍为 Not Run：原生日志不能明确证明每次匹配 hook 的空 stdout；两条 matcher 日志不等于两个插件。无引用的遗留版本缓存清理另有记录。
+- RC12 OpenCode 维护仍 Failed、冷读 Passed（有限制）；历史精确字符串原断言为误报，但旧 notes 独立当前状态、findings 过期事实和 progress 漏记错误是实质缺陷。RC11 四宿主维护及原始失败保留。无新因果干预时不重复模型任务挑选成功，不以显式调用替代自动匹配。
+- 原生信任/权限、各宿主去重与续跑、维护/交接、准确稳定包和远端全门槛仍未完成。不提升 latest 或创建正式 Release。已有发布、模型直连和直接依赖授权不重复询问。
 
-资源：模型/重型容器串行，2 CPU、3 GiB 内存且无额外 Swap、256 PID、单场景600秒；启动前检查4GiB可用RAM和8GiB磁盘。只清理已结束且无引用的本次缓存，保留准确包、失败、项目快照和历史备份，不改其他服务。本次新增清理已归档且无引用的 41,875,805 bytes 解包/临时缓存；保留下一步开发仍引用的 parser。本仓继续现有文档入口，不做根三文件接管。
+资源：模型/重型容器串行，2 CPU、3 GiB 内存且无额外 Swap、256 PID、单场景600秒；启动前检查4GiB可用RAM和8GiB磁盘。只清理已结束且无引用的本次缓存，保留准确包、失败、项目快照和历史备份，不改其他服务。此前保留的 RC12 parser 开发缓存已在实际直接依赖安装通过后验证无引用并释放 104,680,735 bytes；远端成功场景按记录清理自有 npm/CLI bootstrap 缓存。本仓继续现有文档入口，不做根三文件接管。
 
 证据与逐项来源：[REP-0010](../reproduction/0010-five-agent-release.md)、[独立审查](../reviews/0010-five-agent-release-review.md)。
 

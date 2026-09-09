@@ -403,3 +403,49 @@ OpenCode 原自动历史检查要求整段逐字相等；原历史 Linux 示例 
 用户已明确允许将已有锁定 `toml@4.3.0` 声明为直接依赖，不升级其他包。root package/lock 已更新，69 个非根条目逐项完全相同。干净 `npm ci --ignore-scripts --omit=dev` 成功，去除 NODE_PATH 后安装器 123 Passed / 1 本机 Windows Skipped，构建一致性通过。既有 `ini@7.0.0` 在本机 Node 22.22.1/npm 9.2.0 发出 engine warning；其声明要求 22.22.2 或 24.15+ 等版本，本次没有升级它。后续准确宿主使用固定 Node 24.19.0，CI 使用 24.20.0，分别取得结果后记录。
 
 独立 review 发现 publish 工作流没有安装新直接依赖，已同步与三系统 Check 相同的锁定 npm ci 步骤，复核 Closed。见 [依赖审查](../reviews/0010-rc13-dependency-review.md)。本段是准确归档冻结前的源码检查点；不将修复或依赖安装成功记为准确新包、模型或稳定发布验收。
+
+
+### RC13 准确候选发布、原生与远端结果
+
+RC13 冻结源码 `a9c0f948ea52534e446c3945dc9bfa3e5acdce92`，唯一准确 npm 包 SHA-256 `793e3f2c4d5f7e6e8f180494e1f05ea07db2ddd30426edf6c837b6b775e09bda`。三系统 [Check 34371767391](https://github.com/psiQAQ/planweft/actions/runs/34371767391)、[OIDC 34372409182](https://github.com/psiQAQ/planweft/actions/runs/34372409182) Passed，已发布 [0.4.0-rc.13](https://www.npmjs.com/package/planweft/v/0.4.0-rc.13) 到 `next`。远端 SHA-256、SHA-512 integrity、SHA-1 及本地逐字比较均匹配。`latest` 历史 RC1 未被本轮提升，正式 0.4.0 未发布。
+
+| RC13 项目 | 实际结果与边界 |
+| --- | --- |
+| 直接依赖与源码 | toml 4.3.0 直接依赖；69 个非根 lock 条目不变；干净安装后的 123 Passed / 1 Skipped 安装器、228 Python（1 Skipped）、构建与 DSH shell Passed |
+| 五准确本地原生组 | 五宿主 preflight/lifecycle Passed；同版本更新与卸载，不是跨版本或模型验收 |
+| 五真实 npm 跨版本组 | RC4 → RC13 → RC4 → RC13 → 卸载 Passed；核对两份远端准确包、原生内容、已删除平台文件及三文件/需求文档保护；清除 npx 缓存后持久 CLI doctor Passed |
+| Pi/OpenCode/DSH 原生 npm | 原生版本切换、加载探测、Skill 配对及卸载 Passed；没有执行模型任务，不替代 remote_session |
+| Codex 提醒去重 | 独立重算完整 app-server 事件 Passed；四次真实编辑、两回合各 `[1,0]` 提醒、完整正常回合；不是仅靠计数器或模型措辞 |
+| Codex 原生权限拒绝 | 实际匹配拒绝、保护文件未变、写入正控 Passed；使用 hook trust bypass，因此不能覆盖持久信任 |
+| Codex 持久信任 | 原自动 Passed 保留，独立审查 Incomplete：原生 TUI 授权和三新线程有效，但高层 exec JSON 漏掉 code-mode 工具，不能证明没有模型文件读取或上下文投递因果 |
+| Claude 新采集器 | 8 项离线测试、22 项执行器测试和独立 review Passed；仅采集诊断，真实去重 Not Run；元数据 planned/actual argv 混淆已修复并审查关闭 |
+
+两份准确 manifest 的实际差异：Codex/Claude/OpenCode/DSH 各新增18文件、Pi 新增3文件；对应修改80/78/84/77/16文件。正向升级没有删除文件，不宣称覆盖了正向删除；回退删除这些新增文件，执行器检查无残留。合成 A/B 新增、修改、删除场景仍是单独证据。
+
+RC4 准确基线 SHA-256 `c6f54319befc8c43c559fd4c5af2eb6ca3d1b626e6c0b3fd65cb67c11d9d318b` 为历史已验证可用版本。本次没有把 RC10 的已知失败撤回，也没有把 RC4/RC13 流程当作尚未存在的正式版升级证据。Codex/Claude 的公开 Git marketplace 与五平台远端模型会话是其他门槛。本次原生缓存/内容检查也不等于每个版本都完成模型会话。
+
+Registry 执行器原先直接运行裸解包 CLI；直接 toml 依赖使这种方式不再模拟真实 npm 安装。新执行器先对准确包通过 npm 安装依赖，并把执行入口与独立预期解包树分开，逐文件核对后才运行。23 项离线反例和独立审查 Passed；此次真实远端五宿主通过。成功且确认所属容器已删除后，自动清理 npm/CLI bootstrap 缓存合计 1,608,193,606 bytes，保留准确包、日志、版本内容证据及项目记录。另有 104,680,735 bytes 退休 parser 缓存按无引用检查释放，无全局 prune。
+
+公开附件 [rc13-candidate-records.tar.gz](evidence/0010/rc13-candidate-records.tar.gz)：705 文件、587,976 bytes，SHA-256 `842458312e6e638f6605799c96e87fe2a8eb365c1ff66e3efcb5078d13c17b14`。包含 CI/OIDC/registry/审计、五本地原生组、五远端跨版本组、Codex 三边界原记录与独立审查、测试器审查和回归。143 个 Codex 审查附件原摘要由主 Agent 复核；每份附件记录原始/公开摘要，私有凭据与可重建树不导出。Claude 后续真实采集不在此检查点内。
+
+这些是 RC13 候选成绩，不是准确稳定包验收。维护/冷读的旧失败、持久信任归因、其他核心模型行为及最终稳定远端门槛未完成；不创建正式 Release 或提升 latest。
+
+## RC13 原生上下文与 Claude 双回合采集补充
+
+这批仅改变测试器及证据，不改变已发布 RC13 准确归档 `793e3f2c4d5f7e6e8f180494e1f05ea07db2ddd30426edf6c837b6b775e09bda`，不属于稳定版验收。原 Codex 边界报告的 Incomplete 与 Claude 首次失败均保留。
+
+| 场景 | 当前证据与限制 |
+| --- | --- |
+| Codex 持久信任 | 独立 Passed。固定 Codex 0.149.1 / gpt-5.6-terra；原生 TUI 七个 hooks 从未激活到激活，未合成信任文件、未使用 trust bypass。三个独立 app-server 进程/线程分别为授权前、授权后及 owner 更新后的新会话。完整事件证明后两次 SessionStart/UserPromptSubmit 输出按序进入 developer 上下文，回答绑定本次值，无模型工具、旧聊天或恢复旧线程。此项关闭旧高层 exec 流的投递归因缺口，不能替代其他停止/权限场景 |
+| Claude 首次采集 | Failed 保留。第二回合合法同会话 init 被误判为重置；私有 debug 清理也失败，原记录缺少具体 errno，不能猜测确切文件原因。容器最终清理释放 tmpfs |
+| Claude 修复后采集 | 独立采集 Passed，去重 Not Run。固定 Claude 2.1.241 / deepseek-v4-flash；四次 Write 的原生 tool id、结果、磁盘字节对应，两回合 UUID 与重复 init 正确绑定；计划三文件及原两份 fixture 未变；私有日志已删除，原生 uninstall Passed。原外层不完整 summary 未保存镜像摘要，不能后验填默认镜像作为本次证据 |
+| Claude 外层汇总 | 原 summary 仍 Incomplete，保留 `'str' object has no attribute 'get'`。原因是 `--replay-user-messages` 的字符串 content 被当成结构化 blocks。最小修复只解析 list 中的 dict，25 项离线测试 Passed；对保留 471 条事件重算完整保留四个 Write，不重跑模型。当前补充评估 v2 明确 controller 成功不等于未保留的 Docker 退出码；初份错误命名和独立纠正也保留 |
+| Claude 去重门槛 | Not Run。每次日志有两个 matcher，但缺少逐 hook 身份、完成/退出及明确空 stdout；plain-text 分支也可能接收非空文本。不能从缺失输出日志断言 `[1,0]`，也不能把两个 matcher 直接认定为重复插件 |
+
+离线验证：Codex 原生上下文采集器 10 项、Claude 采集器 12 项、最终容器执行器 25 项 Passed。独立实现审查的描述符身份、私有 debug 导出、重复 init 以及补充评估元数据发现均已修复并复核；完整原始发现附在各报告中。
+
+[原生上下文与采集附件](evidence/0010/rc13-native-context-and-collection.tar.gz)：168 项，SHA-256 `61f22a5c3007d20a1ce9aa38bd66d93e6e78e0d4e0eb881356ed540097b99ff4`。导出前主 Agent 重新核对 Codex 61 项、Claude 50 项独立附件摘要。包含冻结采集器、原生事件、项目 before/after、首次失败、原汇总错误、v2 补充及各独立审查；排除私有认证、可重建安装树和专有 CLI 二进制摘录。manifest 记录原始/公开字节摘要；脱敏副本不冒充原始字节。
+
+补充清理：确认当前所有现存容器均不挂载该 Claude 项目的版本目录、卸载已成功且 receipt 的 agents 为空后，仅删除无引用版本缓存 9,011 文件、104,688,509 bytes。原 summary、receipt、业务文件和补充评估保持原字节；清理记录作为新附件，不改写之前未完成的清理状态。没有执行全局 prune 或影响其他服务。
+
+后续仍须 Claude 去重逐执行证据、其余宿主尚缺的原生权限/停止项、维护行为修复与独立交接，再冻结并验证唯一稳定归档。历史 RC 与诊断采集成功都不直接放行 `latest`。
