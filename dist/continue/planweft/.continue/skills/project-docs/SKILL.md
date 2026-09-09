@@ -2,7 +2,7 @@
 name: project-docs
 description: "Use for implementation or maintenance with investigation, fixes, regression tests and persistent handoff, including work continued from old notes. agent instructions read selected project planning context when invoked. Automatic recovery reads project planning files only. Explicit session-catchup.py --metadata reads same-project local agent session records and emits aggregate counts only; --replay may emit bounded nonce-framed excerpts. This adapter registers no lifecycle or Stop hook, never requests continuation, and never runs commands declared in Markdown. The skill has no network upload path."
 metadata:
-  version: "0.4.0-rc.6"
+  version: "0.4.0-rc.7"
 ---
 
 # Project Docs

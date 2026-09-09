@@ -1,5 +1,7 @@
 # Ergebnisse & Entscheidungen
 
+Für jede Beobachtung zur Implementierung Quelle und Zeitpunkt oder Revision angeben (vor einer Änderung oder nach der Prüfung). Frühere Erkenntnisse erhalten und bei Änderungen eine datierte Korrektur oder neue Evidenz ergänzen. Frühere Beobachtungen nicht als aktuelle Implementierung darstellen.
+
 Diese Datei ist die dauerhafte Wissensbasis der Aufgabe. Erfassen Sie hier Anforderungen, Entdeckungen, Entscheidungen und nützliche Quellen. Aktualisieren Sie sie nach neuen Erkenntnissen, insbesondere nach jeweils zwei Ansichts-, Browser- oder Suchvorgängen.
 
 ## Anforderungen

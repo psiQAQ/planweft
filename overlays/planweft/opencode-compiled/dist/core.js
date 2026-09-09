@@ -20,7 +20,7 @@ import * as crypto from "node:crypto";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
-export const VERSION = "0.4.0-rc.6";
+export const VERSION = "0.4.0-rc.7";
 export const BANNER = "[planweft] ACTIVE PLAN — current state:";
 export const REMINDER = "[planweft] Update progress.md with what you just did. If a phase is now complete, update task_plan.md status.";
 export const PLANNING_FILES = ["task_plan.md", "findings.md", "progress.md"];
@@ -569,6 +569,8 @@ const FALLBACK_TEMPLATES = {
     "findings.md": [
         "# Findings & Decisions",
         "",
+        "Give each implementation observation its source and observation time or revision (before a change or after verification). Preserve earlier findings; append a dated correction or superseding evidence when behavior changes. Do not present a pre-change observation as the current implementation.",
+        "",
         "## Requirements",
         "-",
         "",
@@ -589,6 +591,8 @@ const FALLBACK_TEMPLATES = {
     ].join("\n"),
     "progress.md": [
         "# Progress Log",
+        "",
+        "Record dated actions and results here. Read the goal, current phase and next action only in [task_plan.md](task_plan.md); do not maintain a second live status.",
         "",
         "## Session: [date]",
         "",

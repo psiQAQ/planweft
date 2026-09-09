@@ -17,7 +17,7 @@ import tarfile
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR = ROOT / 'vendor/planning-with-files'
 OVERLAY = ROOT / 'overlays/planweft'
-VERSION = '0.4.0-rc.6'
+VERSION = '0.4.0-rc.7'
 PRODUCT = 'planweft'
 SKILL = 'project-docs'
 DESCRIPTION = ('Plan and document implementation or maintenance with investigation, fixes, '
@@ -235,6 +235,10 @@ def local_install_text(text, path):
 def transform(upstream, enhanced=True):
     """Transform the complete tree, including tests for the migration regression."""
     result = {}
+    if enhanced:
+        spec = importlib.util.spec_from_file_location('pw_record_templates', OVERLAY / 'record_templates.py')
+        records = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(records)
     for source, (raw, mode) in upstream.items():
         target = map_path(source)
         try:
@@ -292,6 +296,8 @@ def transform(upstream, enhanced=True):
             text = json.dumps(payload, indent=2) + '\n'
         if target.endswith('/scripts/plan-doctor.sh') or target == 'scripts/plan-doctor.sh':
             text = text.replace("echo '=== plan-doctor done ==='", (OVERLAY / 'doctor-overlap.sh').read_text() + "\necho '=== plan-doctor done ==='")
+        if enhanced:
+            text = records.transform(target, text)
         if enhanced and '/templates/' in '/' + target:
             stem = PurePosixPath(target).stem
             if stem in ('analytics_task_plan', 'task_plan_autonomous'):

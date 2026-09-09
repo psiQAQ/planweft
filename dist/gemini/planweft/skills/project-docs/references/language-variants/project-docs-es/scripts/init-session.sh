@@ -72,6 +72,8 @@ if [ ! -f "findings.md" ]; then
     cat > findings.md << 'EOF'
 # Hallazgos y Decisiones
 
+Indica la fuente y la fecha o revisión de cada observación de implementación (antes del cambio o después de verificarlo). Conserva los hallazgos anteriores y añade correcciones o evidencia posterior con fecha cuando cambie el comportamiento. No presentes una observación anterior al cambio como implementación actual.
+
 ## Requisitos
 -
 
@@ -101,8 +103,8 @@ if [ ! -f "progress.md" ]; then
 
 ## Sesión: $DATE
 
-### Estado Actual
-- **Fase:** 1 - Requisitos y Descubrimiento
+### Registro de sesión
+Registra aquí acciones y resultados con fecha. Consulta el objetivo, la fase actual y el siguiente paso solo en [task_plan.md](task_plan.md); no mantengas otro estado dinámico.
 - **Inicio:** $DATE
 
 ### Acciones Realizadas

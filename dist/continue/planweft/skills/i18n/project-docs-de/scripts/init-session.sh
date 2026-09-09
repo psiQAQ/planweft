@@ -84,6 +84,8 @@ if [ ! -f "findings.md" ]; then
     cat > findings.md << 'EOF'
 # Erkenntnisse & Entscheidungen
 
+Für jede Beobachtung zur Implementierung Quelle und Zeitpunkt oder Revision angeben (vor einer Änderung oder nach der Prüfung). Frühere Erkenntnisse erhalten und bei Änderungen eine datierte Korrektur oder neue Evidenz ergänzen. Frühere Beobachtungen nicht als aktuelle Implementierung darstellen.
+
 ## Anforderungen
 -
 
@@ -113,8 +115,8 @@ if [ ! -f "progress.md" ]; then
 
 ## Sitzung: $DATE
 
-### Aktueller Status
-- **Phase:** 1 - Anforderungen & Entdeckung
+### Sitzungsprotokoll
+Hier stehen datierte Aktionen und Ergebnisse. Ziel, aktuelle Phase und nächsten Schritt nur in [task_plan.md](task_plan.md) nachlesen; keinen zweiten laufenden Status pflegen.
 - **Startzeit:** $DATE
 
 ### Ausgeführte Aktionen

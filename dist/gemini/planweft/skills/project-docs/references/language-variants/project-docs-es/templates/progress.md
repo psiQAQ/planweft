@@ -6,22 +6,9 @@ Este archivo mantiene un registro cronológico de las acciones, los resultados y
 
 Sustituye `[FECHA]` por la fecha de esta sesión de trabajo, por ejemplo, `2026-01-15`.
 
-### Fase 1: [Título]
+### Trabajo registrado
 
-Registra las acciones realizadas durante esta fase y actualiza su estado con `pending`, `in_progress` o `complete`.
-
-- **Estado:** in_progress
 - **Inicio:** [marca_de_tiempo]
-- Acciones realizadas:
-  -
-- Archivos creados/modificados:
-  -
-
-### Fase 2: [Título]
-
-Usa la misma estructura para cada fase posterior y mantén una entrada separada para que el progreso sea verificable.
-
-- **Estado:** pending
 - Acciones realizadas:
   -
 - Archivos creados/modificados:
@@ -45,13 +32,13 @@ Añade inmediatamente cada error, incluso si se resuelve rápido. Incluye la mar
 
 ## Prueba de Reinicio de 5 Preguntas
 
-Responde periódicamente estas preguntas, especialmente después de una pausa o un reinicio de contexto. Las respuestas deben apuntar al estado actual de los archivos de planificación.
+Registra aquí acciones y resultados con fecha. Consulta el objetivo, la fase actual y el siguiente paso solo en [task_plan.md](task_plan.md); no mantengas otro estado dinámico.
 
 | Pregunta | Respuesta |
 |----------|-----------|
-| ¿Dónde estoy? | Fase X |
-| ¿Hacia dónde voy? | Fases restantes |
-| ¿Cuál es el objetivo? | [declaración del objetivo] |
+| ¿Dónde estoy? | [task_plan.md](task_plan.md) |
+| ¿Hacia dónde voy? | [task_plan.md](task_plan.md) |
+| ¿Cuál es el objetivo? | [task_plan.md](task_plan.md) |
 | ¿Qué he aprendido? | Ver findings.md |
 | ¿Qué he hecho? | Ver arriba |
 

@@ -6,22 +6,9 @@ Diese Datei ist das chronologische Sitzungsprotokoll. Halten Sie fest, was wann 
 
 Tragen Sie das Datum der Arbeitssitzung ein, zum Beispiel `2026-01-15`.
 
-### Phase 1: [Titel]
+### Protokollierte Arbeit
 
-Dokumentieren Sie die Aktionen dieser Phase fortlaufend oder spätestens bei ihrem Abschluss. Verwenden Sie für den Status nur `pending`, `in_progress` oder `complete`.
-
-- **Status:** in_progress
 - **Gestartet:** [Zeitstempel]
-- Durchgeführte Aktionen:
-  -
-- Erstellte/Geänderte Dateien:
-  -
-
-### Phase 2: [Titel]
-
-Führen Sie für jede weitere Phase einen eigenen Eintrag mit derselben Struktur.
-
-- **Status:** pending
 - Durchgeführte Aktionen:
   -
 - Erstellte/Geänderte Dateien:
@@ -45,13 +32,13 @@ Dokumentieren Sie jeden unterschiedlichen Fehler sofort mit Zeitstempel, Versuch
 
 ## 5-Fragen-Neustartprüfung
 
-Aktualisieren Sie diese Antworten regelmäßig und besonders nach einer Pause oder einem Kontextwechsel. Sie verweisen auf den aktuellen Standort, die verbleibende Arbeit, das Ziel, die Erkenntnisse und die bereits ausgeführten Schritte.
+Hier stehen datierte Aktionen und Ergebnisse. Ziel, aktuelle Phase und nächsten Schritt nur in [task_plan.md](task_plan.md) nachlesen; keinen zweiten laufenden Status pflegen.
 
 | Frage | Antwort |
 |-------|---------|
-| Wo stehe ich? | Phase X |
-| Wohin gehe ich? | Verbleibende Phasen |
-| Was ist das Ziel? | [Zielbeschreibung] |
+| Wo stehe ich? | [task_plan.md](task_plan.md) |
+| Wohin gehe ich? | [task_plan.md](task_plan.md) |
+| Was ist das Ziel? | [task_plan.md](task_plan.md) |
 | Was habe ich gelernt? | Siehe findings.md |
 | Was habe ich getan? | Siehe oben |
 

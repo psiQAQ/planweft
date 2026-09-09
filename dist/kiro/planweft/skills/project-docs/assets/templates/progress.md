@@ -6,22 +6,9 @@ Use this file as a chronological record of work completed, files changed, tests 
 
 Record the date of this work session.
 
-### Phase 1: [Title]
+### Recorded work
 
-Record actions and files for this phase. Use only `pending`, `in_progress`, or `complete` for status, and include the start timestamp.
-
-- **Status:** in_progress
 - **Started:** [timestamp]
-- Actions taken:
-  -
-- Files created/modified:
-  -
-
-### Phase 2: [Title]
-
-Use the same structure for each additional phase.
-
-- **Status:** pending
 - Actions taken:
   -
 - Files created/modified:
@@ -45,13 +32,13 @@ Record distinct errors with timestamps, attempt numbers, and resolutions so fail
 
 ## 5-Question Reboot Check
 
-Complete this table when resuming work to confirm the current phase, destination, goal, findings, and completed actions.
+Record dated actions and results here. Read the goal, current phase and next action only in [task_plan.md](task_plan.md); do not maintain a second live status.
 
 | Question | Answer |
 |----------|--------|
-| Where am I? | Phase X |
-| Where am I going? | Remaining phases |
-| What's the goal? | [goal statement] |
+| Where am I? | [task_plan.md](task_plan.md) |
+| Where am I going? | [task_plan.md](task_plan.md) |
+| What's the goal? | [task_plan.md](task_plan.md) |
 | What have I learned? | See findings.md |
 | What have I done? | See above |
 

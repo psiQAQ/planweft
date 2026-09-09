@@ -1,5 +1,7 @@
 # Hallazgos y Decisiones
 
+Indica la fuente y la fecha o revisión de cada observación de implementación (antes del cambio o después de verificarlo). Conserva los hallazgos anteriores y añade correcciones o evidencia posterior con fecha cuando cambie el comportamiento. No presentes una observación anterior al cambio como implementación actual.
+
 Este archivo es la base de conocimientos persistente de la tarea. Actualízalo después de cada descubrimiento y, como mínimo, después de cada dos operaciones de inspección, navegador o búsqueda.
 
 ## Requisitos

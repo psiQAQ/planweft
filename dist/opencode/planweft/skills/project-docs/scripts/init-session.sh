@@ -265,6 +265,8 @@ write_default_findings() {
     cat > "$1" << 'EOF'
 # Findings & Decisions
 
+Give each implementation observation its source and observation time or revision (before a change or after verification). Preserve earlier findings; append a dated correction or superseding evidence when behavior changes. Do not present a pre-change observation as the current implementation.
+
 ## Requirements
 -
 
@@ -292,8 +294,8 @@ write_default_progress() {
 
 ## Session: $date_value
 
-### Current Status
-- **Phase:** 1 - Requirements & Discovery
+### Session record
+Record dated actions and results here. Read the goal, current phase and next action only in [task_plan.md](task_plan.md); do not maintain a second live status.
 - **Started:** $date_value
 
 ### Actions Taken
@@ -317,8 +319,8 @@ write_analytics_progress() {
 
 ## Session: $date_value
 
-### Current Status
-- **Phase:** 1 - Data Discovery
+### Session record
+Record dated actions and results here. Read the goal, current phase and next action only in [task_plan.md](task_plan.md); do not maintain a second live status.
 - **Started:** $date_value
 
 ### Actions Taken

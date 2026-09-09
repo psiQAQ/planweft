@@ -2,7 +2,7 @@
 name: project-docs
 description: "Use for implementation or maintenance with investigation, fixes, regression tests and persistent handoff, including work continued from old notes. lifecycle hooks inject selected project planning context. Automatic recovery reads project planning files only. Explicit session-catchup.py --metadata reads same-project local agent session records and emits aggregate counts only; --replay may emit bounded nonce-framed excerpts. Optional gated mode can request continuation only when the host supports it and never runs commands declared in Markdown. The skill has no network upload path."
 metadata:
-  version: "0.4.0-rc.6"
+  version: "0.4.0-rc.7"
 ---
 
 For an explicitly requested language variant, read its instructions from `references/language-variants/project-docs-<language>/GUIDE.md` relative to this Skill directory (ar, de, es, zh, zht). These are supporting resources of this single entry point. Resolve runtime assets from the installed Skill; keep task records in the user project.

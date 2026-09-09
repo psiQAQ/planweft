@@ -2,7 +2,7 @@
 name: project-docs-ar
 description: "Use for implementation or maintenance with investigation, fixes, regression tests and persistent handoff, including work continued from old notes. تخطيط مستمر قائم على الملفات لعمل وكلاء الذكاء الاصطناعي متعدد الخطوات. يحتفظ بملفات task_plan.md و findings.md و progress.md على القرص، وتحقن خطافات دورة الحياة سياق التخطيط المحدد للمشروع. تقرأ الاستعادة التلقائية ملفات تخطيط المشروع فقط. يمكن للأمر الصريح session-catchup.py --metadata فحص بيانات وصفية لجلسات الوكيل المحلية التابعة للمشروع نفسه، بينما قد يصدر --replay مقتطفات محدودة مؤطرة بقيمة nonce. يمكن للوضع المحكوم الاختياري طلب المتابعة فقط عندما يدعمه المضيف، ولا ينفذ أبدًا أوامر معلنة في Markdown. لا تتضمن المهارة مسارًا لرفع البيانات عبر الشبكة. تُستخدم للبحث أو العمل الذي يحتاج إلى 5 استدعاءات أدوات أو أكثر."
 metadata:
-  version: "0.4.0-rc.6"
+  version: "0.4.0-rc.7"
 ---
 
 # توثيق المشروع وتخطيط المهمة

@@ -2,7 +2,7 @@
 name: project-docs-es
 description: "Use for implementation or maintenance with investigation, fixes, regression tests and persistent handoff, including work continued from old notes. Planificación persistente basada en archivos para tareas multipaso de agentes de IA. Mantiene task_plan.md, findings.md y progress.md en disco; los hooks del ciclo de vida inyectan contexto seleccionado de planificación del proyecto. La recuperación automática solo lee los archivos de planificación del proyecto. session-catchup.py --metadata, solicitado de forma explícita, puede inspeccionar metadatos locales de sesiones del mismo proyecto; --replay puede emitir extractos limitados y enmarcados con nonce. El modo con gate opcional solo puede solicitar que el host continúe si este lo admite y nunca ejecuta comandos declarados en Markdown. El skill no tiene ninguna ruta de carga por red. Úsalo para investigación o trabajo que requiera 5 o más llamadas a herramientas."
 metadata:
-  version: "0.4.0-rc.6"
+  version: "0.4.0-rc.7"
 ---
 
 # Documentación y planificación del proyecto

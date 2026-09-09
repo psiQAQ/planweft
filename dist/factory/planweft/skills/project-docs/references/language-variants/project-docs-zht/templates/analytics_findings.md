@@ -1,5 +1,7 @@
 # Findings & Decisions
 
+Give each implementation observation its source and observation time or revision (before a change or after verification). Preserve earlier findings; append a dated correction or superseding evidence when behavior changes. Do not present a pre-change observation as the current implementation.
+
 Use this file as the durable record of analytics data sources, hypotheses, query results, statistical evidence, and decisions.
 
 ## Data Sources
