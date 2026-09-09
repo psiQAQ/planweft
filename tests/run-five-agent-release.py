@@ -366,12 +366,13 @@ def main(argv=None):
     report['resource_limits']={'cpus':2,'memory':'3g','memory_swap_total':'3g',
                                'pids':256,'home_tmpfs':'2g','tmp_tmpfs':'512m'}
     report['resource_preflight']=resources
+    run_id='pw-release-'+uuid.uuid4().hex[:12]
+    report['run_id']=run_id
     write_json(args.output/'summary.json',report)
     # Concurrent labelled validation containers are not baseline services.
     initial=set(subprocess.check_output(['docker','ps','-aq'],text=True).split())
     concurrent_trials=set(subprocess.check_output(['docker','ps','-aq','--filter','label=planweft.run'],text=True).split())
     initial-=concurrent_trials
-    run_id='pw-release-'+uuid.uuid4().hex[:12]
     try:
         for host in dict.fromkeys(args.host):
             cases={}; report['hosts'][host]=cases
@@ -411,7 +412,10 @@ def main(argv=None):
                 fixture.fixture(work,files)
                 before=project_snapshot(fixture,work)
                 write_json(base/'before.json',before)
-                cases[case]={'status':'In Progress'}
+                name=run_id+'-'+host+'-'+case
+                # Freeze identity before launch so a later summarizer exception
+                # cannot erase the actual image or owned-container identity.
+                cases[case]={'status':'In Progress','image':image,'container':name,'container_exit_code':None}
                 write_json(args.output/'summary.json',report)
                 prompt=fixture.PROMPTS.get(case,'')
                 if case in {'context','recovery','untrusted','persisted-trust'}: prompt=fixture.PROBE_PROMPT
@@ -427,7 +431,6 @@ def main(argv=None):
                 payload=scenario_payload(args,host,case,prompt,secret)
                 probe_scope=context_probe_scope(host,case)
                 if probe_scope: payload['probe_scope']=probe_scope
-                name=run_id+'-'+host+'-'+case
                 resource_preflight(args.output)
                 command=['docker','run','--rm','-i','--name',name,'--label','planweft.run='+run_id,
                     '--read-only','--user',f'{os.getuid()}:{os.getgid()}','--cap-drop=ALL',
@@ -449,8 +452,13 @@ def main(argv=None):
                     '--workdir','/workspace','--entrypoint','python3',image,'-c',
                     'import sys,json; sys.path.insert(0,"/runner"); import runtime; sys.exit(runtime.controller(json.load(sys.stdin)))']
                 started=time.monotonic()
+                proc=None
                 try:
                     proc=subprocess.run(command,input=json.dumps(payload),text=True,capture_output=True,timeout=args.timeout+540)
+                    # Persist the Docker result before log processing/cleanup,
+                    # independently of the controller's claimed outcome.
+                    cases[case]['container_exit_code']=proc.returncode
+                    write_json(args.output/'summary.json',report)
                     from five_agent_runtime import secret_values
                     output,error=proc.stdout,proc.stderr
                     for value in secret_values(secret):
@@ -515,7 +523,8 @@ def main(argv=None):
                     assertions['user_guide_updated']=before['notes/guide.md']!=after.get('notes/guide.md')
                     assertions['single_task_plan']=len([p for p in after if Path(p).name=='task_plan.md'])==1
                 cases[case]={'status':'Passed' if all(assertions.values()) else 'Failed','assertions':assertions,
-                    'image':image,'seconds':round(time.monotonic()-started,3),'controller':result,
+                    'image':image,'container':name,'container_exit_code':proc.returncode if proc is not None else None,
+                    'seconds':round(time.monotonic()-started,3),'controller':result,
                     'semantic_review':'Required' if case in {'maintenance','cold-reader','skill-loading'} else 'Not applicable'}
                 if case=='reminder-collection':
                     cases[case].update(reminder_collection_assessment(assertions))

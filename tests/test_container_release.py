@@ -22,6 +22,71 @@ def module(name,path):
 
 
 class ContainerReleaseTest(unittest.TestCase):
+    def test_run_identity_survives_parser_failure_and_timeout(self):
+        from types import SimpleNamespace
+        image='sha256:'+'a'*64
+        for parser_failure in [True,False]:
+            with self.subTest(parser_failure=parser_failure),tempfile.TemporaryDirectory() as temporary:
+                root=Path(temporary);archive=root/'synthetic.tgz';archive.write_bytes(b'fixture archive')
+                runner=module('pw_run_identity_'+str(parser_failure),'tests/run-five-agent-release.py')
+                cases=['simple'] if parser_failure else ['preflight','lifecycle']
+                args=SimpleNamespace(output=root/'evidence',archive=archive,package={'version':'0.4.0-test'},
+                    host=['claude'],cases=cases,images={'hosts':{'claude':{'image':image}}},
+                    model='synthetic',codex_model='synthetic',timeout=1,trace_gate_processes=False)
+                launched=[]
+                def fixture(work,files):
+                    work.mkdir()
+                    for name,text in files.items(): (work/name).write_text(text)
+                def snapshot(work,**kwargs):
+                    return {p.name:p.read_text() for p in work.iterdir() if p.is_file()}
+                fixtures=SimpleNamespace(BASE={'README.md':'synthetic'},PROMPTS={},BOUNDARY='',
+                                         fixture=fixture,snapshot=snapshot)
+                def check_output(argv,**kwargs):
+                    if argv[:3]==['docker','image','inspect']: return image+'\n'
+                    self.assertEqual(argv[:3],['docker','ps','-aq'])
+                    return '' if '--filter' in argv else 'unrelated-baseline\n'
+                def execute(argv,**kwargs):
+                    self.assertEqual(argv[0],'docker')
+                    if argv[1]=='rm': return subprocess.CompletedProcess(argv,0,'','')
+                    self.assertEqual(argv[1],'run')
+                    payload=json.loads(kwargs['input']);case=payload['case']
+                    name=argv[argv.index('--name')+1];launched.append((case,name))
+                    # Identity must already exist on disk before native launch.
+                    saved=json.loads((args.output/'summary.json').read_text())
+                    self.assertEqual(saved['hosts']['claude'][case]['image'],image)
+                    self.assertEqual(saved['hosts']['claude'][case]['container'],name)
+                    self.assertTrue(name.startswith(saved['run_id']+'-claude-'))
+                    if case=='lifecycle': raise subprocess.TimeoutExpired(argv,kwargs['timeout'])
+                    raw=args.output/'claude'/case/'raw'
+                    (raw/'controller.json').write_text('{"status":"Passed"}')
+                    # A successful controller is deliberately not exit-code evidence.
+                    return subprocess.CompletedProcess(argv,23,'synthetic native output','')
+                parsed={'final':'','tool_calls':[],'errors':[]}
+                with patch.object(runner,'parse_args',return_value=args), \
+                     patch.object(runner,'resource_preflight',return_value={'available_memory_bytes':1,'free_disk_bytes':1}), \
+                     patch.object(runner,'load_fixture_module',return_value=fixtures), \
+                     patch.object(runner,'credentials',return_value={'api_key':'synthetic-only'}), \
+                     patch.object(runner.subprocess,'check_output',side_effect=check_output), \
+                     patch.object(runner.subprocess,'run',side_effect=execute), \
+                     patch.object(runner,'cleanup_finished_case',return_value={'status':'Passed'}), \
+                     patch.object(runner,'model_text',side_effect=ValueError('synthetic parser failure') if parser_failure else None,
+                                  return_value=parsed), \
+                     patch.dict(sys.modules,{'five_agent_runtime':SimpleNamespace(secret_values=lambda secret:[])}):
+                    if parser_failure:
+                        with self.assertRaisesRegex(ValueError,'synthetic parser failure'): runner.main([])
+                    else:
+                        with patch('sys.stdout',new_callable=io.StringIO): self.assertEqual(runner.main([]),1)
+                report=json.loads((args.output/'summary.json').read_text())
+                self.assertEqual(report['status'],'Incomplete')
+                self.assertEqual(report['cleanup']['remaining_test_containers'],[])
+                self.assertTrue(report['cleanup']['original_containers_preserved'])
+                for index,(case,name) in enumerate(launched):
+                    observed=report['hosts']['claude'][case]
+                    self.assertEqual((observed['image'],observed['container']),(image,name))
+                    self.assertEqual(observed['container_exit_code'],23 if index==0 else None)
+                if parser_failure: self.assertEqual(report['error'],'synthetic parser failure')
+                else: self.assertEqual(len(launched),2)
+
     def test_mixed_scenario_payload_does_not_forward_auth_to_installation(self):
         from types import SimpleNamespace
         runner=module('pw_case_auth','tests/run-five-agent-release.py')
