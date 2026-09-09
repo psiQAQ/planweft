@@ -124,3 +124,9 @@ RC5 Codex 实测由 `rc5_independent_review` 独立复核，普通停止/gated �
 `trace_repair_review` 审查两遍依赖重放，提出首遍摘要错误被覆盖的反例；已冻结同路径脚本字节、合并两遍错误并补永久回归。29 项解析器测试 Passed。未知 FD 的存在性、路径和 CLOEXEC 经 clone、exec、dup、目录解析、UNSHARE 传播，影响 gate 身份/读取时拒绝；无影响的宿主竞态保留在报告，不将全局并发当作自动失败或自动豁免。
 
 同一 reviewer 独立核对最终准确 RC6 的六项 Codex 停止运行，全部 Passed。绑定 summary `8ec419f6bbc70545cb186d9218e41ad605be09a4d87804b479e3d9184654b7cc`、准确归档、冻结执行器与各场景投影，详见[独立记录](../reproduction/evidence/0010/codex-rc6-stop-independent-review.json)。该结论仅适用于 invocation bypass 测试：不计正常持久信任或原生工具拒绝；原始私有 strace 已删除，独立核查使用冻结解析器与保留投影，没有声称重放原始轨迹。
+
+### RC6 原生权限与维护独立审查
+
+`skill_entry_review` 核查 Codex 严格 custom exec 调用与原生拒绝配对、真实 TUI 信任三会话边界、OpenCode 原生 deny、回归敏感性修复。已修复的反例包括：伪造拒绝输出的 shell 命令、Claude 非 rule 类型拒绝、PTY 退出/EIO 清理以及 UI 日志凭据脱敏。定向检查 23 Passed。
+
+[OpenCode 独立结果](../reproduction/evidence/0010/opencode-rc6-maintenance-independent-review.json) 保留历史字符串自动误报和冷读行号错误；维护及冷读核心语义 Passed。Codex 当前维护记录存在实质双状态/观察时点缺陷，不能用回归方法数量纠正将整个维护改判为 Passed。`trace_repair_review` 已确认默认 Shell/PowerShell 初始化内联硬编码 Phase 1 绕过模板附加规则，建议在 overlays 对模板及内联初始化统一修复，保留 PWF task_plan 协议和既有文件跳过行为。

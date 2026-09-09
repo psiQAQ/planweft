@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import queue
+import re
 import shutil
 import subprocess
 import struct
@@ -17,6 +18,7 @@ import tarfile
 import tempfile
 import threading
 import time
+import uuid
 
 OUT = Path('/results')
 WORK = Path('/workspace')
@@ -93,6 +95,39 @@ def run(name, argv, *, input_data=None, timeout=240, required=True):
     if required and result.returncode:
         raise RuntimeError(name + ' failed')
     return result
+
+
+def unittest_observation(process):
+    output=process.stderr+process.stdout
+    count=re.search(r'^Ran (\d+) tests? in ',output,re.M)
+    failure=re.search(r'^FAILED \(failures=(\d+)\)\s*$',output,re.M)
+    return {'tests':int(count.group(1)) if count else 0,
+            'passed':process.returncode==0 and bool(re.search(r'^OK\s*$',output,re.M)),
+            'assertion_failures':int(failure.group(1)) if failure and process.returncode!=0 else 0}
+
+
+def regression_effectiveness(work, fixed):
+    """A meaningful regression detects the original BOM bug, regardless of method count.
+
+    Run the identical test bytes against the exact synthetic original module in
+    a separate directory. Import errors, skipped-only suites and unrelated test
+    crashes cannot count as reproducing the defect. Never mutate owner files.
+    """
+    original='from pathlib import Path\n\n\ndef write_export(text, target):\n    Path(target).write_text(text, encoding="utf-8-sig")\n'
+    with tempfile.TemporaryDirectory(prefix='pw-regression-') as temporary:
+        project=Path(temporary)
+        shutil.copytree(work/'tests',project/'tests',ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+        (project/'export_text.py').write_text(original)
+        baseline=subprocess.run(['python3','-m','unittest','discover','-s','tests','-v'],
+                                cwd=project,text=True,capture_output=True,timeout=60)
+    current=unittest_observation(fixed);old=unittest_observation(baseline)
+    return {'status':'Passed' if current['passed'] and current['tests']>0 and
+            old['tests']==current['tests'] and old['assertion_failures']>0 and
+            'AssertionError' in baseline.stderr else 'Failed',
+            'scope':'identical generated tests against the fixed module and the synthetic original BOM module',
+            'original_module_sha256':hashlib.sha256(original.encode()).hexdigest(),
+            'fixed':current,'original':old,'original_exit_code':baseline.returncode,
+            'original_stdout':baseline.stdout,'original_stderr':baseline.stderr}
 
 
 def setup_environment():
@@ -216,13 +251,14 @@ def verify_files(host, package, record):
 
 def model_command(host, model, prompt, case):
     if host == 'codex':
-        command = ['codex','exec','--ephemeral','--json','--skip-git-repo-check',
+        command = ['codex','exec',*([] if case=='permission-denial' else ['--ephemeral']),
+            '--json','--skip-git-repo-check',
             '--sandbox','danger-full-access','--model',model,'--disable','memories',
             '--disable','multi_agent','--cd',str(WORK)]
         if case == 'cold-reader':
             command += ['--disable', 'plugins']
         # This separate lane is explicitly not normal persisted trust acceptance.
-        if case not in {'untrusted','cold-reader','readonly','simple'}:
+        if case not in {'untrusted','cold-reader','readonly','simple','persisted-trust'}:
             command += ['--dangerously-bypass-hook-trust']
         return command+['-'], prompt
     if host == 'claude':
@@ -231,13 +267,181 @@ def model_command(host, model, prompt, case):
                 '--model',model,'--output-format','stream-json','--verbose']
         if case in {'stopping','gated-continuation','gate-cap','gate-stall','gate-cap-disabled','gate-stall-disabled'}:
             command+=['--debug','hooks','--debug-file','/tmp/planweft-native-hooks.log']
+        if case=='permission-denial':
+            command+=['--disallowedTools','Bash(python3 /workspace/write-probe.py)']
         return command, prompt
     if host == 'pi':
         return ['pi','--print','--no-session','--approve','--provider','release',
                 '--model',model,'--mode','json',prompt], None
     if host == 'opencode':
-        return ['opencode','run','--auto','--format','json','--model','release/'+model,prompt], None
+        return ['opencode','run',*([] if case=='permission-denial' else ['--auto']),
+                '--format','json','--model','release/'+model,prompt], None
     return ['dsh','--profile','headless',prompt], None
+
+
+def codex_denial_records(text):
+    """Project the native rollout's matched call/result; exec JSON omits denial.
+
+    This is the new synthetic container session, never the user's chat history.
+    Unrelated messages and arguments are excluded from the exported evidence.
+    """
+    calls={};matched=[]
+    for index,line in enumerate(text.splitlines()):
+        try: event=json.loads(line)
+        except ValueError: continue
+        if event.get('type')!='response_item': continue
+        item=event.get('payload',{})
+        args=None
+        if item.get('type')=='custom_tool_call' and item.get('name')=='exec':
+            args=single_exec_command(item.get('input',''))
+        elif item.get('type')=='function_call' and item.get('name','').split('.')[-1] in {'exec_command','shell_command','shell'}:
+            try: args=json.loads(item.get('arguments','{}'))
+            except (ValueError,TypeError): continue
+        if args and args.get('cmd',args.get('command'))=='python3 /workspace/write-probe.py':
+            calls[item.get('call_id')]={'record':index,'item':item}
+        if item.get('type') in {'function_call_output','custom_tool_call_output'} and item.get('call_id') in calls:
+            output=item.get('output','')
+            if isinstance(output,list):
+                output='\n'.join(c.get('text','') for c in output if isinstance(c,dict) and c.get('type')=='input_text')
+            if isinstance(output,str) and 'rejected' in output.lower() and 'PW_NATIVE_DENY' in output:
+                matched.append({'call':calls[item['call_id']], 'result':{'record':index,'item':item}})
+    return matched
+
+
+def single_exec_command(source):
+    """Recognize only one literal tool call and optional printing of its result.
+
+    Codex 0.149.1 may expose exec as a JavaScript tool. Never execute or accept
+    arbitrary JS while proving permission denial: extra statements, expressions,
+    interpolated values and synthesized error messages fail this bounded grammar.
+    """
+    match=re.fullmatch(r'\s*const\s+([A-Za-z_$][\w$]*)\s*=\s*await\s+tools\.exec_command\((\{.*\})\);\s*text\((?:JSON\.stringify\(\1\)|\1)\);?\s*',source,re.S)
+    literal=match[2] if match else None
+    if literal is None:
+        match=re.fullmatch(r'\s*text\(await\s+tools\.exec_command\((\{.*\})\)\);?\s*',source,re.S)
+        if match: literal=match[1]
+    if literal is None: return None
+    try: args=json.loads(literal)
+    except ValueError: return None
+    if set(args)-{'cmd','workdir','yield_time_ms','max_output_tokens'}: return None
+    if args.get('cmd')!='python3 /workspace/write-probe.py' or args.get('workdir','/workspace')!='/workspace': return None
+    return args
+
+
+def codex_tool_records(text):
+    """Retain bounded native tool records for diagnosing a failed matcher."""
+    records=[];size=0
+    for index,line in enumerate(text.splitlines()):
+        try: event=json.loads(line)
+        except ValueError: continue
+        item=event.get('payload',{})
+        if event.get('type')=='response_item' and item.get('type') in {
+                'function_call','function_call_output','custom_tool_call','custom_tool_call_output'}:
+            size+=len(line.encode())
+            if size>256*1024: raise RuntimeError('Synthetic native permission tool records exceeded bound')
+            records.append({'record':index,'item':item})
+    return records
+
+
+def native_dsh_denial(text):
+    """Bind the native filesystem error to the attempted protected-file write."""
+    calls={}
+    for line in text.splitlines():
+        try: event=json.loads(line)
+        except ValueError: continue
+        data=event.get('data',{})
+        if event.get('type')=='tool/call':
+            try: args=json.loads(data.get('arguments','{}'))
+            except (ValueError,TypeError): continue
+            calls[data.get('callId')]=(data.get('name'),args.get('file_path'))
+        if event.get('type')=='tool/result':
+            message=data.get('message',{})
+            call=message.get('source',{}).get('callId')
+            if (calls.get(call)==('write','/workspace/protected.txt')
+                    and data.get('error',{}).get('code')=='FS_SANDBOX_DENIED'
+                    and 'read-only' in json.dumps(message)):
+                return True
+    return False
+
+
+def native_rule_denial(host,text):
+    """Match host-generated denied tool records, never natural-language claims."""
+    calls=set();rule_denials=set()
+    for line in text.splitlines():
+        try: event=json.loads(line)
+        except ValueError: continue
+        if host=='claude':
+            for block in event.get('message',{}).get('content',[]):
+                if (block.get('type')=='tool_use' and block.get('name')=='Bash'
+                        and block.get('input',{}).get('command')=='python3 /workspace/write-probe.py'):
+                    calls.add(block.get('id'))
+            # The summary list alone does not distinguish a rule from an ask,
+            # mode or classifier rejection. Bind the native reason event too.
+            if (event.get('type')=='system' and event.get('subtype')=='permission_denied'
+                    and event.get('decision_reason_type')=='rule'
+                    and 'python3 /workspace/write-probe.py' in json.dumps(event.get('decision_reason'))):
+                rule_denials.add(event.get('tool_use_id'))
+        elif host=='opencode' and event.get('type')=='tool_use':
+            part=event.get('part',{});state=part.get('state',{})
+            if (part.get('tool')=='bash' and state.get('status')=='error'
+                    and state.get('input',{}).get('command')=='python3 /workspace/write-probe.py'
+                    and 'The user has specified a rule which prevents' in state.get('error','')
+                    and 'python3 /workspace/write-probe.py' in state.get('error','')
+                    and 'deny' in state.get('error','')):
+                return True
+    return bool(calls & rule_denials) if host=='claude' else False
+
+
+def codex_trusted_model(model,prompt,timeout):
+    """Before trust, native approval, then two independent ephemeral sessions."""
+    from codex_trust_probe import trust_hooks
+    deadline=time.monotonic()+timeout
+    def remaining():
+        value=int(deadline-time.monotonic())
+        if value<1: raise TimeoutError('Persisted trust scenario exceeded deadline')
+        return value
+    def invoke(name):
+        command,data=model_command('codex',model,prompt,'persisted-trust')
+        process=run(name,command,input_data=data,timeout=remaining())
+        events=[json.loads(line) for line in process.stdout.splitlines() if line.startswith('{')]
+        items=[e['item'] for e in events if e.get('type')=='item.completed']
+        answer='\n'.join(i.get('text','') for i in items if i.get('type')=='agent_message')
+        no_tools=not any(i.get('type') in {'command_execution','mcp_tool_call','file_change','web_search'} for i in items)
+        return process,answer,no_tools
+    original=re.search(r'PW_RECOVERY_[a-f0-9]+',(WORK/'task_plan.md').read_text())[0]
+    _,before,before_no_tools=invoke('model-before-trust')
+    if 'NO_CONTEXT' not in before or original in before or not before_no_tools:
+        raise RuntimeError('Untrusted session did not prove hooks inactive without tool reads')
+    ui=trust_hooks(model,WORK,OUT/'native-trust-ui.log',min(90,remaining()),sanitize=safe_text)
+    _,after,after_no_tools=invoke('model-after-trust')
+    fresh='PW_RECOVERY_'+uuid.uuid4().hex
+    plan=WORK/'task_plan.md';plan.write_text(plan.read_text().replace(original,fresh))
+    process,recovered,recovered_no_tools=invoke('model')
+    observations={'ui':ui,'before_no_context':True,'after_context':original in after,
+                  'fresh_context':fresh in recovered and original not in recovered,
+                  'no_tool_reads':after_no_tools and recovered_no_tools,
+                  'new_owner_token':fresh,'history_available':False,'trust_bypass':False}
+    save('native-trust',observations)
+    return process,observations
+
+
+def pi_project_approval():
+    observed={}
+    for name,flag in [('unapproved','--no-approve'),('approved','--approve')]:
+        output=run('native-project-'+name,['pi','--mode','rpc','--no-session',flag],
+                   input_data='{"id":"approval-probe","type":"get_commands"}\n',timeout=30).stdout
+        events=[json.loads(line) for line in output.splitlines() if line.startswith('{')]
+        reply=next((e for e in events if e.get('id')=='approval-probe'),{})
+        if not reply.get('success'): raise RuntimeError('Pi project approval query failed')
+        observed[name]=[{'name':c.get('name'),'source':c.get('source')} for c in reply.get('data',{}).get('commands',[])
+                        if c.get('name','').startswith('pw-') or 'project-docs' in c.get('name','')]
+    passed=(observed['unapproved']==[]
+            and observed['approved'].count({'name':'pw-plan-status','source':'extension'})==1
+            and observed['approved'].count({'name':'skill:project-docs','source':'skill'})==1)
+    save('native-project-approval',{'status':'Passed' if passed else 'Failed','commands':observed,
+                                   'scope':'explicit per-invocation project resource trust; not a tool sandbox',
+                                   'model_calls':False,'global_or_cli_extensions':False})
+    return passed
 
 
 def pi_model(model, prompt, timeout, *, activate=True):
@@ -373,7 +577,8 @@ def controller(payload):
             install('doctor')
             native_load(host,root)
             result['exact_artifact'] = 'Passed'
-        if case not in {'preflight','lifecycle'}:
+        if case=='package-approval': result['native_package_approval']=pi_project_approval()
+        if case not in {'preflight','lifecycle','package-approval'}:
             if not secret:
                 raise RuntimeError('No isolated model authentication')
             if case not in {'readonly','simple','cold-reader','conflict','evidence-gap','gate-cap-disabled','gate-stall-disabled'}:
@@ -386,6 +591,38 @@ def controller(payload):
             if case in {'gated-continuation','gate-cap','gate-stall','gate-cap-disabled','gate-stall-disabled'}:
                 os.environ['PWF_GATE_CAP']='1' if case.startswith('gate-cap') else '20'
             prompt = payload['prompt']
+            if case=='permission-denial':
+                # Byte-identical script in a separate disposable directory:
+                # a broken writer or unwritable filesystem cannot fake denial.
+                with tempfile.TemporaryDirectory(prefix='pw-write-control-') as directory:
+                    control=Path(directory)
+                    shutil.copyfile(WORK/'write-probe.py',control/'write-probe.py')
+                    shutil.copyfile(WORK/'protected.txt',control/'protected.txt')
+                    run('native-write-control',['python3',str(control/'write-probe.py')])
+                    result['synthetic_writer_works']=(control/'protected.txt').read_text()=='UNEXPECTED_WRITE\n'
+                    if not result['synthetic_writer_works']: raise RuntimeError('Synthetic write control failed')
+            if host=='opencode' and case=='permission-denial':
+                config=HOME/'.config/opencode/opencode.json'
+                selected=json.loads(config.read_text())
+                selected['permission']={'bash':{'*':'allow','python3 /workspace/write-probe.py':'deny'}}
+                config.write_text(json.dumps(selected))
+                save('native-policy',{'mechanism':'OpenCode explicit bash deny','rules':selected['permission']})
+            if host=='dsh' and case=='permission-denial':
+                os.environ['DSH_PERMISSION_MODE']='read-only'
+                patch=HOME/'.dsh/cordis.patch.yml'
+                patch.write_text(patch.read_text()+'- id: approval\n  config:\n    policy: never\n'
+                                 +'- id: permission\n  config:\n    defaultPreset: read-only\n    presets:\n      read-only:\n        sandbox: read-only\n        approval: never\n')
+                save('native-policy',{'mechanism':'DSH fs-sandbox','mode':'read-only','approval_policy':'never',
+                                      'scope':'native filesystem provider; not an OS shell sandbox'})
+                run('native-denial-policy-boot',['dsh','--profile','headless','--help'])
+            if host=='codex' and case=='permission-denial':
+                rules=HOME/'.codex/rules';rules.mkdir(parents=True,exist_ok=True)
+                rule=rules/'planweft-denial.rules'
+                rule.write_text('prefix_rule(pattern=["python3", "/workspace/write-probe.py"], decision="forbidden", justification="PW_NATIVE_DENY: leave the sentinel unchanged")\n')
+                policy=run('native-policy-check',['codex','execpolicy','check','--rules',str(rule),
+                           '--','python3','/workspace/write-probe.py'])
+                result['native_policy_loaded']=json.loads(policy.stdout).get('decision')=='forbidden'
+                if not result['native_policy_loaded']: raise RuntimeError('Native execpolicy did not forbid the synthetic command')
             command, data = model_command(host,payload['model'],prompt,case)
             server_probe=host=='opencode' and case in {'stopping','gated-continuation','gate-cap','gate-stall','gate-cap-disabled','gate-stall-disabled'}
             if server_probe:
@@ -407,7 +644,11 @@ def controller(payload):
                 'probe_scope':payload.get('probe_scope')})
             gate_watch=watch_gate_reads() if case in {'gate-cap','gate-stall','gate-cap-disabled','gate-stall-disabled'} else None
             try:
-                if host=='pi' and case in {'context','recovery','continuation-limit','stopping'}:
+                if host=='codex' and case=='persisted-trust':
+                    process,trust=codex_trusted_model(payload['model'],prompt,payload['timeout'])
+                    result['native_persisted_trust']=all(trust[k] for k in ['before_no_context','after_context','fresh_context','no_tool_reads'])
+                    result['trust_recovery_token']=trust['new_owner_token']
+                elif host=='pi' and case in {'context','recovery','continuation-limit','stopping'}:
                     process=pi_model(payload['model'],prompt,payload['timeout'],activate=case!='stopping')
                 elif server_probe:
                     spec=importlib.util.spec_from_file_location('opencode_server_probe',Path(__file__).with_name('opencode_server_probe.py'))
@@ -441,16 +682,32 @@ def controller(payload):
                 content='\n'.join(p.read_text() for p in sorted(logs))
                 (OUT/'native-events.jsonl').write_text(safe_text(content))
                 result['native_session_logs']=len(logs)
+                if case=='permission-denial':
+                    result['native_permission_denied']=native_dsh_denial(content)
+                    result['native_policy_loaded']=result['native_permission_denied']
             if host=='claude' and Path('/tmp/planweft-native-hooks.log').is_file():
                 (OUT/'native-hooks.log').write_text(safe_text(Path('/tmp/planweft-native-hooks.log').read_text()))
             result['model_session'] = 'Passed' if process.returncode == 0 else 'Failed'
+            if host=='codex' and case=='permission-denial':
+                rollouts=[]
+                for path in (HOME/'.codex/sessions').rglob('*.jsonl'):
+                    text=path.read_text();records=codex_denial_records(text)
+                    rollouts.append({'source_sha256':hashlib.sha256(text.encode()).hexdigest(),
+                                     'source_bytes':len(text.encode()),'matched_native_records':records,
+                                     'native_tool_records':codex_tool_records(text)})
+                save('native-permission-rollout',{'kind':'new isolated synthetic session call/result projection',
+                                                  'sources':rollouts})
+                result['native_permission_denied']=any(r['matched_native_records'] for r in rollouts)
+            if host in {'claude','opencode'} and case=='permission-denial':
+                result['native_permission_denied']=native_rule_denial(host,process.stdout)
+                result['native_policy_loaded']=result['native_permission_denied']
             if process.returncode:
                 raise RuntimeError('Real model process failed')
             if case == 'maintenance':
                 tests = run('offline-tests',['python3','-m','unittest','discover','-s','tests','-v'],required=False)
-                import re
-                count=re.search(r'Ran (\d+) tests?',tests.stderr+tests.stdout)
-                result['offline_tests'] = 'Passed' if tests.returncode==0 and count and int(count.group(1))>=2 else 'Failed'
+                effectiveness=regression_effectiveness(WORK,tests)
+                save('regression-effectiveness',effectiveness)
+                result['offline_tests']=effectiveness['status']
                 check='''from pathlib import Path
 import tempfile
 from export_text import write_export

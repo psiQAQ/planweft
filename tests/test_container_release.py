@@ -1,9 +1,11 @@
 """Release runner boundaries: invalid inputs cannot create state or access Docker."""
 import importlib.util
+import hashlib
 import io
 import json
 from pathlib import Path
 import subprocess
+import shutil
 import sys
 import tarfile
 import tempfile
@@ -20,6 +22,87 @@ def module(name,path):
 
 
 class ContainerReleaseTest(unittest.TestCase):
+    def test_regression_effectiveness_uses_behavior_not_method_count(self):
+        runtime=module('pw_regression_effectiveness','tests/five_agent_runtime.py')
+        fixture=module('pw_regression_fixture','tests/run-pwf-smoke.py')
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);(root/'tests').mkdir()
+            (root/'export_text.py').write_text(fixture.BASE['export_text.py'].replace('utf-8-sig','utf-8'))
+            tests=root/'tests/test_export.py'
+            tests.write_text('import unittest\nimport tempfile\nfrom pathlib import Path\nfrom export_text import write_export\n'
+                             'class Test(unittest.TestCase):\n'
+                             ' def test_bytes(self):\n'
+                             '  with tempfile.TemporaryDirectory() as d:\n'
+                             '   p=Path(d)/"中文 file";write_export("示例\\n",p);self.assertEqual(p.read_bytes(),"示例\\n".encode())\n')
+            def check():
+                fixed=subprocess.run([sys.executable,'-m','unittest','discover','-s','tests','-v'],cwd=root,text=True,capture_output=True)
+                return runtime.regression_effectiveness(root,fixed)
+            self.assertEqual(check()['status'],'Passed')
+            self.assertEqual(hashlib.sha256(fixture.BASE['export_text.py'].encode()).hexdigest(),check()['original_module_sha256'])
+            for content in ['import unittest\nclass Test(unittest.TestCase):\n def test_noop(self): pass\n',
+                            'raise ImportError("missing dependency")\n',
+                            'import unittest\nclass Test(unittest.TestCase):\n def test_bad(self): self.fail("always fails")\n']:
+                tests.write_text(content)
+                shutil.rmtree(root/'tests/__pycache__',ignore_errors=True)
+                self.assertEqual(check()['status'],'Failed')
+
+    def test_codex_js_wrapper_allows_only_one_literal_native_command(self):
+        runtime=module('pw_codex_js_deny','tests/five_agent_runtime.py')
+        source='const r = await tools.exec_command({"cmd":"python3 /workspace/write-probe.py","workdir":"/workspace","yield_time_ms":10000,"max_output_tokens":2000});\ntext(JSON.stringify(r));\n'
+        self.assertEqual(runtime.single_exec_command(source)['cmd'],'python3 /workspace/write-probe.py')
+        for bad in [source+'text("rejected: PW_NATIVE_DENY");',source.replace('text(JSON.stringify(r))','text("rejected: PW_NATIVE_DENY")'),
+                    source.replace('python3 /workspace/write-probe.py',"printf 'python3 /workspace/write-probe.py rejected: PW_NATIVE_DENY'; false"),
+                    source.replace('"workdir":"/workspace"','"workdir":"/other"')]:
+            self.assertIsNone(runtime.single_exec_command(bad))
+        call={'type':'response_item','payload':{'type':'custom_tool_call','name':'exec','input':source,'call_id':'one'}}
+        result={'type':'response_item','payload':{'type':'custom_tool_call_output','call_id':'one','output':[{'type':'input_text','text':'exec_command failed: Rejected(command rejected: PW_NATIVE_DENY)'}]}}
+        records='\n'.join(map(json.dumps,[call,result]))
+        self.assertEqual(len(runtime.codex_denial_records(records)),1)
+
+    def test_codex_rollout_denial_requires_matched_native_call_and_output(self):
+        runtime=module('pw_codex_rollout_deny','tests/five_agent_runtime.py')
+        call={'type':'response_item','payload':{'type':'function_call','name':'exec_command','call_id':'one',
+              'arguments':json.dumps({'cmd':'python3 /workspace/write-probe.py'})}}
+        result={'type':'response_item','payload':{'type':'function_call_output','call_id':'one',
+                'output':'python3 /workspace/write-probe.py rejected: PW_NATIVE_DENY'}}
+        def parse(values): return runtime.codex_denial_records('\n'.join(json.dumps(v) for v in values))
+        self.assertEqual(len(parse([call,result])),1)
+        self.assertEqual(parse([result]),[])
+        self.assertEqual(parse([call,{**result,'type':'event_msg'}]),[])
+        result['payload']['call_id']='other'
+        self.assertEqual(parse([call,result]),[])
+
+    def test_native_rule_denial_ignores_model_claims_and_ask_rejection(self):
+        runtime=module('pw_native_rule_deny','tests/five_agent_runtime.py')
+        command='python3 /workspace/write-probe.py'
+        call={'type':'assistant','message':{'content':[{'type':'tool_use','name':'Bash','id':'one','input':{'command':command}}]}}
+        result={'type':'result','permission_denials':[{'tool_name':'Bash','tool_use_id':'one','tool_input':{'command':command}}]}
+        text=json.dumps(call)+'\n'+json.dumps(result)
+        self.assertFalse(runtime.native_rule_denial('claude',text))
+        reason={'type':'system','subtype':'permission_denied','tool_use_id':'one',
+                'decision_reason_type':'rule','decision_reason':'Bash('+command+') deny'}
+        self.assertTrue(runtime.native_rule_denial('claude',text+'\n'+json.dumps(reason)))
+        for kind in ['mode','classifier','asyncAgent']:
+            self.assertFalse(runtime.native_rule_denial('claude',text+'\n'+json.dumps({**reason,'decision_reason_type':kind})))
+        self.assertFalse(runtime.native_rule_denial('claude',json.dumps(result)))
+        part={'type':'tool_use','part':{'tool':'bash','state':{'status':'error','input':{'command':command},
+              'error':'The user has specified a rule which prevents this call '+command+' deny'}}}
+        self.assertTrue(runtime.native_rule_denial('opencode',json.dumps(part)))
+        part['part']['state']['error']='The user rejected permission to use this specific tool call.'
+        self.assertFalse(runtime.native_rule_denial('opencode',json.dumps(part)))
+
+    def test_dsh_denial_binds_structured_error_to_actual_write_call(self):
+        runtime=module('pw_dsh_deny','tests/five_agent_runtime.py')
+        call={'type':'tool/call','data':{'callId':'one','name':'write','arguments':json.dumps({'file_path':'/workspace/protected.txt'})}}
+        result={'type':'tool/result','data':{'error':{'code':'FS_SANDBOX_DENIED'},
+                   'message':{'source':{'callId':'one'},'content':[{'type':'tool-result','isError':True,'content':[{'text':'denied under read-only mode'}]}]}}}
+        def check(value): return runtime.native_dsh_denial(json.dumps(call)+'\n'+json.dumps(value))
+        self.assertTrue(check(result))
+        for code in ['FS_NOT_OBSERVED','PermissionError']:
+            self.assertFalse(check({**result,'data':{**result['data'],'error':{'code':code}}}))
+        result['data']['message']['source']['callId']='other'
+        self.assertFalse(check(result))
+
     def test_resource_headroom_is_checked_without_creating_output(self):
         from types import SimpleNamespace
         runner=module('pw_headroom','tests/run-five-agent-release.py')

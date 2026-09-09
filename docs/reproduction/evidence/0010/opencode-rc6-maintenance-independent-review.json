@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "host": "opencode",
+  "version": "0.4.0-rc.6",
+  "npm_sha256": "c531188e46d268048ca0ab559baa358fc70af07277cb0001c521951234525799",
+  "image": "sha256:35d7e7989b6fdbefb83135c647cf3eefffcd843b6a6a2a6b0587ced548efeec1",
+  "cli_version": "1.18.22",
+  "reviewer": "skill_entry_review",
+  "status": "Passed",
+  "scope": "Independent review of RC6 Linux maintenance project snapshots, native tool events and fresh cold-reader response. This is not stable 0.4.0 acceptance.",
+  "evidence_set": "opencode-rc6-maintenance-denial/opencode",
+  "maintenance_semantic": "Passed",
+  "historical_preservation_semantic": "Passed",
+  "cold_reader_accuracy": "Passed with nonblocking citation correction",
+  "original_maintenance_assessment": "Failed; retained unchanged. Sole false assertion: historical_observation_preserved.",
+  "original_cold_reader_assessment": "Passed; mechanical project-unchanged checks alone do not establish semantic accuracy.",
+  "checks": {
+    "actual_skill_read": "Passed: first native tool event invokes skill project-docs and returns the installed Skill contents.",
+    "plan_adoption": "Passed: resolver/status followed by successful named initialization; one task_plan.md; old notes/work.md links to it.",
+    "approved_contract_and_user_changes": "Passed: notes/contract.md and user-note.txt retain their original bytes.",
+    "maintenance_and_validation": "Passed: original BOM reproduced; utf-8-sig changed to utf-8; native unittest reports 3 Passed, independent byte check Passed; guide agrees with approved contract.",
+    "handoff_isolation": "Passed: maintenance after.json equals cold-reader before.json and after.json; independent fresh session receives project files without owner chat, trace, review answers or plugin cache.",
+    "cold_reader_validation_attribution": "Passed: distinguishes recorded checks from its actual rerun of 3 tests and byte check; older September 1 observation remains historical; Windows remains Not Run.",
+    "owner_feedback_required": false
+  },
+  "sessions": {
+    "maintenance": "ses_f7acf7dfdffeZAEPjuHJlMFAD9",
+    "cold_reader": "ses_f7ace2c97ffezbOOsA7VVGdwvA"
+  },
+  "findings": [
+    {
+      "kind": "automated_assertion_false_positive",
+      "status": "Explained, original failure preserved",
+      "details": "notes/work.md wording changes from 历史：2026-09-01 Linux 手工示例 Passed，仅为历史观察，不代表本次验证。 to 历史观察:2026-09-01 Linux 手工示例 Passed,仅为历史记录,不代表后续验证。 The date, platform, manual example, Passed result and historical-only restriction are retained; findings.md line 6 also preserves the original restriction. Exact-string mismatch is not historical data loss."
+    },
+    {
+      "kind": "cold_reader_citation_correction",
+      "severity": "nonblocking",
+      "details": "The cold-reader cites progress.md:21 for the September 1 historical observation. That line records the current September 9 unittest run (3 Passed). Correct sources for the older observation are findings.md:6 and notes/work.md:4. The cold-reader substantive historical/current distinction is accurate; preserve its original response and attach this correction instead of rewriting owner documents."
+    }
+  ],
+  "limitations": [
+    "RC6 evidence does not replace final stable archive verification.",
+    "Windows real execution remains Not Run.",
+    "This review did not launch models or containers and did not modify the tested project or raw evidence."
+  ],
+  "artifacts": [
+    {
+      "path": "maintenance/assessment.json",
+      "sha256": "5c59586d6b0c9eab3a530264acc36cdfc27b82fcf6869892c53e758c16ceb246"
+    },
+    {
+      "path": "maintenance/before.json",
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    {
+      "path": "maintenance/after.json",
+      "sha256": "ccba2afbab448bd59512928f1a6d0b7ae32263edb03e40b717e0abb17a10c220"
+    },
+    {
+      "path": "maintenance/raw/model.stdout",
+      "sha256": "b6c5408876b9c1ff1ba648f5392b2c956245acc94f6b57d58c186bcbf26595f4"
+    },
+    {
+      "path": "cold-reader/assessment.json",
+      "sha256": "b7998a94ab98135265d8a80e8997e2db80a4075e7bf5b6df20c274c3e06d56da"
+    },
+    {
+      "path": "cold-reader/before.json",
+      "sha256": "ccba2afbab448bd59512928f1a6d0b7ae32263edb03e40b717e0abb17a10c220"
+    },
+    {
+      "path": "cold-reader/after.json",
+      "sha256": "ccba2afbab448bd59512928f1a6d0b7ae32263edb03e40b717e0abb17a10c220"
+    },
+    {
+      "path": "cold-reader/raw/model.stdout",
+      "sha256": "07f68799bf37f05e9e60b8a633fd884752f309cd3ccfda84b56de58167717c93"
+    }
+  ]
+}

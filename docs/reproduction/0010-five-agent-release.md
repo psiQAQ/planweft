@@ -212,3 +212,16 @@ RC6 从干净源码 `36dfe13cd03f48cbb74698c8c282732d13d19780` 冻结，[三系�
 最终准确 RC6 的 Codex 六项停止 Passed：普通停止、gated 续跑、cap/stall 及各自 disabled 对照；固定 Codex 0.149.1、gpt-5.6-terra 与 strace 6.1 派生镜像。容器全部清理、原服务集合保持，原始失败留存。此组使用单次 hook trust bypass，不能计作正常持久信任；最终独立证据审查另行记录。验收器改动不改变 RC6 npm 内容。
 
 [RC6 离线原始失败与修复附件](evidence/0010/rc6-offline-repairs.tar.gz)：11 项，SHA-256 `0c92ff02d9f31f69a6ee8f8cf455c87c8d22f6f43e38284a383369ec67279b44`。manifest 保留原始/公开摘要，私人路径脱敏、归档身份规范化；不包含模型认证或旧聊天。
+
+### RC6 原生权限、持久信任与维护再审查
+
+准确远端 RC6 仍为 `c531188e46d268048ca0ab559baa358fc70af07277cb0001c521951234525799`，本阶段先修验收器，不修改已发布包。
+
+- Codex 原生规则拒绝已实测：固定命令的 `execpolicy check` 为 forbidden；同 call_id 的实际工具调用返回 Rejected；相同写入程序在独立正控制可写，受保护项目字节未变化。只接受严格的原生调用/结果配对，不接受模型自述或拼接的输出。
+- Codex 正常信任实测 Passed：未信任时 NO_CONTEXT；真实 TUI 完成项目/7 项 hooks 信任；无绕过参数的新会话自动收到计划；owner 更新计划 token 后另一个新会话收到新值。前三次失败与调试记录保留；权限拒绝场景单独使用了 hook invocation trust bypass，不能代替这项持久信任。
+- OpenCode 原生 bash deny 和 DSH read-only 文件写入拒绝 Passed。DSH 首次在模型启动前因 read-only/never 与默认 preset 不匹配失败，修正隔离测试配置后观察到原生 `FS_SANDBOX_DENIED`，没有把普通文件错误算作权限拒绝。
+- Pi 原生项目包批准 Passed：未批准时无 PlanWeft 命令，显式批准时为五个 `pw-` 命令及一个主 Skill。这是项目资源批准，不是逐工具沙箱。
+- OpenCode 维护的历史字符串断言误报，经独立审查语义 Passed；冷读核心结论正确，保留其 progress 行号引用错误，审查给出实际 findings/旧记录来源，不改 owner 文档以迎合报告。
+- Codex 维护的 1 项强化字节测试实际 Passed，但旧测试器硬性要求至少 2 项。新测试器改为同一测试在修复实现通过、原始 BOM 实现产生 assertion failure；不以方法数量代替回归敏感性。原自动 Failed 不改写。独立审查另发现真实记录缺陷：progress 初始化 Phase 1 与完成态 task_plan 冲突，findings 初始观察未标修复前；这两项仍为 Failed，需产品模板修复后复验。
+
+原生记录、准确项目快照、冻结执行器以及失败过程归档于 [RC6 native repairs](evidence/0010/rc6-native-repairs.tar.gz)，SHA-256 `f09be91f85f0124309daac756504999829e130dc0c7387664c3e575b4eda7a0d`，1479 项。manifest 分别保留原始和公开脱敏摘要；省略物理项目树和可重建缓存，保留 before/after JSON。此附件不是稳定版验收。OpenCode 已结束场景的两份无挂载、无安装引用的原生 node_modules 共释放 109,580,458 字节，证据和锁文件保留。Claude 官方兼容端点的明确授权仍待答复，未绕过自动审查阻断。
