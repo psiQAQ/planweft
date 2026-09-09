@@ -248,7 +248,20 @@ def main(argv=None):
             residual=subprocess.check_output(['docker','ps','-aq','--filter','label=planweft.run='+run_id],text=True).split()
             final=set(subprocess.check_output(['docker','ps','-aq'],text=True).split())
             report['cleanup'].update({'removed_own_containers':len(remaining),'remaining_own_containers':residual,'original_containers_preserved':baseline<=final})
-            if not residual and baseline<=final: report['cleanup']['status']='Passed'
+            if not residual and baseline<=final:
+                caches={}
+                # Also cover timeouts and malformed controller output, which
+                # can leave this loop before its ordinary per-stage cleanup.
+                for case in ['review-correction','cold-reader']:
+                    work=args.output/case/'project'
+                    if not work.is_dir(): continue
+                    cleanup=runner.cleanup_finished_case(work,run_id+'-'+case)
+                    if not cleanup.get('removed_unreferenced_versions'):
+                        cleanup['retained_cache_note']='No removable version tree proven by an empty owned receipt; referenced or unverified caches are retained.'
+                    caches[case]=cleanup
+                report['cleanup']['stage_caches']=caches
+                if all(item.get('status')=='Passed' for item in caches.values()):
+                    report['cleanup']['status']='Passed'
         except Exception as error:
             report['cleanup']['error_kind']=type(error).__name__
         if report['cleanup']['status']!='Passed': report['status']='Failed'

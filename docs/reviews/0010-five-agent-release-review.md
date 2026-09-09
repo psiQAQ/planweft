@@ -132,3 +132,5 @@ RC5 Codex 实测由 `rc5_independent_review` 独立复核，普通停止/gated �
 [OpenCode 独立结果](../reproduction/evidence/0010/opencode-rc6-maintenance-independent-review.json) 保留历史字符串自动误报和冷读行号错误；维护及冷读核心语义 Passed。Codex 当前维护记录存在实质双状态/观察时点缺陷，不能用回归方法数量纠正将整个维护改判为 Passed。`trace_repair_review` 已确认默认 Shell/PowerShell 初始化内联硬编码 Phase 1 绕过模板附加规则，建议在 overlays 对模板及内联初始化统一修复，保留 PWF task_plan 协议和既有文件跳过行为。
 
 RC6 最新独立结果：[Codex](../reproduction/evidence/0010/codex-rc6-maintenance-independent-review.json)、[Pi](../reproduction/evidence/0010/pi-rc6-maintenance-independent-review.json)、[DSH](../reproduction/evidence/0010/dsh-rc6-maintenance-independent-review.json)。三者功能/冷读与文档语义分别记录；不改原自动结果，不通过重复相同请求选择成功样本。Pi 项目配置禁读违反与 DSH 额外运行时元数据观察都保留实际范围，无凭据或历史正文泄露推断。
+
+RC7 模板独立依据与实现审查：`skill_entry_review` 核查六语言、analytics、Shell/PowerShell here-doc 文字、OpenCode fallback 及原文件保护，未发现阻塞问题；本机 6 Passed / PowerShell 1 Not Run。对反馈执行器发现异常路径漏清无引用缓存的 P2，主 Agent 增加 finally 中确认容器退出后的逐阶段所有权检查，超时/损坏 controller 均保留场景 Failed 但释放可重建版本；独立复跑 13 Passed，P2 闭合。无法证实无引用的缓存记录保留原因，不把部分安装故障当成全量释放。

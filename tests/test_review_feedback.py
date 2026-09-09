@@ -152,6 +152,41 @@ class ReviewFeedbackTest(unittest.TestCase):
             runner.credentials.assert_not_called();docker.assert_not_called()
             self.assertFalse(args.output.exists())
 
+    def test_exception_cleanup_removes_only_proven_unreferenced_cache(self):
+        runner_impl=feedback.load_module('pw_cleanup_real',Path(__file__).with_name('run-five-agent-release.py'))
+        for failure in ['timeout','invalid-controller']:
+            with self.subTest(failure=failure),tempfile.TemporaryDirectory() as temporary:
+                args,files,review=self.fixture(Path(temporary))
+                args.files=files;args.review_data=review;args.assessment_data=feedback.read_json(args.original_assessment)
+                args.image='sha256:'+'a'*64;args.package={'version':'0.4.0-rc.4'}
+                args.model='fake';args.timeout=30;args.direct_provider_config=Path('/not-read')
+                calls=[]
+                def cleanup(project,name):
+                    calls.append(name)
+                    return {'status':'Passed','removed_unreferenced_versions':runner_impl.clean_completed_store(project)}
+                runner=SimpleNamespace(load_fixture_module=lambda:SimpleNamespace(BOUNDARY=''),
+                    resource_preflight=lambda path:{'checked':True},credentials=lambda *a:{},
+                    project_snapshot=lambda fixture,root:{str(p.relative_to(root)):p.read_text() for p in root.rglob('*') if p.is_file()},
+                    cleanup_finished_case=cleanup)
+                def run(command,**kwargs):
+                    stage=args.output/'review-correction';store=stage/'project/.planweft'
+                    (store/'versions/rc').mkdir(parents=True)
+                    (store/'versions/rc/cache').write_text('rebuildable')
+                    (store/'installations.json').write_text('{"agents":{}}')
+                    if failure=='timeout': raise feedback.subprocess.TimeoutExpired(command,30)
+                    (stage/'raw/controller.json').write_text('{invalid')
+                    return SimpleNamespace(returncode=0)
+                with patch.object(feedback,'parse_args',return_value=args),patch.object(feedback,'load_module',return_value=runner), \
+                     patch.object(feedback.subprocess,'check_output',side_effect=lambda c,**k:args.image+'\n' if c[1:3]==['image','inspect'] else ''), \
+                     patch.object(feedback.subprocess,'run',side_effect=run):
+                    self.assertEqual(feedback.main([]),1)
+                self.assertEqual(len(calls),1)
+                self.assertFalse((args.output/'review-correction/project/.planweft/versions').exists())
+                self.assertTrue((args.output/'review-correction/project/.planweft/installations.json').is_file())
+                report=feedback.read_json(args.output/'summary.json')
+                self.assertEqual(report['status'],'Failed')
+                self.assertTrue(report['cleanup']['stage_caches']['review-correction']['removed_unreferenced_versions'])
+
     def test_cleanup_rechecks_own_container_residue(self):
         self._owner_chain(residual=True)
 
