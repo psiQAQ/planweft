@@ -212,3 +212,9 @@ vendor 四文件是导入器产物，dist 与 plugins 由 builder 生成；证�
 ## RC5 Codex 分发路径修复
 
 `build-plugin.py` 的 Codex 专属生成映射根据固定 PWF `.codex/hooks/{stop,resolve-plan-dir,session-start}.sh` 和本仓根 `skills/` 布局修正三处相对路径，原始 standalone 比较树保持不变。固定 [Codex 0.149.1 Stop 源码](https://github.com/openai/codex/blob/rust-v0.149.1/codex-rs/hooks/src/events/stop.rs#L405) 支持 `decision:block`，不能把 RC4 跳过缺失脚本的失败归因为协议不支持。独立包正向/保护回归、原始/迁移对照及真实新归档结果分别记录；来源与行为 review 见 REV-0010。
+
+## RC6 入口与验收修复
+
+- `scripts/build-plugin.py`、`overlays/planweft/entrypoints/`：依据 [Claude Skills 官方说明](https://code.claude.com/docs/en/skills#add-supporting-files) 的入口/按需引用组织及 description 匹配职责，将固定 PWF 手册保存在各完整 Skill 副本内，保留宿主能力与显式历史读取披露。六语言入口是本地维护的任务流程表达，不宣称能保证模型每次自动采用。
+- `tests/gate_process_trace.py`：依据 [clone(2)](https://man7.org/linux/man-pages/man2/clone.2.html) 的 CLONE_FILES/CLONE_FS 共享与复制，以及 [execve(2)](https://man7.org/linux/man-pages/man2/execve.2.html) 的 FD 表解除共享；核对 [Linux v6.12 fs/exec.c](https://github.com/torvalds/linux/blob/v6.12/fs/exec.c)。本地实现用重叠区间和资源读写集合判定归因歧义，是测试采集器，不修改插件 gate。未知返回和截断仍拒绝通过。
+- 历史结果与本次检查区分、schema 2 逐场景门槛、资源检查及已结束缓存清理是本轮用户批准的验收约束；具体实现与反例经独立审查，不宣称来自上游 PWF。

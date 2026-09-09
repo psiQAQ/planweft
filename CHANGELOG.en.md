@@ -2,6 +2,12 @@
 
 # Changelog
 
+## 0.4.0-rc.6 (candidate in development)
+
+- Replace the long main Skill with a concise task workflow and five corresponding language variants; keep the detailed PWF manual inside every complete Skill copy. Preserve automatic matching, read-only scope, explicitly requested written artifacts and old-plan migration boundaries.
+- Distinguish historical verification from checks not repeated by a fresh reader; model revalidation is pending.
+- Repair shared FD/cwd attribution in the acceptance runner; add schema 2 scenario gates, resource preflight and cleanup of owned unreferenced stores after each case. Offline checks do not replace live host evidence.
+
 ## 0.4.0-rc.5 (candidate)
 
 - Fix resource paths for Stop, plan selection and SessionStart in the Codex plugin distribution; preserve the upstream standalone layout.

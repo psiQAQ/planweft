@@ -226,3 +226,9 @@ Pi 的 `/pw-plan-execute` 同时启用 hooks 与未完成计划的续跑，parit
 `/tmp` 可能是内存文件系统。大安装缓存、构建工作目录优先放在有余量的磁盘目录；仅清理确认不再被进程引用的本次可重建依赖/下载缓存，保留准确 tarball、原始失败、源码和日志。`project_snapshot` 在读取前剪枝顶层安装目录，避免把缓存全部载入内存后再过滤；嵌套同名文档仍被核对。模型启动前保存 before 与 In Progress，意外终止不能补写成 Passed。
 
 共享 HOME 原生隔离入口为 `tests/run-project-isolation.py`，显式传入 `--host`、新旧 `--archive`/`--old-archive`、对应 `--sha256`/`--old-sha256` 和新的 `--output`；超时 `--timeout` 默认 240 秒。Claude/Pi/OpenCode 检查 A 旧版本、B 新版本，更新/移除 A 后 B 的来源、版本和内容保持不变；Codex/DSH 检查不支持的项目 scope 在写入前拒绝。全程无模型、关闭 hooks，不作为 hook 去重或模型权限验收。
+
+## RC6 资源与逐场景发布门槛
+
+五宿主入口在访问认证/Docker 前检查 4 GiB 可用内存及输出磁盘 8 GiB 空间，输出应使用磁盘目录（如 `/var/tmp/planweft-validation-new`），避免大型缓存占用 tmpfs。每个模型场景限时 30..600 秒；仍使用 2 CPU、3 GiB 内存且不额外使用 Swap、256 PID。先确认容器已移除，再删除自有 `agents={}` 的未引用版本缓存，保留项目记录、收据、快照和日志；无法确认时停止新场景。
+
+稳定验收使用 acceptance schema 2：每个总项下列出 `observations.scenarios`，逐场景包含 Passed 和摘要绑定的实际附件。准确所需场景由 `scripts/check-release-gate.py:required_scenarios` 定义。旧 schema 1 不放行；当前没有历史稳定 acceptance 需要自动迁移。候选版仍仅允许 next。

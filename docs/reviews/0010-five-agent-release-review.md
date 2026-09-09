@@ -111,3 +111,10 @@ Claude Pro 单变量对照的独立结论见 `claude-rc4-pro-independent-review.
 共享 HOME 入口由 `rc5_independent_review` 只读审查：原生状态和 B 不变证据真实，Pi 相对路径修正符合固定宿主源码。发现 P2：被移除侧仅查安装器收据。已将产出命名改为 `two_project_isolation` 并显式限定卸载核查范围，未将其冒充原生卸载全验证；完整 lifecycle 仍由既有独立入口证明。实际测试使用的旧 runner 保留，最后标签/范围说明修订没有更改原始结果。
 
 RC5 Codex 实测由 `rc5_independent_review` 独立复核，普通停止/gated 与两个 disabled 组 Passed；cap/stall 负对照归因仍 Failed。确认原始日志为同一 turn 内一/两次 assistant 回复，不宣称两个用户 turn 或已捕获 Stop decision。正常持久信任仍未证明。该结论绑定准确包 `f9123657…066069b3`、原 summary `a2bf0919…fab4` 和实际模型日志，详见独立 JSON。
+
+## RC6 修复独立审查（模型复验之前）
+
+- `trace_repair_review` 只读审查停止解析器，并重放两份真实无认证 CLI trace。提出 clone/exec 复制区间和区间中新生线程的漏判反例；实现后 20 项回归包括 close_range UNSHARE。复审未发现阻塞问题，未知 `?` 返回仍不能放行；没有把这两份离线 trace 当作真实模型完成证据。
+- `skill_entry_review` 审查六语言入口、固定上游手册与包内资源，发现明确书面研究产物的授权例外遗漏；已补回六语言。15 平台资源和迁移手册链接检查通过。后续上游回归发现的能力披露与模板导航缺失已修复，未删减原始断言。
+- 资源/schema 2 复审指出：未确认 docker rm 成功便清理版本缓存可能影响仍运行的容器。已增加精确容器名消失检查；Docker 查询失败或容器仍存在时保留缓存并停止新容器，补反例回归。
+- 当前证据：本地 Python 131 项、安装器 28 项、DSH 3 项 Passed；上游迁移 721 Passed / 63 Skipped / 851 subtests。原始固定快照与 RC5 基线字节相同；本轮不将历史 RC5 模型结果作为 RC6 模型通过。
