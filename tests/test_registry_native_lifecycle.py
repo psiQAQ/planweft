@@ -274,4 +274,41 @@ class RegistryNativeTests(unittest.TestCase):
                 runner.verify_native_package(actual, f.packages[NEW])
 
 
+
+class CliBootstrapTest(unittest.TestCase):
+    def test_bootstrap_checks_exact_bytes_and_installs_runtime_dependencies(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as temporary:
+            f=NativeFixture(Path(temporary));archive=f.out/'exact.tgz';archive.write_bytes(b'synthetic archive')
+            digest=hashlib.sha256(archive.read_bytes()).hexdigest();calls=[]
+            def run(label,argv,cwd):
+                calls.append(argv)
+                self.assertIn('--ignore-scripts',argv);self.assertIn('--omit=dev',argv)
+                self.assertIn('--registry=https://registry.npmjs.org',argv)
+                self.assertEqual(argv[-1],str(archive))
+                prefix=Path(argv[argv.index('--prefix')+1])
+                shutil.copytree(f.packages[NEW],prefix/'node_modules/planweft')
+                write(prefix/'node_modules/toml/package.json',{'name':'toml','version':'4.3.0'})
+            actual=runner.bootstrap_cli(NEW,archive,digest,f.packages[NEW],f.out,run)
+            self.assertEqual(actual,f.out/'cli-bootstrap'/NEW/'node_modules/planweft')
+            self.assertNotEqual(actual,f.packages[NEW]);self.assertEqual(len(calls),1)
+            with self.assertRaisesRegex(RuntimeError,'must be new'):
+                runner.bootstrap_cli(NEW,archive,digest,f.packages[NEW],f.out,run)
+            self.assertEqual(len(calls),1)
+
+    def test_bootstrap_rejects_bad_archive_before_install_and_changed_installed_cli(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as temporary:
+            f=NativeFixture(Path(temporary));archive=f.out/'exact.tgz';archive.write_bytes(b'synthetic archive')
+            with patch.object(runner.subprocess,'run') as proc:
+                with self.assertRaisesRegex(RuntimeError,'digest differs'):
+                    runner.bootstrap_cli(NEW,archive,'0'*64,f.packages[NEW],f.out,proc)
+                proc.assert_not_called()
+            def run(label,argv,cwd):
+                prefix=Path(argv[argv.index('--prefix')+1]);shutil.copytree(f.packages[NEW],prefix/'node_modules/planweft')
+                (prefix/'node_modules/planweft/bin/planweft.mjs').write_text('changed installer')
+            with self.assertRaisesRegex(RuntimeError,'Native npm package differs'):
+                runner.bootstrap_cli(NEW,archive,hashlib.sha256(archive.read_bytes()).hexdigest(),f.packages[NEW],f.out,run)
+
+
 if __name__ == '__main__': unittest.main()

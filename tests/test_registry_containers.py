@@ -77,13 +77,17 @@ class RegistryContainerTests(unittest.TestCase):
     def test_only_successful_owned_case_npm_cache_is_removed(self):
         with tempfile.TemporaryDirectory() as temporary:
             case = Path(temporary); cache = case / 'run/npm-cache'; cache.mkdir(parents=True)
+            bootstrap = case / 'run/cli-bootstrap'; bootstrap.mkdir()
+            (bootstrap / 'dependency').write_text('installed temporary CLI dependency')
             (cache / 'rebuildable').write_text('cache')
             (case / 'run/failure-profile').write_text('preserve')
             for passed, removed in [(False, True), (True, False)]:
                 runner.clear_success_cache(case, passed, {'container_removed': removed})
                 self.assertTrue(cache.exists())
+                self.assertTrue(bootstrap.exists())
             self.assertEqual(runner.clear_success_cache(case, True, {'container_removed': True})['status'], 'removed')
             self.assertFalse(cache.exists()); self.assertTrue((case / 'run/failure-profile').exists())
+            self.assertFalse(bootstrap.exists())
 
     def execution(self, root, *, timeout=False, cleanup=True, wrong_binding=False):
         commands = []

@@ -69,6 +69,20 @@ def verify_skill_tree(actual, expected):
         raise RuntimeError('Native Skill is missing, changed, or paired to another version')
 
 
+def bootstrap_cli(version, archive, expected_sha256, expected_package, out, run):
+    """Execute npm-installed CLI bytes, not a dependency-free tar extraction."""
+    if hashlib.sha256(archive.read_bytes()).hexdigest() != expected_sha256:
+        raise RuntimeError('CLI bootstrap archive digest differs')
+    prefix=out/'cli-bootstrap'/version
+    if prefix.exists(): raise RuntimeError('CLI bootstrap destination must be new')
+    run('bootstrap-'+version, ['npm','install','--prefix',str(prefix),
+        '--ignore-scripts','--omit=dev','--no-audit','--no-fund',
+        '--registry=https://registry.npmjs.org',str(archive)], out)
+    root=prefix/'node_modules/planweft'
+    verify_native_package(root,expected_package)
+    return root
+
+
 def pi_commands(project, env, log):
     # RPC discovery invokes no model. EOF alone need not stop the Pi event loop.
     proc = subprocess.Popen(['pi', '--mode', 'rpc', '--no-session', '--approve'],
@@ -157,7 +171,7 @@ def opencode_package_root(profile, config, version):
     return root
 
 
-def direct_npm_lifecycle(host, version, previous, packages, out, profile, env, run):
+def direct_npm_lifecycle(host, version, previous, packages, out, profile, env, run, cli_packages=None):
     """Native package manager/config operations; discovery only, never a model claim."""
     project = out / ('native-' + host); project.mkdir()
     protected = {n: (n + ' approved\r\n').encode() for n in
@@ -175,7 +189,7 @@ def direct_npm_lifecycle(host, version, previous, packages, out, profile, env, r
     current = None
     for label, selected in native_version_steps(version, previous):
         prefix = host + '-npm-' + label
-        cli = packages[selected] / 'bin/planweft.mjs'
+        cli = (cli_packages or packages)[selected] / 'bin/planweft.mjs'
         source = ('npm:' if host == 'pi' else '') + 'planweft@' + selected
         if host == 'pi':
             run(prefix, ['pi', 'install', source, '--local', '--approve'], project)
@@ -305,7 +319,9 @@ def main():
         if hashlib.sha256(archive.read_bytes()).hexdigest()!=args.sha256: raise RuntimeError('Remote artifact digest differs')
         run('npx-help',['npm','exec','--yes','--package=planweft@'+args.version,'--','planweft','--help'])
         extract_package(archive,out)
-        cli=out/'package/bin/planweft.mjs'
+        packages={args.version:out/'package'}
+        cli_packages={args.version:bootstrap_cli(args.version,archive,args.sha256,packages[args.version],out,run)}
+        cli=cli_packages[args.version]/'bin/planweft.mjs'
         previous_cli=None
         if args.previous_version:
             old=out/'previous';old.mkdir()
@@ -313,9 +329,9 @@ def main():
             previous_archive=old/previous['filename']
             if hashlib.sha256(previous_archive.read_bytes()).hexdigest()!=args.previous_sha256: raise RuntimeError('Previous remote artifact digest differs')
             extract_package(previous_archive,old)
-            previous_cli=old/'package/bin/planweft.mjs'
-        packages={args.version:out/'package'}
-        if previous_cli: packages[args.previous_version]=previous_cli.parent.parent
+            packages[args.previous_version]=old/'package'
+            cli_packages[args.previous_version]=bootstrap_cli(args.previous_version,previous_archive,args.previous_sha256,packages[args.previous_version],out,run)
+            previous_cli=cli_packages[args.previous_version]/'bin/planweft.mjs'
         for host in hosts:
             project=out/('项目 '+host);project.mkdir()
             protected={name:(name+' approved\r\n').encode() for name in ['task_plan.md','findings.md','progress.md','requirements.md']}
@@ -388,7 +404,7 @@ def main():
                 summary['native_channels'][host] = {'status': 'In Progress', 'model_sessions': 'Not Run'}
                 save()
                 summary['native_channels'][host] = direct_npm_lifecycle(
-                    host, args.version, args.previous_version, packages, out, profile, env, run)
+                    host, args.version, args.previous_version, packages, out, profile, env, run, cli_packages)
                 save()
         if args.previous_version: summary['remote_cross_version_lifecycle']='Passed'
         summary['status']='Passed'

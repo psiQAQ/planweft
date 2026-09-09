@@ -61,16 +61,17 @@ def cleanup_container(name, token):
 
 
 def clear_success_cache(case, passed, cleanup):
-    cache = case / 'run/npm-cache'
+    caches = [case / 'run/npm-cache', case / 'run/cli-bootstrap']
     if not passed or cleanup.get('container_removed') is not True:
         return {'status': 'preserved', 'reason': 'failed or unverified case'}
-    if cache.is_symlink() or (case / 'run').is_symlink():
+    if any(cache.is_symlink() for cache in caches) or (case / 'run').is_symlink():
         return {'status': 'preserved', 'reason': 'unexpected cache link'}
-    if not cache.exists(): return {'status': 'absent'}
-    if not cache.is_dir(): return {'status': 'preserved', 'reason': 'unexpected cache type'}
-    size = sum(p.stat().st_size for p in cache.rglob('*') if p.is_file() and not p.is_symlink())
-    shutil.rmtree(cache)
-    return {'status': 'removed', 'path': 'run/npm-cache', 'bytes': size}
+    caches = [cache for cache in caches if cache.exists()]
+    if not caches: return {'status': 'absent'}
+    if any(not cache.is_dir() for cache in caches): return {'status': 'preserved', 'reason': 'unexpected cache type'}
+    size = sum(p.stat().st_size for cache in caches for p in cache.rglob('*') if p.is_file() and not p.is_symlink())
+    for cache in caches: shutil.rmtree(cache)
+    return {'status': 'removed', 'paths': [str(cache.relative_to(case)) for cache in caches], 'bytes': size}
 
 
 def parse_args(argv):
