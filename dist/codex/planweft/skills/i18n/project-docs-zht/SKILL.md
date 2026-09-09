@@ -37,7 +37,7 @@ hooks:
           command: "SH=\"\"; for c in \"${PWF_SCRIPT_DIR}/skill-hook.sh\" \"${CLAUDE_SKILL_DIR}/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs-zht/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/plugins/marketplaces/planweft/scripts/skill-hook.sh\"; do [ -f \"$c\" ] && { SH=\"$c\"; break; }; done; [ -n \"$SH\" ] && sh \"$SH\" --event=precompact; exit 0"
 metadata:
 
-  version: "0.4.0-rc.10"
+  version: "0.4.0-rc.11"
 
 disable-model-invocation: true
 ---
@@ -61,6 +61,8 @@ disable-model-invocation: true
 - 有有效的所選計畫：閱讀三份記錄並恢復。
 - 綁定被拒絕或選擇有歧義：寫入前修正，不另建計畫。
 - 既沒有計畫，也沒有待修正綁定，且實作已授權：執行 `bash "<安裝 Skill>/scripts/init-session.sh" "Task Name"` 或文件中的初始化器。檢查實際建立位置，實作前填好記錄；如回傳 `PLAN_ID` 則保留。
+
+實作前，把附實際使用者／專案來源的簡明範圍摘要寫在現有目標段內、前 30 行中：授權對象、禁止的讀取／寫入及驗證限制。包含本次任務的具體指令，不可只摘錄通用專案規則。範圍僅在此維護，不在末尾附錄重複；提醒可能只選取計畫開頭或 Goal。計畫記錄授權來源，本身不授予權限。 對新初始化的計畫，將這一個目標標題規範為 `## Goal`，正文保留原語言，不增加第二目標段。已有受保護標題保持原樣；smart 擷取可能忽略本地化目標，此時讀取完整計畫，不假定提醒保留了範圍。
 
 將本任務動態狀態轉入所選 `task_plan.md`。僅將舊入口的狀態／下一步欄位替換為指向它的相對連結，保留歷史和核准需求。一個動態狀態來源，不雙向同步。
 

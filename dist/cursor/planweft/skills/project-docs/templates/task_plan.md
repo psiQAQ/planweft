@@ -92,7 +92,7 @@ Record each distinct error, the attempt number, and the resolution. Change the a
 
 Keep only fields useful to this task. Link existing approved requirements instead of copying them into a second specification. This selected plan is the single dynamic task-status source.
 
-- Authorized work and constraints: [scope and boundaries]
+- Scope source: keep authorized targets, prohibited reads/writes and verification limits with their actual instruction sources in the existing Goal section within the first 30 lines; do not duplicate live boundaries here.
 - Success criteria and requirement source: [observable result and exact reference]
 - Verification evidence: [progress entry or reproduction record; actual Passed, Failed or Not Run]
 - Stable design records: [affected specification or ADR, only if needed]

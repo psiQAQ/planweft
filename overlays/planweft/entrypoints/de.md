@@ -18,6 +18,8 @@ Lies [Planauswahl](references/plan-selection.md) ([中文](references/plan-selec
 - Abgelehnte Bindung oder mehrdeutige Auswahl: vor Schreibzugriffen korrigieren, keinen anderen Plan anlegen.
 - Weder Plan noch ungeklärte Bindung vorhanden, Implementierung autorisiert: `bash "<installierter Skill>/scripts/init-session.sh" "Task Name"` oder den dokumentierten Initialisierer ausführen. Tatsächlich angelegte Dateien prüfen und vor Implementierung ausfüllen; zurückgegebene `PLAN_ID` behalten.
 
+Vor der Implementierung eine knappe Bereichszusammenfassung mit den tatsächlichen Benutzer-/Projektquellen im bestehenden Zielabschnitt innerhalb der ersten 30 Zeilen festhalten: erlaubte Ziele, verbotene Lese-/Schreibzugriffe und Prüfgrenzen. Die konkreten Aufgabenanweisungen einschließen, nicht nur allgemeine Projektregeln. Diese Zusammenfassung dort einmalig pflegen; Erinnerungen können nur den Plananfang oder Goal auswählen. Der Plan dokumentiert Berechtigungen, er erteilt sie nicht. Bei neu initialisierten Plänen diese eine Überschrift als `## Goal` schreiben und die Sprache im Text beibehalten; kein zweites Ziel anlegen. Geschützte bestehende Überschriften erhalten: Smart-Extraktion kann lokalisierte Ziele auslassen, deshalb dann den vollständigen Plan lesen statt auf Erinnerungen zu vertrauen.
+
 Übertrage den aktuellen Aufgabenstand in `task_plan.md`. Ersetze nur Status/Nächster-Schritt des alten Einstiegs durch einen relativen Link darauf. Bewahre Historie und genehmigte Anforderungen. Eine dynamische Statusquelle, keine bidirektionale Synchronisierung.
 
 ## 3. Implementieren und Beobachtungen festhalten

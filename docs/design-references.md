@@ -235,3 +235,11 @@ vendor 四文件是导入器产物，dist 与 plugins 由 builder 生成；证�
 
 
 RC9 的加载前资源定位与执行证据修复直接依据固定维护任务边界和 RC8 真实工具顺序，而非新增宿主机制。见 [独立加载前审查](reviews/0010-rc8-preload-evidence-review.md)：Skill 正文返回前已提交的工具无法被正文追溯约束；description 提供规则只是新的待验证指导，不宣称强制隔离。原 PWF consent/capability 披露断言保留。已有证据表区分实际执行/历史来源/静态推断；手工 scratch 的归属遵循用户项目范围，框架隐式缓存另属宿主行为，不新增批准层。
+
+## RC11 原生路径与范围恢复
+
+Pi 的实际 `0.84.3` 项目安装将 package source 写为相对 `.pi/settings.json` 的 `../.planweft/...`。RC10 精确包在安装后 doctor 的原始失败与配置字节证明旧绝对字符串豁免不足；本地修复按配置目录解析已验证的自有来源，只豁免一项，保持其他 scope、重复条目及对象额外字段检查。依据与反例见 [独立路径审查](reviews/0010-rc11-pi-relative-review.md)，真实新包验证另行记录。
+
+固定 PWF [inject-plan.py](https://github.com/OthmanAdi/planning-with-files/blob/0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7/scripts/inject-plan.py) 的 PreToolUse 普通视图只取前30行，smart 选择 Goal/Next Step/Current Phase、活跃阶段及部分决定，未选择本地附加的末尾 Scope。RC10 owner 记录也漏掉任务特有范围。将简明且有实际指令来源的范围放入单一目标段，是针对提取契约的本地修复，不改状态格式、快照协议或新增 hook。新初始化的本地化计划只规范一处目标标题；受保护已有标题保持，不能保证 smart 保留时完整重读。见 [独立范围恢复审查](reviews/0010-rc11-scope-recovery-review.md)。
+
+纯函数对照确认末尾遗漏、Goal保留及本地化/混合标题边界；不证明实际模型看到了提醒，也不能补救计划初始化前已发生的宿主配置读取。计划仅记载授权，不把注入的数据提升为权限或人工批准。

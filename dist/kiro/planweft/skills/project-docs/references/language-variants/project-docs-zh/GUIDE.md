@@ -2,7 +2,7 @@
 name: project-docs-zh
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Kiro skill instructions and steering state read selected project planning context; recovery reads project files and timestamps only, not agent transcript stores. It registers no Stop hook and never requests continuation. It never runs commands declared in Markdown; no network upload path. "
 metadata:
-  version: "0.4.0-rc.10"
+  version: "0.4.0-rc.11"
 ---
 
 # 项目文档与任务规划
@@ -24,6 +24,8 @@ metadata:
 - 有有效的所选计划：读取三份记录并恢复。
 - 绑定被拒绝或选择有歧义：写入前纠正，不另建计划。
 - 既没有计划，也没有待纠正绑定，且实施已授权：运行 `bash "<安装 Skill>/scripts/init-session.sh" "Task Name"` 或文档中的初始化器。检查实际创建位置，实施前填好记录；如返回 `PLAN_ID` 则保留。
+
+实施前，把带实际用户／项目来源的简明范围摘要写在现有目标段内、前 30 行中：授权对象、禁止的读取／写入和验证限制。包含本次任务的具体指令，不能只摘录通用项目规则。范围只维护在这里，不在末尾附录重复；提醒可能只选取计划开头或 Goal。计划记录授权来源，本身不授予权限。 对新初始化的计划，把这一个目标标题规范为 `## Goal`，正文保留原语言，不增加第二目标段。已有受保护标题保持原样；smart 提取可能忽略本地化目标，此时读取完整计划，不假定提醒保留了范围。
 
 将本任务动态状态转入所选 `task_plan.md`。仅将旧入口的状态／下一步字段替换为指向它的相对链接，保留历史和批准需求。一个动态状态源，不双向同步。
 

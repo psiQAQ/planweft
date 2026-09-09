@@ -36,7 +36,7 @@ hooks:
         - type: command
           command: "SH=\"\"; for c in \"${PWF_SCRIPT_DIR}/skill-hook.sh\" \"${CLAUDE_SKILL_DIR}/scripts/skill-hook.sh\" \"$HOME/.mastracode/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/plugins/marketplaces/planweft/scripts/skill-hook.sh\"; do [ -f \"$c\" ] && { SH=\"$c\"; break; }; done; [ -n \"$SH\" ] && sh \"$SH\" --event=precompact; exit 0"
 metadata:
-  version: "0.4.0-rc.10"
+  version: "0.4.0-rc.11"
 
 ---
 
@@ -59,6 +59,8 @@ Read [plan selection](references/plan-selection.md) ([中文](references/plan-se
 - Valid selected plan: read its three records and resume.
 - Rejected binding or ambiguous selection: correct it before writing; do not create another plan.
 - Neither a plan nor a pending binding exists, and implementation is authorized: run `bash "<installed Skill>/scripts/init-session.sh" "Task Name"`, or the documented initializer. Inspect and fill the files actually created before implementing; retain the returned `PLAN_ID` when provided.
+
+Before implementation, put a concise scope summary with its actual user/project sources in the existing goal section, within the first 30 lines: authorized targets, prohibited reads/writes and verification limits. Include the task-specific instructions, not just generic project rules. Keep that summary there rather than duplicating it in a late appendix; reminders can select only the plan beginning or Goal. The plan records authority; it does not grant it. For a newly initialized plan, normalize that one heading to `## Goal`, retaining its language in the body; never add a second goal. Preserve protected existing headings: smart extraction may omit localized goals, so read the full plan instead of assuming reminders retain the scope.
 
 Transfer this task's live state into the selected `task_plan.md`. Replace only the old entry's status/next-action fields with a relative link to it; preserve history and approved requirements. Keep one dynamic status source, with no bidirectional synchronization.
 

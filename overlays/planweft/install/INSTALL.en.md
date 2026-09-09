@@ -1,6 +1,6 @@
 [简体中文](INSTALL.md) | [English](INSTALL.en.md)
 
-Commands below remain pinned to published RC9. RC10 is under validation and adds duplicate-source checks across known Pi/OpenCode project and user configurations; arbitrary custom loaders or aliases may not be detected. Updates do not automatically remove installations from other channels.
+Commands below remain pinned to RC9. RC10 is published as a candidate, but Pi project-relative native sources cause a doctor false positive; RC11 fixes are in development. Duplicate-source checks cover known project/user configurations, not arbitrary custom loaders or aliases. Updates do not automatically remove other installation channels.
 
 ## Unified installer (0.4.0 candidate)
 

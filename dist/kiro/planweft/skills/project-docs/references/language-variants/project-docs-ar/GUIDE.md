@@ -2,7 +2,7 @@
 name: project-docs-ar
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Kiro skill instructions and steering state read selected project planning context; recovery reads project files and timestamps only, not agent transcript stores. It registers no Stop hook and never requests continuation. It never runs commands declared in Markdown; no network upload path. "
 metadata:
-  version: "0.4.0-rc.10"
+  version: "0.4.0-rc.11"
 ---
 
 # وثائق المشروع وتخطيط المهمة
@@ -24,6 +24,8 @@ metadata:
 - خطة محددة صالحة: اقرأ سجلاتها الثلاثة واستأنفها.
 - ربط مرفوض أو اختيار ملتبس: صححه قبل الكتابة، ولا تنشئ خطة أخرى.
 - لا خطة ولا ربط معلق يحتاج إلى التصحيح، والتنفيذ مصرح به: شغّل `bash "<installed Skill>/scripts/init-session.sh" "Task Name"` أو المُهيّئ الموثق. افحص الملفات التي أُنشئت بالفعل واملأها قبل التنفيذ؛ احتفظ بـ`PLAN_ID` إذا أعيدت.
+
+قبل التنفيذ، سجّل ملخصًا موجزًا للنطاق مع مصادره الفعلية من المستخدم أو المشروع داخل قسم الهدف الموجود، ضمن أول 30 سطرًا: الأهداف المسموح بها والقراءات والكتابات المحظورة وحدود التحقق. ضمّن تعليمات المهمة المحددة، لا القواعد العامة وحدها. احتفظ بالملخص هناك مرة واحدة؛ فقد تختار التذكيرات بداية الخطة أو Goal فقط. الخطة تسجل مصدر الصلاحية ولا تمنحها. في الخطة المهيأة حديثًا، اجعل عنوان هذا القسم الواحد `## Goal` مع إبقاء اللغة في النص؛ لا تضف هدفًا ثانيًا. حافظ على العناوين القائمة المحمية: قد يتجاهل الاستخراج smart الأهداف المترجمة، لذا اقرأ الخطة كاملة ولا تفترض أن التذكير يحتفظ بالنطاق.
 
 انقل حالة هذه المهمة الحالية إلى `task_plan.md`. استبدل فقط حقول الحالة والخطوة التالية في المدخل القديم برابط نسبي إلى الخطة، مع الحفاظ على التاريخ والمتطلبات المعتمدة. مصدر ديناميكي واحد للحالة، دون مزامنة ثنائية الاتجاه.
 

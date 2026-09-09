@@ -36,7 +36,7 @@ hooks:
         - type: command
           command: "SH=\"\"; for c in \"${PWF_SCRIPT_DIR}/skill-hook.sh\" \"${CLAUDE_SKILL_DIR}/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs-es/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/plugins/marketplaces/planweft/scripts/skill-hook.sh\"; do [ -f \"$c\" ] && { SH=\"$c\"; break; }; done; [ -n \"$SH\" ] && sh \"$SH\" --event=precompact; exit 0"
 metadata:
-  version: "0.4.0-rc.10"
+  version: "0.4.0-rc.11"
 disable-model-invocation: true
 ---
 
@@ -59,6 +59,8 @@ Lee [selección del plan](references/plan-selection.md) ([中文](references/pla
 - Plan seleccionado válido: lee sus tres registros y continúa.
 - Selección rechazada o ambigua: corrígela antes de escribir; no crees otro plan.
 - Sin plan ni selección pendiente y con implementación autorizada: ejecuta `bash "<Skill instalado>/scripts/init-session.sh" "Task Name"` o el inicializador documentado. Inspecciona y completa los archivos realmente creados antes de implementar; conserva `PLAN_ID` si se devuelve.
+
+Antes de implementar, registra un resumen breve del alcance y sus fuentes reales del usuario/proyecto en la sección de objetivo existente, dentro de las primeras 30 líneas: destinos autorizados, lecturas/escrituras prohibidas y límites de verificación. Incluye las instrucciones concretas de la tarea, no solo reglas generales. Mantén ese resumen una sola vez allí; los recordatorios pueden seleccionar solo el inicio del plan o Goal. El plan registra la autoridad, no la concede. En planes recién inicializados, normaliza ese único título a `## Goal` y conserva el idioma en el cuerpo; no añadas otro objetivo. Conserva los títulos existentes protegidos: la extracción smart puede omitir objetivos localizados, así que lee el plan completo sin dar por hecho que el recordatorio conserva el alcance.
 
 Transfiere el estado activo de esta tarea a `task_plan.md`. Sustituye solo estado/próxima acción de la entrada anterior por un enlace relativo al plan; conserva historia y requisitos aprobados. Una sola fuente de estado, sin sincronización bidireccional.
 

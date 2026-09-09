@@ -2,7 +2,7 @@
 name: project-docs-es
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
 metadata:
-  version: "0.4.0-rc.10"
+  version: "0.4.0-rc.11"
 ---
 
 # Documentos y planificación del proyecto
@@ -24,6 +24,8 @@ Lee [selección del plan](references/plan-selection.md) ([中文](references/pla
 - Plan seleccionado válido: lee sus tres registros y continúa.
 - Selección rechazada o ambigua: corrígela antes de escribir; no crees otro plan.
 - Sin plan ni selección pendiente y con implementación autorizada: ejecuta `bash "<Skill instalado>/scripts/init-session.sh" "Task Name"` o el inicializador documentado. Inspecciona y completa los archivos realmente creados antes de implementar; conserva `PLAN_ID` si se devuelve.
+
+Antes de implementar, registra un resumen breve del alcance y sus fuentes reales del usuario/proyecto en la sección de objetivo existente, dentro de las primeras 30 líneas: destinos autorizados, lecturas/escrituras prohibidas y límites de verificación. Incluye las instrucciones concretas de la tarea, no solo reglas generales. Mantén ese resumen una sola vez allí; los recordatorios pueden seleccionar solo el inicio del plan o Goal. El plan registra la autoridad, no la concede. En planes recién inicializados, normaliza ese único título a `## Goal` y conserva el idioma en el cuerpo; no añadas otro objetivo. Conserva los títulos existentes protegidos: la extracción smart puede omitir objetivos localizados, así que lee el plan completo sin dar por hecho que el recordatorio conserva el alcance.
 
 Transfiere el estado activo de esta tarea a `task_plan.md`. Sustituye solo estado/próxima acción de la entrada anterior por un enlace relativo al plan; conserva historia y requisitos aprobados. Una sola fuente de estado, sin sincronización bidireccional.
 
