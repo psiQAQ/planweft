@@ -681,6 +681,22 @@ def controller(payload):
                     save('model',{'argv':command,'exit_code':process.returncode,
                         'stdout_format':'Agent messages projected from native app-server; full notifications in reminder-protocol.jsonl',
                         'completion':'two native turns in one thread; harness closes server afterward'})
+                elif host=='claude' and case=='reminder-collection':
+                    from claude_reminder_probe import run_probe
+                    native=Path(json.loads((OUT/'installed-content.json').read_text())['native_root'])
+                    process,observation=run_probe(payload['model'],WORK,OUT,package,native,payload['timeout'],safe_text,
+                        plan_dir=WORK,private_dir=Path('/tmp'))
+                    save('model-invocation',{'argv':process.args,'fresh_session':True,'case':case,
+                        'plugin_installed':True,'external_memory':'direct-provider; no MemoryProxy or identity headers',
+                        'transport':'native stream-json; same process two serial turns',
+                        'planning_disabled':os.environ.get('PLANNING_DISABLED')=='1','diagnostic_only':True})
+                    result.update(reminder_collection=observation.get('collection_status'),
+                        reminder_deduplication='Not Run',diagnostic_only=True)
+                    for stream,suffix in [('stdout','native.stdout.jsonl'),('stderr','native.stderr')]:
+                        source=OUT/('claude-reminder-'+suffix)
+                        if source.is_file(): (OUT/('model.'+stream)).write_bytes(source.read_bytes())
+                    save('model',{'argv':process.args,'exit_code':process.returncode,
+                        'completion':'Diagnostic collection only; not reminder gate acceptance'})
                 elif host=='codex' and case=='persisted-trust':
                     process,trust=codex_trusted_model(payload['model'],prompt,payload['timeout'])
                     result['native_persisted_trust']=all(trust[k] for k in ['before_no_context','after_context','fresh_context','no_tool_reads'])

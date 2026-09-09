@@ -40,6 +40,19 @@ class ContainerReleaseTest(unittest.TestCase):
         self.assertEqual(runner.scenario_payload(args,'codex','maintenance','synthetic',secret)['secret'],secret)
         self.assertEqual(secret,{'api_key':'synthetic-never-forward'})
 
+    def test_claude_collection_never_satisfies_release_gate(self):
+        runner=module('pw_claude_collection','tests/run-five-agent-release.py')
+        for success in [True,False]:
+            result=runner.reminder_collection_assessment({'collection_completed':success,'no_errors':True})
+            self.assertEqual(result['status'],'Not Run' if success else 'Failed')
+            self.assertEqual(result['reminder_deduplication'],'Not Run')
+            self.assertTrue(result['diagnostic_only'])
+        with patch.object(runner,'resource_preflight') as resources,patch.object(Path,'is_file') as files:
+            with self.assertRaises(SystemExit):
+                runner.parse_args(['--host','codex','--cases','reminder-collection',
+                                   '--archive','absent.tgz','--output','absent'])
+            resources.assert_not_called();files.assert_not_called()
+
     def test_codex_projection_omits_provider_and_unknown_registration_fields(self):
         runtime=module('pw_codex_projection','tests/five_agent_runtime.py')
         with tempfile.TemporaryDirectory() as temporary:

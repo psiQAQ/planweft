@@ -25,7 +25,7 @@ HOSTS = ('codex','claude','pi','opencode','dsh')
 CASES = ('preflight','lifecycle','skill-loading','context','recovery','maintenance',
          'cold-reader','readonly','simple','untrusted','conflict','evidence-gap',
          'stopping','gated-continuation','gate-cap','gate-stall','continuation-limit',
-         'gate-cap-disabled','gate-stall-disabled','permission-denial','persisted-trust','package-approval','reminder-dedup')
+         'gate-cap-disabled','gate-stall-disabled','permission-denial','persisted-trust','package-approval','reminder-dedup','reminder-collection')
 NO_MODEL_CASES={'preflight','lifecycle','package-approval'}
 STOP_CASES = {'stopping','gated-continuation','gate-cap','gate-stall','continuation-limit','gate-cap-disabled','gate-stall-disabled'}
 
@@ -36,6 +36,13 @@ def scenario_payload(args, host, case, prompt, secret):
     return {'host':host, 'case':case, 'secret':None if case in NO_MODEL_CASES else secret,
             'model':args.codex_model if host=='codex' else args.model, 'prompt':prompt,
             'timeout':args.timeout, 'trace_gate_processes':args.trace_gate_processes}
+
+
+def reminder_collection_assessment(assertions):
+    return {'status':'Not Run' if all(assertions.values()) else 'Failed',
+            'diagnostic_only':True, 'collection_status':'Passed' if all(assertions.values()) else 'Failed',
+            'reminder_deduplication':'Not Run',
+            'reason':'Raw Claude collection only; handler-to-tool delivery and empty output are not yet established'}
 
 
 def context_probe_scope(host,case):
@@ -116,6 +123,8 @@ def parse_args(argv=None):
         parser.error('Project package approval is a Pi native scenario')
     if 'reminder-dedup' in args.cases and set(args.host)!={'codex'}:
         parser.error('Native reminder protocol probe currently supports Codex only')
+    if 'reminder-collection' in args.cases and set(args.host)!={'claude'}:
+        parser.error('Reminder collection is a Claude diagnostic, not a release gate')
     if 'pi' in args.host and set(args.cases)&(STOP_CASES-{'stopping','continuation-limit'}):
         parser.error('Pi uses continuation-limit, not shell ledger/cap gates')
     if 'continuation-limit' in args.cases and set(args.host)!={'pi'}:
@@ -327,6 +336,8 @@ def main(argv=None):
     trust_module.write_bytes((ROOT/'tests/codex_trust_probe.py').read_bytes())
     reminder_module=args.output/'codex_reminder_probe.py'
     reminder_module.write_bytes((ROOT/'tests/codex_reminder_probe.py').read_bytes())
+    claude_reminder_module=args.output/'claude_reminder_probe.py'
+    claude_reminder_module.write_bytes((ROOT/'tests/claude_reminder_probe.py').read_bytes())
     digest=hashlib.sha256(args.archive.read_bytes()).hexdigest()
     report={'schema_version':1,'version':args.package['version'],'npm_sha256':digest,
         'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -336,6 +347,7 @@ def main(argv=None):
         'server_module_sha256':hashlib.sha256(server_module.read_bytes()).hexdigest(),
         'trust_module_sha256':hashlib.sha256(trust_module.read_bytes()).hexdigest(),
         'reminder_module_sha256':hashlib.sha256(reminder_module.read_bytes()).hexdigest(),
+        'claude_reminder_module_sha256':hashlib.sha256(claude_reminder_module.read_bytes()).hexdigest(),
         'status':'In Progress','hosts':{},'semantic_review':'Not Run',
         'scope':'Linux amd64 real hosts; exact artifact, no external memory service'}
     report['resource_limits']={'cpus':2,'memory':'3g','memory_swap_total':'3g',
@@ -375,7 +387,7 @@ def main(argv=None):
                 if case=='evidence-gap':
                     files['notes/design-candidate.md']='# Candidate only\n建议加入 SHA-256 内容指纹与写入锁；目前没有实现、试验或来源，本轮只读分析，不得声称已实现。\n'
                 if case in STOP_CASES: files=stop_fixture(case)
-                if case=='reminder-dedup':
+                if case in {'reminder-dedup','reminder-collection'}:
                     files={'task_plan.md':'# Task Plan\n\n## Goal\nCompleted reminder fixture.\n\n### Phase 1: Fixture\n- **Status:** complete\n',
                            'findings.md':'# Findings\nSynthetic fixture only.\n','progress.md':'# Progress\nFixture complete.\n',
                            'reminder-a.txt':'initial\n','reminder-b.txt':'initial\n'}
@@ -418,6 +430,7 @@ def main(argv=None):
                     '--mount',f'type=bind,src={server_module},dst=/runner/opencode_server_probe.py,readonly',
                     '--mount',f'type=bind,src={trust_module},dst=/runner/codex_trust_probe.py,readonly',
                     '--mount',f'type=bind,src={reminder_module},dst=/runner/codex_reminder_probe.py,readonly',
+                    '--mount',f'type=bind,src={claude_reminder_module},dst=/runner/claude_reminder_probe.py,readonly',
                     '-e','HOME=/home/agent','-e','HTTP_PROXY','-e','HTTPS_PROXY','-e','ALL_PROXY',
                     '--workdir','/workspace','--entrypoint','python3',image,'-c',
                     'import sys,json; sys.path.insert(0,"/runner"); import runtime; sys.exit(runtime.controller(json.load(sys.stdin)))']
@@ -462,6 +475,10 @@ def main(argv=None):
                     assertions['native_reminder_deduplication']=result.get('native_reminder_deduplication') is True
                     expected={**before,'reminder-a.txt':'B\n','reminder-b.txt':'B\n'}
                     assertions['only_requested_fixture_edits']=after==expected
+                if case=='reminder-collection':
+                    assertions['collection_completed']=result.get('reminder_collection')=='Passed'
+                    expected={**before,**{f'reminder-{label.lower()}-{n}.txt':f'{label}-{n}\n' for label in ['A','B'] for n in [1,2]}}
+                    assertions['only_requested_fixture_edits']=after==expected
                 if case=='persisted-trust':
                     assertions['native_persisted_trust']=result.get('native_persisted_trust') is True
                     expected=dict(before)
@@ -486,6 +503,8 @@ def main(argv=None):
                 cases[case]={'status':'Passed' if all(assertions.values()) else 'Failed','assertions':assertions,
                     'image':image,'seconds':round(time.monotonic()-started,3),'controller':result,
                     'semantic_review':'Required' if case in {'maintenance','cold-reader','skill-loading'} else 'Not applicable'}
+                if case=='reminder-collection':
+                    cases[case].update(reminder_collection_assessment(assertions))
                 if probe_scope: cases[case]['probe_scope']=probe_scope
                 write_json(base/'assessment.json',cases[case]);write_json(args.output/'summary.json',report)
                 cleanup=cleanup_finished_case(work,name)
