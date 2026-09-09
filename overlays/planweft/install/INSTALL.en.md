@@ -1,5 +1,7 @@
 [简体中文](INSTALL.md) | [English](INSTALL.en.md)
 
+Commands below remain pinned to published RC9. RC10 is under validation and adds duplicate-source checks across known Pi/OpenCode project and user configurations; arbitrary custom loaders or aliases may not be detected. Updates do not automatically remove installations from other channels.
+
 ## Unified installer (0.4.0 candidate)
 
 The only npm package is `planweft`. Run the remote commands below only after the corresponding version is published;

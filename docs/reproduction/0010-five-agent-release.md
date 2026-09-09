@@ -308,3 +308,32 @@ RC9 开发回归：Python 197 Passed、1 Skipped（本机无 PowerShell）、297
 RC8 完整公开附件：[rc8-live-records.tar.gz](evidence/0010/rc8-live-records.tar.gz)，595 个文件、1055189 bytes，SHA-256 `a16db3744d4f624b8291228757005fb029fd2a351016903d3e0f9c7390eb9c60`。包括公开前审计、CI/OIDC、registry proof、五镜像原生生命周期、三个真实维护/冷读原始记录与逐文件原始/公开摘要。三份独立语义 JSON 单列，保留各自判断。
 
 五宿主真实 A/B 夹具均 Passed（Pi 单组，OpenCode/DSH/Claude/Codex 串行组）：新增、修改、删除文件被正确升级/回退，卸载/重装与项目记录保护通过。两份 A/B 均为明确修改的本地夹具，不冒充准确发布归档；实际 A/B SHA 在各 worker summary 中。外层资源限制和失败路径经过独立审查，所有所属容器删除后才清理自有 npm cache。公开附件：[rc8-fixture-delta.tar.gz](evidence/0010/rc8-fixture-delta.tar.gz)，94 个文件、287822 bytes，SHA-256 `62629dca8ff694f5599848cf0ee0137ec1ccae4db4eb792783769d4cb778f9ea`；含执行器/依赖 helper/镜像锁快照和各步骤日志。原始准确 tarball、A/B tarball 与失败证据保留在本地；安装缓存不进入公开附件。
+
+## RC9 准确远端维护与 RC10 修复
+
+RC9 源码 `7646ed8e50335644acf25210622e3b35a9c3289a`；准确 npm SHA-256 `06eb7aa07a7d90761dd2b5727d572849791f0191ba0f660c3ab0040921c5d395`，5,412,758 bytes。[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34343026093) 与 [OIDC](https://github.com/psiQAQ/planweft/actions/runs/34343163686) Passed，真实下载匹配。Claude 官方兼容端点直连已获补充授权并执行，旧授权阻塞仅属历史。
+
+| RC9 宿主 | 自动检查与独立核查 |
+| --- | --- |
+| Claude | 维护唯一计划 Failed；实际首次调用 Skill、随后读取解析/初始化说明，仍未初始化；也实际读取了范围外宿主设置。独立冷读 Passed，不弥补 owner 失败。 |
+| Pi | 自动维护/冷读 Passed；独立发现最终 findings 仍有被后续实验推翻的 BOM 解释。手工 TemporaryDirectory 未记录实际路径，范围未知，不能写成已证实越界或 Passed。 |
+| OpenCode | 历史记录字面断言 Failed，独立历史语义 Passed；实际创建并通配清理项目外固定临时路径，范围 Failed。冷读执行了 Git 检查却宣称没有任何命令级检查，归属 Failed。 |
+| DSH | 历史标点触发自动 Failed，独立历史语义 Passed；实际读取了范围外 DSH 变量名，值均遮蔽，不能夸大为凭据泄露。测试执行时点/命令参数表述仍有精度问题。 |
+
+原始记录、四份独立审查、CI/OIDC、Pi/OpenCode 跨 scope 重复注册基线见 [RC9 附件](evidence/0010/rc9-live-records.tar.gz)：352 项，SHA-256 `56b29de334b2eccaa6e41f920dd7ceeaa241a175973a2056b3a78c3a031b6014`。主 Agent 重算四份审查的 204 项附件摘要；归档保留原始/公开摘要映射、失败与前后项目快照，省略物理安装副本及可重建缓存。所有模型容器串行、结束后移除，基线服务保留。该归档不是稳定版 acceptance。
+
+RC10 将六语言主入口收敛为四步，详细解释器/绑定分支继续引用原有随包选择文档；没有新增自动写文件 hook 或准备调度服务。保留只读不创建也不修改记录、明确禁令与旧权威例外；通用“最小修改”不构成禁令。要求实际复读最终当前断言及更正依据，并准确区分冷读所做检查和未重跑历史。独立源码审查见 [精简入口 review](../reviews/0010-rc10-compact-entry-review.md)，行为效果仍待新准确包复验。
+
+跨 scope 修复及原生基线见 [安装器 review](../reviews/0010-rc10-cross-scope-review.md)：RC9 在已有全局原生加载源时，项目 dry-run 仍成功，Pi/OpenCode 两宿主都复现；未真正安装第二执行链。RC10 拒绝已知路径/配置的外国来源，仍允许已核验自有更新及同版本 OpenCode Skill 配对。离线修复通过不冒充新包真实双执行去重，任意自定义 loader 识别仍有边界。
+
+### Codex 提醒的原生证据与解析更正
+
+使用固定 Codex `rust-v0.149.1` 源码 `ff29a44391deccde0aba0f8390337d7f3c319ea4` 的 app-server 协议，在同一 thread 中发送两次严格串行 user turn。前一轮只有 PreToolUse、无成功 fileChange，目标文件未变；模型 DONE 不算修改或 hook 成功，原 Failed 保留。第二轮启用原始事件并在提示中补充夹具已知全文，这两项变化都记录，不能单独归因 matcher 或采集开关。
+
+第二轮实际四次合法 apply_patch 成功，每次匹配原生 fileChange、调用/结果和 PostToolUse 身份。每轮 context 次数 `[1,0]`，两次真实 raw developer 消息各含一次提醒；仅目标两文件最终为 `B\n`。原始自动报告仍 Failed，因为收集器错误拒绝首次 turn/started 后、任何 user reset/tool 之前的初始 SessionStart。修正仅允许这一完整初始生命周期，并拒绝中途/重复/不完整、身份或状态改变等事件。20 项正负测试 Passed。
+
+独立 reviewer 使用原始协议与修正后 parser 重算，派生去重语义 Passed；原 assessment/observation 未改，修复后准确包仍须新验收。review SHA-256 `76a930eb0c96611c48741871ec34951491d2e88878fc057f9e3c938b1abcadc4`，parser `d75e90cc078ebf80bca3445f42d597019035b910ea021a31c0eba7bb13b15b91`。主 Agent 重算其 12 项原始附件摘要。见 [两轮协议、固定官方源码和独立审查](evidence/0010/rc9-codex-reminder.tar.gz)：124 项，SHA-256 `c2c4fec6a72989fee1c64192c6aa1b87a45d4e724390bbffdc66b7946bf23d6f`。
+
+RC10 开发回归：Python 219 tests Passed / 1 skipped，最终初始 SessionStart 守卫另以 20 tests 复验 Passed；安装器 64 tests、DSH shell 3 tests Passed。迁移上游 721 passed / 63 skipped / 851 subtests passed；固定原始上游未修改，既有基线保留。本次编译一致性、目录一致性 Passed；尚无 RC10 三系统 CI 或准确包模型结果。见 [开发日志](evidence/0010/rc10-development-regressions.tar.gz)，SHA-256 `327146c993583d4dfc01d3ed0f0f16c4ec5c20bd361072f3384533dcdb0b64be`。
+
+公开前审计发现初稿附件误含 run/tmp 的 Node 编译缓存并命中私钥格式标记；已知认证值无命中。缓存没有证据职责，导出器排除 tmp 后保留 352 项有效文件及全部 204 项审查依据，修正尚未公开的末次证据提交。原始模型失败和本地审计失败继续保留，不用格式标记推断凭据泄露。

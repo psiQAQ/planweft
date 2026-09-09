@@ -2,7 +2,13 @@
 
 # Changelog
 
-## 0.4.0-rc.9 — in development
+## 0.4.0-rc.10 — in development
+
+- Compact the six-language entry into four steps while preserving read-only, explicit restrictions and one live status source; load selection details on demand and re-read corrected claims.
+- Reject cross-scope Pi/OpenCode registrations in known native locations while preserving owned updates, version-matched Skill pairing and path-alias protection.
+- Add native duplicate-registration prevention and Codex reminder timing observations. Retain RC9 semantic failures; stable release gates remain incomplete.
+
+## 0.4.0-rc.9 — published candidate
 
 - Explain resource lookup before the Skill body loads: use the host-provided path without inspecting host settings or installation receipts.
 - Distinguish actual execution, inherited records and static inference; keep manual scratch work in a task-owned directory inside the authorized project.
