@@ -2,7 +2,7 @@
 name: project-docs
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Kiro skill instructions and steering state read selected project planning context; recovery reads project files and timestamps only, not agent transcript stores. It registers no Stop hook and never requests continuation. It never runs commands declared in Markdown; no network upload path. "
 metadata:
-  version: "0.4.0-rc.9"
+  version: "0.4.0-rc.10"
 ---
 
 For an explicitly requested language variant, read its instructions from `references/language-variants/project-docs-<language>/GUIDE.md` relative to this Skill directory (ar, de, es, zh, zht). These are supporting resources of this single entry point. Resolve runtime assets from the installed Skill; keep task records in the user project.
@@ -31,7 +31,7 @@ This installed `project-docs` skill combines the PWF execution workflow below wi
 - Initialization may produce the upstream compact records. Add only useful goal, constraints, acceptance/evidence links and handoff fields from the installed templates; do not replace existing records with blank templates. Preserve `### Phase` headings and literal `**Status:** pending`, `in_progress` or `complete` values used by runtime parsers.
 - Assign one plan owner to update shared status and summaries. Workers use assigned files or per-agent ledgers and report findings to the owner. Independent tasks bind distinct plans or worktrees; the advisory parallel-write guard is not a lock and cannot merge edits.
 
-Before completing a task that initialized its first PWF plan, check the project's existing active-plan entry. Initializing the task-owned PWF plan is adoption for that task: replace the old entry's current-status/next-action fields with a one-way relative Markdown link to the selected `task_plan.md`, while retaining dated history and approved requirements. The old entry must no longer invite future updates to a second current status. Verify the link resolves and that a new reader can follow the project entrypoint to the sole dynamic plan. Do not apply this migration during read-only work or to this plugin's own development repository unless its adoption was separately authorized.
+Before completing a task that initialized its first PWF plan, check the project's existing active-plan entry. Initializing the task-owned PWF plan is adoption for that task: replace the old entry's current-status/next-action fields with a one-way relative Markdown link to the selected `task_plan.md`, while retaining dated history and approved requirements. The old entry must no longer invite future updates to a second current status. Verify the link resolves and that a new reader can follow the project entrypoint to the sole dynamic plan. Do not apply this migration during read-only work or against an explicit project restriction.
 
 ### Promote stable knowledge only when useful
 
