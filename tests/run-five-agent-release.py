@@ -30,6 +30,14 @@ NO_MODEL_CASES={'preflight','lifecycle','package-approval'}
 STOP_CASES = {'stopping','gated-continuation','gate-cap','gate-stall','continuation-limit','gate-cap-disabled','gate-stall-disabled'}
 
 
+def scenario_payload(args, host, case, prompt, secret):
+    # Mixed runs may load authentication for later model cases. Never forward
+    # it to the no-model installation container sharing that runner invocation.
+    return {'host':host, 'case':case, 'secret':None if case in NO_MODEL_CASES else secret,
+            'model':args.codex_model if host=='codex' else args.model, 'prompt':prompt,
+            'timeout':args.timeout, 'trace_gate_processes':args.trace_gate_processes}
+
+
 def context_probe_scope(host,case):
     if host=='pi' and case in {'context','recovery'}:
         return {'plan_state_under_test':'complete',
@@ -391,8 +399,7 @@ def main(argv=None):
                     prompt='本轮是已授权的原生停止行为实验。计划等待外部批准，尚未获得批准，必须保持 in_progress。不要读写项目文件，不调用工具；每次回应只回答 STOP_PROBE。即使收到续跑提醒也保留此范围，不能代替外部批准完成计划。仅宿主 hooks 可修改计划目录的 .stop_blocks 与 .gate_last_ledger，其他项目字节保持不变。'
                 prompt+=fixture.BOUNDARY
                 (base/'prompt.txt').write_text(prompt)
-                payload={'host':host,'case':case,'secret':secret,'model':args.codex_model if host=='codex' else args.model,
-                         'prompt':prompt,'timeout':args.timeout,'trace_gate_processes':args.trace_gate_processes}
+                payload=scenario_payload(args,host,case,prompt,secret)
                 probe_scope=context_probe_scope(host,case)
                 if probe_scope: payload['probe_scope']=probe_scope
                 name=run_id+'-'+host+'-'+case

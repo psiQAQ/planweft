@@ -22,6 +22,38 @@ def module(name,path):
 
 
 class ContainerReleaseTest(unittest.TestCase):
+    def test_mixed_scenario_payload_does_not_forward_auth_to_installation(self):
+        from types import SimpleNamespace
+        runner=module('pw_case_auth','tests/run-five-agent-release.py')
+        runtime=module('pw_case_auth_runtime','tests/five_agent_runtime.py')
+        args=SimpleNamespace(codex_model='test-codex',model='test-model',timeout=600,trace_gate_processes=False)
+        secret={'api_key':'synthetic-never-forward'}
+        for host, case in [('codex','preflight'),('claude','lifecycle'),('pi','package-approval')]:
+            payload=runner.scenario_payload(args,host,case,'synthetic',secret)
+            self.assertNotIn('synthetic-never-forward',json.dumps(payload))
+            # Reject callers bypassing the outer runner before even creating
+            # HOME or invoking the credential preparation function.
+            with patch.object(runtime,'setup_environment') as setup,patch.object(runtime,'prepare_model') as prepare:
+                with self.assertRaisesRegex(ValueError,'No-model scenario'):
+                    runtime.controller({**payload,'secret':secret})
+                setup.assert_not_called();prepare.assert_not_called()
+        self.assertEqual(runner.scenario_payload(args,'codex','maintenance','synthetic',secret)['secret'],secret)
+        self.assertEqual(secret,{'api_key':'synthetic-never-forward'})
+
+    def test_codex_projection_omits_provider_and_unknown_registration_fields(self):
+        runtime=module('pw_codex_projection','tests/five_agent_runtime.py')
+        with tempfile.TemporaryDirectory() as temporary:
+            config=Path(temporary)/'config.toml'
+            raw=b'model="synthetic-model"\n[marketplaces.owned]\nsource="/synthetic/registry"\nsource_type="local"\nextra="omit"\n[plugins."planweft@owned"]\nenabled=true\nextra="omit"\n[model_providers.synthetic]\napi_key="never-export"\n'
+            config.write_bytes(raw)
+            self.assertEqual(runtime.codex_registration_projection(config), {
+                'config_sha256':hashlib.sha256(raw).hexdigest(),
+                'marketplaces':{'owned':{'source':'/synthetic/registry','source_type':'local'}},
+                'plugins':{'planweft@owned':{'enabled':True}}})
+            self.assertEqual(config.read_bytes(),raw)
+            config.write_text('[marketplaces.owned]\nsource="a"\nsource="b"\n')
+            with self.assertRaises(ValueError): runtime.codex_registration_projection(config)
+
     def test_regression_effectiveness_uses_behavior_not_method_count(self):
         runtime=module('pw_regression_effectiveness','tests/five_agent_runtime.py')
         fixture=module('pw_regression_fixture','tests/run-pwf-smoke.py')

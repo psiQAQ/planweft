@@ -535,8 +535,23 @@ def pi_model(model, prompt, timeout, *, activate=True):
     return subprocess.CompletedProcess(command,returncode)
 
 
+def codex_registration_projection(config):
+    """Retain native registration evidence without copying provider settings."""
+    import tomllib
+    data = config.read_bytes()
+    parsed = tomllib.loads(data.decode('utf-8'))
+    return {'config_sha256': hashlib.sha256(data).hexdigest(),
+            'marketplaces': {name: {key: value for key, value in entry.items()
+                                   if key in {'source', 'source_type'}}
+                             for name, entry in parsed.get('marketplaces', {}).items()},
+            'plugins': {name: {key: value for key, value in entry.items() if key == 'enabled'}
+                        for name, entry in parsed.get('plugins', {}).items()}}
+
+
 def controller(payload):
     global SECRETS
+    if payload['case'] in {'preflight','lifecycle','package-approval'} and payload.get('secret'):
+        raise ValueError('No-model scenario must not receive credentials')
     SECRETS=secret_values(payload.get('secret',{}))
     setup_environment()
     host, case = payload['host'], payload['case']
@@ -574,6 +589,16 @@ def controller(payload):
             state = HOME/'.local/share/planweft' if host in {'codex','dsh'} else WORK/'.planweft'
             record = json.loads((state/'installations.json').read_text())['agents'][host]
             root = verify_files(host,package,record)
+            # Continue from the verified persistent npm installation, which
+            # includes declared runtime dependencies. The initial clean add
+            # bootstraps that store from the unmodified exact tarball.
+            cli = ['node', str(root/'bin/planweft.mjs')]
+            if host == 'codex' and case in {'preflight', 'lifecycle'}:
+                # These cases never inject authentication. Capture before
+                # doctor so an installation failure does not lose its cause
+                # when the isolated HOME tmpfs is removed.
+                save('native-registration', codex_registration_projection(HOME/'.codex/config.toml'))
+                run('native-marketplace-list', ['codex', 'plugin', 'marketplace', 'list', '--json'])
             install('doctor')
             native_load(host,root)
             result['exact_artifact'] = 'Passed'
