@@ -48,3 +48,11 @@ RC15 Claude 在两个隔离新会话中完成无工具上下文与恢复检查�
 Codex 补充组的停滞退出与关闭对照自动及独立 Passed，含正常退出、摘要绑定的计数器读取和实际卸载；gated 真实流已产生两次响应，首次 Stop blocked 后反馈注入、末次 Stop completed，但执行器将复用的 hook 配置 ID 误作执行唯一标识，原结果 Failed。执行代次修复通过 51 项测试与独立追加 8 个反例，独立离线重评确认该完整流的实际续跑链；原 controller/container Failed、未执行卸载仍保留，不重复模型试跑；上限场景的旧未完成 syscall 归因缺口仍保留。
 
 [RC15 维护、上下文与反馈附件](evidence/0010/rc15-maintenance-context-feedback.tar.gz) 共 785 项、2,088,619 bytes，SHA-256 `0142850e068bf61359066c33e21c162fe5aef39f7d03aec9a1177bc7f03156ce`。包含四宿主原维护与冷读、Claude 新上下文与恢复、OpenCode 有界修正与冷读、Codex 原失败/中断和补充组、独立审查、离线补评、冻结执行器及测试日志。manifest 分别绑定原始与公开内容摘要。只确认自有容器全部清理；引用关系未证明可删除的版本缓存继续保留，不宣称全部缓存已释放。
+
+## 共享解析契约修复与上限诊断
+
+`master` 检查 [34392198128](https://github.com/psiQAQ/planweft/actions/runs/34392198128) 的三系统安装器 Passed，但 distribution Failed（25 failures、13 errors）：新增 gate 数字诊断把共享 `_events` 返回值从二元改为三元，Claude 消费者仍按二元解包。本地先复现，再仅修正该调用点；独立核查 36 个 Claude 与 30 个 gate 测试通过，未完成调用和未知行仍阻止通过。完整本地 Python 回归 322 项、1 Skipped、无失败；原 CI 与本地失败日志保留，修复后的 CI 另行核对。
+
+一次预先声明的 RC15 上限诊断对照保留两个 Failed。两次原生会话均完整结束、无工具、信任与项目保持、实际卸载已独立确认。正例的脚本摘要和两个 counter 读取归因 Passed；关闭对照仍有 `unresolved syscall result`，pending 数量为零并不消除该错误，不能证明完整无 gate 读取，所以配对门槛 Failed。不混用旧批次的成功负控，不追加无变化模型重试。
+
+[契约修复与诊断附件](evidence/0010/rc15-trace-contract-and-cap-diagnostic.tar.gz) 共 122 项、166,241 bytes，SHA-256 `bba8f4307219c47ae41df69789852e378b7deec5cc5bc1db11d7134dafef97e3`，绑定原失败、修复、完整回归、准确诊断对照、独立审查和清理结果。自有容器与临时合并工作树已移除；源码副本因进程引用核查不完备而保留，未声称释放该副本。
