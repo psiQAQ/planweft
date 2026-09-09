@@ -15,3 +15,7 @@ DSH integration uses @deepseek-ai/dsh-hooks-claude-code and
 @deepseek-ai/dsh-skill-filesystem 0.1.2-rc.1 (MIT) from DeepSeek AI.
 These are npm runtime dependencies with their own notices; their source is
 not copied into the pinned PWF archive.
+
+Codex configuration parsing uses toml 4.3.0 (MIT) by Michelle Tilley,
+https://github.com/BinaryMuse/toml-node. It is an npm runtime dependency;
+its own license accompanies the installed dependency.

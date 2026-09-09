@@ -2,7 +2,7 @@
 name: project-docs-ar
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Its session-end hook reports status only and does not request continuation."
 metadata:
-  version: "0.4.0-rc.12"
+  version: "0.4.0-rc.13"
 ---
 
 # وثائق المشروع وتخطيط المهمة

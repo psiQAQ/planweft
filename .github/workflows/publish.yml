@@ -27,6 +27,7 @@ jobs:
           python-version: '3.14'
       - run: npm install --global npm@11.11.0 --ignore-scripts
       - run: python3 scripts/build-plugin.py --verify
+      - run: npm ci --ignore-scripts --omit=dev --no-audit --no-fund --registry=https://registry.npmjs.org
       - run: node tests/installer.test.mjs
       - run: node tests/dsh-hook-shell.test.mjs
       - run: python3 -m unittest discover -s tests -p 'test_*.py'

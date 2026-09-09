@@ -570,3 +570,136 @@ test('Pi UTF-8 BOM settings accept one owned source and retain duplicate checks'
     }
   });
 });
+
+// Native Codex 0.149.1 registration projection captured before RC12 doctor
+// failed. These offline fixtures retain that structure; they are not host runs.
+async function codexRegistrationFixture(t) {
+  const f=fixture(t), args=['-a','codex','--global'];
+  assert.equal(await f.create(['add',...args]).execute(),0);
+  const owner=f.create(['doctor',...args]), rec=owner.state.agents.codex;
+  const file=path.join(f.home,'.codex/config.toml'); fs.mkdirSync(path.dirname(file),{recursive:true});
+  const registry=path.join(owner.base,'registries','codex');
+  const basic=`[marketplaces.${rec.catalog}]\nsource_type = "local"\nsource = ${JSON.stringify(registry)}\n[plugins.${JSON.stringify(rec.nativeId)}]\nenabled = true\n`;
+  fs.writeFileSync(file,basic);
+  return {...f,args,owner,rec,file,registry,basic};
+}
+
+test('Codex owned marketplace passes doctor and dry update without mutation', async t => {
+  for (const form of ['native','literal','inline','dotted','escaped','crlf']) await t.test(form,async t=>{
+    const f=await codexRegistrationFixture(t);
+    const c=JSON.stringify(f.rec.catalog),p=JSON.stringify(f.rec.nativeId),r=JSON.stringify(f.registry);
+    const variants={native:f.basic, literal:`[marketplaces.'${f.rec.catalog}']\nsource_type='local'\nsource='${f.registry}'\n[plugins.'${f.rec.nativeId}']\nenabled=true\n`,
+      inline:`marketplaces={${c}={source_type="local",source=${r}}}\nplugins={${p}={enabled=true}}\n`,
+      dotted:`marketplaces.${c}.source_type="local"\nmarketplaces.${c}.source=${r}\nplugins.${p}.enabled=true\n`,
+      escaped:f.basic.replace('planweft/registries','planweft\\u002Fregistries'),crlf:f.basic.replaceAll('\n','\r\n')};
+    fs.writeFileSync(f.file,variants[form]);
+    const config=fs.readFileSync(f.file),state=fs.readFileSync(f.owner.statePath),calls=f.calls.length;
+    assert.equal(await f.create(['doctor',...f.args]).execute(),0);
+    assert.equal(await f.create(['update',...f.args,'--dry-run']).execute(),0);
+    assert.deepEqual(fs.readFileSync(f.file),config); assert.deepEqual(fs.readFileSync(f.owner.statePath),state);
+    assert.equal(f.calls.length,calls);
+  });
+});
+
+test('Codex ownership never exempts another source, registration or hook',async t=>{
+  for (const change of ['second-catalog','second-plugin','extra-field','changed-source','changed-type','missing-source','duplicate-key','invalid-utf8','foreign-hook','incomplete-receipt','changed-registry','changed-payload']) await t.test(change,async t=>{
+    const f=await codexRegistrationFixture(t); let content=f.basic;
+    if(change==='second-catalog') content+=`\n[marketplaces.backup]\nsource_type="local"\nsource=${JSON.stringify(f.registry)}\n`;
+    if(change==='second-plugin') content+='\n[plugins."planweft@backup"]\nenabled=true\n';
+    if(change==='extra-field') content=content.replace('[plugins.', 'other_hook="/synthetic/planning-with-files/hook.sh"\n[plugins.');
+    if(change==='changed-source') content=content.replace(JSON.stringify(f.registry),'"/synthetic/other"');
+    if(change==='changed-type') content=content.replace('"local"','"git"');
+    if(change==='missing-source') content=content.replace(/^source = .*\n/m,'');
+    if(change==='duplicate-key') content=content.replace('source_type = "local"','source_type = "local"\nsource_type = "git"');
+    if(change==='foreign-hook') content+='\n[hooks]\ncommand="/synthetic/planning-with-files/hook.sh"\n';
+    if(change==='invalid-utf8') content=Buffer.concat([Buffer.from(content),Buffer.from('# invalid '),Buffer.from([0xff])]);
+    fs.writeFileSync(f.file,content);
+    if(change==='incomplete-receipt') { f.owner.state.agents.codex.steps['marketplace-add']='failed'; f.owner.save(); }
+    if(change==='changed-registry') fs.appendFileSync(path.join(f.registry,'.agents/plugins/marketplace.json'),' ');
+    if(change==='changed-payload') fs.appendFileSync(path.join(f.registry,'payload/version.txt'),'changed');
+    const config=fs.readFileSync(f.file),state=fs.readFileSync(f.owner.statePath),calls=f.calls.length;
+    assert.equal(await f.create(['doctor',...f.args]).execute(),1);
+    await assert.rejects(f.create(['update',...f.args,'--dry-run']).execute());
+    assert.deepEqual(fs.readFileSync(f.file),config); assert.deepEqual(fs.readFileSync(f.owner.statePath),state);
+    assert.equal(f.calls.length,calls);
+  });
+});
+
+test('Codex complete receipts require config, market and enabled plugin',async t=>{
+  for (const missing of ['config','market','plugin','enabled','identity','receipt']) await t.test(missing,async t=>{
+    const f=await codexRegistrationFixture(t);
+    if(missing==='config') fs.unlinkSync(f.file);
+    if(missing==='market') fs.writeFileSync(f.file,`[plugins.${JSON.stringify(f.rec.nativeId)}]\nenabled=true\n`);
+    if(missing==='plugin') fs.writeFileSync(f.file,f.basic.slice(0,f.basic.indexOf('[plugins.')));
+    if(missing==='enabled') fs.writeFileSync(f.file,f.basic.replace('enabled = true','enabled = false'));
+    if(missing==='identity') {f.owner.state.agents.codex.catalog='other';f.owner.save();}
+    if(missing==='receipt') {delete f.owner.state.agents.codex;f.owner.save();}
+    const state=fs.readFileSync(f.owner.statePath),calls=f.calls.length;
+    if(missing!=='receipt') assert.equal(await f.create(['doctor',...f.args]).execute(),1);
+    await assert.rejects(f.create(['update',...f.args,'--dry-run']).execute());
+    assert.deepEqual(fs.readFileSync(f.owner.statePath),state);assert.equal(f.calls.length,calls);
+  });
+});
+
+test('Codex verified marketplace step permits retry after native install failure, not doctor success',async t=>{
+  const f=await codexRegistrationFixture(t);
+  f.owner.state.agents.codex.status='failed';
+  f.owner.state.agents.codex.steps['native-install']='failed';f.owner.save();
+  fs.writeFileSync(f.file,f.basic.slice(0,f.basic.indexOf('[plugins.')));
+  const config=fs.readFileSync(f.file),state=fs.readFileSync(f.owner.statePath),calls=f.calls.length;
+  assert.equal(await f.create(['doctor',...f.args]).execute(),1);
+  assert.equal(await f.create(['update',...f.args,'--dry-run']).execute(),0);
+  assert.deepEqual(fs.readFileSync(f.file),config);assert.deepEqual(fs.readFileSync(f.owner.statePath),state);assert.equal(f.calls.length,calls);
+});
+
+test('Codex custom unbranded storage still rejects a second native catalog using it',async t=>{
+  const f=fixture(t),extra={env:{PLANWEFT_HOME:path.join(f.root,'storage')}};
+  const args=['-a','codex','--global'];
+  assert.equal(await f.create(['add',...args],'0.4.0-rc.1',extra).execute(),0);
+  const owner=f.create(['doctor',...args],'0.4.0-rc.1',extra),rec=owner.state.agents.codex;
+  const file=path.join(f.home,'.codex/config.toml');fs.mkdirSync(path.dirname(file),{recursive:true});
+  const source=JSON.stringify(path.join(owner.base,'registries/codex'));
+  const config=`[marketplaces.${rec.catalog}]\nsource_type="local"\nsource=${source}\n[plugins.${JSON.stringify(rec.nativeId)}]\nenabled=true\n`;
+  fs.writeFileSync(file,config);assert.equal(await owner.execute(),0);
+  fs.appendFileSync(file,`[marketplaces.backup]\nsource_type="local"\nsource=${source}\n`);
+  assert.equal(await f.create(['doctor',...args],'0.4.0-rc.1',extra).execute(),1);
+});
+
+test('Codex decoded hook identities and owned plugin values remain visible',async t=>{
+  for (const tail of ['[hooks]\ncommand="npm:plan\\u0077eft"\n',
+                      '[hooks]\n"planweft@other"=true\n',
+                      '[plugins."extra"]\ncommand="planning-with-files"\n']) await t.test(tail,async t=>{
+    const f=await codexRegistrationFixture(t);fs.appendFileSync(f.file,tail);
+    assert.equal(await f.create(['doctor',...f.args]).execute(),1);
+  });
+  const f=await codexRegistrationFixture(t);fs.appendFileSync(f.file,'command="planning-with-files"\n');
+  assert.equal(await f.create(['doctor',...f.args]).execute(),1);
+});
+
+test('Codex typed values and special keys cannot hide a foreign registration',async t=>{
+  for (const key of ['""','__proto__','constructor']) await t.test(key,async t=>{
+    const f=await codexRegistrationFixture(t);
+    fs.appendFileSync(f.file,`\n[misc]\nbig=9223372036854775807\nfloat=inf\ntime=1979-05-27T07:32:00Z\n${key}="planning-with-files"\n`);
+    assert.equal(await f.create(['doctor',...f.args]).execute(),1);
+  });
+  const f=await codexRegistrationFixture(t);
+  fs.appendFileSync(f.file,'\n[misc]\nbig=9223372036854775807\nfloat=nan\ntime=1979-05-27T07:32:00Z\nlabel="valid �"\n');
+  const before=fs.readFileSync(f.file);
+  assert.equal(await f.create(['doctor',...f.args]).execute(),0);
+  assert.deepEqual(fs.readFileSync(f.file),before);
+});
+
+test('Codex inconsistent completed receipts fail even when config is absent',async t=>{
+  for (const broken of ['marketplace-step','plugin-step','all-steps','record-scope']) await t.test(broken,async t=>{
+    const f=await codexRegistrationFixture(t);fs.unlinkSync(f.file);
+    const rec=f.owner.state.agents.codex;
+    if(broken==='marketplace-step') rec.steps['marketplace-add']='failed';
+    if(broken==='plugin-step') rec.steps['native-install']='failed';
+    if(broken==='all-steps') delete rec.steps;
+    if(broken==='record-scope') rec.scope='project';
+    f.owner.save();const state=fs.readFileSync(f.owner.statePath),calls=f.calls.length;
+    assert.equal(await f.create(['doctor',...f.args]).execute(),1);
+    await assert.rejects(f.create(['update',...f.args,'--dry-run']).execute());
+    assert.deepEqual(fs.readFileSync(f.owner.statePath),state);assert.equal(f.calls.length,calls);
+  });
+});

@@ -1,4 +1,4 @@
-export declare const VERSION = "0.4.0-rc.12";
+export declare const VERSION = "0.4.0-rc.13";
 export declare const BANNER = "[planweft] ACTIVE PLAN \u2014 current state:";
 export declare const REMINDER = "[planweft] Update progress.md with what you just did. If a phase is now complete, update task_plan.md status.";
 export declare const PLANNING_FILES: readonly ["task_plan.md", "findings.md", "progress.md"];
