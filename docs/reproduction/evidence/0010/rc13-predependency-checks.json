@@ -1,0 +1,49 @@
+{
+  "scope": "Uncommitted installer repair development; dependency declaration pending. Not an exact release archive or native acceptance.",
+  "installer": {
+    "passed": 123,
+    "skipped": 1,
+    "dependency_source": "Explicit development-only NODE_PATH to an existing isolated install; not a distributed fallback",
+    "toml_version": "4.3.0",
+    "toml_index_sha256": "a852aecec75bb4bebabe9c0c7e72fb9c76bba5fc243779f8f55cfe941447be1a"
+  },
+  "python": {
+    "tests": 228,
+    "skipped": 1,
+    "failures": 0
+  },
+  "targeted_runtime": {
+    "passed": 21
+  },
+  "build_verify": "Passed",
+  "source_sha256": {
+    "lib/installer.mjs": "36df1782fc41e445800c6e629eec764d4b5f19429e0e8f4b26874bf6d2802f21",
+    "tests/installer.test.mjs": "53475cc30ab840e16ecaeb8488dba00cf219f9dc09dbd292b3d1b786f8437e41",
+    "tests/five_agent_runtime.py": "ac5463b3914011a69919b3c871011476e15a96bfc7fdbb4741d070cb503615da",
+    "tests/run-five-agent-release.py": "253a067d33fe46ac4cdcd957ecb5653e75a5ba7de3fd51bd5581b96a69dd2922",
+    "tests/test_container_release.py": "1a017c1c85c893f0ac147b098460aaa30c2e41528207e90528dbcb2e789d0993"
+  },
+  "logs": {
+    "planweft-rc13-codex-before-direct.log": {
+      "original_sha256": "df96d5312137782244e163f7ec175e343ba1bc336d5ed763113a3687c6417562",
+      "public_sha256": "188025c2d8c8eb9305525a42246aef431bf4a30c907af98f353157d71ac20780"
+    },
+    "planweft-rc13-installer-development-reviewed.log": {
+      "original_sha256": "29ddddaf3fc963f7766c2905753f17d2d566418ba29f06a09882931ef73cdaba",
+      "public_sha256": "29ddddaf3fc963f7766c2905753f17d2d566418ba29f06a09882931ef73cdaba"
+    },
+    "planweft-rc13-runtime-diagnostic-tests.log": {
+      "original_sha256": "2b8cfa9751f5909954e87227c7d9c6cd47df0e0960e7234dccf17db0820be6e1",
+      "public_sha256": "2b8cfa9751f5909954e87227c7d9c6cd47df0e0960e7234dccf17db0820be6e1"
+    },
+    "planweft-rc13-python-predependency.log": {
+      "original_sha256": "d24791dccdf8ce48f596cf386390ff73157d0ebff18c1537df4daa0a9d237f45",
+      "public_sha256": "d24791dccdf8ce48f596cf386390ff73157d0ebff18c1537df4daa0a9d237f45"
+    },
+    "planweft-rc13-predependency-build-verify.log": {
+      "original_sha256": "8ebcc38b65d20bc9966554aa909d5c4722c509e6466f46cb47394f4f557f72e4",
+      "public_sha256": "8ebcc38b65d20bc9966554aa909d5c4722c509e6466f46cb47394f4f557f72e4"
+    }
+  },
+  "ended_cache_bytes_freed": 41875805
+}

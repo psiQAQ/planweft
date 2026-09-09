@@ -1,0 +1,284 @@
+TAP version 13
+# Subtest: Codex owned marketplace passes doctor and dry update without mutation
+    # Subtest: native
+    not ok 1 - native
+      ---
+      duration_ms: 32.569914
+      type: 'test'
+      location: '/home/USER/workspace/program-design/tests/installer.test.mjs:588:87'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        1 !== 0
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 0
+      actual: 1
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:597:12)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:588:79)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: literal
+    not ok 2 - literal
+      ---
+      duration_ms: 13.417862
+      type: 'test'
+      location: '/home/USER/workspace/program-design/tests/installer.test.mjs:588:87'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        1 !== 0
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 0
+      actual: 1
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:597:12)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:588:79)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: inline
+    not ok 3 - inline
+      ---
+      duration_ms: 14.017591
+      type: 'test'
+      location: '/home/USER/workspace/program-design/tests/installer.test.mjs:588:87'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        1 !== 0
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 0
+      actual: 1
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:597:12)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:588:79)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: dotted
+    not ok 4 - dotted
+      ---
+      duration_ms: 13.402218
+      type: 'test'
+      location: '/home/USER/workspace/program-design/tests/installer.test.mjs:588:87'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        1 !== 0
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 0
+      actual: 1
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:597:12)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:588:79)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: escaped
+    not ok 5 - escaped
+      ---
+      duration_ms: 13.390345
+      type: 'test'
+      location: '/home/USER/workspace/program-design/tests/installer.test.mjs:588:87'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        1 !== 0
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 0
+      actual: 1
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:597:12)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:588:79)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: crlf
+    not ok 6 - crlf
+      ---
+      duration_ms: 13.953685
+      type: 'test'
+      location: '/home/USER/workspace/program-design/tests/installer.test.mjs:588:87'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        1 !== 0
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 0
+      actual: 1
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:597:12)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:588:79)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    1..6
+not ok 1 - Codex owned marketplace passes doctor and dry update without mutation
+  ---
+  duration_ms: 102.864179
+  type: 'test'
+  location: '/home/USER/workspace/program-design/tests/installer.test.mjs:587:1'
+  failureType: 'subtestsFailed'
+  error: '6 subtests failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: Codex ownership never exempts another source, registration or hook
+    # Subtest: second-catalog
+    ok 1 - second-catalog
+      ---
+      duration_ms: 18.058963
+      type: 'test'
+      ...
+    # Subtest: second-plugin
+    ok 2 - second-plugin
+      ---
+      duration_ms: 14.078004
+      type: 'test'
+      ...
+    # Subtest: extra-field
+    ok 3 - extra-field
+      ---
+      duration_ms: 14.65622
+      type: 'test'
+      ...
+    # Subtest: changed-source
+    not ok 4 - changed-source
+      ---
+      duration_ms: 13.05748
+      type: 'test'
+      location: '/home/USER/workspace/program-design/tests/installer.test.mjs:605:235'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        0 !== 1
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 1
+      actual: 0
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:621:12)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:605:227)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+      ...
+    # Subtest: changed-type
+    ok 5 - changed-type
+      ---
+      duration_ms: 13.230198
+      type: 'test'
+      ...
+    # Subtest: missing-source
+    not ok 6 - missing-source
+      ---
+      duration_ms: 11.443166
+      type: 'test'
+      location: '/home/USER/workspace/program-design/tests/installer.test.mjs:605:235'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        0 !== 1
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 1
+      actual: 0
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:621:12)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///home/USER/workspace/program-design/tests/installer.test.mjs:605:227)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+      ...
+    # Subtest: duplicate-key
+    ok 7 - duplicate-key
+      ---
+      duration_ms: 12.179644
+      type: 'test'
+      ...
+    # Subtest: invalid-utf8
+    ok 8 - invalid-utf8
+      ---
+      duration_ms: 13.053709
+      type: 'test'
+      ...
+    # Subtest: foreign-hook
+    ok 9 - foreign-hook
+      ---
+      duration_ms: 12.37038
+      type: 'test'
+      ...
+    # Subtest: incomplete-receipt
+    ok 10 - incomplete-receipt
+      ---
+      duration_ms: 12.450698
+      type: 'test'
+      ...
+    # Subtest: changed-registry
+    ok 11 - changed-registry
+      ---
+      duration_ms: 12.528152
+      type: 'test'
+      ...
+    # Subtest: changed-payload
+    ok 12 - changed-payload
+      ---
+      duration_ms: 12.986312
+      type: 'test'
+      ...
+    1..12
+not ok 2 - Codex ownership never exempts another source, registration or hook
+  ---
+  duration_ms: 162.437017
+  type: 'test'
+  location: '/home/USER/workspace/program-design/tests/installer.test.mjs:604:1'
+  failureType: 'subtestsFailed'
+  error: '2 subtests failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..2
+# tests 20
+# suites 0
+# pass 10
+# fail 10
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 288.303256

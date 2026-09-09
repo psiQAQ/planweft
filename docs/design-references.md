@@ -249,3 +249,10 @@ Pi 的实际 `0.84.3` 项目安装将 package source 写为相对 `.pi/settings.
 固定 Pi [v0.84.3 settings-manager](https://github.com/earendil-works/pi/blob/v0.84.3/packages/coding-agent/src/core/settings-manager.ts) 读取/写回已有配置时先调用 [stripBom](https://github.com/earendil-works/pi/blob/v0.84.3/packages/coding-agent/src/utils/text.ts)，仅移除一个开头 U+FEFF。本地安装器据此修正 Pi 自有来源 JSON 解析，不修改通用 JSON、外来配置或重复检测语义；见 [BOM 独立复核](reviews/0010-rc12-pi-bom-review.md)。
 
 OpenCode 原生 `pw_init` 选择面原先只列 autonomous/gated，遗漏省略参数的默认路径。RC11 真实会话在未选择模式时传 autonomous；本地补丁只补选择说明，不改状态与运行逻辑，不声称强制授权。来源、精确 diff 及局限见 [模式入口独立复核](reviews/0010-rc12-opencode-mode-review.md)。完整 Skill 投递后的违规不能再笼统归因于未加载；后续模型行为修复须有新的因果证据，不以重复提示或无变化重试代替。
+
+
+## Codex 自有原生注册识别修复（RC13 准备）
+
+固定 [Codex ff29a443 config schema](https://github.com/openai/codex/blob/ff29a44391deccde0aba0f8390337d7f3c319ea4/codex-rs/core/config.schema.json) 将 `marketplaces.<name>` 表的 `source_type` / `source` 与 `plugins.<name>` 的启用状态分开；RC12 额外无模型诊断的实际 TOML 投影和原生 `marketplace list --json` 与该结构一致。自有目录是持久安装来源，不能仅因路径含 `planweft` 判为第二个插件。
+
+本地选择按解码结构校验安装记录、scope、步骤和 managed registry/payload 摘要，仅豁免精确自有 key/source；保留其他 key/value 扫描及普通别名复用同目录的拒绝。借助锁文件已有 [toml 4.3.0](https://registry.npmjs.org/toml/-/toml-4.3.0.tgz) parser 的实际源码解析 TOML，严格 UTF-8 解码在本地完成；不写回解析对象，不声称其数值精度或语法覆盖等于 Codex 完整配置校验。直接依赖声明仍待确认，当前 NODE_PATH 只用于离线开发验证，不构成分发依赖契约。来源、原始发现与处理见 [独立实施复核](reviews/0010-rc13-codex-registration-review.md)；未执行准确修改归档的真实验收。

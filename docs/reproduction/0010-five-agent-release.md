@@ -374,3 +374,25 @@ RC12 产品改动：Pi 专用 settings parser 只移除一个开头 U+FEFF，匹
 RC12 开发回归[原始日志](evidence/0010/rc12-development-regressions.tar.gz)：29项，52,977字节，SHA-256 `e5ae60c11f09c1770a7f2f3d70840890b34d87552d2021bfec75716fa66c9fde`。包含 RC11 后完成的迁移日志、RC12 原始/迁移 OpenCode 对照、BOM 修复前/后与新worker4项/wrapper5项测试，以及最终分发24项/构建/编译检查；属于源码回归，未绑定尚未冻结的 RC12 npm 包。
 
 Pi 原生 BOM 准确 RC11 对照[两轮原始附件](evidence/0010/rc11-pi-bom-baselines.tar.gz)：63项，6,856,513字节，SHA-256 `f1542a7f673fc084bad33af5c147aa5db708f12b089d996debfd9f8b6f57e4bf`。每轮都确认安装字节/执行位、native list 能识别同一 BOM/CRLF 来源及配置字节保护；doctor/update 均因 JSON BOM 解析 Failed，重复/foreign 未到语义拒绝。第一轮测试器 remove 缺 `--approve-pi-project`，额外卸载 Failed；第二轮补该原生明确确认，remove Passed，产品失败仍保留。最终冻结 worker SHA-256 `6a1e514df462c11fce994f948051adcc38dbf7d7c5066c1979000c0c9aa55f1b`，随后 RC12 必须使用同一入口对照。两轮均无模型/凭据；scope是原生配置兼容，不是模型权限或停止门槛。
+
+
+### RC12 准确归档、Codex 误报与 OpenCode 独立复核
+
+准确归档版本 `0.4.0-rc.12`，SHA-256 `7830a636cf5c36bca51883704abf8feeaf5c5a15f9583b9f8966db48da289dc3`，源码 `17f56d15060cd549ba2797e68cdf53476fbb300b`；**未发布**。三系统 [Check 34357068482](https://github.com/psiQAQ/planweft/actions/runs/34357068482) 及公开审计 Passed。
+
+| 当前准确归档场景 | 实际结果 |
+| --- | --- |
+| Pi 原生 BOM 设置：准确安装、native source、doctor/dry-run、重复拒绝、字节保护、卸载 | 8 项 Passed；与 RC11 最终相同 worker 失败基线分开保存 |
+| Codex preflight / lifecycle | Failed；安装成功、294 文件核对 Passed，doctor 误报自有 marketplace 路径；模型 Not Run |
+| Claude、Pi、OpenCode、DSH preflight / lifecycle | 四宿主均 Passed；不代替模型或跨版本远端证据 |
+| Codex 额外无模型诊断 | 同一未改 RC12 归档仍 Failed；新冻结执行器在 doctor 前导出配置 SHA 及仅 marketplace/plugin 投影，原生 list 一致证实自有路径误报 |
+| OpenCode 维护 | 总体 Failed；修复/回归/批准需求及用户修改保护通过，但记录一致性失败，手工临时目录实际位置未证 |
+| OpenCode 冷读 | Passed（有限制）；12 份项目文件不变，区分历史测试与本次静态检查，少量行号偏差保留 |
+
+OpenCode 原自动历史检查要求整段逐字相等；原历史 Linux 示例 Passed 及“不代表本次验证”仍保留，因此该项属于误报。原 Failed 未被覆盖，也未修改自动断言换取整体通过。真正失败包括旧 notes 的独立当前状态/下一步、findings 仍将旧测试编码写成当前事实、progress 写“无错误”却漏记实际 `File not found`。本次未使用 `pw_init`，Shell 默认初始化无 `.mode`：仅证明未观察到无授权 autonomous，不证明工具描述变更造成该行为。两次手工 `TemporaryDirectory()` 未打印实际目录；不能套用 RC11 已观察到的固定外部路径，也不能后验补造通过证据。
+
+公开附件 [rc12-runtime-records.tar.gz](evidence/0010/rc12-runtime-records.tar.gz)：492 文件，3,756,951 bytes，SHA-256 `f41b004e216865b2bcd3aec09ef84ced64281d6140c0d9faa4cdc14662eba761`。包含五原生组、Pi BOM、Codex 额外诊断、OpenCode 维护/冷读及独立报告、CI/审计/已结束缓存清理记录；75 项独立附件由主 Agent 复核原摘要。逐文件原始/公开摘要分别记录，物理安装缓存与项目副本省略，before/after 文件快照保留。导出有逐文件 16 MiB 和总量 64 MiB 上限，不导出认证或缓存二进制。
+
+后续 Codex 修复按原生结构只豁免经 receipt、scope、完成步骤、registry/payload 摘要和精确 local source 验证的自有字段；其他键和值继续检查，不调用原生命令、不写回 TOML。开发测试使用已有缓存 parser，不代表已交付直接依赖或准确新包。无模型执行器的混合场景认证分流单独修复：即使同一 runner 稍后运行模型，也不向 preflight/lifecycle/package-approval 传入认证，controller 在创建 HOME 前拒绝错误载荷。以上新源码须重新冻结和验收，不能覆盖 RC12 原始结果。
+
+开发回归原始/公开摘要与结果另见 [rc13-predependency-checks.json](evidence/0010/rc13-predependency-checks.json)，包括原失败对照、123 Passed / 1 Skipped 安装器、228 项 Python（1 Skipped、无失败）、21 项执行器及构建一致性。均不是准确新包验收。新增 [资源清理记录](evidence/0010/rc13-ended-rc12-cache-cleanup.json) 保留所核对的自有路径与 41,875,805 bytes 释放量；本轮验收容器均已退出，无全局 prune。

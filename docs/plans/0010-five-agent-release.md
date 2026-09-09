@@ -2,15 +2,16 @@
 
 ## 当前状态（唯一当前入口）
 
-实施中，正式 `0.4.0` 未发布。公开 npm `next` 为 RC10；RC11 未发布，准确本地归档 SHA-256 `53f78985ae94c14ed589a67fb4342303ce14ea4748b825bca405e1bbf172325b`，源码 `438e4a9cb7b3c33cf4abe3472bc232c67b0f1d62`。RC11 三系统 Check `34352955547` Passed，Pi 原生生命周期 Passed，迁移回归 721 Passed / 63 Skipped。`latest` 历史 RC1 不代表稳定版。
+实施中，正式 `0.4.0` 未发布。公开 npm `next` 最近核查为 RC10，`latest` 历史 RC1 不代表稳定版。RC11 和 RC12 均未发布。RC12 准确本地归档 SHA-256 `7830a636cf5c36bca51883704abf8feeaf5c5a15f9583b9f8966db48da289dc3`，冻结源码 `17f56d15060cd549ba2797e68cdf53476fbb300b`；本节之后的开发修复不属于该归档。
 
-- RC11 四个 DeepSeek 宿主完整维护门槛未通过。Claude 完整读取 Skill 后误用旧计划例外，且手工写固定项目外路径；Pi 读取 Skill 前读禁用设置；OpenCode 手工固定外部目录、残留现状错误且未明确选择便启用 autonomous。DSH Skill/Goal/测试/冷读通过，但手工输出临时目录未绑定项目，实际随机位置未证，不能作为完整 scope Passed。
-- 四组原自动评估与独立审查分别保留，352 项审查附件由主 Agent 重核摘要；冷读通过不抵消维护失败。RC10 DSH 原始范围失败补充归档，100 项附件复核。
-- RC12 修复 Pi 原生 UTF-8 BOM 配置解析，独立复现/修复复核通过：5 个定向与安装器全量 81 Passed / 1 Windows 本机 Skipped。OpenCode 原生工具补默认 advisory 与显式模式选择说明，逻辑不变，原始/迁移对照通过；不能声称已修复模型服从问题。
-- Python 221 tests Passed / 1 Skipped；RC12 准确归档冻结、原生 BOM 对照、三系统 CI、公开审计与候选发布待完成。当前使用新原生入口对 RC11 建立 BOM 失败基线，不重打旧包。
-- 原生信任/权限拒绝、各宿主去重与续跑、准确稳定包及远端全门槛仍未完成。不提升 latest 或创建正式 Release。无新因果证据时不重复相同模型任务挑选成功，不追加同类提示冒充修复。
+- RC12 三系统 Check `34357068482`、公开审计 Passed；准确原生 Pi BOM 对照全部 Passed。五平台无模型组中 Claude、Pi、OpenCode、DSH 的 preflight/lifecycle Passed；Codex 两项 Failed，不发布 RC12。
+- Codex 安装及 294 个原生包文件通过，doctor 将自有 registry 路径误认为重复规划注册。独立合成复现后，再用同一未改归档及单独冻结的诊断执行器取得真实原生配置投影，确认同一原因；原失败不改写。诊断无认证、无模型，容器已清理。
+- `fix/rc13-codex-native-source` 准备结构化 TOML 校验与精确自有来源豁免。两个独立发现（完成态步骤缺失、记录 scope 不一致）已修；开发安装器 123 Passed / 1 Windows 本机 Skipped，执行器 21 tests Passed，全量 Python 228 项执行（1 Skipped、无失败），构建一致性 Passed。开发测试显式复用已有缓存中的锁定 parser；将 `toml@4.3.0` 从既有间接依赖声明为直接依赖仍待用户确认，未修改 package.json/lock、未冻结新包或取得新包宿主验收。
+- RC12 OpenCode 维护仍 Failed，冷读 Passed（有限制）；75 项独立审查附件重新核对。历史实际保留，原自动逐字断言 Failed 保留为误报；双重动态状态、旧测试现状描述及漏记 File not found 仍是实质缺陷。手工临时目录实际位置未记录，不推定为固定 `/tmp` 越界，也不标为范围通过。本次使用 Shell 初始化且没有 `.mode`，未调用 `pw_init`，不能声称证明新增工具说明的模型效果。
+- RC11 四宿主维护失败、RC10 原始失败与历史冷读证据均保留。无新因果证据时不重复模型任务挑选成功，不追加同类提示冒充修复。
+- 原生信任/权限拒绝、各宿主去重与续跑、准确稳定包及远端全门槛仍未完成。不提升 latest 或创建正式 Release。待依赖确认、实现复核和准确新包验收后继续；已有发布与模型直连授权不重复询问。
 
-资源：模型/重型容器串行，2 CPU、3 GiB 内存且无额外 Swap、256 PID、单场景600秒；启动前检查4GiB可用RAM和8GiB磁盘。只清理已结束且无引用的本次缓存，保留准确包、失败、项目快照和历史备份，不改其他服务。本仓继续现有文档入口，不做根三文件接管。
+资源：模型/重型容器串行，2 CPU、3 GiB 内存且无额外 Swap、256 PID、单场景600秒；启动前检查4GiB可用RAM和8GiB磁盘。只清理已结束且无引用的本次缓存，保留准确包、失败、项目快照和历史备份，不改其他服务。本次新增清理已归档且无引用的 41,875,805 bytes 解包/临时缓存；保留下一步开发仍引用的 parser。本仓继续现有文档入口，不做根三文件接管。
 
 证据与逐项来源：[REP-0010](../reproduction/0010-five-agent-release.md)、[独立审查](../reviews/0010-five-agent-release-review.md)。
 

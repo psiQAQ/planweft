@@ -1,0 +1,16 @@
+{
+  "status": "Passed",
+  "applied": true,
+  "scope": "Ended, archived rebuildable sources/caches only; installed parser needed by pending development, raw traces, project snapshots, exact archives and credentials retained",
+  "removed": [
+    {
+      "path": "rc12-pi-bom-native/pi/run/source",
+      "bytes": 40491833
+    },
+    {
+      "path": "rc12-pi-bom-native/pi/run/tmp",
+      "bytes": 1383972
+    }
+  ],
+  "bytes": 41875805
+}

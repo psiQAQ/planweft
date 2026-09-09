@@ -1,0 +1,77 @@
+......................................................................................................................................usage: python -m unittest [-h] --host {claude,pi,opencode,codex,dsh}
+                          --archive ARCHIVE --sha256 SHA256
+                          --old-archive OLD_ARCHIVE --old-sha256 OLD_SHA256
+                          --output OUTPUT [--timeout TIMEOUT]
+python -m unittest: error: Archive SHA-256 mismatch
+usage: python -m unittest [-h] --host {claude,pi,opencode,codex,dsh}
+                          --archive ARCHIVE --sha256 SHA256
+                          --old-archive OLD_ARCHIVE --old-sha256 OLD_SHA256
+                          --output OUTPUT [--timeout TIMEOUT]
+python -m unittest: error: Timeout must be 1..600 seconds
+usage: python -m unittest [-h] --host {claude,pi,opencode,codex,dsh}
+                          --archive ARCHIVE --sha256 SHA256
+                          --old-archive OLD_ARCHIVE --old-sha256 OLD_SHA256
+                          --output OUTPUT [--timeout TIMEOUT]
+python -m unittest: error: Timeout must be 1..600 seconds
+usage: python -m unittest [-h] --host {claude,pi,opencode,codex,dsh}
+                          --archive ARCHIVE --sha256 SHA256
+                          --old-archive OLD_ARCHIVE --old-sha256 OLD_SHA256
+                          --output OUTPUT [--timeout TIMEOUT]
+python -m unittest: error: Output must be new and outside checkout
+usage: python -m unittest [-h] --host {claude,pi,opencode,codex,dsh}
+                          --archive ARCHIVE --sha256 SHA256
+                          --old-archive OLD_ARCHIVE --old-sha256 OLD_SHA256
+                          --output OUTPUT [--timeout TIMEOUT]
+python -m unittest: error: Output must be new and outside checkout
+usage: python -m unittest [-h] --host {claude,pi,opencode,codex,dsh}
+                          --archive ARCHIVE --sha256 SHA256
+                          --old-archive OLD_ARCHIVE --old-sha256 OLD_SHA256
+                          --output OUTPUT [--timeout TIMEOUT]
+python -m unittest: error: [Errno 2] No such file or directory: '/tmp/tmpc36twg__/missing'
+usage: python -m unittest [-h] --host {claude,pi,opencode,codex,dsh}
+                          --archive ARCHIVE --sha256 SHA256
+                          --old-archive OLD_ARCHIVE --old-sha256 OLD_SHA256
+                          --output OUTPUT [--timeout TIMEOUT]
+python -m unittest: error: Worker is container-only
+usage: python -m unittest [-h] --host {claude,pi,opencode,codex,dsh}
+                          --archive ARCHIVE --sha256 SHA256
+                          --old-archive OLD_ARCHIVE --old-sha256 OLD_SHA256
+                          --output OUTPUT [--timeout TIMEOUT]
+python -m unittest: error: argument --host: invalid choice: 'unknown' (choose from claude, pi, opencode, codex, dsh)
+......usage: python -m unittest [-h] --host {codex,claude} --commit COMMIT
+                          --version VERSION --output OUTPUT
+                          [--timeout TIMEOUT]
+python -m unittest: error: Invalid full commit SHA
+usage: python -m unittest [-h] --host {codex,claude} --commit COMMIT
+                          --version VERSION --output OUTPUT
+                          [--timeout TIMEOUT]
+python -m unittest: error: Invalid version
+usage: python -m unittest [-h] --host {codex,claude} --commit COMMIT
+                          --version VERSION --output OUTPUT
+                          [--timeout TIMEOUT]
+python -m unittest: error: Timeout must be 1..600 seconds
+usage: python -m unittest [-h] --host {codex,claude} --commit COMMIT
+                          --version VERSION --output OUTPUT
+                          [--timeout TIMEOUT]
+python -m unittest: error: Timeout must be 1..600 seconds
+usage: python -m unittest [-h] --host {codex,claude} --commit COMMIT
+                          --version VERSION --output OUTPUT
+                          [--timeout TIMEOUT]
+python -m unittest: error: Output must be a new path outside the checkout without commas
+usage: python -m unittest [-h] --host {codex,claude} --commit COMMIT
+                          --version VERSION --output OUTPUT
+                          [--timeout TIMEOUT]
+python -m unittest: error: Output must be a new path outside the checkout without commas
+usage: python -m unittest [-h] --host {codex,claude} --commit COMMIT
+                          --version VERSION --output OUTPUT
+                          [--timeout TIMEOUT]
+python -m unittest: error: Worker is container-only
+usage: python -m unittest [-h] --host {codex,claude} --commit COMMIT
+                          --version VERSION --output OUTPUT
+                          [--timeout TIMEOUT]
+python -m unittest: error: argument --host: invalid choice: 'pi' (choose from codex, claude)
+...............................s........................................................
+----------------------------------------------------------------------
+Ran 228 tests in 108.541s
+
+OK (skipped=1)

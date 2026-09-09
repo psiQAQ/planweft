@@ -1,0 +1,769 @@
+TAP version 13
+# Subtest: arguments reject ambiguous scope/method and non-agent values
+ok 1 - arguments reject ambiguous scope/method and non-agent values
+  ---
+  duration_ms: 2.949053
+  type: 'test'
+  ...
+# Subtest: list, doctor and dry run do not create state or touch project documents
+ok 2 - list, doctor and dry run do not create state or touch project documents
+  ---
+  duration_ms: 16.779819
+  type: 'test'
+  ...
+# Subtest: unsupported native scope fails before any write
+ok 3 - unsupported native scope fails before any write
+  ---
+  duration_ms: 6.138502
+  type: 'test'
+  ...
+# Subtest: copied install updates added/changed/deleted files, rolls back and uninstalls
+ok 4 - copied install updates added/changed/deleted files, rolls back and uninstalls
+  ---
+  duration_ms: 35.14385
+  type: 'test'
+  ...
+# Subtest: user modifications block update and uninstall
+ok 5 - user modifications block update and uninstall
+  ---
+  duration_ms: 11.935897
+  type: 'test'
+  ...
+# Subtest: symlink points to persistent complete version and updates without mixed files
+ok 6 - symlink points to persistent complete version and updates without mixed files
+  ---
+  duration_ms: 18.28511
+  type: 'test'
+  ...
+# Subtest: foreign destination and symlink parents are protected
+ok 7 - foreign destination and symlink parents are protected
+  ---
+  duration_ms: 5.811085
+  type: 'test'
+  ...
+# Subtest: two projects keep distinct native catalogs and versions
+ok 8 - two projects keep distinct native catalogs and versions
+  ---
+  duration_ms: 32.847185
+  type: 'test'
+  ...
+# Subtest: native install failure remains failed, registration can be removed
+ok 9 - native install failure remains failed, registration can be removed
+  ---
+  duration_ms: 16.099982
+  type: 'test'
+  ...
+# Subtest: tampered stored version is rejected before reuse
+ok 10 - tampered stored version is rejected before reuse
+  ---
+  duration_ms: 12.373803
+  type: 'test'
+  ...
+# Subtest: multi-agent failure preserves independent success without success exit
+ok 11 - multi-agent failure preserves independent success without success exit
+  ---
+  duration_ms: 11.690824
+  type: 'test'
+  ...
+# Subtest: native remove allows reinstall and foreign catalog is never overwritten
+ok 12 - native remove allows reinstall and foreign catalog is never overwritten
+  ---
+  duration_ms: 26.660911
+  type: 'test'
+  ...
+# Subtest: mode switching is rejected before losing active native registration
+ok 13 - mode switching is rejected before losing active native registration
+  ---
+  duration_ms: 13.225309
+  type: 'test'
+  ...
+# Subtest: Claude other-project registration does not conflict, user scope does
+ok 14 - Claude other-project registration does not conflict, user scope does
+  ---
+  duration_ms: 11.844684
+  type: 'test'
+  ...
+# Subtest: Pi replacement failure attempts restoration and keeps failure evidence
+ok 15 - Pi replacement failure attempts restoration and keeps failure evidence
+  ---
+  duration_ms: 18.957054
+  type: 'test'
+  ...
+# Subtest: component removal failure records progress and can be retried
+ok 16 - component removal failure records progress and can be retried
+  ---
+  duration_ms: 18.294329
+  type: 'test'
+  ...
+# Subtest: partial copy failure restores the previous complete component
+ok 17 - partial copy failure restores the previous complete component
+  ---
+  duration_ms: 21.878171
+  type: 'test'
+  ...
+# Subtest: DSH skill lifecycle follows nearest Git root and protects user records
+ok 18 - DSH skill lifecycle follows nearest Git root and protects user records
+  ---
+  duration_ms: 23.441292
+  type: 'test'
+  ...
+# Subtest: DSH global skill uses DSH_HOME and unsupported full integration fails before writes
+ok 19 - DSH global skill uses DSH_HOME and unsupported full integration fails before writes
+  ---
+  duration_ms: 12.620552
+  type: 'test'
+  ...
+# Subtest: DSH home follows native whitespace and tilde expansion
+ok 20 - DSH home follows native whitespace and tilde expansion
+  ---
+  duration_ms: 4.511266
+  type: 'test'
+  ...
+# Subtest: DSH native profile installs updates rolls back and preserves foreign settings
+ok 21 - DSH native profile installs updates rolls back and preserves foreign settings
+  ---
+  duration_ms: 25.646744
+  type: 'test'
+  ...
+# Subtest: DSH native ownership and failed update keep the previous profile source
+ok 22 - DSH native ownership and failed update keep the previous profile source
+  ---
+  duration_ms: 22.030495
+  type: 'test'
+  ...
+# Subtest: DSH profile argument and foreign source are rejected before installation
+ok 23 - DSH profile argument and foreign source are rejected before installation
+  ---
+  duration_ms: 5.673986
+  type: 'test'
+  ...
+# Subtest: DSH partial native persistence accepts equivalent relative links for recovery
+ok 24 - DSH partial native persistence accepts equivalent relative links for recovery
+  ---
+  duration_ms: 16.346173
+  type: 'test'
+  ...
+# Subtest: DSH explicit profile mismatch cannot remove or report another profile
+ok 25 - DSH explicit profile mismatch cannot remove or report another profile
+  ---
+  duration_ms: 10.390377
+  type: 'test'
+  ...
+# Subtest: DSH detects a second planning hook in a native user overlay before writes
+ok 26 - DSH detects a second planning hook in a native user overlay before writes
+  ---
+  duration_ms: 4.718486
+  type: 'test'
+  ...
+# Subtest: DSH duplicate-hook hints ignore whole-line comments and skill-only operations
+ok 27 - DSH duplicate-hook hints ignore whole-line comments and skill-only operations
+  ---
+  duration_ms: 9.451219
+  type: 'test'
+  ...
+# Subtest: OpenCode npm runtime permits only a version-paired Skill without a second loader
+ok 28 - OpenCode npm runtime permits only a version-paired Skill without a second loader
+  ---
+  duration_ms: 14.603909
+  type: 'test'
+  ...
+# Subtest: pi cross-scope project preflight rejects a global planning registration
+    # Subtest: default root
+    ok 1 - default root
+      ---
+      duration_ms: 4.343297
+      type: 'test'
+      ...
+    # Subtest: configured root
+    ok 2 - configured root
+      ---
+      duration_ms: 4.188948
+      type: 'test'
+      ...
+    1..2
+ok 29 - pi cross-scope project preflight rejects a global planning registration
+  ---
+  duration_ms: 9.132812
+  type: 'test'
+  ...
+# Subtest: pi cross-scope checks preserve the current owned registration
+ok 30 - pi cross-scope checks preserve the current owned registration
+  ---
+  duration_ms: 11.735942
+  type: 'test'
+  ...
+# Subtest: opencode cross-scope project preflight rejects a global planning registration
+    # Subtest: default root
+    ok 1 - default root
+      ---
+      duration_ms: 4.626574
+      type: 'test'
+      ...
+    # Subtest: configured root
+    ok 2 - configured root
+      ---
+      duration_ms: 5.023273
+      type: 'test'
+      ...
+    1..2
+ok 31 - opencode cross-scope project preflight rejects a global planning registration
+  ---
+  duration_ms: 10.116948
+  type: 'test'
+  ...
+# Subtest: opencode cross-scope checks preserve the current owned registration
+ok 32 - opencode cross-scope checks preserve the current owned registration
+  ---
+  duration_ms: 13.368694
+  type: 'test'
+  ...
+# Subtest: pi cross-scope global reference to the owned project source remains foreign
+ok 33 - pi cross-scope global reference to the owned project source remains foreign
+  ---
+  duration_ms: 12.661061
+  type: 'test'
+  ...
+# Subtest: OpenCode cross-scope JSONC permits only the same-version Skill pairing
+ok 34 - OpenCode cross-scope JSONC permits only the same-version Skill pairing
+  ---
+  duration_ms: 17.83184
+  type: 'test'
+  ...
+# Subtest: cross-scope local package paths are recognized in global registrations
+    # Subtest: pi: /synthetic/packages/planweft/dist/index.js
+    ok 1 - pi: /synthetic/packages/planweft/dist/index.js
+      ---
+      duration_ms: 4.616307
+      type: 'test'
+      ...
+    # Subtest: pi: C:\\synthetic\\packages\\planweft\\dist\\index.js
+    ok 2 - pi: C:\\synthetic\\packages\\planweft\\dist\\index.js
+      ---
+      duration_ms: 4.105767
+      type: 'test'
+      ...
+    # Subtest: opencode: /synthetic/packages/planweft/dist/index.js
+    ok 3 - opencode: /synthetic/packages/planweft/dist/index.js
+      ---
+      duration_ms: 4.402104
+      type: 'test'
+      ...
+    # Subtest: opencode: C:\\synthetic\\packages\\planweft\\dist\\index.js
+    ok 4 - opencode: C:\\synthetic\\packages\\planweft\\dist\\index.js
+      ---
+      duration_ms: 4.784696
+      type: 'test'
+      ...
+    1..4
+ok 35 - cross-scope local package paths are recognized in global registrations
+  ---
+  duration_ms: 18.59353
+  type: 'test'
+  ...
+# Subtest: pi duplicate detection preserves a JSON-escaped owned native source
+    # Subtest: C:\\synthetic\\project\\.planweft\\versions\\0.4.0-rc.1\\node_modules\\planweft\\dist\\pi\\planweft
+    ok 1 - C:\\synthetic\\project\\.planweft\\versions\\0.4.0-rc.1\\node_modules\\planweft\\dist\\pi\\planweft
+      ---
+      duration_ms: 4.667711
+      type: 'test'
+      ...
+    # Subtest: /synthetic/project "quoted"/node_modules/planweft/dist/pi/planweft
+    ok 2 - /synthetic/project "quoted"/node_modules/planweft/dist/pi/planweft
+      ---
+      duration_ms: 5.305782
+      type: 'test'
+      ...
+    1..2
+ok 36 - pi duplicate detection preserves a JSON-escaped owned native source
+  ---
+  duration_ms: 10.444504
+  type: 'test'
+  ...
+# Subtest: cross-scope known native loaders block both installation directions
+    # Subtest: pi project: extensions/planweft.ts
+    ok 1 - pi project: extensions/planweft.ts
+      ---
+      duration_ms: 4.30705
+      type: 'test'
+      ...
+    # Subtest: pi project: extensions/planweft/index.ts
+    ok 2 - pi project: extensions/planweft/index.ts
+      ---
+      duration_ms: 4.444009
+      type: 'test'
+      ...
+    # Subtest: pi global: extensions/planweft.ts
+    ok 3 - pi global: extensions/planweft.ts
+      ---
+      duration_ms: 4.071545
+      type: 'test'
+      ...
+    # Subtest: pi global: extensions/planweft/index.ts
+    ok 4 - pi global: extensions/planweft/index.ts
+      ---
+      duration_ms: 4.230993
+      type: 'test'
+      ...
+    # Subtest: opencode project: plugins/planweft.ts
+    ok 5 - opencode project: plugins/planweft.ts
+      ---
+      duration_ms: 4.061278
+      type: 'test'
+      ...
+    # Subtest: opencode project: plugins/planweft.js
+    ok 6 - opencode project: plugins/planweft.js
+      ---
+      duration_ms: 4.450644
+      type: 'test'
+      ...
+    # Subtest: opencode project: plugins/planweft.mjs
+    ok 7 - opencode project: plugins/planweft.mjs
+      ---
+      duration_ms: 4.235044
+      type: 'test'
+      ...
+    # Subtest: opencode global: plugins/planweft.ts
+    ok 8 - opencode global: plugins/planweft.ts
+      ---
+      duration_ms: 4.211717
+      type: 'test'
+      ...
+    # Subtest: opencode global: plugins/planweft.js
+    ok 9 - opencode global: plugins/planweft.js
+      ---
+      duration_ms: 4.490593
+      type: 'test'
+      ...
+    # Subtest: opencode global: plugins/planweft.mjs
+    ok 10 - opencode global: plugins/planweft.mjs
+      ---
+      duration_ms: 4.610022
+      type: 'test'
+      ...
+    1..10
+ok 37 - cross-scope known native loaders block both installation directions
+  ---
+  duration_ms: 44.611133
+  type: 'test'
+  ...
+# Subtest: cross-scope global preflight rejects project settings in the native root
+    # Subtest: pi: settings.json
+    ok 1 - pi: settings.json
+      ---
+      duration_ms: 5.019991
+      type: 'test'
+      ...
+    # Subtest: opencode: opencode.json
+    ok 2 - opencode: opencode.json
+      ---
+      duration_ms: 4.412511
+      type: 'test'
+      ...
+    # Subtest: opencode: opencode.jsonc
+    ok 3 - opencode: opencode.jsonc
+      ---
+      duration_ms: 5.1258
+      type: 'test'
+      ...
+    1..3
+ok 38 - cross-scope global preflight rejects project settings in the native root
+  ---
+  duration_ms: 15.405898
+  type: 'test'
+  ...
+# Subtest: pi same-root alias preserves the current owned package registration
+ok 39 - pi same-root alias preserves the current owned package registration
+  ---
+  duration_ms: 13.261836
+  type: 'test'
+  ...
+# Subtest: OpenCode same-root symlink alias preserves the current owned loader
+ok 40 - OpenCode same-root symlink alias preserves the current owned loader
+  ---
+  duration_ms: 14.464157
+  type: 'test'
+  ...
+# Subtest: OpenCode same-root alias still rejects an additional unowned loader
+ok 41 - OpenCode same-root alias still rejects an additional unowned loader
+  ---
+  duration_ms: 12.059586
+  type: 'test'
+  ...
+# Subtest: Pi native project-relative owned source survives doctor and update
+ok 42 - Pi native project-relative owned source survives doctor and update
+  ---
+  duration_ms: 12.335739
+  type: 'test'
+  ...
+# Subtest: Pi relative source exemptions retain foreign scopes and repeated entries
+    # Subtest: duplicate entry
+    ok 1 - duplicate entry
+      ---
+      duration_ms: 9.718293
+      type: 'test'
+      ...
+    # Subtest: other scope
+    ok 2 - other scope
+      ---
+      duration_ms: 9.712287
+      type: 'test'
+      ...
+    1..2
+ok 43 - Pi relative source exemptions retain foreign scopes and repeated entries
+  ---
+  duration_ms: 19.995736
+  type: 'test'
+  ...
+# Subtest: Pi structured source exemption preserves object metadata and equivalent duplicates
+    # Subtest: object
+    ok 1 - object
+      ---
+      duration_ms: 11.020416
+      type: 'test'
+      ...
+    # Subtest: mixed duplicates
+    ok 2 - mixed duplicates
+      ---
+      duration_ms: 11.108835
+      type: 'test'
+      ...
+    # Subtest: object duplicates
+    ok 3 - object duplicates
+      ---
+      duration_ms: 11.832322
+      type: 'test'
+      ...
+    # Subtest: metadata duplicate
+    ok 4 - metadata duplicate
+      ---
+      duration_ms: 11.078384
+      type: 'test'
+      ...
+    # Subtest: wrong base
+    ok 5 - wrong base
+      ---
+      duration_ms: 14.083031
+      type: 'test'
+      ...
+    # Subtest: foreign object
+    ok 6 - foreign object
+      ---
+      duration_ms: 12.328127
+      type: 'test'
+      ...
+    1..6
+ok 44 - Pi structured source exemption preserves object metadata and equivalent duplicates
+  ---
+  duration_ms: 72.418281
+  type: 'test'
+  ...
+# Subtest: Pi owned global home-relative source is scoped to the global settings file
+ok 45 - Pi owned global home-relative source is scoped to the global settings file
+  ---
+  duration_ms: 12.519493
+  type: 'test'
+  ...
+# Subtest: Pi Windows native separators and JSON escapes preserve one owned source only
+ok 46 - Pi Windows native separators and JSON escapes preserve one owned source only # SKIP
+  ---
+  duration_ms: 0.129207
+  type: 'test'
+  ...
+# Subtest: Pi UTF-8 BOM settings accept one owned source and retain duplicate checks
+    # Subtest: owned doctor
+    ok 1 - owned doctor
+      ---
+      duration_ms: 10.050668
+      type: 'test'
+      ...
+    # Subtest: owned update
+    ok 2 - owned update
+      ---
+      duration_ms: 10.499889
+      type: 'test'
+      ...
+    # Subtest: duplicate
+    ok 3 - duplicate
+      ---
+      duration_ms: 11.592068
+      type: 'test'
+      ...
+    # Subtest: foreign
+    ok 4 - foreign
+      ---
+      duration_ms: 11.701719
+      type: 'test'
+      ...
+    1..4
+ok 47 - Pi UTF-8 BOM settings accept one owned source and retain duplicate checks
+  ---
+  duration_ms: 44.578447
+  type: 'test'
+  ...
+# Subtest: Codex owned marketplace passes doctor and dry update without mutation
+    # Subtest: native
+    ok 1 - native
+      ---
+      duration_ms: 32.586886
+      type: 'test'
+      ...
+    # Subtest: literal
+    ok 2 - literal
+      ---
+      duration_ms: 18.644934
+      type: 'test'
+      ...
+    # Subtest: inline
+    ok 3 - inline
+      ---
+      duration_ms: 18.442603
+      type: 'test'
+      ...
+    # Subtest: dotted
+    ok 4 - dotted
+      ---
+      duration_ms: 17.193838
+      type: 'test'
+      ...
+    # Subtest: escaped
+    ok 5 - escaped
+      ---
+      duration_ms: 17.596823
+      type: 'test'
+      ...
+    # Subtest: crlf
+    ok 6 - crlf
+      ---
+      duration_ms: 15.656
+      type: 'test'
+      ...
+    1..6
+ok 48 - Codex owned marketplace passes doctor and dry update without mutation
+  ---
+  duration_ms: 121.480756
+  type: 'test'
+  ...
+# Subtest: Codex ownership never exempts another source, registration or hook
+    # Subtest: second-catalog
+    ok 1 - second-catalog
+      ---
+      duration_ms: 18.795791
+      type: 'test'
+      ...
+    # Subtest: second-plugin
+    ok 2 - second-plugin
+      ---
+      duration_ms: 15.615283
+      type: 'test'
+      ...
+    # Subtest: extra-field
+    ok 3 - extra-field
+      ---
+      duration_ms: 15.408273
+      type: 'test'
+      ...
+    # Subtest: changed-source
+    ok 4 - changed-source
+      ---
+      duration_ms: 18.660088
+      type: 'test'
+      ...
+    # Subtest: changed-type
+    ok 5 - changed-type
+      ---
+      duration_ms: 14.780677
+      type: 'test'
+      ...
+    # Subtest: missing-source
+    ok 6 - missing-source
+      ---
+      duration_ms: 14.791224
+      type: 'test'
+      ...
+    # Subtest: duplicate-key
+    ok 7 - duplicate-key
+      ---
+      duration_ms: 14.461782
+      type: 'test'
+      ...
+    # Subtest: invalid-utf8
+    ok 8 - invalid-utf8
+      ---
+      duration_ms: 12.953207
+      type: 'test'
+      ...
+    # Subtest: foreign-hook
+    ok 9 - foreign-hook
+      ---
+      duration_ms: 14.249394
+      type: 'test'
+      ...
+    # Subtest: incomplete-receipt
+    ok 10 - incomplete-receipt
+      ---
+      duration_ms: 13.111608
+      type: 'test'
+      ...
+    # Subtest: changed-registry
+    ok 11 - changed-registry
+      ---
+      duration_ms: 14.411008
+      type: 'test'
+      ...
+    # Subtest: changed-payload
+    ok 12 - changed-payload
+      ---
+      duration_ms: 13.425684
+      type: 'test'
+      ...
+    1..12
+ok 49 - Codex ownership never exempts another source, registration or hook
+  ---
+  duration_ms: 182.450423
+  type: 'test'
+  ...
+# Subtest: Codex complete receipts require config, market and enabled plugin
+    # Subtest: config
+    ok 1 - config
+      ---
+      duration_ms: 13.101271
+      type: 'test'
+      ...
+    # Subtest: market
+    ok 2 - market
+      ---
+      duration_ms: 14.003971
+      type: 'test'
+      ...
+    # Subtest: plugin
+    ok 3 - plugin
+      ---
+      duration_ms: 13.038414
+      type: 'test'
+      ...
+    # Subtest: enabled
+    ok 4 - enabled
+      ---
+      duration_ms: 13.521367
+      type: 'test'
+      ...
+    # Subtest: identity
+    ok 5 - identity
+      ---
+      duration_ms: 13.587717
+      type: 'test'
+      ...
+    # Subtest: receipt
+    ok 6 - receipt
+      ---
+      duration_ms: 10.067291
+      type: 'test'
+      ...
+    1..6
+ok 50 - Codex complete receipts require config, market and enabled plugin
+  ---
+  duration_ms: 78.395449
+  type: 'test'
+  ...
+# Subtest: Codex verified marketplace step permits retry after native install failure, not doctor success
+ok 51 - Codex verified marketplace step permits retry after native install failure, not doctor success
+  ---
+  duration_ms: 13.631368
+  type: 'test'
+  ...
+# Subtest: Codex custom unbranded storage still rejects a second native catalog using it
+ok 52 - Codex custom unbranded storage still rejects a second native catalog using it
+  ---
+  duration_ms: 12.36179
+  type: 'test'
+  ...
+# Subtest: Codex decoded hook identities and owned plugin values remain visible
+    # Subtest: [hooks]\\ncommand="npm:plan\\u0077eft"\\n
+    ok 1 - [hooks]\\ncommand="npm:plan\\u0077eft"\\n
+      ---
+      duration_ms: 13.038065
+      type: 'test'
+      ...
+    # Subtest: [hooks]\\n"planweft@other"=true\\n
+    ok 2 - [hooks]\\n"planweft@other"=true\\n
+      ---
+      duration_ms: 11.760246
+      type: 'test'
+      ...
+    # Subtest: [plugins."extra"]\\ncommand="planning-with-files"\\n
+    ok 3 - [plugins."extra"]\\ncommand="planning-with-files"\\n
+      ---
+      duration_ms: 11.572233
+      type: 'test'
+      ...
+    1..3
+ok 53 - Codex decoded hook identities and owned plugin values remain visible
+  ---
+  duration_ms: 48.55368
+  type: 'test'
+  ...
+# Subtest: Codex typed values and special keys cannot hide a foreign registration
+    # Subtest: ""
+    ok 1 - ""
+      ---
+      duration_ms: 12.611892
+      type: 'test'
+      ...
+    # Subtest: __proto__
+    ok 2 - __proto__
+      ---
+      duration_ms: 12.867722
+      type: 'test'
+      ...
+    # Subtest: constructor
+    ok 3 - constructor
+      ---
+      duration_ms: 11.403287
+      type: 'test'
+      ...
+    1..3
+ok 54 - Codex typed values and special keys cannot hide a foreign registration
+  ---
+  duration_ms: 48.876069
+  type: 'test'
+  ...
+# Subtest: Codex inconsistent completed receipts fail even when config is absent
+    # Subtest: marketplace-step
+    ok 1 - marketplace-step
+      ---
+      duration_ms: 12.854871
+      type: 'test'
+      ...
+    # Subtest: plugin-step
+    ok 2 - plugin-step
+      ---
+      duration_ms: 12.398737
+      type: 'test'
+      ...
+    # Subtest: all-steps
+    ok 3 - all-steps
+      ---
+      duration_ms: 12.715817
+      type: 'test'
+      ...
+    # Subtest: record-scope
+    ok 4 - record-scope
+      ---
+      duration_ms: 12.613289
+      type: 'test'
+      ...
+    1..4
+ok 55 - Codex inconsistent completed receipts fail even when config is absent
+  ---
+  duration_ms: 51.267717
+  type: 'test'
+  ...
+1..55
+# tests 124
+# suites 0
+# pass 123
+# fail 0
+# cancelled 0
+# skipped 1
+# todo 0
+# duration_ms 1410.755884

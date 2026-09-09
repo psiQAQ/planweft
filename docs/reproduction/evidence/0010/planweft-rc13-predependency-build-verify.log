@@ -1,0 +1,27 @@
+{
+  "platforms": 15,
+  "differences": {
+    "retired-directories": 0,
+    "codex": 0,
+    "claude": 0,
+    "pi": 0,
+    "opencode": 0,
+    "hermes": 0,
+    "cursor": 0,
+    "gemini": 0,
+    "copilot": 0,
+    "mastracode": 0,
+    "kiro": 0,
+    "continue": 0,
+    "factory": 0,
+    "codebuddy": 0,
+    "agents": 0,
+    "dsh": 0,
+    "codex-mirror": 0,
+    "manifest": 0,
+    "marketplaces": 0,
+    "public-docs": 0,
+    "retired-archives": 0
+  },
+  "verified": true
+}
