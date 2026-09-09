@@ -400,5 +400,163 @@ class ClaudeHookTraceTests(unittest.TestCase):
         self.assertNotIn('SECRET', json.dumps(result))
 
 
+    def test_native_inotify_terminated_read_is_not_stdout_or_eof(self):
+        for initialize in ['inotify_init() = 9', 'inotify_init1(IN_CLOEXEC) = 9',
+                           'inotify_init1(IN_NONBLOCK|IN_CLOEXEC) = 9']:
+            with self.subTest(initialize=initialize):
+                fixture = Fixture(); fixture.add(size=8)
+                fixture.rows += [f'100 {initialize}', '100 dup(9) = 10', '100 close(9) = 0',
+                                 '100 clone(child_stack=NULL, flags=CLONE_FILES|CLONE_THREAD|CLONE_VM) = 101',
+                                 '101 read(0xa, 0xabcd, 0x10000 <unfinished ...>',
+                                 '101 <... read resumed>) = ?', '101 +++ exited with 143 +++']
+                result = self.analyze(fixture)
+                self.assertTrue(result['observation_complete'], result['errors'])
+                self.assertEqual(1, result['auxiliary_unfinished_read_count'])
+                self.assertEqual(8, result['hooks'][0]['stdout_read_bytes'])
+                self.assertEqual(2, len(result['hooks'][0]['stdout_reads']))
+                self.assertNotIn('bytes', result['auxiliary_unfinished_reads'][0])
+
+    def test_inotify_unknown_reuse_hook_exit_and_shared_race_fail_closed(self):
+        fixture = Fixture(); pid = fixture.add()
+        setup = ['100 inotify_init1(IN_CLOEXEC) = 9',
+                 '100 clone(child_stack=NULL, flags=CLONE_FILES|CLONE_THREAD|CLONE_VM) = 101']
+        tail = ['101 read(0x9, 0xabcd, 0x10000 <unfinished ...>',
+                '101 <... read resumed>) = ?', '101 +++ exited with 143 +++']
+        valid = fixture.rows + setup + tail
+        variants = [
+            fixture.rows + setup[1:] + tail,
+            fixture.rows + setup + ['100 close(9) = 0'] + tail,
+            fixture.rows + setup + ['100 close(9) = 0', '100 pipe2([9, 10], 0) = 0'] + tail,
+            valid[:-1],
+            fixture.rows + setup + ['100 dup2(9, 1) = 1'] + tail,
+            fixture.rows + setup + [tail[0], '100 dup2(9, 1) = 1'] + tail[1:],
+            fixture.rows + setup + [tail[0], '100 close(9) = 0'] + tail[1:],
+            fixture.rows + setup + [tail[0], '100 pipe2([11, 12], 0) = 0', '100 dup2(11, 9) = 9'] + tail[1:],
+        ]
+        for index, rows in enumerate(variants):
+            with self.subTest(index=index):
+                result = self.analyze('\n'.join(rows + ['100 +++ exited with 0 +++']) + '\n')
+                self.assertFalse(result['observation_complete'], result)
+        text = fixture.text().replace(f'{pid} +++ exited with 0 +++',
+                                     f'{pid} inotify_init() = 9\n{pid} read(0x9, 0xabcd, 0x10000) = ?\n{pid} +++ exited with 0 +++')
+        self.assertFalse(self.analyze(text)['observation_complete'])
+
+    def test_inotify_cloexec_and_creation_race(self):
+        fixture = Fixture(); pid = fixture.add()
+        text = fixture.text().replace('100 pipe2', '100 inotify_init1(IN_CLOEXEC) = 9\n100 pipe2', 1)
+        text = text.replace(f'{pid} close(3) = 0\n', f'{pid} close(3) = 0\n{pid} dup2(9, 8) = 8\n', 1)
+        # Non-CLOEXEC duplicate survives exec, original FD must not survive.
+        for number, error in [(9, True), (8, False)]:
+            candidate = text.replace(f'{pid} +++ exited with 0 +++',
+                                     f'{pid} read({hex(number)}, 0xabcd, 0x10) = 0x8\n{pid} +++ exited with 0 +++')
+            self.assertEqual(not error, self.analyze(candidate)['observation_complete'])
+        fixture.rows += ['100 clone(child_stack=NULL, flags=CLONE_FILES|CLONE_THREAD|CLONE_VM) = 101',
+                         '100 inotify_init1(IN_CLOEXEC <unfinished ...>',
+                         '101 dup2(3, 9) = 9', '100 <... inotify_init1 resumed>) = 9',
+                         '101 read(0x9, 0xabcd, 0x10000) = ?', '101 +++ exited with 143 +++']
+        self.assertFalse(self.analyze(fixture)['observation_complete'])
+
+
+    def reallocation_fixture(self, *, occupied=True, extra=()):
+        fixture = Fixture(); fixture.add(size=8, transport='unix')
+        prefix = ['100 clone(child_stack=NULL, flags=CLONE_FILES|CLONE_THREAD|CLONE_VM) = 101']
+        if occupied:
+            prefix.append('100 openat(AT_FDCWD, "/synthetic/old", O_RDONLY) = 3')
+        prefix += ['101 close(3 <unfinished ...>',
+                   '100 socketpair(AF_UNIX, SOCK_STREAM|SOCK_CLOEXEC, 0, <unfinished ...>']
+        prefix += list(extra)
+        prefix += ['100 <... socketpair resumed>[3, 4]) = 0', '101 <... close resumed>) = 0']
+        fixture.rows[1:2] = prefix
+        fixture.rows.append('101 +++ exited with 0 +++')
+        return fixture
+
+    def test_isolated_close_socketpair_order_keeps_actual_native_consumption(self):
+        result = self.analyze(self.reallocation_fixture())
+        self.assertTrue(result['observation_complete'], result['errors'])
+        self.assertEqual(1, result['conservative_binding_conflict_count'])
+        self.assertEqual(0, result['binding_conflict_count'])
+        proof, = result['close_reallocation_proofs']
+        self.assertEqual('linux_close_before_unique_socketpair_allocation', proof['rule'])
+        self.assertEqual(3, proof['fd'])
+        self.assertTrue(all(type(value) is int for key, value in proof.items() if key != 'rule'))
+        self.assertEqual(8, result['hooks'][0]['stdout_read_bytes'])
+        self.assertTrue(result['hooks'][0]['stdout_eof'])
+        self.assertNotIn('/synthetic/old', json.dumps(result))
+
+    def test_close_order_cannot_exempt_empty_unknown_or_third_access(self):
+        result = self.analyze(self.reallocation_fixture(occupied=False))
+        self.assertFalse(result['observation_complete'])
+        self.assertEqual([], result['close_reallocation_proofs'])
+        for extra in [
+            ['102 read(0x3, 0xabcd, 0x10) = 0x8'],
+            ['102 read(0x3, 0xabcd, 0x10) = -1 EAGAIN (Resource temporarily unavailable)'],
+            ['102 dup2(9, 3) = 3'], ['102 close(3) = 0'],
+            ['102 socketpair(AF_UNIX, SOCK_STREAM, 0, [3, 8]) = 0'],
+            ['102 close_range(3, 4, 0) = 0'],
+            ['102 clone(child_stack=NULL, flags=SIGCHLD) = 103', '103 +++ exited with 0 +++'],
+            ['102 unshare(CLONE_FILES) = 0'],
+            ['102 pidfd_getfd(0x9, 0x3, 0x0) = 3'],
+        ]:
+            with self.subTest(extra=extra):
+                fixture = self.reallocation_fixture(extra=extra)
+                fixture.rows.insert(2, '100 clone(child_stack=NULL, flags=CLONE_FILES|CLONE_THREAD|CLONE_VM) = 102')
+                fixture.rows.append('102 +++ exited with 0 +++')
+                result = self.analyze(fixture)
+                self.assertFalse(result['observation_complete'])
+                # Unsupported operations must not be used as evidence even if
+                # they cannot yet be modeled as a descriptor-table footprint.
+                self.assertEqual([], result['close_reallocation_proofs'])
+
+    def test_prior_binding_race_is_not_self_justifying_close_proof(self):
+        fixture = self.reallocation_fixture()
+        at = fixture.rows.index('100 openat(AT_FDCWD, "/synthetic/old", O_RDONLY) = 3')
+        fixture.rows[at:at + 1] = ['100 openat(AT_FDCWD, "/synthetic/old", O_RDONLY <unfinished ...>',
+                                    '101 dup2(9, 3) = 3', '100 <... openat resumed>) = 3']
+        result = self.analyze(fixture)
+        self.assertFalse(result['observation_complete'])
+        self.assertEqual([], result['close_reallocation_proofs'])
+
+    def test_socketpair_must_finish_strictly_inside_successful_close(self):
+        fixture = self.reallocation_fixture()
+        original = '100 <... socketpair resumed>[3, 4]) = 0\n101 <... close resumed>) = 0'
+        for replacement in ['101 <... close resumed>) = 0\n100 <... socketpair resumed>[3, 4]) = 0',
+                            '100 <... socketpair resumed>[3, 4]) = 0\n101 <... close resumed>) = -1 EBADF (Bad file descriptor)']:
+            result = self.analyze(fixture.text().replace(original, replacement))
+            self.assertEqual([], result['close_reallocation_proofs'])
+        text = fixture.text().replace('socketpair(AF_UNIX, SOCK_STREAM|SOCK_CLOEXEC, 0, <unfinished ...>',
+                                       'dup2(9, 3 <unfinished ...>').replace('<... socketpair resumed>[3, 4]) = 0',
+                                                                                       '<... dup2 resumed>) = 3')
+        self.assertEqual([], self.analyze(text)['close_reallocation_proofs'])
+
+    def test_native_netlink_route_recvmsg_is_bound_not_global_ancillary_exception(self):
+        fixture = Fixture(); fixture.add()
+        native = ['100 socket(AF_NETLINK, SOCK_RAW|SOCK_CLOEXEC, NETLINK_ROUTE) = 9',
+                  '100 recvmsg(0x9, 0xabcd, 0x0) = 0x14', '100 close(9) = 0']
+        fixture.rows += native
+        result = self.analyze(fixture)
+        self.assertTrue(result['observation_complete'], result['errors'])
+        self.assertEqual(1, len(result['auxiliary_network_reads']))
+        for old, new in [('AF_NETLINK', 'AF_UNIX'), ('NETLINK_ROUTE', 'NETLINK_USERSOCK'),
+                         ('recvmsg(0x9, 0xabcd, 0x0)', 'recvmsg(0x9, 0xabcd, 0x2)'),
+                         (native[0], '100 dup(99) = 9'),
+                         (native[1], '100 close(9) = 0\n100 socket(AF_UNIX, SOCK_STREAM, 0) = 9\n' + native[1])]:
+            with self.subTest(new=new):
+                result = self.analyze(fixture.text().replace(old, new))
+                self.assertFalse(result['observation_complete'])
+                self.assertEqual([], result['auxiliary_network_reads'])
+        fixture = Fixture(); pid = fixture.add()
+        hooked = '\n'.join(row.replace('100 ', f'{pid} ', 1) for row in native)
+        result = self.analyze(fixture.text().replace(f'{pid} +++ exited with 0 +++', hooked + f'\n{pid} +++ exited with 0 +++'))
+        self.assertFalse(result['observation_complete'])
+        self.assertEqual([], result['auxiliary_network_reads'])
+        fixture.rows += [native[0], '100 clone(child_stack=NULL, flags=CLONE_FILES|CLONE_THREAD|CLONE_VM) = 101',
+                         '100 recvmsg(0x9, 0xabcd, 0x0 <unfinished ...>',
+                         '101 dup2(3, 9) = 9', '100 <... recvmsg resumed>) = 0x14',
+                         '101 +++ exited with 0 +++']
+        result = self.analyze(fixture)
+        self.assertFalse(result['observation_complete'])
+        self.assertEqual([], result['auxiliary_network_reads'])
+
+
 if __name__ == '__main__':
     unittest.main()

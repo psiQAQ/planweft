@@ -19,7 +19,7 @@ _spec.loader.exec_module(base)
 
 DATA_SYSCALLS = 'read,readv,write,writev,recvfrom,sendto,recvmsg,sendmsg,recvmmsg,sendmmsg'
 TRANSFER_SYSCALLS = 'sendfile,splice,tee,vmsplice,copy_file_range,pread64,pwrite64,preadv,pwritev,preadv2,pwritev2'
-EXTRA_SYSCALLS = 'pipe,pipe2,socketpair,socket,connect,accept,accept4,shutdown,execveat,pidfd_getfd,unshare,io_uring_setup,io_uring_enter,io_uring_register'
+EXTRA_SYSCALLS = 'pipe,pipe2,socketpair,socket,connect,accept,accept4,shutdown,execveat,pidfd_getfd,unshare,io_uring_setup,io_uring_enter,io_uring_register,inotify_init,inotify_init1'
 TRACE_SYSCALLS = ','.join(dict.fromkeys((base.TRACE_SYSCALLS + ',' + DATA_SYSCALLS + ',' + TRANSFER_SYSCALLS + ',' + EXTRA_SYSCALLS).split(',')))
 RAW_SYSCALLS = ','.join(dict.fromkeys((DATA_SYSCALLS + ',' + TRANSFER_SYSCALLS + ',connect,pidfd_getfd,io_uring_setup,io_uring_enter,io_uring_register').split(',')))
 EVENTS = {'session-start', 'user-prompt-submit', 'pre-tool-use', 'post-tool-use', 'pre-compact', 'stop'}
@@ -67,7 +67,8 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
         process_events.setdefault(pid, []).append(index)
     processes = {}; generations = {}; roots = []; root_execs = set(); hooks = []; channels = []
     accesses = []; io = []; exits = []; unsupported = []
-    fd_history = {}; uncertain_io = []
+    fd_history = {}; uncertain_io = []; auxiliary_reads = []; network_reads = []
+    close_bindings = {}; socketpair_events = set(); guard_accesses = []
     diagnostics = []; diagnostic_count = 0
     paths = {str(Path(native_root) / rel): rel for rel in REQUIRED}
 
@@ -103,6 +104,8 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
         return UNKNOWN_FD if uncertain('fds', number) else state['fds'].get(number)
 
     def set_fd(state, number, value):
+        if number == 1 and value and isinstance(value[0], dict) and value[0]['kind'] == 'inotify':
+            value[0]['stdout_alias'] = True
         remember(state, number, value)
         if uncertain('fds', number, True):
             value = UNKNOWN_FD
@@ -180,6 +183,12 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
             args = base._arguments(body)
             if name in RAW_SYSCALLS.split(',') and not _raw(args):
                 errors.append('data syscall was not raw'); continue
+            # Even a failed third-party I/O attempt blocks the narrowly proved
+            # close/reallocation ordering optimization. It is not byte evidence.
+            if name in READS | WRITES | TRANSFERS:
+                for position in TRANSFER_FDS.get(name, (0,)):
+                    number = base._number(args[position])
+                    guard_accesses.append((index, finished, pid, state['fds'], False, (number, number), name))
             if result.startswith('-1 '):
                 if name == 'close' and not result.startswith('-1 EBADF'):
                     errors.append('failed close may have released descriptor')
@@ -192,6 +201,19 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
             if result.startswith('? ERESTART'):
                 continue
             if result.startswith('?'):
+                # Only a traced native auxiliary FD can make an unfinished
+                # read irrelevant to hook stdout. Retain its FD footprint over
+                # the entire blocked interval for the shared-table replay.
+                if name == 'read' and result == '?' and len(args) == 3 and base._number(args[2]) > 0:
+                    number = base._number(args[0]); binding = get_fd(state, number)
+                    accesses.append((index, finished, pid, state['fds'], False, (number, number), name))
+                    if (state['host'] and state['hook'] is None and binding and isinstance(binding[0], dict)
+                            and binding[0]['kind'] == 'inotify' and binding[0]['native_created']
+                            and not uncertain('fds', number)):
+                        auxiliary_reads.append(({'kind': 'terminated_native_inotify_read', 'pid': pid,
+                                                 'generation': state['generation'], 'sequence': index,
+                                                 'end_sequence': finished}, binding[0]))
+                        continue
                 diagnostic('unresolved_syscall', syscall=name, result_kind='unresolved_return',
                            result_sha256=_hash(result.encode('utf-8', errors='surrogatepass')))
                 errors.append('unresolved syscall result'); continue
@@ -206,7 +228,7 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
             if name in {'pipe', 'pipe2', 'socketpair'} and returned == 0:
                 for number in _pair(args[3] if name == 'socketpair' else args[0]):
                     footprint.append(access_fd(state, number, True))
-            if name in {'socket', 'accept', 'accept4', 'pidfd_getfd'} and returned >= 0:
+            if name in {'socket', 'accept', 'accept4', 'pidfd_getfd', 'inotify_init', 'inotify_init1'} and returned >= 0:
                 footprint.append(access_fd(state, returned, True))
             footprint_end = finished
             if name in {'clone', 'clone3', 'fork', 'vfork'} and returned > 0:
@@ -316,6 +338,8 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
                     for number in numbers:
                         set_fd(state, number, UNKNOWN_FD)
                     continue
+                if name == 'socketpair':
+                    socketpair_events.add(index)
                 count = 2 if name == 'socketpair' else 1
                 allocated = list(range(len(channels), len(channels) + count))
                 channels.extend({'kind': 'unix-stream' if name == 'socketpair' else 'pipe'} for _ in range(count))
@@ -323,12 +347,19 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
                     resource = {'kind': 'unix-stream' if name == 'socketpair' else 'pipe', 'channels': allocated,
                                 'end': side if name == 'socketpair' else ('r' if side == 0 else 'w')}
                     set_fd(state, number, (resource, 'CLOEXEC' in body))
+            elif name in {'inotify_init', 'inotify_init1'} and returned >= 0:
+                flags = set(args[0].split('|')) if name == 'inotify_init1' and len(args) == 1 else set()
+                if ((name == 'inotify_init' and args not in ([], [''])) or (name == 'inotify_init1' and
+                        (len(args) != 1 or not flags <= {'0', 'IN_CLOEXEC', 'IN_NONBLOCK'}))):
+                    raise ValueError('unsupported inotify flags')
+                set_fd(state, returned, ({'kind': 'inotify', 'native_created': state['host'] and state['hook'] is None,
+                                         'stdout_alias': False}, 'IN_CLOEXEC' in flags))
             elif name in {'socket', 'accept', 'accept4', 'pidfd_getfd'} and returned >= 0:
                 # Network connections are not evidence sources. Imported FDs
                 # cannot later be mistaken for a fully observed stdout pipe.
                 resource = None
                 if name == 'socket':
-                    resource = {'kind': 'opaque-socket', 'domain': args[0]}
+                    resource = {'kind': 'opaque-socket', 'domain': args[0], 'protocol': args[2]}
                 elif name in {'accept', 'accept4'}:
                     listener = get_fd(state, base._number(args[0]))
                     if listener and isinstance(listener[0], dict) and listener[0]['kind'] == 'opaque-socket':
@@ -337,6 +368,11 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
                     errors.append('unmodeled cross-process descriptor import')
                 set_fd(state, returned, (resource, 'CLOEXEC' in body) if resource else UNKNOWN_FD)
             elif name == 'close' and returned == 0:
+                # Inspect the pre-close state after all earlier conservative
+                # hazards have propagated. This close's own write hazard must
+                # not be mistaken for unknown provenance of its OLD binding.
+                old = get_fd(state, base._number(args[0]))
+                close_bindings[index] = bool(old and isinstance(old[0], dict))
                 set_fd(state, base._number(args[0]), None)
             elif name == 'close_range' and returned == 0:
                 low = base._number(args[0]); high = base._number(args[1].replace('~0U', '4294967295'))
@@ -408,7 +444,20 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
                 if name in {'recvmsg', 'sendmsg', 'recvmmsg', 'sendmmsg'}:
                     value = get_fd(state, base._number(args[0]))
                     domain = value[0].get('domain') if value and isinstance(value[0], dict) else None
-                    if domain not in {'AF_INET', 'AF_INET6'}:
+                    # Linux v7.0 netlink_recvmsg zeroes scm_cookie, sets only
+                    # credentials, and uses scm_recv (not scm_recv_unix). Thus
+                    # no SCM_RIGHTS or SCM_PIDFD installation is possible here.
+                    # https://raw.githubusercontent.com/torvalds/linux/v7.0/net/netlink/af_netlink.c
+                    # https://raw.githubusercontent.com/torvalds/linux/v7.0/net/core/scm.c
+                    netlink = (name == 'recvmsg' and state['host'] and state['hook'] is None
+                               and domain == 'AF_NETLINK' and value[0].get('protocol') == 'NETLINK_ROUTE'
+                               and base._number(args[2]) == 0)
+                    if netlink:
+                        if len(network_reads) < 32:
+                            network_reads.append({'kind': 'native_netlink_route_recvmsg', 'pid': pid,
+                                                  'generation': state['generation'], 'sequence': index,
+                                                  'fd': base._number(args[0]), 'bytes': returned})
+                    elif domain not in {'AF_INET', 'AF_INET6'}:
                         errors.append('unmodeled ancillary descriptor transfer')
             elif name.startswith('io_uring_'):
                 errors.append('asynchronous I/O cannot prove complete channel accounting')
@@ -423,6 +472,14 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
         errors.append('root process lacks successful exec record')
     if processes:
         errors.append('missing process exit records')
+    observed_auxiliary = []
+    for row, resource in auxiliary_reads:
+        if resource['stdout_alias'] or not any(
+                (item['pid'], item['generation']) == (row['pid'], row['generation'])
+                and item['sequence'] > row['end_sequence'] for item in exits):
+            errors.append('unfinished auxiliary read lacks isolated descriptor and process exit')
+        else:
+            observed_auxiliary.append(row)
     if not hooks:
         errors.append('no bound dispatcher executions')
     output_channels = [h['output_channel'] for h in hooks if h['output_channel'] is not None]
@@ -472,8 +529,57 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
         hook['stdout_empty'] = hook['stdout_written_bytes'] == 0 and hook['stdout_read_bytes'] == 0
     return {'errors': sorted(set(errors)), 'hooks': hooks, 'process_count': sum(generations.values()),
             'root_pid': roots[0][0] if roots else None, 'channel_count': len(channels),
-            'process_exit_count': len(exits), 'diagnostics': diagnostics,
-            'diagnostic_count': diagnostic_count}, accesses
+            'process_exit_count': len(exits), 'auxiliary_unfinished_reads': observed_auxiliary[:32],
+            'auxiliary_unfinished_read_count': len(observed_auxiliary), 'diagnostics': diagnostics,
+            'auxiliary_network_reads': network_reads, 'diagnostic_count': diagnostic_count,
+            '_close_bindings': close_bindings, '_socketpair_events': socketpair_events,
+            '_guard_accesses': guard_accesses}, accesses
+
+
+def _close_reallocation_proofs(accesses, initial, conservative, hazards):
+    """Prove only isolated Linux close -> empty-slot allocation order.
+
+    file_close_fd_locked releases the slot before filp_close completes:
+    https://raw.githubusercontent.com/torvalds/linux/v7.0/fs/file.c
+    https://man7.org/linux/man-pages/man2/close.2.html
+    This does NOT prove release happened before allocation syscall entry.
+    Therefore any third reader, writer or table snapshot blocks shortening.
+    The old binding must also remain known in the UNMODIFIED hazard replay.
+    """
+    proofs = []; adjusted = list(accesses)
+    if initial['errors']:
+        # In particular, an unmodeled import/unshare or malformed record may
+        # lack a reliable footprint. It cannot support an isolation proof.
+        return adjusted, proofs
+    groups = {}
+    for row in accesses + initial.get('_guard_accesses', []):
+        groups.setdefault(id(row[3]), []).append(row)
+    for position, close in enumerate(accesses):
+        start, end, pid, table, write, span, operation = close
+        if (operation != 'close' or not write or span[0] != span[1]
+                or (start, 'fds', True) not in hazards
+                or not initial.get('_close_bindings', {}).get(start)
+                or not conservative.get('_close_bindings', {}).get(start)):
+            continue
+        fd = span[0]
+        overlapping = [row for row in groups[id(table)]
+                       if row[0] <= end and row[1] >= start and row[5][0] <= fd <= row[5][1]]
+        allocs = [row for row in overlapping if row[6] == 'socketpair' and row[4]
+                  and row[0] in initial.get('_socketpair_events', set())
+                  and row[2] != pid and start < row[0] <= row[1] < end]
+        if len(allocs) != 1:
+            continue
+        alloc = allocs[0]
+        if any(row is not close and row is not alloc for row in overlapping):
+            continue
+        adjusted[position] = (start, alloc[0] - 1, pid, table, write, span, operation)
+        proofs.append({'rule': 'linux_close_before_unique_socketpair_allocation', 'fd': fd,
+                       'close_pid': pid, 'close_sequence': start, 'close_end_sequence': end,
+                       'allocation_pid': alloc[2], 'allocation_sequence': alloc[0],
+                       'allocation_end_sequence': alloc[1]})
+        if len(proofs) == 32:
+            break
+    return adjusted, proofs
 
 
 def analyze_trace(text, native_root, resource_sha256, *, expected_host_executable=None,
@@ -529,6 +635,12 @@ def analyze_trace(text, native_root, resource_sha256, *, expected_host_executabl
             result['errors'] = ['descriptor budget exceeded']; return result
         replay, _ = _replay(text, str(root), resource_sha256, expected_host_executable, allowed_interpreters,
                             hazards=hazards, fd_numbers=numbers)
+        adjusted, proofs = _close_reallocation_proofs(accesses, initial, replay, hazards)
+        original_conflict_count = conflicts['count']
+        if proofs:
+            conflicts, hazards = base._conflicts(adjusted)
+            replay, _ = _replay(text, str(root), resource_sha256, expected_host_executable, allowed_interpreters,
+                                hazards=hazards, fd_numbers=numbers)
         replay['errors'] = sorted(set(initial['errors'] + replay['errors']))
         if len(initial['hooks']) == len(replay['hooks']) and any(
                 (first['output_channel'], first.get('stdout_written_bytes'), first.get('stdout_read_bytes')) !=
@@ -537,7 +649,7 @@ def analyze_trace(text, native_root, resource_sha256, *, expected_host_executabl
             replay['errors'].append('channel accounting changes under binding ambiguity')
         # No conflict samples: those may carry future parser implementation
         # details. Only their count and tainted proof failures are exported.
-        result.update(replay)
+        result.update({key: value for key, value in replay.items() if not key.startswith('_')})
         # Both passes can diagnose the same rejection. Merge at most 64 bounded
         # records, preserving unique facts while exporting no more than 32.
         merged = []; keys = set()
@@ -551,6 +663,8 @@ def analyze_trace(text, native_root, resource_sha256, *, expected_host_executabl
         result['diagnostic_rejections_by_pass'] = counts
         result['diagnostics_truncated'] = any(count > DIAGNOSTIC_LIMIT for count in counts) or len(merged) > DIAGNOSTIC_LIMIT
         result['binding_conflict_count'] = conflicts['count']
+        result['conservative_binding_conflict_count'] = original_conflict_count
+        result['close_reallocation_proofs'] = proofs
         result['trace_sha256'] = _hash(data); result['trace_bytes'] = len(data)
         result['observation_complete'] = not result['errors']
     except (OSError, ValueError, TypeError, KeyError, AttributeError):
