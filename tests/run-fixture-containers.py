@@ -33,7 +33,10 @@ def main(argv=None):
     parser.add_argument('--sha256',required=True)
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--timeout',type=int,default=600)
+    parser.add_argument('--scenario',choices=['payload-delta','native-duplicate'],default='payload-delta')
     given=parser.parse_args(argv)
+    if given.scenario=='native-duplicate' and set(given.host)-{'pi','opencode'}:
+        parser.error('Native cross-scope duplicate probe supports Pi/OpenCode only')
     archive=given.archive.resolve()
     if ',' in str(archive):parser.error('Archive mount path cannot contain a comma')
     try:version=isolation.inspect_archive(archive,given.sha256)
@@ -47,14 +50,19 @@ def main(argv=None):
             raise RuntimeError('Locked image identity mismatch')
     args.output.mkdir(parents=True)
     frozen=args.output/'frozen';frozen.mkdir()
-    worker=(ROOT/'tests/run-installer-lifecycle.py').read_bytes()
-    (frozen/'run-installer-lifecycle.py').write_bytes(worker)
+    worker_name='run-native-duplicate.py' if given.scenario=='native-duplicate' else 'run-installer-lifecycle.py'
+    worker=(ROOT/'tests'/worker_name).read_bytes()
+    (frozen/worker_name).write_bytes(worker)
+    if given.scenario=='native-duplicate':
+        (frozen/'run-installer-lifecycle.py').write_bytes((ROOT/'tests/run-installer-lifecycle.py').read_bytes())
     (frozen/'run-fixture-containers.py').write_bytes(Path(__file__).read_bytes())
     (frozen/'run-registry-containers.py').write_bytes(Path(registry.__file__).read_bytes())
     (frozen/'run-project-isolation.py').write_bytes(Path(isolation.__file__).read_bytes())
     (frozen/'container-images.json').write_bytes(args.lock_bytes)
     report={'status':'In Progress','input_version':version,'input_archive_sha256':given.sha256,
-        'scope':'Locally modified A/B fixtures, not exact release payload acceptance',
+        'scope':('Real native registration with exact archive; second-registration preflight only, not execution-time hook deduplication'
+                 if given.scenario=='native-duplicate' else 'Locally modified A/B fixtures, not exact release payload acceptance'),
+        'scenario':given.scenario,
         'model_sessions':'Not Run','credentials_mounted':False,'resource_preflight':resources,
         'worker_sha256':hashlib.sha256(worker).hexdigest(),
         'wrapper_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -78,7 +86,7 @@ def main(argv=None):
             '--mount',f'type=bind,src={archive},dst=/input/package.tgz,readonly',
             '--mount',f'type=bind,src={case},dst=/results',
             *[x for key in args.proxies for x in ['-e',key]],'--entrypoint','python3',
-            args.images[host],'/source/tests/run-installer-lifecycle.py','--host',host,
+            args.images[host],'/source/tests/'+worker_name,'--host',host,
             '--archive','/input/package.tgz','--output','/results/run']
         try:
             with (case/'container.stdout').open('w') as stdout,(case/'container.stderr').open('w') as stderr:
@@ -89,7 +97,8 @@ def main(argv=None):
             if (completed.returncode==0 and observed.get('status')=='Passed'
                     and observed.get('host')==host and observed.get('project_records_unchanged') is True
                     and observed.get('input_archive_sha256')==given.sha256
-                    and set(observed.get('fixture_archives',{}))=={'A','B'}):result['status']='Passed'
+                    and (observed.get('scenario')=='prevention_of_second_native_registration'
+                         if given.scenario=='native-duplicate' else set(observed.get('fixture_archives',{}))=={'A','B'})):result['status']='Passed'
         except (OSError,ValueError,subprocess.SubprocessError,KeyboardInterrupt) as error:
             result['error']=type(error).__name__
         finally:

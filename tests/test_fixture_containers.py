@@ -26,7 +26,8 @@ class FixtureWrapperTest(unittest.TestCase):
     def test_invalid_inputs_have_no_docker_or_output_effect(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary);args=self.args(root)
-            for extra in (['--sha256','0'*64],['--timeout','601'],['--host','unknown']):
+            for extra in (['--sha256','0'*64],['--timeout','601'],['--host','unknown'],
+                          ['--scenario','native-duplicate','--host','claude']):
                 with self.subTest(extra=extra),patch.object(runner.registry,'docker_output') as docker, \
                      contextlib.redirect_stderr(io.StringIO()),self.assertRaises(SystemExit):runner.main(args+extra)
                 docker.assert_not_called();self.assertFalse((root/'evidence').exists())
@@ -56,6 +57,26 @@ class FixtureWrapperTest(unittest.TestCase):
             self.assertEqual(report['status'],'Failed');self.assertEqual(report['hosts']['dsh']['status'],'Not Run')
             self.assertFalse(report['hosts']['pi']['cleanup']['container_removed'])
             self.assertEqual(report['hosts']['pi']['npm_cache']['status'],'preserved')
+
+    def test_native_duplicate_uses_exact_worker_contract_not_fixture_claims(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);args=self.args(root)+['--scenario','native-duplicate']
+            def launch(command,**kwargs):
+                self.assertIn('/source/tests/run-native-duplicate.py',command)
+                run=root/'evidence/pi/run';run.mkdir()
+                digest=args[args.index('--sha256')+1]
+                (run/'summary.json').write_text(json.dumps({'status':'Passed','host':'pi',
+                    'project_records_unchanged':True,'input_archive_sha256':digest,
+                    'scenario':'prevention_of_second_native_registration'}))
+                return runner.subprocess.CompletedProcess(command,0)
+            with patch.object(runner.registry,'resource_preflight',return_value={'fixture':True}), \
+                 patch.object(runner.registry,'docker_output',side_effect=lambda a:a[2]), \
+                 patch.object(runner.registry,'cleanup_container',return_value={'status':'Passed','container_removed':True}), \
+                 patch.object(runner.subprocess,'run',side_effect=launch):
+                self.assertEqual(runner.main(args),0)
+            report=json.loads((root/'evidence/summary.json').read_text())
+            self.assertIn('not execution-time hook deduplication',report['scope'])
+            self.assertEqual(report['scenario'],'native-duplicate')
 
 
 if __name__=='__main__':unittest.main()

@@ -221,7 +221,7 @@ Pi 的 `/pw-plan-execute` 同时启用 hooks 与未完成计划的续跑，parit
 
 ### 资源约束与中断恢复
 
-五宿主模型测试保持串行。容器限制 2 CPU、3 GiB RAM、256 个进程，`--memory-swap=3g` 禁止额外占用 Swap；HOME tmpfs 上限 2 GiB，临时目录 512 MiB。共享 HOME 安装隔离使用同样 CPU/RAM/进程限制和 2 GiB tmpfs。限额导致的失败必须保留，不能标为宿主不支持；运行结束核对并清理本次容器。
+五宿主模型测试保持串行。容器限制 2 CPU、3 GiB RAM、256 个进程，`--memory-swap=3g` 禁止额外占用 Swap；HOME tmpfs 上限 2 GiB，临时目录 512 MiB。共享 HOME 安装隔离使用同样 CPU/RAM/进程限制；HOME、项目、源包和安装临时文件置于输出磁盘目录，容器 `/tmp` 为 512 MiB tmpfs。限额导致的失败必须保留，不能标为宿主不支持；运行结束核对并清理本次容器。
 
 `/tmp` 可能是内存文件系统。大安装缓存、构建工作目录优先放在有余量的磁盘目录；仅清理确认不再被进程引用的本次可重建依赖/下载缓存，保留准确 tarball、原始失败、源码和日志。`project_snapshot` 在读取前剪枝顶层安装目录，避免把缓存全部载入内存后再过滤；嵌套同名文档仍被核对。模型启动前保存 before 与 In Progress，意外终止不能补写成 Passed。
 
@@ -232,3 +232,16 @@ Pi 的 `/pw-plan-execute` 同时启用 hooks 与未完成计划的续跑，parit
 五宿主入口在访问认证/Docker 前检查 4 GiB 可用内存及输出磁盘 8 GiB 空间，输出应使用磁盘目录（如 `/var/tmp/planweft-validation-new`），避免大型缓存占用 tmpfs。每个模型场景限时 30..600 秒；仍使用 2 CPU、3 GiB 内存且不额外使用 Swap、256 PID。先确认容器已移除，再删除自有 `agents={}` 的未引用版本缓存，保留项目记录、收据、快照和日志；无法确认时停止新场景。
 
 稳定验收使用 acceptance schema 2：每个总项下列出 `observations.scenarios`，逐场景包含 Passed 和摘要绑定的实际附件。准确所需场景由 `scripts/check-release-gate.py:required_scenarios` 定义。旧 schema 1 不放行；当前没有历史稳定 acceptance 需要自动迁移。候选版仍仅允许 next。
+
+
+### 原生跨 scope 重复注册预检
+
+```bash
+python3 tests/run-fixture-containers.py --scenario native-duplicate \
+  --host opencode --archive /path/to/planweft-VERSION.tgz \
+  --sha256 EXACT_SHA256 --output /var/tmp/planweft-native-duplicate-new
+```
+
+该场景目前支持 Pi/OpenCode：从准确归档完成真实 global 安装及原生发现，然后执行同包 project `add --dry-run`，要求拒绝并保持原生配置和项目文件；再检查自有 doctor/update 预检与移除记录。Pi 的 `list` 仅证明包注册，不替代 RPC Extension 实际加载。OpenCode 的工具及 Skill 发现也不证明两个 handlers 已执行。此项称为“防止第二套原生注册”，不称为运行时提醒去重；实际模型消息投递另行验收。
+
+包装器在创建输出和 Docker 调用前校验归档、参数与资源，串行限制 2 CPU、3 GiB、无额外 Swap、256 PID、600 秒；失败中止后续宿主，保留失败和原始记录并核对容器清理。默认 `--scenario payload-delta` 仍是修改后 A/B fixtures，与准确发布归档的此项预检证据分开。
