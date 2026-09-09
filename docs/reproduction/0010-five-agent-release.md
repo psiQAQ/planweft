@@ -245,3 +245,45 @@ RC7 通过同一 overlay 修复六语言 progress 模板、Shell/PowerShell 内�
 [离线记录](evidence/0010/rc7-offline-records.tar.gz) 共 28 项，SHA-256 `9eacf2a1f65e95023013e229c0ac0f34c6f880c7b55284e4d72610b3ab30f041`。这是候选准备证据，不是稳定准确归档或新宿主模型验收。RC7 发布后仍须按原固定任务复验，不采用显式调用或重复无变化试验替代自动匹配。
 
 RC7 首次三系统 CI 的 Windows 作业在 setUpClass 阶段因默认 cp1252 读取多语言入口失败，尚未执行 PowerShell 初始化；Linux 作业 Passed，macOS 被矩阵取消。原始日志和摘要见 [编码问题记录](evidence/0010/rc7-windows-encoding.json)。修复为构建器及原生适配器显式 UTF-8 读取，新增模拟旧默认编码的回归；本地 8 Passed / 1 PowerShell Not Run，生成物未变化。矩阵关闭 fail-fast，后继 CI 各系统结果分别保留。此修复不修改已冻结 RC7 包内容，不通过更改摘要放行。
+
+### RC7 OIDC 发布与准确远端包
+
+公开 master `7e66ee9214364ffa5f00a04a8d040e4ace082980`；[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34332899246) 全部成功。每个系统实际执行 9 项记录模板/初始化测试且无 skip（包括 Shell 与 PowerShell）；Linux 完整 unittest 为 160 项 Passed。原失败 Windows 作业保留，不作为通过证据。
+
+[RC7 OIDC](https://github.com/psiQAQ/planweft/actions/runs/34333285542) 发布到 next。固定 Node 24.19.0 / npm 11.11.0 下，原冻结源码 `b51a6a3` 和 Windows 构建修复后的干净源码重建包逐字相同：5,258,313 字节，SHA-256 `e3d67af7dcba154a3800e39c19ec06a7f40b874d3b92dc7b7517bed85cc4bed2`。真实 npm 下载、SHA-512 integrity 与 SHA-1 也匹配。8 项新增提交和递归附件审计未发现私人路径、7 个已知凭据值或归档身份泄漏。
+
+五个固定 Linux 镜像对准确 RC7 包执行预检及同版本原生安装/卸载/重新安装，共10项 Passed；这不是多版本升级或模型验收。无本次容器残留，原有容器保留；另清理 OpenCode 两场景无挂载引用的 node_modules，共 109,580,458 字节，项目证据和锁文件不变。当前 npm latest 仍是 RC1，正式0.4.0未发布；开始使用准确远端 RC7 对记录修复进行模型复验。
+
+## RC7 准确远端维护、独立冷读及 RC8 修复依据
+
+RC7 固定 Node 24.20.0 的 Check `34334806556` 四个 job Passed，保存全部日志并逐一确认实际 Node 版本。与先前 RC7 发布/三系统日志分开保留，不能将新 CI 当作模型验证。
+
+| 准确 RC7 宿主 | 自动维护 / 冷读 | 独立结论与范围 |
+| --- | --- | --- |
+| Codex | Passed / Passed | 维护、唯一状态、观察时点与文件冷读 Passed；辅助 resolver 拒绝后恢复和残留未来时态保留为非阻塞；该维护不证明持久信任或 native deny |
+| Pi | Failed / Passed | 实际没有采用计划，错误把旧记录和未设 PLAN_ID 当例外；读取禁止的宿主配置；冷读无依据称原跟踪实现为用户新增；overall Failed |
+| OpenCode | Passed / Passed | 实际实现已改 utf-8，但 findings 两处仍称当前 utf-8-sig；漏记首次反事实脚本错误，冷读错误归引并漏报矛盾；overall Failed |
+| DSH | Failed / Passed | 历史日期/Passed/仅历史观察实质保留，literal误报保留；功能、计划与外部独立冷读核心 Passed；扩展读取 DSH_* 超出实验范围，overall Failed；未见凭据/业务/旧聊天内容 |
+
+四份 `*-rc7-maintenance-independent-review.json` 保存逐项判定、原始摘要及限制；主 Agent 核对所有附件摘要。DSH owner 内部子代理确实存在并执行获准测试，也收到了项目 hook 数据，不能把它称作纯文件读取盲审；外部 cold-reader 才是独立只读、无插件的新会话。原失败未重写。
+
+脱敏准确证据包 `evidence/0010/rc7-live-records.tar.gz` 共680项，SHA-256 `641ea37db7083d18d7ad148d00af84f4e5f8c5a8c05821b58767ec16c4edbdb2`。包含原始前后JSON快照、模型trace、controller、CI、registry proof、五宿主非模型native生命周期及清理记录；省略物理项目树和可重建缓存，manifest 保存原始/公开摘要映射。所有四组模型容器已清理，原服务保留；OpenCode 后续另释放54,790,229字节已结束且无引用的依赖缓存。
+
+RC8 以独立 [Pi 入口诊断](../reviews/0010-rc7-pi-entry-diagnosis.md) 和 [入口源码审查](../reviews/0010-rc8-entry-review.md) 为依据：用实际文件/绑定/输出分支替换 selection-valid 抽象前提，区分空返回的拒绝与正常新任务，直接使用宿主 Skill location；保留 PowerShell/legacy 与 canonical Bash 的真实初始化差异。将观察时点、用户原有修改来源及最终当前事实核对纳入主流程。description 精简且原宿主完整metadata保留在手册；没有自动写入hook或运行时状态协议变更。小型脚本契约4项与入口2项Passed；其不证明RC8模型已通过。
+
+[门槛独立审查](../reviews/0010-rc7-gate-gap-review.md) 还确认最终 stable 缺口：准确包故障恢复/用户副本保护、实际去重/重复hook、运行项目隔离、远端新会话及完整原生渠道更新。新增native registry worker和资源受限wrapper的16项离线回归Passed，RC6↔RC7实际运行开始；仍按实际结果记录，不填造stable acceptance。
+
+
+### RC8 入口和原生版本生命周期修复
+
+RC8 尚未发布。精简 description 的首次迁移回归为 718 Passed、3 Failed、63 Skipped；发现阶段丢失能力披露，不能由后读手册替代。修复保留任务触发和显式历史读取/文件恢复/宿主续跑边界，未修改原上游披露测试的 21 个断言。随后迁移回归 721 Passed、63 Skipped、851 subtests Passed。该迁移树仍应用既有两 token progress 契约补丁，并非完全未修改的上游基线。
+
+本地完整回归曾为 185 Passed、1 Failed、1 Skipped：Gemini 新增能力 notice 与旧“所有移动资源完全相同”断言冲突。更新为新增 notice 必须存在、原文所有字节和执行位必须保留。定向入口/资源测试 7 Passed、126 subtests Passed；输入前置验证 2 Passed、4 subtests Passed。语言 GUIDE 的错误链接和宿主摘要遗漏也保留在独立 review 中，逐项修复后复验。上述代码契约结果不证明模型采用或语义交接通过。
+
+RC6 → RC7 → RC6 → RC7 → 卸载的真实原生 npm 生命周期：Pi、OpenCode、DSH Passed。逐步校验准确包字节、唯一原生注册及 Skill 配对；Pi/OpenCode 执行原生发现，DSH 为配置组合与启动观察，模型发现另验。项目记录保持原字节。OpenCode 前两次分别因旧缓存路径假设、宿主自动加入 schema 而 Failed，保留原记录；修复只绑定实际固定版本缓存并在 fixture 预置官方 schema，仍严格核对所有无关配置。独立 reviewer 发现悬空 Skill 链接误判卸载成功，已加入 exists/is_symlink 双检查和负对照。
+
+脱敏附件：[rc7-native-version-lifecycle.tar.gz](evidence/0010/rc7-native-version-lifecycle.tar.gz)，159 个文件、324839 bytes、SHA-256 `97b497ece8a487ee3fab6f50cf2438c9409aed142bed781d259d71fee91e9366`。含两次原始失败、三个宿主真实完成结果、冻结执行器、逐文件原始/公开摘要；不包含可重建安装目录、缓存及认证。所有所属容器均确认删除，Passed 场景自有 npm cache 已清理，失败输入保留。
+
+最初导出误纳入大量可重建安装副本，产生约 111 MB 的未提交临时附件；改为明确顶层日志/摘要/冻结脚本清单后，仅保留上述有界公开附件。原始输入未删除，未执行全局 prune。
+
+开发回归原始失败/修复后日志：[rc8-development-regressions.tar.gz](evidence/0010/rc8-development-regressions.tar.gz)，SHA-256 `c0f5a9aec7839cc9a150ce678913ff2723ef6d8fa21f53cc002a683f5927df94`。源码及本地解释器日志仅作开发回归，最终包另验。

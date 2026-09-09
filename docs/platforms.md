@@ -1,8 +1,8 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
-RC6 已经 OIDC 发布到 next，远端字节匹配、三系统 CI 通过。其 Codex 六项停止及独立审查通过；正常持久 hook 信任、Codex/OpenCode/DSH 原生拒绝和 Pi 项目批准已有实测。停止轨迹不替代权限或信任证明。
+RC7 已通过 [OIDC](https://github.com/psiQAQ/planweft/actions/runs/34333285542) 发布到 next，远端准确字节一致，五镜像无模型原生安装/移除/重装 Passed。固定 Node 24.20.0 后的[三系统安装器 CI](https://github.com/psiQAQ/planweft/actions/runs/34334806556) 也已 Passed；这不代表 Windows/macOS 真实 Agent 模型已验证。
 
-RC6 OpenCode 维护和冷读核心语义 Passed，保留历史字符串误报与冷读一处引用行号错误。Codex、Pi 和 DSH 维护在独立审查中仍有文档观察时点问题；Codex 另有 progress 旧阶段冲突，Pi 读取了实验禁止的项目宿主配置（未发现凭据泄露）。原自动结果和独立 Failed 均保留，正准备模板修复。Claude 兼容端点明确授权及实测仍待完成。以下表格保留历史版本范围，不代表稳定验收；状态见[发布：中文](releasing.md) / [English](releasing.en.md)。
+RC7 独立维护/冷读：Codex Passed；Pi 未采用计划、读取禁用配置且冷读有无依据归因，Failed；OpenCode 当前/历史实现记录矛盾且冷读漏报，Failed；DSH 功能与交接核心 Passed，但读取超出范围的宿主环境元数据，整体 Failed，未见凭据/业务/旧聊天内容。当前准备 RC8 入口决策与记录校验修复。Claude 兼容端点明确授权及模型验收仍待完成。下方表格是各历史版本的证据，不替代最终稳定验收。见[发布：中文](releasing.md) / [English](releasing.en.md)。
 
 ## 0.4.0 候选验证
 

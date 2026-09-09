@@ -2,7 +2,13 @@
 
 # Changelog
 
-## 0.4.0-rc.7 (candidate in development)
+## 0.4.0-rc.8 (candidate in development)
+
+- Replace abstract valid-selection wording with actions based on resolver output, bindings and project files. Distinguish normal uninitialized state from refused bindings; use the host-provided Skill location. Document canonical Bash, PowerShell and legacy layout differences while preserving read-only and old-authority exceptions.
+- Shorten the discovery description and retain full adapter metadata in the bundled manual. Include observation dates/revisions, before/after scope and final fact checking in the main record workflow.
+- Add native npm version-switch/removal checks and a resource-bounded serial runner. Pin CI Node 24.20.0. Preserve independent RC7 Pi/OpenCode/DSH failures; stable acceptance is not complete.
+
+## 0.4.0-rc.7 (candidate)
 
 - Remove duplicate live phase state from progress templates and Shell/PowerShell initialization; refer to task_plan.md for dynamic state and date findings against their observed revision. Preserve existing project files and the PWF plan protocol.
 - Add live Codex persistent hook trust and four-host native denial/approval evidence. Replace the test-method count threshold with a counterfactual regression check against the original BOM implementation. Retain RC6 documentation and experiment-scope failures; collector repairs do not constitute stable acceptance.

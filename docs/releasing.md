@@ -63,3 +63,13 @@ RC5 已通过 [OIDC](https://github.com/psiQAQ/planweft/actions/runs/34317038628
 RC6 已通过 [OIDC](https://github.com/psiQAQ/planweft/actions/runs/34322158954) 发布，准确归档 SHA-256 为 `c531188e46d268048ca0ab559baa358fc70af07277cb0001c521951234525799`，[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34322062209) Passed。当前源码准备 RC7，修复初始化 progress 重复状态及 findings 观察时点；不覆盖 RC6。公开渠道仍以 registry 查询为准。稳定版清单升级为 schema 2：每个总项还必须提供逐场景 Passed 与准确附件，包括默认自动采用、去重、停止上限、权限隔离和远端升降级。Pi 使用原生包批准场景，不宣称具有逐工具拒绝沙箱。历史 RC 和 schema 1 不替代当前稳定归档的实际验收。
 
 真实验收串行运行，场景最多 600 秒；不足 4 GiB 可用内存或 8 GiB 输出磁盘空间时不启动容器。容器限 2 CPU、3 GiB 且无额外 Swap、256 PID。确认场景容器消失后才清理自有未引用缓存；原始失败、项目记录、准确包和历史备份保留。
+
+
+## RC7 已发布，RC8 修复中
+
+RC7 源码 `7e66ee9214364ffa5f00a04a8d040e4ace082980` 已经 [OIDC 发布](https://github.com/psiQAQ/planweft/actions/runs/34333285542)，准确 npm SHA-256 为 `e3d67af7dcba154a3800e39c19ec06a7f40b874d3b92dc7b7517bed85cc4bed2`。远端字节及 integrity 均一致；固定 Node 24.20.0 的[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34334806556) 通过。
+
+RC7 尚有计划采用、观察时点和测试范围失败，当前源码准备 RC8，不覆盖 RC7，不发布稳定 0.4.0。原失败和独立审查见[平台状态：中文](platforms.md) / [English](platforms.en.md)。原生 npm 升降级测试与无模型容器入口正在补齐；最终准确 stable 包、远端新会话及五平台门槛仍须完整执行。latest 当前仍指向 RC1，不把这一遗留标签当作正式版本。
+
+
+RC8 开发复验恢复发现阶段的能力与授权边界；721 项迁移回归通过。Pi、OpenCode、DSH 的 RC6↔RC7 原生 npm 生命周期通过，保留此前失败。上述均不是最终稳定归档验收；RC8 发布与模型复验待执行。

@@ -65,3 +65,13 @@ RC5 is now published to `next` by [OIDC](https://github.com/psiQAQ/planweft/acti
 RC6 was published through [OIDC](https://github.com/psiQAQ/planweft/actions/runs/34322158954), with exact archive SHA-256 `c531188e46d268048ca0ab559baa358fc70af07277cb0001c521951234525799` and passing [three-OS CI](https://github.com/psiQAQ/planweft/actions/runs/34322062209). The source is preparing RC7 to fix duplicate progress state and missing observation timing in findings. RC6 will not be overwritten; query the registry for actual published versions. Stable acceptance now uses schema 2: every aggregate check also requires Passed scenarios with bound observation attachments, including automatic adoption, reminder deduplication, stopping limits, permission isolation and remote upgrades/rollbacks. Pi uses native package approval; it does not claim a per-tool denial sandbox. Historical RC results and schema 1 do not replace current stable-artifact acceptance.
 
 Live acceptance runs serially with a 600-second scenario limit. Containers do not start below 4 GiB available RAM or 8 GiB free output storage. Each container is limited to 2 CPUs, 3 GiB with no extra swap, and 256 PIDs. Owned unreferenced stores are cleaned only after confirming container removal. Original failures, project records, exact archives and history backups remain.
+
+
+## Published RC7; RC8 fixes in progress
+
+RC7 source `7e66ee9214364ffa5f00a04a8d040e4ace082980` was [published through OIDC](https://github.com/psiQAQ/planweft/actions/runs/34333285542), with exact npm SHA-256 `e3d67af7dcba154a3800e39c19ec06a7f40b874d3b92dc7b7517bed85cc4bed2`. Remote bytes and integrity match. [Three-OS CI](https://github.com/psiQAQ/planweft/actions/runs/34334806556) passed with Node pinned to 24.20.0.
+
+RC7 still has adoption, observation-timing and experiment-scope failures. The source is preparing RC8; RC7 is not overwritten and stable 0.4.0 is not released. Original failures and independent reviews remain in [platform status: 中文](platforms.md) / [English](platforms.en.md). Native npm version-switch tests and a non-model container runner are being completed; final stable bytes, remote fresh sessions and all five host gates still require execution. latest still points to RC1; that inherited tag is not a stable release.
+
+
+RC8 development restores discovery-time capability and consent boundaries; 721 migrated regression tests passed. Native npm RC6↔RC7 lifecycles passed for Pi, OpenCode and DSH, with prior failures retained. These are not final stable-artifact acceptance; RC8 publication and model revalidation remain pending.

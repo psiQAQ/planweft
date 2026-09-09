@@ -136,3 +136,9 @@ RC6 最新独立结果：[Codex](../reproduction/evidence/0010/codex-rc6-mainten
 RC7 模板独立依据与实现审查：`skill_entry_review` 核查六语言、analytics、Shell/PowerShell here-doc 文字、OpenCode fallback 及原文件保护，未发现阻塞问题；本机 6 Passed / PowerShell 1 Not Run。对反馈执行器发现异常路径漏清无引用缓存的 P2，主 Agent 增加 finally 中确认容器退出后的逐阶段所有权检查，超时/损坏 controller 均保留场景 Failed 但释放可重建版本；独立复跑 13 Passed，P2 闭合。无法证实无引用的缓存记录保留原因，不把部分安装故障当成全量释放。
 
 RC7 上游对照适配复审：原始归档 721 Passed / 63 Skipped；首次迁移有两项 SUBFAILED，均为 progress Phase 1/2 占位检查，其他 721 Passed。`skill_entry_review` 核查仅两个迁移测试字符串替换，19 处断言及循环保持原样，无新增 skip、无 vendor 改动；新模板测试 7 Passed / PowerShell 1 Not Run，迁移模板透明性检查 7 Passed。首次原始失败保留，并与适配后全量结果分开报告。
+
+## RC7 独立模型结果与 RC8 入口审查
+
+四宿主准确远端 RC7 的新独立审查见 `docs/reproduction/evidence/0010/{codex,pi,opencode,dsh}-rc7-maintenance-independent-review.json`：Codex Passed；Pi/OpenCode/DSH 各有独立 Failed 原因，功能、历史语义和范围逐项区分。主 Agent 核对所有附件摘要，不以 automatic Passed 覆盖独立发现。
+
+RC8 [入口诊断](0010-rc7-pi-entry-diagnosis.md)、[源码审查](0010-rc8-entry-review.md) 和[剩余门槛审查](0010-rc7-gate-gap-review.md) 已保存。入口审查未发现阻塞，主 Agent 另将中文/繁体“无计划或待纠正绑定”改为明确的“无计划，且无待纠正绑定”。6项相关离线测试及15平台资源完整性是源码/脚本证据，不代替候选准确包或模型验收。独立门槛审查不授予正式发布通过。

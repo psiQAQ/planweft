@@ -224,3 +224,11 @@ vendor 四文件是导入器产物，dist 与 plugins 由 builder 生成；证�
 固定 PWF v3.17.0 的 `skills/planning-with-files/scripts/init-session.sh` / `.ps1` 使用 here-doc 创建普通 progress，并硬编码初始 Current Status；`templates/progress.md` 另有动态阶段占位。本地“追加模板规则”因此没有覆盖实际默认初始化。这与已批准的 task_plan 唯一动态状态设计冲突，RC6 Codex 原生维护及独立审查确证了冲突；Pi/DSH findings 同样出现修复前观察仍称当前的缺陷。源码归档及版本摘要见 `vendor/planning-with-files/upstream.json`，独立依据与行为记录见 REV-0010 和对应 RC6 JSON。
 
 本地最小修复为生成时替换重复状态、指向同目录 task_plan，并在 findings 提供观察时间/修订提示。它组合已有 Markdown 相对链接、PWF 追加事件记录及本仓证据区分规则，不引入第二个状态服务、同步器或自动改写既有文件。任务阶段解析保持上游协议；实测初始化内容与既有字节保护分开验证。
+
+
+## RC8 可观察的计划选择与记录核对
+
+- 主 Skill 的解析分支以固定 PWF [resolve-plan-dir.sh](https://github.com/OthmanAdi/planning-with-files/blob/0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7/skills/planning-with-files/scripts/resolve-plan-dir.sh#L300) 的拒绝仍返回 0、空输出 legacy 回退和 [init-session.sh](https://github.com/OthmanAdi/planning-with-files/blob/0d21b6c4aa5f2c5bdd3d042e7473ee09f7fae9e7/skills/planning-with-files/scripts/init-session.sh#L377) 的 PWD 命名初始化为依据。PowerShell/i18n及旧宿主副本保留根布局，不能笼统承诺 PLAN_ID 输出。此处只调整入口决策说明，未改变固定脚本或项目状态协议。
+- 优先使用宿主已有 Skill location，以 [Pi v0.84.3 skills.ts](https://github.com/earendil-works/pi/blob/v0.84.3/packages/coding-agent/src/core/skills.ts#L332) 和 [system-prompt.ts](https://github.com/earendil-works/pi/blob/v0.84.3/packages/coding-agent/src/core/system-prompt.ts#L146) 为据，辅以实际 native RPC 的绝对 sourceInfo.path。未截获 RC7 完整系统提示，因此不宣称每次会话都直接观测到了同一 XML。
+- 观察日期/版本、修改前后范围、最终“当前行为”事实核对和用户已有修改来源，是原有证据治理的执行字段。RC7 OpenCode 读过新模板后整体覆盖 findings，仍遗留旧实现为当前的记录；因此把这些字段纳入主入口，而非仅留在可能被替换的模板。RC7 Pi/DSH 的宿主配置/变量范围偏离保留为失败，入口只按已提供位置与规划变量定位资源。
+- 独立诊断和源码审查见 REV-0010；`tests/test_plan_selection_contract.py` 实际验证空输出的两种状态、legacy 保留、具名初始化及拒绝绑定不回退。脚本契约测试不证明模型一定按文案执行，准确 RC8 模型结果仍需单独验收。

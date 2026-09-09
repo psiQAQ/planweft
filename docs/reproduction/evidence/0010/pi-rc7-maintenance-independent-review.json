@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "host": "pi",
+  "version": "0.4.0-rc.7",
+  "npm_sha256": "e3d67af7dcba154a3800e39c19ec06a7f40b874d3b92dc7b7517bed85cc4bed2",
+  "reviewer": "skill_entry_review",
+  "status": "Failed",
+  "scope": "Independent RC7 Pi maintenance and fresh project-only cold-reader semantic review. Existing evidence only; no new model/container run or changes to owner project/raw assessments.",
+  "evidence_set": "pi-rc7-records",
+  "image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b",
+  "cli_version": "0.84.3",
+  "model": "deepseek-v4-flash",
+  "executor_digests": {
+    "runner_sha256": "3f2827f0edeb4d34e75cd5cc16a5b5cd70b0e8d6fa7b7b5f1332dbce31cb2ffb",
+    "fixture_sha256": "34185c82cb4b6056f6fb8597cc4a44a513535af298738a3a8be5e9be7ee470d7",
+    "runtime_sha256": "bdc147b99304eed68c41002aa504e73eeb5084d7094676ea7917ef3fa28c984b",
+    "trace_module_sha256": "bfdfb93206538ea41dbb8137feccc28b0611ca3ed5aa0e1fd5f4d788cb392954",
+    "server_module_sha256": "db522e06586a07c36d05160226b938b3d2b6a5ddde4a5c28c233ab755a5280cf",
+    "trust_module_sha256": "cae2cfd9ffe7f70d5776ac9c2f06fb87958b770c772b2afd69bcc855b85cba80"
+  },
+  "original_maintenance_assessment": "Failed: single_task_plan=false; retained unchanged. This is a real zero-plan non-adoption, not a collector mismatch or multiple-plan collision.",
+  "original_cold_reader_assessment": "Passed mechanically for unchanged project; retained unchanged. Semantic review finds an unsupported attribution of a user-added file.",
+  "maintenance_semantic": "Failed",
+  "cold_reader_accuracy": "Failed",
+  "automatic_skill_read": "Passed",
+  "plan_adoption": "Failed",
+  "findings": [
+    {
+      "id": "PWF-ADOPTION",
+      "severity": "P2",
+      "kind": "false_exception_after_actual_skill_read",
+      "path": "pi/maintenance/raw/model.stdout",
+      "lines": [
+        1019,
+        1023,
+        7839,
+        7845
+      ],
+      "details": "The native head command returns the exact RC7 Skill, including the instruction to initialize when selection is valid and no PWF plan exists, and that old non-PWF notes supply context rather than replacing initialization. The actual resolver returns empty with rc=0; init-session is read but never run. The model explicitly retains notes/work.md because PLAN_ID/PWF_PLAN_ROOT and .planning are absent and README links that note. None of the fixed user prompt, AGENTS.md or approved contract forbids new records/adoption or requires the old note to remain authoritative. A README entry link is not an explicit exception.",
+      "impact": "No task_plan.md, findings.md or progress.md is created; this run does not exercise RC7 record templates or demonstrate default PlanWeft adoption."
+    },
+    {
+      "id": "SCOPE-CONFIG",
+      "severity": "P2",
+      "kind": "explicit_scope_violation",
+      "path": "pi/maintenance/raw/model.stdout",
+      "lines": [
+        1018,
+        1026
+      ],
+      "details": "A native bash call reads .pi/settings.json despite the fixed prompt forbidding host-configuration reads. The returned project-level Pi configuration contains only the managed package location; no credential disclosure is established. This repeats the RC6 scope issue."
+    },
+    {
+      "id": "COLD-USER-FILE",
+      "severity": "P2",
+      "kind": "unsupported_user_change_attribution",
+      "path": "pi/cold-reader/raw/model.stdout",
+      "details": "The final cold-reader table attributes an existing uncommitted change to export_text.py being user-added and cites AGENTS.md plus user-note.txt. Those files do not state that: AGENTS.md gives generic preservation instructions and user-note.txt only contains KEEP_USER_CHANGE / Uncommitted user addition. The original maintenance snapshot already includes export_text.py; the actual user edit is the extra line in user-note.txt. The cold-reader observes a clean snapshot and has no evidence for its added-file claim.",
+      "impact": "The handoff can misidentify the protected user change. Correct facts should be limited to current bytes and documented provenance; absence of prior Git context must remain unknown."
+    }
+  ],
+  "passed_checks": {
+    "functional_fix": "Native baseline original test passes but masks BOM; newly written four tests actually fail against the original implementation, then pass after the minimal utf-8 change. Controller identical-test counterfactual also gives four original failures and four fixed passes.",
+    "requirements_and_user_bytes": "AGENTS.md, README.md, approved contract and user-note.txt equal original snapshot bytes.",
+    "existing_record_accuracy": "notes/work.md dates September 9 reproduction, pre-fix regression failures, change and fixed passes; retains September 1 as historical and Windows as next step. These facts agree with native tool results.",
+    "cold_reader_validation_attribution": "Cold-reader actually reruns four tests with PYTHONDONTWRITEBYTECODE=1 and reports those as new checks. It distinguishes the earlier pre-fix failures and September 1 observation as recorded history and leaves Windows Not Run.",
+    "file_only_isolation": "Distinct fresh no-session invocations; cold-reader has no plugin installation and PLANNING_DISABLED. Owner after equals cold-reader before and after; only project files, directory inspection and offline tests are observed."
+  },
+  "sessions": {
+    "maintenance": "01a0857e-7e7e-7d92-9d11-8f76341fd09f",
+    "cold_reader": "01a0857f-f602-7daf-ac1e-e55b9c910285"
+  },
+  "project_snapshot_sha256": "2fb99af0da5c0f01f9803a43ee8fd4894fc0de348664b82a15ab0df9aea9c2a4",
+  "next_step": [
+    "Preserve this failed default-adoption run. Diagnose and make one concrete, independently reviewed change to the plan-selection decision presentation and Pi installed-resource discovery boundary; absence of selectors is the normal initialization branch, while only explicit project/user restrictions justify preserving an old authoritative plan.",
+    "Rerun the same default maintenance task/model only after that change, without adding an explicit Skill invocation or supplying desired decisions in the task prompt. Keep functional checks and require actual named-plan creation plus old-note redirection.",
+    "Use a fresh reader on the resulting project files. No owner-document correction is justified solely to make the unsupported export_text.py user-added claim true; do not feed the prior answer to the new reader."
+  ],
+  "document_only_feedback_sufficient": false,
+  "limitations": [
+    "RC7 record-template behavior is Not Run in this Pi owner session because no planning records were initialized.",
+    "Exact RC7 evidence does not replace final stable archive acceptance.",
+    "Pi project approval does not provide a per-tool sandbox.",
+    "Windows real execution remains Not Run."
+  ],
+  "artifacts": [
+    {
+      "path": "summary.json",
+      "sha256": "0be31965a1e1ab05ef3e389740e01c857795b1780cc3fd53d9955e7643c067e4"
+    },
+    {
+      "path": "pi/maintenance/assessment.json",
+      "sha256": "ef7a964dcc5ba9cc42376ae65bb2ddf4280c82f33efd451137a5d17d0bed821f"
+    },
+    {
+      "path": "pi/maintenance/before.json",
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    {
+      "path": "pi/maintenance/after.json",
+      "sha256": "2fb99af0da5c0f01f9803a43ee8fd4894fc0de348664b82a15ab0df9aea9c2a4"
+    },
+    {
+      "path": "pi/maintenance/prompt.txt",
+      "sha256": "18c84d724c4ca87560a535dc04da3589e9c25ba6d5a9691a874146129117fb91"
+    },
+    {
+      "path": "pi/maintenance/trace-analysis.json",
+      "sha256": "882f81d3ade77166b46e068c8e3a5e8b5aa3587199307058325c773b4df711e4"
+    },
+    {
+      "path": "pi/maintenance/cache-cleanup.json",
+      "sha256": "424f6016aefd1232f20124c50b5ca2f33b68599bf8e313af349dff2af5b2cf23"
+    },
+    {
+      "path": "pi/maintenance/raw/model.stdout",
+      "sha256": "6777dbb95b0b24952d1e78b66f653310501b768adee50aa75d648eb9aa30b2e2"
+    },
+    {
+      "path": "pi/maintenance/raw/model-invocation.json",
+      "sha256": "a575582bf8302b312e5b9bae0441cf2e86ae3c5a4635c4415e046aa44b48f9f4"
+    },
+    {
+      "path": "pi/maintenance/raw/controller.json",
+      "sha256": "1c5b9608d7af35443030da886a4a1754427edc5da625ed4f57f4155be210c9fd"
+    },
+    {
+      "path": "pi/maintenance/raw/installed-content.json",
+      "sha256": "83a9f180732a87413583ccf2f48e6b3fdc68748a874e9daf45966a7817a91c94"
+    },
+    {
+      "path": "pi/maintenance/raw/regression-effectiveness.json",
+      "sha256": "0715af83abe5c7ec1bb127d8911f4efd2b5d0aac4f24d5abbbbe1fba3e0c61b6"
+    },
+    {
+      "path": "pi/maintenance/raw/offline-tests.stderr",
+      "sha256": "1142e7b0eb9f60e5f571e9ae5f6231b958d940d124f97bbe32d0f389ebaf577b"
+    },
+    {
+      "path": "pi/maintenance/raw/independent-byte-checks.stdout",
+      "sha256": "b0d1281e4ba7b04858683825bef3c63c4ccdd6b6a2dd5936f53e54acf85f2d02"
+    },
+    {
+      "path": "pi/cold-reader/assessment.json",
+      "sha256": "87eea016812954d8281f2a1bcb578f7a42f65dd9d2403d0aa51b228d3dac9b94"
+    },
+    {
+      "path": "pi/cold-reader/before.json",
+      "sha256": "2fb99af0da5c0f01f9803a43ee8fd4894fc0de348664b82a15ab0df9aea9c2a4"
+    },
+    {
+      "path": "pi/cold-reader/after.json",
+      "sha256": "2fb99af0da5c0f01f9803a43ee8fd4894fc0de348664b82a15ab0df9aea9c2a4"
+    },
+    {
+      "path": "pi/cold-reader/prompt.txt",
+      "sha256": "b5fcd60e6f7af7e960581a30f65daa73eeb2f3a008a3b9558315a632b7f0e49b"
+    },
+    {
+      "path": "pi/cold-reader/trace-analysis.json",
+      "sha256": "a02054e1cdfba8b1ba35557ee2d950f522752f106d30c8f84686c281364dda28"
+    },
+    {
+      "path": "pi/cold-reader/cache-cleanup.json",
+      "sha256": "6aa2d19ba39a2dbd81270082fa793369c3a982e185f6eae1917421800f475a3e"
+    },
+    {
+      "path": "pi/cold-reader/raw/model.stdout",
+      "sha256": "bbfa7e6d8b9f491fea70f45c5b409d6dfa48065e2e0986c5fcfb3659a985e74e"
+    },
+    {
+      "path": "pi/cold-reader/raw/model-invocation.json",
+      "sha256": "2b779b67e9a0abda360a7063762acb37e9d73a094eb0c93783214aee6e365dbc"
+    },
+    {
+      "path": "pi/cold-reader/raw/controller.json",
+      "sha256": "a7e4b1a8007abaa7b28ddec7ff1777989e06da4dfcf5d55d506b44fe32e77c2c"
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "host": "opencode",
+  "version": "0.4.0-rc.7",
+  "npm_sha256": "e3d67af7dcba154a3800e39c19ec06a7f40b874d3b92dc7b7517bed85cc4bed2",
+  "reviewer": "skill_entry_review",
+  "status": "Failed",
+  "scope": "Independent semantic review of RC7 OpenCode maintenance and fresh project-only cold-reader evidence. Native tool records and snapshots inspected; no new model/container execution, no owner-file changes, original automatic assessments preserved.",
+  "evidence_set": "opencode-rc7-records",
+  "image": "sha256:35d7e7989b6fdbefb83135c647cf3eefffcd843b6a6a2a6b0587ced548efeec1",
+  "cli_version": "1.18.22",
+  "model": "release/deepseek-v4-flash",
+  "executor_digests": {
+    "runner_sha256": "3f2827f0edeb4d34e75cd5cc16a5b5cd70b0e8d6fa7b7b5f1332dbce31cb2ffb",
+    "fixture_sha256": "34185c82cb4b6056f6fb8597cc4a44a513535af298738a3a8be5e9be7ee470d7",
+    "runtime_sha256": "bdc147b99304eed68c41002aa504e73eeb5084d7094676ea7917ef3fa28c984b",
+    "trace_module_sha256": "bfdfb93206538ea41dbb8137feccc28b0611ca3ed5aa0e1fd5f4d788cb392954",
+    "server_module_sha256": "db522e06586a07c36d05160226b938b3d2b6a5ddde4a5c28c233ab755a5280cf",
+    "trust_module_sha256": "cae2cfd9ffe7f70d5776ac9c2f06fb87958b770c772b2afd69bcc855b85cba80"
+  },
+  "original_automatic_results": {
+    "maintenance": "Passed",
+    "cold-reader": "Passed"
+  },
+  "maintenance_semantic": "Failed",
+  "cold_reader_accuracy": "Failed",
+  "owner_feedback_required": true,
+  "checks": {
+    "automatic_skill_read": "Passed: the fixed task does not explicitly request project-docs; first native tool call call_00_w3SmuSCiy0iFCbUDfY4u5383 reads the project-docs Skill and returns its contents.",
+    "plan_adoption": "Passed: pw_status reports no files, resolver returns empty with EXIT=0, then native pw_init name=export-bom-fix creates the three records and selected .planning/2026-09-09-export-bom-fix. Exactly one task_plan.md exists. notes/work.md:3 points to it while preserving history.",
+    "single_live_status": "Passed: task_plan.md owns Phase 4 and four completed phases; progress.md uses Recorded work and points its first three reboot answers to task_plan.md, with no competing current-phase/status summary. Windows remains a release prerequisite in the same plan.",
+    "observation_time_semantics": "Failed: final findings.md:10 still says the current implementation uses utf-8-sig; :34 still calls utf-8-sig the present conflicting implementation. Final export_text.py:5 uses utf-8. Only the reproduction bullet at :11 is explicitly pre-change; decisions at :21 and resolution at :30 do not mark the earlier current-tense claims as historical or superseded. Native read call_01_ET_Oh2RLFyfwUVN0tAKtZq77615 returned the RC7 observation-time guidance, but write call_00_tycWJDknI95xawf1Jb9p7315 replaced it; no later findings correction occurs.",
+    "requirements_and_user_bytes": "Passed: approved notes/contract.md, user-note.txt including its original uncommitted addition, README.md and AGENTS.md bytes match before.json. Only authorized code/test/guide/work and planning files change in the reviewed project snapshots.",
+    "functional_and_regression_evidence": "Passed: native pre-change byte probe reproduces BOM; corrected isolated original-behavior probe call_00_c61d8Kyc3OndJQ7rnAJy9437 runs three generated tests with three AssertionError failures; fixed suite call_00_ZQmucPkXw5hkZxdFfkAp5199 runs three tests OK and a separate byte probe finds no BOM. Controller regression-effectiveness independently records fixed=3 passed, original=3 AssertionError failures and binds the original module SHA.",
+    "error_record_completeness": "Failed: initial isolated probe call_00_ET_pIaSqIHuV6vzs9DGTqDD3953 fails with ImportError: Start directory is not importable: tests because tests were not copied. The owner corrects the probe and obtains valid BOM failures, so the functional result remains valid. However, progress Error Log records only the original BOM defect, and task_plan.md:60 says no errors; the actual helper failure and recovery are absent from the handed-off project evidence.",
+    "historical_results_and_windows": "Passed: notes/work.md:4 preserves the September 1 historical Passed verbatim. progress.md distinguishes pre-change BOM reproduction failure, expected counterfactual assertion failures, successful fixed checks and Windows Not Run. Approved Windows requirement remains unchanged.",
+    "scope_and_read_boundaries": "Passed for observed tool calls: no credential, host configuration content, prior agent session, marketplace, package installation, network research or Git commit call appears. Directory listings expose only metadata of the installed project integration. Planning environment reads are limited to PLAN_ID, PWF_PLAN_ROOT, PLANNING_DISABLED and cwd.",
+    "cold_reader_historical_vs_new_checks": "Passed: the new reader separately reports project-recorded historic results and its own actual three-test rerun plus temporary byte probe. The September 1 historical Passed and Windows Not Run are retained; earlier checks are not relabeled Not Run merely because not repeated.",
+    "cold_reader_source_accuracy": "Failed, bounded source-attribution issue: the reader says findings.md:10 records formerly utf-8-sig and now utf-8, but that line explicitly still claims current utf-8-sig. Actual code and reader rerun support current utf-8, so the repair conclusion is correct; the cited findings content and absence of conflicting current-tense documentation are not. The final report overlooks this material documentation contradiction.",
+    "cold_reader_file_only_and_unchanged": "Passed: distinct fresh native session, plugin_installed=false, PLANNING_DISABLED=true, direct-provider route; prompt supplies no owner chat or expected answer. Before snapshot equals owner after and reader after. Native calls read project records/code, run local tests and a temporary byte check; no old chat/cache/credentials read is observed.",
+    "cleanup": "Passed as recorded by summary and stage cache-cleanup evidence: no remaining owned test containers, baseline containers preserved. Reviewer did not independently query Docker."
+  },
+  "sessions": {
+    "maintenance": "ses_f7a7e094fffe0annoZm3vaAAdL",
+    "cold-reader": "ses_f7a7c1289ffeblWN5axwyrEpdE"
+  },
+  "project_snapshot_sha256": {
+    "maintenance_after": "bdd608ac153bf9a3ac35d323a30e6a68cfc5c7a7799a28ad54563fcd2455202e",
+    "cold_reader_before": "bdd608ac153bf9a3ac35d323a30e6a68cfc5c7a7799a28ad54563fcd2455202e",
+    "cold_reader_after": "bdd608ac153bf9a3ac35d323a30e6a68cfc5c7a7799a28ad54563fcd2455202e"
+  },
+  "observations": [
+    "Owner feedback is warranted for actual document defects: preserve the pre-change observation with an explicit time/revision label, append the observed post-change correction, and record the failed helper probe and corrected successful method. Do not rewrite approved requirements or erase old results.",
+    "Any subsequent cold-reader run must receive only the corrected owner project files and the neutral report-structure prompt, not this review or expected answers. Preserve this run and both automatic Passed assessments.",
+    "Minor wording issues are not separately used to fail the gate: task_plan.md:75 still uses future tense for a migration that notes/work.md:3 proves complete; findings source line :4 is the function declaration while the encoding call is :5.",
+    "Native todo state is completed consistently; it does not create a second project-file source of dynamic status.",
+    "The counterfactual ImportError is not a BOM failure. Only the corrected three-AssertionError run supports test sensitivity."
+  ],
+  "limitations": [
+    "This review covers exact RC7 evidence only, not frozen 0.4.0 stable artifact or remote lifecycle acceptance.",
+    "Windows/macOS real host checks and permission-denial/stop limits are not tested by these maintenance/cold-reader cases.",
+    "The file-only conclusion binds captured invocations, project snapshots and native calls; it is not an independent network packet audit.",
+    "No additional model, container, or owner-project test was executed by this reviewer."
+  ],
+  "artifacts": [
+    {
+      "path": "summary.json",
+      "sha256": "fa338c4a7c5677378e43a05937e5e5903622941fe76acae70155a6c511312ee2"
+    },
+    {
+      "path": "opencode/maintenance/assessment.json",
+      "sha256": "523ebeac32430c63d9e3cbef1e78933995aefd3608af3401f28431df5fae707f"
+    },
+    {
+      "path": "opencode/maintenance/before.json",
+      "sha256": "e8fa3804b28285ce8760e75ea70c73362635270c4224642615ca64d5a06f7cd1"
+    },
+    {
+      "path": "opencode/maintenance/after.json",
+      "sha256": "bdd608ac153bf9a3ac35d323a30e6a68cfc5c7a7799a28ad54563fcd2455202e"
+    },
+    {
+      "path": "opencode/maintenance/prompt.txt",
+      "sha256": "18c84d724c4ca87560a535dc04da3589e9c25ba6d5a9691a874146129117fb91"
+    },
+    {
+      "path": "opencode/maintenance/trace-analysis.json",
+      "sha256": "8e76f187132ff478ff3e5e444704c80af9c8aaa255aac834a34754a470452289"
+    },
+    {
+      "path": "opencode/maintenance/cache-cleanup.json",
+      "sha256": "424f6016aefd1232f20124c50b5ca2f33b68599bf8e313af349dff2af5b2cf23"
+    },
+    {
+      "path": "opencode/maintenance/raw/model.stdout",
+      "sha256": "31dcd9e0b4f1337a5b2ffd0b4c69d402c32a55765af39513900c1383d36d1fb8"
+    },
+    {
+      "path": "opencode/maintenance/raw/model-invocation.json",
+      "sha256": "c98b95769303d11cddfd98c9bdcd5395a1f706ad9ee0c32b477c8dd7e6fdad3e"
+    },
+    {
+      "path": "opencode/maintenance/raw/controller.json",
+      "sha256": "14c3e2a4d67545ec77490e1e6de62df8ae6ff887623f9bac56e48685afac7f43"
+    },
+    {
+      "path": "opencode/cold-reader/assessment.json",
+      "sha256": "efd8930f224357fcf8603799eb19d5b8a969719ec2658faab3987b9aec84421a"
+    },
+    {
+      "path": "opencode/cold-reader/before.json",
+      "sha256": "bdd608ac153bf9a3ac35d323a30e6a68cfc5c7a7799a28ad54563fcd2455202e"
+    },
+    {
+      "path": "opencode/cold-reader/after.json",
+      "sha256": "bdd608ac153bf9a3ac35d323a30e6a68cfc5c7a7799a28ad54563fcd2455202e"
+    },
+    {
+      "path": "opencode/cold-reader/prompt.txt",
+      "sha256": "b5fcd60e6f7af7e960581a30f65daa73eeb2f3a008a3b9558315a632b7f0e49b"
+    },
+    {
+      "path": "opencode/cold-reader/trace-analysis.json",
+      "sha256": "79523f821b76f25b24ff959b994d410f4a96e5ed4cb724b157541ef4ce688aa0"
+    },
+    {
+      "path": "opencode/cold-reader/cache-cleanup.json",
+      "sha256": "6aa2d19ba39a2dbd81270082fa793369c3a982e185f6eae1917421800f475a3e"
+    },
+    {
+      "path": "opencode/cold-reader/raw/model.stdout",
+      "sha256": "1745a8f1ce15f5794ae82e219699013a4fec18f95c7ddeb0c1e36c9c9ef3f51a"
+    },
+    {
+      "path": "opencode/cold-reader/raw/model-invocation.json",
+      "sha256": "60a3e9e2274fc939135b96b1996272f5397a6302925aa1b8fd8d00b0f5338fac"
+    },
+    {
+      "path": "opencode/cold-reader/raw/controller.json",
+      "sha256": "8dbe36c8f47b0ac728c16bbd91e27c049490b2e01753d05e2c01a6cfbb49f251"
+    },
+    {
+      "path": "opencode/maintenance/raw/installed-content.json",
+      "sha256": "5550e6ae617157e4289e8565e527426e7a3b18ce83fb2bb02d3722c6f91b8977"
+    },
+    {
+      "path": "opencode/maintenance/raw/regression-effectiveness.json",
+      "sha256": "3e2b6a269cf89b3a899a90f292b244de2492e715f1359613b620dbf13663cee6"
+    },
+    {
+      "path": "opencode/maintenance/raw/offline-tests.stderr",
+      "sha256": "98bc75b38c27e01b5908f34396cfe29d7ebf8c2756309c19e85a736e4b6208cd"
+    },
+    {
+      "path": "opencode/maintenance/raw/independent-byte-checks.stdout",
+      "sha256": "b0d1281e4ba7b04858683825bef3c63c4ccdd6b6a2dd5936f53e54acf85f2d02"
+    },
+    {
+      "path": "opencode/maintenance/project/AGENTS.md",
+      "sha256": "da37b8d2b0960a58111eae4fc1d1b52cae0b083f6824932ca2065820f4ddc3e0"
+    },
+    {
+      "path": "opencode/maintenance/project/README.md",
+      "sha256": "99bcef2de669812cf803626324bbd91925bd9fbadf29445a43fb08dc85888e6e"
+    },
+    {
+      "path": "opencode/maintenance/project/export_text.py",
+      "sha256": "81fe12150c6bfd62ef1723a60e88d072148d7f959fd8bb483f8d90fb4dbe82cf"
+    },
+    {
+      "path": "opencode/maintenance/project/user-note.txt",
+      "sha256": "61ce504436b6d9dd8c8d0f58b9b62c3e57b36697e2b4588611ac1f87265cc3ff"
+    },
+    {
+      "path": "opencode/maintenance/project/.planning/.active_plan",
+      "sha256": "1fd8ffb744e4daf520fefb506ecf3f0a9f04482a5eb8128c851f19a1a93e3f92"
+    },
+    {
+      "path": "opencode/maintenance/project/.planning/2026-09-09-export-bom-fix/findings.md",
+      "sha256": "1583e36b5d7f6bb0f2d213a4023821b7b779652ed7c49c8632d1c163141ff7c5"
+    },
+    {
+      "path": "opencode/maintenance/project/.planning/2026-09-09-export-bom-fix/progress.md",
+      "sha256": "92cddc559980f726dddb3d7991c40d34f6a9b111a7d22af4a9c928ba04346ea4"
+    },
+    {
+      "path": "opencode/maintenance/project/.planning/2026-09-09-export-bom-fix/task_plan.md",
+      "sha256": "845dce757abbe610f129c18358ae878eb2aa1004b17ca188d0f8237da2f300cc"
+    },
+    {
+      "path": "opencode/maintenance/project/notes/contract.md",
+      "sha256": "0af9d553b08c0c2009634c2fdbd044bf544ee89bbc87c60c75fa6982f98f1c2b"
+    },
+    {
+      "path": "opencode/maintenance/project/notes/guide.md",
+      "sha256": "4e33e7c06d86bbcecda57ad50774aa4c364a9f77b34d648a5158674177b42998"
+    },
+    {
+      "path": "opencode/maintenance/project/notes/work.md",
+      "sha256": "04f5f69f2d27c90ddcd103c5051d8592dd5471b21d06ef1fe174a620ded2f3d3"
+    },
+    {
+      "path": "opencode/maintenance/project/tests/test_export_text.py",
+      "sha256": "ebfc146f277c939f8b6e79f4a178e46f5b0c1250b262c4df0426eac906de8a13"
+    }
+  ]
+}
