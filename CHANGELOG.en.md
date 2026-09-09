@@ -2,6 +2,12 @@
 
 # Changelog
 
+## 0.4.0-rc.13 — Candidate source (check the official registry)
+
+- Recognize the exact owned Codex marketplace source using parsed TOML, receipt scope, completed steps and file digests; retain foreign-registration, changed-source and invalid-config rejection.
+- Declare the already locked toml@4.3.0 as a direct dependency without changing other locked packages; installer CI starts with clean npm dependencies.
+- Reject credentials before environment setup in no-model trials and retain native registration projections. Preserve RC12 failures and independent OpenCode findings; stable acceptance is not complete.
+
 ## 0.4.0-rc.12 — candidate source (check official registry for publication)
 
 - Match native Pi support for UTF-8 BOM settings with a Pi-only parser fix; retain ownership, duplicate and cross-scope checks.

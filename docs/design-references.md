@@ -256,3 +256,5 @@ OpenCode 原生 `pw_init` 选择面原先只列 autonomous/gated，遗漏省略�
 固定 [Codex ff29a443 config schema](https://github.com/openai/codex/blob/ff29a44391deccde0aba0f8390337d7f3c319ea4/codex-rs/core/config.schema.json) 将 `marketplaces.<name>` 表的 `source_type` / `source` 与 `plugins.<name>` 的启用状态分开；RC12 额外无模型诊断的实际 TOML 投影和原生 `marketplace list --json` 与该结构一致。自有目录是持久安装来源，不能仅因路径含 `planweft` 判为第二个插件。
 
 本地选择按解码结构校验安装记录、scope、步骤和 managed registry/payload 摘要，仅豁免精确自有 key/source；保留其他 key/value 扫描及普通别名复用同目录的拒绝。借助锁文件已有 [toml 4.3.0](https://registry.npmjs.org/toml/-/toml-4.3.0.tgz) parser 的实际源码解析 TOML，严格 UTF-8 解码在本地完成；不写回解析对象，不声称其数值精度或语法覆盖等于 Codex 完整配置校验。直接依赖声明仍待确认，当前 NODE_PATH 只用于离线开发验证，不构成分发依赖契约。来源、原始发现与处理见 [独立实施复核](reviews/0010-rc13-codex-registration-review.md)；未执行准确修改归档的真实验收。
+
+用户随后明确允许将已有锁定 `toml@4.3.0` 声明为直接依赖。69 个非根 lock 条目逐项保持不变；check/publish 两个 CI 入口均在安装器回归前执行 `npm ci --ignore-scripts --omit=dev`。已从真实安装的依赖重跑，不再使用 NODE_PATH。依赖边界和工作流复核见 [独立依赖审查](reviews/0010-rc13-dependency-review.md)，原待确认记录作为历史保留。

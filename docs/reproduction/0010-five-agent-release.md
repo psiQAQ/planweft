@@ -396,3 +396,10 @@ OpenCode 原自动历史检查要求整段逐字相等；原历史 Linux 示例 
 后续 Codex 修复按原生结构只豁免经 receipt、scope、完成步骤、registry/payload 摘要和精确 local source 验证的自有字段；其他键和值继续检查，不调用原生命令、不写回 TOML。开发测试使用已有缓存 parser，不代表已交付直接依赖或准确新包。无模型执行器的混合场景认证分流单独修复：即使同一 runner 稍后运行模型，也不向 preflight/lifecycle/package-approval 传入认证，controller 在创建 HOME 前拒绝错误载荷。以上新源码须重新冻结和验收，不能覆盖 RC12 原始结果。
 
 开发回归原始/公开摘要与结果另见 [rc13-predependency-checks.json](evidence/0010/rc13-predependency-checks.json)，包括原失败对照、123 Passed / 1 Skipped 安装器、228 项 Python（1 Skipped、无失败）、21 项执行器及构建一致性。均不是准确新包验收。新增 [资源清理记录](evidence/0010/rc13-ended-rc12-cache-cleanup.json) 保留所核对的自有路径与 41,875,805 bytes 释放量；本轮验收容器均已退出，无全局 prune。
+
+
+### RC13 直接依赖授权与修复闭合
+
+用户已明确允许将已有锁定 `toml@4.3.0` 声明为直接依赖，不升级其他包。root package/lock 已更新，69 个非根条目逐项完全相同。干净 `npm ci --ignore-scripts --omit=dev` 成功，去除 NODE_PATH 后安装器 123 Passed / 1 本机 Windows Skipped，构建一致性通过。既有 `ini@7.0.0` 在本机 Node 22.22.1/npm 9.2.0 发出 engine warning；其声明要求 22.22.2 或 24.15+ 等版本，本次没有升级它。后续准确宿主使用固定 Node 24.19.0，CI 使用 24.20.0，分别取得结果后记录。
+
+独立 review 发现 publish 工作流没有安装新直接依赖，已同步与三系统 Check 相同的锁定 npm ci 步骤，复核 Closed。见 [依赖审查](../reviews/0010-rc13-dependency-review.md)。本段是准确归档冻结前的源码检查点；不将修复或依赖安装成功记为准确新包、模型或稳定发布验收。

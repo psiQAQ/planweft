@@ -2,7 +2,7 @@
 
 # 发布 PlanWeft
 
-截至 RC12 准确归档验收检查点，最近查询的官方 npm `next` 为 `0.4.0-rc.10`，`latest` 为历史 RC1；正式 `0.4.0`、RC11 和 RC12 均未发布。RC12 通过[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34357068482)、Pi 原生 BOM 对照及 Claude/Pi/OpenCode/DSH 无模型生命周期，但 Codex doctor 将自有 marketplace 来源误报为重复安装，阻止发布。OpenCode 维护仍有记录一致性缺陷，冷读通过不抵消维护失败；其历史记录自动断言误报已由独立审查区分。Codex 修复处于开发验证，尚无准确新包验收。查询官方 npm registry 获取实时状态，不能把历史 `latest` 当作稳定发布。
+截至 RC12 准确归档验收检查点，最近查询的官方 npm `next` 为 `0.4.0-rc.10`，`latest` 为历史 RC1；正式 `0.4.0`、RC11 和 RC12 均未发布。RC12 通过[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34357068482)、Pi 原生 BOM 对照及 Claude/Pi/OpenCode/DSH 无模型生命周期，但 Codex doctor 将自有 marketplace 来源误报为重复安装，阻止发布。OpenCode 维护仍有记录一致性缺陷，冷读通过不抵消维护失败；其历史记录自动断言误报已由独立审查区分。RC13 源码已加入 Codex 修复及固定 parser 直接依赖，其他锁定包不变；本检查点尚无准确新包验收。查询官方 npm registry 获取实时状态，不能把历史 `latest` 当作稳定发布。
 
 唯一包 `planweft`；公开 Git 源 `https://github.com/psiQAQ/planweft`。
 这些是发布目标，不代表当前版本已经上线。入口：[安装：中文](installation.md) / [English](installation.en.md)。
