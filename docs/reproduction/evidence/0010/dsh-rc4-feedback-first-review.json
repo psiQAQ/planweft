@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "host": "dsh",
+  "version": "0.4.0-rc.4",
+  "npm_sha256": "c6f54319befc8c43c559fd4c5af2eb6ca3d1b626e6c0b3fd65cb67c11d9d318b",
+  "reviewer": "release_audit",
+  "status": "Failed",
+  "owner_findings_resolved": {
+    "R1": "Passed",
+    "R2": "Passed",
+    "R3": "Passed"
+  },
+  "cold_reader": "Not Run",
+  "reason": "Collector passed human stdout to the DSH native-event parser; false missing-answer assertion prevented cold reading. Original failure retained.",
+  "protected_text_and_actual_tool_scope": "Passed",
+  "limits": [
+    "New owner read Skill, README and task records and performed three edits within the two allowed records.",
+    "Git inspection had no useful output; content protection derives from independent snapshots/tool trace.",
+    "No cache or executable-bit integrity claim."
+  ],
+  "artifacts": [
+    {
+      "path": "review.json",
+      "sha256": "6cea621506e8a4499570a7c4ec76c0bdffe69ee837a65b4fb1f7541445b3faee"
+    },
+    {
+      "path": "review-correction/after.json",
+      "sha256": "1259a0199adf940b773354e806de2ada9325ff53631c025e79bf024c6a7ce6ed"
+    },
+    {
+      "path": "review-correction/raw/native-events.jsonl",
+      "sha256": "9ee09d322bf22c948cbe612dec9c42898295c07004caa60770cbaf33525522d5"
+    },
+    {
+      "path": "review-correction/raw/model.stdout",
+      "sha256": "90cd38b170b2ee85e54997006f18e211dbcebba2b23acdffdc100e95394d8534"
+    },
+    {
+      "path": "summary.json",
+      "sha256": "d26f94df582c9457f42acd2c0d8502b1e62af52e70ce1b28621210833dcb5afd"
+    }
+  ]
+}

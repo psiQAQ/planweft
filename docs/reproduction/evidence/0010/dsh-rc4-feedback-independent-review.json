@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "host": "dsh",
+  "version": "0.4.0-rc.4",
+  "npm_sha256": "c6f54319befc8c43c559fd4c5af2eb6ca3d1b626e6c0b3fd65cb67c11d9d318b",
+  "reviewer": "release_audit",
+  "status": "Passed",
+  "original_semantic_status": "Failed",
+  "findings_resolved": {
+    "R1": "Passed",
+    "R2": "Passed",
+    "R3": "Passed"
+  },
+  "cold_reader_accuracy": "Passed",
+  "protected_text_and_actual_tool_scope": "Passed",
+  "original_failures_preserved": true,
+  "scope": "Explicit independent feedback correction and fresh file-only cold read; not first-pass maintenance success",
+  "limits": [
+    "Owner read Skill and project entry; three edits touched only the two allowed records.",
+    "Both distinct native sessions ended completed; no implementation or test reruns.",
+    "Cold reader accurately states it cannot establish prior uncommitted status without Git history.",
+    "Text snapshot excludes caches and executable bits; actual tool trace independently checked for extra actions."
+  ],
+  "artifacts": [
+    {
+      "path": "original-after.json",
+      "sha256": "d5cab9c30ee25128cfef439f12ebec3426bbc2bcd838d2e9af9423c6750fbaed"
+    },
+    {
+      "path": "original-assessment.json",
+      "sha256": "f54d49a4ef46eaff14b24a3ea50abf6193de5279337c7db1b99785205275361d"
+    },
+    {
+      "path": "review.json",
+      "sha256": "6cea621506e8a4499570a7c4ec76c0bdffe69ee837a65b4fb1f7541445b3faee"
+    },
+    {
+      "path": "review-correction/after.json",
+      "sha256": "ca0e16ca58fcd8b1496c6328d6566bfdc4e054fa1b2eb56b317618c1d732ecdd"
+    },
+    {
+      "path": "review-correction/raw/native-events.jsonl",
+      "sha256": "0a59ac53614280fda256ff09b96f6366fe81fa91c3123fdcb22be931ad900e56"
+    },
+    {
+      "path": "review-correction/raw/model.stdout",
+      "sha256": "3ee4972fcf726279b499731d76f9a4f0b643e416c6a63071f3cf72a27b83bbbd"
+    },
+    {
+      "path": "cold-reader/before.json",
+      "sha256": "ca0e16ca58fcd8b1496c6328d6566bfdc4e054fa1b2eb56b317618c1d732ecdd"
+    },
+    {
+      "path": "cold-reader/after.json",
+      "sha256": "ca0e16ca58fcd8b1496c6328d6566bfdc4e054fa1b2eb56b317618c1d732ecdd"
+    },
+    {
+      "path": "cold-reader/raw/native-events.jsonl",
+      "sha256": "de65fc8f131d956d9a53ab4406e5425fc3a37006b5467c6860fce5f0ec3c2977"
+    },
+    {
+      "path": "cold-reader/raw/model.stdout",
+      "sha256": "a2ee3e983c956391afd6f598230680237b518ae07320a3f49163856c1c235768"
+    }
+  ]
+}

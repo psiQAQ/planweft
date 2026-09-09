@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "host": "codex",
+  "version": "0.4.0-rc.4",
+  "npm_sha256": "c6f54319befc8c43c559fd4c5af2eb6ca3d1b626e6c0b3fd65cb67c11d9d318b",
+  "source_commit": "1d1c76c1d6048fd67fa6ef1b614e11b999106db6",
+  "reviewer": "release_audit",
+  "status": "Passed",
+  "scope": "Independent project-only cold read followed by review of actual model/fixture evidence; Linux maintenance and handoff only",
+  "initial_review_inputs": "maintenance project files only; no prior chat or expected answer",
+  "code_and_protected_documents": "Passed",
+  "handoff_recovers_windows_pending": "Passed",
+  "plan_consistency": "Passed",
+  "limits_or_findings": [
+    "Hook trust bypass; normal trust flow not covered",
+    "Windows/macOS real hosts Not Run",
+    "Historical pending phrasing in findings remains; final progress and actual files establish completion"
+  ],
+  "artifacts": [
+    {
+      "path": "maintenance/after.json",
+      "sha256": "feb53e420dd1d7611496974543d9991d7ba33004983d1c680686eb04a15e1afa"
+    },
+    {
+      "path": "maintenance/raw/model.stdout",
+      "sha256": "16c2b4a7e7159358acc8f66e0d46cd9b541fdcd233321add10eb44b86c1a57d1"
+    },
+    {
+      "path": "maintenance/raw/offline-tests.json",
+      "sha256": "83dd642eaa67771952d4bdb416bff41bfdeb71fc8ac4c433259687af29378968"
+    },
+    {
+      "path": "maintenance/raw/independent-byte-checks.json",
+      "sha256": "3d453691a6c848908b789ad6b4e97206c6031cd952370a63806d5402f163c194"
+    },
+    {
+      "path": "cold-reader/before.json",
+      "sha256": "feb53e420dd1d7611496974543d9991d7ba33004983d1c680686eb04a15e1afa"
+    },
+    {
+      "path": "cold-reader/after.json",
+      "sha256": "feb53e420dd1d7611496974543d9991d7ba33004983d1c680686eb04a15e1afa"
+    },
+    {
+      "path": "cold-reader/raw/model.stdout",
+      "sha256": "ddba1cd0e59a5e6434993e0bce40193590324bfd1d82ad76df95683520f12e09"
+    }
+  ]
+}

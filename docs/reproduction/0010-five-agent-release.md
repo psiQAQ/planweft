@@ -133,3 +133,28 @@ DSH 同包 flash 的单一计划已建立，但 discovery 命令失败的泛化�
 固定 OpenCode 1.18.22 容器在 network none 下分别复制 RC3 profile/cache，仍配置 `plugin:["planweft@0.4.0-rc.3"]`，只改副本 manifest。四组预期均满足：原始没有工具，main-only/server-only/both 均加载三个 pw_* 工具；包内其他文件摘要不变。原始缓存只读，未注入认证或调用模型。此为因果 fixture，不代替准确 RC4 或真实远端安装。
 
 [入口因果与回归附件](evidence/0010/rc4-entry-causal.tar.gz)：21 项，SHA-256 `350fd75e92e5b506b7980be81517bd6fad633699ab3a02267869e4b060b1fd3f`。全量 Python 91 tests、安装器 28 tests、DSH facade 3 tests Passed；构建一致性通过。RC4 精确归档与远端验收待执行，DSH/Claude 的未完成门槛保持。
+
+
+## RC4 OIDC 与真实 npm 生命周期
+
+干净源码 `1d1c76c1d6048fd67fa6ef1b614e11b999106db6` 的准确归档 SHA-256 `c6f54319befc8c43c559fd4c5af2eb6ca3d1b626e6c0b3fd65cb67c11d9d318b`，OIDC 运行 34267947801 成功，CI 重建逐字相同。官方 npm 下载再次匹配，next=0.4.0-rc.4，latest=0.4.0-rc.1；未发布稳定版。三系统 CI 34267221127 成功。
+
+五固定容器分别下载 RC3/RC4，真实执行 RC3→RC4→RC3→RC4→卸载；安装内容/执行位、持久来源、清理 npx 缓存、项目记录保护均通过。Pi 原生 npm 入口、OpenCode 三个 pw_* 工具及 Skill 配对、DSH 原生包启动与移除通过。这是无认证、无模型的远端生命周期证据；不能替代公开 Git 市场或模型会话。
+
+RC4 Codex 六项自动检查通过：context/recovery/maintenance/cold-reader/readonly/simple。独立 reviewer 通过维护和冷读语义，保留 Windows 待验与 hook trust bypass 限制。stopping/gated-continuation 两场景因服务返回 usage limit 而失败，未重复运行或消费重置额度。
+
+Pi 首组 context 失败：测试显式 parity 与 /pw-plan-execute 激活了未完成计划循环，首轮正确返回注入随机码，后续真实 followUp 使模型读写三文件；完整 settled 收集正确，不截断。新测试使用新建 complete 合成计划分离注入/恢复，明确不覆盖已激活进行中计划的只读恢复，原失败保留。原组 recovery/maintenance/cold-reader/readonly/simple/stopping/continuation-limit 自动检查通过；独立审查进一步发现主计划阶段与错误历史不一致，文档一致性 Failed，见 REVIEW-0010。停止测试保留默认无激活与显式执行三次续跑的区别。
+
+
+公开 Git 市场补测：Codex 0.149.1 与 Claude 2.1.241 从公开仓库注册、安装、同提交刷新、卸载与注销均通过；参考树与实际缓存分别 276/268 文件（摘要和执行位）完全一致，各一份主 Skill，项目四份保护文件不变。前后公开 SHA 固定 `1d1c76c`。Codex 使用 `marketplace upgrade` 后 `plugin add` 重装，Claude 使用 marketplace/plugin update。失败的超时、入口/挂载和误用 update 命令尝试保留。最终成功运行对应 runner SHA `ff405ed49ea32356aa345546682cd55900f40a168a54873848bd480c3d365b15`；后续只读根、执行前归档、清理失败退出的收集器增强仅经三项离线回归，未重跑网络。管理命令不证明模型读取、hooks 信任或跨版本 Git 更新。
+
+
+上述 RC4 已闭合运行收录于 [rc4-remote-and-models.tar.gz](evidence/0010/rc4-remote-and-models.tar.gz)，1500 文件，SHA-256 `83226f26c7613a179af77d478f914ce979c680a9802ce6aa904682b58a51f4c8`；内含 sources.json 对应原运行相对路径。归档前检查实际私有 key 无匹配，统一脱敏私人 home 与归档 owner；原准确 npm 字节证明另存包外。Codex/Pi/OpenCode 独立语义报告分别见同目录 `*-rc4-independent-review.json`，结论不可只读自动 assessment。
+
+
+审查反馈实测采用同一准确 RC4、原项目快照和具体独立发现，原失败输入逐项 SHA 绑定。Pi R1/R2 修正及新冷读经独立核查 Passed，只有指定 task_plan 两处文本变化；不是首轮无误或自动触发审查的证据。DSH 第一反馈的 R1/R2/R3 实际修正与文本保护均通过独立检查，但新 collector 误读 human stdout 而非 native-events，导致假“无最终回答”，冷读未启动。保持该运行 Failed/冷读 Not Run；修正后增加原生 assistant/turn/end、缺日志不 fallback 和错误结束回归（11 tests Passed），在新目录复验，不改写原结果。
+
+
+修订 collector 的 DSH 新反馈组：R1/R2/R3 纠正与无 review 的新冷读独立 Passed，两原生会话 completed；原维护 Failed、第一反馈收集器 Failed 均保留。Pi/DSH 反馈和 DSH RC4 主组见 [rc4-dsh-and-review-feedback.tar.gz](evidence/0010/rc4-dsh-and-review-feedback.tar.gz)，483 文件，SHA-256 `a42ee4be786cbfa72ca7be23cd7b6c9b44d3d62694d92232b6336458188d233a`，sources.json 映射原运行相对路径。分别以 `pi-rc4-feedback-independent-review.json` 和 `dsh-rc4-feedback-independent-review.json` 记录独立结论，不修改原 summary 的 Awaiting 状态。原输入 SHA、容器清理、非允许文本保护均通过；无缓存/执行位或首轮无误的扩大承诺。
+
+本轮新增入口的全量 Python 回归为 107 Passed，之后两次定向修复的反馈回归分别 10/11 Passed；最终源码交由 CI 全量复验。正式 0.4.0 未发布：Codex 服务额度、Claude 明确模型端点授权、OpenCode 冷读状态误报及最终稳定准确归档的全部门槛仍未解决。候选下载与精确摘要不是稳定发布授权。

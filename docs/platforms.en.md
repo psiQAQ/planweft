@@ -1,6 +1,8 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
-RC3 passed OIDC publishing, remote byte verification and three-OS CI; exact-package installation/lifecycle passed in all five fixed Linux containers. OpenCode passed six native-server stopping observations and independent review. DSH context is repaired, but maintenance adoption and documentation accuracy still have failures. The five-host stable gate is not cleared. See [release status: 中文](releasing.md) / [English](releasing.en.md).
+RC4 passed OIDC publishing, remote byte verification and three-OS CI. Exact-package installation and real npm upgrades, rollbacks and removal passed in all five fixed Linux containers. Pi/DSH initial record failures remain preserved; explicit feedback correction and fresh reading passed independent review. OpenCode cold-read accuracy still has a failure, Codex stopping hit a usage limit, and Claude RC4 model acceptance is incomplete. The five-host stable gate is not cleared. See [release status: 中文](releasing.md) / [English](releasing.en.md).
+
+RC4 Codex injection, recovery, maintenance, cold reading, read-only and simple-task scenarios passed automated checks. Stopping and continuation failed because the service account exhausted its usage allowance; these failures do not establish hook correctness. Maintenance and cold reading passed independent semantic review. Passing results from other versions do not establish RC4 or final stable-package acceptance.
 
 ## 0.4.0 candidate validation
 
@@ -14,10 +16,10 @@ For project goals and design sources, read the project introduction: [简体中�
 
 | Platform | Static | Protocol | Native lifecycle (Linux) | Model maintenance (Linux) |
 | --- | --- | --- | --- | --- |
-| Codex | Passed | Passed | Passed | Passed |
-| Claude Code | Passed | Passed | Passed | Passed (RC1) |
-| Pi | Passed | Passed | Passed | Passed (RC1; reviewed reassessment) |
-| OpenCode V1 | Passed | Passed | Passed (RC3 local) | Passed (RC2; RC3 stopping separately passed) |
+| Codex | Passed | Passed | Passed (RC4 local + remote npm) | Passed (RC4; independent review) |
+| Claude Code | Passed | Passed | Passed (RC4 local + remote npm) | Passed (RC1; RC4 Not Run) |
+| Pi | Passed | Passed | Passed (RC4 local + remote npm) | RC4 initial consistency Failed; reviewed correction Passed |
+| OpenCode V1 | Passed | Passed | Passed (RC4 local + remote npm) | RC4 maintenance Passed; cold-read accuracy Failed |
 | Cursor | Passed | Passed | Not Run | Not Run |
 | Copilot CLI | Passed | Passed | Not Run | Not Run |
 | Gemini CLI | Passed | Passed | Not Run | Not Run |
@@ -28,7 +30,7 @@ For project goals and design sources, read the project introduction: [简体中�
 | Continue | Passed | Not Run | Not Run | Not Run |
 | Mastra Code | Passed | Not Run | Not Run | Not Run |
 | Agents | Passed | Not Run | Not Run | Not Run |
-| DeepSeek Harness / DSH | Passed | Passed (RC3 sandbox protocol) | Passed (RC3 local) | Failed (RC3 workflow/doc accuracy) |
+| DeepSeek Harness / DSH | Passed | Passed (RC3 sandbox protocol) | Passed (RC4 local + remote npm) | RC4 initial consistency Failed; reviewed correction Passed |
 
 RC1 remote npm same-version lifecycle passed for Codex, Claude and Pi; OpenCode Skill pairing failed, and DSH composed-config discovery did not prove boot. Remote multi-version and Git marketplace lifecycles and real Windows/macOS host sessions remain Not Run. Pi RPC and OpenCode debug discovery are actual host loading, not model calls. Non-core native runs from 0.3.0 are not reused as 0.4.0 results.
 
@@ -161,3 +163,7 @@ Hermes used official commit `9fd44b4dfc44138b9e5d5689acb56c438364ff7b`. The defa
 All host runs used isolated configuration on Linux x86_64, with no personal authentication or paid model calls. Windows, macOS, GUI installation, remote publication channels, and new-version real-model maintenance and cold-reader trials are **Not Run**. Codex's synthetic responses prove hook delivery; OpenCode debug proves loading and direct execution. Neither proves model-level semantic quality.
 
 Full reproduction details, raw logs, and limitations are in [REP-0006 (engineering record, Chinese)](reproduction/0006-native-distributions.md). Design contracts are in [SPEC-0004 (engineering record, Chinese)](specs/0004-native-distributions.md) and [ADR-0007 (engineering record, Chinese)](adr/0007-native-distributions.md). The 0.2.0 records remain historical evidence and do not substitute for validation of the 0.3.0 distribution.
+
+All five hosts passed real npm RC3 → RC4 → RC3 → RC4 → removal, including the native Pi/OpenCode/DSH package entries. These checks did not call models and do not establish model-session behavior. Public Git marketplaces and real Windows/macOS hosts are tracked separately.
+
+RC4 update: Codex/Claude public Git marketplace installation, same-commit refresh, cache content checks, uninstall and unregister passed. No models were called, and cross-version Git updates were not established. Pi parity injection and fresh-session recovery passed for completed plans; explicit execution of incomplete plans has separate stopping/limit evidence. The completed-plan probe does not establish read-only recovery of an incomplete plan with execution enabled. Pi initial maintenance failed independent plan-consistency review because its current phase and error summary were stale. Both findings were corrected after independent feedback, followed by a passing fresh read; the original failure remains. This explicit feedback route does not independently establish automatic Skill loading or automatic review activation.

@@ -68,3 +68,36 @@ OpenCode server 采集由 container_release_plan_review 实现，未参与实现
 release_audit 独立定位 RC3 远端 npm 入口缺失：[shared.ts](https://github.com/anomalyco/opencode/blob/v1.18.22/packages/opencode/src/plugin/shared.ts#L95) 只选择 ./server 或 main；[loader.ts](https://github.com/anomalyco/opencode/blob/v1.18.22/packages/opencode/src/plugin/loader.ts#L95) 与 [missing 回调](https://github.com/anomalyco/opencode/blob/v1.18.22/packages/opencode/src/plugin/index.ts#L173) 解释了退出 0 却无工具。现有 CLI 直接 loader 成功不代替 npm 原生入口。本次仅诊断；后续修复和准确新包需另验。
 
 RC4 定向修复复核 Passed：根 main 与 ./server 均指向原有预编译 V1 模块，Pi/DSH/根 ESM 导出保留，锁文件仅版本变化；实际 tgz 内的 manifest 与入口文件纳入发布准备检查。主 Agent 随后执行固定 1.18.22 容器无网络四组因果样本：原始缺工具、main-only/server-only/both 均有三个 pw_* 工具；副本除 package.json 外内容摘要完全不变。原始样本和补丁样本均不是准确 RC4 远端包。
+
+
+## RC4 Codex 维护与冷读
+
+独立 reviewer release_audit 先仅阅读维护后的项目文件，再核对真实 trace 和冷读结果，语义 Passed。BOM 修复、字节回归、Linux 两项测试及独立中文/空格路径字节检查均有实际证据；批准需求、用户改动及历史保留，唯一 PWF 计划可通过 README 与旧 notes 的单向链接发现。不同 thread_id 的冷读只收到项目文件，未安装插件，前后快照相同，准确保留 Windows 发布前实测 Required/Not Run。
+
+绑定：准确 RC4 `c6f54319befc8c43c559fd4c5af2eb6ca3d1b626e6c0b3fd65cb67c11d9d318b`；维护后及冷读后快照 `feb53e420dd1d7611496974543d9991d7ba33004983d1c680686eb04a15e1afa`；维护模型输出 `16c2b4a7e7159358acc8f66e0d46cd9b541fdcd233321add10eb44b86c1a57d1`；冷读输出 `ddba1cd0e59a5e6434993e0bce40193590324bfd1d82ad76df95683520f12e09`。findings 留有少量历史待办措辞，以最终 progress 与实际文件为准，不修改原始证据。维护使用显式 hook trust bypass，不能据此声称正常信任流程通过。停止两场景触发服务账号额度限制，与本次维护语义结论分别记录。
+
+
+## RC4 Pi 维护与冷读
+
+release_audit 独立核查：BOM 修复、五项测试及独立字节检查、批准需求和用户保护、唯一计划与历史单向链接 Passed；新冷读恢复结果和 Windows 待办 Passed。但最终计划一致性 Failed：四阶段已完成时 Current Phase 仍为 Phase 3；Errors Encountered 声称无错误，而实际首版前导 U+FEFF 测试失败、修正后通过，progress 已记录这段真实历史。冷读没有指出两个矛盾。不能把自动维护 Passed 当作完整文档语义通过。
+
+准确 RC4 绑定同上；维护后/冷读前后快照 `98f5e24c58b9edbf76efeee895b7b6abb2afe44e485ae49417b5c327ef63a797`；维护输出 `404b0e1dbc4b60e3056e2ef51d88a78ad4df68fb6d776681d856db28c23028bc`；冷读输出 `b10125be95849eacd2c02ab3be144e5d88a3b3985cc617b3254783016f844cf7`。快照覆盖十二个项目文件，排除安装缓存，不宣称整个目录字节相同。审查同意后续以独立项目副本、新 owner 根据具体审查发现最小修正文档，再做无反馈答案的新冷读，保留首次失败和完整纠正链；这条路径尚待实际验证。
+
+
+## RC4 OpenCode 维护与冷读
+
+release_audit 先项目文件冷读后核对实际 trace：维护语义 Passed；历史原日期、Linux 手工示例、Passed、仅为历史观察均保留，仅“不代表本次验证”改为“不代表后续验证”，因此原严格子串断言 Failed 保留为误报。实际变异测试明确预期三项失败，恢复后通过，progress 完整记录；没有发现隐瞒意外错误。
+
+冷读准确性 Failed：前文正确说反证测试仅见历史记录，本轮不重做；最终限制段却把“反证敏感性”与独立审查一起列为 Not Run，与实际 trace 及 progress 的 Passed 矛盾。冷读真实重跑当前三项测试和临时目录字节检查通过，不能据此忽略该错误。来源和分项摘要见 [独立审查附件](../reproduction/evidence/0010/opencode-rc4-independent-review.json)；原 assessment 不改写。
+
+
+独立反馈闭环设计审查：release_audit 核查四类 SHA 输入绑定、文本项目恢复、已有记录 allowlist、原失败保存、新冷读无反馈答案、语义不自动 Passed，九项测试 Passed。指出 cleanup 异常可能跳过 summary；实现者修复并增加四种清理错误子场景，主 Agent 复核十项测试 Passed。报告明确 project_snapshot 不覆盖 .git、安装缓存、字节码目录或执行位，实际工具边界需独立 trace 检查。只有准确原运行/审查输入通过后才读取认证或访问 Docker，原生模型实测另行记录。
+
+
+DSH RC4 独立审查：代码/批准/用户保护、历史事实、唯一主计划、Windows 下一步 Passed；历史字符串仅将“本次”改为具体日期，原自动 Failed 不改。progress 顶部仍 Phase 6 而主计划已 7/7，三个 FS_NOT_OBSERVED 原生工具拒绝未进入错误表，故记录一致性/完整性 Failed。冷读准确指出阶段漂移和 Windows Not Run，一处 notes/notes/contract.md 链接错误但同文正确路径可用。已记录的 helper FileNotFoundError 与修正过程真实；原生事件、模型输出和快照摘要见 [DSH 审查](../reproduction/evidence/0010/dsh-rc4-independent-review.json)。
+
+
+Pi 反馈实测独立复核：首次记录一致性 Failed → R1/R2 纠正 Passed → 新冷读 Passed。owner 仅一次 edit 修改 task_plan 的两处文字；四阶段完成与 Windows Not Run 明确，错误表区分既有 BOM 缺陷和先前测试 U+FEFF 误判，未虚构本轮测试。原输入 SHA 不变，新冷读只项目文件且与 owner 输出一致。owner Git 检查失败后用 mtime 自查不构成内容保护证据，独立字节与工具 trace 才支持结论；未见读取 README/Skill，故该闭环不单独证明自动加载或自动触发审查。限定结论和摘要见 [Pi 反馈审查](../reproduction/evidence/0010/pi-rc4-feedback-independent-review.json)。
+
+
+DSH 新反馈组独立复核 Passed：R1 删除过期当前状态、R2 明确历史拒绝与恢复来源、R3 主计划摘要及日志引用一致；实际读取 Skill/README，仅三次 edit 修改两允许记录。不同原生会话的新冷读准确恢复七阶段完成、历史测试、工具拒绝与 Windows Not Run，且说明无 Git 历史不能证明原“未提交”属性。首次错误 collector 的 owner 修正亦有独立证据，但冷读 Not Run；新组与旧组分别保存，不互相覆盖。来源见 [DSH 新反馈审查](../reproduction/evidence/0010/dsh-rc4-feedback-independent-review.json)。

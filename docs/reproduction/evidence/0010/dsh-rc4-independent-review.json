@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "host": "dsh",
+  "version": "0.4.0-rc.4",
+  "npm_sha256": "c6f54319befc8c43c559fd4c5af2eb6ca3d1b626e6c0b3fd65cb67c11d9d318b",
+  "source_commit": "1d1c76c1d6048fd67fa6ef1b614e11b999106db6",
+  "reviewer": "release_audit",
+  "status": "Failed",
+  "code_and_protected_documents": "Passed",
+  "historical_preservation_semantic": "Passed",
+  "original_historical_assertion": "Failed: current validation was replaced with explicit 2026-09-09 validation; facts retained",
+  "plan_consistency_and_error_completeness": "Failed",
+  "cold_reader_state_and_limits": "Passed with a malformed contract link; correct path also provided",
+  "findings": [
+    "Progress Current Status still Phase 6 while task_plan and actual work are complete at 7/7; cold reader identifies drift.",
+    "Native event sequences 10839,10844,10848 show FS_NOT_OBSERVED refusals before reading files; error tables omit these failures.",
+    "Initial helper FileNotFoundError and corrected tests are honestly recorded; planned old-implementation comparison fails as expected."
+  ],
+  "scope": "Linux DSH 0.1.2-rc.1 headless; project text snapshots exclude cache and Git metadata",
+  "artifacts": [
+    {
+      "path": "maintenance/assessment.json",
+      "sha256": "f54d49a4ef46eaff14b24a3ea50abf6193de5279337c7db1b99785205275361d"
+    },
+    {
+      "path": "maintenance/after.json",
+      "sha256": "d5cab9c30ee25128cfef439f12ebec3426bbc2bcd838d2e9af9423c6750fbaed"
+    },
+    {
+      "path": "maintenance/raw/native-events.jsonl",
+      "sha256": "ef1916f89f945677cb7955d502c80f0ce78e16895e6236deac818aabcfc1f6a9"
+    },
+    {
+      "path": "maintenance/raw/model.stdout",
+      "sha256": "af3a7eeb8afbeb5169999df2d2dc5deb06e49caaa4ea99e6cab6885606aad4b0"
+    },
+    {
+      "path": "cold-reader/before.json",
+      "sha256": "d5cab9c30ee25128cfef439f12ebec3426bbc2bcd838d2e9af9423c6750fbaed"
+    },
+    {
+      "path": "cold-reader/after.json",
+      "sha256": "d5cab9c30ee25128cfef439f12ebec3426bbc2bcd838d2e9af9423c6750fbaed"
+    },
+    {
+      "path": "cold-reader/raw/native-events.jsonl",
+      "sha256": "8369b1788634fa71a2e65e2fc9c08464a32189035c6df8709f325ecbac00c331"
+    },
+    {
+      "path": "cold-reader/raw/model.stdout",
+      "sha256": "6cd8e598a803f9cfa4b238d680fd663002f18627d081362734ca6b0ae4fee42f"
+    }
+  ]
+}

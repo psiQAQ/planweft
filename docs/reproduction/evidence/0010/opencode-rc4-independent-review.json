@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "host": "opencode",
+  "version": "0.4.0-rc.4",
+  "npm_sha256": "c6f54319befc8c43c559fd4c5af2eb6ca3d1b626e6c0b3fd65cb67c11d9d318b",
+  "source_commit": "1d1c76c1d6048fd67fa6ef1b614e11b999106db6",
+  "reviewer": "release_audit",
+  "status": "Failed",
+  "scope": "Independent project-only cold read followed by actual trace review; Linux maintenance and handoff",
+  "maintenance_semantic": "Passed",
+  "historical_preservation_semantic": "Passed",
+  "original_historical_assertion": "Failed: exact substring changed from current validation to subsequent validation; all historical facts retained",
+  "cold_reader_accuracy": "Failed",
+  "findings": [
+    "Cold reader correctly cites mutation testing as previously recorded, but its final limitations paragraph incorrectly calls mutation sensitivity Not Run. Progress and actual trace establish Passed.",
+    "Planned mutation test produced three expected failures, then restoration passed; this does not establish an unrecorded accidental failure.",
+    "Future-tense migration sentence remains despite completed migration; actual single plan and old entry pointer are intact."
+  ],
+  "artifacts": [
+    {
+      "path": "maintenance/assessment.json",
+      "sha256": "6988ea9a06a14560658eb432012c2c17bd334060b7ebb5ac73ccc699c87b91a8"
+    },
+    {
+      "path": "maintenance/after.json",
+      "sha256": "d2be418a2089dd025aed3bf3e786728f8ce6e3b300fedc3458cae30b3974edfc"
+    },
+    {
+      "path": "maintenance/raw/model.stdout",
+      "sha256": "003a202c4f47397ef706e4a2e3907d3b5a89d18ef0ff803d9d1743e0ee49f46b"
+    },
+    {
+      "path": "cold-reader/before.json",
+      "sha256": "d2be418a2089dd025aed3bf3e786728f8ce6e3b300fedc3458cae30b3974edfc"
+    },
+    {
+      "path": "cold-reader/after.json",
+      "sha256": "d2be418a2089dd025aed3bf3e786728f8ce6e3b300fedc3458cae30b3974edfc"
+    },
+    {
+      "path": "cold-reader/raw/model.stdout",
+      "sha256": "8221f58d88b1359083d3dc02c7218e1833f27e4653c4edee161505827ef8f6df"
+    }
+  ]
+}

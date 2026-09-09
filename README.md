@@ -72,10 +72,10 @@ PWF 的[任务完成后指导](https://github.com/OthmanAdi/planning-with-files/
 
 ## 当前交付与使用边界
 
-当前候选版 **0.4.0-rc.1** 提供 15 个平台目录（新增 DSH 原生 bundle）、6 种原生 marketplace 入口，以及 Pi/OpenCode npm 和 Gemini/Hermes Git 发布树准备。安装方法见[中文指南](docs/installation.md) / [English guide](docs/installation.en.md)，平台能力与验证范围见[中文设计](docs/platforms.md) / [English design](docs/platforms.en.md)。
+当前候选版 **0.4.0-rc.4** 提供一个 `planweft` npm 包，包含安装 CLI、Pi Extension、OpenCode V1 入口及 15 个平台资源目录（含 DSH 原生 bundle）；另有 6 种原生 marketplace 入口和 Gemini/Hermes Git 发布树准备工具。安装方法见[中文指南](docs/installation.md) / [English guide](docs/installation.en.md)，平台能力与验证范围见[中文设计](docs/platforms.md) / [English design](docs/platforms.en.md)。
 
-0.3.0 的记录包含八个宿主的本地安装生命周期验证；Hermes 被默认扫描器拒绝安装。GUI、Windows/macOS、公开远程渠道以及新版真实模型维护/冷读仍有 Not Run 项。历史验证不随文档修改自动变成新一轮实测，具体边界见上述跨平台文档。
+0.3.0 的记录包含八个宿主的本地安装生命周期验证；Hermes 被默认扫描器拒绝安装。RC4 五个核心宿主的远端 npm 生命周期及 Codex/Claude 公开 Git 同提交刷新已通过；Windows/macOS 安装器 CI 通过，真实宿主与 GUI 仍有 Not Run 项，模型维护/冷读还存在待解决失败。历史验证不随文档修改自动变成新一轮实测，具体边界见上述跨平台文档。
 
-本仓库尚未公开发布，不提供未经确认的 Git/npm 安装地址。各分发保留 PWF 的 MIT 版权与许可，其他参考材料按各自许可处理。本仓自身继续沿用既有文档入口，没有正式迁移到插件管理。
+GitHub 仓库与 npm 候选版已公开，稳定 `0.4.0` 尚未发布；试用请按安装指南选择明确的候选版本。各分发保留 PWF 的 MIT 版权与许可，其他参考材料按各自许可处理。本仓自身继续沿用既有文档入口，没有正式迁移到插件管理。
 
 维护者资料：[开发约定（中文）](docs/development.md) · [上游维护（中文）](docs/upstream-maintenance.md) · [测试与证据入口（中文）](tests/README.md)。这些工程记录保留原语言；对外项目介绍、安装和跨平台设计均提供上述中英文版本。

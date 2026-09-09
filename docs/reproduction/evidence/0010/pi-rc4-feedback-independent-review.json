@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "host": "pi",
+  "version": "0.4.0-rc.4",
+  "npm_sha256": "c6f54319befc8c43c559fd4c5af2eb6ca3d1b626e6c0b3fd65cb67c11d9d318b",
+  "reviewer": "release_audit",
+  "status": "Passed",
+  "original_semantic_status": "Failed",
+  "scope": "R1/R2 review correction and subsequent independent file-only cold read; not first-pass maintenance success",
+  "findings_resolved": {
+    "R1": "Passed",
+    "R2": "Passed"
+  },
+  "original_inputs_unchanged": true,
+  "protected_text_and_actual_tool_scope": "Passed",
+  "cold_reader_accuracy": "Passed",
+  "limits": [
+    "Owner trace contains one edit to the allowed task_plan, no code/test edits or execution.",
+    "Owner Git inspection failed; mtime alone is insufficient. Independent text comparison and tool trace support protection.",
+    "Owner trace does not establish README or main Skill reading; this is not automatic Skill/review activation evidence.",
+    "Snapshot excludes caches, Git metadata and executable bits; no broader directory integrity claim."
+  ],
+  "artifacts": [
+    {
+      "path": "original-after.json",
+      "sha256": "98f5e24c58b9edbf76efeee895b7b6abb2afe44e485ae49417b5c327ef63a797"
+    },
+    {
+      "path": "original-assessment.json",
+      "sha256": "0f3595966f45c9b4a7528a96ee1883f8717da81a771703aea8eb12e8cca9e10e"
+    },
+    {
+      "path": "review.json",
+      "sha256": "357382500afca9ae90a2c97d6f05a198c71b03b7beb906de938cb2d43d2cdcbf"
+    },
+    {
+      "path": "review-correction/before.json",
+      "sha256": "98f5e24c58b9edbf76efeee895b7b6abb2afe44e485ae49417b5c327ef63a797"
+    },
+    {
+      "path": "review-correction/after.json",
+      "sha256": "d986ad06b15f776fc953b527845eb4dbe8a89846b0878b486e8378cff81fd3fc"
+    },
+    {
+      "path": "review-correction/raw/model.stdout",
+      "sha256": "ece603dc2c7c2509be991e923971324b9b1b078aadaf8ecbca69165e9e8db3c7"
+    },
+    {
+      "path": "cold-reader/before.json",
+      "sha256": "d986ad06b15f776fc953b527845eb4dbe8a89846b0878b486e8378cff81fd3fc"
+    },
+    {
+      "path": "cold-reader/after.json",
+      "sha256": "d986ad06b15f776fc953b527845eb4dbe8a89846b0878b486e8378cff81fd3fc"
+    },
+    {
+      "path": "cold-reader/raw/model.stdout",
+      "sha256": "af0c6cd5af7822ed1064f5dcbf5e5d0144411e6d71d04f247186e572332ac1fe"
+    }
+  ]
+}

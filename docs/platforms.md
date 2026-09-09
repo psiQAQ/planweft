@@ -1,6 +1,8 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
-RC3 已通过 OIDC 发布、远端字节核对及三系统 CI；五个固定 Linux 容器的准确包安装/生命周期通过。OpenCode 六项原生 server 停止观察通过独立审查；DSH 上下文已修复，但维护采用及文档准确性仍有失败。五平台稳定门槛未通过。见[发布状态：中文](releasing.md) / [English](releasing.en.md)。
+RC4 已通过 OIDC 发布、远端字节核对及三系统 CI；五个固定 Linux 容器的准确包安装和真实 npm 升降级/卸载通过。Pi/DSH 首次记录问题保留，指定反馈修正与新冷读通过独立审查；OpenCode 冷读准确性仍有失败，Codex 停止测试遇额度限制，Claude RC4 模型补验尚未完成。五平台稳定门槛未通过。见[发布状态：中文](releasing.md) / [English](releasing.en.md)。
+
+RC4 的 Codex 注入、恢复、维护、冷读、只读和简单任务通过自动检查；停止与续跑场景因服务账号额度耗尽而失败，不作为 hooks 正确性结论。维护与冷读已通过独立语义审查。其他版本的通过项不得视为 RC4 或最终稳定包已通过。
 
 ## 0.4.0 候选验证
 
@@ -14,10 +16,10 @@ PlanWeft 0.4.0 将同一套文件规划与文档协作规则，生成适合 15 �
 
 | 平台 | 静态检查 | 协议检查 | 原生生命周期（Linux） | 模型维护（Linux） |
 | --- | --- | --- | --- | --- |
-| Codex | Passed | Passed | Passed | Passed |
-| Claude Code | Passed | Passed | Passed | Passed (RC1) |
-| Pi | Passed | Passed | Passed | Passed (RC1; reviewed reassessment) |
-| OpenCode V1 | Passed | Passed | Passed (RC3 local) | Passed (RC2; RC3 stopping separately passed) |
+| Codex | Passed | Passed | Passed (RC4 local + remote npm) | Passed (RC4; independent review) |
+| Claude Code | Passed | Passed | Passed (RC4 local + remote npm) | Passed (RC1; RC4 Not Run) |
+| Pi | Passed | Passed | Passed (RC4 local + remote npm) | RC4 initial consistency Failed; reviewed correction Passed |
+| OpenCode V1 | Passed | Passed | Passed (RC4 local + remote npm) | RC4 maintenance Passed; cold-read accuracy Failed |
 | Cursor | Passed | Passed | Not Run | Not Run |
 | Copilot CLI | Passed | Passed | Not Run | Not Run |
 | Gemini CLI | Passed | Passed | Not Run | Not Run |
@@ -28,9 +30,9 @@ PlanWeft 0.4.0 将同一套文件规划与文档协作规则，生成适合 15 �
 | Continue | Passed | Not Run | Not Run | Not Run |
 | Mastra Code | Passed | Not Run | Not Run | Not Run |
 | Agents | Passed | Not Run | Not Run | Not Run |
-| DeepSeek Harness / DSH | Passed | Passed (RC3 sandbox protocol) | Passed (RC3 local) | Failed (RC3 workflow/doc accuracy) |
+| DeepSeek Harness / DSH | Passed | Passed (RC3 sandbox protocol) | Passed (RC4 local + remote npm) | RC4 initial consistency Failed; reviewed correction Passed |
 
-远端 npm/Git 生命周期及 Windows/macOS 真实宿主尚待单独记录。Pi RPC 与 OpenCode debug 是实际宿主加载，不是模型调用；非核心宿主的 0.3.0 安装结果不冒充 0.4.0 实测。
+RC4 五个宿主的真实 npm RC3 → RC4 → RC3 → RC4 → 卸载均通过，包括 Pi/OpenCode/DSH 原生包入口；这些无模型检查不证明新会话模型行为。公开 Git marketplace 与 Windows/macOS 真实宿主分别记录。Pi RPC 与 OpenCode debug 是实际宿主加载，不是模型调用；非核心宿主的 0.3.0 安装结果不冒充 0.4.0 实测。
 
 Codex 模型场景使用隔离容器及显式的 hook trust bypass；该结果证明已审查 hooks 的运行行为，不代表默认交互式信任确认流程已通过。
 
@@ -161,3 +163,5 @@ Hermes 使用官方提交 `9fd44b4dfc44138b9e5d5689acb56c438364ff7b`，最终目
 全部实测在 Linux x86_64 隔离配置下进行，没有使用个人认证或调用付费模型。Windows、macOS、GUI 安装、远程发布渠道、新版真实模型维护和冷读试用为 **Not Run**。Codex 合成响应证明 hook 送达，OpenCode debug 证明加载与直接执行，两者都不证明模型语义质量。
 
 完整复现、原始日志及限制见 [REP-0006（工程记录，中文）](reproduction/0006-native-distributions.md)。设计契约见 [SPEC-0004（工程记录，中文）](specs/0004-native-distributions.md) 与 [ADR-0007（工程记录，中文）](adr/0007-native-distributions.md)。旧 0.2.0 记录保留为历史证据，不替代 0.3.0 分发验证。
+
+RC4 补充：Codex/Claude 公开 Git 市场的安装、同提交刷新、缓存内容核对、卸载和注销 Passed；未调用模型，不表示 Git 跨版本升级已验收。Pi 完成态计划的 parity 注入和新会话恢复复验 Passed；进行中显式执行循环另有停止及上限证据，不能据完成态探针宣称进行中只读恢复。Pi 首次维护的主计划阶段/错误摘要不一致，独立语义检查该项 Failed；后续按独立反馈纠正两项记录并通过新冷读，原失败保留。这条明确反馈路线不单独证明自动 Skill 加载或自动触发审查。

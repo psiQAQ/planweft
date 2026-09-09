@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "host": "pi",
+  "version": "0.4.0-rc.4",
+  "npm_sha256": "c6f54319befc8c43c559fd4c5af2eb6ca3d1b626e6c0b3fd65cb67c11d9d318b",
+  "source_commit": "1d1c76c1d6048fd67fa6ef1b614e11b999106db6",
+  "reviewer": "release_audit",
+  "status": "Failed",
+  "scope": "Independent project-only cold read followed by review of actual model/fixture evidence; Linux maintenance and handoff only",
+  "initial_review_inputs": "maintenance project files only; no prior chat or expected answer",
+  "code_and_protected_documents": "Passed",
+  "handoff_recovers_windows_pending": "Passed",
+  "plan_consistency": "Failed",
+  "limits_or_findings": [
+    "Current Phase says Phase 3 while all four phases are complete",
+    "Errors Encountered says none despite failed first regression and corrected retry recorded in progress",
+    "Cold reader preserves Windows gate but does not identify these contradictions"
+  ],
+  "artifacts": [
+    {
+      "path": "maintenance/after.json",
+      "sha256": "98f5e24c58b9edbf76efeee895b7b6abb2afe44e485ae49417b5c327ef63a797"
+    },
+    {
+      "path": "maintenance/raw/model.stdout",
+      "sha256": "404b0e1dbc4b60e3056e2ef51d88a78ad4df68fb6d776681d856db28c23028bc"
+    },
+    {
+      "path": "maintenance/raw/offline-tests.json",
+      "sha256": "533c3b09127f163d483480b5a51a61ec2c3ad18c4e5e88436166a2d96d15f057"
+    },
+    {
+      "path": "maintenance/raw/independent-byte-checks.json",
+      "sha256": "48d1eda8afa7d33e2950a995c0bb8940828bcc4c52c08647e09545b21c83f16d"
+    },
+    {
+      "path": "cold-reader/before.json",
+      "sha256": "98f5e24c58b9edbf76efeee895b7b6abb2afe44e485ae49417b5c327ef63a797"
+    },
+    {
+      "path": "cold-reader/after.json",
+      "sha256": "98f5e24c58b9edbf76efeee895b7b6abb2afe44e485ae49417b5c327ef63a797"
+    },
+    {
+      "path": "cold-reader/raw/model.stdout",
+      "sha256": "b10125be95849eacd2c02ab3be144e5d88a3b3985cc617b3254783016f844cf7"
+    }
+  ]
+}
