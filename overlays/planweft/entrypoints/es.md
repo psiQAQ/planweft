@@ -4,11 +4,15 @@ Sigue estos cuatro pasos para mantenimiento o implementación con investigación
 
 ## 1. Delimitar el alcance y leer la entrada
 
-Lee instrucciones, requisitos aprobados, notas existentes y el diff relevante. Conserva los cambios del usuario. Lectura, diagnóstico y modo de planificación permanecen de solo lectura: no crean ni modifican registros del proyecto. Las tareas triviales no necesitan un plan nuevo. Un documento de investigación solicitado autoriza ese documento, no otra jerarquía de planes.
+Lee instrucciones, requisitos aprobados, notas existentes y el diff relevante; conserva los cambios del usuario. Antes de preparar la tarea, indica en la respuesta o el objetivo existente qué rama aplica y su fuente real:
 
-Si una instrucción prohíbe nuevos archivos, la adopción o cambiar la autoridad del plan anterior, cita esa instrucción y conserva la autoridad. Minimizar cambios o reutilizar notas no constituye esa excepción. Para la implementación autorizada, continúa con la preparación.
+- Solo lectura, diagnóstico o modo de planificación: inspecciona e informa sin modificar registros. Un documento de investigación solicitado autoriza solo ese documento.
+- Tarea trivial o restricción explícita sobre archivos nuevos, adopción o autoridad del plan anterior: indica el alcance trivial o cita la restricción y su fuente; conserva la entrada de estado existente.
+- Implementación sustancial autorizada: si no aplica esa restricción, indica que no se encontró una prohibición de adopción y resuelve o inicializa el plan según el paso 2. Minimizar cambios y reutilizar notas son contexto de trabajo, no una prohibición de adopción.
 
-Localiza recursos mediante la ruta `SKILL.md` proporcionada por el agente; ejecuta scripts con el proyecto autorizado como cwd. No busques recursos en configuración del agente, recibos de instalación o variables ajenas. Consulta únicamente `PLAN_ID`, `PWF_*` y `PLANNING_DISABLED` cuando los scripts lo requieran.
+Esta decisión registra la autoridad existente; no otorga permisos ni requiere otro archivo.
+
+Localiza recursos mediante la ruta `SKILL.md` proporcionada por el agente; resuelve enlaces según [operaciones locales](references/local-operations.md) ([中文](references/local-operations.zh.md)); ejecuta scripts con el proyecto autorizado como cwd. No busques recursos en configuración del agente, recibos de instalación o variables ajenas. Consulta únicamente `PLAN_ID`, `PWF_*` y `PLANNING_DISABLED` cuando los scripts lo requieran.
 
 ## 2. Preparar la tarea antes de implementar
 
@@ -26,7 +30,7 @@ Transfiere el estado activo de esta tarea a `task_plan.md`. Sustituye solo estad
 
 `task_plan.md`: objetivo, fases, estado, próxima acción, bloqueos y evidencias. `findings.md`: fuentes, observaciones fechadas, hipótesis y decisiones candidatas. `progress.md`: acciones, errores y verificación. Relee el plan antes de decidir y actualízalo tras cada fase. Conserva `### Phase` y los literales `**Status:** pending`, `in_progress`, `complete`.
 
-Mantén los documentos duraderos afectados en sus ubicaciones actuales; crea solo registros útiles que falten. No adaptes requisitos aprobados al código. Un owner actualiza el estado compartido; workers usan registros asignados y tareas independientes usan planes/worktrees separados. Copias temporales manuales y pruebas contrafactuales deben estar en directorios propios de la tarea dentro del proyecto autorizado; no limpies rutas fijas ajenas.
+Mantén los documentos duraderos afectados en sus ubicaciones actuales; crea solo registros útiles que falten. No adaptes requisitos aprobados al código. Un owner actualiza el estado compartido; workers usan registros asignados y tareas independientes usan planes/worktrees separados. Para copias temporales manuales y pruebas contrafactuales, usa la creación y limpieza dentro del proyecto de [operaciones locales](references/local-operations.md) ([中文](references/local-operations.zh.md)); registra la ubicación real.
 
 Registra cada comprobación ejecutada con comando o acción, resultado observado y código de salida disponible. Los resultados heredados citan el registro original; las comprobaciones no ejecutadas son **Not Run**. Inspeccionar código no es ejecutar; una ejecución posterior no ocurrió antes.
 

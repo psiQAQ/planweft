@@ -4,11 +4,11 @@
   "files": {
     "dist/core.d.ts": {
       "executable": false,
-      "sha256": "7c2b32b600fee359efdf7694486f8f0db1dea28bf6abef23d038500ba4ca8ae6"
+      "sha256": "44e96f3bd142b37e3490ef45a5cfe3e6d79296196821cc3506745de8629ff37d"
     },
     "dist/core.js": {
       "executable": false,
-      "sha256": "a5902293c2373f0cb3f7d20735b7f2862cd8f344ca9da05e888bda57a1eaaf3a"
+      "sha256": "db383f9974b3eb57dcfc7eebc3ae1956c9243ad9d53f8cbe67f4d477ce248421"
     },
     "dist/index.d.ts": {
       "executable": false,
@@ -22,15 +22,15 @@
   "inputs": {
     "package-lock.json": {
       "executable": false,
-      "sha256": "d3a4d2512ea4d462f2c2618ea0e70ae812886f35c1addb4df1f9a67f69244981"
+      "sha256": "3b7ca6edb0d98f747029c581a7e104a94e65aa6224832648b5877be7e5cb3408"
     },
     "package.json": {
       "executable": false,
-      "sha256": "07f799f83b45a925d7cfe3f592af08f8e75ec4bffc4d7b67500ce37ee0f7429d"
+      "sha256": "2f3f37930685df3712e15555ddad05d38705c7d038a75110f7ded9789dc12f32"
     },
     "src/core.ts": {
       "executable": false,
-      "sha256": "825f8b8083bdf96969f85fe5dea5b901d2633038e6cf04b1ccefff108a19c8b9"
+      "sha256": "de9c3487117badbc99704034984a91aa46fa5657355dedae75d76fff6c169fca"
     },
     "src/index.ts": {
       "executable": false,
@@ -41,5 +41,5 @@
       "sha256": "29abb8649f73c66d5b5f807103a8d591a878cc1ce2fe959ead50a4e7805950ca"
     }
   },
-  "source_sha256": "4e45481c10a55b35b8d865af41163b92c5eff18347c3ac28ccc95ddb72303504"
+  "source_sha256": "5eb44440a44fb7c1bb4a0e5fa3776f90fdc9a2ca21c19705b08c7d80a2120bc4"
 }

@@ -258,3 +258,9 @@ OpenCode 原生 `pw_init` 选择面原先只列 autonomous/gated，遗漏省略�
 本地选择按解码结构校验安装记录、scope、步骤和 managed registry/payload 摘要，仅豁免精确自有 key/source；保留其他 key/value 扫描及普通别名复用同目录的拒绝。借助锁文件已有 [toml 4.3.0](https://registry.npmjs.org/toml/-/toml-4.3.0.tgz) parser 的实际源码解析 TOML，严格 UTF-8 解码在本地完成；不写回解析对象，不声称其数值精度或语法覆盖等于 Codex 完整配置校验。直接依赖声明仍待确认，当前 NODE_PATH 只用于离线开发验证，不构成分发依赖契约。来源、原始发现与处理见 [独立实施复核](reviews/0010-rc13-codex-registration-review.md)；未执行准确修改归档的真实验收。
 
 用户随后明确允许将已有锁定 `toml@4.3.0` 声明为直接依赖。69 个非根 lock 条目逐项保持不变；check/publish 两个 CI 入口均在安装器回归前执行 `npm ci --ignore-scripts --omit=dev`。已从真实安装的依赖重跑，不再使用 NODE_PATH。依赖边界和工作流复核见 [独立依赖审查](reviews/0010-rc13-dependency-review.md)，原待确认记录作为历史保留。
+
+## RC14 操作例程与判断分支
+
+Python 官方 [Path.resolve](https://docs.python.org/3/library/pathlib.html#pathlib.Path.resolve) 与 [TemporaryDirectory](https://docs.python.org/3/library/tempfile.html#tempfile.TemporaryDirectory) 分别提供链接规范解析、显式父目录及 context manager 清理语义（2026-09-10 实际核查）。本地双语例程只传入宿主已列出的 Skill 路径或已授权项目；不扫描配置，不改变整个宿主的 TMPDIR。中文空格路径、多层相对链接、缺失路径和异常退出已有离线对照，不能因此宣称模型实际遵循。
+
+采用判断由原先两段条件说明改成三个有实际来源的分支动作，沿用已有只读/简单任务/明确禁止采用的边界，不引入批准程序或决策文件。此项是对 Claude 已读取正文仍误判例外的待验证干预；PWF 或 Python 文档不证明其行为效果。见 [独立工作流复核](reviews/0010-rc14-workflow-review.md) 和 [Pi 发现复核](reviews/0010-rc14-pi-discovery-review.md)：Pi 原生预检提供准确路径，现有证据不足以认定安装定位缺陷，也未保留当次最终系统提示。不得用新示例回写旧模型失败。

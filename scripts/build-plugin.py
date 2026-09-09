@@ -17,7 +17,7 @@ import tarfile
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR = ROOT / 'vendor/planning-with-files'
 OVERLAY = ROOT / 'overlays/planweft'
-VERSION = '0.4.0-rc.13'
+VERSION = '0.4.0-rc.14'
 PRODUCT = 'planweft'
 SKILL = 'project-docs'
 SKILL_TRIGGER = ('Use for implementation/maintenance with investigation, fixes, regression tests '
@@ -433,6 +433,8 @@ def transform(upstream, enhanced=True):
                 result[base + '/references/controls.md'] = ((OVERLAY / 'references/controls.md').read_bytes(), 0o644)
                 result[base + '/references/plan-selection.md'] = ((OVERLAY / 'references/plan-selection.md').read_bytes(), 0o644)
                 result[base + '/references/plan-selection.zh.md'] = ((OVERLAY / 'references/plan-selection.zh.md').read_bytes(), 0o644)
+                for reference in ('local-operations.md', 'local-operations.zh.md'):
+                    result[base + '/references/' + reference] = ((OVERLAY / 'references' / reference).read_bytes(), 0o644)
                 # A standalone install copies the skill folder, not its repo.
                 # Fill absent assets only; native/localized assets remain intact.
                 for asset, value in list(result.items()):

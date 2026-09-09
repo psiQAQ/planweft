@@ -1,6 +1,6 @@
 {
   "name": "planweft",
-  "version": "0.4.0-rc.13",
+  "version": "0.4.0-rc.14",
   "description": "Plan and document implementation or maintenance with investigation, fixes, regression tests and handoff, including work continued from existing notes. Use task_plan.md, findings.md and progress.md as persistent task records. Read-only and trivial tasks do not initialize records; respect project restrictions. Hooks provide project context; explicit history access and host-dependent continuation; no network upload path.",
   "author": {
     "name": "PlanWeft contributors"

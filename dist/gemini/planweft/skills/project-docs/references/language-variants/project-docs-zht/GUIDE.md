@@ -2,7 +2,7 @@
 name: project-docs-zht
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Its session-end hook reports status only and does not request continuation."
 metadata:
-  version: "0.4.0-rc.13"
+  version: "0.4.0-rc.14"
 ---
 
 # 專案文件與任務規劃
@@ -11,11 +11,15 @@ metadata:
 
 ## 1. 明確範圍，閱讀專案入口
 
-閱讀專案指令、核准需求、既有任務記錄及相關 diff，保留使用者修改。閱讀、診斷和宿主規劃模式保持唯讀，不建立或修改專案記錄；簡單任務不需要新計畫。明確要求的書面研究產物只授權該產物，不另行授權規劃層級。
+閱讀專案指令、核准需求、既有任務記錄及相關 diff，保留使用者修改。準備任務前，在既有回覆或目標段中說明適用分支及實際來源：
 
-若明確禁止新增檔案、採用新流程或改變舊計畫的權威入口，引用實際指令並保留該權威。「最小修改」「沿用資料」不構成這種例外。其他已授權實作進入任務準備。
+- 唯讀／診斷／宿主規劃模式：只檢查與報告，不修改專案記錄；明確要求的書面研究只授權該產物。
+- 簡單任務，或明確限制新增檔案、採用流程、舊計畫權威：說明簡單任務的範圍，或引用限制原句及來源；保留原狀態入口。
+- 已授權的實質實作：沒有上述限制時，說明未發現禁止採用的指令，再按第 2 步解析或初始化本任務。「最小修改」「沿用資料」是工作背景，不是禁止採用的指令。
 
-資源使用宿主提供的 `SKILL.md` 位置；腳本 cwd 為已授權專案。不要為定位資源檢查宿主設定、安裝收據或無關環境變數；僅按腳本需要查看 `PLAN_ID`、`PWF_*`、`PLANNING_DISABLED`。
+該判斷只記錄既有授權，不授予新權限，也不另建判斷檔案。
+
+資源使用宿主提供的 `SKILL.md` 位置；連結解析見[本地操作](references/local-operations.zh.md)（[English](references/local-operations.md)）；腳本 cwd 為已授權專案。不要為定位資源檢查宿主設定、安裝收據或無關環境變數；僅按腳本需要查看 `PLAN_ID`、`PWF_*`、`PLANNING_DISABLED`。
 
 ## 2. 修改實作前準備任務
 
@@ -33,7 +37,7 @@ metadata:
 
 `task_plan.md` 管理目標、階段、狀態、下一步、阻塞和證據入口；`findings.md` 記錄來源、帶時點的觀察、假設和候選決定；`progress.md` 記錄操作、錯誤和驗證。決策前重讀計畫，每階段後更新；保留解析器字面格式 `### Phase` 和 `**Status:** pending`、`in_progress`、`complete`。
 
-在原有位置維護受影響的長期文件，只建立有用的缺失記錄。不得為配合程式碼改寫核准需求。一個 owner 更新共用狀態，worker 使用分配記錄；獨立任務使用不同計畫或 worktree。手動暫存副本和反事實測試位於授權專案內的本任務自有目錄，不清理非自有固定路徑。
+在原有位置維護受影響的長期文件，只建立有用的缺失記錄。不得為配合程式碼改寫核准需求。一個 owner 更新共用狀態，worker 使用分配記錄；獨立任務使用不同計畫或 worktree。手動暫存副本和反事實檢查按[本地操作](references/local-operations.zh.md)（[English](references/local-operations.md)）在專案內配置並清理自有目錄，記錄實際位置。
 
 實際執行的檢查記錄命令或操作、觀察結果及可取得的退出狀態；繼承結果引用原記錄；未執行檢查為 **Not Run**。讀碼不是執行，後來的執行不能寫成先前結果。
 

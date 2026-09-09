@@ -2,6 +2,12 @@
 
 # Changelog
 
+## 0.4.0-rc.14 — Candidate source, not published
+
+- Express plan adoption as a source-backed branch decision across all six languages; retain read-only, trivial-task and explicit adoption restrictions without adding automatic file-writing hooks.
+- Add bilingual packaged examples for resolving the host-listed Skill link and allocating/cleaning manual scratch inside the authorized project, without looking up host settings or changing the entire host's temporary directory.
+- Examples have offline coverage for linked paths, Chinese/spaced paths and exception cleanup. Automatic matching, scope compliance and final stable-artifact model acceptance remain pending. Dependency versions retain the RC13 lock.
+
 ## 0.4.0-rc.13 — Candidate source (check the official registry)
 
 - Recognize the exact owned Codex marketplace source using parsed TOML, receipt scope, completed steps and file digests; retain foreign-registration, changed-source and invalid-config rejection.

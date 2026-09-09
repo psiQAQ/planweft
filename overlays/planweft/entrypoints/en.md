@@ -4,11 +4,15 @@ Use this four-step workflow for maintenance or implementation combining investig
 
 ## 1. Establish scope and read the entrypoint
 
-Read project instructions, approved requirements, existing task notes and relevant diff. Preserve user edits. Reading, diagnosis and host plan mode stay read-only: neither create nor modify project records. Trivial tasks need no new plan. An explicitly requested research document authorizes that document, not another planning hierarchy.
+Read project instructions, approved requirements, existing task notes and relevant diff; preserve user edits. Before preparation, state which branch applies in the existing response or goal, with the actual source:
 
-If new files, adoption or changing the old plan's authority are explicitly forbidden, cite the actual instruction and retain that authority. General advice to minimize changes or reuse notes does not establish this exception. Otherwise proceed to task preparation for authorized implementation.
+- Read-only/diagnosis/host plan mode: inspect and report without changing project records. An explicitly requested research document authorizes that document alone.
+- Trivial task, or an explicit restriction on new files, adoption or the old plan's authority: name the trivial scope or quote the restricting instruction and its source; keep the existing state entry.
+- Authorized substantive implementation: if no such restriction applies, state that no adoption prohibition was found, then resolve or initialize the task in step 2. General advice to minimize changes or reuse notes is context for that work, not an adoption prohibition.
 
-Use the host-provided `SKILL.md` location for package resources. Run helpers with the authorized project as cwd. Do not inspect host settings, receipts or unrelated environment variables to locate resources; only inspect `PLAN_ID`, `PWF_*` and `PLANNING_DISABLED` when needed by the helpers.
+This decision records existing authority; it grants none and needs no separate decision file.
+
+Use the host-provided `SKILL.md` location for package resources. Resolve symlinks as shown in [local operations](references/local-operations.md) ([中文](references/local-operations.zh.md)). Run helpers with the authorized project as cwd. Do not inspect host settings, receipts or unrelated environment variables to locate resources; only inspect `PLAN_ID`, `PWF_*` and `PLANNING_DISABLED` when needed by the helpers.
 
 ## 2. Prepare the task before changing implementation
 
@@ -26,7 +30,7 @@ Transfer this task's live state into the selected `task_plan.md`. Replace only t
 
 `task_plan.md` owns goal, phases, status, next action, blockers and evidence links. `findings.md` holds sources, dated observations, assumptions and candidate decisions. `progress.md` records actions, errors and verification. Re-read the plan before decisions and update after each phase; preserve `### Phase` and literal `**Status:** pending`, `in_progress`, `complete`.
 
-Maintain affected long-term documents in their existing locations; create only useful missing records. Never change approved requirements to fit code. One owner updates shared state; workers use assigned records, and independent tasks use separate plans/worktrees. Manual scratch copies and counterfactual tests belong in task-owned directories inside the authorized project; never clear an unowned fixed path.
+Maintain affected long-term documents in their existing locations; create only useful missing records. Never change approved requirements to fit code. One owner updates shared state; workers use assigned records, and independent tasks use separate plans/worktrees. For manual scratch and counterfactual checks, use the project-owned allocation and cleanup in [local operations](references/local-operations.md) ([中文](references/local-operations.zh.md)); record the actual location.
 
 For checks actually executed, record the command or action, observed result and exit status when available. Inherited results cite their original record. Unexecuted checks are **Not Run**. Code inspection is not execution; later execution is not an earlier result.
 

@@ -2,7 +2,7 @@
 name: project-docs-de
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
 metadata:
-  version: "0.4.0-rc.13"
+  version: "0.4.0-rc.14"
 ---
 
 # Projektdokumentation und Aufgabenplanung
@@ -11,11 +11,15 @@ Nutze diese vier Schritte für Wartung oder Implementierung mit Untersuchung, Ä
 
 ## 1. Umfang klären und Projekteinstieg lesen
 
-Lies Projektanweisungen, genehmigte Anforderungen, vorhandene Notizen und relevante Diffs. Bewahre Änderungen des Nutzers. Lesen, Diagnose und Planungsmodus des Hosts bleiben schreibgeschützt: keine Projektaufzeichnungen anlegen oder ändern. Triviale Aufgaben benötigen keinen neuen Plan. Ein ausdrücklich gewünschtes Forschungsdokument erlaubt dieses Dokument, keine zusätzliche Planungshierarchie.
+Lies Projektanweisungen, genehmigte Anforderungen, vorhandene Notizen und relevante Diffs; bewahre Änderungen des Nutzers. Nenne vor der Vorbereitung in der vorhandenen Antwort oder im Ziel den zutreffenden Zweig und seine tatsächliche Quelle:
 
-Wenn neue Dateien, die Übernahme oder ein Wechsel der Autorität des alten Plans ausdrücklich verboten sind, zitiere die tatsächliche Anweisung und behalte diese Autorität. Allgemeine Hinweise auf minimale Änderungen oder Wiederverwendung begründen diese Ausnahme nicht. Für autorisierte Implementierung folgt die Vorbereitung.
+- Nur Lesen, Diagnose oder Planungsmodus: prüfen und berichten, ohne Projektaufzeichnungen zu ändern. Ein ausdrücklich gewünschtes Forschungsdokument erlaubt nur dieses Dokument.
+- Triviale Aufgabe oder ausdrückliche Einschränkung neuer Dateien, der Übernahme oder der Autorität des alten Plans: nenne den trivialen Umfang oder zitiere die Einschränkung samt Quelle; behalte den bisherigen Statuseinstieg.
+- Autorisierte substanzielle Implementierung: liegt keine solche Einschränkung vor, halte fest, dass kein Übernahmeverbot gefunden wurde, und wähle oder initialisiere den Aufgabenplan gemäß Schritt 2. Minimale Änderungen und Wiederverwendung sind Arbeitskontext, kein Übernahmeverbot.
 
-Verwende den vom Host angegebenen `SKILL.md`-Pfad für Paketressourcen. Das cwd der Skripte ist das autorisierte Projekt. Suche Ressourcen nicht in Host-Konfiguration, Installationsbelegen oder fremden Umgebungsvariablen; prüfe bei Bedarf nur `PLAN_ID`, `PWF_*` und `PLANNING_DISABLED` für die Helfer.
+Diese Entscheidung dokumentiert bestehende Befugnisse, erteilt keine neuen und benötigt keine separate Datei.
+
+Verwende den vom Host angegebenen `SKILL.md`-Pfad für Paketressourcen. Löse Symlinks gemäß [lokale Operationen](references/local-operations.md) ([中文](references/local-operations.zh.md)) auf. Das cwd der Skripte ist das autorisierte Projekt. Suche Ressourcen nicht in Host-Konfiguration, Installationsbelegen oder fremden Umgebungsvariablen; prüfe bei Bedarf nur `PLAN_ID`, `PWF_*` und `PLANNING_DISABLED` für die Helfer.
 
 ## 2. Aufgabe vor der Implementierung vorbereiten
 
@@ -33,7 +37,7 @@ Vor der Implementierung eine knappe Bereichszusammenfassung mit den tatsächlich
 
 `task_plan.md` enthält Ziel, Phasen, Status, nächste Aktion, Blockaden und Beleglinks. `findings.md` enthält Quellen, datierte Beobachtungen, Annahmen und mögliche Entscheidungen. `progress.md` enthält Aktionen, Fehler und Verifikation. Vor Entscheidungen den Plan erneut lesen, nach jeder Phase aktualisieren. `### Phase` und die Literale `**Status:** pending`, `in_progress`, `complete` erhalten.
 
-Betroffene dauerhafte Dokumente an ihren vorhandenen Orten pflegen; nur nützliche fehlende Aufzeichnungen ergänzen. Genehmigte Anforderungen nicht an den Code anpassen. Ein owner pflegt gemeinsamen Status, workers ihre zugewiesenen Aufzeichnungen; unabhängige Aufgaben verwenden getrennte Pläne/worktrees. Manuelle temporäre Kopien und Gegenproben gehören in aufgabeneigene Verzeichnisse innerhalb des autorisierten Projekts; keine fremden festen Pfade bereinigen.
+Betroffene dauerhafte Dokumente an ihren vorhandenen Orten pflegen; nur nützliche fehlende Aufzeichnungen ergänzen. Genehmigte Anforderungen nicht an den Code anpassen. Ein owner pflegt gemeinsamen Status, workers ihre zugewiesenen Aufzeichnungen; unabhängige Aufgaben verwenden getrennte Pläne/worktrees. Nutze für manuelle temporäre Kopien und Gegenproben die projektinterne Anlage und Bereinigung in [lokale Operationen](references/local-operations.md) ([中文](references/local-operations.zh.md)); protokolliere den tatsächlichen Ort.
 
 Tatsächlich ausgeführte Prüfungen mit Befehl oder Aktion, beobachtetem Ergebnis und verfügbarem Exitstatus dokumentieren. Übernommene Ergebnisse nennen die ursprüngliche Aufzeichnung; nicht ausgeführte Prüfungen sind **Not Run**. Codelesen ist keine Ausführung; spätere Ausführung ist kein früheres Ergebnis.
 
