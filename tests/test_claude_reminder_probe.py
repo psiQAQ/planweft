@@ -200,7 +200,7 @@ class ClaudeReminderTest(unittest.TestCase):
                 # the eventual Failed verdict, not prediction of late data, is required.
 
     def test_private_trace_is_bounded_verified_and_never_exported(self):
-        for mode in ['complete','incomplete','secret','truncated','replaced','oversized','analysis-error','output-symlink','interrupted','metadata-oversized']:
+        for mode in ['complete','incomplete','secret','truncated','replaced','oversized','analysis-error','output-symlink','interrupted','metadata-oversized','metadata-total']:
             with self.subTest(mode=mode),tempfile.TemporaryDirectory() as temporary:
                 root=Path(temporary);work,out,package,native,private,script=self.fixture(root)
                 real=subprocess.Popen;seen=[]
@@ -224,14 +224,19 @@ class ClaudeReminderTest(unittest.TestCase):
                     if mode=='analysis-error':raise ValueError('raw argv must not escape')
                     if mode=='interrupted':raise KeyboardInterrupt()
                     if mode=='metadata-oversized':return {'errors':['x'*(256*1024)]}
+                    if mode=='metadata-total':return {'errors':['x'*(200*1024)]}
                     return {'observation_complete':mode=='complete','hooks':[],
                             'errors':[] if mode=='complete' else ['synthetic attribution gap']}
                 with patch('claude_reminder_probe.subprocess.Popen',side_effect=spawn),patch('claude_hook_trace.analyze_trace',side_effect=analyze),patch('claude_reminder_probe.native_executable_identity',return_value=('/synthetic/claude',{'shell':['/bin/sh'],'python':['/bin/python3']},{'/synthetic/claude':'a'*64})):
                     result,evidence=run_probe('synthetic-model',work,out,package,native,3,
                         lambda text:text.replace('SYNTHETIC_SECRET','[REDACTED]'),
-                        plan_dir=work,private_dir=private,trace_hooks=True)
+                        plan_dir=work,private_dir=private,trace_hooks=True,
+                        limits={**DEFAULT_LIMITS,'total':128*1024} if mode=='metadata-total' else None)
                 self.assertEqual(list(private.iterdir()),[])
                 self.assertTrue(evidence['private_trace_removed'])
+                if mode=='metadata-total':
+                    self.assertFalse((out/(PREFIX+FILES['trace'])).exists())
+                    self.assertLess(sum(p.stat().st_size for p in out.iterdir() if p.is_file() and not p.is_symlink()),128*1024)
                 self.assertEqual((root/'foreign.log').read_text(),'FOREIGN_SYNTHETIC_PRIVATE_CONTENT\n')
                 for path in out.iterdir():
                     if path.is_symlink():continue

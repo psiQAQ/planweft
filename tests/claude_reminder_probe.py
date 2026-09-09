@@ -414,7 +414,10 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
         # The frozen seven-hook native preflight already needs about 47 KiB
         # to retain every script read and EOF. Keep a separate bounded budget
         # instead of dropping provenance to fit the short summary limit.
-        if len(rendered_trace.encode())>TRACE_METADATA_LIMIT:
+        already_written=sum(path.stat().st_size for key,path in paths.items()
+                            if key not in ['trace','report'] and path.exists() and not path.is_symlink())
+        metadata_budget=max(0,min(TRACE_METADATA_LIMIT,limits['total']-65536-already_written))
+        if len(rendered_trace.encode())>metadata_budget:
             raise RuntimeError('Trace observation metadata budget exceeded')
         with paths['trace'].open('x',encoding='utf-8') as target:
             target.write(redact(rendered_trace))
