@@ -12,6 +12,8 @@ from pathlib import Path
 import re
 import select
 import signal
+import stat
+import shutil
 import subprocess
 import tempfile
 import time
@@ -55,11 +57,12 @@ def prompt(work,label):
 
 class Protocol:
     """Incremental actual tool pairing; never count debug strings as delivery."""
-    def __init__(self,work):
+    def __init__(self,work,model,version):
+        self.model=model;self.version=version
         self.work=work;self.sequence=0;self.session=None;self.current=None
         self.sent=[];self.rows=[];self.pending=None;self.tool_ids=set();self.turns=[]
-        self.echoes=[];self.hooks=[];self.init_seen=False;self.finished=False
-        self.answer_after_tools=False
+        self.echoes=[];self.hooks=[];self.initializations={};self.init_metadata=None;self.finished=False
+        self.answer_after_tools=False;self.commands={};self.command_events=[]
 
     def send(self,label,debug_offset):
         if (label not in ['A','B'] or len(self.sent)!=(0 if label=='A' else 1)
@@ -83,12 +86,48 @@ class Protocol:
             if self.session and self.session!=session:raise ValueError('Session identity changed')
             self.session=session
         kind=event.get('type');subtype=event.get('subtype','')
+        if kind=='command_lifecycle':
+            selected=[r for r in self.sent if r['request']['uuid']==event.get('command_uuid')]
+            if len(selected)!=1 or not session:raise ObservationGap('Command lifecycle is not bound to a sent user request')
+            label=selected[0]['label'];state=event.get('state');previous=self.commands.get(label)
+            if state!={None:'queued','queued':'started','started':'completed'}.get(previous):
+                raise ValueError('Repeated, incomplete or reordered command lifecycle')
+            if state=='started' and (label!=self.current or (label=='B' and self.commands.get('A')!='completed')):
+                raise ValueError('Command started outside its serial user turn')
+            if state=='completed' and not any(t['label']==label for t in self.turns):
+                raise ValueError('Command completed before successful result')
+            self.commands[label]=state
+            self.command_events.append({'label':label,'command_uuid':event['command_uuid'],'state':state,'sequence':self.sequence})
+            return
         if kind=='system':
             if 'compact' in subtype.lower() or any(x in str(event.get('hook_event','')).lower() for x in ['compact','clear','resume']):
                 raise ValueError('Compaction/reset cannot prove user-turn rearm')
             if subtype=='init':
-                if self.init_seen or self.rows:raise ValueError('Repeated/late native initialization')
-                self.init_seen=True
+                # Pinned Claude resends identical init metadata for each
+                # stdin user request, without restarting SessionStart.
+                if (self.current is None or self.current in self.initializations or self.pending is not None
+                        or any(r['turn']==self.current for r in self.rows)):
+                    raise ValueError('Repeated/late native initialization within a user turn')
+                if self.commands.get(self.current)!='started':
+                    raise ObservationGap('Initialization lacks native started request binding')
+                required={'cwd':str,'model':str,'permissionMode':str,'claude_code_version':str,
+                          'tools':list,'mcp_servers':list,'plugins':list,'skills':list}
+                if any(not isinstance(event.get(k),kind) for k,kind in required.items()):
+                    raise ObservationGap('Native initialization metadata is incomplete')
+                if (event['cwd']!=str(self.work) or event['model']!=self.model
+                        or event['permissionMode']!='acceptEdits' or event['claude_code_version']!='2.1.241'
+                        or 'Write' not in event['tools'] or event['mcp_servers']):
+                    raise ValueError('Native initial model, scope or capabilities differ')
+                plugins=event['plugins']
+                if (len(plugins)!=1 or not isinstance(plugins[0],dict)
+                        or plugins[0].get('name')!='planweft' or plugins[0].get('version')!=self.version
+                        or event['skills'].count('planweft:project-docs')!=1):
+                    raise ValueError('Native plugin/Skill identity differs or is duplicated')
+                metadata={k:v for k,v in event.items() if k!='uuid'}
+                if self.init_metadata is not None and metadata!=self.init_metadata:
+                    raise ValueError('Native initialization metadata changed between user turns')
+                self.init_metadata=metadata
+                self.initializations[self.current]={'sequence':self.sequence,'session_id':self.session}
             if subtype in ['hook_started','hook_response']:
                 if event.get('hook_event')=='SessionStart' and (self.rows or len(self.sent)>1):
                     raise ValueError('SessionStart after initial activity')
@@ -148,6 +187,7 @@ class Protocol:
                     or not self.session or self.pending is not None
                     or sum(row['turn']==self.current for row in self.rows)!=2):
                 raise ValueError('Failed, incomplete or duplicate native user result')
+            if self.current not in self.initializations:raise ObservationGap('No native initialization metadata for user turn')
             if not self.answer_after_tools:raise ObservationGap('No actual assistant response after the two successful Writes')
             self.turns.append({'label':self.current,'result_sequence':self.sequence,'session_id':self.session,
                                'uuid':event.get('uuid'),'subtype':subtype})
@@ -177,6 +217,22 @@ def stop_owned(process,grace=1):
     process.wait(timeout=grace)
     result['exit_code']=process.returncode
     return result
+
+
+def clean_private_tree(directory,parent,identity):
+    """Delete only the exact private directory created by this invocation."""
+    if directory.parent!=parent or not shutil.rmtree.avoids_symlink_attacks:
+        raise OSError('Safe private directory cleanup unavailable')
+    fd=os.open(parent,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+    try:
+        current=os.stat(directory.name,dir_fd=fd,follow_symlinks=False)
+        if not stat.S_ISDIR(current.st_mode) or (current.st_dev,current.st_ino,current.st_uid)!=identity:
+            raise OSError('Private debug directory identity changed')
+        shutil.rmtree(directory.name,dir_fd=fd)
+        try:os.stat(directory.name,dir_fd=fd,follow_symlinks=False)
+        except FileNotFoundError:return
+        raise OSError('Private debug directory remains')
+    finally:os.close(fd)
 
 
 def validate(model,work,out,package,native_root,plan_dir,private_dir,timeout,limits):
@@ -238,7 +294,8 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
              '--allowedTools','Read,Edit,Write,Bash,Glob,Grep,Skill','--model',model,
              '--output-format','stream-json','--verbose','--input-format','stream-json',
              '--replay-user-messages']
-    protocol=Protocol(work);process=None;deadline=time.monotonic()+timeout
+    version=json.loads((native_root/'.claude-plugin/plugin.json').read_text())['version']
+    protocol=Protocol(work,model,version);process=None;deadline=time.monotonic()+timeout
     evidence={'status':'Not Run','collection_status':'In Progress','reminder_deduplication':'Not Run',
               'reason':'Pinned Claude PostToolUse empty-output/handler-to-tool debug correlation remains unvalidated; raw collection only.',
               'command':command,'timeout_seconds':timeout,'output_limits':limits,'resource_sha256':resources,
@@ -253,9 +310,22 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
         except Exception as error:
             privacy_errors.append(type(error).__name__)
             return '[redaction failed; content omitted]\n'
-    sizes={'stdout':0,'stderr':0};buffers={'stdout':b'','stderr':b''};handles={};truncated=[];debug_parent=None;debug_path=None
+    sizes={'stdout':0,'stderr':0};buffers={'stdout':b'','stderr':b''};handles={};truncated=[];debug_parent=None;debug_path=None;debug_identity=None;debug_parent_fd=None;debug_fd=None;debug_file_identity=None
+    def checked_debug_size():
+        if debug_fd is None or debug_parent_fd is None:raise OSError('Private debug descriptor missing')
+        directory=debug_parent.lstat()
+        if (not stat.S_ISDIR(directory.st_mode)
+                or (directory.st_dev,directory.st_ino,directory.st_uid)!=debug_identity):
+            raise OSError('Private debug directory identity changed')
+        named=os.stat(debug_path.name,dir_fd=debug_parent_fd,follow_symlinks=False)
+        opened=os.fstat(debug_fd)
+        if (not stat.S_ISREG(named.st_mode) or not stat.S_ISREG(opened.st_mode)
+                or (named.st_dev,named.st_ino,named.st_uid)!=debug_file_identity
+                or (opened.st_dev,opened.st_ino,opened.st_uid)!=debug_file_identity):
+            raise OSError('Private debug file identity changed')
+        return opened.st_size
     def debug_size():
-        size=debug_path.stat().st_size if debug_path and debug_path.exists() else 0
+        size=checked_debug_size()
         if size>limits['debug']:raise RuntimeError('Bounded debug output exceeded')
         if size+sum(sizes.values())>limits['total']-65536:raise RuntimeError('Total native output budget exceeded')
         return size
@@ -292,7 +362,11 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
     try:
         for key in ['stdout','stderr','sent']:handles[key]=paths[key].open('x',encoding='utf-8')
         debug_parent=Path(tempfile.mkdtemp(prefix='planweft-claude-reminder-',dir=private_dir))
-        debug_path=debug_parent/'native-debug.log';debug_path.touch(exist_ok=False)
+        created=debug_parent.stat();debug_identity=(created.st_dev,created.st_ino,created.st_uid)
+        debug_parent_fd=os.open(debug_parent,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+        debug_path=debug_parent/'native-debug.log'
+        debug_fd=os.open(debug_path.name,os.O_RDWR|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600,dir_fd=debug_parent_fd)
+        created_file=os.fstat(debug_fd);debug_file_identity=(created_file.st_dev,created_file.st_ino,created_file.st_uid)
         command+=['--debug-file',str(debug_path)]
         process=subprocess.Popen(command,cwd=work,env={**os.environ,'CLAUDE_CODE_DEBUG_LOG_LEVEL':'verbose'},
                                  stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
@@ -310,7 +384,9 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
                             buffers[key]=b''
                             write_log(key,'[incomplete native JSONL record omitted]\n')
                             raise ValueError('Truncated native JSONL record')
-                        write_log(key,buffers[key].decode(errors='replace'));buffers[key]=b''
+                        buffers[key]=b''
+                        write_log(key,'[incomplete native stderr tail omitted]\n')
+                        raise ValueError('Incomplete native stderr tail')
                     continue
                 lines(streams[stream],data)
             # Process every record already returned in the current read batch.
@@ -322,6 +398,7 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
                 process.stdin.close();stdin_closed=True
         process.wait(timeout=max(.01,deadline-time.monotonic()))
         if process.returncode!=0 or not protocol.finished:raise ValueError('Early/nonzero Claude process exit or missing result')
+        if protocol.commands!={'A':'completed','B':'completed'}:raise ObservationGap('Missing complete native command lifecycles')
         if not unchanged():
             raise ValueError('Completed source plan records changed')
         if not debug_size():raise ObservationGap('Native debug file is empty; cannot declare collection complete')
@@ -356,15 +433,16 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
                     # Reserve metadata space inside the aggregate 48 MiB cap.
                     used=sum(p.stat().st_size for key,p in paths.items() if key not in ['debug','report'] and p.exists())
                     budget=max(0,min(limits['debug'],limits['total']-65536-used))
-                    raw_size=debug_path.stat().st_size
-                    with debug_path.open('rb') as source,paths['debug'].open('x',encoding='utf-8') as target:
+                    raw_size=checked_debug_size()
+                    with os.fdopen(os.dup(debug_fd),'rb') as source,paths['debug'].open('x',encoding='utf-8') as target:
+                        source.seek(0)
                         remaining=budget;written=0
                         while remaining>0:
                             raw=source.readline(min(limits['line']+1,remaining))
                             if not raw:break
                             remaining-=len(raw)
-                            if not raw.endswith(b'\n') and source.tell()<raw_size:
-                                raise RuntimeError('Truncated native debug line omitted')
+                            if not raw.endswith(b'\n'):
+                                raise RuntimeError('Incomplete native debug line omitted')
                             if len(raw)>limits['line']:
                                 raise RuntimeError('Bounded debug line exceeded; unsafe partial line not exported')
                             safe=redact(raw.decode(errors='replace'))
@@ -377,14 +455,20 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
                 except Exception as error:
                     evidence.update(status='Failed',collection_status='Failed',debug_export_error=type(error).__name__+': '+str(error))
                 finally:
+                    for descriptor in [debug_fd,debug_parent_fd]:
+                        if descriptor is not None:os.close(descriptor)
                     try:
-                        debug_path.unlink(missing_ok=True);debug_parent.rmdir()
-                        evidence['private_debug_removed']=True
+                        # The CLI can create additional private diagnostic
+                        # files here. This random directory belongs only to
+                        # this probe; never traverse an exchanged root/link.
+                        clean_private_tree(debug_parent,private_dir,debug_identity)
+                        evidence['private_debug_removed']=not debug_parent.exists()
                     except OSError as error:
                         evidence.update(status='Failed',collection_status='Failed',private_debug_removed=False,
                                         cleanup_error='Private debug cleanup: '+type(error).__name__)
             evidence.update(session_id=protocol.session,sent=protocol.sent,turns=protocol.turns,
                 native_writes=protocol.rows,input_echoes=protocol.echoes,stream_hook_events=protocol.hooks,
+                initializations=protocol.initializations,command_lifecycle=protocol.command_events,
                 stdout_records=protocol.sequence,bytes_received=sizes,truncated_streams=sorted(set(truncated)),
                 plan_unchanged=unchanged())
             if not evidence['plan_unchanged']:evidence.update(status='Failed',collection_status='Failed')

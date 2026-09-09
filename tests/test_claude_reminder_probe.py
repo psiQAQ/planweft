@@ -9,7 +9,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from claude_reminder_probe import DEFAULT_LIMITS,FILES,PREFIX,Protocol,run_probe,stop_owned
+from claude_reminder_probe import DEFAULT_LIMITS,FILES,PREFIX,Protocol,run_probe,stop_owned,clean_private_tree
 
 FAKE=r'''
 import json,os,select,sys,time
@@ -17,9 +17,24 @@ from pathlib import Path
 mode=sys.argv[1];debug=Path(sys.argv[2]);work=Path.cwd()
 def emit(value): print(json.dumps(value),flush=True)
 def event(kind,**fields): return {'type':kind,'session_id':'session',**fields}
+previous_uuid=None
 for index,line in enumerate(sys.stdin):
     request=json.loads(line);label=['A','B'][index]
-    if index==0:emit(event('system',subtype='init'))
+    if mode=='late-completed' and index:
+        emit(event('command_lifecycle',command_uuid=previous_uuid,state='completed'))
+    if mode!='no-lifecycle':
+        emit(event('command_lifecycle',command_uuid=request['uuid'],state='queued'))
+        emit(event('command_lifecycle',command_uuid=request['uuid'],state='started'))
+    init=event('system',subtype='init',model='changed' if mode=='wrong-model' or (mode=='changed-init' and index) else 'synthetic-model',
+               cwd=str(work),permissionMode='acceptEdits',claude_code_version='2.1.241',tools=['Write'],
+               mcp_servers=[],plugins=[{'name':'planweft','version':'fixture'}],skills=['planweft:project-docs'])
+    if mode=='missing-metadata':init.pop('cwd')
+    if mode=='wrong-version':init['plugins'][0]['version']='wrong'
+    if mode=='wrong-permissions':init['permissionMode']='bypassPermissions'
+    if mode!='no-init':emit(init)
+    if mode=='extra-private':
+        child=debug.parent/'extra';child.mkdir(exist_ok=True);(child/'private.txt').write_text('SYNTHETIC_SECRET')
+        if not (child/'outside-link').is_symlink():(child/'outside-link').symlink_to(work/'task_plan.md')
     emit(event('user',message=request['message'],uuid=request['uuid'],isReplay=True))
     with debug.open('a') as f:
         if mode!='no-debug':f.write('SYNTHETIC_SECRET native hook diagnostic '+label+'\n')
@@ -37,7 +52,7 @@ for index,line in enumerate(sys.stdin):
     if mode=='hang':time.sleep(30)
     if mode=='early':sys.exit(0)
     if mode=='foreign-session' and index:emit({'type':'assistant','session_id':'foreign','message':{'content':[]}})
-    if mode=='reset' and index:emit(event('system',subtype='init'))
+    if mode=='reset' and index:emit(event('system',subtype='init',model='fixed'))
     for number in [1,2]:
         path=work/f'reminder-{label.lower()}-{number}.txt';text=f'{label}-{number}\n';tool=label+str(number)
         call={'type':'tool_use','name':'Write','id':tool,'input':{'file_path':str(path),'content':text}}
@@ -51,6 +66,7 @@ for index,line in enumerate(sys.stdin):
                      tool_use_result={'type':'create','filePath':str(path),'content':text})
         if mode=='unbound':result.pop('tool_use_result')
         emit(result)
+        if mode=='late-init' and number==1:emit(event('system',subtype='init',model='fixed'))
         if mode=='one-write':break
     if mode=='changed-plan':(work/'task_plan.md').write_text('# changed\n')
     if index==0:
@@ -59,6 +75,13 @@ for index,line in enumerate(sys.stdin):
         if select.select([sys.stdin],[],[],.01)[0]:raise RuntimeError('B queued before A result')
     emit(event('assistant',message={'content':[{'type':'text','text':'DONE_'+label}]}))
     emit(event('result',subtype='success',is_error=False,uuid='result-'+label))
+    if mode!='no-lifecycle' and not (mode=='late-completed' and index==0):
+        emit(event('command_lifecycle',command_uuid=request['uuid'],state='completed'))
+    previous_uuid=request['uuid']
+    if index==1 and mode in ['debug-link','debug-replaced']:
+        debug.unlink()
+        if mode=='debug-link':debug.symlink_to(work.parent/'foreign.log')
+        else:debug.write_text('FOREIGN_SYNTHETIC_PRIVATE_CONTENT\n')
     if mode=='extra-result':emit(event('result',subtype='success',is_error=False))
 '''
 
@@ -72,9 +95,11 @@ class ClaudeReminderTest(unittest.TestCase):
         from claude_reminder_probe import RESOURCES
         for relative in RESOURCES:
             content=b'fixed resource\n'
+            if relative=='.claude-plugin/plugin.json':content=b'{"name":"planweft","version":"fixture"}\n'
             if relative=='hooks/hooks.json':content=json.dumps({'hooks':{'PostToolUse':[{'matcher':'Write|Edit','hooks':[{'type':'command','command':'owned'}]}]}}).encode()
             for base in [native,package/'dist/claude/planweft']:
                 path=base/relative;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(content)
+        (root/'foreign.log').write_text('FOREIGN_SYNTHETIC_PRIVATE_CONTENT\n')
         script=root/'fake_cli.py';script.write_text(FAKE)
         return work,out,package,native,private,script
 
@@ -112,14 +137,57 @@ class ClaudeReminderTest(unittest.TestCase):
             self.assertIn('[REDACTED] native hook diagnostic',(out/(PREFIX+FILES['debug'])).read_text())
             self.assertTrue(evidence['plan_unchanged'])
 
+    def test_cli_private_auxiliary_files_are_cleaned_without_following_links(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            result,evidence,_=self.invoke(Path(temporary),'extra-private')
+            self.assertEqual(result.returncode,0)
+            self.assertTrue(evidence['plan_unchanged'])
+            self.assertEqual(set(evidence['initializations']),{'A','B'})
+
+    def test_previous_command_completion_after_next_send_stays_bound_to_previous_uuid(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            result,evidence,_=self.invoke(Path(temporary),'late-completed')
+            self.assertEqual(result.returncode,0)
+            rows=evidence['command_lifecycle']
+            self.assertEqual([(r['label'],r['state']) for r in rows],
+                [(label,state) for label in ['A','B'] for state in ['queued','started','completed']])
+            self.assertGreater(rows[2]['sequence'],evidence['sent'][1]['sent_after_stdout_sequence'])
+
+    def test_replaced_or_linked_native_debug_never_exports_foreign_content(self):
+        for mode in ['debug-link','debug-replaced']:
+            with self.subTest(mode=mode),tempfile.TemporaryDirectory() as temporary:
+                result,evidence,out=self.invoke(Path(temporary),mode)
+                self.assertEqual(result.returncode,1)
+                self.assertEqual(evidence['status'],'Failed')
+                for path in out.iterdir():self.assertNotIn('FOREIGN_SYNTHETIC_PRIVATE_CONTENT',path.read_text())
+                self.assertEqual((Path(temporary)/'foreign.log').read_text(),'FOREIGN_SYNTHETIC_PRIVATE_CONTENT\n')
+
+    def test_private_root_replacement_and_cleanup_error_are_refused(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            parent=Path(temporary);directory=parent/'owned';directory.mkdir()
+            st=directory.stat();identity=(st.st_dev,st.st_ino,st.st_uid)
+            original=parent/'original';directory.rename(original)
+            sentinel=parent/'other';sentinel.mkdir();(sentinel/'keep').write_text('keep')
+            directory.symlink_to(sentinel,target_is_directory=True)
+            with self.assertRaises(OSError):clean_private_tree(directory,parent,identity)
+            self.assertEqual((sentinel/'keep').read_text(),'keep')
+            directory.unlink();directory.mkdir()
+            with self.assertRaises(OSError):clean_private_tree(directory,parent,identity)
+            directory.rmdir();original.rename(directory)
+            with patch('claude_reminder_probe.shutil.rmtree',side_effect=PermissionError('synthetic')) as remove:
+                remove.avoids_symlink_attacks=True
+                with self.assertRaises(PermissionError):clean_private_tree(directory,parent,identity)
+            self.assertTrue(directory.exists())
+            clean_private_tree(directory,parent,identity);self.assertFalse(directory.exists())
+
     def test_protocol_rejects_early_queue_before_native_success(self):
         with tempfile.TemporaryDirectory() as temporary:
-            protocol=Protocol(Path(temporary));protocol.send('A',0)
+            protocol=Protocol(Path(temporary),'synthetic-model','fixture');protocol.send('A',0)
             with self.assertRaises(ValueError):protocol.send('B',0)
             with self.assertRaises(ValueError):protocol.send('A',0)
 
     def test_failure_truncation_extra_tools_and_resets_never_pass(self):
-        for mode in ['failed-write','truncate','early','concurrent','one-write','bash','foreign-session','reset','extra-result','changed-plan','unbound','no-debug']:
+        for mode in ['failed-write','truncate','early','concurrent','one-write','bash','foreign-session','reset','extra-result','changed-plan','unbound','no-debug','changed-init','late-init','no-init','no-lifecycle','missing-metadata','wrong-model','wrong-version','wrong-permissions']:
             with self.subTest(mode=mode),tempfile.TemporaryDirectory() as temporary:
                 result,evidence,_=self.invoke(Path(temporary),mode)
                 self.assertNotEqual(result.returncode,0)
@@ -127,7 +195,7 @@ class ClaudeReminderTest(unittest.TestCase):
                 self.assertNotEqual(evidence['status'],'Passed')
                 if mode in ['failed-write','truncate','early','concurrent','one-write','bash','unbound']:
                     self.assertEqual(len(evidence['sent']),1)
-                if mode in ['unbound','no-debug']:self.assertEqual(evidence['status'],'Not Run')
+                if mode in ['unbound','no-debug','no-init','no-lifecycle','missing-metadata']:self.assertEqual(evidence['status'],'Not Run')
                 # Duplicate result can arrive after valid A triggered B; only
                 # the eventual Failed verdict, not prediction of late data, is required.
 
