@@ -4,11 +4,11 @@
   "files": {
     "dist/core.d.ts": {
       "executable": false,
-      "sha256": "a2694bd8d0a4df935b5a3688583ccaf6aeb60fa105a766f55177268c1ca0ea2d"
+      "sha256": "9b978d16fd13277c920c65f8b5b25cd7e056cee355ae9ec7285f666e94dff820"
     },
     "dist/core.js": {
       "executable": false,
-      "sha256": "b1548dc5ce5e5d6ec9d8cee35b53d827f0521b734892abdd08dadd751a4307d9"
+      "sha256": "4d8c444b3a6b86fef56593c900c7066d0381ead0d0e7991278de8be8175b13e9"
     },
     "dist/index.d.ts": {
       "executable": false,
@@ -16,30 +16,30 @@
     },
     "dist/index.js": {
       "executable": false,
-      "sha256": "194e93b3d045c97c74e97906e07990063fe3dd79e0eddf341dce5ff0e3fb3c50"
+      "sha256": "a189e78721ac895c987b1a12575a08ecbfac585dc308a989b9f084c47154dac1"
     }
   },
   "inputs": {
     "package-lock.json": {
       "executable": false,
-      "sha256": "ba75d87fd25eb74ca2fd82fab2288041fdae170bc7bde97becb59f0626af6016"
+      "sha256": "d6ce02d01b285b3e0b77ef90dbcdfdeeedbf33d2363c716a221151ae0b50603d"
     },
     "package.json": {
       "executable": false,
-      "sha256": "7e22beed2de5fe1bc0df095403f1f8e0bbbd2c7c7275a42cdbc30d70b9cb9167"
+      "sha256": "c4a0753a90c912f0742318396d6e863ccfd448a0fd87b77c6416cffaeaa12ba3"
     },
     "src/core.ts": {
       "executable": false,
-      "sha256": "46d537ca6e7fb7bf69d629006c84e80a3cf9c66b237c7e5b2c15ecbbd98de1ce"
+      "sha256": "c6e42f8d1fb2ffa9ad34c7c626039428f57d8736b3ea5e388c74b24c62957d41"
     },
     "src/index.ts": {
       "executable": false,
-      "sha256": "fb5383449e129af388d587bfcf6cf42cdee01644504f5bc693c5822a3c7e677c"
+      "sha256": "a3db4e56a2e61ae0614ad81ffb4e8576cfc5377217a3886446f3e25948f70221"
     },
     "tsconfig.json": {
       "executable": false,
       "sha256": "29abb8649f73c66d5b5f807103a8d591a878cc1ce2fe959ead50a4e7805950ca"
     }
   },
-  "source_sha256": "ed9c254d55fd3c97434ffc353f5f021ff9fbdac32334264d273ec614d2a502d5"
+  "source_sha256": "e4ca386a951995a4497a3622c4059ce8fee1ff7d03f7931213426887cbbcd5a1"
 }

@@ -2,7 +2,7 @@
 name: project-docs
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
 metadata:
-  version: "0.4.0-rc.11"
+  version: "0.4.0-rc.12"
 ---
 
 For an explicitly requested language variant, read its instructions from `references/language-variants/project-docs-<language>/GUIDE.md` relative to this Skill directory (ar, de, es, zh, zht). These are supporting resources of this single entry point. Resolve runtime assets from the installed Skill; keep task records in the user project.

@@ -165,10 +165,10 @@ export const PlanningWithFiles = async ({ client, directory }) => {
         },
         tool: {
             pw_init: tool({
-                description: "planweft: create task_plan.md, findings.md and progress.md. A name creates an isolated .planning/YYYY-MM-DD-<slug>/ plan and makes it active; mode autonomous or gated writes the v3 markers and attests the plan.",
+                description: "planweft: create task_plan.md, findings.md and progress.md. A name creates an isolated .planning/YYYY-MM-DD-<slug>/ plan and makes it active; Omit mode for the default advisory workflow. Set autonomous or gated only when the user explicitly requests that mode; ordinary maintenance authorization does not select it. Those modes write v3 markers and attest the plan.",
                 args: {
                     name: tool.schema.string().optional().describe("Optional plan name (creates .planning/<date>-<slug>/)"),
-                    mode: tool.schema.string().optional().describe("Optional v3 mode: autonomous or gated"),
+                    mode: tool.schema.string().optional().describe("Omit for advisory (default). autonomous or gated requires an explicit user request for that mode."),
                     template: tool.schema.string().optional().describe("default or analytics"),
                 },
                 async execute(args, context) {

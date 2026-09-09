@@ -17,7 +17,7 @@ import tarfile
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR = ROOT / 'vendor/planning-with-files'
 OVERLAY = ROOT / 'overlays/planweft'
-VERSION = '0.4.0-rc.11'
+VERSION = '0.4.0-rc.12'
 PRODUCT = 'planweft'
 SKILL = 'project-docs'
 SKILL_TRIGGER = ('Use for implementation/maintenance with investigation, fixes, regression tests '
@@ -396,6 +396,16 @@ def transform(upstream, enhanced=True):
         if target == 'tests/test_codex_plugin_operations.py':
             text = text.replace('["planweft"], sorted(path.name for path in skill_dirs)',
                                 '["project-docs"], sorted(path.name for path in skill_dirs)')
+        if enhanced and target == '.opencode/packages/opencode-planweft/src/index.ts':
+            # The model sees this native tool schema independently of SKILL.md.
+            # Disclose the existing default and the user's mode choice here;
+            # this is guidance, not a runtime proof of authorization.
+            old_mode = 'mode autonomous or gated writes the v3 markers and attests the plan.'
+            old_arg = 'Optional v3 mode: autonomous or gated'
+            if text.count(old_mode) != 1 or text.count(old_arg) != 1:
+                raise ValueError('OpenCode init tool changed; review its mode disclosure')
+            text = text.replace(old_mode, 'Omit mode for the default advisory workflow. Set autonomous or gated only when the user explicitly requests that mode; ordinary maintenance authorization does not select it. Those modes write v3 markers and attest the plan.')
+            text = text.replace(old_arg, 'Omit for advisory (default). autonomous or gated requires an explicit user request for that mode.')
         if target == 'CITATION.cff':
             text = re.sub(r'^version:.*$', 'version: ' + VERSION, text, flags=re.M)
         if target == '.opencode/packages/opencode-planweft/src/core.ts':

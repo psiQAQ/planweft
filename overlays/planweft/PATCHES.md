@@ -41,3 +41,9 @@
 ## RC8 计划选择入口
 
 六语言 `entrypoints` 用实际 resolver 输出、绑定与文件的分支替换抽象有效选择条件，直接采用宿主已提供的 Skill 路径，保留只读、旧权威及本仓不接管边界。新增随包 `references/plan-selection.md` / `.zh.md` 解释 canonical Bash 与 PowerShell/legacy 差异；不修改原始 helper。description 仅用于任务匹配，原宿主完整 metadata 移至该宿主的 PWF 手册。findings 观察时点与最终当前事实核对进入主流程，避免覆盖模板后丢失要求。真实失败来源、离线契约与独立 review 见 REP-0010 / REV-0010；候选模型复验不能省略。
+
+## RC12 原生配置与模式入口
+
+Pi 安装器的自有 package 来源识别仅在解析该宿主 settings 时移除一个开头 U+FEFF，与固定 Pi v0.84.3 原生读取保持一致；不修改配置字节，也不放过重复来源或其他 scope。独立复现与源码核查见 REV-0010 的 RC12 BOM review。
+
+OpenCode `pw_init` 原生工具及可选 `mode` 参数明确：省略参数沿用 advisory 默认；只有用户明确选择 autonomous/gated 才传该值，普通维护授权不代表选择续跑模式。仅补模型实际看到的工具说明，不增加伪授权字段，不改变 `initPlan`、marker、attestation 或 hook 行为，不能作为权限强制证明。RC11 原始未经选择的模式执行仍 Failed；新准确包模型效果待验。
