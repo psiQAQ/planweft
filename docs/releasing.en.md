@@ -75,3 +75,6 @@ RC7 still has adoption, observation-timing and experiment-scope failures. The so
 
 
 RC8 development restores discovery-time capability and consent boundaries; 721 migrated regression tests passed. Native npm RC6↔RC7 lifecycles passed for Pi, OpenCode and DSH, with prior failures retained. These are not final stable-artifact acceptance; RC8 publication and model revalidation remain pending.
+
+
+RC8 was published to next through OIDC; Check 34339605601 passed on all three systems. The remote archive is 5386708 bytes, SHA-256 `d6f34542495d811cc3171af0f6db96f30b1ef3089289fc740e4a4686a27d4a78`. Install/remove/reinstall passed in five images. Pi and OpenCode passed automated maintenance checks, but independent reviews found pre-load out-of-scope reads/unexecuted test claims and manual temporary work outside the project, respectively. These failures remain recorded and do not permit stable promotion. RC9 development addresses the observed triggers; it is unpublished and its model effect remains unverified.

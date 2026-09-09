@@ -232,3 +232,6 @@ vendor 四文件是导入器产物，dist 与 plugins 由 builder 生成；证�
 - 优先使用宿主已有 Skill location，以 [Pi v0.84.3 skills.ts](https://github.com/earendil-works/pi/blob/v0.84.3/packages/coding-agent/src/core/skills.ts#L332) 和 [system-prompt.ts](https://github.com/earendil-works/pi/blob/v0.84.3/packages/coding-agent/src/core/system-prompt.ts#L146) 为据，辅以实际 native RPC 的绝对 sourceInfo.path。未截获 RC7 完整系统提示，因此不宣称每次会话都直接观测到了同一 XML。
 - 观察日期/版本、修改前后范围、最终“当前行为”事实核对和用户已有修改来源，是原有证据治理的执行字段。RC7 OpenCode 读过新模板后整体覆盖 findings，仍遗留旧实现为当前的记录；因此把这些字段纳入主入口，而非仅留在可能被替换的模板。RC7 Pi/DSH 的宿主配置/变量范围偏离保留为失败，入口只按已提供位置与规划变量定位资源。
 - 独立诊断和源码审查见 REV-0010；`tests/test_plan_selection_contract.py` 实际验证空输出的两种状态、legacy 保留、具名初始化及拒绝绑定不回退。脚本契约测试不证明模型一定按文案执行，准确 RC8 模型结果仍需单独验收。
+
+
+RC9 的加载前资源定位与执行证据修复直接依据固定维护任务边界和 RC8 真实工具顺序，而非新增宿主机制。见 [独立加载前审查](reviews/0010-rc8-preload-evidence-review.md)：Skill 正文返回前已提交的工具无法被正文追溯约束；description 提供规则只是新的待验证指导，不宣称强制隔离。原 PWF consent/capability 披露断言保留。已有证据表区分实际执行/历史来源/静态推断；手工 scratch 的归属遵循用户项目范围，框架隐式缓存另属宿主行为，不新增批准层。

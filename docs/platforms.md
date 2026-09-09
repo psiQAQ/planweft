@@ -167,3 +167,6 @@ Hermes 使用官方提交 `9fd44b4dfc44138b9e5d5689acb56c438364ff7b`，最终目
 RC4 补充：Codex/Claude 公开 Git 市场的安装、同提交刷新、缓存内容核对、卸载和注销 Passed；未调用模型，不表示 Git 跨版本升级已验收。Pi 完成态计划的 parity 注入和新会话恢复复验 Passed；进行中显式执行循环另有停止及上限证据，不能据完成态探针宣称进行中只读恢复。Pi 首次维护的主计划阶段/错误摘要不一致，独立语义检查该项 Failed；后续按独立反馈纠正两项记录并通过新冷读，原失败保留。这条明确反馈路线不单独证明自动 Skill 加载或自动触发审查。
 
 资源与隔离补充：测试器在快照读取前剪枝安装缓存，并限制容器 CPU、RAM、Swap、进程与 tmpfs。Claude/Pi/OpenCode 的同 HOME 实测中，更新/移除 A 保持 B 不变；Codex/DSH 拒绝不支持的项目 scope 且无写入。这证明隔离，不证明被移除侧所有原生缓存均消失。Claude Pro 实际读取中文 Skill 后仍未采用 PWF，中断的外层运行保持 Incomplete、冷读 Not Run；Flash 失败同样保留。
+
+
+最新候选 RC8 的三系统 CI 与五镜像安装/移除/重装 Passed；Pi/OpenCode 自动维护通过但独立范围或记录检查 Failed。DSH 同版本审查也发现未执行单测声明与临时路径证据缺口。Claude 模型补充授权未完成。RC9 正在修复具体发现，正式 0.4.0 仍未通过发布门槛。

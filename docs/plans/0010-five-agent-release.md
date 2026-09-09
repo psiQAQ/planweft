@@ -2,7 +2,7 @@
 
 ## 当前状态（唯一当前入口）
 
-实施中，正式 `0.4.0` 未发布。公开候选为 `0.4.0-rc.7`（next），latest 仍是 RC1。发布源码 `7e66ee9214364ffa5f00a04a8d040e4ace082980`；准确 npm SHA-256 `e3d67af7dcba154a3800e39c19ec06a7f40b874d3b92dc7b7517bed85cc4bed2`。当前在 `fix/rc8-plan-selection` 准备 RC8，不覆盖已发布 RC7。
+实施中，正式 `0.4.0` 未发布。公开候选为 `0.4.0-rc.8`（next），latest 仍是 RC1。发布源码 `a3d6cc3c41e2f6ffe636add694b6096fb342ba81`；准确 npm SHA-256 `d6f34542495d811cc3171af0f6db96f30b1ef3089289fc740e4a4686a27d4a78`。RC8 三系统 Check `34339605601`、OIDC `34339751089`、远端精确字节校验和五镜像本地原生生命周期已通过。当前 `fix/rc8-validation-resources` 在 `d5fb39f` 提交资源执行器修复，不改变已发布包。Pi RC8 维护/冷读自动检查通过，但独立语义审查发现加载前读取禁用宿主资料和验证记录不实，不能放行；OpenCode 和 DSH RC8 独立审查也留下严格范围或记录 Failed。当前准备 RC9 定位/证据修复（尚未发布），开发回归197 Passed、迁移上游721 Passed；真实RC8 五宿主A/B文件增删改、升级回退、卸载重装已全部Passed，仍不替代最终稳定包验收。Claude 补充端点授权仍待答复。
 
 - 新增 Passed：RC8 能力披露回归 721 tests；原生 RC6↔RC7 Pi/OpenCode/DSH 升降级与卸载；原始失败保留。最终 RC8 远端与模型验证待执行。
 - Passed：RC7 三系统 CI、OIDC、远端字节一致性、五镜像无模型原生安装/移除/重装；固定 Node 24.20.0 后 CI 再通过。Codex RC7 自动采用、唯一状态、维护与独立冷读语义 Passed。

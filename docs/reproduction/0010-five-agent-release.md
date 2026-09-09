@@ -287,3 +287,24 @@ RC6 → RC7 → RC6 → RC7 → 卸载的真实原生 npm 生命周期：Pi、Op
 最初导出误纳入大量可重建安装副本，产生约 111 MB 的未提交临时附件；改为明确顶层日志/摘要/冻结脚本清单后，仅保留上述有界公开附件。原始输入未删除，未执行全局 prune。
 
 开发回归原始失败/修复后日志：[rc8-development-regressions.tar.gz](evidence/0010/rc8-development-regressions.tar.gz)，SHA-256 `c0f5a9aec7839cc9a150ce678913ff2723ef6d8fa21f53cc002a683f5927df94`。源码及本地解释器日志仅作开发回归，最终包另验。
+
+
+### RC8 公开候选与后续复验
+
+`a3d6cc3c41e2f6ffe636add694b6096fb342ba81` 已推送；Check [34339605601](https://github.com/psiQAQ/planweft/actions/runs/34339605601) 三系统全部 Passed，OIDC [34339751089](https://github.com/psiQAQ/planweft/actions/runs/34339751089) Passed。npm `0.4.0-rc.8` 位于 next；远端 5386708 bytes，SHA-256 `d6f34542495d811cc3171af0f6db96f30b1ef3089289fc740e4a4686a27d4a78`，与已审计本地归档相同。latest 仍为 RC1，正式版本未发布。
+
+五锁定镜像 preflight/lifecycle 10 个场景 Passed；仅准确本地安装、移除、重装，不替代跨版本、模型或稳定产物证据。核查无运行容器引用后清理两份已完成 OpenCode node_modules，各 54790229 bytes；原始日志、项目记录、准确包保留。
+
+Pi RC8 固定维护和冷读的自动检查 Passed。独立审查发现自动观察仍不充分：在主 Skill 正文返回前，同批发出了读取 `.pi/settings.json` 的请求，且更早读取安装记录；不能称读过 RC8 Step2 后又忽略它。已出现的读取范围违例仍保留，不靠事后文档纠正抹去。`progress.md` 把本次未见执行的原测试命令写成已观察通过，也需纠正。最终独立 review 和后续修复另行记录；尚未通过稳定语义门槛。
+
+
+RC8 独立复核结果：Pi review SHA `9a8ee80196df1ea378bfe49465089beac5d3714a4fae8981f382799382f43001`（75附件）；OpenCode `5d1a1153cefb8ca8ce162778a839da29fc4ef371de63079228da3896e42ff32f`（98附件）；DSH `501c99f50a3cdd884d74a2ff40c6edddb1498c362da520ca0a9051702fc7c7ba`（56附件），主 Agent 均逐项复核摘要。三者实际修复/回归与文件冷读有 Passed 证据，但整体均未通过严格语义/范围门槛。OpenCode 手工使用固定 `/tmp/opencode/bomreg`；DSH 修复前单测声明缺来源、恢复过的工具错误未记载，人工临时路径范围未证明（不把未观察到的路径写成已证实）。报告位于本目录 evidence/0010，自动 Passed 与原始失败保留。
+
+RC9 开发修改针对观察到的触发点：description 在正文加载前提供宿主给出的资源路径规则；六语言工作流区分实际命令/操作及观察结果、引用历史、静态推断与 Not Run；手工 scratch/counterfactual 留在授权项目内本任务目录并确认清理归属。不增加写项目的 hook。这是模型指导，不宣称是强制权限隔离。独立 review 保留 Phase3 历史快照解释分歧，不把非共识意见虚报为新增一致失败项。
+
+RC9 开发回归：Python 197 Passed、1 Skipped（本机无 PowerShell）、2974 subtests Passed；Node installer 28 Passed、DSH shell 3 Passed；迁移上游 721 Passed、63 Skipped、851 subtests Passed。原始上游字节和既有对照适配未改变。编译使用已有 TypeScript 5.9.3，无新增依赖。准确 RC9 归档与远端/模型验证尚待执行。
+
+
+RC8 完整公开附件：[rc8-live-records.tar.gz](evidence/0010/rc8-live-records.tar.gz)，595 个文件、1055189 bytes，SHA-256 `a16db3744d4f624b8291228757005fb029fd2a351016903d3e0f9c7390eb9c60`。包括公开前审计、CI/OIDC、registry proof、五镜像原生生命周期、三个真实维护/冷读原始记录与逐文件原始/公开摘要。三份独立语义 JSON 单列，保留各自判断。
+
+五宿主真实 A/B 夹具均 Passed（Pi 单组，OpenCode/DSH/Claude/Codex 串行组）：新增、修改、删除文件被正确升级/回退，卸载/重装与项目记录保护通过。两份 A/B 均为明确修改的本地夹具，不冒充准确发布归档；实际 A/B SHA 在各 worker summary 中。外层资源限制和失败路径经过独立审查，所有所属容器删除后才清理自有 npm cache。公开附件：[rc8-fixture-delta.tar.gz](evidence/0010/rc8-fixture-delta.tar.gz)，94 个文件、287822 bytes，SHA-256 `62629dca8ff694f5599848cf0ee0137ec1ccae4db4eb792783769d4cb778f9ea`；含执行器/依赖 helper/镜像锁快照和各步骤日志。原始准确 tarball、A/B tarball 与失败证据保留在本地；安装缓存不进入公开附件。

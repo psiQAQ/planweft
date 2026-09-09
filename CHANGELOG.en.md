@@ -2,6 +2,12 @@
 
 # Changelog
 
+## 0.4.0-rc.9 — in development
+
+- Explain resource lookup before the Skill body loads: use the host-provided path without inspecting host settings or installation receipts.
+- Distinguish actual execution, inherited records and static inference; keep manual scratch work in a task-owned directory inside the authorized project.
+- Bound acceptance resources and whole-scene timeouts, verify cleanup ownership and retain failure evidence. New exact-artifact model validation remains required.
+
 ## 0.4.0-rc.8 (candidate in development)
 
 - Replace abstract valid-selection wording with actions based on resolver output, bindings and project files. Distinguish normal uninitialized state from refused bindings; use the host-provided Skill location. Document canonical Bash, PowerShell and legacy layout differences while preserving read-only and old-authority exceptions.
