@@ -339,7 +339,7 @@ def adapt(bundles, version, description):
                 hook['command'] = hook['command'].replace('/hooks/claude-hook.sh', '/hooks/dsh-hook.sh')
     reminder = json.dumps({'hookSpecificOutput': {'hookEventName': 'UserPromptSubmit',
                            'additionalContext': UNPLANNED_GUIDANCE}})
-    launcher = (HERE / 'dsh/hook.sh').read_text().replace('__UNPLANNED_CONTEXT__', reminder.replace("'", "'\"'\"'"))
+    launcher = (HERE / 'dsh/hook.sh').read_text(encoding='utf-8').replace('__UNPLANNED_CONTEXT__', reminder.replace("'", "'\"'\"'"))
     files['hooks/dsh-hook.sh'] = (launcher.encode(), 0o755)
     files['hooks/hooks.json'] = json_file(config)
     result['dsh'] = files

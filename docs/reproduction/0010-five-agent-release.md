@@ -243,3 +243,5 @@ RC7 通过同一 overlay 修复六语言 progress 模板、Shell/PowerShell 内�
 - OpenCode：原始 34 Passed；迁移原始 32 Passed / 2 既有设计差异 Failed，失败集合严格匹配既有两项；类型检查及适配后全部契约 Passed。已释放两份测试 node_modules 和下载缓存共 239,019,755 字节，保留源码、锁文件和日志。
 
 [离线记录](evidence/0010/rc7-offline-records.tar.gz) 共 28 项，SHA-256 `9eacf2a1f65e95023013e229c0ac0f34c6f880c7b55284e4d72610b3ab30f041`。这是候选准备证据，不是稳定准确归档或新宿主模型验收。RC7 发布后仍须按原固定任务复验，不采用显式调用或重复无变化试验替代自动匹配。
+
+RC7 首次三系统 CI 的 Windows 作业在 setUpClass 阶段因默认 cp1252 读取多语言入口失败，尚未执行 PowerShell 初始化；Linux 作业 Passed，macOS 被矩阵取消。原始日志和摘要见 [编码问题记录](evidence/0010/rc7-windows-encoding.json)。修复为构建器及原生适配器显式 UTF-8 读取，新增模拟旧默认编码的回归；本地 8 Passed / 1 PowerShell Not Run，生成物未变化。矩阵关闭 fail-fast，后继 CI 各系统结果分别保留。此修复不修改已冻结 RC7 包内容，不通过更改摘要放行。

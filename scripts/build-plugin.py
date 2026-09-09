@@ -38,11 +38,11 @@ def sha(data):
 
 
 def read_upstream():
-    manifest = json.loads((VENDOR / 'upstream.json').read_text())
+    manifest = json.loads((VENDOR / 'upstream.json').read_text(encoding='utf-8'))
     packed = (VENDOR / manifest['archive']).read_bytes()
     if sha(packed) != manifest['sha256']:
         raise ValueError('upstream archive digest mismatch')
-    inventory = json.loads((VENDOR / 'inventory.json').read_text())
+    inventory = json.loads((VENDOR / 'inventory.json').read_text(encoding='utf-8'))
     result = {}
     with tarfile.open(fileobj=io.BytesIO(packed), mode='r:gz') as archive:
         for entry in archive:
@@ -133,7 +133,7 @@ def enhance_skill(text, path):
     front = re.sub(r'^(\s+version:) .+$', r'\1 "' + VERSION + '"', front, flags=re.M)
     if language and 'disable-model-invocation:' not in front:
         front += '\ndisable-model-invocation: true'
-    workflow = (OVERLAY / 'workflow.md').read_text()
+    workflow = (OVERLAY / 'workflow.md').read_text(encoding='utf-8')
     # Installed skills need their own sibling helper, irrespective of host.
     # Preserve all consent options while removing another host's assumed path.
     catchup_replaced = False
@@ -223,7 +223,7 @@ def local_install_text(text, path):
         text = text.replace('[planweft](' + UPSTREAM_URL + ')',
                             'PlanWeft, derived from [planning-with-files](' + UPSTREAM_URL + ')')
         text = re.sub(r'(?<=## Install\n).*?(?=\n## What the plugin does)',
-                      lambda _: '\n' + (OVERLAY / 'install/opencode.md').read_text() + '\n',
+                      lambda _: '\n' + (OVERLAY / 'install/opencode.md').read_text(encoding='utf-8') + '\n',
                       text, flags=re.S)
         text = text.replace('`pwf.md` and `pwf-status.md`', '`pw-pwf.md` and `pw-pwf-status.md`')
         text = text.replace("from the repository's `.opencode/commands/`",
@@ -258,7 +258,7 @@ def transform(upstream, enhanced=True):
                 # another platform's install path a runtime dependency.
                 front, full = text[4:].split('\n---\n', 1)
                 base = str(PurePosixPath(target).parent)
-                manual = full.removeprefix('\n').removeprefix((OVERLAY / 'workflow.md').read_text().rstrip()).lstrip()
+                manual = full.removeprefix('\n').removeprefix((OVERLAY / 'workflow.md').read_text(encoding='utf-8').rstrip()).lstrip()
                 manual = re.sub(r'\]\((?![a-z]+:|/|#)([^)]+)\)', r'](../\1)', manual)
                 result[base + '/references/pwf-workflow.md'] = (
                     ('# PWF implementation reference\n\nApply the scope and workflow in the installed Skill entry first. '
@@ -266,7 +266,7 @@ def transform(upstream, enhanced=True):
                      + manual).encode(), 0o644)
                 language = re.search(r'/i18n/project-docs-([^/]+)/', target)
                 locale = language.group(1) if language else 'en'
-                entry = (OVERLAY / 'entrypoints' / (locale + '.md')).read_text()
+                entry = (OVERLAY / 'entrypoints' / (locale + '.md')).read_text(encoding='utf-8')
                 text = '---\n' + front + '\n---\n\n' + entry
         # Local, source-reviewed adapter patches. Keep event payloads and the
         # upstream state protocol; only remove implicit cwd imports/opt-out gaps.
@@ -295,7 +295,7 @@ def transform(upstream, enhanced=True):
                         hook['command'] = 'bash "' + command + '"'
             text = json.dumps(payload, indent=2) + '\n'
         if target.endswith('/scripts/plan-doctor.sh') or target == 'scripts/plan-doctor.sh':
-            text = text.replace("echo '=== plan-doctor done ==='", (OVERLAY / 'doctor-overlap.sh').read_text() + "\necho '=== plan-doctor done ==='")
+            text = text.replace("echo '=== plan-doctor done ==='", (OVERLAY / 'doctor-overlap.sh').read_text(encoding='utf-8') + "\necho '=== plan-doctor done ==='")
         if enhanced:
             text = records.transform(target, text)
         if enhanced and '/templates/' in '/' + target:
@@ -306,7 +306,7 @@ def transform(upstream, enhanced=True):
                 stem = 'findings'
             extra = OVERLAY / 'templates' / (stem + '.append.md')
             if extra.is_file():
-                text = text.rstrip() + '\n\n' + extra.read_text().rstrip() + '\n'
+                text = text.rstrip() + '\n\n' + extra.read_text(encoding='utf-8').rstrip() + '\n'
         if source.endswith('/package.json') or source.endswith('/package-lock.json'):
             payload = json.loads(text)
             if source.endswith('/package.json'):
@@ -503,7 +503,7 @@ def distributions(tree, upstream, compiled=True):
                                  ('INSTALL' + suffix + '.md', OVERLAY / 'install' / ('INSTALL' + suffix + '.md'))]:
                 # Keep the source language switch first; do not prepend a
                 # second title or link to documents outside the installed pack.
-                text = source.read_text()
+                text = source.read_text(encoding='utf-8')
                 if name.startswith('README'):
                     # Overlay sources are also readable in the repository;
                     # their install/ links become flat within installed packs.
@@ -544,7 +544,7 @@ def public_installation_files():
     result = {}
     for suffix in ['', '.en']:
         source = OVERLAY / 'install' / ('INSTALL' + suffix + '.md')
-        text = source.read_text().replace('](INSTALL.md)', '](installation.md)')
+        text = source.read_text(encoding='utf-8').replace('](INSTALL.md)', '](installation.md)')
         text = text.replace('](INSTALL.en.md)', '](installation.en.md)')
         navigation, _, body = text.partition('\n')
         context = ('Project overview: [中文](../README.md) / [English](../README.en.md) · '
@@ -572,7 +572,7 @@ def attach_opencode_compiled(files):
     path = root / 'manifest.json'
     if not path.is_file():
         raise ValueError('OpenCode compiler output missing; run scripts/compile-opencode.py --install')
-    manifest = json.loads(path.read_text())
+    manifest = json.loads(path.read_text(encoding='utf-8'))
     if manifest['source_sha256'] != tree_digest(opencode_inputs(files)):
         raise ValueError('OpenCode compiled source is stale; run scripts/compile-opencode.py --install')
     actual = {}
@@ -619,12 +619,12 @@ def marketplace_files():
         path = ROOT / name
         reject_symlinks(path)
         if path.is_file():
-            old = json.loads(path.read_text())
+            old = json.loads(path.read_text(encoding='utf-8'))
             if not isinstance(old.get('plugins'), list):
                 raise ValueError('Invalid existing marketplace: ' + name)
             legacy = [item for item in old['plugins'] if item.get('name') == 'program-design']
             if legacy:
-                ownership = json.loads((OVERLAY / 'legacy-0.3.json').read_text())
+                ownership = json.loads((OVERLAY / 'legacy-0.3.json').read_text(encoding='utf-8'))
                 if sha(path.read_bytes()) != ownership['catalogs'].get(name):
                     raise ValueError('Modified legacy marketplace preserved: ' + name)
                 old['plugins'] = [item for item in old['plugins'] if item.get('name') != 'program-design']
@@ -706,7 +706,7 @@ def retired_archives():
     path = ROOT / 'dist/manifest.json'
     if not path.is_file():
         return []
-    old = json.loads(path.read_text())
+    old = json.loads(path.read_text(encoding='utf-8'))
     if old.get('product') != PRODUCT or old.get('schema_version', 1) != 1:
         return []
     version = old.get('version', '')
@@ -728,7 +728,7 @@ def retired_archives():
 
 def legacy_directories():
     """Refuse to retire any 0.3 directory not matching its reviewed content hash."""
-    record = json.loads((OVERLAY / 'legacy-0.3.json').read_text())
+    record = json.loads((OVERLAY / 'legacy-0.3.json').read_text(encoding='utf-8'))
     candidates = [(ROOT / 'dist' / host / 'program-design', digest)
                   for host, digest in record['platforms'].items()]
     candidates.append((ROOT / 'plugins/program-design', record['platforms']['codex']))

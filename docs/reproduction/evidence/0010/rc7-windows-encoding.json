@@ -1,0 +1,13 @@
+{
+  "status": "Local fix passed; real Windows recheck pending",
+  "workflow": "https://github.com/psiQAQ/planweft/actions/runs/34332318671",
+  "failed_job": 102403537146,
+  "original_log_sha256": "04de8cf495d3dfced76b306918b39d5bbfa4bfb284efcb39f6bd89f2a8f1d131",
+  "public_log_sha256": "9bc9220c84f506afc1dcf7af18673dec6bcb7f47291864cd2f4fbeba53ebabfc",
+  "compressed_log_sha256": "f7ec2889d01d06cda45f39524ef3d630073d4e4e178ab763a3e8792deebd0bcb",
+  "public_transformation": "remove ANSI color escape sequences only",
+  "failure": "cp1252 default decoding of localized Skill entry; setUpClass failed before any initializer executed",
+  "fix": "Explicit UTF-8 source reads in builder and native adapter; cp1252-default regression; matrix fail-fast disabled",
+  "local_tests": "8 Passed, 1 PowerShell Not Run; deterministic build verify Passed",
+  "product_files_changed": false
+}

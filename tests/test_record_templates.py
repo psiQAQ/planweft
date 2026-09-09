@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -44,6 +45,20 @@ class RecordTemplatesTest(unittest.TestCase):
                 self.assertIn(words['live'], text)
                 self.assertGreaterEqual(text.count('[task_plan.md](task_plan.md)'), 4)
         self.assertEqual(seen, set(self.records.LOCALES))
+
+    def test_build_reads_utf8_even_with_a_windows_legacy_default(self):
+        original=Path.read_text
+        def legacy_default(path,*args,**kwargs):
+            if not args and kwargs.get('encoding') is None:
+                kwargs['encoding']='cp1252'
+            return original(path,*args,**kwargs)
+        with patch.object(Path,'read_text',legacy_default):
+            upstream,metadata=self.builder.read_upstream()
+            tree=self.builder.transform(upstream)
+            platforms=self.builder.distributions(tree,metadata)
+        self.assertEqual(tree,self.tree)
+        self.assertIn('opencode',platforms)
+        self.assertIn('dsh',platforms)
 
     def test_findings_guidance_reaches_default_analytics_and_localized_templates(self):
         for path, (content, _) in self.tree.items():
