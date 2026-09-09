@@ -22,7 +22,7 @@ fi
 # same opt-in mode, in_progress, recursion, cap, and stall guards. Outside a
 # gated block the oracle is advisory, and the legacy message below remains the
 # public output for backward compatibility.
-CHECK_COMPLETE="${HOOK_DIR}/../skills/project-docs/scripts/check-complete.sh"
+CHECK_COMPLETE="${HOOK_DIR}/../../skills/project-docs/scripts/check-complete.sh"
 if [ "${1:-}" != "--stop-hook-active" ] && [ -f "${CHECK_COMPLETE}" ]; then
     GATE_OUTPUT="$(sh "${CHECK_COMPLETE}" --gate "${PLAN_FILE}")"
     case "${GATE_OUTPUT}" in

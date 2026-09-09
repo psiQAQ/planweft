@@ -2,7 +2,12 @@
 
 # Changelog
 
-## 0.4.0-rc.4 (in development)
+## 0.4.0-rc.5 (in development)
+
+- Fix resource paths for Stop, plan selection and SessionStart in the Codex plugin distribution; preserve the upstream standalone layout.
+- Add independently copied package tests for gating, recursion, cap, stall, opt-out and invalid plan binding. Real-host verification of the new exact candidate remains pending.
+
+## 0.4.0-rc.4
 
 - Add root npm main and ./server entries for the existing compiled OpenCode V1 plugin, fixing silent omission by the native npm resolver.
 - Preserve the RC3 npm failure; validate a new exact archive and remote version without replacing published bytes.

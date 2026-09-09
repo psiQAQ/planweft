@@ -17,7 +17,7 @@ import tarfile
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR = ROOT / 'vendor/planning-with-files'
 OVERLAY = ROOT / 'overlays/planweft'
-VERSION = '0.4.0-rc.4'
+VERSION = '0.4.0-rc.5'
 PRODUCT = 'planweft'
 SKILL = 'project-docs'
 DESCRIPTION = ('Persistent file planning and task-relevant project documentation. '
@@ -394,6 +394,19 @@ def distributions(tree, upstream, compiled=True):
     common = ['scripts', 'templates', 'skills']
     result = {}
     result['codex'] = subset(tree, ['.codex/hooks', 'hooks/codex-hooks.json', *common])
+    # Upstream standalone installs keep skills inside .codex; this plugin ships
+    # them at its root. Resolve all three hook helpers from the installed package,
+    # without changing the standalone layout in the upstream comparison tree.
+    for path, old, new in [
+        ('.codex/hooks/stop.sh', '${HOOK_DIR}/../skills/', '${HOOK_DIR}/../../skills/'),
+        ('.codex/hooks/resolve-plan-dir.sh', '${HOOK_DIR}/../skills/', '${HOOK_DIR}/../../skills/'),
+        ('.codex/hooks/session-start.sh', '$SCRIPT_DIR/.."', '$SCRIPT_DIR/../.."'),
+    ]:
+        raw, mode = result['codex'][path]
+        text = raw.decode()
+        if text.count(old) != 1:
+            raise ValueError('Codex helper layout changed; review ' + path)
+        result['codex'][path] = (text.replace(old, new).encode(), mode)
     # Codex selects exactly one main root; native hooks come from its manifest,
     # never from Claude's skill frontmatter or a migrated command skill.
     key = 'skills/project-docs/SKILL.md'

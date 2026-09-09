@@ -426,6 +426,94 @@ class PackagedRuntimeTest(unittest.TestCase):
         self.assertIn('CODEX_NATIVE_CONTEXT_MARKER', specific['additionalContext'])
         self.assert_plan_frame(specific['additionalContext'])
 
+    def test_codex_packaged_stop_gate_and_guards(self):
+        # Exercise the native Stop front door in the independently copied
+        # distribution, not the shared oracle in its upstream source layout.
+        for scope in ['root', 'slug']:
+            for guard in ['block', 'recursive', 'cap', 'stall', 'disabled']:
+                with self.subTest(scope=scope, guard=guard):
+                    work = self.project / (scope + '-' + guard)
+                    work.mkdir()
+                    selected = work if scope == 'root' else work / '.planning/selected'
+                    selected.mkdir(parents=True, exist_ok=True)
+                    text = '# Selected task\n### Phase 1: Selected work\n- **Status:** in_progress\n'
+                    (selected / 'task_plan.md').write_text(text)
+                    (selected / '.mode').write_text('gate\n')
+                    (selected / '.plan-attestation').write_text(hashlib.sha256(text.encode()).hexdigest() + '\n')
+                    env = {'PWF_GATE_CAP': '20'}
+                    if scope == 'slug':
+                        env['PLAN_ID'] = 'selected'
+                        (work / 'task_plan.md').write_text('# Decoy root\n### Phase 1: Done\n- **Status:** complete\n')
+                    if guard in {'cap', 'stall'}:
+                        (selected / '.stop_blocks').write_text('1\n')
+                        (selected / '.gate_last_ledger').write_text('0\n')
+                    if guard == 'cap':
+                        env['PWF_GATE_CAP'] = '1'
+                        # Advance the ledger so this is a cap test, not a stall.
+                        (selected / 'ledger-test.jsonl').write_text('{}\n')
+                    if guard == 'disabled':
+                        env['PLANNING_DISABLED'] = '1'
+                    before = snapshot(work)
+                    output = self.assert_ok(self.run_script('.codex/hooks/stop.py', cwd=work,
+                        extra_env=env, payload=self.payload('Stop', cwd=str(work), stop_hook_active=guard == 'recursive')))
+                    response = json.loads(output) if output else {}
+                    if guard == 'block':
+                        self.assertEqual(response.get('decision'), 'block')
+                        self.assertIn('Selected work', response['reason'])
+                        self.assertEqual((selected / '.stop_blocks').read_text().strip(), '1')
+                        self.assertEqual((selected / '.gate_last_ledger').read_text().strip(), '0')
+                        after = snapshot(work)
+                        counters = {str((selected / name).relative_to(work)) for name in ['.stop_blocks', '.gate_last_ledger']}
+                        self.assertEqual({k: v for k, v in after.items() if k not in counters}, before)
+                    else:
+                        self.assertNotEqual(response.get('decision'), 'block')
+                        self.assertEqual(snapshot(work), before)
+                        if guard == 'disabled': self.assertEqual(output, '')
+
+    def test_codex_packaged_resolver_selects_slug_and_rejects_wrong_binding(self):
+        self.plan('ROOT_MUST_NOT_REPLACE_SELECTED_PLAN')
+        selected = self.project / '.planning/selected'
+        selected.mkdir(parents=True)
+        (selected / 'task_plan.md').write_text('# Selected\n### Phase 1: Work\n- **Status:** in_progress\n')
+        (selected / '.mode').write_text('gate\n')
+        (self.project / '.planning/.active_plan').write_text('selected\n')
+        for env in [{}, {'PLAN_ID': 'selected'}]:
+            with self.subTest(env=env):
+                resolved = self.assert_ok(self.run_script('.codex/hooks/resolve-plan-dir.sh', extra_env=env)).strip()
+                self.assertTrue(resolved, 'installed Codex resolver must find its bundled canonical resolver')
+                self.assertEqual(Path(resolved).resolve(), selected.resolve())
+        before = snapshot(self.project)
+        wrong = {'PLAN_ID': 'does-not-exist'}
+        self.assertEqual(self.assert_ok(self.run_script('.codex/hooks/resolve-plan-dir.sh', extra_env=wrong)), '')
+        output = self.assert_ok(self.run_script('.codex/hooks/stop.py', extra_env=wrong,
+                                               payload=self.payload('Stop', stop_hook_active=False)))
+        self.assertEqual(output, '')
+        self.assertEqual(snapshot(self.project), before)
+
+    def test_codex_packaged_session_start_executes_bundled_no_history_catchup(self):
+        self.plan('SESSION_START_INSTALLED_CONTEXT')
+        # Observe actual interpreter invocation, then delegate to the real
+        # bundled Python script unchanged. --no-history is intentionally silent,
+        # so context output alone cannot prove that catchup was invoked.
+        observed = self.temporary / 'python-invocations.jsonl'
+        interpreter = self.temporary / 'observed-python'
+        interpreter.write_text('#!' + sys.executable + '\nimport json, os, sys\n'
+            + 'with open(' + repr(str(observed)) + ', "a") as stream:\n'
+            + '    stream.write(json.dumps(sys.argv[1:]) + "\\n")\n'
+            + 'os.execv(' + repr(sys.executable) + ', [' + repr(sys.executable) + ', *sys.argv[1:]])\n')
+        interpreter.chmod(0o755)
+        before = snapshot(self.project)
+        output = self.assert_ok(self.run_script('.codex/hooks/run_sh.py', 'session-start.sh',
+            extra_env={'PYTHON_BIN': str(interpreter)}, payload=self.payload('SessionStart')))
+        self.assertTrue(observed.is_file(), 'SessionStart must invoke the installed catchup script')
+        invocations = [json.loads(line) for line in observed.read_text().splitlines()]
+        expected_script = (self.plugin / 'skills/project-docs/scripts/session-catchup.py').resolve()
+        self.assertEqual(len(invocations), 1)
+        self.assertEqual(Path(invocations[0][0]).resolve(), expected_script)
+        self.assertEqual(invocations[0][1:], ['--no-history', str(self.project)])
+        self.assertIn('SESSION_START_INSTALLED_CONTEXT', json.loads(output)['hookSpecificOutput']['additionalContext'])
+        self.assertEqual(snapshot(self.project), before)
+
     def test_disabled_hooks_do_not_mutate_existing_plan_or_write_new_project_files(self):
         self.assert_ok(self.run_script('scripts/init-session.sh', '--gated'))
         before = snapshot(self.project)

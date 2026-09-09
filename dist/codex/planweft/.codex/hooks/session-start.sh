@@ -7,7 +7,7 @@
 [ "${PLANNING_DISABLED:-}" = "1" ] && exit 0
 
 SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
-CODEX_ROOT="$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd)"
+CODEX_ROOT="$(CDPATH= cd -- "$SCRIPT_DIR/../.." && pwd)"
 SKILL_DIR="$CODEX_ROOT/skills/project-docs"
 PYTHON_BIN="${PYTHON_BIN:-$(command -v python3 || command -v python)}"
 

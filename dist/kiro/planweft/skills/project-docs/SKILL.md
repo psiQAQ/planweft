@@ -2,7 +2,7 @@
 name: project-docs
 description: "Persistent file-based planning for multi-step AI-agent work. Keeps task_plan.md, findings.md, and progress.md on disk; Kiro skill instructions and steering state read selected project planning context. Recovery reads project planning files and their timestamps only, not agent transcript stores. This adapter registers no Stop hook, never requests continuation, and never runs commands declared in Markdown. The skill has no network upload path. Use for research or work needing 5+ tool calls. Automatic matching adds project docs and evidence maintenance; read-only and plan mode do not write records."
 metadata:
-  version: "0.4.0-rc.4"
+  version: "0.4.0-rc.5"
 ---
 
 For an explicitly requested language variant, read its instructions from `references/language-variants/project-docs-<language>/GUIDE.md` relative to this Skill directory (ar, de, es, zh, zht). These are supporting resources of this single entry point. Resolve runtime assets from the installed Skill; keep task records in the user project.

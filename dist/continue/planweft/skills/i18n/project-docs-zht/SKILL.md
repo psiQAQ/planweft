@@ -37,7 +37,7 @@ hooks:
           command: "SH=\"\"; for c in \"${PWF_SCRIPT_DIR}/skill-hook.sh\" \"${CLAUDE_SKILL_DIR}/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs-zht/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/plugins/marketplaces/planweft/scripts/skill-hook.sh\"; do [ -f \"$c\" ] && { SH=\"$c\"; break; }; done; [ -n \"$SH\" ] && sh \"$SH\" --event=precompact; exit 0"
 metadata:
 
-  version: "0.4.0-rc.4"
+  version: "0.4.0-rc.5"
 
 disable-model-invocation: true
 ---

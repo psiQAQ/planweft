@@ -8,7 +8,7 @@
 set -u
 
 HOOK_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" 2>/dev/null && pwd)" || exit 0
-CANONICAL_RESOLVER="${HOOK_DIR}/../skills/project-docs/scripts/resolve-plan-dir.sh"
+CANONICAL_RESOLVER="${HOOK_DIR}/../../skills/project-docs/scripts/resolve-plan-dir.sh"
 
 [ -f "${CANONICAL_RESOLVER}" ] || exit 0
 exec sh "${CANONICAL_RESOLVER}" "$@"
