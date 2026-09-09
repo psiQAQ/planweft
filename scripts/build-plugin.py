@@ -20,9 +20,13 @@ OVERLAY = ROOT / 'overlays/planweft'
 VERSION = '0.4.0-rc.8'
 PRODUCT = 'planweft'
 SKILL = 'project-docs'
-SKILL_DESCRIPTION = ('Use for implementation or maintenance combining investigation, fixes, regression '
-                     'tests and persistent handoff, including work continued from old notes. '
-                     'Read-only and trivial tasks do not initialize planning files.')
+SKILL_TRIGGER = ('Use for implementation/maintenance with investigation, fixes, regression tests '
+                 'and handoff, including existing notes. Read-only/trivial tasks do not initialize files. ')
+SKILL_RECOVERY = ('Uses selected project planning context. Automatic recovery reads project planning files only. '
+                  'Explicit requests only: --metadata / --replay. ')
+SKILL_BOUNDARY = 'It never runs commands declared in Markdown; no network upload path. '
+SKILL_DESCRIPTION = (SKILL_TRIGGER + SKILL_RECOVERY + SKILL_BOUNDARY
+                     + 'Optional gated mode can request continuation only when the host supports it.')
 DESCRIPTION = ('Plan and document implementation or maintenance with investigation, fixes, '
                'regression tests and handoff, including work continued from existing notes. '
                'Use task_plan.md, findings.md and progress.md as persistent task records. '
@@ -114,6 +118,23 @@ def identity_text(text):
     return text.replace('__PW_UPSTREAM_URL__', UPSTREAM_URL)
 
 
+def skill_description(path):
+    # Discovery metadata must disclose consent and host limits before the
+    # agent chooses to read the longer manual. Do not advertise shared hooks.
+    if path.startswith('.kiro/'):
+        return (SKILL_TRIGGER
+                + 'Kiro skill instructions and steering state read selected project planning context; '
+                'recovery reads project files and timestamps only, not agent transcript stores. '
+                'It registers no Stop hook and never requests continuation. ' + SKILL_BOUNDARY)
+    if path.startswith('.continue/'):
+        return (SKILL_TRIGGER + SKILL_RECOVERY + SKILL_BOUNDARY
+                + 'It registers no lifecycle or Stop hook and never requests continuation.')
+    if path.startswith('.gemini/'):
+        return (SKILL_TRIGGER + SKILL_RECOVERY + SKILL_BOUNDARY
+                + 'Its session-end hook reports status only and does not request continuation.')
+    return SKILL_DESCRIPTION
+
+
 def enhance_skill(text, path):
     if not text.startswith('---\n') or '\n---\n' not in text[4:]:
         raise ValueError('unsupported skill frontmatter: ' + path)
@@ -121,11 +142,11 @@ def enhance_skill(text, path):
     language = re.search(r'/i18n/(project-docs-[^/]+)/', path)
     name = language.group(1) if language else SKILL
     front = re.sub(r'^name:.*$', 'name: ' + name, front, flags=re.M)
-    # Discovery needs the task trigger. Retain the original adapter's consent
-    # and capability details in its own manual, not in the matching sentence.
+    # Keep the trigger and essential consent/capability boundaries visible at
+    # discovery; retain the full original adapter metadata in its manual too.
     upstream_description = re.search(r'^description:\s*(.*)$', front, re.M).group(1)
     upstream_description = json.loads(upstream_description) if upstream_description.startswith('"') else upstream_description.strip("'")
-    front = re.sub(r'^description:.*$', lambda _: 'description: ' + json.dumps(SKILL_DESCRIPTION), front, flags=re.M)
+    front = re.sub(r'^description:.*$', lambda _: 'description: ' + json.dumps(skill_description(path)), front, flags=re.M)
     front = re.sub(r'^(\s+version:) .+$', r'\1 "' + VERSION + '"', front, flags=re.M)
     if language and 'disable-model-invocation:' not in front:
         front += '\ndisable-model-invocation: true'
@@ -529,6 +550,31 @@ def distributions(tree, upstream, compiled=True):
     native = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(native)
     result = native.adapt(result, VERSION, DESCRIPTION)
+    # Some native adapters copy the canonical Skill (and language variants).
+    # Their final discovery metadata must describe the receiving host.
+    for host, files in result.items():
+        for name, (raw, mode) in list(files.items()):
+            if (name.endswith('/SKILL.md') or name == 'SKILL.md'
+                    or '/references/language-variants/' in '/' + name and name.endswith('/GUIDE.md')):
+                front, body = raw.decode('utf-8')[4:].split('\n---\n', 1)
+                front = re.sub(r'^description:.*$',
+                               lambda _: 'description: ' + json.dumps(skill_description('.' + host + '/' + name)),
+                               front, flags=re.M)
+                files[name] = (('---\n' + front + '\n---\n' + body).encode(), mode)
+            elif name.endswith('/references/pwf-workflow.md') and host in {'continue', 'gemini'}:
+                boundary = ('Continue registers no lifecycle or Stop hook and never requests continuation.'
+                            if host == 'continue' else
+                            'Gemini session-end hook reports status only and does not request continuation.')
+                entry_root = PurePosixPath(name).parent.parent
+                entry = next((candidate for candidate in ('SKILL.md', 'GUIDE.md')
+                              if str(entry_root / candidate) in files), None)
+                if entry is None:
+                    raise ValueError('No installed entry for workflow manual: ' + name)
+                notice = ('## Installed adapter boundary\n\n' + boundary + ' The fixed-upstream metadata '
+                          'below records shared source material; it does not establish this adapter\'s '
+                          'available events or permissions. Use the current [entry](../' + entry + ') '
+                          'and this platform package\'s INSTALL.md for installed capabilities.\n\n')
+                files[name] = (notice.encode() + raw, mode)
     if compiled:
         attach_opencode_compiled(result['opencode'])
     return result

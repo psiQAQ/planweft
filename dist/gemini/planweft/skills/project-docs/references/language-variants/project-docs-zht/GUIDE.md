@@ -1,6 +1,6 @@
 ---
 name: project-docs-zht
-description: "Use for implementation or maintenance combining investigation, fixes, regression tests and persistent handoff, including work continued from old notes. Read-only and trivial tasks do not initialize planning files."
+description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Its session-end hook reports status only and does not request continuation."
 metadata:
   version: "0.4.0-rc.8"
 ---

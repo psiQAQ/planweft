@@ -45,7 +45,15 @@ class NativeResourcePathsTest(unittest.TestCase):
                     original = 'skills/i18n/project-docs-' + language + '/'
                     for name, value in self.tree.items():
                         if name.startswith(original) and not name.endswith(('/SKILL.md', '/inject-plan.py')):
-                            self.assertEqual(skill[base + name[len(original):]], value,
+                            observed=skill[base + name[len(original):]]
+                            if host=='gemini' and name.endswith('/references/pwf-workflow.md'):
+                                # The receiving-host capability notice is additive:
+                                # retain every original manual byte and executable mode.
+                                self.assertTrue(observed[0].startswith(b'## Installed adapter boundary'))
+                                self.assertTrue(observed[0].endswith(value[0]))
+                                self.assertEqual(observed[1],value[1])
+                                continue
+                            self.assertEqual(observed, value,
                                              host + ': relocated asset differs: ' + name)
 
     def test_codex_and_claude_keep_their_native_language_layout(self):

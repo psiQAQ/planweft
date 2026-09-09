@@ -1,6 +1,6 @@
 ---
 name: project-docs-de
-description: "Use for implementation or maintenance combining investigation, fixes, regression tests and persistent handoff, including work continued from old notes. Read-only and trivial tasks do not initialize planning files."
+description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Kiro skill instructions and steering state read selected project planning context; recovery reads project files and timestamps only, not agent transcript stores. It registers no Stop hook and never requests continuation. It never runs commands declared in Markdown; no network upload path. "
 metadata:
   version: "0.4.0-rc.8"
 ---

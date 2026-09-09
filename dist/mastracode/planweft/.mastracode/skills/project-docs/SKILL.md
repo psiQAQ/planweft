@@ -1,6 +1,6 @@
 ---
 name: project-docs
-description: "Use for implementation or maintenance combining investigation, fixes, regression tests and persistent handoff, including work continued from old notes. Read-only and trivial tasks do not initialize planning files."
+description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
 user-invocable: true
 allowed-tools: "Read Write Edit Bash Glob Grep"
 hooks:

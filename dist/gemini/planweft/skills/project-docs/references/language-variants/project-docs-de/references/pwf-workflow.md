@@ -1,3 +1,7 @@
+## Installed adapter boundary
+
+Gemini session-end hook reports status only and does not request continuation. The fixed-upstream metadata below records shared source material; it does not establish this adapter's available events or permissions. Use the current [entry](../GUIDE.md) and this platform package's INSTALL.md for installed capabilities.
+
 # PWF implementation reference
 
 Apply the scope and workflow in the installed Skill entry first. Script commands are relative to the installed Skill root, not this reference directory.
