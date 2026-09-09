@@ -27,7 +27,7 @@ for index,line in enumerate(sys.stdin):
         emit(event('command_lifecycle',command_uuid=request['uuid'],state='started'))
     init=event('system',subtype='init',model='changed' if mode=='wrong-model' or (mode=='changed-init' and index) else 'synthetic-model',
                cwd=str(work),permissionMode='acceptEdits',claude_code_version='2.1.241',tools=['Write'],
-               mcp_servers=[],plugins=[{'name':'planweft','version':'fixture'}],skills=['planweft:project-docs'])
+               mcp_servers=[],plugins=[{'name':'planweft','version':'fixture','path':str(work.parent/('foreign' if mode=='wrong-plugin-path' else 'native'))}],skills=['planweft:project-docs'])
     if mode=='missing-metadata':init.pop('cwd')
     if mode=='wrong-version':init['plugins'][0]['version']='wrong'
     if mode=='wrong-permissions':init['permissionMode']='bypassPermissions'
@@ -182,12 +182,12 @@ class ClaudeReminderTest(unittest.TestCase):
 
     def test_protocol_rejects_early_queue_before_native_success(self):
         with tempfile.TemporaryDirectory() as temporary:
-            protocol=Protocol(Path(temporary),'synthetic-model','fixture');protocol.send('A',0)
+            protocol=Protocol(Path(temporary),'synthetic-model','fixture',Path(temporary)/'native');protocol.send('A',0)
             with self.assertRaises(ValueError):protocol.send('B',0)
             with self.assertRaises(ValueError):protocol.send('A',0)
 
     def test_failure_truncation_extra_tools_and_resets_never_pass(self):
-        for mode in ['failed-write','truncate','early','concurrent','one-write','bash','foreign-session','reset','extra-result','changed-plan','unbound','no-debug','changed-init','late-init','no-init','no-lifecycle','missing-metadata','wrong-model','wrong-version','wrong-permissions']:
+        for mode in ['failed-write','truncate','early','concurrent','one-write','bash','foreign-session','reset','extra-result','changed-plan','unbound','no-debug','changed-init','late-init','no-init','no-lifecycle','missing-metadata','wrong-model','wrong-version','wrong-permissions','wrong-plugin-path']:
             with self.subTest(mode=mode),tempfile.TemporaryDirectory() as temporary:
                 result,evidence,_=self.invoke(Path(temporary),mode)
                 self.assertNotEqual(result.returncode,0)

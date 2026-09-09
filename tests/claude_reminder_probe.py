@@ -59,8 +59,9 @@ def prompt(work,label):
 
 class Protocol:
     """Incremental actual tool pairing; never count debug strings as delivery."""
-    def __init__(self,work,model,version):
+    def __init__(self,work,model,version,native_root):
         self.model=model;self.version=version
+        self.native_root=str(native_root)
         self.work=work;self.sequence=0;self.session=None;self.current=None
         self.sent=[];self.rows=[];self.pending=None;self.tool_ids=set();self.turns=[]
         self.echoes=[];self.hooks=[];self.initializations={};self.init_metadata=None;self.finished=False
@@ -123,6 +124,7 @@ class Protocol:
                 plugins=event['plugins']
                 if (len(plugins)!=1 or not isinstance(plugins[0],dict)
                         or plugins[0].get('name')!='planweft' or plugins[0].get('version')!=self.version
+                        or plugins[0].get('path')!=self.native_root
                         or event['skills'].count('planweft:project-docs')!=1):
                     raise ValueError('Native plugin/Skill identity differs or is duplicated')
                 metadata={k:v for k,v in event.items() if k!='uuid'}
@@ -325,10 +327,11 @@ def run_probe(model,work,out,package,native_root,timeout,sanitize,*,plan_dir,pri
              '--output-format','stream-json','--verbose','--input-format','stream-json',
              '--replay-user-messages']
     version=json.loads((native_root/'.claude-plugin/plugin.json').read_text())['version']
-    protocol=Protocol(work,model,version);process=None;deadline=time.monotonic()+timeout
+    protocol=Protocol(work,model,version,native_root);process=None;deadline=time.monotonic()+timeout
     evidence={'status':'Not Run','collection_status':'In Progress','reminder_deduplication':'Not Run',
               'reason':'Pinned Claude PostToolUse empty-output/handler-to-tool debug correlation remains unvalidated; raw collection only.',
               'command':command,'timeout_seconds':timeout,'output_limits':limits,'resource_sha256':resources,
+              'native_root':str(native_root),
               'plan_before_sha256':{str(p.relative_to(work)):hashed(v) for p,v in protected.items()},
               'diagnostic_only':True,'same_process':True,'model_route_changed':False,'trust_changed':False,
               'private_process_trace_requested':trace_hooks}

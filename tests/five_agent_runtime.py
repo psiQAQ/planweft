@@ -235,9 +235,25 @@ def verify_files(host, package, record):
         if len(matches) != 1:
             raise RuntimeError('Expected exactly one native plugin cache')
         native = matches[0]
+    cache = native
+    if host == 'claude':
+        # Claude's local marketplace loads its source payload directly, even
+        # when install also created a version cache. Bind the executed source,
+        # while independently retaining the cache-content check below.
+        registry = WORK/'.planweft/registries/claude'
+        catalog = registry/'.claude-plugin/marketplace.json'
+        data = json.loads(catalog.read_text())
+        if (catalog.resolve() != catalog.absolute() or data.get('name') != record.get('catalog')
+                or len(data.get('plugins', [])) != 1
+                or data['plugins'][0].get('name') != 'planweft'
+                or data['plugins'][0].get('source') != './payload'):
+            raise RuntimeError('Claude managed marketplace source differs')
+        native = registry/'payload'
+        if native.resolve() != native.absolute():
+            raise RuntimeError('Claude managed source must not traverse symlinks')
     checked = 0
     for name, expected in manifest['files'].items():
-        for base in {native, expected_root}:
+        for base in {native, cache, expected_root}:
             p = base/name
             if not p.is_file() or hashlib.sha256(p.read_bytes()).hexdigest() != expected['sha256']:
                 raise RuntimeError('Installed content differs: '+name)
@@ -245,7 +261,7 @@ def verify_files(host, package, record):
                 raise RuntimeError('Installed executable bit differs: '+name)
         checked += 1
     save('installed-content', {'status':'Passed','files_checked':checked,'native_root':str(native),
-                              'package_root':str(root),'version':record['version']})
+                              'cache_root':str(cache),'package_root':str(root),'version':record['version']})
     return root
 
 

@@ -22,6 +22,34 @@ def module(name,path):
 
 
 class ContainerReleaseTest(unittest.TestCase):
+    def test_claude_loaded_marketplace_payload_is_verified_separately_from_cache(self):
+        runtime=module('pw_claude_source_binding','tests/five_agent_runtime.py')
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);runtime.WORK=root/'work';runtime.HOME=root/'home'
+            package=root/'package';stored=root/'stored'
+            catalog=runtime.WORK/'.planweft/registries/claude/.claude-plugin/marketplace.json'
+            payload=catalog.parent.parent/'payload'
+            cache=runtime.HOME/'.claude/plugins/cache/owned/planweft/fixture'
+            files={'.claude-plugin/plugin.json':b'{"name":"planweft","version":"fixture"}',
+                   'hooks/hook.sh':b'fixed hook\n'}
+            for base in [package/'dist/claude/planweft',stored/'dist/claude/planweft',cache,payload]:
+                for name,data in files.items():
+                    target=base/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data);target.chmod(0o644)
+            manifest={'platforms':{'claude':{'files':{name:{'sha256':hashlib.sha256(data).hexdigest(),'executable':False} for name,data in files.items()}}}}
+            for base in [package,stored]:(base/'dist/manifest.json').write_text(json.dumps(manifest))
+            catalog.parent.mkdir(parents=True,exist_ok=True)
+            data={'name':'owned','plugins':[{'name':'planweft','source':'./payload'}]}
+            catalog.write_text(json.dumps(data));record={'packageRoot':str(stored),'version':'fixture','catalog':'owned'}
+            with patch.object(runtime,'save') as save:
+                runtime.verify_files('claude',package,record)
+                evidence=save.call_args.args[1]
+                self.assertEqual(evidence['native_root'],str(payload));self.assertEqual(evidence['cache_root'],str(cache))
+                (payload/'hooks/hook.sh').write_text('changed')
+                with self.assertRaisesRegex(RuntimeError,'Installed content differs'):runtime.verify_files('claude',package,record)
+                (payload/'hooks/hook.sh').write_bytes(files['hooks/hook.sh'])
+                data['plugins'][0]['source']='../foreign';catalog.write_text(json.dumps(data))
+                with self.assertRaisesRegex(RuntimeError,'marketplace source differs'):runtime.verify_files('claude',package,record)
+
     def test_run_identity_survives_parser_failure_and_timeout(self):
         from types import SimpleNamespace
         image='sha256:'+'a'*64
