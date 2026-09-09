@@ -11,6 +11,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import tarfile
 from urllib.parse import urlsplit
@@ -18,6 +19,32 @@ import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
 HOSTS = ('claude', 'pi', 'opencode', 'codex', 'dsh')
+
+
+def resource_preflight(output):
+    existing=output
+    while not existing.exists(): existing=existing.parent
+    disk=shutil.disk_usage(existing).free
+    match=re.search(r'^MemAvailable:\s+(\d+)\s+kB$',Path('/proc/meminfo').read_text(),re.M)
+    memory=int(match[1])*1024 if match else 0
+    if memory < 4*1024**3 or disk < 8*1024**3:
+        raise RuntimeError('Require 4 GiB available RAM and 8 GiB free output storage')
+    return {'available_memory_bytes':memory,'free_disk_bytes':disk}
+
+
+def cleanup_owned(name, token):
+    try:
+        def read(arguments):
+            return subprocess.check_output(['docker',*arguments],text=True,timeout=30).strip()
+        query=['ps','-aq','--filter','name=^/'+name+'$']
+        if not read(query):return {'container_removed':True}
+        owner=read(['inspect','--type','container','--format',
+                    '{{index .Config.Labels "planweft.isolation-run"}}',name])
+        if owner!=token:return {'container_removed':False,'error':'ownership label differs'}
+        subprocess.run(['docker','rm','-f',name],capture_output=True,timeout=30)
+        return {'container_removed':not read(query)}
+    except (OSError,subprocess.SubprocessError) as error:
+        return {'container_removed':False,'error':type(error).__name__}
 
 
 def save(path, data):
@@ -66,7 +93,8 @@ def inspect_archive(path, digest):
 
 def worker(args):
     out = args.output
-    home = Path('/tmp/isolation-home'); home.mkdir()
+    home = out / 'profile'; home.mkdir()
+    temporary=out / 'tmp'; temporary.mkdir()
     for name in ['.codex', '.claude', '.pi/agent', '.config/opencode', '.dsh']:
         (home / name).mkdir(parents=True, exist_ok=True)
     env = {key: value for key, value in os.environ.items()
@@ -78,14 +106,14 @@ def worker(args):
                npm_config_userconfig='/dev/null', npm_config_cache=str(home / '.npm'),
                npm_config_registry='https://registry.npmjs.org', PLANNING_DISABLED='1',
                CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC='1', GIT_CONFIG_NOSYSTEM='1',
-               GIT_CONFIG_GLOBAL='/dev/null', GIT_TERMINAL_PROMPT='0')
+               GIT_CONFIG_GLOBAL='/dev/null', GIT_TERMINAL_PROMPT='0', TMPDIR=str(temporary))
     report = {'host': args.host, 'status': 'In Progress', 'old_version': args.old_version,
               'version': args.version, 'old_sha256': args.old_sha256, 'sha256': args.sha256,
               'shared_home': True, 'model_calls': 'Not Run: native management/discovery only',
               'hooks': 'Not Run: PLANNING_DISABLED=1',
               'uninstall_verification_scope': 'Removed-side installer receipts only; surviving B native state is checked. Full native uninstall absence is a separate lifecycle check.',
               'steps': []}
-    projects = {letter: Path('/tmp') / ('项目 ' + letter) for letter in ['A', 'B']}
+    projects = {letter: out / ('项目 ' + letter) for letter in ['A', 'B']}
     protected = {}
     for letter, project in projects.items():
         project.mkdir()
@@ -102,7 +130,7 @@ def worker(args):
                      'models': {'never-call': {'name': 'Never called'}}}}})
     packages = {}
     for label, archive in [('old', args.old_archive), ('new', args.archive)]:
-        target = Path('/tmp') / ('source-' + label); target.mkdir()
+        target = out / ('source-' + label); target.mkdir()
         with tarfile.open(archive) as packed:
             packed.extractall(target)  # Every member was validated before output/Docker.
         packages[label] = target / 'package'
@@ -257,14 +285,17 @@ def main(argv=None):
     for key in proxies:
         if key.lower() != 'no_proxy' and (urlsplit(os.environ[key]).username or urlsplit(os.environ[key]).password):
             parser.error('Authenticated proxies are outside this runner')
+    resources=resource_preflight(args.output)
     actual = subprocess.check_output(['docker', 'image', 'inspect', image, '--format', '{{.Id}}'], text=True).strip()
     if actual != image: raise RuntimeError('Locked image identity mismatch')
     args.output.mkdir(parents=True)
     script = args.output / 'runner.py'; script.write_bytes(Path(__file__).read_bytes())
-    name = 'planweft-project-isolation-' + uuid.uuid4().hex
+    token=uuid.uuid4().hex
+    name = 'planweft-project-isolation-' + token
     command = ['docker', 'run', '--rm', '--name', name, '--read-only', '--user', f'{os.getuid()}:{os.getgid()}',
+               '--label','planweft.isolation-run='+token,
                '--cap-drop=ALL', '--security-opt=no-new-privileges', '--cpus=2', '--memory=3g',
-               '--memory-swap=3g', '--pids-limit=256', '--network=host', '--tmpfs', '/tmp:mode=1777,size=2g',
+               '--memory-swap=3g', '--pids-limit=256', '--network=host', '--tmpfs', '/tmp:mode=1777,size=512m',
                '--mount', f'type=bind,src={script},dst=/runner/run.py,readonly',
                '--mount', f'type=bind,src={args.output},dst=/evidence',
                '--mount', f'type=bind,src={args.archive},dst=/input/new.tgz,readonly',
@@ -274,16 +305,24 @@ def main(argv=None):
                '--sha256', args.sha256, '--old-archive', '/input/old.tgz', '--old-sha256', args.old_sha256,
                '--output', '/evidence', '--timeout', str(args.timeout)]
     result = None
+    error = None
+    remaining = 'unverified'
     try:
-        result = subprocess.run(command, text=True, capture_output=True, timeout=args.timeout * 30)
+        result = subprocess.run(command, text=True, capture_output=True, timeout=args.timeout)
         (args.output / 'container.log').write_text(result.stdout + result.stderr)
+    except subprocess.TimeoutExpired as exc:
+        error='TimeoutExpired'
+        def text(value): return value.decode(errors='replace') if isinstance(value,bytes) else value or ''
+        (args.output / 'container.log').write_text(text(exc.stdout)+text(exc.stderr))
     finally:
-        subprocess.run(['docker', 'rm', '-f', name], capture_output=True)
-        remaining = subprocess.check_output(['docker', 'ps', '-aq', '--filter', 'name=^/' + name + '$'], text=True).strip()
+        cleanup=cleanup_owned(name,token)
+        remaining=not cleanup['container_removed']
         save(args.output / 'container.json', {'image': image, 'runner_sha256': hashlib.sha256(script.read_bytes()).hexdigest(),
+             'status':'Passed' if result and result.returncode==0 and not remaining else 'Failed',
              'exit_code': result.returncode if result else None, 'container_removed': not remaining,
-             'credentials_mounted': False, 'network': 'host network and existing credential-free proxy'})
-    return 1 if remaining else result.returncode
+             'credentials_mounted': False, 'network': 'host network and existing credential-free proxy',
+             'resource_preflight':resources,'timeout_seconds':args.timeout,'error':error,'cleanup':cleanup})
+    return 1 if remaining or result is None else result.returncode
 
 
 if __name__ == '__main__':

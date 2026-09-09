@@ -73,13 +73,51 @@ class ProjectIsolationTest(unittest.TestCase):
                 root = Path(temporary); argv = self.inputs(root)
                 success = SimpleNamespace(returncode=0, stdout='', stderr='')
                 with patch.dict(runner.os.environ, {'PATH': '/usr/bin'}, clear=True), \
-                     patch.object(runner.subprocess, 'check_output', side_effect=[image, remaining]), \
+                     patch.object(runner,'resource_preflight',return_value={'fixture':True}), \
+                     patch.object(runner,'cleanup_owned',return_value={'container_removed':not remaining}), \
+                     patch.object(runner.subprocess, 'check_output', return_value=image), \
                      patch.object(runner.subprocess, 'run', return_value=success) as run:
                     self.assertEqual(runner.main(argv), 1 if remaining else 0)
                 self.assertEqual((root / 'evidence/runner.py').read_bytes(), SCRIPT.read_bytes())
                 self.assertIn('--read-only', run.call_args_list[0].args[0])
                 state = json.loads((root / 'evidence/container.json').read_text())
                 self.assertEqual(state['container_removed'], not remaining)
+
+    def test_resource_shortage_precedes_docker_and_output(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary); argv=self.inputs(root)
+            with patch.object(runner,'resource_preflight',side_effect=RuntimeError('resource shortage')), \
+                 patch.object(runner.subprocess,'check_output') as read:
+                with self.assertRaisesRegex(RuntimeError,'resource shortage'):runner.main(argv)
+                read.assert_not_called()
+                self.assertFalse((root/'evidence').exists())
+
+    def test_timeout_retains_partial_output_and_bounds_whole_scene(self):
+        image=json.loads((runner.ROOT/'tests/container-images.json').read_text())['hosts']['claude']['image']
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary); argv=self.inputs(root)+['--timeout','42']
+            expired=runner.subprocess.TimeoutExpired('fixture',42,output=b'partial stdout',stderr=b'partial stderr')
+            with patch.dict(runner.os.environ,{'PATH':'/usr/bin'},clear=True), \
+                 patch.object(runner,'resource_preflight',return_value={'fixture':True}), \
+                 patch.object(runner,'cleanup_owned',return_value={'container_removed':True}), \
+                 patch.object(runner.subprocess,'check_output',return_value=image), \
+                 patch.object(runner.subprocess,'run',side_effect=[expired,SimpleNamespace(returncode=0)]) as run:
+                self.assertEqual(runner.main(argv),1)
+            self.assertEqual(run.call_args_list[0].kwargs['timeout'],42)
+            self.assertIn('/tmp:mode=1777,size=512m',run.call_args_list[0].args[0])
+            self.assertEqual((root/'evidence/container.log').read_text(),'partial stdoutpartial stderr')
+            state=json.loads((root/'evidence/container.json').read_text())
+            self.assertTrue(state['container_removed']);self.assertEqual(state['error'],'TimeoutExpired')
+
+    def test_cleanup_refuses_foreign_owner_and_unverified_daemon(self):
+        with patch.object(runner.subprocess,'check_output',side_effect=['container','foreign']), \
+             patch.object(runner.subprocess,'run') as remove:
+            self.assertFalse(runner.cleanup_owned('owned-name','token')['container_removed'])
+            remove.assert_not_called()
+        with patch.object(runner.subprocess,'check_output',side_effect=OSError('unavailable')), \
+             patch.object(runner.subprocess,'run') as remove:
+            self.assertFalse(runner.cleanup_owned('owned-name','token')['container_removed'])
+            remove.assert_not_called()
 
 
 if __name__ == '__main__': unittest.main()
