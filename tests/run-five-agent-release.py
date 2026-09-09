@@ -242,6 +242,9 @@ def model_text(host, text):
         if event.get('type')=='message_end' and event.get('message',{}).get('stopReason') in {'error','aborted'}:
             errors.append(event['message'].get('errorMessage','model failed'))
         if host=='codex':
+            if event.get('type')=='context_probe_projection':
+                final.append(event.get('answer',''));responses+=1
+                if event.get('status')!='Passed': errors.append(event)
             item=event.get('item',{})
             if event.get('type')=='item.completed' and item.get('type')=='agent_message': responses+=1
             if item.get('type')=='agent_message': final.append(item.get('text',''))
@@ -282,7 +285,10 @@ def model_text(host, text):
                 kind=reason.get('kind') if isinstance(reason,dict) else reason
                 if kind!='completed': errors.append(event)
     return {'final':'\n'.join(final).strip(),'tool_calls':tools,'errors':errors,'assistant_responses':responses,'native_stop_results':len(stops),'native_stop_decisions':stops,'native_followups':followups,
-            'tool_observation_supported':host!='dsh' or native_end}
+            # Fixed Codex exec JSON omits code-mode tool calls. Absence of
+            # high-level items cannot establish no tools; dedicated native
+            # probes supply their separate complete-protocol assertions.
+            'tool_observation_supported':host not in {'codex','dsh'} or (host=='dsh' and native_end)}
 
 
 def stop_assertions(case,host,before,after,trace,result,rpc,cases):
@@ -336,6 +342,8 @@ def main(argv=None):
     trust_module.write_bytes((ROOT/'tests/codex_trust_probe.py').read_bytes())
     reminder_module=args.output/'codex_reminder_probe.py'
     reminder_module.write_bytes((ROOT/'tests/codex_reminder_probe.py').read_bytes())
+    context_module=args.output/'codex_context_probe.py'
+    context_module.write_bytes((ROOT/'tests/codex_context_probe.py').read_bytes())
     claude_reminder_module=args.output/'claude_reminder_probe.py'
     claude_reminder_module.write_bytes((ROOT/'tests/claude_reminder_probe.py').read_bytes())
     digest=hashlib.sha256(args.archive.read_bytes()).hexdigest()
@@ -347,6 +355,7 @@ def main(argv=None):
         'server_module_sha256':hashlib.sha256(server_module.read_bytes()).hexdigest(),
         'trust_module_sha256':hashlib.sha256(trust_module.read_bytes()).hexdigest(),
         'reminder_module_sha256':hashlib.sha256(reminder_module.read_bytes()).hexdigest(),
+        'context_module_sha256':hashlib.sha256(context_module.read_bytes()).hexdigest(),
         'claude_reminder_module_sha256':hashlib.sha256(claude_reminder_module.read_bytes()).hexdigest(),
         'status':'In Progress','hosts':{},'semantic_review':'Not Run',
         'scope':'Linux amd64 real hosts; exact artifact, no external memory service'}
@@ -431,6 +440,7 @@ def main(argv=None):
                     '--mount',f'type=bind,src={trust_module},dst=/runner/codex_trust_probe.py,readonly',
                     '--mount',f'type=bind,src={reminder_module},dst=/runner/codex_reminder_probe.py,readonly',
                     '--mount',f'type=bind,src={claude_reminder_module},dst=/runner/claude_reminder_probe.py,readonly',
+                    '--mount',f'type=bind,src={context_module},dst=/runner/codex_context_probe.py,readonly',
                     '-e','HOME=/home/agent','-e','HTTP_PROXY','-e','HTTPS_PROXY','-e','ALL_PROXY',
                     '--workdir','/workspace','--entrypoint','python3',image,'-c',
                     'import sys,json; sys.path.insert(0,"/runner"); import runtime; sys.exit(runtime.controller(json.load(sys.stdin)))']

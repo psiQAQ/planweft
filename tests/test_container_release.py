@@ -53,6 +53,53 @@ class ContainerReleaseTest(unittest.TestCase):
                                    '--archive','absent.tgz','--output','absent'])
             resources.assert_not_called();files.assert_not_called()
 
+    def test_codex_exec_projection_never_claims_complete_tool_observation(self):
+        runner=module('pw_codex_projection_scope','tests/run-five-agent-release.py')
+        stream=json.dumps({'type':'item.completed','item':{'type':'agent_message','text':'NO_CONTEXT'}})
+        self.assertFalse(runner.model_text('codex',stream)['tool_observation_supported'])
+        stream=json.dumps({'type':'context_probe_projection','status':'Passed','answer':'synthetic'})
+        observed=runner.model_text('codex',stream)
+        self.assertEqual(observed['final'],'synthetic')
+        self.assertFalse(observed['tool_observation_supported'])
+
+    def test_codex_three_fresh_probes_bind_owner_token_and_native_trust(self):
+        from types import SimpleNamespace
+        for duplicate,fail_before in [(False,False),(True,False),(False,True)]:
+            with self.subTest(duplicate=duplicate,fail_before=fail_before),tempfile.TemporaryDirectory() as temporary:
+                runtime=module('pw_fresh_trust_'+str(duplicate)+str(fail_before),'tests/five_agent_runtime.py')
+                work=Path(temporary)/'project';out=Path(temporary)/'out';work.mkdir();out.mkdir()
+                original='PW_RECOVERY_'+'a'*32
+                (work/'task_plan.md').write_text('Goal '+original)
+                (out/'installed-content.json').write_text(json.dumps({'native_root':'/synthetic/native'}))
+                runtime.WORK=work;runtime.OUT=out
+                calls=[];trust=[]
+                def probe(model,project,evidence,package,native,timeout,sanitize,**kwargs):
+                    calls.append(kwargs)
+                    self.assertNotIn(original,kwargs['prompt'])
+                    self.assertNotIn('resume',kwargs)
+                    expected=kwargs['expected_token']
+                    self.assertEqual((work/'task_plan.md').read_text(),'Goal '+(expected or original))
+                    observed={'status':'Failed' if fail_before else 'Passed','answer':expected or 'NO_CONTEXT',
+                              'no_model_tool_calls':True,'thread_id':'same' if duplicate else str(len(calls)),
+                              'native_pid':len(calls)}
+                    stdout=json.dumps({'type':'context_probe_projection','status':observed['status'],'answer':observed['answer']})
+                    return subprocess.CompletedProcess(['codex','app-server'],int(fail_before),stdout,''),observed
+                def approve(*args,**kwargs):
+                    self.assertEqual(len(calls),1);trust.append(True);return {'status':'Passed'}
+                with patch.dict(sys.modules,{'codex_context_probe':SimpleNamespace(run_probe=probe),
+                                              'codex_trust_probe':SimpleNamespace(trust_hooks=approve)}):
+                    if fail_before:
+                        with self.assertRaises(RuntimeError):runtime.codex_trusted_model('model','Recover supplied context only',600)
+                        self.assertEqual(trust,[]);self.assertEqual(len(calls),1)
+                    else:
+                        _,result=runtime.codex_trusted_model('model','Recover supplied context only',600)
+                        self.assertEqual(len(calls),3);self.assertEqual(trust,[True])
+                        self.assertEqual([x['forbidden_token'] for x in calls],[original,None,original])
+                        self.assertEqual(result['distinct_threads'],not duplicate)
+                        self.assertTrue(result['distinct_processes']);self.assertTrue(result['no_tool_reads'])
+                        self.assertNotEqual(result['new_owner_token'],original)
+                        self.assertEqual(json.loads((out/'model.json').read_text())['argv'],['codex','app-server'])
+
     def test_codex_projection_omits_provider_and_unknown_registration_fields(self):
         runtime=module('pw_codex_projection','tests/five_agent_runtime.py')
         with tempfile.TemporaryDirectory() as temporary:

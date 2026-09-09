@@ -393,35 +393,48 @@ def native_rule_denial(host,text):
 
 
 def codex_trusted_model(model,prompt,timeout):
-    """Before trust, native approval, then two independent ephemeral sessions."""
+    """Native trust UI between three complete, independent app-server sessions."""
     from codex_trust_probe import trust_hooks
+    from codex_context_probe import run_probe
     deadline=time.monotonic()+timeout
+    native=Path(json.loads((OUT/'installed-content.json').read_text())['native_root'])
+    package=Path('/tmp/unpacked/package');sessions=[]
     def remaining():
         value=int(deadline-time.monotonic())
         if value<1: raise TimeoutError('Persisted trust scenario exceeded deadline')
         return value
-    def invoke(name):
-        command,data=model_command('codex',model,prompt,'persisted-trust')
-        process=run(name,command,input_data=data,timeout=remaining())
-        events=[json.loads(line) for line in process.stdout.splitlines() if line.startswith('{')]
-        items=[e['item'] for e in events if e.get('type')=='item.completed']
-        answer='\n'.join(i.get('text','') for i in items if i.get('type')=='agent_message')
-        no_tools=not any(i.get('type') in {'command_execution','mcp_tool_call','file_change','web_search'} for i in items)
-        return process,answer,no_tools
+    def invoke(name,expected,forbidden=None):
+        process,observed=run_probe(model,WORK,OUT/name,package,native,remaining(),safe_text,
+            prompt=prompt,expected_token=expected,forbidden_token=forbidden)
+        sessions.append({'name':name,**observed})
+        save('native-trust-sessions',{'sessions':sessions,'scope':'Fresh processes/threads, no resume or session history'})
+        if process.returncode or observed.get('status')!='Passed':
+            raise RuntimeError('Native context attribution failed: '+name)
+        return process,observed
     original=re.search(r'PW_RECOVERY_[a-f0-9]+',(WORK/'task_plan.md').read_text())[0]
-    _,before,before_no_tools=invoke('model-before-trust')
-    if 'NO_CONTEXT' not in before or original in before or not before_no_tools:
-        raise RuntimeError('Untrusted session did not prove hooks inactive without tool reads')
+    _,before=invoke('context-before-trust',None,original)
     ui=trust_hooks(model,WORK,OUT/'native-trust-ui.log',min(90,remaining()),sanitize=safe_text)
-    _,after,after_no_tools=invoke('model-after-trust')
+    _,after=invoke('context-after-trust',original)
     fresh='PW_RECOVERY_'+uuid.uuid4().hex
     plan=WORK/'task_plan.md';plan.write_text(plan.read_text().replace(original,fresh))
-    process,recovered,recovered_no_tools=invoke('model')
-    observations={'ui':ui,'before_no_context':True,'after_context':original in after,
-                  'fresh_context':fresh in recovered and original not in recovered,
-                  'no_tool_reads':after_no_tools and recovered_no_tools,
-                  'new_owner_token':fresh,'history_available':False,'trust_bypass':False}
+    process,recovered=invoke('context-fresh-session',fresh,original)
+    distinct_threads=len({s['thread_id'] for s in sessions})==3
+    distinct_processes=len({s['native_pid'] for s in sessions})==3
+    observations={'ui':ui,'before_no_context':before['answer']=='NO_CONTEXT',
+                  'after_context':after['answer']==original,'fresh_context':recovered['answer']==fresh,
+                  'no_tool_reads':all(s.get('no_model_tool_calls') is True for s in sessions),
+                  'no_tool_reads_scope':'No model-initiated tools; native hooks read project files',
+                  'distinct_threads':distinct_threads,'distinct_processes':distinct_processes,
+                  'sessions':sessions,'new_owner_token':fresh,'history_available':False,'trust_bypass':False}
     save('native-trust',observations)
+    (OUT/'model.stdout').write_text(safe_text(process.stdout))
+    (OUT/'model.stderr').write_text(safe_text(process.stderr))
+    metadata={'argv':process.args,'exit_code':process.returncode,'fresh_session':True,
+              'case':'persisted-trust','codex_hook_trust':'normal','plugin_installed':True,
+              'stdout_format':'Explicit context_probe_projection; complete native protocol retained for each session',
+              'transport':'three independent app-server processes with full EOF drain',
+              'external_memory':'Codex direct authentication; memories disabled; no session history'}
+    save('model',metadata);save('model-invocation',metadata)
     return process,observations
 
 
@@ -649,7 +662,7 @@ def controller(payload):
                 result['native_policy_loaded']=json.loads(policy.stdout).get('decision')=='forbidden'
                 if not result['native_policy_loaded']: raise RuntimeError('Native execpolicy did not forbid the synthetic command')
             command, data = model_command(host,payload['model'],prompt,case)
-            if case=='reminder-dedup':
+            if host=='codex' and case in {'reminder-dedup','persisted-trust'}:
                 command=['codex','--disable','memories','--disable','multi_agent','app-server']
             server_probe=host=='opencode' and case in {'stopping','gated-continuation','gate-cap','gate-stall','gate-cap-disabled','gate-stall-disabled'}
             if server_probe:
@@ -663,7 +676,9 @@ def controller(payload):
                 command=['strace','-f','--decode-pids=comm','-s','4096','-e','trace='+tracer.TRACE_SYSCALLS,'-e','raw=read','-o','/tmp/planweft-gate.trace','--',*command]
             save('model-invocation',{'argv':command,'fresh_session':True,'case':case,
                 'plugin_installed':case!='cold-reader','external_memory':'direct-provider; no MemoryProxy or identity headers',
-                'transport':'native server SSE; finite quiet window' if server_probe else 'native CLI',
+                'transport':('three fresh native app-server probes; individual journals; stop after failure'
+                             if host=='codex' and case=='persisted-trust'
+                             else 'native server SSE; finite quiet window' if server_probe else 'native CLI'),
                 'codex_hook_trust':'invocation bypass' if '--dangerously-bypass-hook-trust' in command else 'normal',
                 'planning_disabled':os.environ.get('PLANNING_DISABLED')=='1'})
             if host=='pi': save('pi-mode',{'configured':os.environ.get('PWF_MODE','auto'),
@@ -699,7 +714,7 @@ def controller(payload):
                         'completion':'Diagnostic collection only; not reminder gate acceptance'})
                 elif host=='codex' and case=='persisted-trust':
                     process,trust=codex_trusted_model(payload['model'],prompt,payload['timeout'])
-                    result['native_persisted_trust']=all(trust[k] for k in ['before_no_context','after_context','fresh_context','no_tool_reads'])
+                    result['native_persisted_trust']=all(trust[k] for k in ['before_no_context','after_context','fresh_context','no_tool_reads','distinct_threads','distinct_processes'])
                     result['trust_recovery_token']=trust['new_owner_token']
                 elif host=='pi' and case in {'context','recovery','continuation-limit','stopping'}:
                     process=pi_model(payload['model'],prompt,payload['timeout'],activate=case!='stopping')
