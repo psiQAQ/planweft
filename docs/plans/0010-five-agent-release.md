@@ -4,6 +4,10 @@
 
 实施中，正式 `0.4.0` 未发布。RC13 已通过 OIDC 发布到 npm `next`，远端包与准确本地归档逐字一致；`latest` 历史 RC1 不代表稳定版。RC11/RC12 均未发布。RC13 冻结源码 `a9c0f948ea52534e446c3945dc9bfa3e5acdce92`，准确归档 SHA-256 `793e3f2c4d5f7e6e8f180494e1f05ea07db2ddd30426edf6c837b6b775e09bda`。后续测试器修改不改变该归档。
 
+RC14 已通过 OIDC 发布到 npm `next`，官方 registry 下载字节与准确本地归档一致。独立审查后的六语言采用分支和中英本地操作例程已生成全部15平台；初次 CI Windows 默认 cp1252 读取中文失败，已用显式 UTF-8 最小修复，保留原失败。新冻结源码 `6e54876bf6249bb1d83514767920fdeb793f3573`，准确归档 SHA-256 `9ecfd09b82d118a99f7593fa3fcd948234a334ac11f7c2e06d63e446e693b85a`；旧 `2c96af78` 归档已排除发布，不覆盖历史。新三系统安装器、例程和 distribution Check `34382490295` 全部通过，OIDC `34383018444` 通过，远端包 5,462,803 bytes；SHA-256/SHA-512/SHA-1 均与预期一致。公开审计4个新提交、88个去重blob、4325个递归payload、7个已知凭据匹配检查无发现。
+
+Claude 新增仅供诊断的私有进程追踪：独立审查初始7类对抗反例修复后均拒绝，65项定向回归及86个子场景 Passed。冻结源码的无模型实际七hook预检已绑定脚本读取、输出通道与EOF，四次 PostToolUse 实际字节为187、0、187、0；旧缺少插件ROOT及误拒普通pread读取的两次预检保留。该结果不证明真实 Claude 模型投递／去重，真实 RC13 traced diagnostic 已完成两轮四次Write且通过独立收集核查，但归因 Incomplete：实际native init加载受管marketplace payload，旧测试器绑定cache；另有创建来源未捕获的线程read返回?。已经补正确来源与会话路径绑定（41项定向回归通过），下一步无模型补采FD创建事件，不能仅按fs.watch线程名称或读长度跳过未知调用。RC14固定任务维护与独立冷读正在串行容器执行。追踪原文只在私有临时目录，导出限额数字／摘要后删除；元数据预算按实际预检从32KiB改为256KiB并增加超限反例。
+
 - 用户授权的直接依赖 `toml@4.3.0` 已落地，69 个非根 lock 条目完全不变。干净 npm 安装后的安装器 123 Passed / 1 本机 Windows Skipped、Python 228 项（1 Skipped、无失败）、构建一致性 Passed。RC13 三系统 Check `34371767391`、OIDC `34372409182`、公开审计和远端准确字节校验均 Passed。
 - RC13 五宿主准确原生 preflight/lifecycle 均 Passed；此组仅为同版本更新与卸载，不冒充两版本升级/回退或模型门槛。Codex 自有来源校验缺陷已通过准确新包实际修复，RC12 原失败和额外诊断保留。
 - 真实 npm RC4 → RC13 → RC4 → RC13 → 卸载五宿主均 Passed，Pi/OpenCode/DSH 另有原生 npm 入口/配对资源检查。该组不含模型会话或公开 Git marketplace；RC4 为历史已验证可用的旧版基线，RC10 的已知缺陷不撤销。正式版仍须另行执行 RC13 ↔ 稳定版全流程。
