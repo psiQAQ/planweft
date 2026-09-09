@@ -196,15 +196,30 @@ def run_probe(model, work, out, package, native_root, timeout, sanitize, *, prom
     sent to Codex; their only use is assessment after the stream has closed.
     Caller supplies an isolated environment, installed native root, and trust.
     """
+    require(isinstance(prompt, str), 'Invalid prompt')
+    for token in (expected_token, forbidden_token):
+        require(token is None or isinstance(token, str) and re.fullmatch(r'PW_RECOVERY_[a-f0-9]{32}', token), 'Invalid recovery token')
+        require(token is None or token not in prompt, 'Token must not be sent to model')
+    require(not expected_token or expected_token != forbidden_token, 'Conflicting expected/forbidden token')
+    return _collect_native_turn(model, work, out, package, native_root, timeout, sanitize,
+        prompt=prompt, evaluator=lambda events, thread, turn, source:
+            assess(events, thread, turn, prompt, source, expected_token, forbidden_token),
+        evidence_prefix='context', limits=limits)
+
+
+def _collect_native_turn(model, work, out, package, native_root, timeout, sanitize, *, prompt,
+                         evaluator, evidence_prefix, limits=None, command_prefix=(), trace_limit=None):
+    """Shared transport only; each probe retains its own strict final assessor.
+
+    command_prefix is private API: the stop wrapper validates its exact strace
+    shape and owned tmpfs destination before calling. It wraps the real Popen.
+    """
+    require(evidence_prefix in {'context', 'stop'} and callable(evaluator), 'Invalid probe assessor')
     require(os.name == 'posix' and callable(sanitize), 'POSIX and explicit sanitizer required')
     require(isinstance(timeout, (int, float)) and not isinstance(timeout, bool) and 0 < timeout <= 600,
             'Timeout must be in (0, 600]')
     require(isinstance(model, str) and model and isinstance(prompt, str) and 0 < len(prompt.encode()) <= 16384,
             'Invalid model/prompt')
-    for token in (expected_token, forbidden_token):
-        require(token is None or isinstance(token, str) and re.fullmatch(r'PW_RECOVERY_[a-f0-9]{32}', token), 'Invalid recovery token')
-        require(token is None or token not in prompt, 'Token must not be sent to model')
-    require(not expected_token or expected_token != forbidden_token, 'Conflicting expected/forbidden token')
     paths = [Path(p).absolute() for p in (work, out, package, native_root)]
     work, out, package, native_root = paths
     require(all(p.is_dir() for p in (work, package, native_root)) and (not out.exists() or out.is_dir()), 'Invalid resource/output directory')
@@ -215,7 +230,7 @@ def run_probe(model, work, out, package, native_root, timeout, sanitize, *, prom
         require(isinstance(limits, dict) and not set(limits) - set(caps), 'Unknown limit')
         for key, value in limits.items():
             require(type(value) is int and 0 < value <= caps[key], 'Invalid output limit'); caps[key] = value
-    names = ['context-protocol.jsonl', 'context-native.stderr', 'context-observation.json']
+    names = [evidence_prefix + suffix for suffix in ('-protocol.jsonl', '-native.stderr', '-observation.json')]
     require(not any((out / name).exists() or (out / name).is_symlink() for name in names), 'Evidence already exists')
     expected = package / 'dist/codex/planweft'
     require(expected.is_dir(), 'Missing exact Codex distribution')
@@ -235,7 +250,7 @@ def run_probe(model, work, out, package, native_root, timeout, sanitize, *, prom
     redaction_check = sanitize('context-probe')
     require(isinstance(redaction_check, str) and redaction_check, 'Sanitizer must return nonempty text')
     out.mkdir(parents=True, exist_ok=True)
-    command = ['codex', '--disable', 'memories', '--disable', 'multi_agent', 'app-server']
+    command = [*command_prefix, 'codex', '--disable', 'memories', '--disable', 'multi_agent', 'app-server']
     deadline = time.monotonic() + timeout
     events = []; buffer = b''; pending = []; process = None; thread = turn = None
     raw_size = raw_stderr_size = exported = 0
@@ -304,8 +319,19 @@ def run_probe(model, work, out, package, native_root, timeout, sanitize, *, prom
                     require(value['id'] == ident and ident not in responses and 'result' in value and 'error' not in value,
                             'Mismatched/failed native response')
                     responses.add(ident); return value['result']
+        spawn_options = {}
+        if command_prefix:
+            require(type(trace_limit) is int and 0 < trace_limit <= 32 * 1024**2, 'Invalid private trace bound')
+            # Bound the actual strace writer as well as its descendants. The
+            # runtime owns projection/removal; no private trace is read here.
+            def limit_trace_file():
+                import resource
+                _, hard = resource.getrlimit(resource.RLIMIT_FSIZE)
+                limit = min(trace_limit, hard) if hard != resource.RLIM_INFINITY else trace_limit
+                resource.setrlimit(resource.RLIMIT_FSIZE, (limit, limit))
+            spawn_options['preexec_fn'] = limit_trace_file
         process = subprocess.Popen(command, cwd=work, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                                   stderr=subprocess.PIPE, start_new_session=True)
+                                   stderr=subprocess.PIPE, start_new_session=True, **spawn_options)
         initialized = request(1, 'initialize', {'clientInfo': {'name': 'planweft-context-probe', 'version': '1'},
                                                'capabilities': {'experimentalApi': True}})
         require('/0.149.1 ' in initialized.get('userAgent', ''), 'Unexpected native CLI version')
@@ -330,7 +356,7 @@ def run_probe(model, work, out, package, native_root, timeout, sanitize, *, prom
         require([e['id'] for e in events if 'id' in e] == [1, 2, 3], 'Additional native response/request')
         for event in events:
             if event.get('method') == 'thread/started': fresh_thread(event['params']['thread'], work)
-        evidence = assess(events, thread, turn, prompt, source, expected_token, forbidden_token)
+        evidence = evaluator(events, thread, turn, source)
         evidence.update(normal_eof=True, native_exit_code=0, thread_snapshot=info)
     except KeyboardInterrupt:
         failure = 'KeyboardInterrupt: native probe interrupted'
@@ -396,7 +422,7 @@ def run_probe(model, work, out, package, native_root, timeout, sanitize, *, prom
         report = json.dumps(evidence) + '\n'
         safe_evidence = evidence
     (out / names[2]).write_text(report)
-    stdout = json.dumps({'type': 'context_probe_projection', 'status': safe_evidence['status'],
+    stdout = json.dumps({'type': evidence_prefix + '_probe_projection', 'status': safe_evidence['status'],
                          'answer': safe_evidence.get('answer', '')}) + '\n'
     return subprocess.CompletedProcess(command, 0 if safe_evidence['status'] == 'Passed' else 1,
                                        stdout, stderr_text), safe_evidence

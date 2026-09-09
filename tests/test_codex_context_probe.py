@@ -90,6 +90,14 @@ if mode=='late':emit({'method':'rawResponseItem/completed','params':{'threadId':
 '''
 
 
+def process_finished(status):
+    # A dying process can disappear after exists(), or while procfs reads it.
+    try:
+        return 'State:\tZ' in status.read_text()
+    except (FileNotFoundError, ProcessLookupError):
+        return True
+
+
 class ContextProbeTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(prefix='pw-context-test-')
@@ -254,6 +262,17 @@ class ContextProbeTests(unittest.TestCase):
         self.assertNotIn('header: SEC', '\n'.join(p.read_text() for p in out.iterdir()))
         self.assertEqual((out / 'context-native.stderr').read_text(), '')
 
+    def test_procfs_exit_race_is_exit_but_other_errors_are_not(self):
+        status=mock.Mock()
+        for error in (FileNotFoundError(),ProcessLookupError()):
+            status.read_text.side_effect=error
+            self.assertTrue(process_finished(status))
+        status.read_text.side_effect=PermissionError()
+        with self.assertRaises(PermissionError):process_finished(status)
+        status.read_text.side_effect=None
+        status.read_text.return_value='State:\tS (sleeping)'
+        self.assertFalse(process_finished(status))
+
     def test_timeout_kills_only_owned_process_group(self):
         other = subprocess.Popen([sys.executable, '-c', 'import time;time.sleep(30)'])
         try:
@@ -265,9 +284,9 @@ class ContextProbeTests(unittest.TestCase):
             pid = int((self.base / 'child.pid').read_text())
             status = Path('/proc') / str(pid) / 'status'
             for _ in range(20):
-                if not status.exists() or 'State:\tZ' in status.read_text(): break
+                if process_finished(status): break
                 time.sleep(0.05)
-            self.assertTrue(not status.exists() or 'State:\tZ' in status.read_text())
+            self.assertTrue(process_finished(status))
             result, observed, _ = self.run_fake('devnull-child')
             self.assertEqual(result.returncode, 0, observed)
             self.assertEqual(observed['native_exit_code'], 0)
@@ -276,9 +295,9 @@ class ContextProbeTests(unittest.TestCase):
             pid = int((self.base / 'child.pid').read_text())
             status = Path('/proc') / str(pid) / 'status'
             for _ in range(20):
-                if not status.exists() or 'State:\tZ' in status.read_text(): break
+                if process_finished(status): break
                 time.sleep(0.05)
-            self.assertTrue(not status.exists() or 'State:\tZ' in status.read_text())
+            self.assertTrue(process_finished(status))
         finally:
             other.terminate(); other.wait(timeout=3)
 

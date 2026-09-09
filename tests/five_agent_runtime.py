@@ -410,6 +410,62 @@ def native_rule_denial(host,text):
     return bool(calls & rule_denials) if host=='claude' else False
 
 
+CODEX_STOP_CASES = {'stopping','gated-continuation','gate-cap','gate-stall',
+                    'gate-cap-disabled','gate-stall-disabled'}
+
+
+def codex_stopping_model(model,prompt,timeout,case,package,*,traced=False):
+    """Native trust, complete model protocol, then private counter attribution."""
+    from codex_trust_probe import trust_hooks
+    from codex_stop_probe import run_probe, trace_prefix
+    started=time.monotonic()
+    def remaining():
+        value=timeout-(time.monotonic()-started)
+        if value<1:raise TimeoutError('Native stopping scenario exceeded deadline')
+        return value
+    native=Path(json.loads((OUT/'installed-content.json').read_text())['native_root'])
+    trust=trust_hooks(model,WORK,OUT/'native-stop-trust-ui.log',min(90,remaining()),sanitize=safe_text)
+    save('native-stop-trust',trust)
+    attribution={}
+    with tempfile.TemporaryDirectory(prefix='planweft-codex-stop-',dir='/tmp') as directory:
+        private=Path(directory)
+        prefix=trace_prefix(private) if traced else ()
+        trace_path=private/'gate-private.strace'
+        actual_command=[*prefix,'codex','--disable','memories','--disable','multi_agent','app-server']
+        metadata_path=OUT/'model-invocation.json'
+        metadata=json.loads(metadata_path.read_text()) if metadata_path.is_file() else {}
+        metadata.update(argv=actual_command,case=case,codex_hook_trust='native TUI persisted trust; no bypass',
+                        transport='complete native app-server stream and EOF' + (' with private strace' if traced else ''))
+        save('model-invocation',metadata)
+        try:
+            process,observation=run_probe(model,WORK,OUT,package,native,remaining(),safe_text,
+                prompt=prompt,case=case,command_prefix=prefix)
+            if process.args!=actual_command:raise RuntimeError('Actual native stop launch differs from recorded argv')
+        finally:
+            if traced:
+                import gate_process_trace as tracer
+                expected=hashlib.sha256((package/'dist/codex/planweft/scripts/check-complete.sh').read_bytes()).hexdigest()
+                if trace_path.is_file() and not trace_path.is_symlink() and trace_path.stat().st_size<=32*1024**2:
+                    attributed=tracer.attributed_gate_reads(trace_path.read_text(),expected)
+                    save('native-gate-processes',attributed)
+                    attribution={'gate_trace_complete':attributed['trace_complete'],
+                        'attributed_gate_reads':attributed['trace_complete'] and attributed['attributed_files']==['.gate_last_ledger','.stop_blocks'],
+                        'any_attributed_gate_reads':bool(attributed['attributed_files'])}
+                else:
+                    attribution={'gate_trace_complete':False,'attributed_gate_reads':False,
+                                 'any_attributed_gate_reads':False}
+                trace_path.unlink(missing_ok=True)
+    observation['native_trust_acquired']=trust.get('status')=='Passed'
+    observation['private_gate_trace_removed']=not private.exists()
+    save('native-stop',observation)
+    (OUT/'model.stdout').write_text(safe_text(process.stdout))
+    (OUT/'model.stderr').write_text(safe_text(process.stderr))
+    save('model',{'argv':process.args,'exit_code':process.returncode,
+        'stdout_format':'stop projection; full native stream in stop-protocol.jsonl',
+        'completion':'one native turn, complete EOF and process exit; no hook trust bypass'})
+    return process,observation,attribution
+
+
 def codex_trusted_model(model,prompt,timeout):
     """Native trust UI between three complete, independent app-server sessions."""
     from codex_trust_probe import trust_hooks
@@ -680,7 +736,8 @@ def controller(payload):
                 result['native_policy_loaded']=json.loads(policy.stdout).get('decision')=='forbidden'
                 if not result['native_policy_loaded']: raise RuntimeError('Native execpolicy did not forbid the synthetic command')
             command, data = model_command(host,payload['model'],prompt,case)
-            if host=='codex' and case in {'reminder-dedup','persisted-trust'}:
+            codex_stop=host=='codex' and case in CODEX_STOP_CASES
+            if host=='codex' and (case in {'reminder-dedup','persisted-trust'} or codex_stop):
                 command=['codex','--disable','memories','--disable','multi_agent','app-server']
             server_probe=host=='opencode' and case in {'stopping','gated-continuation','gate-cap','gate-stall','gate-cap-disabled','gate-stall-disabled'}
             if server_probe:
@@ -691,7 +748,7 @@ def controller(payload):
                 spec=importlib.util.spec_from_file_location('gate_process_trace',Path(__file__).with_name('gate_process_trace.py'))
                 tracer=importlib.util.module_from_spec(spec);spec.loader.exec_module(tracer)
                 expected_gate_hash=hashlib.sha256((package/'dist'/host/'planweft/scripts/check-complete.sh').read_bytes()).hexdigest()
-                command=['strace','-f','--decode-pids=comm','-s','4096','-e','trace='+tracer.TRACE_SYSCALLS,'-e','raw=read','-o','/tmp/planweft-gate.trace','--',*command]
+                if not codex_stop:command=['strace','-f','--decode-pids=comm','-s','4096','-e','trace='+tracer.TRACE_SYSCALLS,'-e','raw=read','-o','/tmp/planweft-gate.trace','--',*command]
             save('model-invocation',{'argv':command,'fresh_session':True,'case':case,
                 'plugin_installed':case!='cold-reader','external_memory':'direct-provider; no MemoryProxy or identity headers',
                 'transport':('three fresh native app-server probes; individual journals; stop after failure'
@@ -704,7 +761,11 @@ def controller(payload):
                 'probe_scope':payload.get('probe_scope')})
             gate_watch=watch_gate_reads() if case in {'gate-cap','gate-stall','gate-cap-disabled','gate-stall-disabled'} else None
             try:
-                if host=='codex' and case=='reminder-dedup':
+                if codex_stop:
+                    process,observation,attribution=codex_stopping_model(payload['model'],prompt,payload['timeout'],case,package,traced=traced)
+                    result.update(attribution)
+                    result['native_stop_observation']=observation.get('status')=='Passed'
+                elif host=='codex' and case=='reminder-dedup':
                     from codex_reminder_probe import run_probe
                     native=Path(json.loads((OUT/'installed-content.json').read_text())['native_root'])
                     process,observation=run_probe(payload['model'],WORK,OUT,package,native,payload['timeout'],safe_text)
@@ -755,7 +816,7 @@ def controller(payload):
                     observed_files={e['file'] for e in observed['events']}
                     result['any_gate_counter_access']=bool(observed_files) or observed['overflow']
                     result['gate_counters_read']=not observed['overflow'] and observed_files=={'.stop_blocks','.gate_last_ledger'}
-                if traced and Path('/tmp/planweft-gate.trace').is_file():
+                if traced and not codex_stop and Path('/tmp/planweft-gate.trace').is_file():
                     raw=Path('/tmp/planweft-gate.trace').read_text()
                     attributed=tracer.attributed_gate_reads(raw,expected_gate_hash);save('native-gate-processes',attributed)
                     # Keep raw argv private in container tmpfs. Only the

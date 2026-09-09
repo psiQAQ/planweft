@@ -319,7 +319,8 @@ def stop_assertions(case,host,before,after,trace,result,rpc,cases):
             else:
                 assertions['negative_control']=control.get('status')=='Passed' and control.get('controller',{}).get('any_gate_counter_access') is False
     if case not in {'continuation-limit','gated-continuation'} and host!='dsh': assertions['single_response']=trace['assistant_responses']==1
-    if case=='gated-continuation': assertions['actual_followup']=trace['assistant_responses']>=2
+    if case=='gated-continuation': assertions['actual_followup']=(trace.get('native_actual_followup') is True if host=='codex' else trace['assistant_responses']>=2)
+    if host=='codex':assertions['native_stop_observation']=result.get('native_stop_observation') is True
     if host=='dsh':
         expected=[] if case.endswith('-disabled') else ['block','pass'] if case=='gated-continuation' else ['pass']
         assertions['native_stop_decisions']=trace['native_stop_decisions']==expected
@@ -383,6 +384,8 @@ def main(argv=None):
     reminder_module.write_bytes((ROOT/'tests/codex_reminder_probe.py').read_bytes())
     context_module=args.output/'codex_context_probe.py'
     context_module.write_bytes((ROOT/'tests/codex_context_probe.py').read_bytes())
+    stop_module=args.output/'codex_stop_probe.py'
+    stop_module.write_bytes((ROOT/'tests/codex_stop_probe.py').read_bytes())
     claude_reminder_module=args.output/'claude_reminder_probe.py'
     claude_reminder_module.write_bytes((ROOT/'tests/claude_reminder_probe.py').read_bytes())
     claude_trace_module=args.output/'claude_hook_trace.py'
@@ -397,6 +400,7 @@ def main(argv=None):
         'trust_module_sha256':hashlib.sha256(trust_module.read_bytes()).hexdigest(),
         'reminder_module_sha256':hashlib.sha256(reminder_module.read_bytes()).hexdigest(),
         'context_module_sha256':hashlib.sha256(context_module.read_bytes()).hexdigest(),
+        'stop_module_sha256':hashlib.sha256(stop_module.read_bytes()).hexdigest(),
         'claude_reminder_module_sha256':hashlib.sha256(claude_reminder_module.read_bytes()).hexdigest(),
         'claude_trace_module_sha256':hashlib.sha256(claude_trace_module.read_bytes()).hexdigest(),
         'status':'In Progress','hosts':{},'semantic_review':'Not Run',
@@ -487,6 +491,7 @@ def main(argv=None):
                     '--mount',f'type=bind,src={claude_reminder_module},dst=/runner/claude_reminder_probe.py,readonly',
                     '--mount',f'type=bind,src={claude_trace_module},dst=/runner/claude_hook_trace.py,readonly',
                     '--mount',f'type=bind,src={context_module},dst=/runner/codex_context_probe.py,readonly',
+                    '--mount',f'type=bind,src={stop_module},dst=/runner/codex_stop_probe.py,readonly',
                     '-e','HOME=/home/agent','-e','HTTP_PROXY','-e','HTTPS_PROXY','-e','ALL_PROXY',
                     '--workdir','/workspace','--entrypoint','python3',image,'-c',
                     'import sys,json; sys.path.insert(0,"/runner"); import runtime; sys.exit(runtime.controller(json.load(sys.stdin)))']
@@ -517,7 +522,17 @@ def main(argv=None):
                 text=(results/'model.stdout').read_text() if (results/'model.stdout').exists() else ''
                 if host=='dsh':
                     text=(results/'native-events.jsonl').read_text() if (results/'native-events.jsonl').exists() else ''
-                trace=model_text(host,text);write_json(base/'trace-analysis.json',trace)
+                trace=model_text(host,text)
+                if host=='codex' and case in STOP_CASES:
+                    path=results/'native-stop.json'
+                    observed=json.loads(path.read_text()) if path.is_file() else {}
+                    complete=(observed.get('status')=='Passed' and observed.get('normal_eof') is True
+                              and observed.get('native_exit_code')==0 and observed.get('case')==case)
+                    trace.update(final=observed.get('answer',''),assistant_responses=observed.get('assistant_responses',0),
+                        tool_observation_supported=complete and observed.get('no_model_tool_calls') is True,
+                        native_actual_followup=complete and observed.get('actual_followup') is True,
+                        errors=[] if complete else ['Incomplete native stopping observation'])
+                write_json(base/'trace-analysis.json',trace)
                 assertions={'container_succeeded':status=='Passed'}
                 if case not in NO_MODEL_CASES:
                     assertions['model_answer_present']=bool(trace['final'])

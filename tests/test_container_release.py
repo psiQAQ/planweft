@@ -22,6 +22,54 @@ def module(name,path):
 
 
 class ContainerReleaseTest(unittest.TestCase):
+    def test_codex_stopping_trust_trace_projection_and_cleanup(self):
+        from types import SimpleNamespace
+        runtime=module('pw_codex_stop_runtime','tests/five_agent_runtime.py')
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);out=root/'out';out.mkdir();work=root/'work';work.mkdir()
+            package=root/'package';script=package/'dist/codex/planweft/scripts/check-complete.sh'
+            script.parent.mkdir(parents=True);script.write_text('exact synthetic gate')
+            (out/'installed-content.json').write_text(json.dumps({'native_root':str(root/'native')}))
+            sequence=[];trace_paths=[]
+            def trust(*args,**kwargs):
+                sequence.append('trust');return {'status':'Passed'}
+            def prefix(private):
+                trace_paths.append(private/'gate-private.strace');return ['strace','-o',str(trace_paths[-1]),'--']
+            def probe(*args,**kwargs):
+                self.assertEqual(sequence,['trust']);sequence.append('model')
+                self.assertEqual(kwargs['case'],'gate-cap')
+                self.assertEqual(kwargs['command_prefix'][2],str(trace_paths[-1]))
+                trace_paths[-1].write_text('synthetic actual trace')
+                return subprocess.CompletedProcess([*kwargs['command_prefix'],'codex','--disable','memories','--disable','multi_agent','app-server'],0,'projection',''),{'status':'Passed','case':'gate-cap'}
+            def attribute(raw,digest):
+                self.assertEqual(raw,'synthetic actual trace')
+                self.assertEqual(digest,hashlib.sha256(script.read_bytes()).hexdigest())
+                sequence.append('attribute')
+                return {'trace_complete':True,'attributed_files':['.gate_last_ledger','.stop_blocks']}
+            with patch.object(runtime,'OUT',out),patch.object(runtime,'WORK',work),patch.object(runtime,'safe_text',lambda x:x),patch.dict(sys.modules,{
+                    'codex_trust_probe':SimpleNamespace(trust_hooks=trust),
+                    'codex_stop_probe':SimpleNamespace(run_probe=probe,trace_prefix=prefix),
+                    'gate_process_trace':SimpleNamespace(attributed_gate_reads=attribute)}):
+                process,observation,attribution=runtime.codex_stopping_model('model','STOP',30,'gate-cap',package,traced=True)
+            self.assertEqual(sequence,['trust','model','attribute'])
+            self.assertTrue(observation['native_trust_acquired'])
+            self.assertTrue(attribution['attributed_gate_reads'])
+            self.assertTrue(observation['private_gate_trace_removed'])
+            self.assertFalse(trace_paths[0].parent.exists())
+            self.assertEqual(json.loads((out/'model.json').read_text())['argv'],process.args)
+            self.assertEqual(json.loads((out/'model-invocation.json').read_text())['argv'],process.args)
+
+    def test_codex_two_messages_do_not_prove_native_followup(self):
+        runner=module('pw_stop_chain','tests/run-five-agent-release.py')
+        trace={'final':'STOP_PROBE','tool_observation_supported':True,'tool_calls':[],
+               'assistant_responses':2}
+        result=runner.stop_assertions('gated-continuation','codex',{},
+            {'.stop_blocks':'1','.gate_last_ledger':'0'},trace,{'native_stop_observation':True},{},{})
+        self.assertFalse(result['actual_followup'])
+        trace['native_actual_followup']=True
+        self.assertTrue(runner.stop_assertions('gated-continuation','codex',{},
+            {'.stop_blocks':'1','.gate_last_ledger':'0'},trace,{'native_stop_observation':True},{},{})['actual_followup'])
+
     def test_explicit_settings_access_uses_actual_file_tool_arguments(self):
         runner=module('pw_explicit_settings','tests/run-five-agent-release.py')
         calls={
