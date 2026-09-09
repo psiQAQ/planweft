@@ -1,0 +1,27 @@
+{
+  "reviewer": "trace_repair_review",
+  "status": "Passed",
+  "scope": "Codex six stopping scenarios; invocation hook trust bypass only",
+  "npm_sha256": "c531188e46d268048ca0ab559baa358fc70af07277cb0001c521951234525799",
+  "summary_sha256": "8ec419f6bbc70545cb186d9218e41ad605be09a4d87804b479e3d9184654b7cc",
+  "checks": [
+    "Exact remote archive and all frozen executor digests match",
+    "No parser errors; cap/stall reads bound to verified gate descendants",
+    "Disabled controls contain no gate identity or gate reads",
+    "No model tools/errors; expected response counts and permitted counter changes only",
+    "Cleanup confirmed; original containers preserved"
+  ],
+  "limitations": [
+    "Not persisted hook trust or native tool permission acceptance",
+    "Continuation observed within one native turn; no direct Codex Stop decision event",
+    "Raw private strace removed; independent review used frozen parser and allowlisted projection"
+  ],
+  "artifacts": {
+    "codex/gate-stall/raw/native-gate-processes.json": "d34889eb4d2bda27390bfb601580ebd6a82711c700ffd28e52f15811ec0fce96",
+    "codex/gate-cap-disabled/raw/native-gate-processes.json": "8c85bafd285ef4e7321ab82d60474559027e75827c127447ae330b56184aa9c6",
+    "codex/stopping/raw/native-gate-processes.json": "7708171bd21534b12c016fa55626e6770067e4b357ae3fb0401c25e7b1169624",
+    "codex/gate-cap/raw/native-gate-processes.json": "6a60b2c26bec343c2cd7b8fab64b035545e59ef251667ff0c8564548e9fafa05",
+    "codex/gate-stall-disabled/raw/native-gate-processes.json": "13449c8a321ff3fa626f7fbd071651ed9e1cd586e76f3957c91ae898a75e01ea",
+    "codex/gated-continuation/raw/native-gate-processes.json": "c2d5e2d2cd580b469958a925c2b8d51efbce893295f88f8142e21b03f9978037"
+  }
+}

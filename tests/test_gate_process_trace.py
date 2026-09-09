@@ -26,6 +26,85 @@ def parse(text,**kwargs):
 
 
 class GateProcessTraceTest(unittest.TestCase):
+    def test_two_pass_unknown_snapshot_reaches_later_gate_exec(self):
+        prefix=('10<host> execve("/bin/host", ["host"], 0x1) = 0\n'
+                '10<host> clone(child_stack=NULL, flags=CLONE_FILES|SIGCHLD) = 11\n'
+                '10<host> clone(child_stack=NULL, flags=SIGCHLD <unfinished ...>\n'
+                '11<host> openat(AT_FDCWD, "/workspace/.stop_blocks", O_RDONLY|O_CLOEXEC) = 7\n'
+                '10<host> <... clone resumed>) = 20\n')
+        read='20<bash> read(0x7, 0x1234, 0x100) = 0x2\n'
+        result=parse(prefix+GATE+read+ending(20,11,10))
+        self.assertFalse(result['trace_complete'],result)
+        self.assertIn('gate read depends on ambiguous descriptor binding',result['errors'])
+        # A definite later open clears the inherited unknown binding, even
+        # though the original host race remains in the reported conflicts.
+        result=parse(prefix+GATE+io(fd=7)+ending(20,11,10))
+        self.assertTrue(result['trace_complete'],result)
+        self.assertGreater(result['conflicts']['count'],0)
+
+    def test_unknown_bindings_propagate_through_dup_and_directory_operations(self):
+        prefix=(GATE+'20<bash> clone(child_stack=NULL, flags=CLONE_FILES|SIGCHLD) = 21\n'
+                '20<bash> openat(AT_FDCWD, "/workspace", <unfinished ...>\n'
+                '21<host> close(7) = 0\n'
+                '20<bash> <... openat resumed>O_RDONLY|O_DIRECTORY) = 7\n')
+        routes=[
+            '20<bash> dup2(7, 8) = 8\n20<bash> read(0x8, 0x1234, 0x100) = 0x2\n',
+            '20<bash> openat(7, ".stop_blocks", O_RDONLY) = 8\n20<bash> read(0x8, 0x1234, 0x100) = 0x2\n',
+            '20<bash> fchdir(7) = 0\n'+io(path='.stop_blocks'),
+            '20<bash> fchdir(7) = 0\n20<bash> chdir("child") = 0\n'+io(path='.stop_blocks'),
+        ]
+        for route in routes:
+            with self.subTest(route=route):
+                self.assertFalse(parse(prefix+route+ending(21,20))['trace_complete'])
+        # Absolute chdir is a definite cwd reset after the uncertainty ended.
+        result=parse(prefix+'20<bash> fchdir(7) = 0\n20<bash> chdir("/workspace") = 0\n'+io(path='.stop_blocks')+ending(21,20))
+        self.assertTrue(result['trace_complete'],result)
+
+    def test_only_covering_definite_writes_clear_unknown(self):
+        prefix=GATE+'20<bash> clone(child_stack=NULL, flags=CLONE_FILES|SIGCHLD) = 21\n'
+        race=('20<bash> openat(AT_FDCWD, "/workspace/.stop_blocks", <unfinished ...>\n'
+              '21<host> close(3) = 0\n')
+        finish='20<bash> <... openat resumed>O_RDONLY) = 3\n'
+        read='20<bash> read(0x3, 0x1234, 0x100) = 0x2\n'
+        overwrite='21<host> openat(AT_FDCWD, "/workspace/.stop_blocks", O_RDONLY) = 3\n'
+        self.assertFalse(parse(prefix+race+overwrite+finish+read+ending(21,20))['trace_complete'])
+        self.assertTrue(parse(prefix+race+finish+overwrite+read+ending(21,20))['trace_complete'])
+        for low,complete in [(0,True),(4,False)]:
+            route=f'20<bash> close_range({low}, ~0U, CLOSE_RANGE_UNSHARE) = 0\n'
+            result=parse(prefix+race+finish+route+read+ending(21,20))
+            self.assertEqual(result['trace_complete'],complete,result)
+
+    def test_unrelated_host_race_cannot_hide_relative_gate_identity(self):
+        prefix=('20<host> execve("/bin/host", ["host"], 0x1) = 0\n'
+                '20<host> clone(child_stack=NULL, flags=CLONE_FILES|SIGCHLD) = 21\n'
+                '20<host> openat(AT_FDCWD, "/package/scripts", <unfinished ...>\n'
+                '21<host> close(7) = 0\n'
+                '20<host> <... openat resumed>O_RDONLY|O_DIRECTORY) = 7\n')
+        result=parse(prefix+ending(21,20))
+        self.assertTrue(result['trace_complete'],result)
+        self.assertEqual(result['gates'],[])
+        hidden='20<host> fchdir(7) = 0\n'+GATE.replace('/package/scripts/check-complete.sh','check-complete.sh')
+        self.assertFalse(parse(prefix+hidden+ending(21,20))['trace_complete'])
+
+    def test_non_ebadf_close_and_descriptor_limit_fail_closed(self):
+        for error,complete in [('EIO',False),('EINTR',False),('EBADF',True)]:
+            result=parse(GATE+f'20<bash> close(3) = -1 {error} (synthetic error)\n'+ending(20))
+            self.assertEqual(result['trace_complete'],complete,result)
+        text=GATE+''.join(f'20<bash> close({n}) = 0\n' for n in range(4097))+ending(20)
+        result=parse(text)
+        self.assertFalse(result['trace_complete'])
+        self.assertIn('descriptor bound exceeded',result['errors'])
+
+    def test_script_identity_is_frozen_and_first_pass_failure_survives(self):
+        calls=[]
+        def reader(path):
+            calls.append(path)
+            return b'wrong first bytes' if len(calls)==1 else SCRIPT
+        result=trace_module.attributed_gate_reads(GATE+io()+ending(20),DIGEST,read_script=reader)
+        self.assertFalse(result['trace_complete'],result)
+        self.assertIn('gate candidate digest mismatch or unavailable',result['errors'])
+        self.assertEqual(len(calls),1)
+
     def test_snapshot_and_async_gate_descendants_are_distinct(self):
         text=('10<claude> execve("/usr/bin/claude", ["claude", "-p"], 0x1 /* 8 vars */) = 0\n'
               +io(10)+'10<claude> clone(child_stack=NULL, flags=SIGCHLD <unfinished ...>\n'
@@ -55,6 +134,19 @@ class GateProcessTraceTest(unittest.TestCase):
         self.assertEqual(result['attributed_files'],[])
         direct='20<gate> execve("/package/scripts/check-complete.sh", ["/package/scripts/check-complete.sh", "--gate"], 0x1 /* 8 vars */) = 0\n'
         self.assertEqual(parse(direct+io()+ending(20))['attributed_files'],['.stop_blocks'])
+
+    def test_codex_explicit_root_plan_argument_is_bound_to_this_probe(self):
+        for plan in ('/workspace/task_plan.md','task_plan.md'):
+            trace=GATE.replace('"--gate"]','"--gate", '+json.dumps(plan)+']')+io()+ending(20)
+            result=parse(trace)
+            self.assertTrue(result['trace_complete'],result)
+            self.assertEqual(result['attributed_files'],['.stop_blocks'])
+        for args in ['"--gate", "/other/task_plan.md"','"--gate", "--help"',
+                     '"--gate", "/workspace/task_plan.md", "extra"']:
+            trace=GATE.replace('"--gate"',args)+io()+ending(20)
+            result=parse(trace)
+            self.assertFalse(result['trace_complete'])
+            self.assertEqual(result['attributed_files'],[])
 
     def test_exact_counter_directory_and_cwd(self):
         result=parse(GATE+io(path='/tmp/other/.stop_blocks')+ending(20))
@@ -189,17 +281,19 @@ class GateProcessTraceTest(unittest.TestCase):
         for path,complete in [('/workspace/.stop_blocks',True),('.stop_blocks',False)]:
             trace=(prefix+f'20<bash> openat(AT_FDCWD, "{path}", <unfinished ...>\n'
                    +'21<host> chdir("/tmp") = 0\n'
-                   +'20<bash> <... openat resumed>O_RDONLY) = 3\n'+ending(21,20))
+                   +'20<bash> <... openat resumed>O_RDONLY) = 3\n20<bash> read(0x3, 0x1234, 0x100) = 0x2\n'+ending(21,20))
             self.assertEqual(parse(trace)['trace_complete'],complete,parse(trace))
 
     def test_clone_and_exec_snapshots_cannot_race_shared_mutations(self):
-        prefix=GATE+'20<bash> clone(child_stack=NULL, flags=CLONE_FILES|CLONE_FS|SIGCHLD) = 21\n'
+        prefix=GATE+io()+'20<bash> clone(child_stack=NULL, flags=CLONE_FILES|CLONE_FS|SIGCHLD) = 21\n'
         for change in ['21<host> chdir("/tmp") = 0\n','21<host> close(3) = 0\n']:
             trace=(prefix+'20<bash> clone(child_stack=NULL, flags=SIGCHLD <unfinished ...>\n'
-                   +change+'20<bash> <... clone resumed>) = 22\n'+io(22,path='.stop_blocks')+ending(22,21,20))
+                   +change+'20<bash> <... clone resumed>) = 22\n'
+                   +'22<child> read(0x3, 0x1234, 0x100) = 0x2\n'+io(22,path='.stop_blocks')+ending(22,21,20))
             self.assertFalse(parse(trace)['trace_complete'])
         trace=(prefix+'20<bash> execve("/bin/cat", ["cat"], <unfinished ...>\n'
-               +'21<host> close(3) = 0\n20<bash> <... execve resumed>0x1) = 0\n'+ending(21,20))
+               +'21<host> close(3) = 0\n20<bash> <... execve resumed>0x1) = 0\n'
+               +'20<cat> read(0x3, 0x1234, 0x100) = 0x2\n'+ending(21,20))
         self.assertFalse(parse(trace)['trace_complete'])
 
     def test_thread_born_inside_pending_read_is_not_missed(self):
@@ -209,6 +303,44 @@ class GateProcessTraceTest(unittest.TestCase):
                +'22<host> close(3) = 0\n'
                +'20<bash> <... read resumed>0x1234, 0x100) = 0x2\n'+ending(22,21,20))
         self.assertFalse(parse(trace)['trace_complete'])
+
+    def test_child_event_bounds_snapshot_before_delayed_parent_return(self):
+        prefix=(GATE+io()+'20<bash> clone(child_stack=NULL, flags=CLONE_FILES|CLONE_FS|SIGCHLD) = 21\n')
+        for mutation in ['21<host> close(3) = 0\n', '21<host> chdir("/tmp") = 0\n']:
+            for before_child in (False,True):
+                trace=prefix+'20<bash> clone(child_stack=NULL, flags=CLONE_VM|CLONE_VFORK|SIGCHLD <unfinished ...>\n'
+                if before_child: trace+=mutation
+                trace+='22<child> read(0x3, 0x1234, 0x100) = 0x2\n'
+                if not before_child: trace+=mutation
+                trace+='20<bash> <... clone resumed>) = 22\n'+io(22,path='.stop_blocks')+ending(22,21,20)
+                result=parse(trace)
+                self.assertEqual(result['trace_complete'],not before_child,result)
+        # Sharing persists after the first child event: a later overlapping
+        # close/read is still ambiguous even before the parent clone returns.
+        trace=prefix+'20<bash> clone(child_stack=NULL, flags=CLONE_FILES|SIGCHLD <unfinished ...>\n'
+        trace+='22<child> read(0x3, 0x1234, 0x100) = 0x2\n21<host> close(3 <unfinished ...>\n'
+        trace+='22<child> read(0x3, 0x1234, 0x100) = 0x2\n21<host> <... close resumed>) = 0\n'
+        trace+='20<bash> <... clone resumed>) = 22\n'+ending(22,21,20)
+        self.assertFalse(parse(trace)['trace_complete'])
+
+    def test_child_snapshot_bound_uses_start_and_preserves_overlapping_mutation(self):
+        prefix=GATE+io()+'20<bash> clone(child_stack=NULL, flags=CLONE_FILES|CLONE_FS|SIGCHLD) = 21\n'
+        clone='20<bash> clone(child_stack=NULL, flags=CLONE_VFORK|SIGCHLD <unfinished ...>\n'
+        child='22<child> read(0x3, <unfinished ...>\n'
+        resume='22<child> <... read resumed>0x1234, 0x100) = 0x2\n'
+        tail='20<bash> <... clone resumed>) = 22\n'+ending(22,21,20)
+        result=parse(prefix+clone+child+'21<host> close(3) = 0\n'+resume+tail)
+        self.assertTrue(result['trace_complete'],result)
+        trace=prefix+clone+'21<host> close(3 <unfinished ...>\n'+child
+        trace+='21<host> <... close resumed>) = 0\n'+resume+tail
+        self.assertFalse(parse(trace)['trace_complete'])
+        # A PID's older generation cannot supply the new clone's bound.
+        reused=prefix+'20<bash> fork() = 22\n'+ending(22)+clone
+        reused+='21<host> close(3) = 0\n22<child> read(0x3, 0x1234, 0x100) = 0x2\n'+tail
+        self.assertFalse(parse(reused)['trace_complete'])
+        # No child events cannot prove an earlier snapshot boundary or exit.
+        missing=prefix+clone+'21<host> close(3) = 0\n20<bash> <... clone resumed>) = 22\n'+ending(21,20)
+        self.assertFalse(parse(missing)['trace_complete'])
 
     def test_exec_preserves_shared_cwd_and_unknown_exit_results_fail(self):
         trace=(GATE+'20<bash> clone(child_stack=NULL, flags=CLONE_FS|SIGCHLD) = 21\n'
@@ -229,8 +361,9 @@ class GateProcessTraceTest(unittest.TestCase):
         self.assertEqual(result['reads'][-1]['pid'],21)
         for other,complete in [('21<cat> close(3) = 0\n',False),
                                ('21<cat> read(0x3, 0x1234, 0x100) = 0x2\n',True)]:
-            trace=prefix+'20<bash> close_range(0, ~0U, <unfinished ...>\n'+other
-            trace+='20<bash> <... close_range resumed>CLOSE_RANGE_UNSHARE) = 0\n'+ending(21,20)
+            trace=prefix+'20<bash> close_range(4, ~0U, <unfinished ...>\n'+other
+            trace+='20<bash> <... close_range resumed>CLOSE_RANGE_UNSHARE) = 0\n'
+            trace+='20<bash> read(0x3, 0x1234, 0x100) = 0x2\n'+ending(21,20)
             self.assertEqual(parse(trace)['trace_complete'],complete,parse(trace))
 
 

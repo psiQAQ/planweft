@@ -118,3 +118,9 @@ RC5 Codex 实测由 `rc5_independent_review` 独立复核，普通停止/gated �
 - `skill_entry_review` 审查六语言入口、固定上游手册与包内资源，发现明确书面研究产物的授权例外遗漏；已补回六语言。15 平台资源和迁移手册链接检查通过。后续上游回归发现的能力披露与模板导航缺失已修复，未删减原始断言。
 - 资源/schema 2 复审指出：未确认 docker rm 成功便清理版本缓存可能影响仍运行的容器。已增加精确容器名消失检查；Docker 查询失败或容器仍存在时保留缓存并停止新容器，补反例回归。
 - 当前证据：本地 Python 131 项、安装器 28 项、DSH 3 项 Passed；上游迁移 721 Passed / 63 Skipped / 851 subtests。原始固定快照与 RC5 基线字节相同；本轮不将历史 RC5 模型结果作为 RC6 模型通过。
+
+## RC6 停止归因实测闭环
+
+`trace_repair_review` 审查两遍依赖重放，提出首遍摘要错误被覆盖的反例；已冻结同路径脚本字节、合并两遍错误并补永久回归。29 项解析器测试 Passed。未知 FD 的存在性、路径和 CLOEXEC 经 clone、exec、dup、目录解析、UNSHARE 传播，影响 gate 身份/读取时拒绝；无影响的宿主竞态保留在报告，不将全局并发当作自动失败或自动豁免。
+
+同一 reviewer 独立核对最终准确 RC6 的六项 Codex 停止运行，全部 Passed。绑定 summary `8ec419f6bbc70545cb186d9218e41ad605be09a4d87804b479e3d9184654b7cc`、准确归档、冻结执行器与各场景投影，详见[独立记录](../reproduction/evidence/0010/codex-rc6-stop-independent-review.json)。该结论仅适用于 invocation bypass 测试：不计正常持久信任或原生工具拒绝；原始私有 strace 已删除，独立核查使用冻结解析器与保留投影，没有声称重放原始轨迹。

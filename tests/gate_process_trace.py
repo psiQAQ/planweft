@@ -5,6 +5,7 @@ in TRACE_SYSCALLS, retain process-exit records, and start in /workspace. Raw
 trace text stays private: the result contains no argv, buffers or environment.
 """
 import ast
+import bisect
 import hashlib
 import os
 from pathlib import Path
@@ -13,6 +14,8 @@ import re
 TRACE_SYSCALLS = 'execve,clone,clone3,fork,vfork,open,openat,openat2,read,close,close_range,dup,dup2,dup3,fcntl,chdir,fchdir'
 COUNTERS = {'/workspace/.stop_blocks', '/workspace/.gate_last_ledger'}
 ALL_FDS = (0, 4294967295)
+UNKNOWN = object()
+UNKNOWN_FD = (UNKNOWN, UNKNOWN)
 
 
 def _footprint(name, args, returned, body, state):
@@ -63,18 +66,31 @@ def _footprint(name, args, returned, body, state):
     return items
 
 
-def _ambiguous(accesses):
+def _conflicts(accesses):
     # Events have already been sorted by start. Grouping by resource also
     # catches threads born inside an unfinished operation's interval.
-    groups={}
-    for start,end,pid,resource,write,span in accesses:
+    groups={}; samples=[]; count=0; hazards={}
+    def hazard(index,kind,span,write):
+        hazards.setdefault((index,kind,write),[]).append(span)
+    for start,end,pid,resource,write,span,operation in accesses:
         group=groups.setdefault(id(resource),[])
-        group[:]=[entry for entry in group if entry[0]>=start]
-        for other_end,other_pid,other_write,other_span in group:
+        group[:]=[entry for entry in group if entry[1]>=start]
+        kind='fds' if isinstance(resource,dict) else 'cwd'
+        for other_start,other_end,other_pid,other_write,other_span,other_operation in group:
             if pid!=other_pid and (write or other_write) and max(span[0],other_span[0])<=min(span[1],other_span[1]):
-                return True
-        group.append((end,pid,write,span))
-    return False
+                count+=1
+                overlap=(max(span[0],other_span[0]),min(span[1],other_span[1]))
+                # A reader overlapping a write cannot know which binding it
+                # observed. A writer's resulting binding is uncertain only
+                # when another writer races it, not merely a concurrent read.
+                if not write or other_write: hazard(start,kind,overlap,write)
+                if not other_write or write: hazard(other_start,kind,overlap,other_write)
+                if len(samples)<12:
+                    samples.append({'resource':'fds' if isinstance(resource,dict) else 'cwd',
+                        'operations':[other_operation,operation], 'pids':[other_pid,pid],
+                        'ranges':[other_span,span]})
+        group.append((start,end,pid,write,span,operation))
+    return {'count':count,'samples':samples},hazards
 
 
 def _arguments(value):
@@ -137,7 +153,7 @@ def _events(text):
     return sorted(events),errors
 
 
-def attributed_gate_reads(text, expected_script_hash, *, read_script=None):
+def _replay(text, expected_script_hash, *, read_script=None, hazards=None, fd_numbers=None):
     """Return evidence bound to script bytes, process generation and exact files.
 
     read_script(path) is injectable for offline tests and returns bytes. A trace
@@ -145,6 +161,10 @@ def attributed_gate_reads(text, expected_script_hash, *, read_script=None):
     """
     reader=read_script or (lambda path: Path(path).read_bytes())
     events,errors=_events(text)
+    hazards=hazards or {}
+    process_events={}
+    for index,pid,_,_ in events:
+        process_events.setdefault(pid,[]).append(index)
     accesses=[]
     processes={}; generations={}; reads=[]; gates=[]; roots=set(); root_execs=set()
     if not re.fullmatch(r'[0-9a-f]{64}',expected_script_hash):
@@ -162,13 +182,30 @@ def attributed_gate_reads(text, expected_script_hash, *, read_script=None):
 
     def absolute(path,state,dirfd=None):
         if os.path.isabs(path): return os.path.normpath(path)
-        directory=state['cwd'][0]
+        directory=cwd_value(state)
         if dirfd is not None and dirfd!='AT_FDCWD':
-            opened=state['fds'].get(_number(dirfd))
+            opened=fd_value(state,_number(dirfd))
             if not opened: raise ValueError('unresolved openat dirfd')
             directory=opened[0]
-        if directory is None: raise ValueError('unknown cwd')
+        if directory is None or directory is UNKNOWN: raise ValueError('unknown cwd')
         return os.path.normpath(os.path.join(directory,path))
+
+    def uncertain(kind,number=0,write=False):
+        return any(low<=number<=high for low,high in hazards.get((index,kind,write),()))
+
+    def fd_value(state,number):
+        return UNKNOWN_FD if uncertain('fds',number) else state['fds'].get(number)
+
+    def cwd_value(state):
+        return UNKNOWN if uncertain('cwd') else state['cwd'][0]
+
+    def set_fd(state,number,value):
+        value=UNKNOWN_FD if uncertain('fds',number,True) else value
+        if value is None: state['fds'].pop(number,None)
+        else: state['fds'][number]=value
+
+    def slots(state):
+        return tuple(state['fds']) if fd_numbers is None else fd_numbers
 
     for index,pid,call,finished in events:
         state=processes.get(pid)
@@ -182,30 +219,63 @@ def attributed_gate_reads(text, expected_script_hash, *, read_script=None):
             errors.append('unrecognized syscall record'); continue
         name,body,result=parsed.groups()
         # Failed calls do not change successful syscall state.
-        if result.startswith('-1 ') or result.startswith('? ERESTART'): continue
+        if result.startswith('-1 '):
+            # Linux may release an FD even when close reports an I/O error.
+            # EBADF alone proves that no valid descriptor was closed.
+            if name=='close' and not result.startswith('-1 EBADF'):
+                errors.append('failed close may have released descriptor')
+            continue
+        if result.startswith('? ERESTART'): continue
         if result.startswith('?'):
             errors.append('unresolved syscall result'); continue
         try:
             returned=_return_number(result); args=_arguments(body)
+            footprint_end=finished
+            if name in {'clone','clone3','fork','vfork'} and returned>0:
+                child_events=process_events.get(returned,[])
+                next_child=bisect.bisect_right(child_events,index)
+                if next_child<len(child_events):
+                    # A child's first observed event is after its inherited
+                    # tables were copied. In particular, vfork can leave the
+                    # parent blocked until much later (child exec or exit).
+                    # Only copy footprints exist here: CLONE_FILES/CLONE_FS
+                    # sharing is handled by subsequent accesses to the same
+                    # resource object, with their full syscall intervals.
+                    footprint_end=min(finished,child_events[next_child]-1)
             for resource,write,span in _footprint(name,args,returned,body,state):
-                accesses.append((index,finished,pid,resource,write,span))
+                accesses.append((index,footprint_end,pid,resource,write,span,name))
             if name in {'clone','clone3','fork','vfork'}:
                 if returned>0:
                     if returned in processes: errors.append('child PID already active')
-                    fresh(returned,state,body)
+                    child=fresh(returned,state,body)
+                    if 'CLONE_FILES' not in body:
+                        child['fds']={n:value for n in slots(state) if (value:=fd_value(state,n)) is not None}
+                    if 'CLONE_FS' not in body: child['cwd']=[cwd_value(state)]
             elif name=='execve' and returned==0:
                 root_execs.add((pid,state['generation']))
                 # execve unshares FDs, while CLONE_FS sharing remains in effect.
-                state['fds']={fd:value for fd,value in state['fds'].items() if not value[1]}
+                # Unknown CLOEXEC is not proof that the descriptor was closed.
+                state['fds']={n:value for n in slots(state)
+                              if (value:=fd_value(state,n)) is not None and value[1] is not True}
                 filename=absolute(_string(args[0]),state)
                 argv=ast.literal_eval(args[1])
                 if not isinstance(argv,list) or not all(isinstance(a,str) for a in argv):
                     raise ValueError('truncated exec argv')
                 candidate=None
-                if Path(filename).name=='check-complete.sh' and argv[1:]==['--gate']:
-                    candidate=filename
-                elif Path(filename).name in {'bash','sh','dash'} and len(argv)==3 and argv[2]=='--gate':
-                    candidate=absolute(argv[1],state)
+                gate_args=[]
+                if Path(filename).name=='check-complete.sh':
+                    candidate=filename; gate_args=argv[1:]
+                elif Path(filename).name in {'bash','sh','dash'} and len(argv)>=3 and Path(argv[1]).name=='check-complete.sh':
+                    candidate=absolute(argv[1],state); gate_args=argv[2:]
+                if candidate:
+                    # Codex's native Stop adapter supplies the resolved plan
+                    # as one extra positional argument. This bounded probe only
+                    # owns the root plan and its two counters, not other tasks.
+                    valid=(gate_args==['--gate'] or len(gate_args)==2 and gate_args[0]=='--gate'
+                           and absolute(gate_args[1],state)=='/workspace/task_plan.md')
+                    if not valid:
+                        if '--gate' in gate_args: errors.append('unsupported gate plan arguments')
+                        candidate=None
                 if candidate and Path(candidate).name=='check-complete.sh':
                     try: matched=hashlib.sha256(reader(candidate)).hexdigest()==expected_script_hash
                     except OSError: matched=False
@@ -217,38 +287,41 @@ def attributed_gate_reads(text, expected_script_hash, *, read_script=None):
                 path_arg=0 if name=='open' else 1
                 path=_string(args[path_arg])
                 try: path=absolute(path,state,None if name=='open' else args[0])
-                except ValueError:
-                    # Unknown unrelated directories cannot label counter FDs.
-                    if Path(path).name in {'.stop_blocks','.gate_last_ledger'}: raise
-                    path=None
-                state['fds'][returned]=(path,'O_CLOEXEC' in body)
+                except ValueError: path=UNKNOWN
+                set_fd(state,returned,(path,'O_CLOEXEC' in body))
             elif name=='close' and returned==0:
-                state['fds'].pop(_number(args[0]),None)
+                set_fd(state,_number(args[0]),None)
             elif name=='close_range' and returned==0:
                 low=_number(args[0]); high=_number(args[1].replace('~0U','4294967295'))
-                if 'CLOSE_RANGE_UNSHARE' in body: state['fds']=dict(state['fds'])
-                for fd,value in list(state['fds'].items()):
+                if 'CLOSE_RANGE_UNSHARE' in body:
+                    state['fds']={n:value for n in slots(state) if (value:=fd_value(state,n)) is not None}
+                for fd in slots(state):
                     if low<=fd<=high:
-                        if 'CLOSE_RANGE_CLOEXEC' in body: state['fds'][fd]=(value[0],True)
-                        else: del state['fds'][fd]
+                        value=state['fds'].get(fd)
+                        if 'CLOSE_RANGE_CLOEXEC' in body:
+                            if value: set_fd(state,fd,(value[0],True))
+                        else: set_fd(state,fd,None)
             elif name in {'dup','dup2','dup3'} and returned>=0:
-                source=_number(args[0]); value=state['fds'].get(source)
+                source=_number(args[0]); value=fd_value(state,source)
                 if name=='dup2' and source==returned: continue
-                state['fds'].pop(returned,None)
-                if value: state['fds'][returned]=(value[0],name=='dup3' and 'O_CLOEXEC' in body)
+                set_fd(state,returned,(value[0],name=='dup3' and 'O_CLOEXEC' in body) if value else None)
             elif name=='fcntl' and returned>=0:
-                source=_number(args[0]); value=state['fds'].get(source)
+                source=_number(args[0]); value=fd_value(state,source)
                 if args[1] in {'F_DUPFD','F_DUPFD_CLOEXEC'}:
-                    state['fds'].pop(returned,None)
-                    if value: state['fds'][returned]=(value[0],args[1]=='F_DUPFD_CLOEXEC')
+                    set_fd(state,returned,(value[0],args[1]=='F_DUPFD_CLOEXEC') if value else None)
                 elif args[1]=='F_SETFD' and value:
-                    state['fds'][source]=(value[0],'FD_CLOEXEC' in args[2])
+                    set_fd(state,source,(value[0],'FD_CLOEXEC' in args[2]))
             elif name=='chdir' and returned==0:
-                state['cwd'][0]=absolute(_string(args[0]),state)
+                try: directory=absolute(_string(args[0]),state)
+                except ValueError: directory=UNKNOWN
+                state['cwd'][0]=UNKNOWN if uncertain('cwd',write=True) else directory
             elif name=='fchdir' and returned==0:
-                value=state['fds'].get(_number(args[0])); state['cwd'][0]=value[0] if value else None
+                value=fd_value(state,_number(args[0]))
+                state['cwd'][0]=UNKNOWN if uncertain('cwd',write=True) else value[0] if value else None
             elif name=='read' and returned>0:
-                value=state['fds'].get(_number(args[0]))
+                value=fd_value(state,_number(args[0]))
+                if state['gate'] and value and value[0] is UNKNOWN:
+                    errors.append('gate read depends on ambiguous descriptor binding')
                 if value and value[0] in COUNTERS:
                     reads.append({'pid':pid,'generation':state['generation'],
                                   'file':Path(value[0]).name,'bytes':returned,'gate':state['gate']})
@@ -257,11 +330,41 @@ def attributed_gate_reads(text, expected_script_hash, *, read_script=None):
         except (ValueError,SyntaxError,IndexError,TypeError):
             errors.append('unsupported or malformed syscall arguments')
     if not events or not roots: errors.append('empty process trace')
-    if _ambiguous(accesses): errors.append('ambiguous concurrent shared descriptor or cwd operation')
     if roots-root_execs: errors.append('root process lacks successful exec record')
     if processes: errors.append('missing process exit records')
     return {'kind':'script-digest-bound process-generation counter I/O',
             'trace_complete':not errors,'errors':sorted(set(errors)),
             'source_sha256':hashlib.sha256(text.encode()).hexdigest(),
             'source_bytes':len(text.encode()),'gates':gates,'reads':reads,
-            'attributed_files':sorted({r['file'] for r in reads if r['gate']})}
+            'attributed_files':sorted({r['file'] for r in reads if r['gate']})},accesses
+
+
+def attributed_gate_reads(text, expected_script_hash, *, read_script=None):
+    """Prove bounded gate identity/I/O, retaining unrelated host races.
+
+    The first replay records physical sharing and syscall intervals. The second
+    uses all overlaps, including future resumed calls, before copying bindings.
+    Unknown bindings survive fork/exec/dup and are cleared only by an unopposed
+    definite overwrite; they never serve as proof of a gate read or its absence.
+    """
+    source=read_script or (lambda path: Path(path).read_bytes())
+    scripts={}
+    def frozen_script(path):
+        if path not in scripts: scripts[path]=source(path)
+        return scripts[path]
+    initial,accesses=_replay(text,expected_script_hash,read_script=frozen_script)
+    conflicts,hazards=_conflicts(accesses)
+    numbers={n for _,_,_,resource,_,span,_ in accesses if isinstance(resource,dict)
+             and span[0]==span[1] for n in span}
+    if len(numbers)>4096:
+        initial['trace_complete']=False
+        initial['errors'].append('descriptor bound exceeded')
+        result=initial
+    else:
+        result,_=_replay(text,expected_script_hash,read_script=frozen_script,
+                         hazards=hazards,fd_numbers=numbers)
+        result['errors']=sorted(set(initial['errors']+result['errors']))
+        result['trace_complete']=not result['errors']
+    result['conflicts']=conflicts
+    result['proof_scope']='gate identity and counter I/O; unrelated host binding races retained'
+    return result

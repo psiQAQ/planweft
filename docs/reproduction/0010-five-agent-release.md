@@ -201,4 +201,14 @@ RC5 冻结源码 `c3bb9d870429e304149ca58b0e804ea55f4b537a`；唯一 npm 包为 
 
 新 Codex strace 派生镜像只复制已验证 Claude trace 镜像中的 strace 6.1 及必要库，离线构建；保留原镜像。新镜像 ID `sha256:9ffeaf322318e5bfa6de76190ece94c323a3964f38e1ad426284b021b8ab5b58`；实际 CLI 与 strace 版本需运行前核对。
 
+## RC6 发布后停止归因修复
+
+RC6 从干净源码 `36dfe13cd03f48cbb74698c8c282732d13d19780` 冻结，[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34322062209) 与 [OIDC](https://github.com/psiQAQ/planweft/actions/runs/34322158954) Passed。npm 下载 5,219,998 字节，SHA-256 `c531188e46d268048ca0ab559baa358fc70af07277cb0001c521951234525799`，与本地及 CI 归档一致。next 为 RC6，latest 仍 RC1；不代表稳定发布。
+
+保留三轮 Codex 失败：首次六项均被全局共享描述符冲突阻止；识别 Codex 原生 `--gate task_plan.md` 参数后，cap 正对照能绑定 gate 和两个计数器，但正/负仍有 87/101 冲突；按子进程首事件收紧非共享快照区间后仍有 38/16 冲突。均未把后台 IN_ACCESS 当作 hook 证据。
+
+进一步采用两遍重放：先收集实际资源共享和重叠区间，再按 FD/cwd 绑定传播未知状态。非相关宿主冲突保留在报告中；未知状态影响 gate 身份或成功读取时仍失败。复制时新增 FD、CLOEXEC、dup、目录解析、UNSHARE、区间内覆盖、PID 代次、退出、截断均有反例；只允许明确的后续覆盖清除对应未知。独立 reviewer 发现首遍错误可能被覆盖，已固定脚本字节并合并两遍错误，29 项回归 Passed。
+
+最终准确 RC6 的 Codex 六项停止 Passed：普通停止、gated 续跑、cap/stall 及各自 disabled 对照；固定 Codex 0.149.1、gpt-5.6-terra 与 strace 6.1 派生镜像。容器全部清理、原服务集合保持，原始失败留存。此组使用单次 hook trust bypass，不能计作正常持久信任；最终独立证据审查另行记录。验收器改动不改变 RC6 npm 内容。
+
 [RC6 离线原始失败与修复附件](evidence/0010/rc6-offline-repairs.tar.gz)：11 项，SHA-256 `0c92ff02d9f31f69a6ee8f8cf455c87c8d22f6f43e38284a383369ec67279b44`。manifest 保留原始/公开摘要，私人路径脱敏、归档身份规范化；不包含模型认证或旧聊天。
