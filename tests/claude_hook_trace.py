@@ -30,6 +30,7 @@ READS = {'read', 'readv', 'recvfrom'}
 WRITES = {'write', 'writev', 'sendto'}
 TRANSFERS = {'recvmsg', 'sendmsg', 'recvmmsg', 'sendmmsg'} | set(TRANSFER_SYSCALLS.split(','))
 TRANSFER_FDS = {'sendfile': (0, 1), 'splice': (0, 2), 'tee': (0, 1), 'copy_file_range': (0, 2)}
+DIAGNOSTIC_LIMIT = 32
 
 
 def _hash(data):
@@ -67,7 +68,20 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
     processes = {}; generations = {}; roots = []; root_execs = set(); hooks = []; channels = []
     accesses = []; io = []; exits = []; unsupported = []
     fd_history = {}; uncertain_io = []
+    diagnostics = []; diagnostic_count = 0
     paths = {str(Path(native_root) / rel): rel for rel in REQUIRED}
+
+    def diagnostic(kind, **fields):
+        nonlocal diagnostic_count
+        diagnostic_count += 1
+        if len(diagnostics) < DIAGNOSTIC_LIMIT:
+            diagnostics.append({'kind': kind, 'pid': pid, 'generation': state['generation'],
+                                'sequence': index, **fields})
+
+    def path_hash(path):
+        # Hash the normalized path spelling, not file contents. The caller can
+        # compare known controlled paths without exporting arbitrary paths.
+        return _hash(path.encode('utf-8', errors='surrogatepass'))
 
     def fresh(pid, parent=None, flags=''):
         generations[pid] = generations.get(pid, 0) + 1
@@ -178,6 +192,8 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
             if result.startswith('? ERESTART'):
                 continue
             if result.startswith('?'):
+                diagnostic('unresolved_syscall', syscall=name, result_kind='unresolved_return',
+                           result_sha256=_hash(result.encode('utf-8', errors='surrogatepass')))
                 errors.append('unresolved syscall result'); continue
             returned = base._return_number(result)
             footprint = base._footprint('execve' if name == 'execveat' else name,
@@ -221,9 +237,12 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
                 first_root_exec = (pid, state['generation']) == roots[0] and state['exec_generation'] == 1
                 if state['host']:
                     if not first_root_exec:
+                        diagnostic('host_reexec', root_matches=filename == expected_host_executable,
+                                   exec_path_sha256=path_hash(filename))
                         errors.append('native host process or thread executed a new image')
                         state['host'] = False
                     elif filename != expected_host_executable:
+                        diagnostic('root_identity', root_matches=False, exec_path_sha256=path_hash(filename))
                         errors.append('root executable differs from caller binding')
                         state['host'] = False
                 if state['execution'] is not None:
@@ -237,8 +256,13 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
                 state['script'] = None
                 if len(argv) >= 2 and Path(argv[1]).name == 'claude-hook.sh':
                     script = absolute(argv[1], state)
-                    if (filename not in allowed_interpreters['shell'] or len(argv) != 3
-                            or script != str(Path(native_root) / REQUIRED[0]) or argv[2] not in EVENTS):
+                    identity = {'interpreter_matches': filename in allowed_interpreters['shell'],
+                                'argc': len(argv), 'argc_matches': len(argv) == 3,
+                                'script_matches': script == str(Path(native_root) / REQUIRED[0]),
+                                'event_known': len(argv) > 2 and argv[2] in EVENTS}
+                    if not all(identity[key] for key in ('interpreter_matches', 'argc_matches', 'script_matches', 'event_known')):
+                        diagnostic('dispatcher_identity', **identity, exec_path_sha256=path_hash(filename),
+                                   script_path_sha256=path_hash(script))
                         errors.append('dispatcher identity or event differs'); continue
                     if state['hook'] is not None:
                         errors.append('nested or repeated dispatcher execution')
@@ -254,13 +278,22 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
                     hooks.append(hook); state['hook'] = len(hooks) - 1; state['script'] = REQUIRED[0]
                     state['host'] = False
                     if len(hooks) > 64:
-                        return {'errors': ['hook observation budget exceeded'], 'hooks': []}, accesses
+                        return {'errors': ['hook observation budget exceeded'], 'hooks': [],
+                                'diagnostics': diagnostics, 'diagnostic_count': diagnostic_count}, accesses
                 elif len(argv) >= 4 and Path(argv[3]).name == 'inject-plan.py':
                     script = absolute(argv[3], state)
-                    if (state['hook'] is None or filename not in allowed_interpreters['python']
-                            or len(argv) != 5 or argv[1:3] != ['-I', '-B']
-                            or script != str(Path(native_root) / REQUIRED[1])
-                            or argv[4] != '--claude-event=' + hooks[state['hook']]['event']):
+                    identity = {'owner_bound': state['hook'] is not None,
+                                'interpreter_matches': filename in allowed_interpreters['python'],
+                                'argc': len(argv), 'argc_matches': len(argv) == 5,
+                                'flags_match': argv[1:3] == ['-I', '-B'],
+                                'script_matches': script == str(Path(native_root) / REQUIRED[1]),
+                                'event_known': len(argv) > 4 and argv[4] in {'--claude-event=' + e for e in EVENTS},
+                                'event_matches': len(argv) > 4 and state['hook'] is not None
+                                and argv[4] == '--claude-event=' + hooks[state['hook']]['event']}
+                    if not all(identity[key] for key in ('owner_bound', 'interpreter_matches', 'argc_matches',
+                                                         'flags_match', 'script_matches', 'event_matches')):
+                        diagnostic('fast_path_identity', **identity, exec_path_sha256=path_hash(filename),
+                                   script_path_sha256=path_hash(script))
                         errors.append('fast path identity or event differs'); continue
                     state['script'] = REQUIRED[1]
                     execution = {'pid': pid, 'generation': state['generation'], 'exec_generation': state['exec_generation'],
@@ -347,7 +380,8 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
                                and base._number(args[2]) > 0 and returned == 0,
                                'time': timestamps.get(index), 'end_time': timestamps.get(finished)})
                     if len(io) > 16384:
-                        return {'errors': ['channel I/O observation budget exceeded'], 'hooks': []}, accesses
+                        return {'errors': ['channel I/O observation budget exceeded'], 'hooks': [],
+                                'diagnostics': diagnostics, 'diagnostic_count': diagnostic_count}, accesses
                 elif state['hook'] is not None and (binding is None or binding[0] is UNKNOWN):
                     errors.append('hook I/O has ambiguous descriptor')
                 if not writing and returned > 0 and state['script'] and binding and isinstance(binding[0], dict):
@@ -438,7 +472,8 @@ def _replay(text, native_root, digests, expected_host_executable, allowed_interp
         hook['stdout_empty'] = hook['stdout_written_bytes'] == 0 and hook['stdout_read_bytes'] == 0
     return {'errors': sorted(set(errors)), 'hooks': hooks, 'process_count': sum(generations.values()),
             'root_pid': roots[0][0] if roots else None, 'channel_count': len(channels),
-            'process_exit_count': len(exits)}, accesses
+            'process_exit_count': len(exits), 'diagnostics': diagnostics,
+            'diagnostic_count': diagnostic_count}, accesses
 
 
 def analyze_trace(text, native_root, resource_sha256, *, expected_host_executable=None,
@@ -458,7 +493,8 @@ def analyze_trace(text, native_root, resource_sha256, *, expected_host_executabl
     paths from its isolated layout. Known Linux FD aliases fail closed here;
     offline path text alone cannot resolve arbitrary unobserved symlinks.
     """
-    result = {'observation_complete': False, 'errors': [], 'hooks': [],
+    result = {'observation_complete': False, 'errors': [], 'hooks': [], 'diagnostics': [],
+              'diagnostic_rejections_by_pass': [0, 0], 'diagnostics_truncated': False,
               'proof_scope': 'caller-bound native command identity, normal exit and stdout byte/EOF accounting; not model delivery or deduplication',
               'caller_requirements': ['verified root and interpreter binary provenance',
                                       'isolated layout excludes arbitrary unobserved filesystem aliases into process FDs',
@@ -502,6 +538,18 @@ def analyze_trace(text, native_root, resource_sha256, *, expected_host_executabl
         # No conflict samples: those may carry future parser implementation
         # details. Only their count and tainted proof failures are exported.
         result.update(replay)
+        # Both passes can diagnose the same rejection. Merge at most 64 bounded
+        # records, preserving unique facts while exporting no more than 32.
+        merged = []; keys = set()
+        for row in replay.get('diagnostics', []) + initial.get('diagnostics', []):
+            key = tuple(sorted(row.items()))
+            if key not in keys:
+                keys.add(key); merged.append(row)
+        counts = [initial.get('diagnostic_count', 0), replay.get('diagnostic_count', 0)]
+        result.pop('diagnostic_count', None)
+        result['diagnostics'] = merged[:DIAGNOSTIC_LIMIT]
+        result['diagnostic_rejections_by_pass'] = counts
+        result['diagnostics_truncated'] = any(count > DIAGNOSTIC_LIMIT for count in counts) or len(merged) > DIAGNOSTIC_LIMIT
         result['binding_conflict_count'] = conflicts['count']
         result['trace_sha256'] = _hash(data); result['trace_bytes'] = len(data)
         result['observation_complete'] = not result['errors']

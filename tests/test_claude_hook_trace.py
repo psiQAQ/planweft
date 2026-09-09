@@ -346,6 +346,59 @@ class ClaudeHookTraceTests(unittest.TestCase):
         result = trace.analyze_trace(fixture.text(), ROOT, DIGESTS, max_bytes=1, read_script=lambda path: calls.append(path))
         self.assertFalse(result['observation_complete']); self.assertEqual([], calls)
 
+    def test_identity_diagnostics_are_only_booleans_counts_and_path_hashes(self):
+        fixture = Fixture(); fixture.add(child=True)
+        cases = [('execve("/bin/sh"', 'execve("/untrusted/SECRET/sh"', 'dispatcher_identity', '/untrusted/SECRET/sh'),
+                 ('execve("/usr/bin/python3"', 'execve("/untrusted/SECRET/python3"', 'fast_path_identity', '/untrusted/SECRET/python3')]
+        allowed = {'kind', 'pid', 'generation', 'sequence', 'interpreter_matches', 'argc', 'argc_matches',
+                   'script_matches', 'event_known', 'event_matches', 'owner_bound', 'flags_match',
+                   'exec_path_sha256', 'script_path_sha256'}
+        for old, new, kind, path in cases:
+            with self.subTest(kind=kind):
+                text = fixture.text().replace(old, new)
+                # Additional arbitrary argv must not become an error message,
+                # a diagnostic string, or a diagnostic argv digest.
+                text = text.replace('"post-tool-use"],', '"post-tool-use", "Authorization: SECRET"],') if kind == 'dispatcher_identity' else text
+                result = self.analyze(text)
+                self.assertFalse(result['observation_complete'])
+                row = next(row for row in result['diagnostics'] if row['kind'] == kind)
+                self.assertFalse(row['interpreter_matches'])
+                self.assertTrue(row['script_matches'])
+                self.assertEqual(hashlib.sha256(path.encode()).hexdigest(), row['exec_path_sha256'])
+                self.assertTrue(set(row) <= allowed)
+                self.assertTrue(all(type(value) in {bool, int} or key in {'kind', 'exec_path_sha256', 'script_path_sha256'}
+                                    for key, value in row.items()))
+                encoded = json.dumps(result)
+                for forbidden in ['SECRET', 'Authorization', '/untrusted/', ROOT, 'argv']:
+                    self.assertNotIn(forbidden, encoded)
+
+    def test_unresolved_diagnostic_does_not_export_arbitrary_result_text(self):
+        fixture = Fixture(); fixture.add()
+        result_text = '? SECRET_RESULT'
+        text = fixture.text().replace('100 +++ exited with 0 +++',
+                                     '100 read(0x63, 0xabcd, 0x1000) = ' + result_text + '\n100 +++ exited with 0 +++')
+        result = self.analyze(text)
+        self.assertFalse(result['observation_complete'])
+        self.assertIn('unresolved syscall result', result['errors'])
+        row, = result['diagnostics']
+        self.assertEqual('read', row['syscall'])
+        self.assertEqual('unresolved_return', row['result_kind'])
+        self.assertEqual(hashlib.sha256(result_text.encode()).hexdigest(), row['result_sha256'])
+        self.assertEqual({'kind', 'pid', 'generation', 'sequence', 'syscall', 'result_kind', 'result_sha256'}, set(row))
+        self.assertNotIn('SECRET_RESULT', json.dumps(result))
+        self.assertEqual([1, 1], result['diagnostic_rejections_by_pass'])
+
+    def test_diagnostics_are_capped_across_both_replay_passes(self):
+        fixture = Fixture(); fixture.add()
+        extra = '\n'.join(f'100 read(0x63, 0xabcd, 0x1000) = ? SECRET_{number}' for number in range(41))
+        result = self.analyze(fixture.text().replace('100 +++ exited with 0 +++', extra + '\n100 +++ exited with 0 +++'))
+        self.assertFalse(result['observation_complete'])
+        self.assertEqual(32, len(result['diagnostics']))
+        self.assertEqual([41, 41], result['diagnostic_rejections_by_pass'])
+        self.assertTrue(result['diagnostics_truncated'])
+        self.assertEqual(32, len({row['sequence'] for row in result['diagnostics']}))
+        self.assertNotIn('SECRET', json.dumps(result))
+
 
 if __name__ == '__main__':
     unittest.main()
