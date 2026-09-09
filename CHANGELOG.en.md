@@ -2,10 +2,10 @@
 
 # Changelog
 
-## 0.4.0-rc.5 (in development)
+## 0.4.0-rc.5 (candidate)
 
 - Fix resource paths for Stop, plan selection and SessionStart in the Codex plugin distribution; preserve the upstream standalone layout.
-- Add independently copied package tests for gating, recursion, cap, stall, opt-out and invalid plan binding. Real-host verification of the new exact candidate remains pending.
+- Add independently copied package tests for gating, recursion, cap, stall, opt-out and invalid plan binding. Exact RC5 Codex normal-stop and gated-continuation checks passed; cap/stall attribution still failed, so stable gates remain open.
 
 ## 0.4.0-rc.4
 

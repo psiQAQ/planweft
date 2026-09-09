@@ -174,3 +174,17 @@ Claude 六项 Stop 溯源组均按失败保留：原始解析器无法完整归�
 本地全量 Python 117 tests Passed；后续 Pi 路径回归 4 tests Passed；安装器 28、DSH facade 3 Passed。原始与迁移上游各 721 Passed、63 skipped（平台或依赖条件保留），子测试数分别 798/851。确定性构建 Passed；该组不代替准确 RC5 包或新跨系统 CI。
 
 [本组附件](evidence/0010/rc5-path-resource-and-rc4-followup.tar.gz)：712 文件，SHA-256 `0623d06cc7cf2fb2971596b7b154d4241b9c19a98526f1b6455deca8f570ca63`，包括原始失败、停止组、Pro 中断标记、资源清理、隔离结果和回归日志；sources.json 映射各运行来源。没有覆盖原 RC4 或历史附件。RC5 准确归档、五宿主完整稳定门槛和正式发布仍未完成。
+
+## RC5 准确候选发布与复验
+
+RC5 冻结源码 `c3bb9d870429e304149ca58b0e804ea55f4b537a`；唯一 npm 包为 5,213,945 bytes，SHA-256 `f9123657773eb95cfe3df79b3f55669f12b37203bf2a593c1e749da1676069b3`。公开前扫描本轮五个提交、70 个唯一 blob、递归附件及该包共 4580 项负载，无凭据或私人路径发现。
+
+[三系统 CI 34316870816](https://github.com/psiQAQ/planweft/actions/runs/34316870816) Passed；[OIDC 34317038628](https://github.com/psiQAQ/planweft/actions/runs/34317038628) 使用固定期望摘要发布到 next，重建字节匹配。真实 npm 下载的 SHA-256、SHA-512 integrity 及本地逐字比较均 Passed。latest 仍为 RC1，正式 0.4.0 未发布。
+
+准确 RC5 Codex 组：普通停止、gated 续跑、两个 disabled 对照 Passed。普通一次、gated 两次 assistant 回复发生于各自同一原生 turn；gated 只增加两个计数器，计划保持 in_progress，其余项目快照不变，没有模型工具调用。cap/stall 仍 Failed：唯一失败为 negative_control，禁用组也有计数器 IN_ACCESS，无法归因读取进程。全部使用 invocation bypass，不证明正常持久信任；未捕获原生 Stop decision 事件。独立 reviewer 核对同意上述边界，见 `codex-rc5-stop-independent-review.json`。
+
+从真实 npm 下载的同一准确 RC5 包，五个固定容器分别 preflight 与 lifecycle（安装、同版本 update、内容核对、移除）均 Passed；共有十个串行测试容器，全部删除，原常驻容器保持。Pi/OpenCode/DSH 原生发现或启动入口通过；该组没有模型调用，不宣称 RC4↔RC5 跨版本或最终稳定归档验收。先前一次将多个 host 放在单个 --host 后的调用被参数检查拒绝，未创建目录或容器；使用入口规定的重复 --host 后执行。
+
+[RC5 发布与原生证据](evidence/0010/rc5-native-and-release.tar.gz)：589 文件，SHA-256 `f8d93e9f370578f10c3226a2fe65c4ba67303bdd0dad638aea62aa0b85994fba`。保留来源索引、摘要、CI 日志、Codex 原失败及五宿主原始检查，不改写早先附件。发布后的说明文档另行更新；重新生成该已发布归档必须使用上述冻结提交，而非后续文档提交。
+
+归档完成后，确认测试收据均已注销，再清理 12 个合成项目中的可重建版本存储，共约 1193 MiB；项目记录、收据、原始日志、快照、准确 npm 包和发布树保留。清单见 `rc5-completed-cache-cleanup.json`。本轮合计清理约 5.1 GiB 逻辑缓存文件，不把磁盘回收量等同于物理内存下降量。

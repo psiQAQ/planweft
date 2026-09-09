@@ -1,6 +1,6 @@
 [简体中文](README.md) | [English](README.en.md)
 
-> PlanWeft 0.4.0-rc.4 为候选版；稳定 0.4.0 须通过 Codex、Claude Code、Pi、OpenCode、DSH 五个平台真实验收。见[发布清单：中文](docs/releasing.md) / [English](docs/releasing.en.md)。
+> PlanWeft 0.4.0-rc.5 为候选版；稳定 0.4.0 须通过 Codex、Claude Code、Pi、OpenCode、DSH 五个平台真实验收。见[发布清单：中文](docs/releasing.md) / [English](docs/releasing.en.md)。
 
 # PlanWeft
 
@@ -72,7 +72,7 @@ PWF 的[任务完成后指导](https://github.com/OthmanAdi/planning-with-files/
 
 ## 当前交付与使用边界
 
-当前候选版 **0.4.0-rc.4** 提供一个 `planweft` npm 包，包含安装 CLI、Pi Extension、OpenCode V1 入口及 15 个平台资源目录（含 DSH 原生 bundle）；另有 6 种原生 marketplace 入口和 Gemini/Hermes Git 发布树准备工具。安装方法见[中文指南](docs/installation.md) / [English guide](docs/installation.en.md)，平台能力与验证范围见[中文设计](docs/platforms.md) / [English design](docs/platforms.en.md)。
+当前候选版 **0.4.0-rc.5** 提供一个 `planweft` npm 包，包含安装 CLI、Pi Extension、OpenCode V1 入口及 15 个平台资源目录（含 DSH 原生 bundle）；另有 6 种原生 marketplace 入口和 Gemini/Hermes Git 发布树准备工具。安装方法见[中文指南](docs/installation.md) / [English guide](docs/installation.en.md)，平台能力与验证范围见[中文设计](docs/platforms.md) / [English design](docs/platforms.en.md)。
 
 0.3.0 的记录包含八个宿主的本地安装生命周期验证；Hermes 被默认扫描器拒绝安装。RC4 五个核心宿主的远端 npm 生命周期及 Codex/Claude 公开 Git 同提交刷新已通过；Windows/macOS 安装器 CI 通过，真实宿主与 GUI 仍有 Not Run 项，模型维护/冷读还存在待解决失败。历史验证不随文档修改自动变成新一轮实测，具体边界见上述跨平台文档。
 

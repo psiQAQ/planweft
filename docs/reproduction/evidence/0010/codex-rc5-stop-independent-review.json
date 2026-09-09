@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "host": "codex",
+  "version": "0.4.0-rc.5",
+  "npm_sha256": "f9123657773eb95cfe3df79b3f55669f12b37203bf2a593c1e749da1676069b3",
+  "source_commit": "c3bb9d870429e304149ca58b0e804ea55f4b537a",
+  "reviewer": "rc5_independent_review",
+  "status": "Incomplete",
+  "stopping": "Passed: one assistant reply, no tools or project changes",
+  "gated_continuation": "Passed: two assistant replies in one native turn/invocation; only gate counters added, plan remains in_progress",
+  "cap_and_stall_attribution": "Failed: disabled controls also show counter reads, no PID attribution",
+  "trust": "Invocation bypass only; normal persisted trust is not established",
+  "native_decision_capture": "No Stop decision events captured; observed replies and counters are the evidence",
+  "artifacts": [
+    {
+      "path": "summary.json",
+      "sha256": "a2bf0919c247302661b127215e17ee1eab0ca93044bd0c5179c6004fda22fab4"
+    },
+    {
+      "path": "codex/stopping/assessment.json",
+      "sha256": "0f7c9ebebfeecd456727052e2e929566c3e1f4d74d96ddc9e66924a3749519be"
+    },
+    {
+      "path": "codex/gated-continuation/assessment.json",
+      "sha256": "afad3d263cd38f06490e0a452b5893299a7d9bbeb648ddaab03f3e1fccbda6eb"
+    },
+    {
+      "path": "codex/gate-cap-disabled/assessment.json",
+      "sha256": "3f5d873c9b3c2ceb692e4c6f15c057aade4273c9cda3e9758cc1174c1819e67d"
+    },
+    {
+      "path": "codex/gate-cap/assessment.json",
+      "sha256": "236a3c8ff7390d8f8e8729a12eb697bf2d5df0fb8f46791a859b6bf981342e72"
+    },
+    {
+      "path": "codex/gate-stall-disabled/assessment.json",
+      "sha256": "513862762d364e763cccdcbf1c2e33a898b417036f82dd1142f0a59881b74a95"
+    },
+    {
+      "path": "codex/gate-stall/assessment.json",
+      "sha256": "0e64fcc8a674580e83116240fbb0f492b8794697e4e2b69cd61b01391a850b27"
+    },
+    {
+      "path": "codex/stopping/raw/model.stdout",
+      "sha256": "998ccd932c9055001da490651777d215c7a0c9579a2f715dbc747d429c1c2452"
+    },
+    {
+      "path": "codex/gated-continuation/raw/model.stdout",
+      "sha256": "5c5a7b45cf02bc76f7a4a724254d1aad85304d4c605dc23e5f4f14a4170acecb"
+    }
+  ]
+}

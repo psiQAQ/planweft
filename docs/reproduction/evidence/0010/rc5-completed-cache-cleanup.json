@@ -1,0 +1,55 @@
+{
+  "scope": "Only completed synthetic runs whose installer receipts have no agents",
+  "removed_version_stores": [
+    {
+      "directory": "rc5-remote-native/opencode/lifecycle/project/.planweft/versions",
+      "logical_bytes": 104209673
+    },
+    {
+      "directory": "rc5-remote-native/opencode/preflight/project/.planweft/versions",
+      "logical_bytes": 104209673
+    },
+    {
+      "directory": "rc5-remote-native/pi/lifecycle/project/.planweft/versions",
+      "logical_bytes": 104209673
+    },
+    {
+      "directory": "rc5-remote-native/pi/preflight/project/.planweft/versions",
+      "logical_bytes": 104209673
+    },
+    {
+      "directory": "rc5-remote-native/claude/lifecycle/project/.planweft/versions",
+      "logical_bytes": 104209673
+    },
+    {
+      "directory": "rc5-remote-native/claude/preflight/project/.planweft/versions",
+      "logical_bytes": 104209673
+    },
+    {
+      "directory": "claude-rc4-pro-control/claude/maintenance/project/.planweft/versions",
+      "logical_bytes": 104201870
+    },
+    {
+      "directory": "claude-rc4-remote-core/claude/maintenance/project/.planweft/versions",
+      "logical_bytes": 104201870
+    },
+    {
+      "directory": "claude-rc4-remote-core/claude/readonly/project/.planweft/versions",
+      "logical_bytes": 104201870
+    },
+    {
+      "directory": "claude-rc4-remote-core/claude/recovery/project/.planweft/versions",
+      "logical_bytes": 104201870
+    },
+    {
+      "directory": "claude-rc4-remote-core/claude/context/project/.planweft/versions",
+      "logical_bytes": 104201870
+    },
+    {
+      "directory": "claude-rc4-remote-core/claude/simple/project/.planweft/versions",
+      "logical_bytes": 104201870
+    }
+  ],
+  "retained": "receipts, project documents, raw model output, snapshots, exact local/remote npm archives and release trees",
+  "logical_bytes_released": 1250469258
+}

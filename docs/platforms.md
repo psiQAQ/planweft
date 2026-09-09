@@ -1,8 +1,8 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
-RC4 已通过 OIDC 发布、远端字节核对及三系统 CI；五个固定 Linux 容器的准确包安装和真实 npm 升降级/卸载通过。Pi/DSH 指定反馈修正与新冷读通过独立审查，首次失败保留。OpenCode 冷读准确性与 Claude Flash 计划采用仍失败；Codex 普通停止复验通过，gated 续跑暴露包内路径缺陷，RC5 正在开发。五平台稳定门槛未通过。见[发布状态：中文](releasing.md) / [English](releasing.en.md)。
+RC5 已经 OIDC 发布到 next，远端字节匹配、三系统 CI 通过。Codex 普通停止和 gated 续跑通过 invocation bypass 下的真实模型验证；cap/stall 因禁用对照也读取计数器，来源归因仍 Failed。Claude 计划采用及 OpenCode 冷读准确性继续阻止稳定验收；下方 RC4 维护结果保留原版本范围。见[发布状态：中文](releasing.md) / [English](releasing.en.md)。
 
-RC4 Codex 维护与冷读通过独立语义审查；最新 gated 失败与额度无关，Stop 静默跳过包内门禁脚本。RC5 已修正 Stop、resolver、SessionStart 资源路径，独立复制包回归 Passed，准确新候选包模型复验待完成。Claude Flash 完成代码维护及冷读，但没有读取已发现的主 Skill 或创建 PWF 计划；其停止进程溯源因收集器解析限制按失败保留。正常持久 Codex 信任、原生权限拒绝及同 HOME 项目隔离仍须当前归档证据，invocation bypass 与独立容器不能替代。
+RC5 修正 Codex 包内 Stop、resolver 和 SessionStart 路径。gated 探针观察到同一原生 turn 中两次 assistant 回复且仅计数变化，没有捕获原生 Stop decision 事件。正常持久 hook 信任和原生权限拒绝仍待补验；RC3/RC4 同 HOME 隔离已通过，不能替代当前稳定归档验收。Claude 进程归因仍未完成，不宣称正式 0.4.0 已发布。
 
 ## 0.4.0 候选验证
 
@@ -16,10 +16,10 @@ PlanWeft 0.4.0 将同一套文件规划与文档协作规则，生成适合 15 �
 
 | 平台 | 静态检查 | 协议检查 | 原生生命周期（Linux） | 模型维护（Linux） |
 | --- | --- | --- | --- | --- |
-| Codex | Passed | Passed | Passed (RC4 local + remote npm) | Passed (RC4; independent review) |
-| Claude Code | Passed | Passed | Passed (RC4 local + remote npm) | RC4 Flash code Passed; planning adoption Failed |
-| Pi | Passed | Passed | Passed (RC4 local + remote npm) | RC4 initial consistency Failed; reviewed correction Passed |
-| OpenCode V1 | Passed | Passed | Passed (RC4 local + remote npm) | RC4 maintenance Passed; cold-read accuracy Failed |
+| Codex | Passed | Passed | Passed (RC5 same-version; RC3/4 upgrade/rollback) | Passed (RC4; independent review) |
+| Claude Code | Passed | Passed | Passed (RC5 same-version; RC3/4 upgrade/rollback) | RC4 Flash code Passed; planning adoption Failed |
+| Pi | Passed | Passed | Passed (RC5 same-version; RC3/4 upgrade/rollback) | RC4 initial consistency Failed; reviewed correction Passed |
+| OpenCode V1 | Passed | Passed | Passed (RC5 same-version; RC3/4 upgrade/rollback) | RC4 maintenance Passed; cold-read accuracy Failed |
 | Cursor | Passed | Passed | Not Run | Not Run |
 | Copilot CLI | Passed | Passed | Not Run | Not Run |
 | Gemini CLI | Passed | Passed | Not Run | Not Run |
@@ -30,7 +30,7 @@ PlanWeft 0.4.0 将同一套文件规划与文档协作规则，生成适合 15 �
 | Continue | Passed | Not Run | Not Run | Not Run |
 | Mastra Code | Passed | Not Run | Not Run | Not Run |
 | Agents | Passed | Not Run | Not Run | Not Run |
-| DeepSeek Harness / DSH | Passed | Passed (RC3 sandbox protocol) | Passed (RC4 local + remote npm) | RC4 initial consistency Failed; reviewed correction Passed |
+| DeepSeek Harness / DSH | Passed | Passed (RC3 sandbox protocol) | Passed (RC5 same-version; RC3/4 upgrade/rollback) | RC4 initial consistency Failed; reviewed correction Passed |
 
 RC4 五个宿主的真实 npm RC3 → RC4 → RC3 → RC4 → 卸载均通过，包括 Pi/OpenCode/DSH 原生包入口；这些无模型检查不证明新会话模型行为。公开 Git marketplace 与 Windows/macOS 真实宿主分别记录。Pi RPC 与 OpenCode debug 是实际宿主加载，不是模型调用；非核心宿主的 0.3.0 安装结果不冒充 0.4.0 实测。
 

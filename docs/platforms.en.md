@@ -1,8 +1,8 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
-RC4 passed OIDC publishing, remote byte verification and three-OS CI. Exact-package installation and real npm upgrades, rollbacks and removal passed in all five fixed Linux containers. Pi/DSH feedback corrections and fresh reading passed independent review, with initial failures retained. OpenCode cold-read accuracy and Claude Flash planning adoption still fail. Codex stopping passed a fresh test, but gated continuation exposed a package path defect; RC5 is in development. The five-host stable gate remains incomplete. See [release status: 中文](releasing.md) / [English](releasing.en.md).
+RC5 is published to next through OIDC, with matching remote bytes and passing three-OS CI. Its Codex normal stop and gated continuation passed actual invocation-bypass model checks. Cap/stall attribution remains Failed because disabled controls also read the counters. Claude planning adoption and OpenCode cold-read accuracy still block stable acceptance; RC4 maintenance results below retain their original version scope. See [release status: 中文](releasing.md) / [English](releasing.en.md).
 
-RC4 Codex maintenance and cold reading passed independent review. The latest gated failure is unrelated to quota: Stop silently missed the packaged gate helper. RC5 corrects Stop, resolver and SessionStart resource paths, with copied-package regressions passed; exact candidate model verification remains pending. Claude Flash completed code maintenance and cold reading but did not read the discovered main Skill or create a PWF plan. Its process-attributed stop tests failed closed on collector parsing limitations. Normal persisted Codex trust, native permission denial and shared-HOME isolation still need current-artifact evidence; invocation bypass and separate containers do not prove these behaviors.
+RC5 corrects the Codex packaged Stop, resolver and SessionStart resource paths. The gated probe observed two assistant replies within one native turn and only counter changes; it did not capture native Stop decision events. Normal persisted hook trust and native permission-denial checks remain pending. Shared-HOME isolation passed on RC3/RC4; it does not replace current stable-artifact acceptance. Claude process attribution is still incomplete. No stable 0.4.0 release is claimed.
 
 ## 0.4.0 candidate validation
 
@@ -16,10 +16,10 @@ For project goals and design sources, read the project introduction: [简体中�
 
 | Platform | Static | Protocol | Native lifecycle (Linux) | Model maintenance (Linux) |
 | --- | --- | --- | --- | --- |
-| Codex | Passed | Passed | Passed (RC4 local + remote npm) | Passed (RC4; independent review) |
-| Claude Code | Passed | Passed | Passed (RC4 local + remote npm) | RC4 Flash code Passed; planning adoption Failed |
-| Pi | Passed | Passed | Passed (RC4 local + remote npm) | RC4 initial consistency Failed; reviewed correction Passed |
-| OpenCode V1 | Passed | Passed | Passed (RC4 local + remote npm) | RC4 maintenance Passed; cold-read accuracy Failed |
+| Codex | Passed | Passed | Passed (RC5 same-version; RC3/4 upgrade/rollback) | Passed (RC4; independent review) |
+| Claude Code | Passed | Passed | Passed (RC5 same-version; RC3/4 upgrade/rollback) | RC4 Flash code Passed; planning adoption Failed |
+| Pi | Passed | Passed | Passed (RC5 same-version; RC3/4 upgrade/rollback) | RC4 initial consistency Failed; reviewed correction Passed |
+| OpenCode V1 | Passed | Passed | Passed (RC5 same-version; RC3/4 upgrade/rollback) | RC4 maintenance Passed; cold-read accuracy Failed |
 | Cursor | Passed | Passed | Not Run | Not Run |
 | Copilot CLI | Passed | Passed | Not Run | Not Run |
 | Gemini CLI | Passed | Passed | Not Run | Not Run |
@@ -30,7 +30,7 @@ For project goals and design sources, read the project introduction: [简体中�
 | Continue | Passed | Not Run | Not Run | Not Run |
 | Mastra Code | Passed | Not Run | Not Run | Not Run |
 | Agents | Passed | Not Run | Not Run | Not Run |
-| DeepSeek Harness / DSH | Passed | Passed (RC3 sandbox protocol) | Passed (RC4 local + remote npm) | RC4 initial consistency Failed; reviewed correction Passed |
+| DeepSeek Harness / DSH | Passed | Passed (RC3 sandbox protocol) | Passed (RC5 same-version; RC3/4 upgrade/rollback) | RC4 initial consistency Failed; reviewed correction Passed |
 
 RC1 remote npm same-version lifecycle passed for Codex, Claude and Pi; OpenCode Skill pairing failed, and DSH composed-config discovery did not prove boot. Remote multi-version and Git marketplace lifecycles and real Windows/macOS host sessions remain Not Run. Pi RPC and OpenCode debug discovery are actual host loading, not model calls. Non-core native runs from 0.3.0 are not reused as 0.4.0 results.
 
