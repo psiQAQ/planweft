@@ -209,3 +209,12 @@ OpenCode 停止场景使用 `opencode_server_probe.py`，固定 1.18.22 的原�
 ### Pi 上下文探针与执行循环
 
 Pi 的 `/pw-plan-execute` 同时启用 hooks 与未完成计划的续跑，parity 全文注入并不是独立的只读模式。`context` / `recovery` 新探针使用新建的完成态合成计划，完整采集到 `agent_settled`，并记录 `probe_scope`，仅证明完成态计划的注入和新会话文件恢复。不会把既有进行中计划改成完成态；该前置条件不满足时拒绝运行。`continuation-limit` 保持进行中计划，单独验证执行循环；默认未激活停止也单独验证。旧进行中只读探针产生的实际续跑与写入保留为 Failed，不通过截断首轮改判。
+
+
+### 公开 Git 与审查反馈闭环
+
+`run-public-git-marketplace.py --host codex|claude --commit <完整公开master SHA> --version <版本> --output <新目录>` 使用固定镜像和无认证的隔离 HOME，核对公开 Git 与缓存内容、执行位、同提交市场刷新、重装、卸载及注销。它不调用模型，不声称覆盖 Git 跨版本更新；容器清理失败返回失败。运行脚本副本和摘要一并保存。
+
+`run-review-feedback.py` 复用实际五宿主 controller 的 owner 与冷读分支。输入必须提供准确包、原维护 `after.json`、原自动 assessment、独立 review JSON 及各自 SHA-256；目前限 Pi/DSH。review v1 绑定宿主、准确包、原快照和 assessment，并保存原语义 Failed、原任务范围、允许修正的已有记录路径与具体发现。代码、测试、批准需求及用户内容必须此前验证通过，本轮字节保持不变。新容器只获得原项目文件和简短事实反馈；后续冷读只获得修正后的项目文件，不获得 review、旧聊天、历史或安装缓存。
+
+所有输入/参数在创建输出、访问认证或 Docker 前校验，单模型场景限 30–600 秒。该入口不修改原运行；成功完成自动边界检查也仅标 `Awaiting independent semantic review`，仍需独立核对发现是否真正修正、状态与错误记录是否准确。Docker bootstrap 只记录退出/超时/耗时，不归档可能含私有配置的输出；原生 runtime 的脱敏诊断在可用时保留，报告明确此限制。两阶段与原失败分别留存，不能称首轮维护从未失误。
