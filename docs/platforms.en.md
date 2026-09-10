@@ -1,12 +1,12 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
-At the RC12 exact-archive acceptance checkpoint, the most recently checked official npm `next` is `0.4.0-rc.10` and `latest` is historical RC1; stable `0.4.0`, RC11 and RC12 are unpublished. RC12 passed [three-OS CI](https://github.com/psiQAQ/planweft/actions/runs/34357068482), the native Pi BOM comparison and no-model lifecycles for Claude, Pi, OpenCode and DSH. Codex doctor incorrectly flags its owned marketplace source as a duplicate, blocking publication. OpenCode maintenance still has record-consistency defects; a passing cold reader does not cancel maintenance failures. Independent review distinguished its false historical-text assertion from actual defects. RC13 source includes the Codex repair and a pinned direct parser dependency, with other locked packages unchanged; no new exact package has been accepted at this checkpoint. Query the official npm registry for live state; historical `latest` is not a stable release.
+0.4.0 uses a capability-tiered support policy. Exact artifacts, deterministic lifecycle, explicit Skill reading, project/user protection, duplicate detection and offline advisory/disable/cap/stall controls are supported across five hosts; Codex explicit maintenance → independent cold read is the required workflow. Pi explicit/auto modes are rated separately from evidence. Other automatic model adoption, live-model stopping, autonomous/gated behavior and the other ten adapters remain experimental. Use the official registry and GitHub Release for live publication state; historical `latest=RC1` is not stable acceptance.
 
 Results and limits: [release: 中文](releasing.md) / [English](releasing.en.md). Historical tables below do not replace current exact-package acceptance.
 
 ## 0.4.0 candidate validation
 
-One npm package now exposes the installer, Pi resources and OpenCode V1 entry. Stable publication requires all five hosts: Codex, Claude Code, Pi, OpenCode and DSH. The other ten adapters remain experimental. Existing local lifecycle evidence is retained; exact artifacts, model sessions and remote installations are tested separately. Linux, Windows and macOS installer CI passed after correcting the Windows failure-injection path; [run record](https://github.com/psiQAQ/planweft/actions/runs/34242500572). [Release: 中文](releasing.md) / [English](releasing.en.md). The 0.3.0 evidence below remains historical.
+One npm package exposes the installer, Pi resources and OpenCode V1 entry. [`release/support-policy.json`](../release/support-policy.json) evaluates stable publication per host and scenario; non-blocking Failed/Inconclusive results are never rewritten as Passed. Existing lifecycle evidence may be retained only under the explicit reuse rules, while non-reusable checks rerun against the final archive. The version tables below remain historical and do not replace 0.4.0 acceptance.
 
 # Cross-platform design
 

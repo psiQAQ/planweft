@@ -231,7 +231,9 @@ Pi 的 `/pw-plan-execute` 同时启用 hooks 与未完成计划的续跑，parit
 
 五宿主入口在访问认证/Docker 前检查 4 GiB 可用内存及输出磁盘 8 GiB 空间，输出应使用磁盘目录（如 `/var/tmp/planweft-validation-new`），避免大型缓存占用 tmpfs。每个模型场景限时 30..600 秒；仍使用 2 CPU、3 GiB 内存且不额外使用 Swap、256 PID。先确认容器已移除，再删除自有 `agents={}` 的未引用版本缓存，保留项目记录、收据、快照和日志；无法确认时停止新场景。
 
-稳定验收使用 acceptance schema 2：每个总项下列出 `observations.scenarios`，逐场景包含 Passed 和摘要绑定的实际附件。准确所需场景由 `scripts/check-release-gate.py:required_scenarios` 定义。旧 schema 1 不放行；当前没有历史稳定 acceptance 需要自动迁移。候选版仍仅允许 next。
+稳定验收使用 acceptance schema 3 与 `release/support-policy.json`。状态为 Passed / Failed / Inconclusive / Not Run；总项取子场景最差状态，`release_blocking` 由门禁按逐场景 tier 计算。每个场景单独声明 fresh/reused；复用须绑定原包/目标包、解析后的逐文件 manifest diff、受影响检查和 reviewer，不可复用项由策略及门禁的冻结最低契约共同拒绝。证据可位于仓库 root 内，仍拒绝绝对路径、`..`、越界 symlink、自引用和摘要不匹配。prepublication/promotion review 分别绑定策略、准确包和阶段结果。旧 schema 1/2 不放行；候选版仍仅允许 next。
+
+`tests/run-five-agent-release.py --adoption-mode auto|explicit` 在任何输出、认证或 Docker 副作用前由 argparse 校验；默认 `auto` 保持历史语义，选择值写入 summary、payload 和逐场景 assessment。explicit 维护还须由 acceptance 绑定实际 Skill 读取及独立冷读证据，不能只凭 prompt 文本宣称完成。
 
 
 ### 原生跨 scope 重复注册预检

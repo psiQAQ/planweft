@@ -2,7 +2,7 @@
 
 # Releasing PlanWeft
 
-At the RC12 exact-archive acceptance checkpoint, the most recently checked official npm `next` is `0.4.0-rc.10` and `latest` is historical RC1; stable `0.4.0`, RC11 and RC12 are unpublished. RC12 passed [three-OS CI](https://github.com/psiQAQ/planweft/actions/runs/34357068482), the native Pi BOM comparison and no-model lifecycles for Claude, Pi, OpenCode and DSH. Codex doctor incorrectly flags its owned marketplace source as a duplicate, blocking publication. OpenCode maintenance still has record-consistency defects; a passing cold reader does not cancel maintenance failures. Independent review distinguished its false historical-text assertion from actual defects. RC13 source includes the Codex repair and a pinned direct parser dependency, with other locked packages unchanged; no new exact package has been accepted at this checkpoint. Query the official npm registry for live state; historical `latest` is not a stable release.
+0.4.0 is prepared on an isolated branch from `master@fe3543f`; RC16 will not be published. The same immutable stable archive goes to `next` first and reaches `latest` only after remote acceptance and the promotion gate, followed by the GitHub Release. Query the official registry for live state; historical `latest=0.4.0-rc.1` is not stable acceptance.
 
 The single package is `planweft`; its public Git target is `https://github.com/psiQAQ/planweft`.
 These coordinates are release targets, not proof that a version is published. [Installation: 中文](installation.md) / [English](installation.en.md).
@@ -26,29 +26,27 @@ Retain release.json and the complete Git trees. For subsequent releases, recover
 do not force-push or create a new branch root. release.json records the source commit, per-file npm digests, platform trees,
 and OpenCode/Hermes Skill pairing.
 
-5. Complete the first npm authentication interactively and publish a candidate under next. Never paste tokens in chat or logs.
+5. Use the master-only OIDC/provenance workflow to publish the reviewed stable SHA under next. Never paste tokens in chat or logs.
 
 ```bash
-npm login --registry=https://registry.npmjs.org
-npm publish /tmp/planweft-release-new/npm/planweft-0.4.0-rc.1.tgz --tag next --access public --registry=https://registry.npmjs.org
+gh workflow run publish.yml -f expected_sha256=REVIEWED_SHA256
 ```
 
 6. Configure the npm package's GitHub trusted publisher (psiQAQ / planweft / publish.yml) with a protected release environment.
 The workflow uses Node 24 and npm 11.11.0 without a persistent publish token. Validate OIDC with a candidate version.
-7. Test install, upgrade, rollback and removal from actual npm/Git sources. Stable requires real model maintenance and independent
-cold-read evidence on Codex, Claude, Pi, OpenCode and DSH. Missing authentication, GUI or OS runs remain Not Run; synthetic responses
-are not model validation.
-8. Only after every stable gate passes, publish 0.4.0 under next, perform remote smoke checks, promote latest and create the
-v0.4.0 GitHub Release. Candidates never use latest. Publishing does not enable plugin trust or install into personal global profiles.
+7. Download from the official registry and verify bytes, SHA-256 and integrity, then run five-host native discovery, doctor, no-new-model fresh-session loading and uninstall. Final install/remove/uninstall evidence is fresh; upgrade/rollback is reusable only after per-file manifest-diff and independent review show it is unaffected.
+8. Commit promotion evidence and run `check-release-gate.py --promotion`. Only then update npm `latest` and create the source-bound `v0.4.0` Release with the exact tgz, manifest/checksum, support matrix, experimental capabilities, known failures and rollback command.
 
 Reference: [npm trusted publishers](https://docs.npmjs.com/trusted-publishers/). Current execution state is in internal
 [PLAN-0010](plans/0010-five-agent-release.md) (Chinese). Official store listings require separate host reviews.
 
 ## Five-container gates and exact artifacts
 
-The stable archive must pass `scripts/check-release-gate.py` for all five hosts. Each record binds the version, npm SHA-256, actual attachments and their hashes. Model records identify the image, CLI, model, runner and session. Cold reads use a different session and the exact maintenance output snapshot. Independent review binds current local evidence and, before latest promotion, remote evidence. The gate checks completeness and consistency; it does not independently establish correctness.
+Stable acceptance uses schema 3. The version-controlled [`support-policy.json`](../release/support-policy.json) labels every host/scenario `required`, `evidence_based` or `experimental`; the gate computes `release_blocking` and rejects a self-authorized value. Aggregate status comes from real scenario results. Non-blocking Failed/Inconclusive stays visible with a public limit ID; Not Run retains its reason.
 
-The publishing workflow compares CI bytes against its `expected_sha256` input, required for stable versions. Fix reproducibility failures instead of changing the expected digest. Acceptance attachments stay outside the npm package to avoid circular hashes. Candidates may use next, never latest. After real remote RC→stable→RC→stable validation, use existing interactive authentication to change latest and create the Release. OIDC publishing permission does not imply npm dist-tag management permission.
+Each fresh/reused scenario binds the exact package and attachment hashes. Reuse additionally binds source/target packages, a parsed per-file manifest diff, affected checks and a reviewer. Exact artifacts, final install/uninstall, user-file protection, explicit Skill reading and required model workflows cannot be reused. Codex maintenance and cold-read use different sessions and attachments, the same output/input snapshot, no-history/no-plugin isolation, and actual Skill-read evidence. Separate pre-publication and promotion reviews bind their phase; promotion also verifies the earlier review.
+
+The publishing workflow compares CI bytes against its `expected_sha256` input, required for stable versions. Fix reproducibility failures instead of changing the expected digest. The evidence root is bounded by the repository; absolute paths, `..`, escaping symlinks, self-reference and digest mismatches are rejected. OIDC publishing permission does not imply npm dist-tag management permission.
 
 Public master history has been backed up and sanitized; the GitHub repository is public. Earlier statements that it had not been pushed describe historical status only. An internal [mapping](reproduction/evidence/0010/history-sanitization.json) relates original history and sanitized attachments. Rewriting history does not recall existing third-party copies.
 

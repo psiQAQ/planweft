@@ -2,7 +2,7 @@
 name: project-docs-ar
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Kiro skill instructions and steering state read selected project planning context; recovery reads project files and timestamps only, not agent transcript stores. It registers no Stop hook and never requests continuation. It never runs commands declared in Markdown; no network upload path. "
 metadata:
-  version: "0.4.0-rc.15"
+  version: "0.4.0"
 ---
 
 # وثائق المشروع وتخطيط المهمة

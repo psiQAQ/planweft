@@ -2,7 +2,7 @@
 
 # 发布 PlanWeft
 
-截至 RC12 准确归档验收检查点，最近查询的官方 npm `next` 为 `0.4.0-rc.10`，`latest` 为历史 RC1；正式 `0.4.0`、RC11 和 RC12 均未发布。RC12 通过[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34357068482)、Pi 原生 BOM 对照及 Claude/Pi/OpenCode/DSH 无模型生命周期，但 Codex doctor 将自有 marketplace 来源误报为重复安装，阻止发布。OpenCode 维护仍有记录一致性缺陷，冷读通过不抵消维护失败；其历史记录自动断言误报已由独立审查区分。RC13 源码已加入 Codex 修复及固定 parser 直接依赖，其他锁定包不变；本检查点尚无准确新包验收。查询官方 npm registry 获取实时状态，不能把历史 `latest` 当作稳定发布。
+0.4.0 从 `master@fe3543f` 的隔离分支准备，不发布 RC16。正式版先把同一不可变归档发布到 `next`，远端验收与 promotion gate 通过后才提升 `latest` 并创建 GitHub Release。查询官方 registry 获取实时状态；历史 `latest=0.4.0-rc.1` 不代表稳定验收。
 
 唯一包 `planweft`；公开 Git 源 `https://github.com/psiQAQ/planweft`。
 这些是发布目标，不代表当前版本已经上线。入口：[安装：中文](installation.md) / [English](installation.en.md)。
@@ -25,28 +25,28 @@ python3 scripts/prepare-native-release.py --release --output /tmp/planweft-relea
 发布后必须保留完整 release.json 与 Git 发布树；后续从已发布分支恢复历史后再生成，不强推或重建分支根。
 `release.json` 记录源码提交、包内逐文件摘要、平台树及 OpenCode/Hermes 的 Skill 配对信息。
 
-5. 首次通过交互式 npm login 完成认证，发布候选版到 next；不要在聊天或日志中粘贴 token。
+5. 使用 master-only OIDC/provenance workflow 将预审 SHA 对应的稳定版发布到 next；不要在聊天或日志中粘贴 token。
 
 ```bash
 npm login --registry=https://registry.npmjs.org
-npm publish /tmp/planweft-release-new/npm/planweft-0.4.0-rc.1.tgz --tag next --access public --registry=https://registry.npmjs.org
+gh workflow run publish.yml -f expected_sha256=REVIEWED_SHA256
 ```
 
 6. 在 npm 包 Settings 配置 GitHub trusted publisher（psiQAQ / planweft / publish.yml），使用受保护 release 环境。
 工作流使用 Node 24 与 npm 11.11.0；不保存长期发布 token。配置完成后用候选版本验证 OIDC。
-7. 从真实 npm/Git 源测试安装、升级、回退和卸载。稳定版必须有 Codex、Claude、Pi、OpenCode、DSH 五平台
-真实模型维护与独立冷读证据；缺失认证、GUI、OS 实测单独记 Not Run，不将 synthetic responses 当模型验证。
-8. 只有稳定版门槛全部 Passed，才发布 0.4.0 到 next，完成远端冒烟后提升 latest，并创建 v0.4.0 GitHub Release。
-候选版本不使用 latest。发布配置不会自动开启插件信任或个人全局安装。
+7. 从官方 registry 回下载并核对字节、SHA-256 与 integrity，再做五宿主原生发现、doctor、无新模型调用的新会话加载和卸载。最终 install/remove/uninstall 不复用；升级/回退仅在逐文件 manifest 差异和独立 review 证明不受影响时复用。
+8. 重新提交 promotion 证据并运行 `check-release-gate.py --promotion`。通过后才更新 npm `latest`，创建指向最终源码提交的 `v0.4.0` Release，并附准确 tgz、manifest/checksum、支持矩阵、实验能力、已知失败和回退命令。
 
 依据：[npm trusted publishers](https://docs.npmjs.com/trusted-publishers/)。本轮验证状态见内部记录
 [PLAN-0010](plans/0010-five-agent-release.md)（中文）。官方商店上架需要各宿主另行审核。
 
 ## 五容器门槛与准确产物
 
-稳定归档必须由 `scripts/check-release-gate.py` 校验五平台证据。每项记录绑定版本、npm SHA-256、实际附件及其 SHA；模型记录标识实际镜像、CLI、模型、runner 和 session。冷读来自不同会话，输入摘要必须等于维护结果快照；独立审查绑定当前本地证据，提升 latest 前还须绑定远端证据。校验器保证证据完整性和一致性，不独立证明结论正确。
+稳定归档使用 acceptance schema 3。受版本控制的 [`support-policy.json`](../release/support-policy.json) 逐宿主、逐场景声明 `required`、`evidence_based` 或 `experimental`；门禁计算 `release_blocking`，不信任 acceptance 自填放行。聚合状态来自真实子场景，非阻塞 Failed/Inconclusive 仍原样公开并绑定限制 ID，Not Run 保留原因。
 
-发布工作流的 `expected_sha256` 输入用于核对 CI 重建的准确归档；稳定版必填，不能通过替换期望摘要放行差异。验收附件存放在 npm 包外，避免摘要自引用。候选包可以进入 next，不能提升 latest；真实远端 RC→stable→RC→stable 验证完成后，才通过现有交互认证更新 latest 并创建 Release。OIDC 发布权限不等于 npm dist-tag 管理权限。
+每个 fresh/reused 场景绑定准确包与附件 SHA。复用还须绑定原包/目标包、解析后的逐文件 manifest 差异、受影响检查和 reviewer；准确产物、最终安装/卸载、用户文件保护、显式 Skill 读取和正式模型工作流不得复用。Codex 显式维护和冷读使用不同会话、不同附件、相同输出/输入快照，并绑定无历史/无插件冷读隔离与实际 Skill 读取。prepublication 和 promotion 各有独立 review；promotion 同时复核前一阶段 review。
+
+发布工作流的 `expected_sha256` 输入用于核对 CI 重建的准确归档；稳定版必填，不能通过替换期望摘要放行差异。证据 root 最多为仓库根，绝对路径、`..`、越界 symlink、自引用和摘要不匹配均拒绝。OIDC 发布权限不等于 npm dist-tag 管理权限。
 
 本轮已备份并清理公开 master 历史，GitHub 仓库已公开；旧记录中的“尚未推送”仅属于当时状态。原始历史和清理后附件通过内部 [映射](reproduction/evidence/0010/history-sanitization.json) 关联。清理不撤回其他人的旧副本。
 
