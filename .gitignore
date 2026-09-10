@@ -2,6 +2,8 @@
 __pycache__/
 *.pyc
 /.venv/
+/.planning/
+/.worktrees/
 
 /node_modules/
 /.planweft/
