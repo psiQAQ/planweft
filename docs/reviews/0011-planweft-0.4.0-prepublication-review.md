@@ -6,18 +6,20 @@
 
 | 对象 | SHA-256 / 结果 |
 | --- | --- |
-| 唯一 npm 归档 | `438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c` |
+| 唯一 npm 归档 | `e611338a619adabb0ba943d75460a01d83e4670dbe7d69f5d1050a1c1467c132` |
 | `release/support-policy.json` | `bfd7ac9b18c8e6675374114758b9d33b6232ff25a1b03aa855bf2c9e7ff5749e` |
-| 结果集合 | `360d62e564ecfb1b35e1fd754bf2e863b3d82f3702683574e63b21a9527c1c17` |
+| 结果集合 | `b30afcd62449c82a28edb1679ba51220b43a40742a961a933457df496758ff5c` |
 | 结果 attestation | 53/53，无重复，与 reviewer 集合精确相等 |
 
 门禁使用完整草案实测时只因 `prepublication review=Not Run` 拒绝，未出现策略、包摘要、结果集合、附件、复用或聚合错误。
 
+首次本地预审错误绑定 Node `22.22.1` / npm `9.2.0` 生成的 `438f…7e4c`。OIDC workflow `34430655159` 在 npm 写入前 fail closed；发布 workflow 的 Node `24.20.0` / npm `11.11.0` 生成当前 canonical 归档。reviewer 实算两个 gzip 解压后的 tar stream 均为 `b195ce9c9d1a11590e456c613cc22636ab3a30ed118089e55e2036864085b1d0` 且逐字相同，确认差异只在 gzip 封装。首轮 attestation 未沿用；本表、53 项结果和第二轮 review 均 fresh 绑定 canonical SHA。
+
 ## Fresh 与 reused 证据
 
-五宿主准确产物、最终安装/卸载、用户文件保护、离线控制及实际 Skill 读取均使用 `0.4.0` fresh evidence 并 Passed。RC15 仅复用 update/rollback/reinstall、fixture 恢复及未受影响的权限类检查。
+五宿主准确产物、最终安装/卸载、用户文件保护、离线控制及实际 Skill 读取均在 canonical `0.4.0` 上重新生成 fresh evidence 并 Passed。RC15 仅复用 update/rollback/reinstall、fixture 恢复及未受影响的权限类检查。
 
-逐文件 manifest 记录 RC15 到目标包的 255 个差异，均为版本/发布文档、Skill/UPSTREAM/manifest 元数据；OpenCode `core.ts` / `core.js` 仅修改 `VERSION`，未发现 installer、hook 或运行逻辑变化。五宿主 `single_main_skill` 已列入 affected checks 并以目标包重新验证。因此，本轮复用范围与策略相符。
+逐文件 manifest 记录 RC15 到 canonical 目标包的 255 个差异，affected checks 仅为五宿主 `single_main_skill`，且均已用目标包重新验证。该结果也与旧、新 gzip 的 tar 内容逐字一致相容。因此，本轮复用范围与策略相符。
 
 ## 工作流与非 Passed 项
 
@@ -27,7 +29,7 @@ Codex `gate_cap` 与 `gate_cap_disabled` 原样保留 `Failed`，绑定公开限
 
 ## 隐私与验证
 
-八个新 tar 的 manifest 覆盖全部成员且成员 SHA 全部匹配，无 redaction 差异。对 tar、acceptance、输入、manifest 和 attestations 的路径、常见 token、邮箱及认证头模式扫描未发现个人路径、凭据或认证头。
+八个 canonical tar 的 manifest 覆盖全部成员且成员 SHA 全部匹配，无 redaction 差异。对 tar、canonical 包、acceptance 输入、manifest 和 attestations 的路径、常见 token、邮箱及认证头模式扫描未发现个人路径、凭据或认证头。
 
 本地证据记录 Python `332 Passed, 1 Skipped`，Node `123 Passed, 1 Windows-only Skipped`，DSH `3 Passed`。
 

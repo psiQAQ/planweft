@@ -1,30 +1,30 @@
 {
   "host": "pi",
-  "npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+  "npm_sha256": "e611338a619adabb0ba943d75460a01d83e4670dbe7d69f5d1050a1c1467c132",
   "observations": {
     "adoption_mode": "explicit",
     "classification": "supported",
     "cli_version": "0.84.3",
-    "cold_read_evidence_sha256": "1d41c8384b6a0eeab6bd13420fd5e66494cb58f188f597d9628382aeef235a97",
-    "cold_read_session_id": "01a08905-175f-72f3-9b50-2fdc11fbd131",
+    "cold_read_evidence_sha256": "c0b3bac2b9d580a3d5cf587dc9c31f0fb0e26ad5019d51183887ef1676dd9716",
+    "cold_read_session_id": "01a08950-5a6f-7dca-b827-4280a4b2dad6",
     "explicit_skill_read": true,
     "external_memory": false,
     "history_available": false,
     "image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b",
-    "input_snapshot_sha256": "2c3810fc645f80b62f968b6167f5b2943d13a6ecb04cc5468f10786a666e77b4",
+    "input_snapshot_sha256": "4bfacf2750e0e8ef715c93fb3e07d70fbc788cf47efdf3e7a15d25802866b112",
     "kind": "actual-host-model",
-    "maintenance_evidence_sha256": "6ba5a9bc039762782368fc69ba599dc4ea30ecc71c3a946b8920032517c6ba08",
-    "maintenance_session_id": "01a08904-3989-797d-b382-a935a136fdd7",
+    "maintenance_evidence_sha256": "2abba725f1392aee462976cbb1834d832508cbc5404148cf6b1792380b0e5a3e",
+    "maintenance_session_id": "01a0894f-63d8-718c-8be6-ee0d800bc8e4",
     "model": "deepseek-v4-flash",
-    "output_snapshot_sha256": "2c3810fc645f80b62f968b6167f5b2943d13a6ecb04cc5468f10786a666e77b4",
+    "output_snapshot_sha256": "4bfacf2750e0e8ef715c93fb3e07d70fbc788cf47efdf3e7a15d25802866b112",
     "plugin_available": false,
     "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
     "scenarios": {
       "independent_cold_read": {
         "artifacts": [
           {
-            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-pi-explicit-cold-read.tar.gz",
-            "sha256": "1d41c8384b6a0eeab6bd13420fd5e66494cb58f188f597d9628382aeef235a97"
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-pi-explicit-cold-read.tar.gz",
+            "sha256": "c0b3bac2b9d580a3d5cf587dc9c31f0fb0e26ad5019d51183887ef1676dd9716"
           }
         ],
         "evidence_type": "fresh",
@@ -33,8 +33,8 @@
       "maintenance": {
         "artifacts": [
           {
-            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-pi-explicit-maintenance.tar.gz",
-            "sha256": "6ba5a9bc039762782368fc69ba599dc4ea30ecc71c3a946b8920032517c6ba08"
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-pi-explicit-maintenance.tar.gz",
+            "sha256": "2abba725f1392aee462976cbb1834d832508cbc5404148cf6b1792380b0e5a3e"
           }
         ],
         "evidence_type": "fresh",
@@ -43,16 +43,16 @@
       "scope_compliance": {
         "artifacts": [
           {
-            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
-            "sha256": "4ddb0368911b8d5c87a7642ae033ed69f0b6f4d54fe1e7e101a9e30d31466127"
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-prepublication-runs.tar.gz",
+            "sha256": "6e54a20c7661fab3f05b9d1325ac19153ddac7610d653b36d1d621ef8f45a40c"
           }
         ],
         "evidence_type": "fresh",
         "status": "Passed"
       }
     },
-    "session_id": "01a08904-3989-797d-b382-a935a136fdd7",
-    "skill_loading_evidence_sha256": "2b55e063cdaf67fcccd6df1dae6fe3991e8e1cf5ca3c55a19cc7a7ace40aaa98"
+    "session_id": "01a0894f-63d8-718c-8be6-ee0d800bc8e4",
+    "skill_loading_evidence_sha256": "aedecea231565bbe80f67fa73c6d8c3b651be4bd187c83c262ad41b6e6cc0bec"
   },
   "status": "Passed",
   "version": "0.4.0",
