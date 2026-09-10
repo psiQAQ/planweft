@@ -1,19 +1,19 @@
 {
   "version": "0.4.0",
   "artifacts": {
-    "fresh_runs": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
-    "local_checks": "docs/reproduction/evidence/0010/planweft-0.4.0-local-checks.tar.gz",
+    "fresh_runs": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-prepublication-runs.tar.gz",
+    "local_checks": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-local-checks.tar.gz",
     "reused_runs": "docs/reproduction/evidence/0010/rc15-publication-and-native-trace.tar.gz",
-    "manifest_diff": "docs/reproduction/evidence/0010/planweft-0.4.0-rc15-manifest-diff.json",
-    "codex_workflow": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
-    "pi_explicit_workflow": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
-    "codex_gate_pair": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
-    "codex_maintenance": "docs/reproduction/evidence/0010/planweft-0.4.0-codex-maintenance.tar.gz",
-    "codex_cold": "docs/reproduction/evidence/0010/planweft-0.4.0-codex-cold-read.tar.gz",
-    "pi_explicit_maintenance": "docs/reproduction/evidence/0010/planweft-0.4.0-pi-explicit-maintenance.tar.gz",
-    "pi_explicit_cold": "docs/reproduction/evidence/0010/planweft-0.4.0-pi-explicit-cold-read.tar.gz",
-    "pi_auto_maintenance": "docs/reproduction/evidence/0010/planweft-0.4.0-pi-auto-maintenance.tar.gz",
-    "pi_auto_cold": "docs/reproduction/evidence/0010/planweft-0.4.0-pi-auto-cold-read.tar.gz",
+    "manifest_diff": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-rc15-manifest-diff.json",
+    "codex_workflow": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-prepublication-runs.tar.gz",
+    "pi_explicit_workflow": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-prepublication-runs.tar.gz",
+    "codex_gate_pair": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-prepublication-runs.tar.gz",
+    "codex_maintenance": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-codex-maintenance.tar.gz",
+    "codex_cold": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-codex-cold-read.tar.gz",
+    "pi_explicit_maintenance": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-pi-explicit-maintenance.tar.gz",
+    "pi_explicit_cold": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-pi-explicit-cold-read.tar.gz",
+    "pi_auto_maintenance": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-pi-auto-maintenance.tar.gz",
+    "pi_auto_cold": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-pi-auto-cold-read.tar.gz",
     "prepublication_review": "docs/reviews/0011-planweft-0.4.0-prepublication-review.md"
   },
   "models": {
@@ -22,42 +22,42 @@
       "cli_version": "codex-cli 0.149.1",
       "model": "gpt-5.6-terra",
       "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
-      "session_id": "01a088ff-c317-72b1-8203-2754c32a0c97"
+      "session_id": "01a0894b-b0d3-7bf0-a82d-24f902801563"
     },
     "codex_cold_read": {
       "image": "sha256:aa46e31c71577eb37c1e1d856427d9d159ddd5a41aa92472af722838b1c3a159",
       "cli_version": "codex-cli 0.149.1",
       "model": "gpt-5.6-terra",
       "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
-      "session_id": "01a08902-c7cc-7a60-9eb1-a41fdad29823"
+      "session_id": "01a0894e-335d-7463-b536-0eb8cff9f49e"
     },
     "codex_gate": {
       "image": "sha256:9ffeaf322318e5bfa6de76190ece94c323a3964f38e1ad426284b021b8ab5b58",
       "cli_version": "codex-cli 0.149.1",
       "model": "gpt-5.6-terra",
       "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
-      "session_id": "pw-release-489753408eae"
+      "session_id": "pw-release-e64e959c892d"
     },
     "pi_maintenance": {
       "image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b",
       "cli_version": "0.84.3",
       "model": "deepseek-v4-flash",
       "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
-      "session_id": "01a08904-3989-797d-b382-a935a136fdd7"
+      "session_id": "01a0894f-63d8-718c-8be6-ee0d800bc8e4"
     },
     "pi_cold_read": {
       "image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b",
       "cli_version": "0.84.3",
       "model": "deepseek-v4-flash",
       "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
-      "session_id": "01a08905-175f-72f3-9b50-2fdc11fbd131"
+      "session_id": "01a08950-5a6f-7dca-b827-4280a4b2dad6"
     },
     "pi_auto_maintenance": {
       "image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b",
       "cli_version": "0.84.3",
       "model": "deepseek-v4-flash",
       "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
-      "session_id": "01a08906-1159-7192-aa92-520c13d200d8"
+      "session_id": "01a08951-6e3e-7c74-9400-29204d6ba208"
     }
   },
   "workflows": {
@@ -68,9 +68,9 @@
       "maintenance_artifact": "codex_maintenance",
       "cold_artifact": "codex_cold",
       "general_artifact": "codex_workflow",
-      "maintenance_session_id": "01a088ff-c317-72b1-8203-2754c32a0c97",
-      "cold_read_session_id": "01a08902-c7cc-7a60-9eb1-a41fdad29823",
-      "snapshot_sha256": "cd6c42e777271dc55504eaba522a2f4a61dc8d783c04989d9a08035fbebd0b10"
+      "maintenance_session_id": "01a0894b-b0d3-7bf0-a82d-24f902801563",
+      "cold_read_session_id": "01a0894e-335d-7463-b536-0eb8cff9f49e",
+      "snapshot_sha256": "26649b1850638e3e9c629b9d54f4f48ddb44defa9fe3782876b0930c0f72d4f3"
     },
     "pi_explicit_maintenance_cold_read": {
       "host": "pi",
@@ -79,9 +79,9 @@
       "maintenance_artifact": "pi_explicit_maintenance",
       "cold_artifact": "pi_explicit_cold",
       "general_artifact": "pi_explicit_workflow",
-      "maintenance_session_id": "01a08904-3989-797d-b382-a935a136fdd7",
-      "cold_read_session_id": "01a08905-175f-72f3-9b50-2fdc11fbd131",
-      "snapshot_sha256": "2c3810fc645f80b62f968b6167f5b2943d13a6ecb04cc5468f10786a666e77b4"
+      "maintenance_session_id": "01a0894f-63d8-718c-8be6-ee0d800bc8e4",
+      "cold_read_session_id": "01a08950-5a6f-7dca-b827-4280a4b2dad6",
+      "snapshot_sha256": "4bfacf2750e0e8ef715c93fb3e07d70fbc788cf47efdf3e7a15d25802866b112"
     },
     "pi_auto_maintenance_cold_read": {
       "host": "pi",
@@ -90,9 +90,9 @@
       "maintenance_artifact": "pi_auto_maintenance",
       "cold_artifact": "pi_auto_cold",
       "general_artifact": "pi_explicit_workflow",
-      "maintenance_session_id": "01a08906-1159-7192-aa92-520c13d200d8",
-      "cold_read_session_id": "01a08906-b862-7363-bafb-c0b5626cf586",
-      "snapshot_sha256": "2ed241ce66b0ae8a642b202b8f32878d4aec31a047331c39eabceb553394cc84"
+      "maintenance_session_id": "01a08951-6e3e-7c74-9400-29204d6ba208",
+      "cold_read_session_id": "01a08952-5344-757e-a797-16005a72a643",
+      "snapshot_sha256": "2ae9a8f5cf7b3e39b9dcd82bc03f544e0fed9217de1f60503c062eead1361fb9"
     }
   },
   "review": {

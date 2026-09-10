@@ -1,14 +1,14 @@
 {
   "check": "offline_controls",
   "host": "dsh",
-  "npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+  "npm_sha256": "e611338a619adabb0ba943d75460a01d83e4670dbe7d69f5d1050a1c1467c132",
   "observations": {
     "scenarios": {
       "continuation_cap": {
         "artifacts": [
           {
-            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-local-checks.tar.gz",
-            "sha256": "50308e2f4057ed353575df14eb96aa4802c8f2821d6b864f7eb54e33c8880055"
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-local-checks.tar.gz",
+            "sha256": "6c30f9b6709cd6864c2cbc6f2649ed2f33c8b67fae892eafce1fe49f055f17b7"
           }
         ],
         "evidence_type": "fresh",
@@ -17,8 +17,8 @@
       "continuation_stall": {
         "artifacts": [
           {
-            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-local-checks.tar.gz",
-            "sha256": "50308e2f4057ed353575df14eb96aa4802c8f2821d6b864f7eb54e33c8880055"
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-local-checks.tar.gz",
+            "sha256": "6c30f9b6709cd6864c2cbc6f2649ed2f33c8b67fae892eafce1fe49f055f17b7"
           }
         ],
         "evidence_type": "fresh",
@@ -27,8 +27,8 @@
       "default_advisory": {
         "artifacts": [
           {
-            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-local-checks.tar.gz",
-            "sha256": "50308e2f4057ed353575df14eb96aa4802c8f2821d6b864f7eb54e33c8880055"
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-local-checks.tar.gz",
+            "sha256": "6c30f9b6709cd6864c2cbc6f2649ed2f33c8b67fae892eafce1fe49f055f17b7"
           }
         ],
         "evidence_type": "fresh",
@@ -37,8 +37,8 @@
       "explicit_disable": {
         "artifacts": [
           {
-            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-local-checks.tar.gz",
-            "sha256": "50308e2f4057ed353575df14eb96aa4802c8f2821d6b864f7eb54e33c8880055"
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-local-checks.tar.gz",
+            "sha256": "6c30f9b6709cd6864c2cbc6f2649ed2f33c8b67fae892eafce1fe49f055f17b7"
           }
         ],
         "evidence_type": "fresh",

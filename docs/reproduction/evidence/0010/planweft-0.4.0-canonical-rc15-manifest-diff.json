@@ -1,0 +1,1292 @@
+{
+  "affected_checks": [
+    "codex/skill_loading/single_main_skill",
+    "claude/skill_loading/single_main_skill",
+    "pi/skill_loading/single_main_skill",
+    "opencode/skill_loading/single_main_skill",
+    "dsh/skill_loading/single_main_skill"
+  ],
+  "changed_files": [
+    {
+      "after_sha256": "6fd4eb1c766e4e7aca707886e442648ffdd8b1e1c5411361c7b36758499f82c8",
+      "before_sha256": "a0a3d2f8247b63e35fd4db1c73a762ae61de6f4de8bad06824f32437f1b16e26",
+      "path": ".claude-plugin/marketplace.json"
+    },
+    {
+      "after_sha256": "c48d4656f85e6ee3b8f3c65e7405fbe0a77f28bb5e6855f7ab65a58466ec5581",
+      "before_sha256": "efb0dabf46e48f561628536068c05a52b16ea3de7ceda0c9e35ffc4b059fab4a",
+      "path": ".codebuddy-plugin/marketplace.json"
+    },
+    {
+      "after_sha256": "5cdc679c522750a86409db264e2970fb6607df2f00f3b2544e7f13bcd580e539",
+      "before_sha256": "af0c825e28f2c0f6beb6fc5d31cf2feba7602d8abd49ffdbfac6c41cc851e760",
+      "path": ".cursor-plugin/marketplace.json"
+    },
+    {
+      "after_sha256": "c0e11056f017e5cd6f1b144ef838888da0b9f7a9fc9f9c5220190118775e7880",
+      "before_sha256": "0d36d4ccabd3c825465d2fc7d50c71f36ade58f3602097e38234dcc8de43e6a4",
+      "path": ".factory-plugin/marketplace.json"
+    },
+    {
+      "after_sha256": "7a319357d6f9d5e63022570b2d01d4d1c4b80ee13a991894f7b99b839289f6a3",
+      "before_sha256": "50a6cccc647126b6c180738729db64d225f7ff488f3473336607dea23e283a2f",
+      "path": ".github/plugin/marketplace.json"
+    },
+    {
+      "after_sha256": "9b38a37fd288bced58e5b9b63b1635c3bf124669b25ca8b1aa9dcdacf05340fb",
+      "before_sha256": "6c92b862d4066f897f2bcba168eae3bd485d55a18ec000036e019d018a2098ba",
+      "path": "CHANGELOG.en.md"
+    },
+    {
+      "after_sha256": "5bda08bbcdb9ce205b7d8f2bf6a4e1044e9e790878fc452b6cfe4781b88ad9cb",
+      "before_sha256": "959957acfed3589f7f227dff14bfe3957a6576ab50097ad87b916aac78584c05",
+      "path": "CHANGELOG.md"
+    },
+    {
+      "after_sha256": "0b75eb9e9c790b73b65c37f8fea7ac4668a267ee19839cc520a055c38a22568e",
+      "before_sha256": "f42bd6f5647a5b42cd413e41e5f420b1efc6464ecd287af12a10644b6b15e0d6",
+      "path": "README.en.md"
+    },
+    {
+      "after_sha256": "4e1b52f17b9c5a71e7b62adbcc5bf40ceb44c56ff16209339fc7054c8d1bade1",
+      "before_sha256": "4e3f67354d099b4ca398c790edbfe1d0f23a86486525000074fe5b588c7162b6",
+      "path": "README.md"
+    },
+    {
+      "after_sha256": "fbbcfdcf7e88ccb3ec1a6087efbe2b3fb89c054d1698069e8fdc3429dc2b4f09",
+      "before_sha256": "47fa87404a7f34fb60abf71a1456e57401b1519a12ef1b5b8a5243c92f37354b",
+      "path": "dist/agents/planweft/.agents/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/agents/planweft/.agents/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "96cacb9a5e8ed0cbe10b17c547d1bcd2ae843e1785dbc6320b717d11576f7f0c",
+      "before_sha256": "88c1a6a53dc9b22708ba8c3e0522ae1e0c87988253473d8bd72afbe43eba7c01",
+      "path": "dist/agents/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "78a7fa672e27706d16921e20066ac81a166c0dcae14a00f1bee1f2f23c99ce0a",
+      "before_sha256": "d2ce10dd2c1fc392da8490e25c866ca6b29ab2287b8d1e923dbac94894a137db",
+      "path": "dist/agents/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/agents/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ca106261652dfd8637ea41e044de9049c95de543bfdeb2a9b7896789df44a497",
+      "before_sha256": "c86a82b954617bb5f6d6f3a19025c2da51e0fe135496692be36efb845b499183",
+      "path": "dist/agents/planweft/skills/i18n/project-docs-ar/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/agents/planweft/skills/i18n/project-docs-ar/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "afc136ff31a432d987cce86b62098dfadf1d4d39ac6d06a9d7a1dc36d44a143c",
+      "before_sha256": "702549dcade215c44267fbc8ff6fab14b92451978ebbe2b24f2e0fefbb3e744c",
+      "path": "dist/agents/planweft/skills/i18n/project-docs-de/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/agents/planweft/skills/i18n/project-docs-de/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "bee443335dc1f7cb0c0deafc4bc93c56039161f4ed7ccf78f6b5fb7cf82cdb93",
+      "before_sha256": "79ff320e63f596ef200f5e801fc5d2e8e94d7d92d76e16dabc8197a07fbbc5f0",
+      "path": "dist/agents/planweft/skills/i18n/project-docs-es/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/agents/planweft/skills/i18n/project-docs-es/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "5781cab0bbd34f03228bd188d0aae225aa442f519a26521853101cf457701016",
+      "before_sha256": "cae9d33c45f9d8c7e0d44fbaa91a9034fbc1949bf80412110005a688d6b3ed43",
+      "path": "dist/agents/planweft/skills/i18n/project-docs-zh/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/agents/planweft/skills/i18n/project-docs-zh/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ef339a35c10367ba90fad5afb2ab69d5c570deb8779f58c09c503f101eeedcd8",
+      "before_sha256": "ea1d71c826dfa69fa78112c67bb4771ee277f0ed38925018ea0addde045ba4e5",
+      "path": "dist/agents/planweft/skills/i18n/project-docs-zht/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/agents/planweft/skills/i18n/project-docs-zht/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ab2e627dd01e145f7832f349c465fb63a36e7074dbb6a37dd4d961ad98835604",
+      "before_sha256": "32bf6126dae11d369e791f296fe5cdb9e1249a21cdc5a14287161c6823671cf9",
+      "path": "dist/agents/planweft/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/agents/planweft/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "5792ca7ea003430523ea4ba0628beb5bc758e71e243bf52418ab83fd0cd9fa2f",
+      "before_sha256": "bc5f38474db799f5c25695fa79aa6d6b0708c48e15dfd3dbf90a78e5cf4c228b",
+      "path": "dist/claude/planweft/.claude-plugin/plugin.json"
+    },
+    {
+      "after_sha256": "3ad1ea7358548033094366ba3664b3dbb8fce84ebe3553887fe91c008c12fa09",
+      "before_sha256": "22638da03b2fdec7c0778423ff63e15e8786237424d1133b24058ec8ec5f12b0",
+      "path": "dist/claude/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "ea9e4ecd34e57ea2d42a4a0ce806e1ebcbc8e3fe7b95bc9f962747c48f95c6b6",
+      "before_sha256": "a985f88727ddeb749e3c0cc6e5ee03a0e2676843617d32f996691b6eb670ef5b",
+      "path": "dist/claude/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/claude/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ca106261652dfd8637ea41e044de9049c95de543bfdeb2a9b7896789df44a497",
+      "before_sha256": "c86a82b954617bb5f6d6f3a19025c2da51e0fe135496692be36efb845b499183",
+      "path": "dist/claude/planweft/skills/i18n/project-docs-ar/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/claude/planweft/skills/i18n/project-docs-ar/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "afc136ff31a432d987cce86b62098dfadf1d4d39ac6d06a9d7a1dc36d44a143c",
+      "before_sha256": "702549dcade215c44267fbc8ff6fab14b92451978ebbe2b24f2e0fefbb3e744c",
+      "path": "dist/claude/planweft/skills/i18n/project-docs-de/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/claude/planweft/skills/i18n/project-docs-de/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "bee443335dc1f7cb0c0deafc4bc93c56039161f4ed7ccf78f6b5fb7cf82cdb93",
+      "before_sha256": "79ff320e63f596ef200f5e801fc5d2e8e94d7d92d76e16dabc8197a07fbbc5f0",
+      "path": "dist/claude/planweft/skills/i18n/project-docs-es/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/claude/planweft/skills/i18n/project-docs-es/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "5781cab0bbd34f03228bd188d0aae225aa442f519a26521853101cf457701016",
+      "before_sha256": "cae9d33c45f9d8c7e0d44fbaa91a9034fbc1949bf80412110005a688d6b3ed43",
+      "path": "dist/claude/planweft/skills/i18n/project-docs-zh/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/claude/planweft/skills/i18n/project-docs-zh/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ef339a35c10367ba90fad5afb2ab69d5c570deb8779f58c09c503f101eeedcd8",
+      "before_sha256": "ea1d71c826dfa69fa78112c67bb4771ee277f0ed38925018ea0addde045ba4e5",
+      "path": "dist/claude/planweft/skills/i18n/project-docs-zht/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/claude/planweft/skills/i18n/project-docs-zht/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ab2e627dd01e145f7832f349c465fb63a36e7074dbb6a37dd4d961ad98835604",
+      "before_sha256": "32bf6126dae11d369e791f296fe5cdb9e1249a21cdc5a14287161c6823671cf9",
+      "path": "dist/claude/planweft/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/claude/planweft/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "bfee3f8a88ef3c2f2d67cb7f360d52d0290f7a398cd979501a41d91e039547c3",
+      "before_sha256": "4bab8a9eae6c552ac16722627b335622e96f8048836d1e10d3f82072cbb4b895",
+      "path": "dist/codebuddy/planweft/.codebuddy-plugin/plugin.json"
+    },
+    {
+      "after_sha256": "176b1e1926838e49882640f5a1351f8a3eec1fcb5b347071c0b80e18edd6ded6",
+      "before_sha256": "79cafaf467f9133092472e4196116a187fb903798c4efa0f31559041813c13c6",
+      "path": "dist/codebuddy/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "2819db93d5b8e4993f7dfc9e7ef876da9e4bb7333f188dcf61a2e6ee8551ad0e",
+      "before_sha256": "1b3166587ae6c36d0e296e167aa28f77f883b6f19a20d60198e9d3880181d0c9",
+      "path": "dist/codebuddy/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/codebuddy/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "e2aee661b26fed073e6defc86662c4539f1c3aeadc9a9308af21d21e914df201",
+      "before_sha256": "b63882d73712afa9bdf45afd569a88586d785ad5415574c36f7597652dbccd0c",
+      "path": "dist/codebuddy/planweft/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/codebuddy/planweft/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "cce44a98d9edb4a02378c7c3fb4f2a3e904cf15424ce1a467f71bb7a36805e47",
+      "before_sha256": "d1eb09085790a956b89dd6c5cfaaf7a6723129deffe614ababe149c6afdc2597",
+      "path": "dist/codebuddy/planweft/skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/codebuddy/planweft/skills/project-docs/references/language-variants/project-docs-ar/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "33d22b31b1efabf25155ff84b0fa3b18a48fd82d416b1679719220500834ee30",
+      "before_sha256": "20a324f266616c8e591697948e062aaeb8d8e58345c811ab992951757862a987",
+      "path": "dist/codebuddy/planweft/skills/project-docs/references/language-variants/project-docs-de/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/codebuddy/planweft/skills/project-docs/references/language-variants/project-docs-de/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "b51e591e05110a5bdf183c8845c7de72ce74c8c85e0cea30703beaf53b8b7ad5",
+      "before_sha256": "8e6fbec70fd920b0a0f83c67b411c4b02e26a1287b80bebf9edd7e2b9f0bad13",
+      "path": "dist/codebuddy/planweft/skills/project-docs/references/language-variants/project-docs-es/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/codebuddy/planweft/skills/project-docs/references/language-variants/project-docs-es/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "69743f4dd8ba8a1e093892b5c377ac646feb8d86a96a30ee2a1cef3459fa37b9",
+      "before_sha256": "65fb4a1e1f020493a674e44144ca7fcb33d3a98d86cf278e35552bd219c9eaee",
+      "path": "dist/codebuddy/planweft/skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/codebuddy/planweft/skills/project-docs/references/language-variants/project-docs-zh/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ec189c716167c4b4afc267a4735b04e23893b7fdf604ef7f9d6f4b227d639165",
+      "before_sha256": "ac3d99a45466a0dacbb15cf74c435abff572cd433e6064db47d003d721bc1eeb",
+      "path": "dist/codebuddy/planweft/skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/codebuddy/planweft/skills/project-docs/references/language-variants/project-docs-zht/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "058197b985a21f6fa9cabaf129a0205a6827e4bbfd3f856cdcc5ab9321892d9d",
+      "before_sha256": "66ca2a1fad1cb33631b46051cedeb35b98b4ddead4def50791c42794e751e4e5",
+      "path": "dist/codex/planweft/.codex-plugin/plugin.json"
+    },
+    {
+      "after_sha256": "a538565083ee76a92259bd089b0e663df155a19089315c620de819eda116ceb8",
+      "before_sha256": "5027c057246c2d0f891dc8a93fb1c7dfc81b3fbfd9b53faa2185cca10446a709",
+      "path": "dist/codex/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "01270e319621fe585ff45bd44fcdd4811e5c52343f5ffc29fd937fd21510c6c7",
+      "before_sha256": "649af65e9eba86320260aa167e4bb8ed457ddb42f4c825cff84671241e71ae8a",
+      "path": "dist/codex/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/codex/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ca106261652dfd8637ea41e044de9049c95de543bfdeb2a9b7896789df44a497",
+      "before_sha256": "c86a82b954617bb5f6d6f3a19025c2da51e0fe135496692be36efb845b499183",
+      "path": "dist/codex/planweft/skills/i18n/project-docs-ar/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/codex/planweft/skills/i18n/project-docs-ar/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "afc136ff31a432d987cce86b62098dfadf1d4d39ac6d06a9d7a1dc36d44a143c",
+      "before_sha256": "702549dcade215c44267fbc8ff6fab14b92451978ebbe2b24f2e0fefbb3e744c",
+      "path": "dist/codex/planweft/skills/i18n/project-docs-de/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/codex/planweft/skills/i18n/project-docs-de/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "bee443335dc1f7cb0c0deafc4bc93c56039161f4ed7ccf78f6b5fb7cf82cdb93",
+      "before_sha256": "79ff320e63f596ef200f5e801fc5d2e8e94d7d92d76e16dabc8197a07fbbc5f0",
+      "path": "dist/codex/planweft/skills/i18n/project-docs-es/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/codex/planweft/skills/i18n/project-docs-es/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "5781cab0bbd34f03228bd188d0aae225aa442f519a26521853101cf457701016",
+      "before_sha256": "cae9d33c45f9d8c7e0d44fbaa91a9034fbc1949bf80412110005a688d6b3ed43",
+      "path": "dist/codex/planweft/skills/i18n/project-docs-zh/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/codex/planweft/skills/i18n/project-docs-zh/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ef339a35c10367ba90fad5afb2ab69d5c570deb8779f58c09c503f101eeedcd8",
+      "before_sha256": "ea1d71c826dfa69fa78112c67bb4771ee277f0ed38925018ea0addde045ba4e5",
+      "path": "dist/codex/planweft/skills/i18n/project-docs-zht/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/codex/planweft/skills/i18n/project-docs-zht/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "d3542124b3edecf8a9d5a3d14f9797483420946da1220eb9b1a727f987c1152d",
+      "before_sha256": "4e6f490b4569055929befe1f1919155c7734cd5de5e0496e40aa27964806c1db",
+      "path": "dist/codex/planweft/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/codex/planweft/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "6b0d8ec3e13b338ce65795a8b23b269f44f8dc1cc2638069edb1ecbcbc3db73d",
+      "before_sha256": "9b5ae2ff2cb9d93982fbc6a36ddf92a905620474586d0a57c5cd8141376df235",
+      "path": "dist/continue/planweft/.continue/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/continue/planweft/.continue/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "cd78836c4e593d9b626a5cff1feaea29a92f1abc98275cfa73aff3205f27dcb5",
+      "before_sha256": "662af7d94d428af5b01b25c1a0ed030b2d529729289c681350d242e18bf51aef",
+      "path": "dist/continue/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "94f679cb67f0513267b14ab108f6bc2f434fce4058c58f41b0e5fddca94b7734",
+      "before_sha256": "005877b6319e8959a2aa6b12e08dc7db8d941debd7976cfa86c2e37a3fdce901",
+      "path": "dist/continue/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/continue/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "e294338becd5104027ab5884e0b51cf51808080f322af18b0520b186a7bc2eae",
+      "before_sha256": "dda4c992c0b044123e8e62703af616fd7b6f1843132108ac4f44845b5363c45b",
+      "path": "dist/continue/planweft/skills/i18n/project-docs-ar/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/continue/planweft/skills/i18n/project-docs-ar/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "8b71cf10efee64e2a1e102303ce37564fdf3e2f31bef64a86f128427c25cc1fd",
+      "before_sha256": "0b272159dd6965019424373808d604b1b5fba722515ad081c50daf38a7a8f542",
+      "path": "dist/continue/planweft/skills/i18n/project-docs-de/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/continue/planweft/skills/i18n/project-docs-de/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "00b39addd866e154cc23a187501943a961a61e144f3b9b6494ec259d80e13c1e",
+      "before_sha256": "013d8af5ab59955f2f6a7ec30051550b6c736a01b4e70f5f8130f2d60bd1bef0",
+      "path": "dist/continue/planweft/skills/i18n/project-docs-es/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/continue/planweft/skills/i18n/project-docs-es/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "14174f3dd45caca4e489eb0b6616ada17773ed89d17f4e3c56a7cccf3eebeb17",
+      "before_sha256": "66e9a21fc6d84e72fad8e75735e429c07d068d2a10ef4fb405de35f6f1f89d77",
+      "path": "dist/continue/planweft/skills/i18n/project-docs-zh/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/continue/planweft/skills/i18n/project-docs-zh/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "12bc35b0f87e2a382dbe204599428c31379a0c397f7ecc88b672f7d6f8606ad3",
+      "before_sha256": "eeeb84765c2b062580f637d7a66ede4e5a36b8d0f9d0d918c5e0f848ebc66feb",
+      "path": "dist/continue/planweft/skills/i18n/project-docs-zht/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/continue/planweft/skills/i18n/project-docs-zht/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "d7c7eff579ee4ffeee4570ff527381cff8c8441bb7cb98be9c4e147b2ddf6476",
+      "before_sha256": "711c1b26dee29743dd8ea7e4f429a5a780d0cddb4d6adc43b6f8111fa1d4d7bc",
+      "path": "dist/continue/planweft/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/continue/planweft/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "759252d2af22f8e51dabcc6d4e38d7c944fac6399cb1c32d913ff4e8754df752",
+      "before_sha256": "c51e1d6a34a1346f124a1c9ea8a4769bb9ba14e1463e5f0c4e6710d32c2c8c5a",
+      "path": "dist/copilot/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "bcf52c4932e007e8600546c0ffe0e24cc050d4c80e108bcf82501bbed676a839",
+      "before_sha256": "b930151fcd3e77dae5bd78c8de6ce0926664a36d5d697656a952298405822ca0",
+      "path": "dist/copilot/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/copilot/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "67ba5038de45c0786f0cc780aafc9d261c3863bcd3be1c55adf54c479801102f",
+      "before_sha256": "9afc8cd303c2e2f59937144e2747afbeb24c0e891e004dcc290975e8aef08e12",
+      "path": "dist/copilot/planweft/plugin.json"
+    },
+    {
+      "after_sha256": "e2aee661b26fed073e6defc86662c4539f1c3aeadc9a9308af21d21e914df201",
+      "before_sha256": "b63882d73712afa9bdf45afd569a88586d785ad5415574c36f7597652dbccd0c",
+      "path": "dist/copilot/planweft/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/copilot/planweft/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "cce44a98d9edb4a02378c7c3fb4f2a3e904cf15424ce1a467f71bb7a36805e47",
+      "before_sha256": "d1eb09085790a956b89dd6c5cfaaf7a6723129deffe614ababe149c6afdc2597",
+      "path": "dist/copilot/planweft/skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/copilot/planweft/skills/project-docs/references/language-variants/project-docs-ar/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "33d22b31b1efabf25155ff84b0fa3b18a48fd82d416b1679719220500834ee30",
+      "before_sha256": "20a324f266616c8e591697948e062aaeb8d8e58345c811ab992951757862a987",
+      "path": "dist/copilot/planweft/skills/project-docs/references/language-variants/project-docs-de/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/copilot/planweft/skills/project-docs/references/language-variants/project-docs-de/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "b51e591e05110a5bdf183c8845c7de72ce74c8c85e0cea30703beaf53b8b7ad5",
+      "before_sha256": "8e6fbec70fd920b0a0f83c67b411c4b02e26a1287b80bebf9edd7e2b9f0bad13",
+      "path": "dist/copilot/planweft/skills/project-docs/references/language-variants/project-docs-es/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/copilot/planweft/skills/project-docs/references/language-variants/project-docs-es/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "69743f4dd8ba8a1e093892b5c377ac646feb8d86a96a30ee2a1cef3459fa37b9",
+      "before_sha256": "65fb4a1e1f020493a674e44144ca7fcb33d3a98d86cf278e35552bd219c9eaee",
+      "path": "dist/copilot/planweft/skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/copilot/planweft/skills/project-docs/references/language-variants/project-docs-zh/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ec189c716167c4b4afc267a4735b04e23893b7fdf604ef7f9d6f4b227d639165",
+      "before_sha256": "ac3d99a45466a0dacbb15cf74c435abff572cd433e6064db47d003d721bc1eeb",
+      "path": "dist/copilot/planweft/skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/copilot/planweft/skills/project-docs/references/language-variants/project-docs-zht/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "31c28cf13b8513c98679e8ea78f12b1a0297c83286856a069047c6cda4ae4aa1",
+      "before_sha256": "bcb0e9a4289f132fd326ab2606a44ffeb45f506a9254a7179c11ed208dcd42aa",
+      "path": "dist/cursor/planweft/.cursor-plugin/plugin.json"
+    },
+    {
+      "after_sha256": "0b5d0918484450602220963d99aa3aa188db8213cb52e6053ca2283b6e182145",
+      "before_sha256": "d85795638e46662cec42a51f18219bbf233b0094cb19227508414d9620597029",
+      "path": "dist/cursor/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "6f10f275a7b1183b817e1dee59f8d2baaecb9640206b277f0bbeffbce32e577a",
+      "before_sha256": "690c4af95d0b600b5c056f7180f30db3f1e96355108dfa0be05b51d56d75fcb8",
+      "path": "dist/cursor/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/cursor/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "e2aee661b26fed073e6defc86662c4539f1c3aeadc9a9308af21d21e914df201",
+      "before_sha256": "b63882d73712afa9bdf45afd569a88586d785ad5415574c36f7597652dbccd0c",
+      "path": "dist/cursor/planweft/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/cursor/planweft/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "cce44a98d9edb4a02378c7c3fb4f2a3e904cf15424ce1a467f71bb7a36805e47",
+      "before_sha256": "d1eb09085790a956b89dd6c5cfaaf7a6723129deffe614ababe149c6afdc2597",
+      "path": "dist/cursor/planweft/skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/cursor/planweft/skills/project-docs/references/language-variants/project-docs-ar/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "33d22b31b1efabf25155ff84b0fa3b18a48fd82d416b1679719220500834ee30",
+      "before_sha256": "20a324f266616c8e591697948e062aaeb8d8e58345c811ab992951757862a987",
+      "path": "dist/cursor/planweft/skills/project-docs/references/language-variants/project-docs-de/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/cursor/planweft/skills/project-docs/references/language-variants/project-docs-de/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "b51e591e05110a5bdf183c8845c7de72ce74c8c85e0cea30703beaf53b8b7ad5",
+      "before_sha256": "8e6fbec70fd920b0a0f83c67b411c4b02e26a1287b80bebf9edd7e2b9f0bad13",
+      "path": "dist/cursor/planweft/skills/project-docs/references/language-variants/project-docs-es/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/cursor/planweft/skills/project-docs/references/language-variants/project-docs-es/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "69743f4dd8ba8a1e093892b5c377ac646feb8d86a96a30ee2a1cef3459fa37b9",
+      "before_sha256": "65fb4a1e1f020493a674e44144ca7fcb33d3a98d86cf278e35552bd219c9eaee",
+      "path": "dist/cursor/planweft/skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/cursor/planweft/skills/project-docs/references/language-variants/project-docs-zh/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ec189c716167c4b4afc267a4735b04e23893b7fdf604ef7f9d6f4b227d639165",
+      "before_sha256": "ac3d99a45466a0dacbb15cf74c435abff572cd433e6064db47d003d721bc1eeb",
+      "path": "dist/cursor/planweft/skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/cursor/planweft/skills/project-docs/references/language-variants/project-docs-zht/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "8a85a0f5b09ab23e5cf95da2f3963bbd7654cd81fe11b55522460c075feafeda",
+      "before_sha256": "4ae5a392868ba3c5c60fabdb4e636b996e84db09feae054acfd732d0a877c68e",
+      "path": "dist/dsh/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "df96e9f6a465bec84b393619338803a727fa24082f7fea5537fb500c9707c34a",
+      "before_sha256": "9acc21f1ab91a977fe2a89e4fbde438092a224f4a8b30b1a0e0a2014d45028cc",
+      "path": "dist/dsh/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/dsh/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ac7652807397a9447d6736d4da110f33f703f5ea1480660ad84e135ef7784e48",
+      "before_sha256": "4f38ec8d9c6058c24765044897d2c45abad3e324d97f4fb687e4ac72430894a7",
+      "path": "dist/dsh/planweft/package.json"
+    },
+    {
+      "after_sha256": "e2aee661b26fed073e6defc86662c4539f1c3aeadc9a9308af21d21e914df201",
+      "before_sha256": "b63882d73712afa9bdf45afd569a88586d785ad5415574c36f7597652dbccd0c",
+      "path": "dist/dsh/planweft/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/dsh/planweft/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "cce44a98d9edb4a02378c7c3fb4f2a3e904cf15424ce1a467f71bb7a36805e47",
+      "before_sha256": "d1eb09085790a956b89dd6c5cfaaf7a6723129deffe614ababe149c6afdc2597",
+      "path": "dist/dsh/planweft/skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/dsh/planweft/skills/project-docs/references/language-variants/project-docs-ar/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "33d22b31b1efabf25155ff84b0fa3b18a48fd82d416b1679719220500834ee30",
+      "before_sha256": "20a324f266616c8e591697948e062aaeb8d8e58345c811ab992951757862a987",
+      "path": "dist/dsh/planweft/skills/project-docs/references/language-variants/project-docs-de/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/dsh/planweft/skills/project-docs/references/language-variants/project-docs-de/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "b51e591e05110a5bdf183c8845c7de72ce74c8c85e0cea30703beaf53b8b7ad5",
+      "before_sha256": "8e6fbec70fd920b0a0f83c67b411c4b02e26a1287b80bebf9edd7e2b9f0bad13",
+      "path": "dist/dsh/planweft/skills/project-docs/references/language-variants/project-docs-es/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/dsh/planweft/skills/project-docs/references/language-variants/project-docs-es/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "69743f4dd8ba8a1e093892b5c377ac646feb8d86a96a30ee2a1cef3459fa37b9",
+      "before_sha256": "65fb4a1e1f020493a674e44144ca7fcb33d3a98d86cf278e35552bd219c9eaee",
+      "path": "dist/dsh/planweft/skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/dsh/planweft/skills/project-docs/references/language-variants/project-docs-zh/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ec189c716167c4b4afc267a4735b04e23893b7fdf604ef7f9d6f4b227d639165",
+      "before_sha256": "ac3d99a45466a0dacbb15cf74c435abff572cd433e6064db47d003d721bc1eeb",
+      "path": "dist/dsh/planweft/skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/dsh/planweft/skills/project-docs/references/language-variants/project-docs-zht/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "bfee3f8a88ef3c2f2d67cb7f360d52d0290f7a398cd979501a41d91e039547c3",
+      "before_sha256": "4bab8a9eae6c552ac16722627b335622e96f8048836d1e10d3f82072cbb4b895",
+      "path": "dist/factory/planweft/.factory-plugin/plugin.json"
+    },
+    {
+      "after_sha256": "6018286a3efe91cbfd4fb175091ac6abca56722a88b87c13cc67671bc37241fe",
+      "before_sha256": "fa6aa0b0b2b95b2be4a22fbac11672833666bf92e34a60fe4e382e9c3e5091a4",
+      "path": "dist/factory/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "9821af59ef16ee44711f9acdcd318034967716eb6364586e7d2d7832811d35a0",
+      "before_sha256": "b3344141e7e0e3585e9f8d9b44c9fb772a4155b4cd8a97a4bf090070ded22ccd",
+      "path": "dist/factory/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/factory/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "e2aee661b26fed073e6defc86662c4539f1c3aeadc9a9308af21d21e914df201",
+      "before_sha256": "b63882d73712afa9bdf45afd569a88586d785ad5415574c36f7597652dbccd0c",
+      "path": "dist/factory/planweft/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/factory/planweft/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "cce44a98d9edb4a02378c7c3fb4f2a3e904cf15424ce1a467f71bb7a36805e47",
+      "before_sha256": "d1eb09085790a956b89dd6c5cfaaf7a6723129deffe614ababe149c6afdc2597",
+      "path": "dist/factory/planweft/skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/factory/planweft/skills/project-docs/references/language-variants/project-docs-ar/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "33d22b31b1efabf25155ff84b0fa3b18a48fd82d416b1679719220500834ee30",
+      "before_sha256": "20a324f266616c8e591697948e062aaeb8d8e58345c811ab992951757862a987",
+      "path": "dist/factory/planweft/skills/project-docs/references/language-variants/project-docs-de/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/factory/planweft/skills/project-docs/references/language-variants/project-docs-de/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "b51e591e05110a5bdf183c8845c7de72ce74c8c85e0cea30703beaf53b8b7ad5",
+      "before_sha256": "8e6fbec70fd920b0a0f83c67b411c4b02e26a1287b80bebf9edd7e2b9f0bad13",
+      "path": "dist/factory/planweft/skills/project-docs/references/language-variants/project-docs-es/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/factory/planweft/skills/project-docs/references/language-variants/project-docs-es/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "69743f4dd8ba8a1e093892b5c377ac646feb8d86a96a30ee2a1cef3459fa37b9",
+      "before_sha256": "65fb4a1e1f020493a674e44144ca7fcb33d3a98d86cf278e35552bd219c9eaee",
+      "path": "dist/factory/planweft/skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/factory/planweft/skills/project-docs/references/language-variants/project-docs-zh/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ec189c716167c4b4afc267a4735b04e23893b7fdf604ef7f9d6f4b227d639165",
+      "before_sha256": "ac3d99a45466a0dacbb15cf74c435abff572cd433e6064db47d003d721bc1eeb",
+      "path": "dist/factory/planweft/skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/factory/planweft/skills/project-docs/references/language-variants/project-docs-zht/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "2a3f40dfd22b11f7ea3941280fbd1b5ecd7db7e86c12b4640bba5d8a11ce0117",
+      "before_sha256": "e6dd8d8a7031791898ca0eb2fb412ecdf16e2ed5c6594fdbab223ac697ee71fd",
+      "path": "dist/gemini/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "8cfaa5f1fecd473092fe7f9b311c106d4be335f126f86291acf2075bd3db2739",
+      "before_sha256": "0abf050cc005d8a242a53211aeb1289ea4f91cf7271be94c069b23b7f02e434a",
+      "path": "dist/gemini/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/gemini/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "55932855d298dfb0566623b9512777a342daaa6882cc9bb2ceaffea65bdc6b03",
+      "before_sha256": "bdd2929189104a12499f4dc0d32ec3869565923e4d3b84d953f12260b313a76e",
+      "path": "dist/gemini/planweft/gemini-extension.json"
+    },
+    {
+      "after_sha256": "530d7278f79b885a3beb414b4280c28c255829027eb8653408b9c78fa3d31e61",
+      "before_sha256": "36004509376e740228f8709602b2a51553a73f65b9f9234efa0bff24a858afb6",
+      "path": "dist/gemini/planweft/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/gemini/planweft/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "427ca7b2e35be5a4aa20e175eb6f91d2affc741afc20fa8886688d3a62621896",
+      "before_sha256": "b3fd5cae757994ad179d7d75a807df3bea1beac934e313d48695df2215ef9b0c",
+      "path": "dist/gemini/planweft/skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/gemini/planweft/skills/project-docs/references/language-variants/project-docs-ar/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "f4407c51818d9483ca6b25f4f071afb3f339b93d859fdfe15843aaa4f305ac75",
+      "before_sha256": "ddf4361a389eb02447212eee1b269780af14abe8ce2ec07be06951fa27cb470e",
+      "path": "dist/gemini/planweft/skills/project-docs/references/language-variants/project-docs-de/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/gemini/planweft/skills/project-docs/references/language-variants/project-docs-de/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "424a4d5f0cc49cbb859ddff3f67e7bdd53624a775499c0ab89478a4672a14c9a",
+      "before_sha256": "8aac0b189df81f5f45994480cae99aa226dd9a5e115e4a0123dec92b3cd075db",
+      "path": "dist/gemini/planweft/skills/project-docs/references/language-variants/project-docs-es/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/gemini/planweft/skills/project-docs/references/language-variants/project-docs-es/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "849ab5ebdefa631ba15607cf706517ebe25e708a382375481c6094e6028c01b1",
+      "before_sha256": "6e4ca4049586515b673f8931be7a92f1071248eed9b835b70340ff2ecb47ebf9",
+      "path": "dist/gemini/planweft/skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/gemini/planweft/skills/project-docs/references/language-variants/project-docs-zh/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "0cba7cd23241288f91faa9f9856ede93302245fa97aee6b1aa52fe77e8f60c60",
+      "before_sha256": "d47f17a27c0d5f43aa7287b98bcb381324f2e95f89693624613a6dee0884e2a5",
+      "path": "dist/gemini/planweft/skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/gemini/planweft/skills/project-docs/references/language-variants/project-docs-zht/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "f5e133f90d31aad2d6ec3e9f10e348cbddd0444e03b1c97d1dca2f47fc67e79f",
+      "before_sha256": "6efb52676c836ed8360d901ad5a079590e19d0804425a5597afe58b7e6671a19",
+      "path": "dist/hermes/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "301fce6065e3138a15292ca132632fc864ed66d076f5688618a4b4beb097eb39",
+      "before_sha256": "9df5852a86a3b4d324ced186c592389490628c37042d52e77b29cc2938676d48",
+      "path": "dist/hermes/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/hermes/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "c130d63a57ebd6ce5bc989de4da33ca37626a0066c7dcb54d1c306cb16a67939",
+      "before_sha256": "945ffafb3116d9fcb27424113c7a476b883a5cb6adba5b0249556b42eb46d355",
+      "path": "dist/hermes/planweft/plugin.yaml"
+    },
+    {
+      "after_sha256": "e2aee661b26fed073e6defc86662c4539f1c3aeadc9a9308af21d21e914df201",
+      "before_sha256": "b63882d73712afa9bdf45afd569a88586d785ad5415574c36f7597652dbccd0c",
+      "path": "dist/hermes/planweft/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/hermes/planweft/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "cce44a98d9edb4a02378c7c3fb4f2a3e904cf15424ce1a467f71bb7a36805e47",
+      "before_sha256": "d1eb09085790a956b89dd6c5cfaaf7a6723129deffe614ababe149c6afdc2597",
+      "path": "dist/hermes/planweft/skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/hermes/planweft/skills/project-docs/references/language-variants/project-docs-ar/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "33d22b31b1efabf25155ff84b0fa3b18a48fd82d416b1679719220500834ee30",
+      "before_sha256": "20a324f266616c8e591697948e062aaeb8d8e58345c811ab992951757862a987",
+      "path": "dist/hermes/planweft/skills/project-docs/references/language-variants/project-docs-de/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/hermes/planweft/skills/project-docs/references/language-variants/project-docs-de/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "b51e591e05110a5bdf183c8845c7de72ce74c8c85e0cea30703beaf53b8b7ad5",
+      "before_sha256": "8e6fbec70fd920b0a0f83c67b411c4b02e26a1287b80bebf9edd7e2b9f0bad13",
+      "path": "dist/hermes/planweft/skills/project-docs/references/language-variants/project-docs-es/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/hermes/planweft/skills/project-docs/references/language-variants/project-docs-es/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "69743f4dd8ba8a1e093892b5c377ac646feb8d86a96a30ee2a1cef3459fa37b9",
+      "before_sha256": "65fb4a1e1f020493a674e44144ca7fcb33d3a98d86cf278e35552bd219c9eaee",
+      "path": "dist/hermes/planweft/skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/hermes/planweft/skills/project-docs/references/language-variants/project-docs-zh/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ec189c716167c4b4afc267a4735b04e23893b7fdf604ef7f9d6f4b227d639165",
+      "before_sha256": "ac3d99a45466a0dacbb15cf74c435abff572cd433e6064db47d003d721bc1eeb",
+      "path": "dist/hermes/planweft/skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/hermes/planweft/skills/project-docs/references/language-variants/project-docs-zht/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "0a31aadab8a9a817a34e98286f9c64147e42a1179bcb78a744c0324a5065afda",
+      "before_sha256": "75d79464cd1889194fc61ffc64ab50a1d2aea6415562d8e38cd34c0ddcdae22c",
+      "path": "dist/kiro/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "8967eaaf04831543db4a416f499159ae414e235d4017c4a732d22ae978d8050d",
+      "before_sha256": "7e694528abb64cc5a316c0ac65995e296c69f3e32131ff273a273bb7e0db699d",
+      "path": "dist/kiro/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/kiro/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "82734984418e81cba1c16815dae5d445feeb790df5c654c1946681d168ea5b36",
+      "before_sha256": "d5cddcad86f3b999be698351e6aab6a8e04d0ae52dfd29c2be9ab3776cd5094c",
+      "path": "dist/kiro/planweft/plugin.json"
+    },
+    {
+      "after_sha256": "f0e03d7c73fb28f732206214077c86f7d973c28754cc8ebafb36a08fd5ad79d4",
+      "before_sha256": "84b332876edb8530978dffca227b8d328b0515f3554e4b266f294cf7d7e090d2",
+      "path": "dist/kiro/planweft/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/kiro/planweft/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "61236cab0492487017ef7be5b1db012bd0f889d7f514296f2458cef45f05175b",
+      "before_sha256": "a72f0056aa2c4592be9425db4621c22f45035788d71bd2aeab125231bce377d1",
+      "path": "dist/kiro/planweft/skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/kiro/planweft/skills/project-docs/references/language-variants/project-docs-ar/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "d26b5776344ae4335653068ba8cbcb5d89aba8bcdb9de64d4314cfe5ad34df2b",
+      "before_sha256": "39dc8faebbc02bb37ac54ac033fe56e82020a4020a7d929e49e3e31bf1f42e91",
+      "path": "dist/kiro/planweft/skills/project-docs/references/language-variants/project-docs-de/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/kiro/planweft/skills/project-docs/references/language-variants/project-docs-de/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "06581afd8215deafb231d72fce6b03ed7cf9b0211c6cd2017cec8532b826c0cc",
+      "before_sha256": "6b80da3ece7790ecea04b347ffafc03cb2027993b5e3c1856e7ff6fe4d36d254",
+      "path": "dist/kiro/planweft/skills/project-docs/references/language-variants/project-docs-es/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/kiro/planweft/skills/project-docs/references/language-variants/project-docs-es/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "69137113df802ec2bcf15681dcf9af64441b356893f9f7304791376de820579f",
+      "before_sha256": "2a9d41ee729e1cb87392b54d55c6f00ed4ea9e27fbae3b450c2d723581ea973f",
+      "path": "dist/kiro/planweft/skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/kiro/planweft/skills/project-docs/references/language-variants/project-docs-zh/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "93a6f84dd021380b335a505b9ba46bef6ad4a59cce1d7ee6cf897423ce7d01d8",
+      "before_sha256": "a0b79837b2d613b62aa9b558125dfb6eeb52be26135b9183200a9b58c5efe63d",
+      "path": "dist/kiro/planweft/skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/kiro/planweft/skills/project-docs/references/language-variants/project-docs-zht/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "160f4a9f885a1e9385796250c3074758ad46bfaf38a30bbb3280a1ef752efd4a",
+      "before_sha256": "e100d2586a90595b0439a5a9bf54b5b0ace8c2145c2a443e21699b9ad81b7947",
+      "path": "dist/manifest.json"
+    },
+    {
+      "after_sha256": "0e008ebfbfad7b1edaaef701117291ffd3510005b2b1f47d4af355ef6ac8cbba",
+      "before_sha256": "9ecdabffde6f12537af99013ba544c888aa4a9915f2a3405d6f4666ad79a9d9e",
+      "path": "dist/mastracode/planweft/.mastracode/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/mastracode/planweft/.mastracode/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "2e064fc8dacbae5688de639a57996032e5560b965f162c5d39ded8fcc616e8b6",
+      "before_sha256": "0239a9a6f5cb19ef6ab2921ecfe9a920b0a296e2e270fa0211aec377ee52e5e9",
+      "path": "dist/mastracode/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "2eb4cc1c73c5a08219f9182879f4be97e65ad445c12a5ee64f136fd7c11c87f6",
+      "before_sha256": "a52a67e284a5fe630b4783296f6b0b0c850e5b975889fc303e4797fabc0c8a83",
+      "path": "dist/mastracode/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/mastracode/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ca106261652dfd8637ea41e044de9049c95de543bfdeb2a9b7896789df44a497",
+      "before_sha256": "c86a82b954617bb5f6d6f3a19025c2da51e0fe135496692be36efb845b499183",
+      "path": "dist/mastracode/planweft/skills/i18n/project-docs-ar/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/mastracode/planweft/skills/i18n/project-docs-ar/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "afc136ff31a432d987cce86b62098dfadf1d4d39ac6d06a9d7a1dc36d44a143c",
+      "before_sha256": "702549dcade215c44267fbc8ff6fab14b92451978ebbe2b24f2e0fefbb3e744c",
+      "path": "dist/mastracode/planweft/skills/i18n/project-docs-de/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/mastracode/planweft/skills/i18n/project-docs-de/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "bee443335dc1f7cb0c0deafc4bc93c56039161f4ed7ccf78f6b5fb7cf82cdb93",
+      "before_sha256": "79ff320e63f596ef200f5e801fc5d2e8e94d7d92d76e16dabc8197a07fbbc5f0",
+      "path": "dist/mastracode/planweft/skills/i18n/project-docs-es/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/mastracode/planweft/skills/i18n/project-docs-es/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "5781cab0bbd34f03228bd188d0aae225aa442f519a26521853101cf457701016",
+      "before_sha256": "cae9d33c45f9d8c7e0d44fbaa91a9034fbc1949bf80412110005a688d6b3ed43",
+      "path": "dist/mastracode/planweft/skills/i18n/project-docs-zh/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/mastracode/planweft/skills/i18n/project-docs-zh/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ef339a35c10367ba90fad5afb2ab69d5c570deb8779f58c09c503f101eeedcd8",
+      "before_sha256": "ea1d71c826dfa69fa78112c67bb4771ee277f0ed38925018ea0addde045ba4e5",
+      "path": "dist/mastracode/planweft/skills/i18n/project-docs-zht/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/mastracode/planweft/skills/i18n/project-docs-zht/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ab2e627dd01e145f7832f349c465fb63a36e7074dbb6a37dd4d961ad98835604",
+      "before_sha256": "32bf6126dae11d369e791f296fe5cdb9e1249a21cdc5a14287161c6823671cf9",
+      "path": "dist/mastracode/planweft/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/mastracode/planweft/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "96ffc1042f36da4cddaf9ef557c851ecd087a3d7f64519f174beedd57b40f040",
+      "before_sha256": "1775039169618c8720ac81dfa9e703b842314940eb74adee4fa814c71f9523b5",
+      "path": "dist/opencode/planweft/BUILD.json"
+    },
+    {
+      "after_sha256": "21c6c56e10db60b4586eebf40aea584a6694136bd629419eb6657c8273cc46a3",
+      "before_sha256": "6e69ce03e355138ef4f8323ad125800510651b816fd352f96b9c1ecf208cc90f",
+      "path": "dist/opencode/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "7c303ee4afc3db3107d7bc36519ee6bc794f02b78849cc1f4dbd24ee017e19ee",
+      "before_sha256": "9090c3315f6757d632a9edb353fc9126bd85bccac49e026ed6399ad0fff5ca6e",
+      "path": "dist/opencode/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/opencode/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "019798179b77b7d57c39e9e0f5fe4bf9722b3874c363341a8aae0de0d1412dde",
+      "before_sha256": "b7d4b5b94b5a77ee4e0762207b4b8c2294b4f12e08297b570fbb2c2e085130bc",
+      "path": "dist/opencode/planweft/dist/core.d.ts"
+    },
+    {
+      "after_sha256": "aabb7ecbae7c8e3dd38cb2184501f2cae9d159b405e3d8c712e7be6f089aaf51",
+      "before_sha256": "a6014a30a49ea47ab14b2511a05c50b9a4224a79f48a33994860f972d577b947",
+      "path": "dist/opencode/planweft/dist/core.js"
+    },
+    {
+      "after_sha256": "741607bef9f0f50cebb8d7648c8326a57cb47ecc5c3b1653e6bed6f27139382e",
+      "before_sha256": "08cb6779435e2994c5e0a07f9ab055eaf3a2179a157532e4339ef6a5173f52b4",
+      "path": "dist/opencode/planweft/package-lock.json"
+    },
+    {
+      "after_sha256": "4fb6332aa1ddc2cb8be1d8c6fac169bbc08349340438390c667e46e349c64f62",
+      "before_sha256": "6de4707cefc12232c3aa2e72fc3f57c9642f0c06a9c1414cc293f3798eec0fc9",
+      "path": "dist/opencode/planweft/package.json"
+    },
+    {
+      "after_sha256": "e2aee661b26fed073e6defc86662c4539f1c3aeadc9a9308af21d21e914df201",
+      "before_sha256": "b63882d73712afa9bdf45afd569a88586d785ad5415574c36f7597652dbccd0c",
+      "path": "dist/opencode/planweft/skills/project-docs/SKILL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/opencode/planweft/skills/project-docs/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "cce44a98d9edb4a02378c7c3fb4f2a3e904cf15424ce1a467f71bb7a36805e47",
+      "before_sha256": "d1eb09085790a956b89dd6c5cfaaf7a6723129deffe614ababe149c6afdc2597",
+      "path": "dist/opencode/planweft/skills/project-docs/references/language-variants/project-docs-ar/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/opencode/planweft/skills/project-docs/references/language-variants/project-docs-ar/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "33d22b31b1efabf25155ff84b0fa3b18a48fd82d416b1679719220500834ee30",
+      "before_sha256": "20a324f266616c8e591697948e062aaeb8d8e58345c811ab992951757862a987",
+      "path": "dist/opencode/planweft/skills/project-docs/references/language-variants/project-docs-de/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/opencode/planweft/skills/project-docs/references/language-variants/project-docs-de/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "b51e591e05110a5bdf183c8845c7de72ce74c8c85e0cea30703beaf53b8b7ad5",
+      "before_sha256": "8e6fbec70fd920b0a0f83c67b411c4b02e26a1287b80bebf9edd7e2b9f0bad13",
+      "path": "dist/opencode/planweft/skills/project-docs/references/language-variants/project-docs-es/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/opencode/planweft/skills/project-docs/references/language-variants/project-docs-es/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "69743f4dd8ba8a1e093892b5c377ac646feb8d86a96a30ee2a1cef3459fa37b9",
+      "before_sha256": "65fb4a1e1f020493a674e44144ca7fcb33d3a98d86cf278e35552bd219c9eaee",
+      "path": "dist/opencode/planweft/skills/project-docs/references/language-variants/project-docs-zh/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/opencode/planweft/skills/project-docs/references/language-variants/project-docs-zh/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "ec189c716167c4b4afc267a4735b04e23893b7fdf604ef7f9d6f4b227d639165",
+      "before_sha256": "ac3d99a45466a0dacbb15cf74c435abff572cd433e6064db47d003d721bc1eeb",
+      "path": "dist/opencode/planweft/skills/project-docs/references/language-variants/project-docs-zht/GUIDE.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/opencode/planweft/skills/project-docs/references/language-variants/project-docs-zht/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "197959bc4c05f4eb919916285d2a29ab74e36b00091f24765b2102c31a6d8158",
+      "before_sha256": "576365909a8c5e7882c311cfa57e56416722d70f706c0b0098bf6b55ebeee3c3",
+      "path": "dist/opencode/planweft/src/core.ts"
+    },
+    {
+      "after_sha256": "af97a20135344b61087a4a2ded4bdaa88f28deb8198239b7ca40c9a06ca8b2b1",
+      "before_sha256": "86875b73c5a14e6b7f056b394f908c117941d5af081887d7cf5387c8f650f4bb",
+      "path": "dist/pi/planweft/INSTALL.en.md"
+    },
+    {
+      "after_sha256": "c7d8042bc49be997eda84a35dc0b6ee8551391274f254cc6df0149c02f3322b4",
+      "before_sha256": "305e176244fd4e003da2cdbe0271e8a126c938a8f9adbf0f75989b91124e9d25",
+      "path": "dist/pi/planweft/INSTALL.md"
+    },
+    {
+      "after_sha256": "7fa57f7ea4dd4bd8927c4c0927d203e13a01dfe87489ac05be0a0c0bafe097b3",
+      "before_sha256": "84123be0a2fd5e1d33dd8378a81b1f997f3ec41c12095a8917a23829e998440e",
+      "path": "dist/pi/planweft/UPSTREAM.json"
+    },
+    {
+      "after_sha256": "9eae2052cfed7c23e3cd9eb311475b8760909a703fd8956276279acd9e0a1d94",
+      "before_sha256": "6bc0ecb9465a827844b8809ab7a67b2d89669b4e2d77fd26c568467d04227da2",
+      "path": "dist/pi/planweft/extensions/planweft/package-lock.json"
+    },
+    {
+      "after_sha256": "1b43767195e8b65afc2a07cdd608be17b749eb73a99e72735ff4e190f41482f5",
+      "before_sha256": "d67844af3d69be2b1832e9475e5aa05e6bc00a6bb3bb0bd95d8963fb98da8861",
+      "path": "dist/pi/planweft/extensions/planweft/package.json"
+    },
+    {
+      "after_sha256": "9e910d15f8533b3273b0f47e0be1d9fef05fd0e4b6e3ca8ceaaf31d3754d0320",
+      "before_sha256": "fb8904e9512ca264437bb590819e6568d6cea3b7441540828a25b3483efa8bd1",
+      "path": "dist/pi/planweft/package.json"
+    },
+    {
+      "after_sha256": "917f301d49da56ebdbafe2113b213596008e14840d1fc430b2a5b661c6283292",
+      "before_sha256": "ef3d811ba65f0f5b30d81d00c88b3c93cf4ea58a58eac4dd6f93d62806517139",
+      "path": "docs/installation.en.md"
+    },
+    {
+      "after_sha256": "ce326fe5832c035df8fcb9ac4025df2d9e6c1e8e8b006147c8e57aafc546711b",
+      "before_sha256": "5080b8d9a9a9393a91e381555581c9c0bc089e569788433a3ac47a2c44bd24b5",
+      "path": "docs/installation.md"
+    },
+    {
+      "after_sha256": "327c3e9bcb28029cca12107adb31d8eb19d73f9899667212f7e14259161ff759",
+      "before_sha256": "56c6724254c1932a7d52e580a80b375cc3432913f2b4c47f05fcf32f64400ff6",
+      "path": "docs/platforms.en.md"
+    },
+    {
+      "after_sha256": "0f320de6c3656043c39cb3c2839cebc705e1fbada335555c7fc389ddb8c6eb8c",
+      "before_sha256": "d7d8106f4c05942b890950ffe24dbd9b07ed925f30c9af07dcfcbb9109175407",
+      "path": "docs/platforms.md"
+    },
+    {
+      "after_sha256": "8ab768274431f2e8745a4339b5a442d1c8fd784afeff1f07a0a0835ebdcd6a71",
+      "before_sha256": "748c6c84bc128c543b790be8866431296aaa7d68c20a3c13aa7548eb124a7642",
+      "path": "docs/releasing.en.md"
+    },
+    {
+      "after_sha256": "c79f7e9b38c33f77c9071c03351df6b4252266f730877a343761b6cc2527cada",
+      "before_sha256": "d1ab9297da9cacf4b17acfffaba54691099aa7c6303efdd532189182d11cb293",
+      "path": "docs/releasing.md"
+    },
+    {
+      "after_sha256": "3f4e277ec8e280338ce0868c59b862b41905420d21446ea1e53c5647eb245d4a",
+      "before_sha256": "4c103e3494e4c4d5c1dd1e85c0e7c21dc07f5156e10f4c6adafdca14721fb9f2",
+      "path": "package.json"
+    }
+  ],
+  "reviewer": "release_plan_review",
+  "schema_version": 1,
+  "source_npm_sha256": "3cdb78d2c001278d61f28fb23f6233eacf39a371c462c32622c39ab6dd8c8b45",
+  "source_version": "0.4.0-rc.15",
+  "target_npm_sha256": "e611338a619adabb0ba943d75460a01d83e4670dbe7d69f5d1050a1c1467c132",
+  "target_version": "0.4.0"
+}
