@@ -2,87 +2,62 @@
 
 # Releasing PlanWeft
 
-0.4.0 is prepared on an isolated branch from `master@fe3543f`; RC16 will not be published. The same immutable stable archive goes to `next` first and reaches `latest` only after remote acceptance and the promotion gate, followed by the GitHub Release. Query the official registry for live state; historical `latest=0.4.0-rc.1` is not stable acceptance.
+This page records the maintainer release process and the final 0.4.0 publication facts. See the [installation guide](installation.en.md) for user commands and [platform support](platforms.en.md) for public capability claims.
 
-The single package is `planweft`; its public Git target is `https://github.com/psiQAQ/planweft`.
-These coordinates are release targets, not proof that a version is published. [Installation: 中文](installation.md) / [English](installation.en.md).
+## Pre-release checks
 
-1. Audit public history and attachments, third-party licenses, authors and installation metadata. Back up local history; do not push unresolved privacy findings.
-2. Bump package.json and builder versions, refresh the OpenCode compiler binding, then generate and verify directories. Dependency changes require a root lock update.
-3. Run offline regression, original/migrated comparisons, isolated native lifecycles and independent review. Commit logical batches and merge master.
-4. Prepare artifacts from a clean commit: one npm tarball, plus separate Gemini/Hermes Git trees rooted at their plugin files.
+1. Create a clean worktree and release branch from the confirmed remote `master`. Do not copy uncommitted changes from another checkout.
+2. Check the version, remote branch, latest CI, npm version availability, and dist-tags. Query them again before every external write.
+3. Review public history, attachments, licenses, authors, and installation metadata. An unresolved privacy finding blocks publication.
+4. Edit canonical sources and generate platform directories. Review dependency, pinned-upstream, or compiler changes separately.
+5. Run build consistency, the full test suite, native lifecycles, exact-artifact checks, the authorized model acceptance set, and independent review.
 
 ```bash
-python3 scripts/compile-opencode.py --install
 python3 scripts/build-plugin.py
 python3 scripts/build-plugin.py --verify
 node tests/installer.test.mjs
 python3 -m unittest discover -s tests -p 'test_*.py'
-python3 scripts/prepare-native-release.py --release --output /tmp/planweft-release-new --repository-url https://github.com/psiQAQ/planweft
 ```
 
-`--output` must be a new directory outside the checkout. `--previous-release` preserves previous release-tree ancestry.
-Retain release.json and the complete Git trees. For subsequent releases, recover published branch history before generating;
-do not force-push or create a new branch root. release.json records the source commit, per-file npm digests, platform trees,
-and OpenCode/Hermes Skill pairing.
+## Exact artifacts and publication order
 
-5. Use the master-only OIDC/provenance workflow to publish the reviewed stable SHA under next. Never paste tokens in chat or logs.
+Generate one npm tgz, `release.json`, and checksum set from the same clean commit. For a stable release, the publication workflow requires the reviewed SHA-256 as `expected_sha256`. Stop if the CI rebuild differs; do not change the expected digest to accept different bytes.
 
 ```bash
+python3 scripts/prepare-native-release.py --release --output /tmp/planweft-release-new --repository-url https://github.com/psiQAQ/planweft
 gh workflow run publish.yml -f expected_sha256=REVIEWED_SHA256
 ```
 
-6. Configure the npm package's GitHub trusted publisher (psiQAQ / planweft / publish.yml) with a protected release environment.
-The workflow uses Node 24 and npm 11.11.0 without a persistent publish token. Validate OIDC with a candidate version.
-7. Download from the official registry and verify bytes, SHA-256 and integrity, then run five-host native discovery, doctor, no-new-model fresh-session loading and uninstall. Final install/remove/uninstall evidence is fresh; upgrade/rollback is reusable only after per-file manifest-diff and independent review show it is unaffected.
-8. Commit promotion evidence and run `check-release-gate.py --promotion`. Only then update npm `latest` and create the source-bound `v0.4.0` Release with the exact tgz, manifest/checksum, support matrix, experimental capabilities, known failures and rollback command.
+`--output` must name a new directory outside the checkout. The publication workflow uses GitHub OIDC/provenance. Do not place long-lived npm tokens in commands, chat, or logs.
 
-Reference: [npm trusted publishers](https://docs.npmjs.com/trusted-publishers/). Current execution state is in internal
-[PLAN-0010](plans/0010-five-agent-release.md) (Chinese). Official store listings require separate host reviews.
+Publish a stable version to `next` first. Download it from the official registry and verify bytes, SHA-256, and integrity, then complete native installation, discovery, doctor, fresh-session loading, and removal on the five core hosts. Update `latest` only after promotion evidence and independent review pass. Create the source-bound GitHub Release last.
 
-## Five-container gates and exact artifacts
+Do not overwrite or delete a published npm version. If remote acceptance fails, keep the existing `latest` tag and failure evidence, then fix the problem in a new patch version.
 
-Stable acceptance uses schema 3. The version-controlled [`support-policy.json`](../release/support-policy.json) labels every host/scenario `required`, `evidence_based` or `experimental`; the gate computes `release_blocking` and rejects a self-authorized value. Aggregate status comes from real scenario results. Non-blocking Failed/Inconclusive stays visible with a public limit ID; Not Run retains its reason.
+## Schema 3 gate
 
-Each fresh/reused scenario binds the exact package and attachment hashes. Reuse additionally binds source/target packages, a parsed per-file manifest diff, affected checks and a reviewer. Exact artifacts, final install/uninstall, user-file protection, explicit Skill reading and required model workflows cannot be reused. Codex maintenance and cold-read use different sessions and attachments, the same output/input snapshot, no-history/no-plugin isolation, and actual Skill-read evidence. Separate pre-publication and promotion reviews bind their phase; promotion also verifies the earlier review.
+[`release/support-policy.json`](../release/support-policy.json) classifies every host and scenario as `required`, `evidence_based`, or `experimental`. The gate calculates `release_blocking` from policy and does not trust a self-declared acceptance value.
 
-The publishing workflow compares CI bytes against its `expected_sha256` input, required for stable versions. Fix reproducibility failures instead of changing the expected digest. The evidence root is bounded by the repository; absolute paths, `..`, escaping symlinks, self-reference and digest mismatches are rejected. OIDC publishing permission does not imply npm dist-tag management permission.
+- A `required` item must be Passed.
+- Experimental Failed/Inconclusive results require an attachment and public limit ID. Not Run requires a reason.
+- Fresh and reused evidence bind exact package and attachment digests. Reuse also binds source and target packages, a per-file manifest diff, affected checks, and a reviewer.
+- Exact artifacts, final installation/removal, user-file protection, explicit Skill reading, and supported model workflows cannot be reused.
+- Prepublication and promotion require separate independent reviews. Promotion also verifies the earlier review.
+- The evidence root cannot escape the repository. Absolute paths, `..`, escaping symlinks, self-reference, and digest mismatches are rejected.
 
-Public master history has been backed up and sanitized; the GitHub repository is public. Earlier statements that it had not been pushed describe historical status only. An internal [mapping](reproduction/evidence/0010/history-sanitization.json) relates original history and sanitized attachments. Rewriting history does not recall existing third-party copies.
+Aggregate status comes from real child scenarios. Whether an item blocks publication is separate from whether it Passed.
 
-## Historical candidate records
+## 0.4.0 release record
 
-The following records retain their version-specific checkpoints. Current preparation status is at the top; historical pending work is not today's status.
+- Source commit: `1a96dce0d25b4c92ecfc82225b94980ca37bda14`
+- npm archive SHA-256: `e611338a619adabb0ba943d75460a01d83e4670dbe7d69f5d1050a1c1467c132`
+- npm `latest` and `next`: `0.4.0`
+- Linux, Windows, macOS, and distribution Check: Passed
+- Prepublication gate, promotion gate, and independent reviews: Passed
+- GitHub Release: [`v0.4.0`](https://github.com/psiQAQ/planweft/releases/tag/v0.4.0)
 
-RC1 is now public and its downloaded SHA-256 matches the accepted archive. The first publish created latest despite selecting next; authenticated tag-removal requests still return HTTP 400 and correction remains pending. A candidate tag is not stable acceptance. GitHub trusted publishing is configured with a master-only release environment. Configuration uses npm 11.19.1 and `--allow-publish`, because the old 11.11.0 trust request omits the API's required permissions field; the publishing workflow remains pinned to npm 11.11.0. RC2/RC3/RC4 subsequently verified OIDC; the final five-host gates remain incomplete.
+The only retained experimental Failed aggregate is Codex stopping. The gate-cap enabled/disabled pair uses `LIMIT-CODEX-TRACE-INCOMPLETE` because syscall attribution was incomplete. Normal session termination does not change that result.
 
-RC2 is now published to next through [GitHub OIDC](https://github.com/psiQAQ/planweft/actions/runs/34248506886); CI rebuilt the exact accepted archive and the real npm download matches SHA-256 `3948cb9c4cd03f1505966b95e22729177cb09a4af28296fd1ef7be2dd0349754`. OpenCode maintenance passed independent review. DSH context and maintenance failures at that point required subsequent fixes.
+## Historical records
 
-RC3 was published to `next` through the [OIDC workflow](https://github.com/psiQAQ/planweft/actions/runs/34264091642). Clean source `7d690010fbf8705129d3fb44b2556bb6a0fa7de6`, the CI rebuild and the npm download bind to SHA-256 `09ea0e4dceb88c9b845af851916356c44f3447071e0d1311dc38841639705060`; [three-OS CI](https://github.com/psiQAQ/planweft/actions/runs/34262987621) passed. DSH injection and recovery now have real evidence, but maintenance adoption/documentation accuracy still have failures. OpenCode passed six native-server stopping scenarios with a five-second quiet window, without claiming a native settled guarantee. Stable `0.4.0` remains unpublished and `latest` still points to RC1; the trial version at that point was `planweft@0.4.0-rc.3`. Detailed status: [中文](platforms.md) / [English](platforms.en.md).
-
-RC4 is published to `next` through the [OIDC workflow](https://github.com/psiQAQ/planweft/actions/runs/34267947801), fixing the native OpenCode npm entry. Frozen source is `1d1c76c1d6048fd67fa6ef1b614e11b999106db6`; the downloaded archive SHA-256 is `c6f54319befc8c43c559fd4c5af2eb6ca3d1b626e6c0b3fd65cb67c11d9d318b`, byte-identical to the local package and CI rebuild. [Three-OS CI](https://github.com/psiQAQ/planweft/actions/runs/34267221127) passed. That run used `planweft@0.4.0-rc.4`; the current candidate is listed below. The RC3 record above preserves its historical artifact identity; the stable gate remains incomplete and `latest` still points to RC1.
-
-RC5 is now published to `next` by [OIDC](https://github.com/psiQAQ/planweft/actions/runs/34317038628), with [three-OS CI](https://github.com/psiQAQ/planweft/actions/runs/34316870816) passed. Frozen source: `c3bb9d870429e304149ca58b0e804ea55f4b537a`; exact npm SHA-256: `f9123657773eb95cfe3df79b3f55669f12b37203bf2a593c1e749da1676069b3`. Downloaded bytes and npm integrity match. That stage used `planweft@0.4.0-rc.5`. Stable 0.4.0 remains unpublished; latest still points to RC1. Current failures and collector limitations are tracked in [platforms: 中文](platforms.md) / [English](platforms.en.md).
-
-## Published RC6 and preparation of RC7
-
-RC6 was published through [OIDC](https://github.com/psiQAQ/planweft/actions/runs/34322158954), with exact archive SHA-256 `c531188e46d268048ca0ab559baa358fc70af07277cb0001c521951234525799` and passing [three-OS CI](https://github.com/psiQAQ/planweft/actions/runs/34322062209). The source is preparing RC7 to fix duplicate progress state and missing observation timing in findings. RC6 will not be overwritten; query the registry for actual published versions. Stable acceptance now uses schema 2: every aggregate check also requires Passed scenarios with bound observation attachments, including automatic adoption, reminder deduplication, stopping limits, permission isolation and remote upgrades/rollbacks. Pi uses native package approval; it does not claim a per-tool denial sandbox. Historical RC results and schema 1 do not replace current stable-artifact acceptance.
-
-Live acceptance runs serially with a 600-second scenario limit. Containers do not start below 4 GiB available RAM or 8 GiB free output storage. Each container is limited to 2 CPUs, 3 GiB with no extra swap, and 256 PIDs. Owned unreferenced stores are cleaned only after confirming container removal. Original failures, project records, exact archives and history backups remain.
-
-
-## Published RC7; RC8 fixes in progress
-
-RC7 source `7e66ee9214364ffa5f00a04a8d040e4ace082980` was [published through OIDC](https://github.com/psiQAQ/planweft/actions/runs/34333285542), with exact npm SHA-256 `e3d67af7dcba154a3800e39c19ec06a7f40b874d3b92dc7b7517bed85cc4bed2`. Remote bytes and integrity match. [Three-OS CI](https://github.com/psiQAQ/planweft/actions/runs/34334806556) passed with Node pinned to 24.20.0.
-
-RC7 still has adoption, observation-timing and experiment-scope failures. The source is preparing RC8; RC7 is not overwritten and stable 0.4.0 is not released. Original failures and independent reviews remain in [platform status: 中文](platforms.md) / [English](platforms.en.md). Native npm version-switch tests and a non-model container runner are being completed; final stable bytes, remote fresh sessions and all five host gates still require execution. latest still points to RC1; that inherited tag is not a stable release.
-
-
-RC8 development restores discovery-time capability and consent boundaries; 721 migrated regression tests passed. Native npm RC6↔RC7 lifecycles passed for Pi, OpenCode and DSH, with prior failures retained. These are not final stable-artifact acceptance; RC8 publication and model revalidation remain pending.
-
-
-RC8 was published to next through OIDC; Check 34339605601 passed on all three systems. The remote archive is 5386708 bytes, SHA-256 `d6f34542495d811cc3171af0f6db96f30b1ef3089289fc740e4a4686a27d4a78`. Install/remove/reinstall passed in five images. Pi and OpenCode passed automated maintenance checks, but independent reviews found pre-load out-of-scope reads/unexecuted test claims and manual temporary work outside the project, respectively. These failures remain recorded and do not permit stable promotion. RC9 development addresses the observed triggers; it is unpublished and its model effect remains unverified.
-
-RC9 is published through OIDC; exact archive verification and three-OS CI passed. Claude completed its authorized direct DeepSeek compatibility-endpoint trial but skipped plan initialization. Independent Pi, OpenCode and DSH checks still found record-accuracy or scope problems. RC10 fixes are in development and unpublished; original RC9 failures remain, and stable 0.4.0 has not passed its gates.
-
-At its publication checkpoint, RC10 passed three-OS CI, OIDC and official archive-byte verification, but Claude independent maintenance semantics failed and Pi native relative paths caused a doctor regression before its maintenance model ran. RC11 fixes are in development. Explicit OpenCode direct-model authorization is now complete; the five-host gates have not passed and stable 0.4.0 is unpublished.
+RC1 through RC15 publication, failures, fixes, CI, model acceptance, and attachment bindings remain in [PLAN-0010](plans/0010-five-agent-release.md), [REP-0010](reproduction/0010-five-agent-release.md), and their checkpoint/evidence files. Those records keep their original state. This page does not repeat or rewrite them after the final 0.4.0 release.
