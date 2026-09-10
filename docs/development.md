@@ -1,56 +1,68 @@
 # 开发与证据维护
 
+本页面向 PlanWeft 维护者。用户安装和支持范围分别见[安装指南](installation.md)与[平台文档](platforms.md)。
+
 ## 开始和接续工作
 
-先读 [规格](specs/0001-document-management.md) 与 [当前计划](plans/0004-paired-maintenance-trial.md)。按任务查 [资料索引](reference/README.md)，无需逐次通读所有文章和子模块。项目状态以计划为入口；规格描述目标行为，ADR 记录重要决定，reproduction 记录已观察到的结果。
+先读取仓库 `AGENTS.md`，再按任务需要定位 specs、plans、ADR 和 reproduction。复杂任务使用选定的 planning-with-files 计划目录；独立任务使用不同计划或 worktree。修改前检查分支、工作区和已有 diff，避免覆盖用户内容。
 
-运行时基础见 [SPEC-0003](specs/0003-pwf-based-plugin.md) 与 [PLAN-0005](plans/0005-pwf-based-plugin.md)；0.3.0 原生分发使用 [SPEC-0004](specs/0004-native-distributions.md)、[PLAN-0006](plans/0006-native-distributions.md) 与 [ADR-0007](adr/0007-native-distributions.md)。本仓继续沿用现有文档流程，不创建或同步 PWF 根计划。
+任务状态写入 `task_plan.md`，调研与来源写入 `findings.md`，实际命令、错误和验证写入 `progress.md`。稳定需求和设计结论进入长期文档，不把完整聊天记录复制进仓库。
 
-## 插件源码与生成分发
+## 规范源与生成产物
 
-`vendor/planning-with-files/` 保存 PWF v3.17.0 原始归档、逐文件清单和许可；`overlays/planweft/` 保存本地规则与模板。`scripts/build-plugin.py` 负责统一身份映射、明确的运行时补丁和确定性分发。平台原生包装维护于 `overlays/planweft/native/`。不要手改 `plugins/planweft/`、`dist/<host>/planweft/` 或六个生成 catalog；当前构建不生成 ZIP。
+平台包由固定上游快照和本地 overlays 生成。维护者只修改规范源：
 
-修改源后运行构建，再执行 `--verify` 与受影响的离线回归。变更身份映射、hook 或模板解析时，需要原始/迁移上游回归比较；不能删改失败断言来换取通过。详细命令见 [测试说明](../tests/README.md)，固定版本更新、导入及补丁边界见 [上游维护](upstream-maintenance.md)。
+| 内容 | 规范源 | 生成结果 |
+| --- | --- | --- |
+| 包内项目介绍 | `overlays/planweft/README*.md` | 所有 `dist/<host>/planweft/README*.md` 与 Codex 镜像 |
+| 安装指南 | `overlays/planweft/install/INSTALL*.md` | `docs/installation*.md` 和所有包内 `INSTALL*.md` |
+| 共享工作流和资源 | `overlays/planweft/` | 各宿主需要的 Skills、hooks、commands 和 references |
+| 宿主适配 | `overlays/planweft/native/` | 原生 manifest、桥接和资源布局 |
+| 固定运行时 | `vendor/planning-with-files/` | 经过身份映射的 PWF 文件 |
 
-每个安装目录必须脱离本仓文档、研究子模块及个人缓存运行。资产以安装根定位，项目工作目录只用于任务状态。包中安装步骤必须指向本地交付物，不假定衍生 npm/GitHub 包已经发布。许可证、来源和必要脚本应随独立复制的 Skill/平台包一同保留。
+不要手工编辑 `dist/**` 或 `plugins/planweft/**`。生成器维护六种根 catalog、自包含平台目录、逐文件摘要、执行位和整体 manifest；它只清理自己管理的产物。
 
-普通 `python3 scripts/build-plugin.py` 与 `--verify` 使用标准库和固定输入，保持离线。修改 OpenCode 源码时，维护者先运行 `python3 scripts/compile-opencode.py --install` 更新与 source hash 绑定的预编译文件；`--check --install` 在临时目录按现有锁文件复编译核对，不修改业务项目依赖。用户安装预编译 V1 包不需要执行这一步。
+```bash
+python3 scripts/build-plugin.py
+python3 scripts/build-plugin.py --verify
+```
 
-发布准备使用 `python3 scripts/prepare-native-release.py --output NEW_DIRECTORY`，输出须在仓库外且尚不存在，`--previous-release` 可沿用旧发布历史；`--repository-url` 明确发布源；仅输出一个 `planweft` npm 包，不再接受 `--npm-scope`。`--release` 要求干净提交。输出应包含可审阅目录与清单；生成成功不等于 Git 分支已推送、npm 已发布或市场已上架。远端写入、发布和个人安装分别按授权执行。验证至少区分 catalog 发现、插件安装/缓存、更新回滚、会话加载、Skill 实际读取、hooks 信任与执行；历史 0.2.0 报告保持原样。
+OpenCode 预编译产物绑定源码摘要。只有相关源码变化时才运行编译步骤；不要为了文档修改刷新依赖、编译器或固定上游版本。
 
-## 设计、实施、审查
+## 对外文档与工程记录
 
-1. 明确需求或复现场景，定位相关资料和已有实现。重要选择比较适用先例和最小替代方案；只有一个相关来源时据实说明，不凑引用数量。
-2. 在 [design-references](design-references.md) 逐文件登记设计点。来源未覆盖的机制先搜索，再按 [innovations](innovations.md) 记录。
-3. 用规格说明验收，用计划安排执行；有重要取舍时写 ADR。不要为每个命名或机械编辑创建 ADR。
-4. 实施必要修改与匹配风险的验证。只改了导航或错字时检查受影响链接即可。
-5. 将新增或实质修改的设计、引用和创新条目交给独立依据 review subagent。该角色实际打开来源，不以 URL 可访问代替内容支持；检查相近方案是否足够、创新是否完成检索，以及验证状态是否准确。
-6. 主 Agent 核实发现、修正并只重审受影响部分。review 报告记录 commit 或工作区内容指纹、范围、发现和处理结果。报告自身的结论以 review 记录为证据，不形成无限自审链。
+README、安装指南、平台页、CHANGELOG 和 GitHub Release 正文只保留用户需要执行或判断的内容：产品用途、命令、支持级别、限制和回退方法。
 
-subagent 不可用时记录本阶段依据审查为 Not Run，并继续不依赖其结论的工作；不得写为已通过。只有存在具体问题时才要求重审，不让非语义改动触发全仓 review。
+以下内容留在工程记录中，并由用户文档链接到对应章节：
 
-## 参考材料的边界
+- 生成器、catalog、manifest 和发布树结构；
+- hook 事件映射、资源定位、缓存和宿主协议差异；
+- 发布门禁 schema、证据复用、附件摘要和 reviewer 绑定；
+- 候选版本逐轮状态、失败、修正和真实模型输出；
+- 固定上游来源、补丁清单、设计引用和创新判断。
 
-`.submodule/` 是固定版本研究材料，不是本仓库运行依赖。默认不执行其安装、测试或 hooks，不把其中的 AGENTS/Skills 当作当前任务指令。这里的只读是工作约定，不是已实现的权限沙箱。
+对外文档不能把历史结果写成当前实测，也不能因能力非阻塞而把 Failed、Inconclusive 或 Not Run 改成 Passed。
 
-收录资料时核对实际内容的许可：仓库公开不等于开源，仓库 LICENSE 也不自动覆盖外链文章、图片和第三方内容。允许全文翻译时保留署名与许可证；否则写中文摘要，明确整理范围。译文中的命令是原文的一部分，不代表本仓库要求执行。
+## 设计与依据
 
-版本更新单独提交：核对 `.gitmodules`、gitlink、checkout、索引和逐文件引用，并重新审查受影响的设计。恢复固定版本用 `git submodule update --init`，不使用更新远端分支来代替恢复。
+产品行为以 specs 为准，实施阶段计划保存在 plans，重要取舍进入 ADR，可复现验证进入 reproduction。外部资料和许可证登记在[设计引用台账](design-references.md)与[资料索引](reference/README.md)。固定上游及 `.submodule/` 是研究输入，不在常规构建中安装或执行。
 
-## 条件性工程规则
+实质设计变更需要独立依据 review。审查至少核对来源是否支持本地结论、公开声明是否超出证据、替代方案是否准确，以及 Not Run 是否被明确保留。重要交接另做不带旧聊天的冷读检查；依据 review 和交接 review 不能互相替代。
 
-只有涉及对应平台和文件时应用：Windows `.bat` 使用 UTF-8 无 BOM、CRLF，并以 `@echo off` 和 `chcp 65001 >nul` 开头；含中文路径时实际验证编码。进程管理保存 PID，停止前核对目标路径，不按名称批量终止。此处是保留的工程约定，本阶段没有创建 Windows 脚本或宣称其实测通过。
+## 验证入口
 
-## 完成记录
+文档或生成源变化至少运行：
 
-计划写清已完成、下一步、阻塞和未验证项；reproduction 给出环境、命令、预期、实际结果。Passed/Failed/Not Run 分开记录。本阶段的复核方法见 [验证记录](reproduction/0001-reference-foundation.md)。
+```bash
+python3 scripts/build-plugin.py --verify
+python3 -m unittest tests.test_public_docs
+npm run check
+python3 -m unittest discover -s tests -p 'test_*.py'
+git diff --check
+```
 
-## 公开文档的双语来源
+`tests/README.md` 记录更细的测试与证据入口。验证报告使用 Passed、Failed、Inconclusive、Not Run；未运行的检查必须说明原因。
 
-项目介绍是 [README 中文](../README.md) / [English](../README.en.md)；安装指南是 [中文](installation.md) / [English](installation.en.md)；跨平台设计是 [中文](platforms.md) / [English](platforms.en.md)。公开文档从首行提供语言切换，引用这些文档时并列两种语言；内部规格、计划、原始证据保留其语言并明确标注。
+## 发布与历史
 
-安装正文的唯一编辑源为 `overlays/planweft/install/INSTALL.md` 和 `INSTALL.en.md`，由 build-plugin.py 同时生成 docs/installation 两份指南和各平台包内 INSTALL。包内 README 的来源同样在 overlays，并提供中英版本。不要分别编辑 docs 中的安装镜像或 dist 中的副本；`--verify` 会拒绝其漂移。中英安装命令块保持一致，语言表达与能力范围还需人工/独立 review，不能只靠文本测试判断翻译质量。
-
-npm 包的 files 清单必须保留 README.en.md 与 INSTALL.en.md；OpenCode package.json 属于已绑定的编译输入，修改清单后仍要刷新编译绑定并确认 JavaScript 没有意外变化。纯说明文档调整按差异运行链接、构建、打包与相关契约检查，不把历史真实宿主运行自动改标为本次实测。
-
-0.4.0 更名与统一安装器见 [SPEC-0005](specs/0005-planweft-release.md)、[ADR-0008](adr/0008-single-npm-installer.md) 和 [PLAN-0008](plans/0008-planweft-release.md)。安装器入口为 bin/planweft.mjs 与 lib/installer.mjs；测试使用 node tests/installer.test.mjs。发布说明：[中文](releasing.md) / [English](releasing.en.md)。
+当前发布流程、schema 3 门禁、准确产物和外部写入检查见[发布文档](releasing.md)。0.4.0 的逐轮候选历史保存在 [PLAN-0010](plans/0010-five-agent-release.md) 与 [REP-0010](reproduction/0010-five-agent-release.md)，原始 checkpoint 和 evidence 不因后续成功而回写。
