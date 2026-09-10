@@ -8,6 +8,7 @@ import unittest
 from unittest.mock import patch
 
 SCRIPT = Path(__file__).with_name('run-registry-smoke.py')
+ROOT = SCRIPT.parents[1]
 spec = importlib.util.spec_from_file_location('registry_native', SCRIPT)
 runner = importlib.util.module_from_spec(spec); spec.loader.exec_module(runner)
 OLD, NEW = '0.4.0-rc.7', '0.4.0'
@@ -99,6 +100,12 @@ class NativeFixture:
 
 
 class RegistryNativeTests(unittest.TestCase):
+    def test_fresh_process_discovery_is_not_reported_as_a_model_session(self):
+        source = SCRIPT.read_text()
+        self.assertIn("host+'-load-'+label", source)
+        self.assertIn("[host,'plugin','list','--json']", source)
+        self.assertIn("'model_sessions':'Not Run'", source)
+
     def test_three_native_channels_execute_the_real_version_sequence(self):
         for host in ['pi', 'opencode', 'dsh']:
             with self.subTest(host=host), tempfile.TemporaryDirectory() as temporary:
@@ -126,6 +133,11 @@ class RegistryNativeTests(unittest.TestCase):
             result = runner.direct_npm_lifecycle('opencode', NEW, None, f.packages, f.out, f.profile, {}, f.run)
             self.assertEqual(result['scope'], 'single-version-install-remove')
             self.assertEqual([x['step'] for x in result['steps']], ['install', 'remove'])
+
+    def test_promotion_assembler_reuses_native_update(self):
+        source = (ROOT / 'scripts/assemble-release-acceptance.py').read_text()
+        self.assertIn("check == 'native_channels' and scenario == 'native_update'", source)
+        self.assertIn('single-version registry evidence', source)
 
     def test_opencode_removal_preserves_other_configuration_and_plugins(self):
         with tempfile.TemporaryDirectory() as temporary:

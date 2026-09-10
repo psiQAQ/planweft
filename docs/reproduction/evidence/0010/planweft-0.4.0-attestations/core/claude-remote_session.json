@@ -5,13 +5,21 @@
   "observations": {
     "scenarios": {
       "fresh_session_native_loading": {
-        "artifacts": [],
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-registry-acceptance.tar.gz",
+            "sha256": "d4c04ddcdfa8c2ce7c680dd1df27227b49bfa2f62b6cbaac2791e469525b6b69"
+          },
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-registry-proof.json",
+            "sha256": "c514e7088e8f942998f77189de67a7595fcead79326d6762bb1585b63903b1d7"
+          }
+        ],
         "evidence_type": "fresh",
-        "reason": "Pending official-registry next publication and promotion validation",
-        "status": "Not Run"
+        "status": "Passed"
       }
     }
   },
-  "status": "Not Run",
+  "status": "Passed",
   "version": "0.4.0"
 }

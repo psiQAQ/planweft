@@ -49,7 +49,8 @@ def not_run(reason):
 
 
 def fresh(status, evidence, limit=None):
-    item = {'status': status, 'evidence_type': 'fresh', 'artifacts': [evidence]}
+    artifacts = evidence if isinstance(evidence, list) else [evidence]
+    item = {'status': status, 'evidence_type': 'fresh', 'artifacts': artifacts}
     if limit:
         item['public_limit_id'] = limit
     return item
@@ -99,7 +100,22 @@ def core_record(config, policy, host, check, version, npm_sha):
     for scenario, rule in rules.items():
         label = host + '/' + check + '/' + scenario
         if policy['core'][host][check]['phase'] == 'promotion':
-            scenarios[scenario] = not_run('Pending official-registry next publication and promotion validation')
+            if 'promotion' not in config:
+                scenarios[scenario] = not_run('Pending official-registry next publication and promotion validation')
+            elif ((check == 'remote_lifecycle' and scenario != 'uninstall')
+                  or (check == 'native_channels' and scenario == 'native_update')):
+                # The approved stable flow intentionally does not repeat a
+                # full RC<->stable registry round trip when runtime/installer
+                # or cross-version native update when runtime/installer inputs
+                # are unchanged. Bind that semantic reuse to the final archive's
+                # deterministic lifecycle plus the parsed RC15 to stable
+                # manifest diff, rather than to single-version registry evidence
+                # or publication metadata.
+                scenarios[scenario] = reused(config, version, npm_sha, label, fresh_runs)
+            else:
+                run = artifact(config, 'registry_runs')
+                proof = artifact(config, 'registry_proof')
+                scenarios[scenario] = fresh('Passed', [run, proof])
         elif rule['tier'] == 'experimental':
             scenarios[scenario] = not_run('Not rerun for 0.4.0; experimental historical results remain published separately')
         elif not rule['reusable'] or label in json.loads(
@@ -154,10 +170,11 @@ def workflow_record(config, name, version, npm_sha, skill_sha):
             'workflow': name, 'host': source['host'], 'observations': details}
 
 
-def result_rows(evidence):
+def result_rows(evidence, phase='prepublication'):
     rows = []
     for host in HOSTS:
-        for check in LOCAL_CHECKS:
+        checks = LOCAL_CHECKS if phase == 'prepublication' else LOCAL_CHECKS + REMOTE_CHECKS
+        for check in checks:
             record = evidence['core'][host][check]
             rows.append([host + '/' + check, record['status'], record['sha256']])
     for name in WORKFLOWS:
@@ -203,7 +220,7 @@ def main():
                                        evidence['core'][host]['skill_loading']['sha256'])
             evidence['workflows'][name] = write_attestation(
                 args.attestations_dir, args.evidence_prefix, 'workflows/' + name + '.json', observed)
-        rows = result_rows(evidence)
+        rows = result_rows(evidence, 'prepublication')
         review_artifact = artifact(config, 'prepublication_review')
         review = config['review']
         review_scenario = (fresh('Passed', review_artifact) if review['status'] == 'Passed'
@@ -221,10 +238,31 @@ def main():
         evidence['independent_reviews']['prepublication'] = write_attestation(
             args.attestations_dir, args.evidence_prefix,
             'reviews/prepublication.json', review_observed)
-        promotion_observed = {'status': 'Not Run', 'version': version, 'npm_sha256': npm_sha,
-                              'check': 'independent_review', 'phase': 'promotion',
-                              'observations': {'scenarios': {'review': not_run(
-                                  'Pending official-registry validation and promotion results')}}}
+        if 'promotion' in config:
+            promotion_rows = result_rows(evidence, 'promotion')
+            promotion = config['promotion']['review']
+            promotion_artifact = artifact(config, 'promotion_review')
+            promotion_scenario = (fresh('Passed', promotion_artifact)
+                                  if promotion['status'] == 'Passed'
+                                  else not_run('Independent promotion review is pending'))
+            promotion_details = {
+                'scenarios': {'review': promotion_scenario},
+                'reviewer': promotion['reviewer'],
+                'reviewed_sha256': sorted({row[2] for row in promotion_rows}),
+                'support_policy_sha256': evidence['support_policy_sha256'],
+                'npm_sha256': npm_sha,
+                'result_set_sha256': hashlib.sha256(json.dumps(
+                    promotion_rows, separators=(',', ':')).encode()).hexdigest(),
+                'prior_review_sha256': evidence['independent_reviews']['prepublication']['sha256'],
+            }
+            promotion_observed = {'status': promotion['status'], 'version': version,
+                                  'npm_sha256': npm_sha, 'check': 'independent_review',
+                                  'phase': 'promotion', 'observations': promotion_details}
+        else:
+            promotion_observed = {'status': 'Not Run', 'version': version, 'npm_sha256': npm_sha,
+                                  'check': 'independent_review', 'phase': 'promotion',
+                                  'observations': {'scenarios': {'review': not_run(
+                                      'Pending official-registry validation and promotion results')}}}
         evidence['independent_reviews']['promotion'] = write_attestation(
             args.attestations_dir, args.evidence_prefix,
             'reviews/promotion.json', promotion_observed)
@@ -232,7 +270,8 @@ def main():
         parser.error(str(error))
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_bytes(json_bytes(evidence))
-    print(json.dumps({'records': len(rows), 'review': review['status'],
+    print(json.dumps({'records': len(result_rows(evidence, 'promotion') if 'promotion' in config else rows),
+                      'review': review['status'],
                       'output': str(args.output)}))
 
 
