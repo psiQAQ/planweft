@@ -1,0 +1,29 @@
+{
+  "check": "native_channels",
+  "host": "dsh",
+  "npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+  "observations": {
+    "scenarios": {
+      "native_install": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Pending official-registry next publication and promotion validation",
+        "status": "Not Run"
+      },
+      "native_remove": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Pending official-registry next publication and promotion validation",
+        "status": "Not Run"
+      },
+      "native_update": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Pending official-registry next publication and promotion validation",
+        "status": "Not Run"
+      }
+    }
+  },
+  "status": "Not Run",
+  "version": "0.4.0"
+}

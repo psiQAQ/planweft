@@ -40,6 +40,34 @@ class GateProcessTraceTest(unittest.TestCase):
         self.assertNotIn('SECRET',json.dumps(result))
         self.assertTrue(all(s['later_exit_event'] is None for s in result['unfinished_syscalls']['samples']))
 
+    def test_unknown_result_diagnostic_is_bounded_and_privacy_safe(self):
+        secret='/workspace/SECRET/private.txt'
+        text=(GATE+'20<bash> openat(AT_FDCWD, "/workspace/.stop_blocks", O_RDONLY) = 3\n'
+              +f'20<bash> read(3, "{secret}", 4096) = ? UNKNOWN SECRET_TEXT\n'+ending(20))
+        result=parse(text)
+        self.assertFalse(result['trace_complete'])
+        self.assertIn('unresolved syscall result',result['errors'])
+        self.assertEqual(result['diagnostic_rejections_by_pass'],[1,1])
+        self.assertFalse(result['diagnostics_truncated'])
+        self.assertEqual(result['diagnostics'],[{
+            'pid':20,'generation':1,'start_event':2,'end_event':2,
+            'syscall':'read','fd':3,'resource_category':'descriptor-counter',
+            'gate_bound':True,'result_kind':'unknown_return','context_missing':False}])
+        rendered=json.dumps(result)
+        self.assertNotIn('SECRET',rendered)
+        self.assertNotIn(secret,rendered)
+        self.assertNotIn('argv',rendered)
+
+    def test_unknown_result_diagnostics_mark_missing_context_and_cap_at_32(self):
+        unknown=''.join(f'20<bash> read({n}, 0x1234, 1) = ?\n' for n in range(40))
+        result=parse(GATE+unknown+ending(20))
+        self.assertFalse(result['trace_complete'])
+        self.assertEqual(result['diagnostic_rejections_by_pass'],[40,40])
+        self.assertTrue(result['diagnostics_truncated'])
+        self.assertEqual(len(result['diagnostics']),32)
+        self.assertTrue(all(row['context_missing'] for row in result['diagnostics']))
+        self.assertTrue(all(row['resource_category']=='descriptor-unknown' for row in result['diagnostics']))
+
     def test_two_pass_unknown_snapshot_reaches_later_gate_exec(self):
         prefix=('10<host> execve("/bin/host", ["host"], 0x1) = 0\n'
                 '10<host> clone(child_stack=NULL, flags=CLONE_FILES|SIGCHLD) = 11\n'

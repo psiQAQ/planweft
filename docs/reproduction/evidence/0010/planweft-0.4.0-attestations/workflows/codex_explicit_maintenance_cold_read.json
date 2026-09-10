@@ -1,0 +1,60 @@
+{
+  "host": "codex",
+  "npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+  "observations": {
+    "adoption_mode": "explicit",
+    "classification": "supported",
+    "cli_version": "codex-cli 0.149.1",
+    "cold_read_evidence_sha256": "d8282c3e23c2fb14375f2cbd96e4a8505e51201179fd45b9c6746ea57fdb341a",
+    "cold_read_session_id": "01a08902-c7cc-7a60-9eb1-a41fdad29823",
+    "explicit_skill_read": true,
+    "external_memory": false,
+    "history_available": false,
+    "image": "sha256:aa46e31c71577eb37c1e1d856427d9d159ddd5a41aa92472af722838b1c3a159",
+    "input_snapshot_sha256": "cd6c42e777271dc55504eaba522a2f4a61dc8d783c04989d9a08035fbebd0b10",
+    "kind": "actual-host-model",
+    "maintenance_evidence_sha256": "8cc12e47c0c9dc457302cde8cc023b28ce75440b6a1f40d2ad370e27895a76f2",
+    "maintenance_session_id": "01a088ff-c317-72b1-8203-2754c32a0c97",
+    "model": "gpt-5.6-terra",
+    "output_snapshot_sha256": "cd6c42e777271dc55504eaba522a2f4a61dc8d783c04989d9a08035fbebd0b10",
+    "plugin_available": false,
+    "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
+    "scenarios": {
+      "independent_cold_read": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-codex-cold-read.tar.gz",
+            "sha256": "d8282c3e23c2fb14375f2cbd96e4a8505e51201179fd45b9c6746ea57fdb341a"
+          }
+        ],
+        "evidence_type": "fresh",
+        "status": "Passed"
+      },
+      "maintenance": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-codex-maintenance.tar.gz",
+            "sha256": "8cc12e47c0c9dc457302cde8cc023b28ce75440b6a1f40d2ad370e27895a76f2"
+          }
+        ],
+        "evidence_type": "fresh",
+        "status": "Passed"
+      },
+      "scope_compliance": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
+            "sha256": "4ddb0368911b8d5c87a7642ae033ed69f0b6f4d54fe1e7e101a9e30d31466127"
+          }
+        ],
+        "evidence_type": "fresh",
+        "status": "Passed"
+      }
+    },
+    "session_id": "01a088ff-c317-72b1-8203-2754c32a0c97",
+    "skill_loading_evidence_sha256": "a9d070ef388afc2d1b272aa59829d2a7fad5180ff05c73467132f89148b8a0d7"
+  },
+  "status": "Passed",
+  "version": "0.4.0",
+  "workflow": "codex_explicit_maintenance_cold_read"
+}

@@ -1,12 +1,12 @@
 [简体中文](platforms.md) | [English](platforms.en.md)
 
-截至 RC12 准确归档验收检查点，最近查询的官方 npm `next` 为 `0.4.0-rc.10`，`latest` 为历史 RC1；正式 `0.4.0`、RC11 和 RC12 均未发布。RC12 通过[三系统 CI](https://github.com/psiQAQ/planweft/actions/runs/34357068482)、Pi 原生 BOM 对照及 Claude/Pi/OpenCode/DSH 无模型生命周期，但 Codex doctor 将自有 marketplace 来源误报为重复安装，阻止发布。OpenCode 维护仍有记录一致性缺陷，冷读通过不抵消维护失败；其历史记录自动断言误报已由独立审查区分。RC13 源码已加入 Codex 修复及固定 parser 直接依赖，其他锁定包不变；本检查点尚无准确新包验收。查询官方 npm registry 获取实时状态，不能把历史 `latest` 当作稳定发布。
+0.4.0 采用能力分级支持策略。五宿主的准确产物、确定性生命周期、显式 Skill 读取、项目/用户保护、重复注册和离线 advisory/禁用/cap/stall 控制为正式支持；Codex 显式维护→独立冷读是正式工作流。Pi explicit/auto 分别按证据定级；其他模型自动采用、实际模型 stopping、autonomous/gated 及其余十个适配器保持实验性。实时发布状态以官方 registry 和 GitHub Release 为准；历史 `latest=RC1` 不代表稳定版。
 
 详细结果与限制：[发布：中文](releasing.md) / [English](releasing.en.md)。以下各历史版本表格不替代当前准确包验收。
 
 ## 0.4.0 候选验证
 
-单 npm 包提供安装器、Pi 资源和 OpenCode V1 入口。正式发布要求 Codex、Claude Code、Pi、OpenCode 和 DSH 五个平台全部通过；其余十个平台仍为实验性。已有本地生命周期证据保留，准确归档、真实模型与远端安装分别验收。Linux、Windows、macOS 安装器 CI 已通过，首次 Windows 故障注入路径问题已修复；[运行记录](https://github.com/psiQAQ/planweft/actions/runs/34242500572)。[发布：中文](releasing.md) / [English](releasing.en.md)。下方 0.3.0 证据继续作为历史记录。
+单 npm 包提供安装器、Pi 资源和 OpenCode V1 入口。正式发布由 [`release/support-policy.json`](../release/support-policy.json) 逐宿主、逐场景判定，不把非阻塞 Failed/Inconclusive 改写为 Passed。已有本地生命周期证据保留，准确归档、真实模型与远端安装分别验收；不可复用项必须对最终稳定包重做。下方版本表格是历史证据，不替代 0.4.0 acceptance。
 
 # 跨平台设计
 

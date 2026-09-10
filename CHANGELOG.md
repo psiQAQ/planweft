@@ -2,6 +2,13 @@
 
 # 变更记录
 
+## 0.4.0 — 正式发布准备
+
+- 新增受版本控制的能力分级支持策略和 acceptance schema 3；门禁按逐场景策略计算阻塞，保留 Failed / Inconclusive / Not Run，不信任证据自填的放行布尔值。
+- 证据支持逐场景 fresh/reused，安全引用仓库内脱敏附件；复用绑定原包/目标包、逐文件 manifest 差异、受影响检查与 reviewer。准确产物、最终安装/卸载、用户文件保护、显式 Skill 读取和正式模型工作流不得复用。
+- Codex 未知 syscall 返回增加最多 32 条脱敏诊断，仍保持 fail closed；五宿主 runner 增加副作用前校验并写入证据的 `--adoption-mode auto|explicit`。
+- 五宿主确定性核心能力和 Codex 显式维护→独立冷读为正式门槛；Pi explicit/auto 分别证据定级。其他自动采用、实际模型 stopping、autonomous/gated 及其余十个平台适配保持实验性。依赖、固定 PWF/vendor/submodule、宿主和模型不变。
+
 ## 0.4.0-rc.15 — 候选版本（发布状态以官方 registry 为准）
 
 - 探索前先按用户读取范围选择少量项目入口，再沿相关项目关系扩展；宿主提供的 Skill 路径单独用于包内资源，不把发现的安装器目录自动视为任务输入。

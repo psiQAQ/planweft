@@ -1,0 +1,60 @@
+{
+  "host": "pi",
+  "npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+  "observations": {
+    "adoption_mode": "explicit",
+    "classification": "supported",
+    "cli_version": "0.84.3",
+    "cold_read_evidence_sha256": "1d41c8384b6a0eeab6bd13420fd5e66494cb58f188f597d9628382aeef235a97",
+    "cold_read_session_id": "01a08905-175f-72f3-9b50-2fdc11fbd131",
+    "explicit_skill_read": true,
+    "external_memory": false,
+    "history_available": false,
+    "image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b",
+    "input_snapshot_sha256": "2c3810fc645f80b62f968b6167f5b2943d13a6ecb04cc5468f10786a666e77b4",
+    "kind": "actual-host-model",
+    "maintenance_evidence_sha256": "6ba5a9bc039762782368fc69ba599dc4ea30ecc71c3a946b8920032517c6ba08",
+    "maintenance_session_id": "01a08904-3989-797d-b382-a935a136fdd7",
+    "model": "deepseek-v4-flash",
+    "output_snapshot_sha256": "2c3810fc645f80b62f968b6167f5b2943d13a6ecb04cc5468f10786a666e77b4",
+    "plugin_available": false,
+    "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
+    "scenarios": {
+      "independent_cold_read": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-pi-explicit-cold-read.tar.gz",
+            "sha256": "1d41c8384b6a0eeab6bd13420fd5e66494cb58f188f597d9628382aeef235a97"
+          }
+        ],
+        "evidence_type": "fresh",
+        "status": "Passed"
+      },
+      "maintenance": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-pi-explicit-maintenance.tar.gz",
+            "sha256": "6ba5a9bc039762782368fc69ba599dc4ea30ecc71c3a946b8920032517c6ba08"
+          }
+        ],
+        "evidence_type": "fresh",
+        "status": "Passed"
+      },
+      "scope_compliance": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
+            "sha256": "4ddb0368911b8d5c87a7642ae033ed69f0b6f4d54fe1e7e101a9e30d31466127"
+          }
+        ],
+        "evidence_type": "fresh",
+        "status": "Passed"
+      }
+    },
+    "session_id": "01a08904-3989-797d-b382-a935a136fdd7",
+    "skill_loading_evidence_sha256": "2b55e063cdaf67fcccd6df1dae6fe3991e8e1cf5ca3c55a19cc7a7ace40aaa98"
+  },
+  "status": "Passed",
+  "version": "0.4.0",
+  "workflow": "pi_explicit_maintenance_cold_read"
+}

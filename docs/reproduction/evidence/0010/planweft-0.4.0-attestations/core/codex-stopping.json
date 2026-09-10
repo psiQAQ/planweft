@@ -1,0 +1,64 @@
+{
+  "check": "stopping",
+  "host": "codex",
+  "npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+  "observations": {
+    "cli_version": "codex-cli 0.149.1",
+    "external_memory": false,
+    "image": "sha256:9ffeaf322318e5bfa6de76190ece94c323a3964f38e1ad426284b021b8ab5b58",
+    "kind": "actual-host-model",
+    "model": "gpt-5.6-terra",
+    "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
+    "scenarios": {
+      "explicit_continuation": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Not rerun for 0.4.0; experimental historical results remain published separately",
+        "status": "Not Run"
+      },
+      "gate_cap": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
+            "sha256": "4ddb0368911b8d5c87a7642ae033ed69f0b6f4d54fe1e7e101a9e30d31466127"
+          }
+        ],
+        "evidence_type": "fresh",
+        "public_limit_id": "LIMIT-CODEX-TRACE-INCOMPLETE",
+        "status": "Failed"
+      },
+      "gate_cap_disabled": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
+            "sha256": "4ddb0368911b8d5c87a7642ae033ed69f0b6f4d54fe1e7e101a9e30d31466127"
+          }
+        ],
+        "evidence_type": "fresh",
+        "public_limit_id": "LIMIT-CODEX-TRACE-INCOMPLETE",
+        "status": "Failed"
+      },
+      "gate_stall": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Not rerun for 0.4.0; experimental historical results remain published separately",
+        "status": "Not Run"
+      },
+      "gate_stall_disabled": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Not rerun for 0.4.0; experimental historical results remain published separately",
+        "status": "Not Run"
+      },
+      "normal_stop": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Not rerun for 0.4.0; experimental historical results remain published separately",
+        "status": "Not Run"
+      }
+    },
+    "session_id": "pw-release-489753408eae"
+  },
+  "status": "Failed",
+  "version": "0.4.0"
+}

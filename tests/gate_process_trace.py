@@ -7,6 +7,7 @@ trace text stays private: the result contains no argv, buffers or environment.
 import ast
 import bisect
 import hashlib
+import json
 import os
 from pathlib import Path
 import re
@@ -14,6 +15,7 @@ import re
 TRACE_SYSCALLS = 'execve,clone,clone3,fork,vfork,open,openat,openat2,read,close,close_range,dup,dup2,dup3,fcntl,chdir,fchdir'
 COUNTERS = {'/workspace/.stop_blocks', '/workspace/.gate_last_ledger'}
 ALL_FDS = (0, 4294967295)
+DIAGNOSTIC_LIMIT = 32
 UNKNOWN = object()
 UNKNOWN_FD = (UNKNOWN, UNKNOWN)
 
@@ -179,7 +181,7 @@ def _replay(text, expected_script_hash, *, read_script=None, hazards=None, fd_nu
     process_events={}
     for index,pid,_,_ in events:
         process_events.setdefault(pid,[]).append(index)
-    accesses=[]
+    accesses=[]; diagnostics=[]; diagnostic_count=0
     processes={}; generations={}; reads=[]; gates=[]; roots=set(); root_execs=set()
     if not re.fullmatch(r'[0-9a-f]{64}',expected_script_hash):
         errors.append('invalid expected script digest')
@@ -221,6 +223,47 @@ def _replay(text, expected_script_hash, *, read_script=None, hazards=None, fd_nu
     def slots(state):
         return tuple(state['fds']) if fd_numbers is None else fd_numbers
 
+    def unresolved_diagnostic(name, body, result, state, start, end):
+        """Retain only allowlisted process context for an unknown return.
+
+        The raw trace can contain argv, paths, buffers, environment snippets or
+        kernel text. None of those values are exported by this diagnostic.
+        """
+        nonlocal diagnostic_count
+        diagnostic_count += 1
+        fd=None; binding=None; missing=False
+        resource='other'
+        if name in {'clone','clone3','fork','vfork','execve'}:
+            resource='process'
+        elif name in {'chdir'}:
+            resource='working-directory'
+        elif name in {'open','openat','openat2'}:
+            resource='file-open'
+        elif name=='close_range':
+            resource='fd-range'
+        elif name in {'read','close','dup','dup2','dup3','fcntl','fchdir'}:
+            resource='descriptor'
+            try:
+                args=_arguments(body); fd=_number(args[0])
+                binding=fd_value(state,fd)
+            except (ValueError,SyntaxError,IndexError,TypeError):
+                missing=True; fd=None
+            if binding is UNKNOWN_FD or binding is None:
+                resource='descriptor-unknown'; missing=True
+            elif isinstance(binding,tuple) and binding[0] in COUNTERS:
+                resource='descriptor-counter'
+            elif isinstance(binding,tuple):
+                resource='descriptor-file'
+            else:
+                resource='descriptor-unknown'; missing=True
+        if len(diagnostics)<DIAGNOSTIC_LIMIT:
+            diagnostics.append({'pid':pid,'generation':state['generation'],
+                'start_event':start,'end_event':end,
+                'syscall':name if name in TRACE_SYSCALLS.split(',') else 'unknown',
+                'fd':fd,'resource_category':resource,
+                'gate_bound':state['gate'] is not None,
+                'result_kind':'unknown_return','context_missing':missing})
+
     for index,pid,call,finished in events:
         state=processes.get(pid)
         if state is None:
@@ -241,6 +284,7 @@ def _replay(text, expected_script_hash, *, read_script=None, hazards=None, fd_nu
             continue
         if result.startswith('? ERESTART'): continue
         if result.startswith('?'):
+            unresolved_diagnostic(name,body,result,state,index,finished)
             errors.append('unresolved syscall result'); continue
         try:
             returned=_return_number(result); args=_arguments(body)
@@ -349,6 +393,7 @@ def _replay(text, expected_script_hash, *, read_script=None, hazards=None, fd_nu
     return {'kind':'script-digest-bound process-generation counter I/O',
             'trace_complete':not errors,'errors':sorted(set(errors)),
             'unfinished_syscalls':unfinished,
+            'diagnostics':diagnostics,'diagnostic_count':diagnostic_count,
             'source_sha256':hashlib.sha256(text.encode()).hexdigest(),
             'source_bytes':len(text.encode()),'gates':gates,'reads':reads,
             'attributed_files':sorted({r['file'] for r in reads if r['gate']})},accesses
@@ -380,6 +425,19 @@ def attributed_gate_reads(text, expected_script_hash, *, read_script=None):
                          hazards=hazards,fd_numbers=numbers)
         result['errors']=sorted(set(initial['errors']+result['errors']))
         result['trace_complete']=not result['errors']
+        merged=[]; seen=set()
+        for row in result.get('diagnostics',[])+initial.get('diagnostics',[]):
+            key=json.dumps(row,sort_keys=True)
+            if key not in seen:
+                seen.add(key); merged.append(row)
+        counts=[initial.get('diagnostic_count',0),result.get('diagnostic_count',0)]
+        result['diagnostics']=merged[:DIAGNOSTIC_LIMIT]
+        result['diagnostic_rejections_by_pass']=counts
+        result['diagnostics_truncated']=(any(count>DIAGNOSTIC_LIMIT for count in counts)
+                                         or len(merged)>DIAGNOSTIC_LIMIT)
+    result.pop('diagnostic_count',None)
+    result.setdefault('diagnostic_rejections_by_pass',[initial.get('diagnostic_count',0),0])
+    result.setdefault('diagnostics_truncated',initial.get('diagnostic_count',0)>DIAGNOSTIC_LIMIT)
     result['conflicts']=conflicts
     result['proof_scope']='gate identity and counter I/O; unrelated host binding races retained'
     return result

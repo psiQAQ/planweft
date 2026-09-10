@@ -1,0 +1,1460 @@
+{
+  "schema_version": 1,
+  "acceptance_schema_version": 3,
+  "version": "0.4.0",
+  "statuses": [
+    "Passed",
+    "Failed",
+    "Inconclusive",
+    "Not Run"
+  ],
+  "tiers": [
+    "required",
+    "evidence_based",
+    "experimental"
+  ],
+  "core": {
+    "codex": {
+      "exact_artifact": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "archive_bytes": {
+            "tier": "required",
+            "reusable": false
+          },
+          "installed_contents": {
+            "tier": "required",
+            "reusable": false
+          },
+          "runtime_dependencies": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "native_lifecycle": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "install": {
+            "tier": "required",
+            "reusable": false
+          },
+          "update": {
+            "tier": "required",
+            "reusable": true
+          },
+          "rollback": {
+            "tier": "required",
+            "reusable": true
+          },
+          "remove": {
+            "tier": "required",
+            "reusable": false
+          },
+          "reinstall": {
+            "tier": "required",
+            "reusable": true
+          },
+          "fixture_add_modify_delete": {
+            "tier": "required",
+            "reusable": true
+          },
+          "partial_failure_recovery": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "skill_loading": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "single_main_skill": {
+            "tier": "required",
+            "reusable": true
+          },
+          "actual_skill_read": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "offline_controls": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "default_advisory": {
+            "tier": "required",
+            "reusable": true
+          },
+          "explicit_disable": {
+            "tier": "required",
+            "reusable": true
+          },
+          "continuation_cap": {
+            "tier": "required",
+            "reusable": true
+          },
+          "continuation_stall": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "context_injection": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "context_delivery": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "reminder_deduplication": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "recovery": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "fresh_session_project_files": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "stopping": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "normal_stop": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "explicit_continuation": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_cap": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_stall": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_cap_disabled": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_stall_disabled": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "permissions": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "readonly_disabled": {
+            "tier": "required",
+            "reusable": true
+          },
+          "project_isolation": {
+            "tier": "required",
+            "reusable": true
+          },
+          "user_change_protection": {
+            "tier": "required",
+            "reusable": false
+          },
+          "duplicate_hooks": {
+            "tier": "required",
+            "reusable": true
+          },
+          "native_permission_denial": {
+            "tier": "required",
+            "reusable": true
+          },
+          "untrusted_hooks": {
+            "tier": "required",
+            "reusable": true
+          },
+          "persisted_hook_trust": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "model_maintenance": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "automatic_adoption": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "authorized_file_access": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "authorized_environment_access": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "regression_tests": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "approved_requirements": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "single_state_source": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "accurate_records": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "cold_read": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "goal_and_next_action": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "historical_results_and_limits": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "remote_lifecycle": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "candidate_to_release": {
+            "tier": "required",
+            "reusable": true
+          },
+          "release_to_candidate": {
+            "tier": "required",
+            "reusable": true
+          },
+          "candidate_to_release_again": {
+            "tier": "required",
+            "reusable": true
+          },
+          "uninstall": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "remote_session": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "fresh_session_native_loading": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "native_channels": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "native_install": {
+            "tier": "required",
+            "reusable": false
+          },
+          "native_update": {
+            "tier": "required",
+            "reusable": true
+          },
+          "native_remove": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      }
+    },
+    "claude": {
+      "exact_artifact": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "archive_bytes": {
+            "tier": "required",
+            "reusable": false
+          },
+          "installed_contents": {
+            "tier": "required",
+            "reusable": false
+          },
+          "runtime_dependencies": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "native_lifecycle": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "install": {
+            "tier": "required",
+            "reusable": false
+          },
+          "update": {
+            "tier": "required",
+            "reusable": true
+          },
+          "rollback": {
+            "tier": "required",
+            "reusable": true
+          },
+          "remove": {
+            "tier": "required",
+            "reusable": false
+          },
+          "reinstall": {
+            "tier": "required",
+            "reusable": true
+          },
+          "fixture_add_modify_delete": {
+            "tier": "required",
+            "reusable": true
+          },
+          "partial_failure_recovery": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "skill_loading": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "single_main_skill": {
+            "tier": "required",
+            "reusable": true
+          },
+          "actual_skill_read": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "offline_controls": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "default_advisory": {
+            "tier": "required",
+            "reusable": true
+          },
+          "explicit_disable": {
+            "tier": "required",
+            "reusable": true
+          },
+          "continuation_cap": {
+            "tier": "required",
+            "reusable": true
+          },
+          "continuation_stall": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "context_injection": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "context_delivery": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "reminder_deduplication": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "recovery": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "fresh_session_project_files": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "stopping": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "normal_stop": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "explicit_continuation": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_cap": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_stall": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_cap_disabled": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_stall_disabled": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "permissions": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "readonly_disabled": {
+            "tier": "required",
+            "reusable": true
+          },
+          "project_isolation": {
+            "tier": "required",
+            "reusable": true
+          },
+          "user_change_protection": {
+            "tier": "required",
+            "reusable": false
+          },
+          "duplicate_hooks": {
+            "tier": "required",
+            "reusable": true
+          },
+          "native_permission_denial": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "model_maintenance": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "automatic_adoption": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "authorized_file_access": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "authorized_environment_access": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "regression_tests": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "approved_requirements": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "single_state_source": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "accurate_records": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "cold_read": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "goal_and_next_action": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "historical_results_and_limits": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "remote_lifecycle": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "candidate_to_release": {
+            "tier": "required",
+            "reusable": true
+          },
+          "release_to_candidate": {
+            "tier": "required",
+            "reusable": true
+          },
+          "candidate_to_release_again": {
+            "tier": "required",
+            "reusable": true
+          },
+          "uninstall": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "remote_session": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "fresh_session_native_loading": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "native_channels": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "native_install": {
+            "tier": "required",
+            "reusable": false
+          },
+          "native_update": {
+            "tier": "required",
+            "reusable": true
+          },
+          "native_remove": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      }
+    },
+    "pi": {
+      "exact_artifact": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "archive_bytes": {
+            "tier": "required",
+            "reusable": false
+          },
+          "installed_contents": {
+            "tier": "required",
+            "reusable": false
+          },
+          "runtime_dependencies": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "native_lifecycle": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "install": {
+            "tier": "required",
+            "reusable": false
+          },
+          "update": {
+            "tier": "required",
+            "reusable": true
+          },
+          "rollback": {
+            "tier": "required",
+            "reusable": true
+          },
+          "remove": {
+            "tier": "required",
+            "reusable": false
+          },
+          "reinstall": {
+            "tier": "required",
+            "reusable": true
+          },
+          "fixture_add_modify_delete": {
+            "tier": "required",
+            "reusable": true
+          },
+          "partial_failure_recovery": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "skill_loading": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "single_main_skill": {
+            "tier": "required",
+            "reusable": true
+          },
+          "actual_skill_read": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "offline_controls": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "default_advisory": {
+            "tier": "required",
+            "reusable": true
+          },
+          "explicit_disable": {
+            "tier": "required",
+            "reusable": true
+          },
+          "continuation_cap": {
+            "tier": "required",
+            "reusable": true
+          },
+          "continuation_stall": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "context_injection": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "context_delivery": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "reminder_deduplication": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "recovery": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "fresh_session_project_files": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "stopping": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "normal_stop": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "explicit_continuation": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "continuation_limit": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "permissions": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "readonly_disabled": {
+            "tier": "required",
+            "reusable": true
+          },
+          "project_isolation": {
+            "tier": "required",
+            "reusable": true
+          },
+          "user_change_protection": {
+            "tier": "required",
+            "reusable": false
+          },
+          "duplicate_hooks": {
+            "tier": "required",
+            "reusable": true
+          },
+          "package_approval": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "model_maintenance": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "automatic_adoption": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "authorized_file_access": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "authorized_environment_access": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "regression_tests": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "approved_requirements": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "single_state_source": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "accurate_records": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "cold_read": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "goal_and_next_action": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "historical_results_and_limits": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "remote_lifecycle": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "candidate_to_release": {
+            "tier": "required",
+            "reusable": true
+          },
+          "release_to_candidate": {
+            "tier": "required",
+            "reusable": true
+          },
+          "candidate_to_release_again": {
+            "tier": "required",
+            "reusable": true
+          },
+          "uninstall": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "remote_session": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "fresh_session_native_loading": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "native_channels": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "native_install": {
+            "tier": "required",
+            "reusable": false
+          },
+          "native_update": {
+            "tier": "required",
+            "reusable": true
+          },
+          "native_remove": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      }
+    },
+    "opencode": {
+      "exact_artifact": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "archive_bytes": {
+            "tier": "required",
+            "reusable": false
+          },
+          "installed_contents": {
+            "tier": "required",
+            "reusable": false
+          },
+          "runtime_dependencies": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "native_lifecycle": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "install": {
+            "tier": "required",
+            "reusable": false
+          },
+          "update": {
+            "tier": "required",
+            "reusable": true
+          },
+          "rollback": {
+            "tier": "required",
+            "reusable": true
+          },
+          "remove": {
+            "tier": "required",
+            "reusable": false
+          },
+          "reinstall": {
+            "tier": "required",
+            "reusable": true
+          },
+          "fixture_add_modify_delete": {
+            "tier": "required",
+            "reusable": true
+          },
+          "partial_failure_recovery": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "skill_loading": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "single_main_skill": {
+            "tier": "required",
+            "reusable": true
+          },
+          "actual_skill_read": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "offline_controls": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "default_advisory": {
+            "tier": "required",
+            "reusable": true
+          },
+          "explicit_disable": {
+            "tier": "required",
+            "reusable": true
+          },
+          "continuation_cap": {
+            "tier": "required",
+            "reusable": true
+          },
+          "continuation_stall": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "context_injection": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "context_delivery": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "reminder_deduplication": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "recovery": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "fresh_session_project_files": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "stopping": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "normal_stop": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "explicit_continuation": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_cap": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_stall": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_cap_disabled": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_stall_disabled": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "permissions": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "readonly_disabled": {
+            "tier": "required",
+            "reusable": true
+          },
+          "project_isolation": {
+            "tier": "required",
+            "reusable": true
+          },
+          "user_change_protection": {
+            "tier": "required",
+            "reusable": false
+          },
+          "duplicate_hooks": {
+            "tier": "required",
+            "reusable": true
+          },
+          "native_permission_denial": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "model_maintenance": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "automatic_adoption": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "authorized_file_access": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "authorized_environment_access": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "regression_tests": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "approved_requirements": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "single_state_source": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "accurate_records": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "cold_read": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "goal_and_next_action": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "historical_results_and_limits": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "remote_lifecycle": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "candidate_to_release": {
+            "tier": "required",
+            "reusable": true
+          },
+          "release_to_candidate": {
+            "tier": "required",
+            "reusable": true
+          },
+          "candidate_to_release_again": {
+            "tier": "required",
+            "reusable": true
+          },
+          "uninstall": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "remote_session": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "fresh_session_native_loading": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "native_channels": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "native_install": {
+            "tier": "required",
+            "reusable": false
+          },
+          "native_update": {
+            "tier": "required",
+            "reusable": true
+          },
+          "native_remove": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      }
+    },
+    "dsh": {
+      "exact_artifact": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "archive_bytes": {
+            "tier": "required",
+            "reusable": false
+          },
+          "installed_contents": {
+            "tier": "required",
+            "reusable": false
+          },
+          "runtime_dependencies": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "native_lifecycle": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "install": {
+            "tier": "required",
+            "reusable": false
+          },
+          "update": {
+            "tier": "required",
+            "reusable": true
+          },
+          "rollback": {
+            "tier": "required",
+            "reusable": true
+          },
+          "remove": {
+            "tier": "required",
+            "reusable": false
+          },
+          "reinstall": {
+            "tier": "required",
+            "reusable": true
+          },
+          "fixture_add_modify_delete": {
+            "tier": "required",
+            "reusable": true
+          },
+          "partial_failure_recovery": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "skill_loading": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "single_main_skill": {
+            "tier": "required",
+            "reusable": true
+          },
+          "actual_skill_read": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "offline_controls": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "default_advisory": {
+            "tier": "required",
+            "reusable": true
+          },
+          "explicit_disable": {
+            "tier": "required",
+            "reusable": true
+          },
+          "continuation_cap": {
+            "tier": "required",
+            "reusable": true
+          },
+          "continuation_stall": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "context_injection": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "context_delivery": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "reminder_deduplication": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "recovery": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "fresh_session_project_files": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "stopping": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "normal_stop": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "explicit_continuation": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_cap": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_stall": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_cap_disabled": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "gate_stall_disabled": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "permissions": {
+        "tier": "required",
+        "phase": "prepublication",
+        "scenarios": {
+          "readonly_disabled": {
+            "tier": "required",
+            "reusable": true
+          },
+          "project_isolation": {
+            "tier": "required",
+            "reusable": true
+          },
+          "user_change_protection": {
+            "tier": "required",
+            "reusable": false
+          },
+          "duplicate_hooks": {
+            "tier": "required",
+            "reusable": true
+          },
+          "native_permission_denial": {
+            "tier": "required",
+            "reusable": true
+          }
+        }
+      },
+      "model_maintenance": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "automatic_adoption": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "authorized_file_access": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "authorized_environment_access": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "regression_tests": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "approved_requirements": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "single_state_source": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "accurate_records": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "cold_read": {
+        "tier": "experimental",
+        "phase": "prepublication",
+        "scenarios": {
+          "goal_and_next_action": {
+            "tier": "experimental",
+            "reusable": true
+          },
+          "historical_results_and_limits": {
+            "tier": "experimental",
+            "reusable": true
+          }
+        }
+      },
+      "remote_lifecycle": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "candidate_to_release": {
+            "tier": "required",
+            "reusable": true
+          },
+          "release_to_candidate": {
+            "tier": "required",
+            "reusable": true
+          },
+          "candidate_to_release_again": {
+            "tier": "required",
+            "reusable": true
+          },
+          "uninstall": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "remote_session": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "fresh_session_native_loading": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      },
+      "native_channels": {
+        "tier": "required",
+        "phase": "promotion",
+        "scenarios": {
+          "native_install": {
+            "tier": "required",
+            "reusable": false
+          },
+          "native_update": {
+            "tier": "required",
+            "reusable": true
+          },
+          "native_remove": {
+            "tier": "required",
+            "reusable": false
+          }
+        }
+      }
+    }
+  },
+  "workflows": {
+    "codex_explicit_maintenance_cold_read": {
+      "host": "codex",
+      "adoption_mode": "explicit",
+      "tier": "required",
+      "phase": "prepublication",
+      "scenarios": {
+        "maintenance": {
+          "tier": "required",
+          "reusable": false
+        },
+        "independent_cold_read": {
+          "tier": "required",
+          "reusable": false
+        },
+        "scope_compliance": {
+          "tier": "required",
+          "reusable": false
+        }
+      }
+    },
+    "pi_explicit_maintenance_cold_read": {
+      "host": "pi",
+      "adoption_mode": "explicit",
+      "tier": "evidence_based",
+      "phase": "prepublication",
+      "scenarios": {
+        "maintenance": {
+          "tier": "evidence_based",
+          "reusable": false
+        },
+        "independent_cold_read": {
+          "tier": "evidence_based",
+          "reusable": false
+        },
+        "scope_compliance": {
+          "tier": "evidence_based",
+          "reusable": false
+        }
+      }
+    },
+    "pi_auto_maintenance_cold_read": {
+      "host": "pi",
+      "adoption_mode": "auto",
+      "tier": "evidence_based",
+      "phase": "prepublication",
+      "scenarios": {
+        "maintenance": {
+          "tier": "evidence_based",
+          "reusable": false
+        },
+        "independent_cold_read": {
+          "tier": "evidence_based",
+          "reusable": false
+        },
+        "scope_compliance": {
+          "tier": "evidence_based",
+          "reusable": false
+        }
+      }
+    }
+  },
+  "independent_review": {
+    "prepublication": {
+      "tier": "required",
+      "phase": "prepublication",
+      "reusable": false
+    },
+    "promotion": {
+      "tier": "required",
+      "phase": "promotion",
+      "reusable": false
+    }
+  },
+  "experimental_distributions": {
+    "hermes": {
+      "tier": "experimental"
+    },
+    "cursor": {
+      "tier": "experimental"
+    },
+    "gemini": {
+      "tier": "experimental"
+    },
+    "copilot": {
+      "tier": "experimental"
+    },
+    "mastracode": {
+      "tier": "experimental"
+    },
+    "kiro": {
+      "tier": "experimental"
+    },
+    "continue": {
+      "tier": "experimental"
+    },
+    "factory": {
+      "tier": "experimental"
+    },
+    "codebuddy": {
+      "tier": "experimental"
+    },
+    "agents": {
+      "tier": "experimental"
+    }
+  }
+}

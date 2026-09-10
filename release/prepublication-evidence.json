@@ -1,0 +1,102 @@
+{
+  "version": "0.4.0",
+  "artifacts": {
+    "fresh_runs": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
+    "local_checks": "docs/reproduction/evidence/0010/planweft-0.4.0-local-checks.tar.gz",
+    "reused_runs": "docs/reproduction/evidence/0010/rc15-publication-and-native-trace.tar.gz",
+    "manifest_diff": "docs/reproduction/evidence/0010/planweft-0.4.0-rc15-manifest-diff.json",
+    "codex_workflow": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
+    "pi_explicit_workflow": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
+    "codex_gate_pair": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
+    "codex_maintenance": "docs/reproduction/evidence/0010/planweft-0.4.0-codex-maintenance.tar.gz",
+    "codex_cold": "docs/reproduction/evidence/0010/planweft-0.4.0-codex-cold-read.tar.gz",
+    "pi_explicit_maintenance": "docs/reproduction/evidence/0010/planweft-0.4.0-pi-explicit-maintenance.tar.gz",
+    "pi_explicit_cold": "docs/reproduction/evidence/0010/planweft-0.4.0-pi-explicit-cold-read.tar.gz",
+    "pi_auto_maintenance": "docs/reproduction/evidence/0010/planweft-0.4.0-pi-auto-maintenance.tar.gz",
+    "pi_auto_cold": "docs/reproduction/evidence/0010/planweft-0.4.0-pi-auto-cold-read.tar.gz",
+    "prepublication_review": "docs/reviews/0011-planweft-0.4.0-prepublication-review.md"
+  },
+  "models": {
+    "codex_maintenance": {
+      "image": "sha256:aa46e31c71577eb37c1e1d856427d9d159ddd5a41aa92472af722838b1c3a159",
+      "cli_version": "codex-cli 0.149.1",
+      "model": "gpt-5.6-terra",
+      "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
+      "session_id": "01a088ff-c317-72b1-8203-2754c32a0c97"
+    },
+    "codex_cold_read": {
+      "image": "sha256:aa46e31c71577eb37c1e1d856427d9d159ddd5a41aa92472af722838b1c3a159",
+      "cli_version": "codex-cli 0.149.1",
+      "model": "gpt-5.6-terra",
+      "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
+      "session_id": "01a08902-c7cc-7a60-9eb1-a41fdad29823"
+    },
+    "codex_gate": {
+      "image": "sha256:9ffeaf322318e5bfa6de76190ece94c323a3964f38e1ad426284b021b8ab5b58",
+      "cli_version": "codex-cli 0.149.1",
+      "model": "gpt-5.6-terra",
+      "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
+      "session_id": "pw-release-489753408eae"
+    },
+    "pi_maintenance": {
+      "image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b",
+      "cli_version": "0.84.3",
+      "model": "deepseek-v4-flash",
+      "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
+      "session_id": "01a08904-3989-797d-b382-a935a136fdd7"
+    },
+    "pi_cold_read": {
+      "image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b",
+      "cli_version": "0.84.3",
+      "model": "deepseek-v4-flash",
+      "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
+      "session_id": "01a08905-175f-72f3-9b50-2fdc11fbd131"
+    },
+    "pi_auto_maintenance": {
+      "image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b",
+      "cli_version": "0.84.3",
+      "model": "deepseek-v4-flash",
+      "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
+      "session_id": "01a08906-1159-7192-aa92-520c13d200d8"
+    }
+  },
+  "workflows": {
+    "codex_explicit_maintenance_cold_read": {
+      "host": "codex",
+      "adoption_mode": "explicit",
+      "model_key": "codex_maintenance",
+      "maintenance_artifact": "codex_maintenance",
+      "cold_artifact": "codex_cold",
+      "general_artifact": "codex_workflow",
+      "maintenance_session_id": "01a088ff-c317-72b1-8203-2754c32a0c97",
+      "cold_read_session_id": "01a08902-c7cc-7a60-9eb1-a41fdad29823",
+      "snapshot_sha256": "cd6c42e777271dc55504eaba522a2f4a61dc8d783c04989d9a08035fbebd0b10"
+    },
+    "pi_explicit_maintenance_cold_read": {
+      "host": "pi",
+      "adoption_mode": "explicit",
+      "model_key": "pi_maintenance",
+      "maintenance_artifact": "pi_explicit_maintenance",
+      "cold_artifact": "pi_explicit_cold",
+      "general_artifact": "pi_explicit_workflow",
+      "maintenance_session_id": "01a08904-3989-797d-b382-a935a136fdd7",
+      "cold_read_session_id": "01a08905-175f-72f3-9b50-2fdc11fbd131",
+      "snapshot_sha256": "2c3810fc645f80b62f968b6167f5b2943d13a6ecb04cc5468f10786a666e77b4"
+    },
+    "pi_auto_maintenance_cold_read": {
+      "host": "pi",
+      "adoption_mode": "auto",
+      "model_key": "pi_auto_maintenance",
+      "maintenance_artifact": "pi_auto_maintenance",
+      "cold_artifact": "pi_auto_cold",
+      "general_artifact": "pi_explicit_workflow",
+      "maintenance_session_id": "01a08906-1159-7192-aa92-520c13d200d8",
+      "cold_read_session_id": "01a08906-b862-7363-bafb-c0b5626cf586",
+      "snapshot_sha256": "2ed241ce66b0ae8a642b202b8f32878d4aec31a047331c39eabceb553394cc84"
+    }
+  },
+  "review": {
+    "status": "Passed",
+    "reviewer": "release_plan_review"
+  }
+}

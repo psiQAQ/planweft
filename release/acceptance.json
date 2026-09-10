@@ -1,0 +1,443 @@
+{
+  "core": {
+    "claude": {
+      "cold_read": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-cold_read.json",
+        "evidence_type": "fresh",
+        "sha256": "2a8fbf79d0f9a6d5f98cf948e5bb87c5c31b543f4c195526972f6d664705ea8a",
+        "status": "Not Run"
+      },
+      "context_injection": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-context_injection.json",
+        "evidence_type": "fresh",
+        "sha256": "3a04b55bba9de331211975fb4c56b558dfd51323bbb086b36540c9ce9d545dcf",
+        "status": "Not Run"
+      },
+      "exact_artifact": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-exact_artifact.json",
+        "evidence_type": "fresh",
+        "sha256": "76d125e9d135a690cd75ecb4a01e764dc406a985b265bdaf542c6dd4ad781055",
+        "status": "Passed"
+      },
+      "model_maintenance": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-model_maintenance.json",
+        "evidence_type": "fresh",
+        "sha256": "10190edf9aab6a326d4b4bab88c80cdbbe92a6f82c18a11a9f1f2f1b210a51ea",
+        "status": "Not Run"
+      },
+      "native_channels": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-native_channels.json",
+        "evidence_type": "fresh",
+        "sha256": "270f4e9d39edee0f8d9760afef321239db61639556dd3862b29f4de00e02f43c",
+        "status": "Not Run"
+      },
+      "native_lifecycle": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-native_lifecycle.json",
+        "evidence_type": "fresh",
+        "sha256": "3e6b8c101bc3f6f578f31e22df3c944092baa3ea66e4ef01d07608001d8f8e63",
+        "status": "Passed"
+      },
+      "offline_controls": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-offline_controls.json",
+        "evidence_type": "fresh",
+        "sha256": "f16125f1862ed52860c8c3e4ed97a1ece730c10f8f29d27983babc09b9831037",
+        "status": "Passed"
+      },
+      "permissions": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-permissions.json",
+        "evidence_type": "fresh",
+        "sha256": "9726adff2fb850bd72aba273cc998f5d1a229c6321b28fda43ecb9ecbb279ea1",
+        "status": "Passed"
+      },
+      "recovery": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-recovery.json",
+        "evidence_type": "fresh",
+        "sha256": "1b39bbfda39e2927aefb44221d1b075cf51edfec03c4b0ea1a69e7da2731efbc",
+        "status": "Not Run"
+      },
+      "remote_lifecycle": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-remote_lifecycle.json",
+        "evidence_type": "fresh",
+        "sha256": "8c39ebbe8e4cac7b4154b1f72132cc87c617ea9c699205c62a6811ce08468eb9",
+        "status": "Not Run"
+      },
+      "remote_session": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-remote_session.json",
+        "evidence_type": "fresh",
+        "sha256": "4af1ff8356402a98282801a4a8722f7777b23620ee951e30f458c3f7360ecf0b",
+        "status": "Not Run"
+      },
+      "skill_loading": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-skill_loading.json",
+        "evidence_type": "fresh",
+        "sha256": "4edde51a5a66bf5efba564f438cba31e81c4625a59d57488e6cd884fde43cb98",
+        "status": "Passed"
+      },
+      "stopping": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-stopping.json",
+        "evidence_type": "fresh",
+        "sha256": "3f199505be52d25a37f309a3149056b1283428aac2991e052da89db8da7589a3",
+        "status": "Not Run"
+      }
+    },
+    "codex": {
+      "cold_read": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-cold_read.json",
+        "evidence_type": "fresh",
+        "sha256": "097f416026b58632724f95361bb8ca365e214e999eafb0a3832b5c5c835a44fc",
+        "status": "Passed"
+      },
+      "context_injection": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-context_injection.json",
+        "evidence_type": "fresh",
+        "sha256": "0469ad5b797f1df07a3cbfbd2c733f534b6985fe6ca9a93ec60e626d2aad4da1",
+        "status": "Not Run"
+      },
+      "exact_artifact": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-exact_artifact.json",
+        "evidence_type": "fresh",
+        "sha256": "d2481172880d03e9853c309afcf36d6c5fa9a4b53f3049cdb45a778a5cc39772",
+        "status": "Passed"
+      },
+      "model_maintenance": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-model_maintenance.json",
+        "evidence_type": "fresh",
+        "sha256": "5dcecba12eaceb7a153bf8a8294e20c927351fe49fffa999842443f38eb9b3fe",
+        "status": "Passed"
+      },
+      "native_channels": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-native_channels.json",
+        "evidence_type": "fresh",
+        "sha256": "bc31eb9f79d5330fece0897e97ad262c3cd43019304f3c2dd61316a04dc5b3cf",
+        "status": "Not Run"
+      },
+      "native_lifecycle": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-native_lifecycle.json",
+        "evidence_type": "fresh",
+        "sha256": "a21ecb93fd8eaf1c77d191204b3aff9951ac9618255ec426c706e189ac7a1f14",
+        "status": "Passed"
+      },
+      "offline_controls": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-offline_controls.json",
+        "evidence_type": "fresh",
+        "sha256": "d6caec2f768f85978366243558891d94ff4c66fccef30cd1a1040178a204b0ef",
+        "status": "Passed"
+      },
+      "permissions": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-permissions.json",
+        "evidence_type": "fresh",
+        "sha256": "fdf8fa36371e592778d82597c4b0570ae2317066daaf252f06b7c23815a5bb40",
+        "status": "Passed"
+      },
+      "recovery": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-recovery.json",
+        "evidence_type": "fresh",
+        "sha256": "9d0c78395d633fd95a8dc5362523d8ce3fbd57ad2ea703a7a14baf1a653200dd",
+        "status": "Not Run"
+      },
+      "remote_lifecycle": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-remote_lifecycle.json",
+        "evidence_type": "fresh",
+        "sha256": "bad1aad7b06b34922d798daf487d0664058f231c1a8c05101a555e9db9490b68",
+        "status": "Not Run"
+      },
+      "remote_session": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-remote_session.json",
+        "evidence_type": "fresh",
+        "sha256": "30c4322a9851d15d5ea6241d45dc68a5b6e9fab6499c8dcb2dffdf424cfe3644",
+        "status": "Not Run"
+      },
+      "skill_loading": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-skill_loading.json",
+        "evidence_type": "fresh",
+        "sha256": "a9d070ef388afc2d1b272aa59829d2a7fad5180ff05c73467132f89148b8a0d7",
+        "status": "Passed"
+      },
+      "stopping": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-stopping.json",
+        "evidence_type": "fresh",
+        "sha256": "f02c5a568d6de214997514525a524f224512eb37433529d313482332555a56ef",
+        "status": "Failed"
+      }
+    },
+    "dsh": {
+      "cold_read": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-cold_read.json",
+        "evidence_type": "fresh",
+        "sha256": "18dd0da079386bc2cddc5139eb7926a7e1ad7829c0aeeee04c51b31b3382b3b9",
+        "status": "Not Run"
+      },
+      "context_injection": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-context_injection.json",
+        "evidence_type": "fresh",
+        "sha256": "9273391a282bbf92f5fd9897275f53eb94248cd65342f17859f8ae9ae022299f",
+        "status": "Not Run"
+      },
+      "exact_artifact": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-exact_artifact.json",
+        "evidence_type": "fresh",
+        "sha256": "13bf0b9c0ede9e0cde7e8701ed18930677d2ef41a6506117d31d30da7d8f3326",
+        "status": "Passed"
+      },
+      "model_maintenance": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-model_maintenance.json",
+        "evidence_type": "fresh",
+        "sha256": "5e30f01fe5c1e5a3f8c9a15cb35f41ae145ccd4cc7c683d484ff8b3af7713a59",
+        "status": "Not Run"
+      },
+      "native_channels": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-native_channels.json",
+        "evidence_type": "fresh",
+        "sha256": "4f14d78a03f221a114e66f4afc128d4e36a406c4b41d5b99aed16f9da78c0f67",
+        "status": "Not Run"
+      },
+      "native_lifecycle": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-native_lifecycle.json",
+        "evidence_type": "fresh",
+        "sha256": "701260f4d21268c05a3d79d70281ddf6450cd6637891f3f473b4d19ace171c4c",
+        "status": "Passed"
+      },
+      "offline_controls": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-offline_controls.json",
+        "evidence_type": "fresh",
+        "sha256": "3208424c5672a77ada062d8ab413e5989522c525d2b417f5123711810b0c1503",
+        "status": "Passed"
+      },
+      "permissions": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-permissions.json",
+        "evidence_type": "fresh",
+        "sha256": "a0988a783133df73f541dac47e6fa7a52b0ff144c4b43d577d97f3a6d6f1e1ad",
+        "status": "Passed"
+      },
+      "recovery": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-recovery.json",
+        "evidence_type": "fresh",
+        "sha256": "d1907bdc640e8bba06f92e3711e5f0890c20d66089089f0ccf8d946dd4c89997",
+        "status": "Not Run"
+      },
+      "remote_lifecycle": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-remote_lifecycle.json",
+        "evidence_type": "fresh",
+        "sha256": "cc45c8a0dd7def832d5f904123571d09e40871b8bf99998780b1bc327fd1f60b",
+        "status": "Not Run"
+      },
+      "remote_session": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-remote_session.json",
+        "evidence_type": "fresh",
+        "sha256": "a45832f559f297325e16beca17cfc4537c0d1f340b35eb771ab3fb1c647e8904",
+        "status": "Not Run"
+      },
+      "skill_loading": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-skill_loading.json",
+        "evidence_type": "fresh",
+        "sha256": "2bceb2a5c076ad87bb6821d57cbbdd94b4d0ba99313accc96e09c5b82cb8e51a",
+        "status": "Passed"
+      },
+      "stopping": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-stopping.json",
+        "evidence_type": "fresh",
+        "sha256": "b7704d67c60b73a14af56822a977b4412b3d23d6be88d51a8f0084b139f18a00",
+        "status": "Not Run"
+      }
+    },
+    "opencode": {
+      "cold_read": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-cold_read.json",
+        "evidence_type": "fresh",
+        "sha256": "672a5ad493f5a866a8681fb9d59b990449e47c4ba4750b33ab5114cccfd0af70",
+        "status": "Not Run"
+      },
+      "context_injection": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-context_injection.json",
+        "evidence_type": "fresh",
+        "sha256": "0dde4861d72ef87aacdfa5e7a2e215c12f69f095fbd5dfe1365ce4921f8e662b",
+        "status": "Not Run"
+      },
+      "exact_artifact": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-exact_artifact.json",
+        "evidence_type": "fresh",
+        "sha256": "4306456e28917f8c71a25f3131df5def11870e0963faf082bbabc61adc56b051",
+        "status": "Passed"
+      },
+      "model_maintenance": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-model_maintenance.json",
+        "evidence_type": "fresh",
+        "sha256": "2f82111569fb433f8cbdea0098ba8b798fa599f3bd6b92094b52969a1c5020ce",
+        "status": "Not Run"
+      },
+      "native_channels": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-native_channels.json",
+        "evidence_type": "fresh",
+        "sha256": "f6d162ec8b7c6e42ed920a5a49197d3097f1a80b6f95023466488b17ae716773",
+        "status": "Not Run"
+      },
+      "native_lifecycle": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-native_lifecycle.json",
+        "evidence_type": "fresh",
+        "sha256": "4b8f2e9714f9243ac0b6e25b39741caf99bc7c0e7adc83356cf90581e6f9df59",
+        "status": "Passed"
+      },
+      "offline_controls": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-offline_controls.json",
+        "evidence_type": "fresh",
+        "sha256": "b254c4e2ef82e4f25036dc1205ab55f86e6769f78251429dcc78e3e460fab983",
+        "status": "Passed"
+      },
+      "permissions": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-permissions.json",
+        "evidence_type": "fresh",
+        "sha256": "5532ae40eacffc68e0a1027c1498989279fdf5adb19460cfe8a6592f2dffbcfd",
+        "status": "Passed"
+      },
+      "recovery": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-recovery.json",
+        "evidence_type": "fresh",
+        "sha256": "513cce04ecac11995095edde785cc8062c69b317535b39745c20f317c4b2621a",
+        "status": "Not Run"
+      },
+      "remote_lifecycle": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-remote_lifecycle.json",
+        "evidence_type": "fresh",
+        "sha256": "a51c399b1c2b520c1d4fb461f94eab6881847ddff1ca00d9d94cc1e3d0cf188c",
+        "status": "Not Run"
+      },
+      "remote_session": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-remote_session.json",
+        "evidence_type": "fresh",
+        "sha256": "f1f10655a2151c5e2846e14cf8d6dba70aa581682148499e3be98630600ddb39",
+        "status": "Not Run"
+      },
+      "skill_loading": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-skill_loading.json",
+        "evidence_type": "fresh",
+        "sha256": "b040802a08dd920fe13486b562d563725b9c34cc2c96dbf8d3108086eff73b0b",
+        "status": "Passed"
+      },
+      "stopping": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-stopping.json",
+        "evidence_type": "fresh",
+        "sha256": "377b1c2389ca6b84b78e6cf7aa478b51ba9eba6ef5ff26fa5280d6aa83a90407",
+        "status": "Not Run"
+      }
+    },
+    "pi": {
+      "cold_read": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-cold_read.json",
+        "evidence_type": "fresh",
+        "sha256": "a1f0ff93e89de4a29c3e5566f0465eabc6f0d46b82811bee08a677dbcfdfc7c0",
+        "status": "Passed"
+      },
+      "context_injection": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-context_injection.json",
+        "evidence_type": "fresh",
+        "sha256": "331df874306572a60fb70504a829ef5a8254678d896da8ea4791a741094e1d12",
+        "status": "Not Run"
+      },
+      "exact_artifact": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-exact_artifact.json",
+        "evidence_type": "fresh",
+        "sha256": "0cb75759b27df4615d537dc305bb29603892c0deca682a3049647d92cdee2110",
+        "status": "Passed"
+      },
+      "model_maintenance": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-model_maintenance.json",
+        "evidence_type": "fresh",
+        "sha256": "399de7945aafa8ed6838b9baca75cda8ab40eb87e73116589eb5a8837e0c12b6",
+        "status": "Passed"
+      },
+      "native_channels": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-native_channels.json",
+        "evidence_type": "fresh",
+        "sha256": "43d534c50936096f495966f12d9f3a370901dcdd1a408fc374bca525859aa663",
+        "status": "Not Run"
+      },
+      "native_lifecycle": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-native_lifecycle.json",
+        "evidence_type": "fresh",
+        "sha256": "7b0d3a1db845070cb1e0e410667f51fa01375ce5b379e2de512f287f0637d8af",
+        "status": "Passed"
+      },
+      "offline_controls": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-offline_controls.json",
+        "evidence_type": "fresh",
+        "sha256": "bb609cadafc618538e6e64f7e6631cb34053283b0bf92cfe4c421c44887ccdc3",
+        "status": "Passed"
+      },
+      "permissions": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-permissions.json",
+        "evidence_type": "fresh",
+        "sha256": "842ffee6ef6e7eb7b672bea717bf7aa754757610cc33993b532b722482bd1c60",
+        "status": "Passed"
+      },
+      "recovery": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-recovery.json",
+        "evidence_type": "fresh",
+        "sha256": "d1e71bd3d97bf66d5cfee7edbe491dc5e1926bbd0a3abfb37bd1fcfca76dcae1",
+        "status": "Not Run"
+      },
+      "remote_lifecycle": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-remote_lifecycle.json",
+        "evidence_type": "fresh",
+        "sha256": "6d10b67dc57d44d73121dbc44d63e896cfa2ba59cd53028177a04e8c4d59a25b",
+        "status": "Not Run"
+      },
+      "remote_session": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-remote_session.json",
+        "evidence_type": "fresh",
+        "sha256": "29cb6293301c169bc15d132ac310a3aafe2deaa275cf381589a3bf5a058c39ec",
+        "status": "Not Run"
+      },
+      "skill_loading": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-skill_loading.json",
+        "evidence_type": "fresh",
+        "sha256": "2b55e063cdaf67fcccd6df1dae6fe3991e8e1cf5ca3c55a19cc7a7ace40aaa98",
+        "status": "Passed"
+      },
+      "stopping": {
+        "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-stopping.json",
+        "evidence_type": "fresh",
+        "sha256": "4f52d4582588231ede851016f42e0914549e1b1f8478a40d75b8c0f19c0dcf30",
+        "status": "Not Run"
+      }
+    }
+  },
+  "independent_reviews": {
+    "prepublication": {
+      "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/reviews/prepublication.json",
+      "evidence_type": "fresh",
+      "sha256": "095617d1524d83e644b7af79626a018e8af265d672703ea3f8477db2ae5c8fa3",
+      "status": "Passed"
+    },
+    "promotion": {
+      "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/reviews/promotion.json",
+      "evidence_type": "fresh",
+      "sha256": "790a5302508208622138bb999a08e2d24f9732fff2df0928d42398de9d7e4999",
+      "status": "Not Run"
+    }
+  },
+  "npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+  "release_blocking": false,
+  "schema_version": 3,
+  "support_policy_sha256": "bfd7ac9b18c8e6675374114758b9d33b6232ff25a1b03aa855bf2c9e7ff5749e",
+  "version": "0.4.0",
+  "workflows": {
+    "codex_explicit_maintenance_cold_read": {
+      "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/workflows/codex_explicit_maintenance_cold_read.json",
+      "evidence_type": "fresh",
+      "sha256": "2b498c4c88e17e8adcc451ec217349a973b709d88af60443c5f95c3a5d58d8fb",
+      "status": "Passed"
+    },
+    "pi_auto_maintenance_cold_read": {
+      "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/workflows/pi_auto_maintenance_cold_read.json",
+      "evidence_type": "fresh",
+      "sha256": "dd71336ede57c611a9cd7229eff35d66829bbf98578e0c3252e2d628236d3493",
+      "status": "Passed"
+    },
+    "pi_explicit_maintenance_cold_read": {
+      "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/workflows/pi_explicit_maintenance_cold_read.json",
+      "evidence_type": "fresh",
+      "sha256": "41e4f8afd3ce29f9507e8c9f4976fc65238c4a788335e72f07923915ffab8b2b",
+      "status": "Passed"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 [简体中文](README.md) | [English](README.en.md)
 
-> PlanWeft 0.4.0 is still in candidate acceptance. Stable 0.4.0 requires live acceptance on Codex, Claude Code, Pi, OpenCode and DSH. See the [release checklist](docs/releasing.en.md) / [中文](docs/releasing.md).
+> PlanWeft 0.4.0 is undergoing capability-tiered stable-release acceptance. Deterministic five-host core capabilities and the Codex explicit-maintenance → independent-cold-read workflow are blocking; automatic model adoption and autonomous/gated behavior remain evidence-rated or experimental. See the [release checklist](docs/releasing.en.md) / [中文](docs/releasing.md).
 
 # PlanWeft
 
@@ -39,7 +39,7 @@ It is intended for feature development, maintenance, investigations and design w
 1. Read the project entry points and task constraints, then locate existing specifications, decisions and validation material.
 2. For authorized complex work, resolve or initialize the task's PWF plan. Reading, diagnosis and simple work retain their appropriate minimal scope.
 3. Record findings and actual operations while implementing, minimally update affected documents, and preserve the user's existing edits.
-4. Record validation as Passed, Failed or Not Run. Compare approved requirements with actual results and explain limitations.
+4. Record validation as Passed, Failed, Inconclusive or Not Run. Compare approved requirements with actual results and explain limitations.
 5. Apply independent evidence review or a fresh-reader handoff as the task warrants, and leave an actionable next step.
 
 These practices depend on the agent reading and following the Skill correctly. The plugin provides records, recovery and host adapters; task outcomes still require validation.
@@ -72,10 +72,10 @@ This project contributes the concrete workflow integration and engineering:
 
 ## Current delivery and boundaries
 
-The **0.4.0 candidate series** provides one `planweft` npm package containing the installation CLI, Pi Extension, OpenCode V1 entry and resources for 15 hosts, including the native DSH bundle. It also provides six native marketplace entry points and preparation tools for Gemini/Hermes Git release trees. See the [中文安装指南](docs/installation.md) / [English installation guide](docs/installation.en.md), and the [中文跨平台设计](docs/platforms.md) / [English cross-platform design](docs/platforms.en.md) for capabilities and validation scope.
+**0.4.0** provides one `planweft` npm package containing the installation CLI, Pi Extension, OpenCode V1 entry and resources for 15 hosts, including the native DSH bundle. It also provides six native marketplace entry points and preparation tools for Gemini/Hermes Git release trees. [`release/support-policy.json`](release/support-policy.json) declares the exact five-host core contract, Codex required workflow, Pi evidence ratings and ten experimental adapters. See the [中文安装指南](docs/installation.md) / [English installation guide](docs/installation.en.md), and the [中文跨平台设计](docs/platforms.md) / [English cross-platform design](docs/platforms.en.md) for capabilities and validation scope.
 
 The 0.3.0 record includes local installation lifecycle checks for eight hosts. Hermes installation was rejected by its default scanner. RC4 remote npm lifecycles passed on all five core hosts, as did Codex/Claude public Git same-commit refreshes. Windows/macOS installer CI passed; real hosts and GUI cases retain Not Run items, and model maintenance/fresh-reader failures remain unresolved. Historical evidence does not become a new host run when documentation changes; the cross-platform documents explain these boundaries.
 
-The GitHub repository and npm candidates are public; stable `0.4.0` remains unpublished. Select an explicit candidate version using the installation guide. Distributions retain PWF's MIT copyright and license; other reference material follows its own licensing. This repository itself continues to use its existing document entry points and has not formally migrated to plugin-managed planning.
+The GitHub repository and npm candidates are public. Stable `0.4.0` is promoted to `latest` only after pre-publication gates, three-OS CI, remote acceptance from `next`, and the promotion gate all pass. Distributions retain PWF's MIT copyright and license; other reference material follows its own licensing. This repository itself continues to use its existing document entry points and has not formally migrated to plugin-managed planning.
 
 Maintainer material: [development conventions (Chinese)](docs/development.md) · [upstream maintenance (Chinese)](docs/upstream-maintenance.md) · [tests and evidence (Chinese)](tests/README.md). These engineering records retain their original language; the public overview, installation guide and cross-platform design have the paired Chinese and English versions above.

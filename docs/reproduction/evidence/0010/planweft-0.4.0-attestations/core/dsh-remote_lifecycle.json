@@ -1,0 +1,35 @@
+{
+  "check": "remote_lifecycle",
+  "host": "dsh",
+  "npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+  "observations": {
+    "scenarios": {
+      "candidate_to_release": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Pending official-registry next publication and promotion validation",
+        "status": "Not Run"
+      },
+      "candidate_to_release_again": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Pending official-registry next publication and promotion validation",
+        "status": "Not Run"
+      },
+      "release_to_candidate": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Pending official-registry next publication and promotion validation",
+        "status": "Not Run"
+      },
+      "uninstall": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Pending official-registry next publication and promotion validation",
+        "status": "Not Run"
+      }
+    }
+  },
+  "status": "Not Run",
+  "version": "0.4.0"
+}

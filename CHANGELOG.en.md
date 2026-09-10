@@ -2,6 +2,13 @@
 
 # Changelog
 
+## 0.4.0 — Stable release preparation
+
+- Add a version-controlled capability-tiered support policy and acceptance schema 3. The gate computes blocking per scenario, preserves Failed / Inconclusive / Not Run, and never trusts a self-declared release boolean.
+- Support scenario-level fresh/reused evidence and safe references to sanitized repository attachments. Reuse binds source/target packages, a per-file manifest diff, affected checks and a reviewer. Exact artifacts, final install/uninstall, user-file protection, explicit Skill reading and required model workflows cannot be reused.
+- Add at most 32 privacy-safe diagnostics for unknown Codex syscall returns while remaining fail closed. The five-host runner adds side-effect-before-validation and evidence recording for `--adoption-mode auto|explicit`.
+- Deterministic five-host core capabilities and Codex explicit maintenance → independent cold read are stable requirements; Pi explicit/auto modes are rated separately. Other automatic adoption, live-model stopping, autonomous/gated behavior and the other ten adapters remain experimental. Dependencies, pinned PWF/vendor/submodule, hosts and models are unchanged.
+
 ## 0.4.0-rc.15 — Candidate (publication status follows the official registry)
 
 - Select a small initial set of project entries within the user's read scope before exploration, then follow relevant project relationships. Use the host-provided Skill path separately for package resources; a discovered installer directory is not automatically task input.

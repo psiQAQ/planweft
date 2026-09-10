@@ -477,6 +477,7 @@ class ContainerReleaseTest(unittest.TestCase):
                 tar.addfile(info,io.BytesIO(data))
             base=[sys.executable,str(ROOT/'tests/run-five-agent-release.py'),'--archive',str(archive),'--output',str(output)]
             for flags in [['--host','unknown'],['--host','codex','--timeout','0'],
+                          ['--host','codex','--adoption-mode','implicit'],
                           ['--host','pi','--cases','gate-cap'],
                           ['--host','claude','--cases','gate-cap'],
                           ['--host','codex','--cases','continuation-limit'],
@@ -486,6 +487,15 @@ class ContainerReleaseTest(unittest.TestCase):
                     result=subprocess.run(base+flags,capture_output=True)
                     self.assertEqual(result.returncode,2)
                     self.assertFalse(output.exists())
+
+    def test_adoption_mode_defaults_to_auto_and_is_recorded_in_payload(self):
+        from types import SimpleNamespace
+        runner=module('pw_adoption_mode','tests/run-five-agent-release.py')
+        args=SimpleNamespace(codex_model='codex',model='model',timeout=600,
+                             trace_gate_processes=False,trace_reminder_processes=False)
+        self.assertEqual(runner.scenario_payload(args,'codex','maintenance','prompt',{})['adoption_mode'],'auto')
+        args.adoption_mode='explicit'
+        self.assertEqual(runner.scenario_payload(args,'pi','maintenance','prompt',{})['adoption_mode'],'explicit')
 
     def test_stop_fixtures_separate_cap_from_stall(self):
         import hashlib

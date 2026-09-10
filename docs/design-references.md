@@ -136,6 +136,15 @@ README、AGENTS 和 development 本轮仅补当前计划/测试/结果导航，�
 
 本轮生成运行时逐文件追溯到导入清单与身份映射/补丁；它们的批量来源是 PWF-317 的固定文件，不逐份虚构第一方原创依据。本地扩展与构建脚本应另列其实际入口和设计来源。REP-0005 中的测试输出是本轮观察证据，不是外部权威来源；历史 REP-0003/0004 不作为 0.2.0 兼容通过的依据。
 
+## 0.4.0 能力分级发布（2026-09-10）
+
+| 本仓库目标文件 | 问题与设计 | 实际来源及本地差异 | 验证 / 审查入口 |
+| --- | --- | --- | --- |
+| [ADR-0009](adr/0009-capability-tiered-release-gate.md)、[`support-policy.json`](../release/support-policy.json) | 确定性核心能力、真实模型工作流和实验适配不能用统一全绿状态表达；acceptance 不能自行决定放行 | 用户批准的 0.4.0 正式发布计划是需求来源；沿用 SPEC-0005 的准确包和不可覆盖版本原则。能力分级、schema 3、证据复用限制及 `next` 后 promotion 是本地发布治理决定，不冒充外部标准 | `tests/test_release_gate.py` 的策略完整性、状态汇总、路径/摘要、复用与 review 反例；最终独立 release review |
+| [Codex trace parser](../tests/gate_process_trace.py) | 未知 syscall 返回既要 fail closed，也要留下可复核且不泄密的有界诊断 | 既有 Claude trace 的 bounded diagnostic 结构作为仓库内已测试先例；具体字段和隐私限制来自用户批准计划 | `tests/test_gate_process_trace.py` 的上限、类型、上下文缺失和秘密/路径/argv 反例；保留原 trace 离线回放 |
+
+历史 reproduction/checkpoint 是观察证据，不作为新策略的设计权威，也不因分级发布被回写为成功。
+
 ### 0.2.0 实施文件映射
 
 | 第一方入口 | 具体设计及精确依据 | 本地差异与验证 |

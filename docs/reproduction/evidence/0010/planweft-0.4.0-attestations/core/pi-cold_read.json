@@ -1,0 +1,38 @@
+{
+  "check": "cold_read",
+  "host": "pi",
+  "npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+  "observations": {
+    "cli_version": "0.84.3",
+    "external_memory": false,
+    "image": "sha256:e1ad8a1b86193e7f8439de603b7b7d4fe8c806c1b8b0195564b6115b274be89b",
+    "kind": "actual-host-model",
+    "model": "deepseek-v4-flash",
+    "runner_sha256": "f3d9a93c5c569097f2ec988057ebe73f2a3a273f12d2beb2e46d0ffc0680d963",
+    "scenarios": {
+      "goal_and_next_action": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
+            "sha256": "4ddb0368911b8d5c87a7642ae033ed69f0b6f4d54fe1e7e101a9e30d31466127"
+          }
+        ],
+        "evidence_type": "fresh",
+        "status": "Passed"
+      },
+      "historical_results_and_limits": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
+            "sha256": "4ddb0368911b8d5c87a7642ae033ed69f0b6f4d54fe1e7e101a9e30d31466127"
+          }
+        ],
+        "evidence_type": "fresh",
+        "status": "Passed"
+      }
+    },
+    "session_id": "01a08905-175f-72f3-9b50-2fdc11fbd131"
+  },
+  "status": "Passed",
+  "version": "0.4.0"
+}

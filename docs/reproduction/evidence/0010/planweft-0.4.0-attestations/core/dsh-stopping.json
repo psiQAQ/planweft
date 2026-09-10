@@ -1,0 +1,47 @@
+{
+  "check": "stopping",
+  "host": "dsh",
+  "npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+  "observations": {
+    "scenarios": {
+      "explicit_continuation": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Not rerun for 0.4.0; experimental historical results remain published separately",
+        "status": "Not Run"
+      },
+      "gate_cap": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Not rerun for 0.4.0; experimental historical results remain published separately",
+        "status": "Not Run"
+      },
+      "gate_cap_disabled": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Not rerun for 0.4.0; experimental historical results remain published separately",
+        "status": "Not Run"
+      },
+      "gate_stall": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Not rerun for 0.4.0; experimental historical results remain published separately",
+        "status": "Not Run"
+      },
+      "gate_stall_disabled": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Not rerun for 0.4.0; experimental historical results remain published separately",
+        "status": "Not Run"
+      },
+      "normal_stop": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Not rerun for 0.4.0; experimental historical results remain published separately",
+        "status": "Not Run"
+      }
+    }
+  },
+  "status": "Not Run",
+  "version": "0.4.0"
+}
