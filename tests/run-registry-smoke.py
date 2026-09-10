@@ -364,6 +364,13 @@ def main():
                     candidates=[p.parent.parent for p in (profile/('.codex/plugins/cache' if host=='codex' else '.claude/plugins/cache')).rglob(suffix) if json.loads(p.read_text()).get('version')==version]
                     if len(candidates)!=1: raise RuntimeError('Native cache does not identify selected version')
                     native=candidates[0]
+                    # Start a separate credential-free host process after the
+                    # installer exits. This proves that a fresh process
+                    # discovers the selected native registration; it is not a
+                    # model session or a claim that hooks executed.
+                    listing=run(host+'-load-'+label,[host,'plugin','list','--json'],project)
+                    if 'planweft' not in listing:
+                        raise RuntimeError('Fresh host process did not discover native registration')
                 for name,expected in manifest['files'].items():
                     installed=native/name
                     if not installed.is_file() or hashlib.sha256(installed.read_bytes()).hexdigest()!=expected['sha256'] or bool(installed.stat().st_mode & 0o111)!=expected['executable']:

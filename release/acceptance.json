@@ -28,8 +28,8 @@
       "native_channels": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-native_channels.json",
         "evidence_type": "fresh",
-        "sha256": "2921c80cd7270f91c1e71339a2ccaa38c73ee495eb50b13c2c49a6ee2bba7846",
-        "status": "Not Run"
+        "sha256": "ecc6b5713c355714efd7a29c399f46a1ea109bc0589e41d87639d9befb8ab454",
+        "status": "Passed"
       },
       "native_lifecycle": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-native_lifecycle.json",
@@ -58,14 +58,14 @@
       "remote_lifecycle": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-remote_lifecycle.json",
         "evidence_type": "fresh",
-        "sha256": "cd2470c9842c615f595a0fd28c674619600ead2955aaa9ef658be56fa35262e3",
-        "status": "Not Run"
+        "sha256": "0016e922d2a7c098f7838108d67b1c9339f38ed17e2f2e72fbbbd0000eb38fb6",
+        "status": "Passed"
       },
       "remote_session": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-remote_session.json",
         "evidence_type": "fresh",
-        "sha256": "31d191614e3bab7d43effa2afe4ae67df9ff48dc9170df7199beb454ffab099d",
-        "status": "Not Run"
+        "sha256": "0607bb0e1d64df1679bd26948f2c789d21ccec83ac828dc456b92f3edf6644dd",
+        "status": "Passed"
       },
       "skill_loading": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/claude-skill_loading.json",
@@ -108,8 +108,8 @@
       "native_channels": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-native_channels.json",
         "evidence_type": "fresh",
-        "sha256": "b87530ee777b931f266a1ff5dd51198a8b1ba3b6460e419a565ad8385a0a1341",
-        "status": "Not Run"
+        "sha256": "0e387636104622d14831d522e091e8dc4d387d625fc05dbba6f16936dcd78bfe",
+        "status": "Passed"
       },
       "native_lifecycle": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-native_lifecycle.json",
@@ -138,14 +138,14 @@
       "remote_lifecycle": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-remote_lifecycle.json",
         "evidence_type": "fresh",
-        "sha256": "e423550f9d57771c413291ececa66c39a2dab642bf5c77e43b03660aef7e8922",
-        "status": "Not Run"
+        "sha256": "63b878bec6040eee909ac86be10817f52f018c2fb4330db78a0a98b5b7d5b3a8",
+        "status": "Passed"
       },
       "remote_session": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-remote_session.json",
         "evidence_type": "fresh",
-        "sha256": "ae4e0df39bc164455724dac15b3fd58464fa01d0bbe09024ea47e96ff0d54d18",
-        "status": "Not Run"
+        "sha256": "e16164409e6d4f721dbf5010addc6f25ec04d2a18bee82a5489d2dfd37359939",
+        "status": "Passed"
       },
       "skill_loading": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/codex-skill_loading.json",
@@ -188,8 +188,8 @@
       "native_channels": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-native_channels.json",
         "evidence_type": "fresh",
-        "sha256": "e5289aac2c2395293f78c2461395bffcf2eb4684b02cee5aa9c232feab3c2dd7",
-        "status": "Not Run"
+        "sha256": "96d9cd23f3b3d5be80c63bf1d80ccc246332b734c113e2b02b60729915dfafb1",
+        "status": "Passed"
       },
       "native_lifecycle": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-native_lifecycle.json",
@@ -218,14 +218,14 @@
       "remote_lifecycle": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-remote_lifecycle.json",
         "evidence_type": "fresh",
-        "sha256": "acab2233e1ae333aff2ce8087e5b0df8334cc182da847c9c3f88b091578e755e",
-        "status": "Not Run"
+        "sha256": "2986f383dcf3a1d9126b07cff8c77be549a1a9afd3e1eeaf9463f5166521e0f5",
+        "status": "Passed"
       },
       "remote_session": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-remote_session.json",
         "evidence_type": "fresh",
-        "sha256": "eeee4c17820250592a23e1add3f33e5e3d6877e93c306a392676ec420d22600c",
-        "status": "Not Run"
+        "sha256": "c25f9f4f024c7e86def13291b7ded1262435813fa1356047f3828e688c220570",
+        "status": "Passed"
       },
       "skill_loading": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/dsh-skill_loading.json",
@@ -268,8 +268,8 @@
       "native_channels": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-native_channels.json",
         "evidence_type": "fresh",
-        "sha256": "0b4ea75a79b4a6b475266e2975b78d9c0bc817ee65363af043cec7d58a3ba203",
-        "status": "Not Run"
+        "sha256": "4ead9e529547bf6ae94ab4101234b537a0e0af6b2512613d7fa117ac68868871",
+        "status": "Passed"
       },
       "native_lifecycle": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-native_lifecycle.json",
@@ -298,14 +298,14 @@
       "remote_lifecycle": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-remote_lifecycle.json",
         "evidence_type": "fresh",
-        "sha256": "e01c126aeb4b0a882eb53ed2db12f886b86e1e3fc20388d15e02e27665e0a775",
-        "status": "Not Run"
+        "sha256": "b964d4f62a6ad0100311f23ff8dc99ecf04a7d04f0240901bc65274c6f64ec94",
+        "status": "Passed"
       },
       "remote_session": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-remote_session.json",
         "evidence_type": "fresh",
-        "sha256": "f1caef7903f09aa7c803282de22c6aa5d4500984aede2ed60cdbcb42253ed002",
-        "status": "Not Run"
+        "sha256": "9c5a1e35d545d772c7d495c96c5d271dda4d26f725d5f8db7745fb7d67ecaa4c",
+        "status": "Passed"
       },
       "skill_loading": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/opencode-skill_loading.json",
@@ -348,8 +348,8 @@
       "native_channels": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-native_channels.json",
         "evidence_type": "fresh",
-        "sha256": "05fa3f515108ef77975f2dee662a76a1a234845b8a68c4fe2cafc3ff9d4b58ad",
-        "status": "Not Run"
+        "sha256": "0342b7fe342dc78be752372ab972c4042a08c4014c0e4d1c0ea773b986c3a9bf",
+        "status": "Passed"
       },
       "native_lifecycle": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-native_lifecycle.json",
@@ -378,14 +378,14 @@
       "remote_lifecycle": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-remote_lifecycle.json",
         "evidence_type": "fresh",
-        "sha256": "39a466b45ce33858646e6eeaba54e68e184e70bcd639d96ffb163137d45deb28",
-        "status": "Not Run"
+        "sha256": "2f6fd3a746738832474efb0abfe2fb01e6a85e0bc00731e366c9e38a8b5d676e",
+        "status": "Passed"
       },
       "remote_session": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-remote_session.json",
         "evidence_type": "fresh",
-        "sha256": "da99a694f8c11537426b4a79a978865efacc35b82bd2bbdb16b15470f3e63930",
-        "status": "Not Run"
+        "sha256": "9c8a561ce01df473173eea4d68889d91578728ef6247995f2632dfdf93205ac8",
+        "status": "Passed"
       },
       "skill_loading": {
         "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/core/pi-skill_loading.json",
@@ -411,8 +411,8 @@
     "promotion": {
       "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-attestations/reviews/promotion.json",
       "evidence_type": "fresh",
-      "sha256": "d7299a8ba02d9bcc2a297fcd732ad3dbd64f5090e2a95a1a0f2e6fc84640d1b0",
-      "status": "Not Run"
+      "sha256": "3b19aeef97fdc7ffcadaac6341feb7602e2cb669d2ce01f10c802c856849b769",
+      "status": "Passed"
     }
   },
   "npm_sha256": "e611338a619adabb0ba943d75460a01d83e4670dbe7d69f5d1050a1c1467c132",

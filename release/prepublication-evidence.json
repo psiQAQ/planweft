@@ -14,7 +14,10 @@
     "pi_explicit_cold": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-pi-explicit-cold-read.tar.gz",
     "pi_auto_maintenance": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-pi-auto-maintenance.tar.gz",
     "pi_auto_cold": "docs/reproduction/evidence/0010/planweft-0.4.0-canonical-pi-auto-cold-read.tar.gz",
-    "prepublication_review": "docs/reviews/0011-planweft-0.4.0-prepublication-review.md"
+    "prepublication_review": "docs/reviews/0011-planweft-0.4.0-prepublication-review.md",
+    "registry_runs": "docs/reproduction/evidence/0010/planweft-0.4.0-registry-acceptance.tar.gz",
+    "registry_proof": "docs/reproduction/evidence/0010/planweft-0.4.0-registry-proof.json",
+    "promotion_review": "docs/reviews/0012-planweft-0.4.0-promotion-review.md"
   },
   "models": {
     "codex_maintenance": {
@@ -98,5 +101,11 @@
   "review": {
     "status": "Passed",
     "reviewer": "release_plan_review"
+  },
+  "promotion": {
+    "review": {
+      "status": "Passed",
+      "reviewer": "release_plan_review"
+    }
   }
 }

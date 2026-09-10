@@ -2,7 +2,7 @@
 
 ## 当前状态（唯一当前入口）
 
-实施中，正式 `0.4.0` 未发布。2026-09-10 已从远端 `master@fe3543f` 创建隔离 `release/0.4.0` worktree；主工作区 RC15 checkpoint 末尾的用户未提交“？”不纳入本分支。经重新查询，npm `next=0.4.0-rc.15`、`latest=0.4.0-rc.1`，稳定 `0.4.0` 未占用，`v0.4.0` 不存在，`fe3543f` 的三系统 Check `34393048435` Passed。
+Promotion 中。正式 `0.4.0` 已从 `master@f0ca3200f53ce56e0d122dd5241f233648ca9459` 通过 OIDC/provenance workflow `34434623009` 发布至 npm `next`；官方 registry 下载字节与预审归档一致，SHA-256 为 `e611338a619adabb0ba943d75460a01d83e4670dbe7d69f5d1050a1c1467c132`。五宿主 registry lifecycle、原生发现、doctor、新进程加载与卸载均 Passed，promotion 独立审查、门禁与最终三系统 CI 尚待完成。npm `latest` 仍为 `0.4.0-rc.1`，`v0.4.0` 尚未创建。隔离 `release/0.4.0` worktree 继续排除主工作区 RC15 checkpoint 末尾的用户未提交“？”。
 
 本轮不发布 RC16，不升级依赖、宿主、模型或固定 PWF/vendor/submodule。先实现 ADR-0009 与 `release/support-policy.json`、Codex trace 脱敏诊断、acceptance schema 3 和 adoption mode；再冻结唯一 `0.4.0` 归档并执行有界验证。正式支持、证据定级和实验能力以策略文件逐项为准，不再要求所有真实模型能力伪装成统一全绿。Codex 显式维护→独立冷读和五宿主核心能力仍是硬门槛；未通过即停止发布，不临时缩小承诺。
 
