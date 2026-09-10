@@ -39,5 +39,6 @@ jobs:
           VERSION=$(node -p "JSON.parse(require('fs').readFileSync('package.json')).version")
           ARCHIVE="$RUNNER_TEMP/planweft-release/npm/planweft-$VERSION.tgz"
           python3 scripts/check-release-artifact.py --archive "$ARCHIVE"
-          python3 scripts/check-release-gate.py --archive "$ARCHIVE"
+          python3 scripts/check-release-gate.py --archive "$ARCHIVE" \
+            --policy release/support-policy.json --evidence-root .
           npm publish "$ARCHIVE" --access public --tag next --provenance
