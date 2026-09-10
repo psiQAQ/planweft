@@ -1,0 +1,133 @@
+{
+  "check": "permissions",
+  "host": "pi",
+  "npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+  "observations": {
+    "scenarios": {
+      "duplicate_hooks": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/rc15-publication-and-native-trace.tar.gz",
+            "sha256": "a6a7daba5c81a428f2ad9f9b369ca7f70649e4c1d5c130e3a971e74ca5b488df"
+          }
+        ],
+        "evidence_type": "reused",
+        "reuse": {
+          "affected_checks": [
+            "codex/skill_loading/single_main_skill",
+            "claude/skill_loading/single_main_skill",
+            "pi/skill_loading/single_main_skill",
+            "opencode/skill_loading/single_main_skill",
+            "dsh/skill_loading/single_main_skill"
+          ],
+          "manifest_diff": {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-rc15-manifest-diff.json",
+            "sha256": "b3fe4a728e7ffb12219099d6443d524938ad70624d5875dc1be738f183d98851"
+          },
+          "reviewer": "release_plan_review",
+          "source_npm_sha256": "3cdb78d2c001278d61f28fb23f6233eacf39a371c462c32622c39ab6dd8c8b45",
+          "source_version": "0.4.0-rc.15",
+          "target_npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+          "target_version": "0.4.0"
+        },
+        "status": "Passed"
+      },
+      "package_approval": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/rc15-publication-and-native-trace.tar.gz",
+            "sha256": "a6a7daba5c81a428f2ad9f9b369ca7f70649e4c1d5c130e3a971e74ca5b488df"
+          }
+        ],
+        "evidence_type": "reused",
+        "reuse": {
+          "affected_checks": [
+            "codex/skill_loading/single_main_skill",
+            "claude/skill_loading/single_main_skill",
+            "pi/skill_loading/single_main_skill",
+            "opencode/skill_loading/single_main_skill",
+            "dsh/skill_loading/single_main_skill"
+          ],
+          "manifest_diff": {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-rc15-manifest-diff.json",
+            "sha256": "b3fe4a728e7ffb12219099d6443d524938ad70624d5875dc1be738f183d98851"
+          },
+          "reviewer": "release_plan_review",
+          "source_npm_sha256": "3cdb78d2c001278d61f28fb23f6233eacf39a371c462c32622c39ab6dd8c8b45",
+          "source_version": "0.4.0-rc.15",
+          "target_npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+          "target_version": "0.4.0"
+        },
+        "status": "Passed"
+      },
+      "project_isolation": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/rc15-publication-and-native-trace.tar.gz",
+            "sha256": "a6a7daba5c81a428f2ad9f9b369ca7f70649e4c1d5c130e3a971e74ca5b488df"
+          }
+        ],
+        "evidence_type": "reused",
+        "reuse": {
+          "affected_checks": [
+            "codex/skill_loading/single_main_skill",
+            "claude/skill_loading/single_main_skill",
+            "pi/skill_loading/single_main_skill",
+            "opencode/skill_loading/single_main_skill",
+            "dsh/skill_loading/single_main_skill"
+          ],
+          "manifest_diff": {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-rc15-manifest-diff.json",
+            "sha256": "b3fe4a728e7ffb12219099d6443d524938ad70624d5875dc1be738f183d98851"
+          },
+          "reviewer": "release_plan_review",
+          "source_npm_sha256": "3cdb78d2c001278d61f28fb23f6233eacf39a371c462c32622c39ab6dd8c8b45",
+          "source_version": "0.4.0-rc.15",
+          "target_npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+          "target_version": "0.4.0"
+        },
+        "status": "Passed"
+      },
+      "readonly_disabled": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/rc15-publication-and-native-trace.tar.gz",
+            "sha256": "a6a7daba5c81a428f2ad9f9b369ca7f70649e4c1d5c130e3a971e74ca5b488df"
+          }
+        ],
+        "evidence_type": "reused",
+        "reuse": {
+          "affected_checks": [
+            "codex/skill_loading/single_main_skill",
+            "claude/skill_loading/single_main_skill",
+            "pi/skill_loading/single_main_skill",
+            "opencode/skill_loading/single_main_skill",
+            "dsh/skill_loading/single_main_skill"
+          ],
+          "manifest_diff": {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-rc15-manifest-diff.json",
+            "sha256": "b3fe4a728e7ffb12219099d6443d524938ad70624d5875dc1be738f183d98851"
+          },
+          "reviewer": "release_plan_review",
+          "source_npm_sha256": "3cdb78d2c001278d61f28fb23f6233eacf39a371c462c32622c39ab6dd8c8b45",
+          "source_version": "0.4.0-rc.15",
+          "target_npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+          "target_version": "0.4.0"
+        },
+        "status": "Passed"
+      },
+      "user_change_protection": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
+            "sha256": "4ddb0368911b8d5c87a7642ae033ed69f0b6f4d54fe1e7e101a9e30d31466127"
+          }
+        ],
+        "evidence_type": "fresh",
+        "status": "Passed"
+      }
+    }
+  },
+  "status": "Passed",
+  "version": "0.4.0"
+}

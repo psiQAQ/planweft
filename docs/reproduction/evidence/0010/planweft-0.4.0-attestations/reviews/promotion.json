@@ -1,0 +1,17 @@
+{
+  "check": "independent_review",
+  "npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+  "observations": {
+    "scenarios": {
+      "review": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Pending official-registry validation and promotion results",
+        "status": "Not Run"
+      }
+    }
+  },
+  "phase": "promotion",
+  "status": "Not Run",
+  "version": "0.4.0"
+}

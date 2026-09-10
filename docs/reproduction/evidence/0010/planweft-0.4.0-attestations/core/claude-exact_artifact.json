@@ -1,0 +1,41 @@
+{
+  "check": "exact_artifact",
+  "host": "claude",
+  "npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+  "observations": {
+    "scenarios": {
+      "archive_bytes": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
+            "sha256": "4ddb0368911b8d5c87a7642ae033ed69f0b6f4d54fe1e7e101a9e30d31466127"
+          }
+        ],
+        "evidence_type": "fresh",
+        "status": "Passed"
+      },
+      "installed_contents": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
+            "sha256": "4ddb0368911b8d5c87a7642ae033ed69f0b6f4d54fe1e7e101a9e30d31466127"
+          }
+        ],
+        "evidence_type": "fresh",
+        "status": "Passed"
+      },
+      "runtime_dependencies": {
+        "artifacts": [
+          {
+            "evidence": "docs/reproduction/evidence/0010/planweft-0.4.0-prepublication-runs.tar.gz",
+            "sha256": "4ddb0368911b8d5c87a7642ae033ed69f0b6f4d54fe1e7e101a9e30d31466127"
+          }
+        ],
+        "evidence_type": "fresh",
+        "status": "Passed"
+      }
+    }
+  },
+  "status": "Passed",
+  "version": "0.4.0"
+}

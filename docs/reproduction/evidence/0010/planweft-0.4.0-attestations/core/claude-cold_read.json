@@ -1,0 +1,23 @@
+{
+  "check": "cold_read",
+  "host": "claude",
+  "npm_sha256": "438f164a065e2b57469910580baee3c00aaeac92f1c2c831d1223343bfdb7e4c",
+  "observations": {
+    "scenarios": {
+      "goal_and_next_action": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Not rerun for 0.4.0; experimental historical results remain published separately",
+        "status": "Not Run"
+      },
+      "historical_results_and_limits": {
+        "artifacts": [],
+        "evidence_type": "fresh",
+        "reason": "Not rerun for 0.4.0; experimental historical results remain published separately",
+        "status": "Not Run"
+      }
+    }
+  },
+  "status": "Not Run",
+  "version": "0.4.0"
+}
