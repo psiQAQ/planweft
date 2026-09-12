@@ -163,6 +163,19 @@ README、AGENTS 和 development 本轮仅补当前计划/测试/结果导航，�
 
 0.5.0 的静态证据不能由本文或 0.4.0 历史替代；registry promotion 仍是独立发布阶段。
 
+## 0.5.1 可选文档职责映射（2026-09-13）
+
+需求来源是用户批准的 0.5.1 实施计划。该计划选择保留用户提供的
+[提案原文](planweft-document-management-proposal.md)中“将目录转为文档管理职责”的分析，而不把它转写为强制项目布局。0.5.1 的 Markdown 映射、AGENTS 优先级与受限 `CODEX.md` fallback 是本地组合；不宣称为宿主自动发现协议。
+
+| 本仓库目标文件 | 问题与设计 | 实际来源及本地差异 | 验证 / 审查入口 |
+| --- | --- | --- | --- |
+| [SPEC-0007](specs/0007-document-role-map.md)、[ADR-0011](adr/0011-optional-document-role-map.md)、[PLAN-0012](plans/0012-document-role-map.md) | 可选人类可读职责映射、无固定迁移、AGENTS 主入口和 CODEX 受限补充 | 提案第 4、5 节及既有 SPEC-0006 的 Skill-first 范围；表格只作导航，不新增 parser、缓存或 Hook 输入 | `test_documentation_map_contract.py`、生成入口关联、REP-0014 和独立审查 |
+| [workflow](../overlays/planweft/workflow.md)、[map reference](../overlays/planweft/references/documentation-map.md) | 将映射约定分发给全部生成 Skill，同时明确不创建索引、不按邻近目录读取敏感或无关资料 | 固定 PWF 仅提供计划恢复协议；受限导航和角色定义是对用户提案的本地最小实现 | 生成树、Hook 只读夹具、公开文档与冷读 |
+| [0.5 gate](../scripts/check-document-release-gate.py)、[0.5.1 policy](../release/support-policy-0.5.1.json) | 允许 0.5.x patch 复用静态门禁结构，但要求 policy、evidence 和 archive 同版本 | 0.5.0 的附件与准确归档绑定为本地先例；版本范围与 workflow 路径解析是本轮维护变更 | `test_document_release_gate.py`、REP-0014 与 promotion review |
+
+0.5.1 不复用或重写 0.5.0 的 package/evidence 摘要；每个不可变候选归档有自己的附件绑定与审查记录。
+
 ### 0.2.0 实施文件映射
 
 | 第一方入口 | 具体设计及精确依据 | 本地差异与验证 |

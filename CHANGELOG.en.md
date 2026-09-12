@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.1 (pending publication to `next`)
+
+- Added the optional, human-readable `Documentation Map`: an existing documentation index can record roles, actual locations, update triggers, and generated sources without migration, scaffolding, or machine state.
+- `project-docs` navigates from task paths, AGENTS, README, bounded CODEX guidance, and an existing documentation index; templates, role descriptions, and output folders are not automatically treated as active or authoritative.
+- The release gate and trusted publishing workflow now bind the same exact `0.5.x` policy, evidence, and npm archive while retaining 0.5.0 and 0.4.0 records.
+
 ## 0.5.0 (published to `next`; `latest` promotion awaits maintainer authentication)
 
 - Added the `task_plan.md` document-handoff marker: `project-docs` makes the authorized documentation decision and Hooks only read and remind.

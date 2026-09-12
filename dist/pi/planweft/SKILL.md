@@ -90,3 +90,7 @@ duplicate, or malformed markers remain pending. The Skill decides and performs
 authorized documentation work; Hooks only read the marker. Default advisory mode
 never blocks for document handoff. Retained `pw-*` controls are compatibility and
 troubleshooting interfaces, not the required user workflow.
+
+## Documentation Map
+
+For authorized long-term documentation work, an existing task-named document index or in-scope `docs/README.md` may contain a human-readable Documentation Map. Start with task paths, applicable AGENTS and README; read `CODEX.md` only when named or linked. The map is not parser/cache/approval/task-state/Hook input, and does not justify creating an index or treating templates, project-local Skills or agent descriptions as registered. Read [documentation-map guidance](references/documentation-map.md) only when needed.

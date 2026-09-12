@@ -17,7 +17,7 @@ import tarfile
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR = ROOT / 'vendor/planning-with-files'
 OVERLAY = ROOT / 'overlays/planweft'
-VERSION = '0.5.0'
+VERSION = '0.5.1'
 PRODUCT = 'planweft'
 SKILL = 'project-docs'
 DOCUMENT_HANDOFF_ENTRY = '''
@@ -32,6 +32,10 @@ duplicate, or malformed markers remain pending. The Skill decides and performs
 authorized documentation work; Hooks only read the marker. Default advisory mode
 never blocks for document handoff. Retained `pw-*` controls are compatibility and
 troubleshooting interfaces, not the required user workflow.
+
+## Documentation Map
+
+For authorized long-term documentation work, an existing task-named document index or in-scope `docs/README.md` may contain a human-readable Documentation Map. Start with task paths, applicable AGENTS and README; read `CODEX.md` only when named or linked. The map is not parser/cache/approval/task-state/Hook input, and does not justify creating an index or treating templates, project-local Skills or agent descriptions as registered. Read [documentation-map guidance](references/documentation-map.md) only when needed.
 '''
 SKILL_TRIGGER = ('Use for implementation/maintenance with investigation, fixes, regression tests '
                  'and handoff, including existing notes. Read-only/trivial tasks do not initialize files. ')
@@ -490,6 +494,7 @@ esac
                 result[base + '/references/controls.md'] = ((OVERLAY / 'references/controls.md').read_bytes(), 0o644)
                 result[base + '/references/plan-selection.md'] = ((OVERLAY / 'references/plan-selection.md').read_bytes(), 0o644)
                 result[base + '/references/plan-selection.zh.md'] = ((OVERLAY / 'references/plan-selection.zh.md').read_bytes(), 0o644)
+                result[base + '/references/documentation-map.md'] = ((OVERLAY / 'references/documentation-map.md').read_bytes(), 0o644)
                 for reference in ('local-operations.md', 'local-operations.zh.md'):
                     result[base + '/references/' + reference] = ((OVERLAY / 'references' / reference).read_bytes(), 0o644)
                 # A standalone install copies the skill folder, not its repo.

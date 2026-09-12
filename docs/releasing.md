@@ -4,15 +4,17 @@
 
 本页记录维护者发布流程和 0.4.0 的最终发布事实。用户安装方法见[安装指南](installation.md)，公开支持声明见[平台文档](platforms.md)。
 
-## 0.5.0 静态/逻辑发布路径
+## 0.5.x 静态/逻辑发布路径
 
-0.5.0 使用独立的 [`release/support-policy-0.5.json`](../release/support-policy-0.5.json) 和
-`check-document-release-gate.py`。预发布要求可重建包、离线测试、Hook 逻辑、Skill/Hook 关联、
+每个 0.5.x patch 使用与 `package.json` 同版本的 `release/support-policy-<version>.json`、
+`release/evidence/<version>/` 和 `check-document-release-gate.py`。预发布要求可重建包、离线测试、Hook 逻辑、Skill/Hook 关联、
 公开文档、独立源码审查及项目文件冷读均为 Passed；promotion 还要求 registry 归档身份、临时安装
 静态检查和独立 promotion review。不得用此路径修改 0.4.0 的 policy 或历史验收。
 
+冻结的 0.5.0 policy 是唯一文件名例外：它继续使用既有的 `release/support-policy-0.5.json`；不得为统一命名重写其 policy 或 evidence。
+
 每条 Passed 记录必须引用 evidence JSON 所在目录下的实际附件及其 SHA-256；`package_sha256`
-必须等于传入的本地 npm 归档摘要，且归档内 `package/package.json` 必须标识 `planweft@0.5.0`。
+必须等于传入的本地 npm 归档摘要，且归档内 `package/package.json` 必须标识与 policy/evidence 相同的 `planweft@<version>`。
 门禁拒绝自引用、绝对路径、`..`、越界 symlink、缺失附件或摘要不匹配。预发布只校验预发布项；
 `--promotion` 才额外要求 registry 与 promotion review 证据。
 
