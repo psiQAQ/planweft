@@ -2,7 +2,7 @@
 name: project-docs-zh
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Kiro skill instructions and steering state read selected project planning context; recovery reads project files and timestamps only, not agent transcript stores. It registers no Stop hook and never requests continuation. It never runs commands declared in Markdown; no network upload path. "
 metadata:
-  version: "0.4.0"
+  version: "0.5.0"
 ---
 
 # 项目文档与任务规划
@@ -54,3 +54,15 @@ metadata:
 按需读取 [PWF 细节](references/pwf-workflow.md)和[控制说明](references/controls.md)。默认提醒模式；自动恢复只用项目文件，访问会话历史需明确请求，attestation 不是批准。同一会话只启用一个规划插件的 hooks。保留 `PLAN_ID`、`PWF_*`、`PLANNING_DISABLED`；必要时在只读会话启动前设置 `PLANNING_DISABLED=1`。私有缓存与项目记录分开，宿主能力以 `INSTALL.md` 为准。
 
 缺失记录模板：[计划](templates/task_plan.md)、[发现](templates/findings.md)、[进展](templates/progress.md)。
+
+
+## Documentation Handoff
+
+For an authorized substantive implementation, keep one `## Documentation Handoff`
+section in the selected `task_plan.md` with exactly one marker:
+`<!-- planweft-docs-status: pending -->`, `not_required`, or `complete`.
+Record the considered documents, rationale/evidence, and next action. Missing,
+duplicate, or malformed markers remain pending. The Skill decides and performs
+authorized documentation work; Hooks only read the marker. Default advisory mode
+never blocks for document handoff. Retained `pw-*` controls are compatibility and
+troubleshooting interfaces, not the required user workflow.

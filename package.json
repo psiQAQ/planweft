@@ -1,6 +1,6 @@
 {
   "name": "planweft",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Persistent planning, project documentation and evidence for coding agents",
   "type": "module",
   "bin": {

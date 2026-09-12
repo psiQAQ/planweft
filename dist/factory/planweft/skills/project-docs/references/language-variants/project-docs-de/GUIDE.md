@@ -2,7 +2,7 @@
 name: project-docs-de
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
 metadata:
-  version: "0.4.0"
+  version: "0.5.0"
 ---
 
 # Projektdokumentation und Aufgabenplanung
@@ -54,3 +54,15 @@ Für wesentliche Entwürfe unabhängige Quellenreviewer, für wichtige Übergabe
 [PWF-Details](references/pwf-workflow.md) und [Steuerung](references/controls.md) bei Bedarf lesen. Standard: Hinweise; automatische Wiederaufnahme nur aus Projektdateien, Sitzungshistorie nur auf ausdrückliche Anfrage, attestation ist keine Genehmigung. Nur ein Planungsplugin mit Ausführungshooks je Sitzung. `PLAN_ID`, `PWF_*`, `PLANNING_DISABLED` erhalten; bei Bedarf vor Nur-Lese-Sitzungen `PLANNING_DISABLED=1` setzen. Private Caches getrennt halten; Host-Fähigkeiten gemäß `INSTALL.md`.
 
 Vorlagen für fehlende Aufzeichnungen: [Plan](templates/task_plan.md), [Befunde](templates/findings.md), [Fortschritt](templates/progress.md).
+
+
+## Documentation Handoff
+
+For an authorized substantive implementation, keep one `## Documentation Handoff`
+section in the selected `task_plan.md` with exactly one marker:
+`<!-- planweft-docs-status: pending -->`, `not_required`, or `complete`.
+Record the considered documents, rationale/evidence, and next action. Missing,
+duplicate, or malformed markers remain pending. The Skill decides and performs
+authorized documentation work; Hooks only read the marker. Default advisory mode
+never blocks for document handoff. Retained `pw-*` controls are compatibility and
+troubleshooting interfaces, not the required user workflow.

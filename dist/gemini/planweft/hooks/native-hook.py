@@ -15,8 +15,9 @@ import sys
 
 PLUGIN_ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = PLUGIN_ROOT / 'scripts'
-REMINDER = ('[planweft] Update progress.md with observed work. If a phase is complete, '
-            'update the selected task_plan.md. Read-only requests do not write records.')
+REMINDER = ('[planweft] The selected task plan has a pending document handoff. Use the '
+            'project-docs Skill to assess affected project documents, record the rationale, '
+            'and complete the handoff only within the authorized task scope.')
 
 
 def project_directory(host, payload):
@@ -74,6 +75,24 @@ def context(kind, cwd, env):
                 '--context=' + kind], cwd, env)
 
 
+def document_handoff_status(cwd, env):
+    """Read the selected plan marker without changing project state."""
+    shell = shutil.which('sh')
+    if not shell:
+        return None
+    selected = run([shell, str(SCRIPTS / 'resolve-plan-dir.sh')], cwd, env)
+    if selected:
+        plan = Path(selected) / 'task_plan.md'
+    elif env.get('PLAN_ID') or env.get('PWF_PLAN_ROOT'):
+        return None
+    else:
+        plan = cwd / 'task_plan.md'
+    if not plan.is_file():
+        return None
+    status = run([shell, str(SCRIPTS / 'document-handoff-check.sh'), str(plan)], cwd, env)
+    return status if status in {'pending', 'not_required', 'complete'} else 'pending'
+
+
 def gate(payload, cwd, env):
     if payload.get('stop_hook_active') is True:
         return {}
@@ -128,7 +147,9 @@ def handle(host, event, payload):
         return {}
     if after:
         tool = payload.get('tool_name') or payload.get('toolName') or ''
-        if isinstance(tool, str) and tool.lower() in {'write', 'edit', 'create', 'apply_patch', 'write_file', 'replace', 'edit_file'}:
+        if (isinstance(tool, str)
+                and tool.lower() in {'write', 'edit', 'create', 'apply_patch', 'write_file', 'replace', 'edit_file'}
+                and document_handoff_status(cwd, env) == 'pending'):
             message += '\n' + REMINDER
     if host == 'cursor':
         return {'additional_context': message}

@@ -4,7 +4,7 @@
 
 PlanWeft 把编程 Agent 的任务计划、调查发现和验证记录保存在项目中。会话中断或换人后，可以从这些文件继续工作，而不必依赖聊天记录。
 
-当前稳定版是 **0.4.0**。它基于固定的 planning-with-files（PWF）v3.17.0，并为 Codex、Claude Code、Pi、OpenCode V1 和 DeepSeek Harness 提供经过正式验收的安装与生命周期支持。
+当前源码目标是 **0.5.0（未发布）**。它基于固定的 planning-with-files（PWF）v3.17.0，并新增由 `project-docs` Skill 管理、Hook 只读提示的文档交接接口。当前 registry 安装入口仍是已发布的 0.4.0；0.5.0 只有完成本页所述的静态/逻辑门禁和后续 promotion 后才会成为可安装版本。
 
 ## 快速开始
 
@@ -29,17 +29,16 @@ npx planweft@0.4.0 doctor -a codex --global
 
 稳定的需求、设计决定和复现材料继续保存在项目已有的 specs、ADR 和 reproduction 文档中。PlanWeft 不要求为每个小改动创建一整套文档，也不会把宿主聊天历史当作默认恢复来源。
 
-## 0.4.0 支持范围
+## 0.5.0 验证范围
 
 | 能力 | 状态 |
 | --- | --- |
-| Codex、Claude Code、Pi、OpenCode V1、DSH 的准确产物、安装、更新、回退、卸载和重新安装 | 正式支持 |
-| 上述五宿主的项目隔离、用户文件保护、重复注册检查、显式 Skill 读取、默认提醒和明确禁用 | 正式支持 |
-| Codex 显式维护后由独立会话冷读 | 正式工作流 |
-| Pi 的 explicit/auto 维护与冷读 | 在 0.4.0 冻结条件下通过，按证据定级 |
-| autonomous/gated、真实模型自动采用和其余十个平台适配 | 实验性 |
+| 可重建包、安装包静态检查、Hook 逻辑、Skill/Hook 关联与文档交接 marker | 0.5.0 必需验证 |
+| 独立源码审查与只接收项目文件的冷读 | 0.5.0 必需验证 |
+| Docker、五 Agent runtime、真实宿主或真实模型行为 | 0.5.0 Not Run，且不是本版本门禁 |
+| 0.4.0 五宿主安装与生命周期验收 | 历史证据，适用范围不自动延伸至 0.5.0 |
 
-实验性能力的失败或 Not Run 不会被写成 Passed。Codex 的 gate-cap 开启/关闭配对因 syscall 归因不完整保留为 Failed（`LIMIT-CODEX-TRACE-INCOMPLETE`）；这不影响五宿主的正式核心能力。完整分级见[平台与支持范围](docs/platforms.md)和 [`release/support-policy.json`](release/support-policy.json)。
+未执行验证不会写成 Passed。0.5.0 的文档交接默认 advisory；只有用户明确启用 gated 且原 PWF 条件已满足时才复用既有 block 预算。0.4.0 的五宿主和 syscall 限制保留在其历史记录中。完整边界见 [SPEC-0006](docs/specs/0006-skill-hook-document-handoff.md)。
 
 ## 使用边界
 
@@ -58,4 +57,4 @@ npx planweft@0.4.0 doctor -a codex --global
 - [测试入口](tests/README.md)
 - [设计来源台账](docs/design-references.md)
 
-项目通过一个 `planweft` npm 包分发。发布附件、准确归档摘要和验收记录见 [v0.4.0 GitHub Release](https://github.com/psiQAQ/planweft/releases/tag/v0.4.0)。
+项目通过一个 `planweft` npm 包分发。0.4.0 的发布附件、准确归档摘要和验收记录仍见 [v0.4.0 GitHub Release](https://github.com/psiQAQ/planweft/releases/tag/v0.4.0)。

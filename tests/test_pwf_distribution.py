@@ -459,7 +459,9 @@ class PackagedRuntimeTest(unittest.TestCase):
                     response = json.loads(output) if output else {}
                     if guard == 'block':
                         self.assertEqual(response.get('decision'), 'block')
-                        self.assertIn('Selected work', response['reason'])
+                        # A plan without the required marker remains pending;
+                        # only the already-authorized PWF block reason changes.
+                        self.assertIn('documentation handoff pending', response['reason'])
                         self.assertEqual((selected / '.stop_blocks').read_text().strip(), '1')
                         self.assertEqual((selected / '.gate_last_ledger').read_text().strip(), '0')
                         after = snapshot(work)

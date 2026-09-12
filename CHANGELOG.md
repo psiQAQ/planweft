@@ -1,5 +1,11 @@
 # 变更记录
 
+## 0.5.0（未发布）
+
+- 新增 `task_plan.md` 文档交接 marker；由 `project-docs` Skill 判断并在已授权范围维护文档，Hook 只读提醒。
+- 显式 gated 且原 PWF gate 已满足时，pending 交接只细化该次 block 原因；不改变 selector、attestation、cap 或 stall。
+- 0.5.0 采用静态/逻辑、独立源码审查和冷读门禁；Docker、多 Agent runtime、真实宿主和真实模型验证均为 Not Run，且不把 0.4.0 历史证据转写为本版结果。
+
 ## 0.4.0（2026-09-10）
 
 - 发布统一的 `planweft` npm 包和安装 CLI，覆盖 Codex、Claude Code、Pi、OpenCode V1、DSH 及十个实验性平台适配器。

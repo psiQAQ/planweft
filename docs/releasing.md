@@ -4,7 +4,24 @@
 
 本页记录维护者发布流程和 0.4.0 的最终发布事实。用户安装方法见[安装指南](installation.md)，公开支持声明见[平台文档](platforms.md)。
 
-## 发布前检查
+## 0.5.0 静态/逻辑发布路径
+
+0.5.0 使用独立的 [`release/support-policy-0.5.json`](../release/support-policy-0.5.json) 和
+`check-document-release-gate.py`。预发布要求可重建包、离线测试、Hook 逻辑、Skill/Hook 关联、
+公开文档、独立源码审查及项目文件冷读均为 Passed；promotion 还要求 registry 归档身份、临时安装
+静态检查和独立 promotion review。Docker、五 Agent runtime、真实宿主和真实模型一律记录为
+Not Run，且不属于该版本门禁。不得用此路径修改 0.4.0 的 policy 或历史验收。
+
+每条 Passed 记录必须引用 evidence JSON 所在目录下的实际附件及其 SHA-256；`package_sha256`
+必须等于传入的本地 npm 归档摘要，且归档内 `package/package.json` 必须标识 `planweft@0.5.0`。
+门禁拒绝自引用、绝对路径、`..`、越界 symlink、缺失附件或摘要不匹配。预发布只校验预发布项；
+`--promotion` 才额外要求 registry 与 promotion review 证据。
+
+## 冻结的 0.4.0 全生命周期（历史）
+
+以下流程和五宿主要求是 0.4.0 schema 3 的历史发布边界，不是 0.5.0 的补充门禁，也不得用来把 0.4.0 的运行时结果写成 0.5.0 验证。
+
+### 发布前检查
 
 1. 从已确认的远端 `master` 创建干净 worktree 和发布分支。不要带入其他工作区的未提交内容。
 2. 核对版本、远端分支、最新 CI、npm 版本占用和 dist-tags。外部写入前再次查询。
@@ -19,7 +36,7 @@ node tests/installer.test.mjs
 python3 -m unittest discover -s tests -p 'test_*.py'
 ```
 
-## 准确产物与发布顺序
+### 准确产物与发布顺序
 
 从同一干净提交生成唯一 npm tgz、`release.json` 和 checksum。稳定版的发布 workflow 必须以预审 SHA-256 作为 `expected_sha256`，CI 重建结果不一致时停止发布，不能通过修改期望摘要放行。
 
@@ -34,7 +51,7 @@ gh workflow run publish.yml -f expected_sha256=REVIEWED_SHA256
 
 已发布的 npm 版本不可覆盖或删除。远端验收失败时保留 `latest` 的原值和失败证据，以新 patch 版本修复。
 
-## Schema 3 门禁
+### Schema 3 门禁
 
 [`release/support-policy.json`](../release/support-policy.json) 为每个宿主和场景声明 `required`、`evidence_based` 或 `experimental`。门禁根据策略计算 `release_blocking`，不信任 acceptance 自行填写的放行值。
 
