@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       expected_sha256:
-        description: SHA-256 of the exact archive already reviewed (required for stable)
+        description: SHA-256 of the exact 0.5 archive admitted by the prepublication gate
         type: string
-        required: false
+        required: true
 permissions:
   contents: read
 jobs:
@@ -31,14 +31,15 @@ jobs:
       - run: node tests/installer.test.mjs
       - run: node tests/dsh-hook-shell.test.mjs
       - run: python3 -m unittest discover -s tests -p 'test_*.py'
-      - run: python3 scripts/prepare-native-release.py --release --output "$RUNNER_TEMP/planweft-release" --repository-url https://github.com/psiQAQ/planweft
-      - name: Gate and publish to next (never promotes latest)
+      - name: Gate and publish 0.5 to next (never promotes latest)
         env:
           EXPECTED_NPM_SHA256: ${{ inputs.expected_sha256 }}
         run: |
           VERSION=$(node -p "JSON.parse(require('fs').readFileSync('package.json')).version")
-          ARCHIVE="$RUNNER_TEMP/planweft-release/npm/planweft-$VERSION.tgz"
-          python3 scripts/check-release-artifact.py --archive "$ARCHIVE"
-          python3 scripts/check-release-gate.py --archive "$ARCHIVE" \
-            --policy release/support-policy.json --evidence-root .
+          npm pack --pack-destination "$RUNNER_TEMP" --json
+          ARCHIVE="$RUNNER_TEMP/planweft-$VERSION.tgz"
+          ACTUAL_NPM_SHA256=$(sha256sum "$ARCHIVE" | awk '{print $1}')
+          test "$ACTUAL_NPM_SHA256" = "$EXPECTED_NPM_SHA256"
+          python3 scripts/check-document-release-gate.py \
+            --evidence release/evidence/0.5.0/prepublication.json --archive "$ARCHIVE"
           npm publish "$ARCHIVE" --access public --tag next --provenance
