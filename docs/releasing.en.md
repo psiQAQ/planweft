@@ -22,6 +22,16 @@ must equal the local npm archive passed to the gate, whose `package/package.json
 attachments, and digest mismatches. Prepublication checks only its own items; `--promotion` additionally
 requires registry and promotion-review evidence.
 
+### 0.5.1 `next` record
+
+- Source commit: `b4a2c02bacf01ea2896f1beae5382588b5b6abd7`
+- Trusted publication workflow: [34725859049](https://github.com/psiQAQ/planweft/actions/runs/34725859049)
+- Official npm archive SHA-256: `8071dee2ffe8c0500e739e17723cf307d3c29276055bbc5a8d1c860358419b28`
+- `next`: `0.5.1`; `latest`: `0.4.0`
+- Prepublication, registry evidence, and independent reviews: Passed; attachments are in `release/evidence/0.5.1/`
+
+This record does not promote `latest` or create a `v0.5.1` tag.
+
 ## Frozen 0.4.0 full lifecycle (historical)
 
 The following flow and five-host requirements are the historical schema-3 boundary for 0.4.0. They are not additional 0.5.0 gates and must not turn 0.4.0 runtime results into 0.5.0 validation.

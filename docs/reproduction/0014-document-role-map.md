@@ -1,6 +1,6 @@
 # REP-0014：PlanWeft 0.5.1 可选文档职责映射
 
-状态：Prepublication Passed；日期：2026-09-13。需求与设计见 [SPEC-0007](../specs/0007-document-role-map.md)、[ADR-0011](../adr/0011-optional-document-role-map.md) 与 [PLAN-0012](../plans/0012-document-role-map.md)。
+状态：Passed（`next` candidate）；日期：2026-09-13。需求与设计见 [SPEC-0007](../specs/0007-document-role-map.md)、[ADR-0011](../adr/0011-optional-document-role-map.md) 与 [PLAN-0012](../plans/0012-document-role-map.md)。
 
 ## 输入与范围
 
@@ -18,6 +18,7 @@
 | 独立源码审查 | Passed | [REV-0014](../reviews/0014-document-role-map-source-review.md) 记录路径绑定与 0.5.0 历史兼容修复的回审。 |
 | 项目文件冷读 | Passed | [REV-0014](../reviews/0014-document-role-map-cold-read.md) 记录仅基于项目快照的目标、边界和状态可读性检查。 |
 | 预发布 release gate | Passed | `check-document-release-gate.py` 已核对同版本 policy、evidence、附件摘要和候选归档。 |
-| `next` candidate 与 registry 静态安装 | Not Run | 等待提交、推送和可信发布 workflow；完成后新增 promotion evidence。 |
+| `next` candidate、registry 归档与静态安装 | Passed | 可信 workflow `34725859049` 成功；官方 `next` 为 0.5.1、`latest` 保持 0.4.0；重新下载的归档 SHA-256 与预发布一致，`--ignore-scripts` 临时静态安装通过。 |
+| 独立 promotion evidence 审查与 promotion gate | Passed | [REV-0015](../reviews/0015-document-role-map-promotion-review.md) 和 `promotion.json` 均绑定官方归档、静态安装与独立审查。 |
 
-预发布的实际结果、归档摘要与附件已写入 `release/evidence/0.5.1/prepublication.json`；未执行项不写作 Passed。`latest` promotion 与 `v0.5.1` tag 仍不在本次范围内。
+预发布和 registry promotion evidence 分别写入 `release/evidence/0.5.1/prepublication.json` 与 `release/evidence/0.5.1/promotion.json`；未执行项不写作 Passed。`latest` promotion 与 `v0.5.1` tag 仍不在本次范围内。

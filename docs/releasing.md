@@ -18,6 +18,16 @@
 门禁拒绝自引用、绝对路径、`..`、越界 symlink、缺失附件或摘要不匹配。预发布只校验预发布项；
 `--promotion` 才额外要求 registry 与 promotion review 证据。
 
+### 0.5.1 `next` 记录
+
+- 源码提交：`b4a2c02bacf01ea2896f1beae5382588b5b6abd7`
+- 可信发布 workflow：[34725859049](https://github.com/psiQAQ/planweft/actions/runs/34725859049)
+- 官方 npm 归档 SHA-256：`8071dee2ffe8c0500e739e17723cf307d3c29276055bbc5a8d1c860358419b28`
+- `next`：`0.5.1`；`latest`：`0.4.0`
+- prepublication、registry evidence 与独立 review：Passed，附件见 `release/evidence/0.5.1/`
+
+本记录不提升 `latest`，也不创建 `v0.5.1` tag。
+
 ## 冻结的 0.4.0 全生命周期（历史）
 
 以下流程和五宿主要求是 0.4.0 schema 3 的历史发布边界，不是 0.5.0 的补充门禁，也不得用来把 0.4.0 的运行时结果写成 0.5.0 验证。

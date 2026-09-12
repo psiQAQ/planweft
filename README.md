@@ -4,7 +4,7 @@
 
 PlanWeft 把编程 Agent 的任务计划、调查发现和验证记录保存在项目中。会话中断或换人后，可以从这些文件继续工作，而不必依赖聊天记录。
 
-当前源码目标是 **0.5.1（待发布至 `next`）**。它基于固定的 planning-with-files（PWF）v3.17.0，并由 `project-docs` Skill 管理文档交接及可选的文档职责映射；Hook 仍只读提示交接状态。默认 registry 安装入口仍是 0.4.0；0.5.x 的 `latest` promotion 仍待维护者认证完成。
+当前源码版本为 **0.5.1（已发布至 `next`）**。它基于固定的 planning-with-files（PWF）v3.17.0，并由 `project-docs` Skill 管理文档交接及可选的文档职责映射；Hook 仍只读提示交接状态。默认 registry 安装入口仍是 0.4.0；0.5.x 的 `latest` promotion 仍待维护者认证完成。
 
 ## 快速开始
 

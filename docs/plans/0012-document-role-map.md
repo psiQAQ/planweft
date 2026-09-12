@@ -1,6 +1,6 @@
 # PLAN-0012：可选文档职责映射
 
-状态：In Progress；日期：2026-09-13；需求：[SPEC-0007](../specs/0007-document-role-map.md)。
+状态：Complete；日期：2026-09-13；需求：[SPEC-0007](../specs/0007-document-role-map.md)。
 
 ## Goal
 
@@ -18,12 +18,12 @@
 
 ### Phase 3: 验证、审查与 candidate 发布
 
-- **Status:** in_progress
-- 离线验证、独立源码审查、项目文件冷读和预发布门禁已通过；待提交、推送、发布 `next` 并记录 registry 静态核验。
+- **Status:** complete
+- 离线验证、独立源码审查、项目文件冷读、预发布与 registry promotion evidence 均已通过；0.5.1 已发布到 `next`。
 
 ## Documentation Handoff
 
 <!-- planweft-docs-status: complete -->
 - Documents considered: SPEC-0007、ADR-0011、公开说明、release policy、REP-0014、独立审查与设计引用台账。
 - Rationale / evidence: 已在既有 `docs/README.md` 建立可选映射，在所有生成入口分发 reference，并以 REP-0014、release evidence 与审查记录保存验证及发布结果。
-- Next action: 合并、推送并完成 `next` 发布后，以官方归档和临时静态安装更新 REP-0014。
+- Next action: 仅在维护者认证后按独立流程评估 `latest` promotion 和 `v0.5.1` tag；本计划不执行这些操作。

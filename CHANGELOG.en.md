@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.5.1 (pending publication to `next`)
+## 0.5.1 (published to `next`; `latest` promotion and tag await maintainer authentication)
 
 - Added the optional, human-readable `Documentation Map`: an existing documentation index can record roles, actual locations, update triggers, and generated sources without migration, scaffolding, or machine state.
 - `project-docs` navigates from task paths, AGENTS, README, bounded CODEX guidance, and an existing documentation index; templates, role descriptions, and output folders are not automatically treated as active or authoritative.
