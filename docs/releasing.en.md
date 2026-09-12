@@ -4,18 +4,21 @@
 
 This page records the maintainer release process and the final 0.4.0 publication facts. See the [installation guide](installation.en.md) for user commands and [platform support](platforms.en.md) for public capability claims.
 
-## 0.5.0 static/logic release path
+## 0.5.x static/logic release path
 
-0.5.0 uses a separate [`release/support-policy-0.5.json`](../release/support-policy-0.5.json) and
-`check-document-release-gate.py`. Prepublication requires Passed rebuildable-package, offline-test,
+Each 0.5.x patch uses `release/support-policy-<version>.json`, `release/evidence/<version>/`, and
+`check-document-release-gate.py` for the same version declared by `package.json`. Prepublication requires Passed rebuildable-package, offline-test,
 Hook-logic, Skill/Hook-association, public-documentation, independent-source-review, and
 project-files-only-cold-read records. Promotion also requires registry archive identity, temporary
 static-install verification, and independent promotion review. This path never changes the frozen 0.4.0
 policy or acceptance record.
 
+The frozen 0.5.0 policy is the one filename exception: it continues to use the existing
+`release/support-policy-0.5.json`; do not rewrite its policy or evidence to normalize the name.
+
 Every Passed record names an actual attachment below the evidence JSON and its SHA-256; `package_sha256`
-must equal the local npm archive passed to the gate, whose `package/package.json` must identify
-`planweft@0.5.0`. The gate rejects self-references, absolute paths, `..`, escaping symlinks, missing
+must equal the local npm archive passed to the gate, whose `package/package.json` must identify the same
+`planweft@<version>` as the policy and evidence. The gate rejects self-references, absolute paths, `..`, escaping symlinks, missing
 attachments, and digest mismatches. Prepublication checks only its own items; `--promotion` additionally
 requires registry and promotion-review evidence.
 

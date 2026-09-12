@@ -58,7 +58,7 @@ class DocumentHandoffTest(unittest.TestCase):
         self.assertTrue(any(path.endswith('/scripts/check-complete.sh') and path not in gates
                             for path in tree))
 
-    def test_all_skill_variants_explain_the_hook_contract(self):
+    def test_all_skill_variants_explain_handoff_and_optional_map_contracts(self):
         spec = importlib.util.spec_from_file_location('entry_builder', ROOT / 'scripts/build-plugin.py')
         builder = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(builder)
@@ -75,6 +75,15 @@ class DocumentHandoffTest(unittest.TestCase):
                 self.assertIn('troubleshooting interfaces', text)
                 self.assertIn('Default advisory mode', text)
                 self.assertIn('blocks for document handoff', text)
+                self.assertIn('Documentation Map', text)
+                self.assertIn('(references/documentation-map.md)', text)
+                reference = str(Path(path).parent / 'references/documentation-map.md')
+                self.assertIn(reference, tree)
+                guide = tree[reference][0].decode()
+                self.assertIn('not a schema, parser input, cache, task-state source, or', guide)
+                self.assertIn('Do not create either file merely to satisfy this convention.', guide)
+                self.assertIn('AGENTS.md', guide)
+                self.assertIn('`CODEX.md`', guide)
 
     def test_existing_smart_plan_view_keeps_chinese_goal_phase_and_next_step(self):
         spec = importlib.util.spec_from_file_location('entry_builder', ROOT / 'scripts/build-plugin.py')

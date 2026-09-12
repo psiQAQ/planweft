@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "version": "0.5.1",
+  "required_prepublication": [
+    "rebuildable_package",
+    "offline_test_suite",
+    "hook_logic",
+    "skill_hook_association",
+    "public_documentation",
+    "independent_source_review",
+    "project_files_cold_read"
+  ],
+  "required_promotion": [
+    "registry_archive_identity",
+    "registry_static_install",
+    "independent_promotion_review"
+  ],
+  "not_run": []
+}

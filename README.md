@@ -4,7 +4,7 @@
 
 PlanWeft 把编程 Agent 的任务计划、调查发现和验证记录保存在项目中。会话中断或换人后，可以从这些文件继续工作，而不必依赖聊天记录。
 
-当前源码目标是 **0.5.0（`next` 已发布）**。它基于固定的 planning-with-files（PWF）v3.17.0，并新增由 `project-docs` Skill 管理、Hook 只读提示的文档交接接口。默认 registry 安装入口仍是 0.4.0；0.5.0 的 `latest` promotion 仍待维护者认证完成。
+当前源码目标是 **0.5.1（待发布至 `next`）**。它基于固定的 planning-with-files（PWF）v3.17.0，并由 `project-docs` Skill 管理文档交接及可选的文档职责映射；Hook 仍只读提示交接状态。默认 registry 安装入口仍是 0.4.0；0.5.x 的 `latest` promotion 仍待维护者认证完成。
 
 ## 快速开始
 
@@ -29,15 +29,17 @@ npx planweft@0.4.0 doctor -a codex --global
 
 稳定的需求、设计决定和复现材料继续保存在项目已有的 specs、ADR 和 reproduction 文档中。PlanWeft 不要求为每个小改动创建一整套文档，也不会把宿主聊天历史当作默认恢复来源。
 
-## 0.5.0 验证范围
+已有的文档索引可以可选地加入一个 Markdown `Documentation Map`，说明文档职责、实际位置、更新触发条件和生成来源。它只帮助 Skill 在授权范围内导航：不要求迁移目录、不解析为状态、不读取配置或环境文件，也不影响 Hook。完整约定见随 Skill 分发的 `references/documentation-map.md` 与 [SPEC-0007](docs/specs/0007-document-role-map.md)。
+
+## 0.5.x 验证范围
 
 | 能力 | 状态 |
 | --- | --- |
-| 可重建包、安装包静态检查、Hook 逻辑、Skill/Hook 关联与文档交接 marker | 0.5.0 必需验证 |
-| 独立源码审查与只接收项目文件的冷读 | 0.5.0 必需验证 |
-| 0.4.0 五宿主安装与生命周期验收 | 历史证据，适用范围不自动延伸至 0.5.0 |
+| 可重建包、安装包静态检查、Hook 逻辑、Skill/Hook 关联与文档交接 marker | 每个 0.5.x 版本的必需验证 |
+| 独立源码审查与只接收项目文件的冷读 | 每个 0.5.x 版本的必需验证 |
+| 0.4.0 发布验收 | 历史证据，适用范围不自动延伸至 0.5.x |
 
-未执行验证不会写成 Passed。0.5.0 的文档交接默认 advisory；只有用户明确启用 gated 且原 PWF 条件已满足时才复用既有 block 预算。0.4.0 的五宿主和 syscall 限制保留在其历史记录中。完整边界见 [SPEC-0006](docs/specs/0006-skill-hook-document-handoff.md)。
+未执行验证不会写成 Passed。文档交接默认 advisory；只有用户明确启用 gated 且原 PWF 条件已满足时才复用既有 block 预算。0.4.0 的历史限制保留在其历史记录中。完整边界见 [SPEC-0006](docs/specs/0006-skill-hook-document-handoff.md)。
 
 ## 使用边界
 

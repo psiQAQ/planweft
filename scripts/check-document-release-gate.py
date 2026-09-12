@@ -9,11 +9,17 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
 import sys
 import tarfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
+PATCH_VERSION = re.compile(r'0\.5\.(?:0|[1-9][0-9]*)')
+# 0.5.0 already has released, hash-bound evidence under this historic name.
+# Keep that filename as a narrow compatibility exception; every later patch
+# policy must use its complete semantic version in its filename.
+LEGACY_POLICY_FILENAMES = {'0.5.0': 'support-policy-0.5.json'}
 
 
 def digest(path):
@@ -24,7 +30,9 @@ def load(path):
     value = json.loads(path.read_text())
     expected = {'schema_version', 'version', 'required_prepublication',
                 'required_promotion', 'not_run'}
-    if set(value) != expected or value['schema_version'] != 1 or value['version'] != '0.5.0':
+    if (set(value) != expected or value['schema_version'] != 1
+            or not isinstance(value['version'], str)
+            or PATCH_VERSION.fullmatch(value['version']) is None):
         raise ValueError('Unsupported 0.5 release policy')
     for key in ('required_prepublication', 'required_promotion', 'not_run'):
         items = value[key]
@@ -77,6 +85,12 @@ def validate(policy, evidence, promotion, evidence_path, archive):
         raise ValueError('Evidence identity differs')
     if evidence['policy_sha256'] != policy['_sha256']:
         raise ValueError('Evidence policy binding differs')
+    expected_policy_name = LEGACY_POLICY_FILENAMES.get(
+        policy['version'], 'support-policy-' + policy['version'] + '.json')
+    if policy['_path'].name != expected_policy_name:
+        raise ValueError('Policy path does not bind its version')
+    if evidence_path.parent.name != policy['version']:
+        raise ValueError('Evidence path does not bind its version')
     if not archive.is_file() or evidence['package_sha256'] != digest(archive):
         raise ValueError('Evidence package digest differs')
     validate_archive_identity(archive, policy['version'])
@@ -97,7 +111,8 @@ def validate(policy, evidence, promotion, evidence_path, archive):
         read_attachment(evidence_path, record, name)
     for name in policy['not_run']:
         record = evidence['checks'][name]
-        if record != {'status': 'Not Run', 'reason': 'outside 0.5.0 static/logic validation scope'}:
+        if record != {'status': 'Not Run',
+                      'reason': 'outside ' + policy['version'] + ' static/logic validation scope'}:
             raise ValueError('Excluded runtime record differs: ' + name)
     if (not isinstance(evidence['release_blocking'], bool)
             or evidence['release_blocking'] != bool(blocking)):
@@ -117,6 +132,7 @@ def main():
     try:
         policy = load(args.policy)
         policy['_sha256'] = digest(args.policy)
+        policy['_path'] = args.policy.resolve()
         validate(policy, json.loads(args.evidence.read_text()), args.promotion,
                  args.evidence, args.archive)
     except (OSError, ValueError, json.JSONDecodeError, tarfile.TarError) as error:

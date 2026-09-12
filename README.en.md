@@ -4,7 +4,7 @@
 
 PlanWeft keeps a coding agent's task plan, findings, and validation record in the project. A later session or collaborator can continue from those files without relying on chat history.
 
-The current source target is **0.5.0 (published to `next`)**. It uses a pinned planning-with-files (PWF) v3.17.0 runtime and adds a document-handoff interface managed by the `project-docs` Skill and read by Hooks. The default registry installation entry point remains 0.4.0; 0.5.0 promotion to `latest` awaits maintainer authentication.
+The current source target is **0.5.1 (pending publication to `next`)**. It uses a pinned planning-with-files (PWF) v3.17.0 runtime and adds optional document-role mapping alongside Skill-managed document handoff; Hooks still only read handoff state. The default registry installation entry point remains 0.4.0; 0.5.x promotion to `latest` awaits maintainer authentication.
 
 ## Quick start
 
@@ -28,6 +28,8 @@ A complex task normally uses three working files:
 | `progress.md` | Actions taken, errors, and test results |
 
 Durable requirements, design decisions, and reproduction material remain in the project's existing specs, ADRs, and reproduction documents. PlanWeft does not require a full document set for every small change, and it does not treat host chat history as the default recovery source.
+
+An existing documentation index may optionally include a Markdown `Documentation Map` with document roles, actual locations, update triggers, and generated sources. It only guides the Skill within authorized scope: it requires no directory migration, is not parsed as state, does not read configuration or environment files, and does not affect Hooks. See the packaged `references/documentation-map.md` and [SPEC-0007](docs/specs/0007-document-role-map.md).
 
 ## 0.5.0 validation boundary
 
