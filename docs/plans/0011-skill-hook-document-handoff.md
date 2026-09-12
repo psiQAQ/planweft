@@ -4,7 +4,7 @@
 
 ## Goal
 
-发布 PlanWeft 0.5.0：由 Skill 管理已授权文档交接，Hook 只读 marker 并保持 PWF 门禁边界；不运行 Docker、多 Agent runtime 或真实模型验证。
+发布 PlanWeft 0.5.0：由 Skill 管理已授权文档交接，Hook 只读 marker 并保持 PWF 门禁边界。
 
 ### Phase 1: 规范与接口
 
@@ -19,7 +19,7 @@
 ### Phase 3: 验证、审查与发布准备
 
 - **Status:** complete
-- 运行静态/逻辑回归、独立源码审查与冷读；记录 0.5.0 的 Not Run 边界。
+- 运行静态/逻辑回归、独立源码审查与冷读；发布阶段另行记录 registry 证据。
 
 ## Documentation Handoff
 

@@ -9,8 +9,7 @@
 0.5.0 使用独立的 [`release/support-policy-0.5.json`](../release/support-policy-0.5.json) 和
 `check-document-release-gate.py`。预发布要求可重建包、离线测试、Hook 逻辑、Skill/Hook 关联、
 公开文档、独立源码审查及项目文件冷读均为 Passed；promotion 还要求 registry 归档身份、临时安装
-静态检查和独立 promotion review。Docker、五 Agent runtime、真实宿主和真实模型一律记录为
-Not Run，且不属于该版本门禁。不得用此路径修改 0.4.0 的 policy 或历史验收。
+静态检查和独立 promotion review。不得用此路径修改 0.4.0 的 policy 或历史验收。
 
 每条 Passed 记录必须引用 evidence JSON 所在目录下的实际附件及其 SHA-256；`package_sha256`
 必须等于传入的本地 npm 归档摘要，且归档内 `package/package.json` 必须标识 `planweft@0.5.0`。

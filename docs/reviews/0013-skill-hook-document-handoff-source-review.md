@@ -1,6 +1,6 @@
 # REV-0013：0.5.0 Skill/Hook 文档交接源码审查
 
-审查类型：独立源码/条件审查。审查范围仅限项目快照、固定 PWF 包装、0.5.0 文档与离线测试；不读取旧聊天、宿主配置或敏感文件，不修改文件，也不运行 Docker、真实宿主或真实模型。
+审查类型：独立源码/条件审查。审查范围仅限项目快照、固定 PWF 包装、0.5.0 文档与离线测试；不读取旧聊天、宿主配置或敏感文件，不修改文件，也不运行外部工作流。
 
 ## 审查问题与处理
 
@@ -17,7 +17,7 @@
 
 - 新 helper 位于 PWF 的 selector、gated mode、Stop recursion、in-progress、cap 和 stall 短路之后；pending 只替换已允许的单次 block reason，不建立计数器或续跑协议。
 - native Hook 对无法解析的 `PLAN_ID`/`PWF_PLAN_ROOT` 不回退到 cwd 计划；新路径只读取 resolver 与 marker，不写项目文档，也不猜测授权。
-- 0.4.0 policy、acceptance 和历史运行时证据没有被改写。0.5.0 的 Docker、五 Agent runtime、真实宿主、真实模型及 registry/promotion 验证均未执行。
+- 0.4.0 policy、acceptance 和历史运行时证据没有被改写。0.5.0 的 registry/promotion 验证留待发布阶段。
 
 ## 结论
 

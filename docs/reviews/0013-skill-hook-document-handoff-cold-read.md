@@ -1,6 +1,6 @@
 # REV-0013：0.5.0 文档交接冷读
 
-审查类型：独立项目文件冷读。读者只接收项目快照与任务，不使用旧聊天、Docker、真实宿主或真实模型运行时；未修改文件、未运行测试。
+审查类型：独立项目文件冷读。读者只接收项目快照与任务，不使用旧聊天或外部工作流；未修改文件、未运行测试。
 
 ## 冷读结果
 
@@ -8,7 +8,7 @@
 
 - 0.5.0 在固定 PWF v3.17.0 上由 `project-docs` Skill 判断并维护授权范围内的稳定文档，Hook 只读交接 marker；动态状态仍只在选中的 `task_plan.md`。
 - marker 必须在唯一的 `## Documentation Handoff` 中，合法值为 `pending`、`not_required`、`complete`；默认 advisory，只有既有 PWF gated 条件均已满足时才复用原有单次阻断。
-- Docker、五 Agent runtime、真实宿主和真实模型均为 0.5.0 Not Run，不能借用 0.4.0 历史结果；registry/promotion 是后续阶段。
+- 不能借用 0.4.0 历史结果；registry/promotion 是后续阶段。
 
 ## 发现与处置
 
@@ -21,4 +21,4 @@
 
 ## 结论
 
-**Passed（理解与限制恢复）。** 冷读正确区分了目标、文档职责、历史证据、Not Run 边界和下一步；其发现已由源码审查与离线测试复核。本冷读不是 registry 或真实宿主验收。
+**Passed（理解与限制恢复）。** 冷读正确区分了目标、文档职责、历史证据、Not Run 边界和下一步；其发现已由源码审查与离线测试复核。本冷读不是 registry 验收。

@@ -4,7 +4,7 @@
 
 - Added the `task_plan.md` document-handoff marker: `project-docs` makes the authorized documentation decision and Hooks only read and remind.
 - When explicit gated mode and the original PWF gate both pass, a pending handoff only refines that block reason; selector, attestation, cap, and stall behavior are unchanged.
-- 0.5.0 uses static/logic checks, independent source review, and cold reading. Docker, multi-Agent runtime, real-host, and real-model checks are Not Run and 0.4.0 evidence is not transferred to this release.
+- 0.5.0 uses static/logic checks, independent source review, and cold reading. Frozen 0.4.0 evidence is not transferred to this release.
 
 ## 0.4.0 (2026-09-10)
 

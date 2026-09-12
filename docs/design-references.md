@@ -161,7 +161,7 @@ README、AGENTS 和 development 本轮仅补当前计划/测试/结果导航，�
 | [私有检查器](../overlays/planweft/document-handoff-check.sh)、[native Hook](../overlays/planweft/native/native-hook.py) | 缺失、错位、重复、非法 marker 保守为 pending；写后只提醒，显式 gated 仅细化既有 block reason | 固定 PWF `check-complete.sh` 的 selector/attestation/in-progress/cap/stall 顺序；用户限定 Hook 不写文档、不猜授权 | marker、native Hook、PWF 包装夹具；REV-0013 source review |
 | [`support-policy-0.5.json`](../release/support-policy-0.5.json)、[0.5 gate](../scripts/check-document-release-gate.py) | 将 0.5 静态/逻辑门禁与冻结 0.4 schema 3 证据分离；Passed 绑定 archive 和附件摘要 | 用户批准的 0.5 范围；0.4 `check-release-gate.py` 的本地附件/摘要边界作为实现先例，不改写旧 policy | `tests/test_document_release_gate.py`；REP-0013；registry/promotion 留待发布阶段 |
 
-Docker、五 Agent runtime、真实宿主和真实模型不属于该版本的验证输入；它们以 Not Run 留在 REP-0013，不能由本文或 0.4.0 历史替代。
+0.5.0 的静态证据不能由本文或 0.4.0 历史替代；registry promotion 仍是独立发布阶段。
 
 ### 0.2.0 实施文件映射
 

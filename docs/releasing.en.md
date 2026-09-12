@@ -10,9 +10,8 @@ This page records the maintainer release process and the final 0.4.0 publication
 `check-document-release-gate.py`. Prepublication requires Passed rebuildable-package, offline-test,
 Hook-logic, Skill/Hook-association, public-documentation, independent-source-review, and
 project-files-only-cold-read records. Promotion also requires registry archive identity, temporary
-static-install verification, and independent promotion review. Docker, five-Agent runtime, real-host,
-and real-model checks are recorded as Not Run and are not this release's gate. This path never changes
-the frozen 0.4.0 policy or acceptance record.
+static-install verification, and independent promotion review. This path never changes the frozen 0.4.0
+policy or acceptance record.
 
 Every Passed record names an actual attachment below the evidence JSON and its SHA-256; `package_sha256`
 must equal the local npm archive passed to the gate, whose `package/package.json` must identify

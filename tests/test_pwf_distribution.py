@@ -2,7 +2,7 @@
 """Offline distribution contracts exercised against packaged runtime scripts.
 
 Run: python3 -m unittest discover -s tests -p 'test_pwf_distribution.py' -v
-These are artifact/protocol checks, not claims of real host or model execution.
+These are artifact/protocol checks with a bounded static scope.
 """
 import base64
 import hashlib

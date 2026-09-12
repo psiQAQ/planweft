@@ -50,4 +50,4 @@ OpenCode `pw_init` 原生工具及可选 `mode` 参数明确：省略参数沿�
 
 ## 0.5.0 文档交接
 
-PD-P16 在构建期向具有上游 Stop gate 锚点的 `check-complete.sh` 插入一个私有、只读的 `document-handoff-check.sh` 调用。它只识别所选 `task_plan.md` 中唯一的 `## Documentation Handoff` marker；缺失、重复或非法标记按 pending。原 PWF 已通过 selector、attestation、in-progress、cap 和 stall 判断后，pending 仅改变该次阻断提示，不新增计数、状态目录或自动写入。无该锚点的宿主保留原协议。主 Skill 和任务模板声明同一 marker，原生 PostTool 提醒只在 pending 时提示模型。离线 marker、构建关联、native hook 和 PWF 回归分别验证；Docker、真实宿主/模型与多 Agent runtime 未作为 0.5.0 门禁。
+PD-P16 在构建期向具有上游 Stop gate 锚点的 `check-complete.sh` 插入一个私有、只读的 `document-handoff-check.sh` 调用。它只识别所选 `task_plan.md` 中唯一的 `## Documentation Handoff` marker；缺失、重复或非法标记按 pending。原 PWF 已通过 selector、attestation、in-progress、cap 和 stall 判断后，pending 仅改变该次阻断提示，不新增计数、状态目录或自动写入。无该锚点的宿主保留原协议。主 Skill 和任务模板声明同一 marker，原生 PostTool 提醒只在 pending 时提示模型。离线 marker、构建关联、native hook 和 PWF 回归分别验证。

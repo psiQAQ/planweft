@@ -291,7 +291,7 @@ The block reason is a fixed template plus the phase NAME only. Plan body text ne
 
 ### Host capability boundaries
 
-The adapters do not share one stopping protocol. Claude Code and Codex use native Stop decisions; DSH uses its Stop bridge; Pi and OpenCode use native follow-up mechanisms. Continue has no execution hooks. Use the installed platform's INSTALL.md and [explicit controls](../references/controls.md) for actual availability and activation. Shell counter limits do not describe Pi's extension counter. Protocol checks do not prove real host enforcement.
+The adapters do not share one stopping protocol. Claude Code and Codex use native Stop decisions; DSH uses its Stop bridge; Pi and OpenCode use native follow-up mechanisms. Continue has no execution hooks. Use the installed platform's INSTALL.md and [explicit controls](../references/controls.md) for actual availability and activation. Shell counter limits do not describe Pi's extension counter. Protocol checks do not prove external enforcement.
 
 ### Runaway guards
 

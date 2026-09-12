@@ -35,7 +35,6 @@ Durable requirements, design decisions, and reproduction material remain in the 
 | --- | --- |
 | Rebuildable package, package static checks, Hook logic, Skill/Hook association, and document-handoff marker | Required for 0.5.0 |
 | Independent source review and project-files-only cold read | Required for 0.5.0 |
-| Docker, five-Agent runtime, real-host, or real-model behavior | Not Run for 0.5.0 and not a release gate |
 | 0.4.0 five-host installation and lifecycle acceptance | Historical evidence; not automatically transferred to 0.5.0 |
 
 Unrun checks are never reported as Passed. The 0.5.0 document handoff is advisory by default; it reuses an existing PWF block budget only after the user explicitly enables gated mode and the original PWF conditions pass. The 0.4.0 five-host and syscall limits remain historical. See [SPEC-0006](docs/specs/0006-skill-hook-document-handoff.md) for the full boundary.

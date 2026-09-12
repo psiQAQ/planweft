@@ -49,7 +49,7 @@
         },
         ".agents/skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "cb202843a68f1af0f29650e6d8fa9a1d2d7411e357e6f7f3600022565cb779f0"
+          "sha256": "234271ac58aff3162c23fd07c204169dfd06e9d3f01cffc903545fb17ccfc12e"
         },
         ".agents/skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -1177,7 +1177,7 @@
         },
         "skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "306dbc0325673a172e231befb3a290841be6edf63987c7045fe965e02cc62c0d"
+          "sha256": "4f742daa92ef25c4f2c42b59be5ba392955c6b926090fdb223eea8ec2ccede67"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -1325,7 +1325,7 @@
         }
       },
       "path": "agents/planweft",
-      "sha256": "b50163a515bc5befa67da566d18395d52021e9430a0adf9eb5659ed41db415cc"
+      "sha256": "2e9bdf2ef41e4bbb46ae24dca7ed5a56e0c050630a6f31c12e8b77ccfcdead3d"
     },
     "claude": {
       "file_count": 305,
@@ -2404,7 +2404,7 @@
         },
         "skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "306dbc0325673a172e231befb3a290841be6edf63987c7045fe965e02cc62c0d"
+          "sha256": "4f742daa92ef25c4f2c42b59be5ba392955c6b926090fdb223eea8ec2ccede67"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -2552,7 +2552,7 @@
         }
       },
       "path": "claude/planweft",
-      "sha256": "afccc3037d91a7443fe9396b44adadd62201035a6ca211d7f7b2e7b112e28a55"
+      "sha256": "412c29a7c211eefdd2a96612713d46b57cf60eeac230f4c51b6ee758477a5881"
     },
     "codebuddy": {
       "file_count": 289,
@@ -3567,7 +3567,7 @@
         },
         "skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "306dbc0325673a172e231befb3a290841be6edf63987c7045fe965e02cc62c0d"
+          "sha256": "4f742daa92ef25c4f2c42b59be5ba392955c6b926090fdb223eea8ec2ccede67"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -3715,7 +3715,7 @@
         }
       },
       "path": "codebuddy/planweft",
-      "sha256": "8914d37133e453e0b9c6088bb6a0e73000c764f2d5d612d34d4168ba51d2d68c"
+      "sha256": "aac715a637e48fb0d2682de7f49add7fd9605b6372af0b1dd0ff4fa696fe43f2"
     },
     "codex": {
       "file_count": 313,
@@ -4826,7 +4826,7 @@
         },
         "skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "306dbc0325673a172e231befb3a290841be6edf63987c7045fe965e02cc62c0d"
+          "sha256": "4f742daa92ef25c4f2c42b59be5ba392955c6b926090fdb223eea8ec2ccede67"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -4974,7 +4974,7 @@
         }
       },
       "path": "codex/planweft",
-      "sha256": "80abb2a3c690b2d47786f6d46557508df61a394f43bf268e76627596bfccc40a"
+      "sha256": "c49bd69f2cc6ffa64bb2cef6c58b880fc0699aaeab17f6f50d7912e8670eb47b"
     },
     "continue": {
       "file_count": 331,
@@ -6157,7 +6157,7 @@
         },
         "skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "265fce17c6dbbe7a646961c0c4c8f7ee66468e8c750c65589dc1c29d1d3c0a04"
+          "sha256": "f0ca98d9f037442a27d039acf86e26846aa5247c8163782de3b314bed07d629e"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -6305,7 +6305,7 @@
         }
       },
       "path": "continue/planweft",
-      "sha256": "772654aecd40da2194f0e1f49080fa2cc0fc22e25edbaee992c22a4006cdeaea"
+      "sha256": "93d78cd4575a8df72405550cda9af765b49195996c71bad0df61c31e3399ff4e"
     },
     "copilot": {
       "file_count": 291,
@@ -7328,7 +7328,7 @@
         },
         "skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "306dbc0325673a172e231befb3a290841be6edf63987c7045fe965e02cc62c0d"
+          "sha256": "4f742daa92ef25c4f2c42b59be5ba392955c6b926090fdb223eea8ec2ccede67"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -7476,7 +7476,7 @@
         }
       },
       "path": "copilot/planweft",
-      "sha256": "493514863e44527856ff088a077802aa2cce166274d3d7613a0c30751d3a075a"
+      "sha256": "5035a2891895fd954ce849c00798d6b289cf24f6386c9560df4ac53904486d45"
     },
     "cursor": {
       "file_count": 291,
@@ -8499,7 +8499,7 @@
         },
         "skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "306dbc0325673a172e231befb3a290841be6edf63987c7045fe965e02cc62c0d"
+          "sha256": "4f742daa92ef25c4f2c42b59be5ba392955c6b926090fdb223eea8ec2ccede67"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -8647,7 +8647,7 @@
         }
       },
       "path": "cursor/planweft",
-      "sha256": "595122b94d7b2d8fd1f2694e215c6d8b6881edf1d300dc84222d9e7c50fe859a"
+      "sha256": "9ae8ddc494ddb6f438399e411d6f6a01a8ff75a6be16b54f478362d0ed0d5f95"
     },
     "dsh": {
       "file_count": 295,
@@ -9686,7 +9686,7 @@
         },
         "skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "306dbc0325673a172e231befb3a290841be6edf63987c7045fe965e02cc62c0d"
+          "sha256": "4f742daa92ef25c4f2c42b59be5ba392955c6b926090fdb223eea8ec2ccede67"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -9834,7 +9834,7 @@
         }
       },
       "path": "dsh/planweft",
-      "sha256": "a9e10edb2cfc6a01b7a88ead5ec09dbd1d9a847e5fffe5611f6e48ac830dc2e9"
+      "sha256": "ab305cc5ceb52d505ef3cc5db1699e23546cc721362d09792669af6b052c414e"
     },
     "factory": {
       "file_count": 289,
@@ -10849,7 +10849,7 @@
         },
         "skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "306dbc0325673a172e231befb3a290841be6edf63987c7045fe965e02cc62c0d"
+          "sha256": "4f742daa92ef25c4f2c42b59be5ba392955c6b926090fdb223eea8ec2ccede67"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -10997,7 +10997,7 @@
         }
       },
       "path": "factory/planweft",
-      "sha256": "ca03fee15b32a3c4711ac47abcbafcf98feff9e37588f18e455aa3772c2f636c"
+      "sha256": "0e4bf22e71628dae97a3433d9c8d16c6d7b8d6b557b0c77fe9f0781cb7f17eb6"
     },
     "gemini": {
       "file_count": 293,
@@ -12028,7 +12028,7 @@
         },
         "skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "fa49ab0dbe6c82e6a6d9d538fcb6eb01193dc4387e86480313f32646c9640812"
+          "sha256": "1dbe6424c049cc9a027aed31f0552a3a7182a8ed832c4b0e315642f64a9f8e0f"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -12176,7 +12176,7 @@
         }
       },
       "path": "gemini/planweft",
-      "sha256": "15c29db7db40c03433e987cc66a6995e9f8e5cb6a4cd4fd16346977c05fc5100"
+      "sha256": "91a628ba5e5f451faebc4d11ada6e6a9fa624af94089754e4a3752345598547a"
     },
     "hermes": {
       "file_count": 298,
@@ -13223,7 +13223,7 @@
         },
         "skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "306dbc0325673a172e231befb3a290841be6edf63987c7045fe965e02cc62c0d"
+          "sha256": "4f742daa92ef25c4f2c42b59be5ba392955c6b926090fdb223eea8ec2ccede67"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -13375,7 +13375,7 @@
         }
       },
       "path": "hermes/planweft",
-      "sha256": "b2899f8e94325db24e2c13032fd64c493305e8a0787ad7a02ce060555e2a56fd"
+      "sha256": "e6983bab1bc1e805fec514ef23ffe95c074f9a7d2b3144ea7ac52844d0cf1f3d"
     },
     "kiro": {
       "file_count": 301,
@@ -14438,7 +14438,7 @@
         },
         "skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "306dbc0325673a172e231befb3a290841be6edf63987c7045fe965e02cc62c0d"
+          "sha256": "4f742daa92ef25c4f2c42b59be5ba392955c6b926090fdb223eea8ec2ccede67"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -14586,7 +14586,7 @@
         }
       },
       "path": "kiro/planweft",
-      "sha256": "0575174cd28e5593019b386e0faa6c9e0deb2ab07815343fce898b5d80da547e"
+      "sha256": "8f7111d6fed15fc35b647dbb5fb6272fb94972ca7e8c029ea8496e13b2e805f8"
     },
     "mastracode": {
       "file_count": 333,
@@ -15777,7 +15777,7 @@
         },
         "skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "306dbc0325673a172e231befb3a290841be6edf63987c7045fe965e02cc62c0d"
+          "sha256": "4f742daa92ef25c4f2c42b59be5ba392955c6b926090fdb223eea8ec2ccede67"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -15925,7 +15925,7 @@
         }
       },
       "path": "mastracode/planweft",
-      "sha256": "3df9425f6949f88686573b755e9c14e1fbe85f94395032fbec0f79fcabed3cba"
+      "sha256": "019463f1dc3139e20eafd7c9962748d27717d408c3e680305841992fa457fa36"
     },
     "opencode": {
       "file_count": 301,
@@ -16976,7 +16976,7 @@
         },
         "skills/project-docs/references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "306dbc0325673a172e231befb3a290841be6edf63987c7045fe965e02cc62c0d"
+          "sha256": "4f742daa92ef25c4f2c42b59be5ba392955c6b926090fdb223eea8ec2ccede67"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -17136,7 +17136,7 @@
         }
       },
       "path": "opencode/planweft",
-      "sha256": "bcd178cef50947a3f18d4fd25bdcbb676aa29cd7144df415358970808424a9f7"
+      "sha256": "c044566f57d752d08c38ef5379ba5fe883e9349fde0ae88362444a3af160a632"
     },
     "pi": {
       "file_count": 56,
@@ -17239,7 +17239,7 @@
         },
         "references/pwf-workflow.md": {
           "executable": false,
-          "sha256": "306dbc0325673a172e231befb3a290841be6edf63987c7045fe965e02cc62c0d"
+          "sha256": "4f742daa92ef25c4f2c42b59be5ba392955c6b926090fdb223eea8ec2ccede67"
         },
         "scripts/attest-plan.ps1": {
           "executable": false,
@@ -17367,7 +17367,7 @@
         }
       },
       "path": "pi/planweft",
-      "sha256": "5d75d356ef4f7e1a7595e2d9f841782bab215b06c56ebe614da40405996c9e7f"
+      "sha256": "6c6f9934af522b0c53f899f22f60f65f100f37d6e328f7d0ffbfb68efb2f57b7"
     }
   },
   "product": "planweft",

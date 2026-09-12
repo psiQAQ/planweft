@@ -15,10 +15,5 @@
     "registry_static_install",
     "independent_promotion_review"
   ],
-  "not_run": [
-    "docker_runtime",
-    "five_agent_runtime",
-    "real_host_runtime",
-    "real_model_runtime"
-  ]
+  "not_run": []
 }

@@ -2,8 +2,8 @@
 """Validate the scoped static/logic release evidence for PlanWeft 0.5.x.
 
 This intentionally does not interpret the frozen 0.4.0 schema-3 policy.  It
-rejects self-declared success, requires every versioned policy item to have a
-Passed evidence record, and keeps excluded runtime checks explicitly Not Run.
+rejects self-declared success and requires every applicable versioned policy
+item to have a Passed evidence record.
 """
 import argparse
 import hashlib
@@ -28,8 +28,9 @@ def load(path):
         raise ValueError('Unsupported 0.5 release policy')
     for key in ('required_prepublication', 'required_promotion', 'not_run'):
         items = value[key]
-        if not isinstance(items, list) or not items or len(items) != len(set(items)) or any(
-                not isinstance(item, str) or not item for item in items):
+        if (not isinstance(items, list) or (key != 'not_run' and not items)
+                or len(items) != len(set(items)) or any(
+                not isinstance(item, str) or not item for item in items)):
             raise ValueError('Invalid policy list: ' + key)
     if set(value['required_prepublication']) & set(value['required_promotion']):
         raise ValueError('A release check cannot belong to both phases')

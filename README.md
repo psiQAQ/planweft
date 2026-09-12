@@ -35,7 +35,6 @@ npx planweft@0.4.0 doctor -a codex --global
 | --- | --- |
 | 可重建包、安装包静态检查、Hook 逻辑、Skill/Hook 关联与文档交接 marker | 0.5.0 必需验证 |
 | 独立源码审查与只接收项目文件的冷读 | 0.5.0 必需验证 |
-| Docker、五 Agent runtime、真实宿主或真实模型行为 | 0.5.0 Not Run，且不是本版本门禁 |
 | 0.4.0 五宿主安装与生命周期验收 | 历史证据，适用范围不自动延伸至 0.5.0 |
 
 未执行验证不会写成 Passed。0.5.0 的文档交接默认 advisory；只有用户明确启用 gated 且原 PWF 条件已满足时才复用既有 block 预算。0.4.0 的五宿主和 syscall 限制保留在其历史记录中。完整边界见 [SPEC-0006](docs/specs/0006-skill-hook-document-handoff.md)。

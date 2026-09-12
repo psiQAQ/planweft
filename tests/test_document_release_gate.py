@@ -65,7 +65,7 @@ class DocumentReleaseGateTest(unittest.TestCase):
             _, path, archive = self.make_evidence(directory, promotion=True)
             self.assertEqual(self.check(path, archive, promotion=True).returncode, 0)
 
-    def test_required_and_excluded_statuses_cannot_be_forged(self):
+    def test_required_status_and_check_set_cannot_be_forged(self):
         with tempfile.TemporaryDirectory(prefix='pw-document-release-') as directory:
             evidence, path, archive = self.make_evidence(directory)
             evidence['checks']['hook_logic']['status'] = 'Not Run'
@@ -73,7 +73,7 @@ class DocumentReleaseGateTest(unittest.TestCase):
             path.write_text(json.dumps(evidence))
             self.assertNotEqual(self.check(path, archive).returncode, 0)
             evidence, path, archive = self.make_evidence(directory)
-            evidence['checks']['docker_runtime']['status'] = 'Passed'
+            evidence['checks']['unexpected_check'] = {'status': 'Passed'}
             path.write_text(json.dumps(evidence))
             self.assertNotEqual(self.check(path, archive).returncode, 0)
 
