@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.5.0 (unreleased)
+## 0.5.0 (published to `next`; `latest` promotion awaits maintainer authentication)
 
 - Added the `task_plan.md` document-handoff marker: `project-docs` makes the authorized documentation decision and Hooks only read and remind.
 - When explicit gated mode and the original PWF gate both pass, a pending handoff only refines that block reason; selector, attestation, cap, and stall behavior are unchanged.

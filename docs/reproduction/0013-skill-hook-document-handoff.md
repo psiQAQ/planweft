@@ -1,6 +1,6 @@
 # REP-0013：PlanWeft 0.5.0 Skill/Hook 文档交接
 
-状态：静态/逻辑实现验证完成；发布与 promotion 未执行。需求与边界见
+状态：静态/逻辑实现验证与 `next` 发布完成；`latest` promotion 与 tag 待维护者认证。需求与边界见
 [SPEC-0006](../specs/0006-skill-hook-document-handoff.md)、
 [ADR-0010](../adr/0010-skill-hook-document-handoff.md) 和
 [PLAN-0011](../plans/0011-skill-hook-document-handoff.md)。
@@ -9,7 +9,7 @@
 
 - 用户提供的研究提案已原样纳入：`planweft-document-management-proposal.md`，SHA-256 为 `e1cafbf781c7a3f3a4e2e7efd149102ec10ee932571e9f91563e868220ef824d`。
 - 版本为 `0.5.0`；固定上游仍为 PWF v3.17.0。
-- 本记录只覆盖本地构建、夹具、静态包清单、源码审查和项目文件冷读；不包含 npm registry 发布或 dist-tag 变更。
+- 本记录覆盖本地构建、夹具、静态包清单、源码审查、项目文件冷读，以及 `next` 发布后的官方 registry 归档与静态安装核验。
 
 ## 已执行验证
 
@@ -22,6 +22,7 @@
 | `git diff --check` | Passed | 无空白错误。 |
 | 独立源码审查 | Passed | [REV-0013 source review](../reviews/0013-skill-hook-document-handoff-source-review.md) 复核 marker、Hook 边界、archive/evidence gate 与公开声明。 |
 | 独立项目文件冷读 | Passed | [REV-0013 cold read](../reviews/0013-skill-hook-document-handoff-cold-read.md) 恢复目标、职责、历史限制与后续 registry 阶段，并发现后已修复的文档/门禁问题。 |
+| 受信任 candidate 发布 | Passed | GitHub Actions `34707596498` 在 `master@0e1f5de` 通过构建、离线检查、0.5 gate，并发布 `planweft@0.5.0` 到 `next`。 |
 
 `test_project_isolation` 与 `test_review_feedback` 的参数拒绝夹具会打印预期的 argparse 错误；其 unittest 分组仍以零退出码通过。
 
@@ -29,13 +30,15 @@
 
 `support-policy-0.5.json` 与 `check-document-release-gate.py` 的夹具验证了：Passed 记录必须绑定传入 archive 的 SHA-256、archive 内唯一的 `package/package.json`（`planweft@0.5.0`）以及 evidence JSON 目录内的实际附件/摘要；错误包身份、篡改 archive、非法/越界/缺失附件、附件摘要不符和非对象 manifest 都被拒绝。
 
-这些是 gate 实现的离线逻辑证据，不是一次 0.5.0 发布放行。预发布 gate 只能在干净的发布提交生成唯一 `.tgz` 和证据附件后执行。
+这些是 gate 实现的离线逻辑证据。预发布 gate 已在受信任发布提交生成唯一 `.tgz` 和证据附件后通过。
 
-## 后续发布阶段
+## 发布与 promotion 结果
 
 | 项目 | 状态 | 原因 |
 | --- | --- | --- |
-| registry archive identity、registry 静态安装、promotion review | Not Run | 尚未发布到 `next`；不得以本地 dry-run 代替官方 registry 证据。 |
-| `latest` promotion、annotated `v0.5.0` tag 与远端写入 | Not Run | 需在预发布和 promotion 证据齐备后单独授权/执行。 |
+| registry archive identity | Passed | `next` 指向 `0.5.0`；官方归档 SHA-256 为 `431adcc83c773e57bf8b3828bddf34b8043145adc02e522d8a925eaec6ea6eda`，与预发布摘要一致。 |
+| registry 静态安装 | Passed | Node.js 24.20.0 在临时目录从官方 registry 安装后，包身份、Skill marker 与 helper 布局均存在。 |
+| 独立 promotion review | Passed | 独立复核发现并纠正镜像来源缺口后，确认 policy、附件摘要、candidate workflow 与官方归档一致。 |
+| `latest` promotion、annotated `v0.5.0` tag 与远端写入 | Not Run | 本机没有 npm 维护者认证；需有权限的维护者完成 promotion 后再创建 tag。 |
 
 0.4.0 的历史记录保持在其原有文档与 policy 中，未被写作本版 Passed。

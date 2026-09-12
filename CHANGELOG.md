@@ -1,6 +1,6 @@
 # 变更记录
 
-## 0.5.0（未发布）
+## 0.5.0（`next` 已发布；`latest` promotion 待维护者认证）
 
 - 新增 `task_plan.md` 文档交接 marker；由 `project-docs` Skill 判断并在已授权范围维护文档，Hook 只读提醒。
 - 显式 gated 且原 PWF gate 已满足时，pending 交接只细化该次 block 原因；不改变 selector、attestation、cap 或 stall。

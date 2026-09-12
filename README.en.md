@@ -4,7 +4,7 @@
 
 PlanWeft keeps a coding agent's task plan, findings, and validation record in the project. A later session or collaborator can continue from those files without relying on chat history.
 
-The current source target is **0.5.0 (unreleased)**. It uses a pinned planning-with-files (PWF) v3.17.0 runtime and adds a document-handoff interface managed by the `project-docs` Skill and read by Hooks. The registry installation entry point remains the published 0.4.0 until 0.5.0 completes its static/logic gate and later promotion.
+The current source target is **0.5.0 (published to `next`)**. It uses a pinned planning-with-files (PWF) v3.17.0 runtime and adds a document-handoff interface managed by the `project-docs` Skill and read by Hooks. The default registry installation entry point remains 0.4.0; 0.5.0 promotion to `latest` awaits maintainer authentication.
 
 ## Quick start
 

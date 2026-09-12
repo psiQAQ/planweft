@@ -27,4 +27,4 @@
 
 - Documents considered: SPEC-0006、ADR-0010、docs/README、公开版本说明、REP-0013、REV-0013 与设计引用台账。
 - Rationale / evidence: 该任务改变 Skill、Hook、构建产物与发布验证声明；离线回归、独立源码审查和冷读已记录于 REP-0013/REV-0013。
-- Next action: 实现交接已完成；registry `next`、静态安装、promotion review、`latest` 与 tag 仍是独立的发布阶段。
+- Next action: `next`、官方 registry 静态安装和 promotion review 已完成；`latest` promotion 与 tag 等待维护者认证。

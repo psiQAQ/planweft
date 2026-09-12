@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "version": "0.5.0",
+  "policy_sha256": "d3807781a81db465760c1cdbf10a3b618691d22afd8d5dc67c2cc1def85d7b0d",
+  "package_sha256": "431adcc83c773e57bf8b3828bddf34b8043145adc02e522d8a925eaec6ea6eda",
+  "release_blocking": false,
+  "checks": {
+    "rebuildable_package": {
+      "status": "Passed",
+      "evidence": "raw/rebuildable-package.md",
+      "sha256": "705658dcafef1a5ae6611f6ec1e89fa52d09388d27736ccecd9955d048c0a1ea"
+    },
+    "offline_test_suite": {
+      "status": "Passed",
+      "evidence": "raw/offline-test-suite.md",
+      "sha256": "9677f1c2732a33caa75adcc4628b2050845f6f81a0a3ba8cc19340495367f907"
+    },
+    "hook_logic": {
+      "status": "Passed",
+      "evidence": "raw/hook-logic.md",
+      "sha256": "4a9b0f85a6de882dc966a70cec975cb40473bd9befe2ce585f4f82262f6c6d87"
+    },
+    "skill_hook_association": {
+      "status": "Passed",
+      "evidence": "raw/skill-hook-association.md",
+      "sha256": "6c424ee408530b34e68cbf10683a1fbf1436096c1e348d48f01e02dd3a4b2e9a"
+    },
+    "public_documentation": {
+      "status": "Passed",
+      "evidence": "raw/public-documentation.md",
+      "sha256": "04768426dba840bb9d72b6cc90ffbb8777a47a2b8460e9de0d6a2c88cae732da"
+    },
+    "independent_source_review": {
+      "status": "Passed",
+      "evidence": "raw/independent-source-review.md",
+      "sha256": "f44bd79163a784134185b317e159a367866c2f0bfbc26bc2f54d048bda592461"
+    },
+    "project_files_cold_read": {
+      "status": "Passed",
+      "evidence": "raw/project-files-cold-read.md",
+      "sha256": "4bf20b4cdacc7216a1d00b1a4a21ddcf7e120fa676aea0f0ea6e520ccc58a2bb"
+    },
+    "registry_archive_identity": {
+      "status": "Passed",
+      "evidence": "raw/registry-archive-identity.md",
+      "sha256": "00b9d03e38baac8cbec633b814896411a3bbed5fb3100d8315fb77fba5b2f13a"
+    },
+    "registry_static_install": {
+      "status": "Passed",
+      "evidence": "raw/registry-static-install.md",
+      "sha256": "5f8ad901b18b3afe779f2c96d82666b1f67bbf372d88c5dde5a0214cff001eeb"
+    },
+    "independent_promotion_review": {
+      "status": "Passed",
+      "evidence": "raw/independent-promotion-review.md",
+      "sha256": "d45f75e2abd43663c83c313e60fd485cd9b38dce7feb364d036a1453fc63dbf5"
+    }
+  }
+}
