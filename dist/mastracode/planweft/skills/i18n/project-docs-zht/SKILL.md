@@ -37,7 +37,7 @@ hooks:
           command: "SH=\"\"; for c in \"${PWF_SCRIPT_DIR}/skill-hook.sh\" \"${CLAUDE_SKILL_DIR}/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs-zht/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/plugins/marketplaces/planweft/scripts/skill-hook.sh\"; do [ -f \"$c\" ] && { SH=\"$c\"; break; }; done; [ -n \"$SH\" ] && sh \"$SH\" --event=precompact; exit 0"
 metadata:
 
-  version: "0.4.0"
+  version: "0.5.0"
 
 disable-model-invocation: true
 ---
@@ -91,3 +91,15 @@ disable-model-invocation: true
 按需閱讀 [PWF 細節](references/pwf-workflow.md)和[控制說明](references/controls.md)。預設提醒模式；自動恢復只用專案檔案，存取會話歷史需明確請求，attestation 不是核准。同一會話只啟用一個規劃外掛的 hooks。保留 `PLAN_ID`、`PWF_*`、`PLANNING_DISABLED`；必要時在唯讀會話啟動前設定 `PLANNING_DISABLED=1`。私有快取與專案記錄分開，宿主能力以 `INSTALL.md` 為準。
 
 缺失記錄範本：[計畫](templates/task_plan.md)、[發現](templates/findings.md)、[進度](templates/progress.md)。
+
+
+## Documentation Handoff
+
+For an authorized substantive implementation, keep one `## Documentation Handoff`
+section in the selected `task_plan.md` with exactly one marker:
+`<!-- planweft-docs-status: pending -->`, `not_required`, or `complete`.
+Record the considered documents, rationale/evidence, and next action. Missing,
+duplicate, or malformed markers remain pending. The Skill decides and performs
+authorized documentation work; Hooks only read the marker. Default advisory mode
+never blocks for document handoff. Retained `pw-*` controls are compatibility and
+troubleshooting interfaces, not the required user workflow.

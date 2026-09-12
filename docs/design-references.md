@@ -145,6 +145,24 @@ README、AGENTS 和 development 本轮仅补当前计划/测试/结果导航，�
 
 历史 reproduction/checkpoint 是观察证据，不作为新策略的设计权威，也不因分级发布被回写为成功。
 
+## 0.5.0 Skill/Hook 文档交接（2026-09-13）
+
+本节的需求来源是用户批准的 0.5.0 实施计划。用户提供的
+[提案原文](planweft-document-management-proposal.md)以 SHA-256
+`e1cafbf781c7a3f3a4e2e7efd149102ec10ee932571e9f91563e868220ef824d` 原样保留；它是研究输入，
+不是批准规格或实施完成的证据。固定 PWF v3.17.0 的 selector、attestation、phase、cap 和 stall
+实现只用于界定补丁锚点。单一 HTML marker、私有分类器和版本化静态门禁是针对本仓库约束的最小组合，
+不作首创或通用安全保证。
+
+| 本仓库目标文件 | 问题与设计 | 实际来源及本地差异 | 验证 / 审查入口 |
+| --- | --- | --- | --- |
+| [SPEC-0006](specs/0006-skill-hook-document-handoff.md)、[ADR-0010](adr/0010-skill-hook-document-handoff.md)、[PLAN-0011](plans/0011-skill-hook-document-handoff.md) | 让 Skill 完成授权内文档判断，Hook 仅读取交接状态；不增加 CLI、映射或第二状态引擎 | 用户批准计划、原样提案和固定 PWF 三文件/phase parser；`pending` marker 与目录不迁移为本地最小取舍 | REP-0013；REV-0013 source/cold read |
+| [build-plugin.py](../scripts/build-plugin.py)、[workflow](../overlays/planweft/workflow.md)、[task_plan 增量](../overlays/planweft/templates/task_plan.append.md) | 将唯一 marker 和 Skill-first、兼容控制边界写入所有生成入口/模板 | 固定 PWF Skill/模板；用户要求不以人工命令作为日常文档维护前提。仅向已有 Stop gate 锚点注入 helper，不手改生成物 | `tests/test_document_handoff.py`、`tests/test_record_templates.py`、构建一致性 |
+| [私有检查器](../overlays/planweft/document-handoff-check.sh)、[native Hook](../overlays/planweft/native/native-hook.py) | 缺失、错位、重复、非法 marker 保守为 pending；写后只提醒，显式 gated 仅细化既有 block reason | 固定 PWF `check-complete.sh` 的 selector/attestation/in-progress/cap/stall 顺序；用户限定 Hook 不写文档、不猜授权 | marker、native Hook、PWF 包装夹具；REV-0013 source review |
+| [`support-policy-0.5.json`](../release/support-policy-0.5.json)、[0.5 gate](../scripts/check-document-release-gate.py) | 将 0.5 静态/逻辑门禁与冻结 0.4 schema 3 证据分离；Passed 绑定 archive 和附件摘要 | 用户批准的 0.5 范围；0.4 `check-release-gate.py` 的本地附件/摘要边界作为实现先例，不改写旧 policy | `tests/test_document_release_gate.py`；REP-0013；registry/promotion 留待发布阶段 |
+
+0.5.0 的静态证据不能由本文或 0.4.0 历史替代；registry promotion 仍是独立发布阶段。
+
 ### 0.2.0 实施文件映射
 
 | 第一方入口 | 具体设计及精确依据 | 本地差异与验证 |

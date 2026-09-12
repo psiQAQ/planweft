@@ -17,9 +17,22 @@ import tarfile
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR = ROOT / 'vendor/planning-with-files'
 OVERLAY = ROOT / 'overlays/planweft'
-VERSION = '0.4.0'
+VERSION = '0.5.0'
 PRODUCT = 'planweft'
 SKILL = 'project-docs'
+DOCUMENT_HANDOFF_ENTRY = '''
+
+## Documentation Handoff
+
+For an authorized substantive implementation, keep one `## Documentation Handoff`
+section in the selected `task_plan.md` with exactly one marker:
+`<!-- planweft-docs-status: pending -->`, `not_required`, or `complete`.
+Record the considered documents, rationale/evidence, and next action. Missing,
+duplicate, or malformed markers remain pending. The Skill decides and performs
+authorized documentation work; Hooks only read the marker. Default advisory mode
+never blocks for document handoff. Retained `pw-*` controls are compatibility and
+troubleshooting interfaces, not the required user workflow.
+'''
 SKILL_TRIGGER = ('Use for implementation/maintenance with investigation, fixes, regression tests '
                  'and handoff, including existing notes. Read-only/trivial tasks do not initialize files. ')
 SKILL_LOOKUP = ('Use the host-listed Skill path; read it before resource lookup. '
@@ -191,7 +204,7 @@ def enhance_skill(text, path):
                   'Pi and OpenCode use native follow-up mechanisms. Continue has no execution hooks. '
                   'Use the installed platform\'s INSTALL.md and [explicit controls](references/controls.md) '
                   'for actual availability and activation. Shell counter limits do not describe Pi\'s '
-                  'extension counter. Protocol checks do not prove real host enforcement.\n\n',
+                  'extension counter. Protocol checks do not prove external enforcement.\n\n',
                   body, flags=re.S)
     return ('---\n' + front + '\n---\n\n' + workflow.rstrip() + '\n\n'
             + '## Adapter metadata from the fixed upstream\n\n' + upstream_description
@@ -287,7 +300,8 @@ def transform(upstream, enhanced=True):
                      + manual).encode(), 0o644)
                 language = re.search(r'/i18n/project-docs-([^/]+)/', target)
                 locale = language.group(1) if language else 'en'
-                entry = (OVERLAY / 'entrypoints' / (locale + '.md')).read_text(encoding='utf-8')
+                entry = ((OVERLAY / 'entrypoints' / (locale + '.md')).read_text(encoding='utf-8')
+                         + DOCUMENT_HANDOFF_ENTRY)
                 text = '---\n' + front + '\n---\n\n' + entry
         # Local, source-reviewed adapter patches. Keep event payloads and the
         # upstream state protocol; only remove implicit cwd imports/opt-out gaps.
@@ -319,6 +333,42 @@ def transform(upstream, enhanced=True):
             text = text.replace("echo '=== plan-doctor done ==='", (OVERLAY / 'doctor-overlap.sh').read_text(encoding='utf-8') + "\necho '=== plan-doctor done ==='")
         if enhanced:
             text = records.transform(target, text)
+        if (enhanced and (target.endswith('/scripts/check-complete.sh')
+                         or target == 'scripts/check-complete.sh')
+                and '# All guards passed: block the stop.\n' in text):
+            marker = '# All guards passed: block the stop.\n'
+            handoff = '''# PlanWeft document-handoff reason. The PWF gate has already accepted
+# explicit gated mode, an in-progress phase, the cap and stall guards. This
+# read-only classifier only refines that one block reason; it never changes
+# whether the upstream gate blocks.
+HANDOFF_CHECK="${SCRIPT_DIR}/document-handoff-check.sh"
+HANDOFF_STATUS="pending"
+if [ -f "${HANDOFF_CHECK}" ]; then
+    HANDOFF_STATUS="$(sh "${HANDOFF_CHECK}" "${PLAN_FILE}" 2>/dev/null || printf pending)"
+fi
+case "${HANDOFF_STATUS}" in
+    pending|not_required|complete) ;;
+    *) HANDOFF_STATUS="pending" ;;
+esac
+
+'''
+            if text.count(marker) != 1:
+                raise ValueError('PWF completion gate insertion point changed: ' + target)
+            text = text.replace(marker, handoff + marker)
+            phase_marker = ('if [ -z "${PHASE_NAME}" ]; then\n'
+                            '    PHASE_NAME="unknown phase"\n'
+                            'fi\n'
+                            'PHASE_ESCAPED="$(json_escape "${PHASE_NAME}")"\n')
+            phase_replacement = ('if [ -z "${PHASE_NAME}" ]; then\n'
+                                 '    PHASE_NAME="unknown phase"\n'
+                                 'fi\n'
+                                 'if [ "${HANDOFF_STATUS}" = "pending" ]; then\n'
+                                 '    PHASE_NAME="documentation handoff pending; use the project-docs Skill to assess documents, record the rationale, and complete the handoff"\n'
+                                 'fi\n'
+                                 'PHASE_ESCAPED="$(json_escape "${PHASE_NAME}")"\n')
+            if text.count(phase_marker) != 1:
+                raise ValueError('PWF document handoff reason anchor changed: ' + target)
+            text = text.replace(phase_marker, phase_replacement)
         if enhanced and '/templates/' in '/' + target:
             stem = PurePosixPath(target).stem
             if stem in ('analytics_task_plan', 'task_plan_autonomous'):
@@ -423,6 +473,13 @@ def transform(upstream, enhanced=True):
                     'never create a competing root plan.\n\n') + body.lstrip()
         result[target] = (text.encode('utf-8'), mode)
     if enhanced:
+        helper = (OVERLAY / 'document-handoff-check.sh').read_bytes()
+        for target, (data, mode) in list(result.items()):
+            if b'HANDOFF_CHECK="${SCRIPT_DIR}/document-handoff-check.sh"' in data:
+                helper_target = str(PurePosixPath(target).parent / 'document-handoff-check.sh')
+                if helper_target in result:
+                    raise ValueError('PWF document handoff helper collides: ' + helper_target)
+                result[helper_target] = (helper, mode)
         data, mode = result['LICENSE']
         result['LICENSE'] = (data.replace(b'Permission is hereby granted', b'Copyright (c) 2026 PlanWeft contributors\n\nPermission is hereby granted', 1), mode)
         canonical = 'skills/project-docs/'

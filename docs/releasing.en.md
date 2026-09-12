@@ -4,7 +4,26 @@
 
 This page records the maintainer release process and the final 0.4.0 publication facts. See the [installation guide](installation.en.md) for user commands and [platform support](platforms.en.md) for public capability claims.
 
-## Pre-release checks
+## 0.5.0 static/logic release path
+
+0.5.0 uses a separate [`release/support-policy-0.5.json`](../release/support-policy-0.5.json) and
+`check-document-release-gate.py`. Prepublication requires Passed rebuildable-package, offline-test,
+Hook-logic, Skill/Hook-association, public-documentation, independent-source-review, and
+project-files-only-cold-read records. Promotion also requires registry archive identity, temporary
+static-install verification, and independent promotion review. This path never changes the frozen 0.4.0
+policy or acceptance record.
+
+Every Passed record names an actual attachment below the evidence JSON and its SHA-256; `package_sha256`
+must equal the local npm archive passed to the gate, whose `package/package.json` must identify
+`planweft@0.5.0`. The gate rejects self-references, absolute paths, `..`, escaping symlinks, missing
+attachments, and digest mismatches. Prepublication checks only its own items; `--promotion` additionally
+requires registry and promotion-review evidence.
+
+## Frozen 0.4.0 full lifecycle (historical)
+
+The following flow and five-host requirements are the historical schema-3 boundary for 0.4.0. They are not additional 0.5.0 gates and must not turn 0.4.0 runtime results into 0.5.0 validation.
+
+### Pre-release checks
 
 1. Create a clean worktree and release branch from the confirmed remote `master`. Do not copy uncommitted changes from another checkout.
 2. Check the version, remote branch, latest CI, npm version availability, and dist-tags. Query them again before every external write.
@@ -19,7 +38,7 @@ node tests/installer.test.mjs
 python3 -m unittest discover -s tests -p 'test_*.py'
 ```
 
-## Exact artifacts and publication order
+### Exact artifacts and publication order
 
 Generate one npm tgz, `release.json`, and checksum set from the same clean commit. For a stable release, the publication workflow requires the reviewed SHA-256 as `expected_sha256`. Stop if the CI rebuild differs; do not change the expected digest to accept different bytes.
 
@@ -34,7 +53,7 @@ Publish a stable version to `next` first. Download it from the official registry
 
 Do not overwrite or delete a published npm version. If remote acceptance fails, keep the existing `latest` tag and failure evidence, then fix the problem in a new patch version.
 
-## Schema 3 gate
+### Schema 3 gate
 
 [`release/support-policy.json`](../release/support-policy.json) classifies every host and scenario as `required`, `evidence_based`, or `experimental`. The gate calculates `release_blocking` from policy and does not trust a self-declared acceptance value.
 

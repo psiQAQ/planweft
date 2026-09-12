@@ -2,7 +2,7 @@
 name: project-docs
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
 metadata:
-  version: "0.4.0"
+  version: "0.5.0"
 ---
 
 # Project Docs
@@ -54,3 +54,15 @@ Use an independent evidence reviewer for significant design and a fresh reader f
 Read [PWF details](references/pwf-workflow.md) and [controls](references/controls.md) only as needed. Default mode is advisory; automatic recovery uses project files only, session-history access requires an explicit request, and attestation is not approval. One planning plugin's hooks per session. Keep `PLAN_ID`, `PWF_*`, `PLANNING_DISABLED`; set `PLANNING_DISABLED=1` before read-only sessions when needed. Private caches stay separate. Platform capabilities follow `INSTALL.md`.
 
 Missing-record templates: [plan](templates/task_plan.md), [findings](templates/findings.md), [progress](templates/progress.md).
+
+
+## Documentation Handoff
+
+For an authorized substantive implementation, keep one `## Documentation Handoff`
+section in the selected `task_plan.md` with exactly one marker:
+`<!-- planweft-docs-status: pending -->`, `not_required`, or `complete`.
+Record the considered documents, rationale/evidence, and next action. Missing,
+duplicate, or malformed markers remain pending. The Skill decides and performs
+authorized documentation work; Hooks only read the marker. Default advisory mode
+never blocks for document handoff. Retained `pw-*` controls are compatibility and
+troubleshooting interfaces, not the required user workflow.

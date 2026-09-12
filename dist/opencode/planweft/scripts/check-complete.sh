@@ -242,6 +242,20 @@ if [ "${BLOCKS}" -gt 0 ] && [ "${LEDGER_NOW}" -eq "${LEDGER_PREV}" ]; then
     exit 0
 fi
 
+# PlanWeft document-handoff reason. The PWF gate has already accepted
+# explicit gated mode, an in-progress phase, the cap and stall guards. This
+# read-only classifier only refines that one block reason; it never changes
+# whether the upstream gate blocks.
+HANDOFF_CHECK="${SCRIPT_DIR}/document-handoff-check.sh"
+HANDOFF_STATUS="pending"
+if [ -f "${HANDOFF_CHECK}" ]; then
+    HANDOFF_STATUS="$(sh "${HANDOFF_CHECK}" "${PLAN_FILE}" 2>/dev/null || printf pending)"
+fi
+case "${HANDOFF_STATUS}" in
+    pending|not_required|complete) ;;
+    *) HANDOFF_STATUS="pending" ;;
+esac
+
 # All guards passed: block the stop.
 # json_escape: escape a string for safe inclusion in a JSON string literal.
 # Escapes backslash and double-quote, then neutralizes every bare control
@@ -269,6 +283,9 @@ first_in_progress_phase() {
 PHASE_NAME="$(first_in_progress_phase)"
 if [ -z "${PHASE_NAME}" ]; then
     PHASE_NAME="unknown phase"
+fi
+if [ "${HANDOFF_STATUS}" = "pending" ]; then
+    PHASE_NAME="documentation handoff pending; use the project-docs Skill to assess documents, record the rationale, and complete the handoff"
 fi
 PHASE_ESCAPED="$(json_escape "${PHASE_NAME}")"
 

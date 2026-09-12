@@ -36,7 +36,7 @@ hooks:
         - type: command
           command: "SH=\"\"; for c in \"${PWF_SCRIPT_DIR}/skill-hook.sh\" \"${CLAUDE_SKILL_DIR}/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs-de/scripts/skill-hook.sh\" \"$HOME/.claude/skills/project-docs/scripts/skill-hook.sh\" \"$HOME/.claude/plugins/marketplaces/planweft/scripts/skill-hook.sh\"; do [ -f \"$c\" ] && { SH=\"$c\"; break; }; done; [ -n \"$SH\" ] && sh \"$SH\" --event=precompact; exit 0"
 metadata:
-  version: "0.4.0"
+  version: "0.5.0"
 disable-model-invocation: true
 ---
 
@@ -89,3 +89,15 @@ Für wesentliche Entwürfe unabhängige Quellenreviewer, für wichtige Übergabe
 [PWF-Details](references/pwf-workflow.md) und [Steuerung](references/controls.md) bei Bedarf lesen. Standard: Hinweise; automatische Wiederaufnahme nur aus Projektdateien, Sitzungshistorie nur auf ausdrückliche Anfrage, attestation ist keine Genehmigung. Nur ein Planungsplugin mit Ausführungshooks je Sitzung. `PLAN_ID`, `PWF_*`, `PLANNING_DISABLED` erhalten; bei Bedarf vor Nur-Lese-Sitzungen `PLANNING_DISABLED=1` setzen. Private Caches getrennt halten; Host-Fähigkeiten gemäß `INSTALL.md`.
 
 Vorlagen für fehlende Aufzeichnungen: [Plan](templates/task_plan.md), [Befunde](templates/findings.md), [Fortschritt](templates/progress.md).
+
+
+## Documentation Handoff
+
+For an authorized substantive implementation, keep one `## Documentation Handoff`
+section in the selected `task_plan.md` with exactly one marker:
+`<!-- planweft-docs-status: pending -->`, `not_required`, or `complete`.
+Record the considered documents, rationale/evidence, and next action. Missing,
+duplicate, or malformed markers remain pending. The Skill decides and performs
+authorized documentation work; Hooks only read the marker. Default advisory mode
+never blocks for document handoff. Retained `pw-*` controls are compatibility and
+troubleshooting interfaces, not the required user workflow.

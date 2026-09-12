@@ -2,7 +2,7 @@
 """Offline distribution contracts exercised against packaged runtime scripts.
 
 Run: python3 -m unittest discover -s tests -p 'test_pwf_distribution.py' -v
-These are artifact/protocol checks, not claims of real host or model execution.
+These are artifact/protocol checks with a bounded static scope.
 """
 import base64
 import hashlib
@@ -459,7 +459,9 @@ class PackagedRuntimeTest(unittest.TestCase):
                     response = json.loads(output) if output else {}
                     if guard == 'block':
                         self.assertEqual(response.get('decision'), 'block')
-                        self.assertIn('Selected work', response['reason'])
+                        # A plan without the required marker remains pending;
+                        # only the already-authorized PWF block reason changes.
+                        self.assertIn('documentation handoff pending', response['reason'])
                         self.assertEqual((selected / '.stop_blocks').read_text().strip(), '1')
                         self.assertEqual((selected / '.gate_last_ledger').read_text().strip(), '0')
                         after = snapshot(work)

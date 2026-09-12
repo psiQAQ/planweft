@@ -2,7 +2,7 @@
 name: project-docs-ar
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Its session-end hook reports status only and does not request continuation."
 metadata:
-  version: "0.4.0"
+  version: "0.5.0"
 ---
 
 # وثائق المشروع وتخطيط المهمة
@@ -54,3 +54,15 @@ metadata:
 اقرأ [تفاصيل PWF](references/pwf-workflow.md) و[التحكم](references/controls.md) عند الحاجة. الوضع الافتراضي تذكيري؛ الاستعادة الآلية من ملفات المشروع فقط، وتاريخ الجلسة بطلب صريح، وattestation ليس موافقة. ملحق تخطيط واحد فقط يشغّل hooks في الجلسة. احتفظ بـ`PLAN_ID` و`PWF_*` و`PLANNING_DISABLED`؛ اضبط `PLANNING_DISABLED=1` قبل جلسة القراءة فقط عند الحاجة. افصل التخزين المؤقت الخاص، واتبع قدرات المضيف في `INSTALL.md`.
 
 قوالب السجلات المفقودة: [الخطة](templates/task_plan.md)، [النتائج](templates/findings.md)، [التقدم](templates/progress.md).
+
+
+## Documentation Handoff
+
+For an authorized substantive implementation, keep one `## Documentation Handoff`
+section in the selected `task_plan.md` with exactly one marker:
+`<!-- planweft-docs-status: pending -->`, `not_required`, or `complete`.
+Record the considered documents, rationale/evidence, and next action. Missing,
+duplicate, or malformed markers remain pending. The Skill decides and performs
+authorized documentation work; Hooks only read the marker. Default advisory mode
+never blocks for document handoff. Retained `pw-*` controls are compatibility and
+troubleshooting interfaces, not the required user workflow.

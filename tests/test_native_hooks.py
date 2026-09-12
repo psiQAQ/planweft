@@ -42,11 +42,18 @@ class NativeHookTest(unittest.TestCase):
                     'LANG': 'C.UTF-8', 'PYTHONDONTWRITEBYTECODE': '1',
                     'PWF_TRUSTED_PYTHON': sys.executable}
 
-    def plan(self):
+    def plan(self, handoff=None):
         path = self.project / 'task_plan.md'
-        path.write_text('# Task Plan: NATIVE_PROJECT_MARKER\n\n## Goal\n'
-                        'Verify the installed package against this project.\n\n'
-                        '### Phase 1: Runtime\n- **Status:** in_progress\n')
+        text = ('# Task Plan: NATIVE_PROJECT_MARKER\n\n## Goal\n'
+                'Verify the installed package against this project.\n\n'
+                '### Phase 1: Runtime\n- **Status:** in_progress\n')
+        if handoff is not None:
+            text += ('\n## Documentation Handoff\n\n<!-- planweft-docs-status: '
+                     + handoff + ' -->\n'
+                     '- Documents considered: docs/README.md\n'
+                     '- Rationale / evidence: native hook fixture\n'
+                     '- Next action: continue verification\n')
+        path.write_text(text)
         return path
 
     def hook(self, host, event, payload=None, env=None):
@@ -85,7 +92,7 @@ class NativeHookTest(unittest.TestCase):
                     self.assertIn('NATIVE_PROJECT_MARKER', str(output))
                     self.assertIn('===BEGIN-PWF-DATA', str(output))
                     self.assertNotIn('permissionDecision', str(output))
-                self.assertIn('progress.md', str(output))
+                self.assertIn('document handoff', str(output))
                 self.assertEqual(snapshot(self.packages[host]), package_before)
         self.assertEqual(snapshot(self.project), project_before)
 
@@ -102,6 +109,19 @@ class NativeHookTest(unittest.TestCase):
                 for cwd in ['relative', str(self.packages[host]), str(self.root / 'missing')]:
                     self.assertEqual(self.hook(host, start, {'cwd': cwd}), {})
         self.assertEqual(snapshot(self.project), before)
+
+    def test_post_write_reminder_only_reports_pending_document_handoff(self):
+        self.plan('complete')
+        for host, (_, after, field) in HOSTS.items():
+            output = self.hook(host, after, {'toolName': 'edit', 'tool_name': 'Write'})
+            self.assertNotIn('document handoff', str(output))
+            self.assertEqual(set(output), {field})
+        self.plan('not_required')
+        for host, (_, after, _) in HOSTS.items():
+            self.assertNotIn('document handoff', str(self.hook(host, after, {'toolName': 'edit'})))
+        self.plan('unknown')
+        for host, (_, after, _) in HOSTS.items():
+            self.assertIn('document handoff', str(self.hook(host, after, {'toolName': 'edit'})))
 
     def test_cursor_workspace_roots_and_gemini_compression_use_native_fields(self):
         self.plan()
@@ -136,6 +156,7 @@ class NativeHookTest(unittest.TestCase):
                 else:
                     self.assertEqual(output['decision'], 'block')
                     self.assertEqual(set(output), {'decision', 'reason'})
+                self.assertIn('documentation handoff pending', str(output))
                 self.assertEqual(self.stop(host, stop_hook_active=True), {})
                 self.assertEqual(self.stop(host), {}, 'a stalled ledger does not repeatedly continue')
         plan.write_text(plan.read_text() + '\nUNATTESTED_PLAN_CHANGE\n')
@@ -146,6 +167,18 @@ class NativeHookTest(unittest.TestCase):
         for host in ['cursor', 'copilot']:
             self.assertEqual(self.stop(host), {})
             self.assertFalse((self.project / '.stop_blocks').exists())
+
+    @unittest.skipUnless(shutil.which('sh'), 'the upstream gated continuation needs sh')
+    def test_completed_handoff_keeps_the_original_gate_reason(self):
+        self.plan('complete')
+        (self.project / '.mode').write_text('gate\n')
+        self.attest()
+        for host in ['cursor', 'copilot']:
+            for marker in ['.stop_blocks', '.gate_last_ledger']:
+                (self.project / marker).unlink(missing_ok=True)
+            output = self.stop(host)
+            self.assertIn('Gated plan incomplete', str(output))
+            self.assertNotIn('documentation handoff pending', str(output))
 
     @unittest.skipUnless(shutil.which('sh'), 'the upstream gated continuation needs sh')
     def test_gate_respects_host_status_loop_mode_and_explicit_plan_binding(self):

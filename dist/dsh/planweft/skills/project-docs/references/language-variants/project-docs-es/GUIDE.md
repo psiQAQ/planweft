@@ -2,7 +2,7 @@
 name: project-docs-es
 description: "Use for implementation/maintenance with investigation, fixes, regression tests and handoff, including existing notes. Read-only/trivial tasks do not initialize files. Use the host-listed Skill path; read it before resource lookup. Do not use host settings or installation receipts to locate resources. Uses selected project planning context. Automatic recovery reads project planning files only. Explicit requests only: --metadata / --replay. It never runs commands declared in Markdown; no network upload path. Optional gated mode can request continuation only when the host supports it."
 metadata:
-  version: "0.4.0"
+  version: "0.5.0"
 ---
 
 # Documentos y planificación del proyecto
@@ -54,3 +54,15 @@ Usa un reviewer independiente para diseños importantes y un lector nuevo para e
 Consulta [detalles PWF](references/pwf-workflow.md) y [controles](references/controls.md) según necesidad. Modo predeterminado: recordatorios. Recuperación automática solo desde archivos del proyecto; historial de sesiones requiere solicitud explícita; attestation no es aprobación. Un plugin de planificación con hooks por sesión. Conserva `PLAN_ID`, `PWF_*`, `PLANNING_DISABLED`; usa `PLANNING_DISABLED=1` antes de sesiones de solo lectura cuando corresponda. Caché privada separada del estado; capacidades según `INSTALL.md`.
 
 Plantillas para registros ausentes: [plan](templates/task_plan.md), [hallazgos](templates/findings.md), [progreso](templates/progress.md).
+
+
+## Documentation Handoff
+
+For an authorized substantive implementation, keep one `## Documentation Handoff`
+section in the selected `task_plan.md` with exactly one marker:
+`<!-- planweft-docs-status: pending -->`, `not_required`, or `complete`.
+Record the considered documents, rationale/evidence, and next action. Missing,
+duplicate, or malformed markers remain pending. The Skill decides and performs
+authorized documentation work; Hooks only read the marker. Default advisory mode
+never blocks for document handoff. Retained `pw-*` controls are compatibility and
+troubleshooting interfaces, not the required user workflow.

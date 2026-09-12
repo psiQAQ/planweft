@@ -47,3 +47,7 @@
 Pi 安装器的自有 package 来源识别仅在解析该宿主 settings 时移除一个开头 U+FEFF，与固定 Pi v0.84.3 原生读取保持一致；不修改配置字节，也不放过重复来源或其他 scope。独立复现与源码核查见 REV-0010 的 RC12 BOM review。
 
 OpenCode `pw_init` 原生工具及可选 `mode` 参数明确：省略参数沿用 advisory 默认；只有用户明确选择 autonomous/gated 才传该值，普通维护授权不代表选择续跑模式。仅补模型实际看到的工具说明，不增加伪授权字段，不改变 `initPlan`、marker、attestation 或 hook 行为，不能作为权限强制证明。RC11 原始未经选择的模式执行仍 Failed；新准确包模型效果待验。
+
+## 0.5.0 文档交接
+
+PD-P16 在构建期向具有上游 Stop gate 锚点的 `check-complete.sh` 插入一个私有、只读的 `document-handoff-check.sh` 调用。它只识别所选 `task_plan.md` 中唯一的 `## Documentation Handoff` marker；缺失、重复或非法标记按 pending。原 PWF 已通过 selector、attestation、in-progress、cap 和 stall 判断后，pending 仅改变该次阻断提示，不新增计数、状态目录或自动写入。无该锚点的宿主保留原协议。主 Skill 和任务模板声明同一 marker，原生 PostTool 提醒只在 pending 时提示模型。离线 marker、构建关联、native hook 和 PWF 回归分别验证。

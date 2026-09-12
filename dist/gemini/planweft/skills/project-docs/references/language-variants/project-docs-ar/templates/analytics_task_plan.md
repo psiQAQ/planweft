@@ -97,6 +97,19 @@ Keep the current next action in `## Next Step` above, rather than duplicating a 
 - Remaining blocker or approval decision: [concrete missing input, or none]
 - Independent evidence review: [record and disposition, or Not Run with reason]
 - Fresh-reader check: [record and discrepancy resolution, or Not Run with reason]
-- Existing plan migration: [old status entry now points here, when the target project adopts this workflow; otherwise not applicable]
+- Active-plan relocation: not supported; record an in-place closure or explicitly authorized archive-index update only when applicable
 
 Attestation records bytes, not approval. Checked phases or a gate decision do not prove that acceptance criteria passed.
+
+## Documentation Handoff
+
+<!-- planweft-docs-status: pending -->
+
+- Documents considered: [affected existing documents, or none]
+- Rationale / evidence: [why documentation is needed or not required]
+- Next action: [authorized update, verification, or closure action]
+
+The marker has exactly one value: `pending`, `not_required`, or `complete`. It is a
+read-only Hook input and not a second task status. Missing, duplicate or malformed
+markers remain pending; do not set `complete` before the actual documentation result
+is recorded.
