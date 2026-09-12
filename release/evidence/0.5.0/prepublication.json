@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "version": "0.5.0",
+  "policy_sha256": "d3807781a81db465760c1cdbf10a3b618691d22afd8d5dc67c2cc1def85d7b0d",
+  "package_sha256": "7104584984ca6c49734fe97c775b10f4edbd0a652f11dbd4e22ef43b89951898",
+  "release_blocking": false,
+  "checks": {
+    "rebuildable_package": {
+      "status": "Passed",
+      "evidence": "raw/rebuildable-package.md",
+      "sha256": "be9db75184cc5d3bb025e5d955252750586faa9d1f5f03255b4c2bed690cd2d9"
+    },
+    "offline_test_suite": {
+      "status": "Passed",
+      "evidence": "raw/offline-test-suite.md",
+      "sha256": "9677f1c2732a33caa75adcc4628b2050845f6f81a0a3ba8cc19340495367f907"
+    },
+    "hook_logic": {
+      "status": "Passed",
+      "evidence": "raw/hook-logic.md",
+      "sha256": "4a9b0f85a6de882dc966a70cec975cb40473bd9befe2ce585f4f82262f6c6d87"
+    },
+    "skill_hook_association": {
+      "status": "Passed",
+      "evidence": "raw/skill-hook-association.md",
+      "sha256": "6c424ee408530b34e68cbf10683a1fbf1436096c1e348d48f01e02dd3a4b2e9a"
+    },
+    "public_documentation": {
+      "status": "Passed",
+      "evidence": "raw/public-documentation.md",
+      "sha256": "04768426dba840bb9d72b6cc90ffbb8777a47a2b8460e9de0d6a2c88cae732da"
+    },
+    "independent_source_review": {
+      "status": "Passed",
+      "evidence": "raw/independent-source-review.md",
+      "sha256": "f44bd79163a784134185b317e159a367866c2f0bfbc26bc2f54d048bda592461"
+    },
+    "project_files_cold_read": {
+      "status": "Passed",
+      "evidence": "raw/project-files-cold-read.md",
+      "sha256": "4bf20b4cdacc7216a1d00b1a4a21ddcf7e120fa676aea0f0ea6e520ccc58a2bb"
+    }
+  }
+}

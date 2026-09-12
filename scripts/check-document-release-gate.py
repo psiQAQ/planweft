@@ -99,7 +99,8 @@ def validate(policy, evidence, promotion, evidence_path, archive):
         record = evidence['checks'][name]
         if record != {'status': 'Not Run', 'reason': 'outside 0.5.0 static/logic validation scope'}:
             raise ValueError('Excluded runtime record differs: ' + name)
-    if evidence['release_blocking'] != bool(blocking):
+    if (not isinstance(evidence['release_blocking'], bool)
+            or evidence['release_blocking'] != bool(blocking)):
         raise ValueError('release_blocking differs')
     if blocking:
         raise ValueError('Release is blocked by: ' + ', '.join(blocking))

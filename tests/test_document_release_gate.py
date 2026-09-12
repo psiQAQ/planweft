@@ -76,6 +76,11 @@ class DocumentReleaseGateTest(unittest.TestCase):
             evidence['checks']['unexpected_check'] = {'status': 'Passed'}
             path.write_text(json.dumps(evidence))
             self.assertNotEqual(self.check(path, archive).returncode, 0)
+            for non_boolean in (0, 1):
+                evidence, path, archive = self.make_evidence(directory)
+                evidence['release_blocking'] = non_boolean
+                path.write_text(json.dumps(evidence))
+                self.assertNotEqual(self.check(path, archive).returncode, 0)
 
     def test_archive_and_attachment_digests_are_verified_inside_evidence_root(self):
         with tempfile.TemporaryDirectory(prefix='pw-document-release-') as directory:
