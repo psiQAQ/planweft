@@ -6,6 +6,7 @@
 - `project-docs` 按任务路径、AGENTS、README、受限的 CODEX 和已有文档索引导航；模板、角色说明和输出目录不会被目录名自动认定为已启用或权威。
 - 发布 gate 与可信发布 workflow 改为严格绑定同一 `0.5.x` policy、evidence 和 npm archive，保留 0.5.0 与 0.4.0 记录。
 - 在候选归档、registry 静态安装和独立 promotion evidence 均通过后，维护者将同一不可变归档提升至 `latest`；最终 source record 由 annotated `v0.5.1` tag 标记。
+- 在 tag 创建后，以同一 `v0.5.1` 创建公开的 [GitHub Release](https://github.com/psiQAQ/planweft/releases/tag/v0.5.1)，不附加新构建产物。
 
 ## 0.5.0（`next` 已发布；`latest` promotion 待维护者认证）
 

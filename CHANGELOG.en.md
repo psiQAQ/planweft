@@ -6,6 +6,7 @@
 - `project-docs` navigates from task paths, AGENTS, README, bounded CODEX guidance, and an existing documentation index; templates, role descriptions, and output folders are not automatically treated as active or authoritative.
 - The release gate and trusted publishing workflow now bind the same exact `0.5.x` policy, evidence, and npm archive while retaining 0.5.0 and 0.4.0 records.
 - After candidate-archive, registry-static-install, and independent-promotion evidence passed, a maintainer promoted the same immutable archive to `latest`; the final source record is marked by the annotated `v0.5.1` tag.
+- After the tag was created, the same `v0.5.1` became a public [GitHub Release](https://github.com/psiQAQ/planweft/releases/tag/v0.5.1) with no additional build assets.
 
 ## 0.5.0 (published to `next`; `latest` promotion awaits maintainer authentication)
 

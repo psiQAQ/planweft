@@ -26,8 +26,9 @@
 - `next`：`0.5.1`；`latest`：`0.5.1`
 - prepublication、registry evidence 与独立 review：Passed，附件见 `release/evidence/0.5.1/`；正式 promotion 的独立 readback 见 [REP-0015](reproduction/0015-planweft-0.5.1-formal-promotion.md)
 - annotated `v0.5.1` tag 指向包含本正式记录的最终 `master` 提交
+- GitHub Release：[v0.5.1](https://github.com/psiQAQ/planweft/releases/tag/v0.5.1)，公开、非草稿、非预发布，未附加新构建产物
 
-候选阶段的 `next` 记录、policy 和附件保持原样；本节仅记录随后经维护者授权完成的 dist-tag promotion 与 source tag。
+候选阶段的 `next` 记录、policy 和附件保持原样；本节仅记录随后经维护者授权完成的 dist-tag promotion、source tag 与 post-tag GitHub Release。
 
 ## 冻结的 0.4.0 全生命周期（历史）
 

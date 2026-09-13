@@ -6,7 +6,7 @@
 
 - 已发布的 `planweft@0.5.1` 归档保持不变，不重新发布、不删除版本。
 - 维护者在官方 npm registry 将 `latest` 指向既有的 `0.5.1`；`next` 保持指向同一版本。
-- 本记录所在的最终 `master` 提交由 annotated `v0.5.1` tag 标记；未创建 GitHub Release。
+- 本记录所在的最终 `master` 提交由 annotated `v0.5.1` tag 标记；随后以相同 tag 创建公开的 [GitHub Release](https://github.com/psiQAQ/planweft/releases/tag/v0.5.1)，不附加新构建产物。
 
 ## 独立 readback
 
@@ -17,6 +17,7 @@
 | 完整性 | `sha512-FkcshU28V8p4l8CO98AY4ZvGzHzUiQ/CnkBMRujHQOQbQRbB5Eg+YQ7jf1GMfqUKNE76+TFEK20OKjyAXx0PJg==`。 |
 | 归档 SHA-256 | `8071dee2ffe8c0500e739e17723cf307d3c29276055bbc5a8d1c860358419b28`，与 [REP-0014](0014-document-role-map.md) 和 `promotion.json` 绑定的不可变归档一致。 |
 | 发布前提 | 同版本 policy、prepublication、registry 静态安装与独立 promotion review 已在候选阶段 Passed；本次仅改变 dist-tag。 |
+| GitHub Release | `v0.5.1`，公开、非草稿、非预发布、无额外资产；tag 解析到 `e81291c83761b593ff2aca1b4b572d3b719a1746`。 |
 
 详细 readback 附件见 [`release/evidence/0.5.1/raw/latest-promotion.md`](../../release/evidence/0.5.1/raw/latest-promotion.md)。
 
@@ -25,4 +26,4 @@
 <!-- planweft-docs-status: complete -->
 - Documents considered: README、CHANGELOG、发布说明、REP-0014、0.5.1 release evidence。
 - Rationale / evidence: registry 的 `latest` 已在 maintainer promotion 后指向既有 `0.5.1`，本记录保留独立官方 readback；候选阶段证据保持不改写。
-- Next action: 核验包含本记录的 `master` 提交后，创建并推送 annotated `v0.5.1` tag。
+- Next action: GitHub Release 已由同一 tag 创建；后续版本复用本独立记录流程，不修改该已发布 tag。

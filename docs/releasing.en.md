@@ -30,8 +30,9 @@ requires registry and promotion-review evidence.
 - `next`: `0.5.1`; `latest`: `0.5.1`
 - Prepublication, registry evidence, and independent reviews: Passed; attachments are in `release/evidence/0.5.1/`; an independent formal-promotion readback is in [REP-0015](reproduction/0015-planweft-0.5.1-formal-promotion.md)
 - The annotated `v0.5.1` tag points at the final `master` commit containing this formal record
+- GitHub Release: [v0.5.1](https://github.com/psiQAQ/planweft/releases/tag/v0.5.1), public, non-draft, non-prerelease, and with no additional build assets
 
-The candidate-stage `next` record, policy, and attachments remain unchanged. This section only records the later maintainer-authorized dist-tag promotion and source tag.
+The candidate-stage `next` record, policy, and attachments remain unchanged. This section only records the later maintainer-authorized dist-tag promotion, source tag, and post-tag GitHub Release.
 
 ## Frozen 0.4.0 full lifecycle (historical)
 
