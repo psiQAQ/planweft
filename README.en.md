@@ -4,15 +4,15 @@
 
 PlanWeft keeps a coding agent's task plan, findings, and validation record in the project. A later session or collaborator can continue from those files without relying on chat history.
 
-The current source version is **0.5.1 (published to `next`)**. It uses a pinned planning-with-files (PWF) v3.17.0 source and adds optional document-role mapping alongside Skill-managed document handoff; Hooks still only read handoff state. The default registry installation entry point remains 0.4.0; 0.5.x promotion to `latest` awaits maintainer authentication.
+The current source version is **0.5.1 (published to `next` and `latest`)**. It uses a pinned planning-with-files (PWF) v3.17.0 source and adds optional document-role mapping alongside Skill-managed document handoff; Hooks still only read handoff state. The formal promotion record is [REP-0015](docs/reproduction/0015-planweft-0.5.1-formal-promotion.md).
 
 ## Quick start
 
 Node.js 22 or newer is required. This example installs the complete Codex integration and checks its state:
 
 ```bash
-npx planweft@0.4.0 add -a codex --global
-npx planweft@0.4.0 doctor -a codex --global
+npx planweft@0.5.1 add -a codex --global
+npx planweft@0.5.1 doctor -a codex --global
 ```
 
 In a new session, invoke `$project-docs` explicitly and confirm that the agent reads the Skill. See the [installation guide](docs/installation.en.md) for scope, trust, and loading details on other hosts.

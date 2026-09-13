@@ -22,15 +22,16 @@ must equal the local npm archive passed to the gate, whose `package/package.json
 attachments, and digest mismatches. Prepublication checks only its own items; `--promotion` additionally
 requires registry and promotion-review evidence.
 
-### 0.5.1 `next` record
+### 0.5.1 formal promotion record
 
 - Source commit: `b4a2c02bacf01ea2896f1beae5382588b5b6abd7`
 - Trusted publication workflow: [34725859049](https://github.com/psiQAQ/planweft/actions/runs/34725859049)
 - Official npm archive SHA-256: `8071dee2ffe8c0500e739e17723cf307d3c29276055bbc5a8d1c860358419b28`
-- `next`: `0.5.1`; `latest`: `0.4.0`
-- Prepublication, registry evidence, and independent reviews: Passed; attachments are in `release/evidence/0.5.1/`
+- `next`: `0.5.1`; `latest`: `0.5.1`
+- Prepublication, registry evidence, and independent reviews: Passed; attachments are in `release/evidence/0.5.1/`; an independent formal-promotion readback is in [REP-0015](reproduction/0015-planweft-0.5.1-formal-promotion.md)
+- The annotated `v0.5.1` tag points at the final `master` commit containing this formal record
 
-This record does not promote `latest` or create a `v0.5.1` tag.
+The candidate-stage `next` record, policy, and attachments remain unchanged. This section only records the later maintainer-authorized dist-tag promotion and source tag.
 
 ## Frozen 0.4.0 full lifecycle (historical)
 

@@ -4,15 +4,15 @@
 
 PlanWeft 把编程 Agent 的任务计划、调查发现和验证记录保存在项目中。会话中断或换人后，可以从这些文件继续工作，而不必依赖聊天记录。
 
-当前源码版本为 **0.5.1（已发布至 `next`）**。它基于固定的 planning-with-files（PWF）v3.17.0，并由 `project-docs` Skill 管理文档交接及可选的文档职责映射；Hook 仍只读提示交接状态。默认 registry 安装入口仍是 0.4.0；0.5.x 的 `latest` promotion 仍待维护者认证完成。
+当前源码版本为 **0.5.1（已发布至 `next` 和 `latest`）**。它基于固定的 planning-with-files（PWF）v3.17.0，并由 `project-docs` Skill 管理文档交接及可选的文档职责映射；Hook 仍只读提示交接状态。正式 promotion 记录见 [REP-0015](docs/reproduction/0015-planweft-0.5.1-formal-promotion.md)。
 
 ## 快速开始
 
 需要 Node.js 22 或更高版本。下面的例子为 Codex 安装完整集成，并检查安装状态：
 
 ```bash
-npx planweft@0.4.0 add -a codex --global
-npx planweft@0.4.0 doctor -a codex --global
+npx planweft@0.5.1 add -a codex --global
+npx planweft@0.5.1 doctor -a codex --global
 ```
 
 新会话中显式调用 `$project-docs`，确认 Agent 实际读取了 Skill。其他宿主的 scope、信任和加载方式见[安装指南](docs/installation.md)。

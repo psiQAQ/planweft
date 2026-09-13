@@ -1,10 +1,11 @@
 # 变更记录
 
-## 0.5.1（已发布至 `next`；`latest` promotion 与 tag 待维护者认证）
+## 0.5.1（已发布至 `next` 和 `latest`；`v0.5.1` 为正式 source tag）
 
 - 新增可选、人工可读的 `Documentation Map`：在已有文档索引中记录职责、实际位置、更新触发条件和生成来源，不要求迁移、脚手架或机器状态。
 - `project-docs` 按任务路径、AGENTS、README、受限的 CODEX 和已有文档索引导航；模板、角色说明和输出目录不会被目录名自动认定为已启用或权威。
 - 发布 gate 与可信发布 workflow 改为严格绑定同一 `0.5.x` policy、evidence 和 npm archive，保留 0.5.0 与 0.4.0 记录。
+- 在候选归档、registry 静态安装和独立 promotion evidence 均通过后，维护者将同一不可变归档提升至 `latest`；最终 source record 由 annotated `v0.5.1` tag 标记。
 
 ## 0.5.0（`next` 已发布；`latest` promotion 待维护者认证）
 

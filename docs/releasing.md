@@ -18,15 +18,16 @@
 门禁拒绝自引用、绝对路径、`..`、越界 symlink、缺失附件或摘要不匹配。预发布只校验预发布项；
 `--promotion` 才额外要求 registry 与 promotion review 证据。
 
-### 0.5.1 `next` 记录
+### 0.5.1 正式 promotion 记录
 
 - 源码提交：`b4a2c02bacf01ea2896f1beae5382588b5b6abd7`
 - 可信发布 workflow：[34725859049](https://github.com/psiQAQ/planweft/actions/runs/34725859049)
 - 官方 npm 归档 SHA-256：`8071dee2ffe8c0500e739e17723cf307d3c29276055bbc5a8d1c860358419b28`
-- `next`：`0.5.1`；`latest`：`0.4.0`
-- prepublication、registry evidence 与独立 review：Passed，附件见 `release/evidence/0.5.1/`
+- `next`：`0.5.1`；`latest`：`0.5.1`
+- prepublication、registry evidence 与独立 review：Passed，附件见 `release/evidence/0.5.1/`；正式 promotion 的独立 readback 见 [REP-0015](reproduction/0015-planweft-0.5.1-formal-promotion.md)
+- annotated `v0.5.1` tag 指向包含本正式记录的最终 `master` 提交
 
-本记录不提升 `latest`，也不创建 `v0.5.1` tag。
+候选阶段的 `next` 记录、policy 和附件保持原样；本节仅记录随后经维护者授权完成的 dist-tag promotion 与 source tag。
 
 ## 冻结的 0.4.0 全生命周期（历史）
 
