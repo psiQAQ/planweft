@@ -2,6 +2,8 @@
 
 # PlanWeft
 
+**让编程任务在会话结束后，仍有可读、可接续、可核验的项目记录。**
+
 PlanWeft 把编程 Agent 的任务计划、调查发现和验证记录保存在项目中。会话中断或换人后，可以从这些文件继续工作，而不必依赖聊天记录。
 
 当前源码版本为 **0.5.1（已发布至 `next` 和 `latest`）**。它基于固定的 planning-with-files（PWF）v3.17.0，并由 `project-docs` Skill 管理文档交接及可选的文档职责映射；Hook 仍只读提示交接状态。正式 promotion 记录见 [REP-0015](docs/reproduction/0015-planweft-0.5.1-formal-promotion.md)。
@@ -16,6 +18,32 @@ npx planweft@0.5.1 doctor -a codex --global
 ```
 
 新会话中显式调用 `$project-docs`，确认 Agent 实际读取了 Skill。其他宿主的 scope、信任和加载方式见[安装指南](docs/installation.md)。
+
+首次使用时，安装记录、宿主发现、当前会话的 Skill 读取、Hook 启用，以及任务记录的实际创建是不同的检查点。`doctor` 检查受管安装状态，不能替代新会话中对 Skill 实际读取的确认。
+
+## 看一次任务如何留下记录
+
+这是一个说明性任务输入，不是本仓库的真实宿主或模型运行记录：
+
+```text
+$project-docs
+修复 CSV 导入时空行导致的崩溃，补回归测试，并更新受影响的使用说明。
+保留现有文档目录，记录实际验证结果和未完成事项。
+```
+
+```mermaid
+flowchart LR
+    U[用户提出任务] --> H[宿主会话]
+    H --> S[宿主发现并选中 project-docs Skill]
+    S --> M[模型在授权范围内工作]
+    M --> P[task_plan.md\nfindings.md\nprogress.md]
+    M --> D[按需维护已有项目文档]
+    P --> N[后续会话或协作者接续]
+    H -. 完整集成且相关 Hook 已启用 .-> K[上下文或状态检查]
+    K -. 只读检查，不修改长期文档 .-> H
+```
+
+Skill 指导模型怎样发现、维护和交接项目记录；Hook 只在宿主实际支持并启用的生命周期时点提供上下文或读取状态。两者都不绕过项目规则、用户授权或宿主权限。有关这条链路、目录所有权和控制边界，见[工作原理](docs/how-it-works.md)与[运行时参考](docs/reference/runtime-map.md)。
 
 ## 它保存什么
 
@@ -52,6 +80,8 @@ npx planweft@0.5.1 doctor -a codex --global
 ## 文档
 
 - [安装、更新、回退与卸载](docs/installation.md)
+- [工作原理、目录与用户控制](docs/how-it-works.md)
+- [运行时资源与调用边界](docs/reference/runtime-map.md)
 - [平台支持和已知限制](docs/platforms.md)
 - [开发与生成约定](docs/development.md)
 - [发布与证据维护](docs/releasing.md)

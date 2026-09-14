@@ -30,6 +30,7 @@ class PublicDocsTest(unittest.TestCase):
 
     def test_public_documents_have_working_language_pairs_and_identical_commands(self):
         for base in ('README', 'docs/installation', 'docs/platforms',
+                     'docs/how-it-works', 'docs/reference/runtime-map',
                      'overlays/planweft/README', 'overlays/planweft/install/INSTALL'):
             self.check_pair(ROOT / (base + '.md'), ROOT / (base + '.en.md'))
         cn = ROOT / 'overlays/planweft/install/INSTALL.md'
@@ -38,6 +39,18 @@ class PublicDocsTest(unittest.TestCase):
         self.assertEqual(commands(cn), commands(en), 'translations must not change installation commands')
         for filename in ('docs/installation.md', 'docs/installation.en.md'):
             self.assertEqual(commands(ROOT / filename), commands(cn))
+
+    def test_current_installation_guides_match_package_version(self):
+        version = json.loads((ROOT / 'package.json').read_text())['version']
+        for filename in ('overlays/planweft/install/INSTALL.md',
+                         'overlays/planweft/install/INSTALL.en.md',
+                         'docs/installation.md', 'docs/installation.en.md'):
+            text = (ROOT / filename).read_text()
+            with self.subTest(filename=filename):
+                versions = re.findall(r'planweft@(\d+\.\d+\.\d+)', text)
+                self.assertTrue(versions, f'{filename}: no concrete package version found')
+                self.assertEqual(set(versions), {version})
+                self.assertIn(f'PlanWeft {version}', text)
 
     def test_each_standalone_package_retains_both_readme_and_installation_languages(self):
         manifest = json.loads((ROOT / 'dist/manifest.json').read_text())

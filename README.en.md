@@ -2,6 +2,8 @@
 
 # PlanWeft
 
+**Keep a coding task readable, resumable, and reviewable after its chat session ends.**
+
 PlanWeft keeps a coding agent's task plan, findings, and validation record in the project. A later session or collaborator can continue from those files without relying on chat history.
 
 The current source version is **0.5.1 (published to `next` and `latest`)**. It uses a pinned planning-with-files (PWF) v3.17.0 source and adds optional document-role mapping alongside Skill-managed document handoff; Hooks still only read handoff state. The formal promotion record is [REP-0015](docs/reproduction/0015-planweft-0.5.1-formal-promotion.md).
@@ -16,6 +18,32 @@ npx planweft@0.5.1 doctor -a codex --global
 ```
 
 In a new session, invoke `$project-docs` explicitly and confirm that the agent reads the Skill. See the [installation guide](docs/installation.en.md) for scope, trust, and loading details on other hosts.
+
+First use has distinct checks: an installation record, host discovery, Skill reading in the current session, enabled Hooks, and the task records actually being created. `doctor` checks managed installation state; it cannot replace confirmation that the Skill was read in a new session.
+
+## See a task leave useful records
+
+This is an illustrative task input, not a real host or model run from this repository:
+
+```text
+$project-docs
+Fix the crash caused by empty rows in CSV import, add a regression test, and update the affected usage guide.
+Keep the existing documentation layout and record actual validation results and unfinished work.
+```
+
+```mermaid
+flowchart LR
+    U[User asks for work] --> H[Host session]
+    H --> S[Host discovers and selects the project-docs Skill]
+    S --> M[Model works within authorized scope]
+    M --> P[task_plan.md\nfindings.md\nprogress.md]
+    M --> D[Updates existing project documents when needed]
+    P --> N[A later session or collaborator resumes]
+    H -. Full integration and relevant Hooks enabled .-> K[Context or state check]
+    K -. Read-only check; does not edit durable documents .-> H
+```
+
+The Skill guides model-side discovery, maintenance, and handoff. Hooks provide context or read state only at lifecycle points the host actually supports and enables. Neither bypasses project rules, user authorization, or host permissions. See [how it works](docs/how-it-works.en.md) and the [runtime reference](docs/reference/runtime-map.en.md) for the chain, directory ownership, and control boundaries.
 
 ## What it records
 
@@ -51,6 +79,8 @@ Unrun checks are never reported as Passed. Document handoff is advisory by defau
 ## Documentation
 
 - [Install, update, roll back, and remove](docs/installation.en.md)
+- [How it works, directories, and controls](docs/how-it-works.en.md)
+- [Runtime resources and invocation boundaries](docs/reference/runtime-map.en.md)
 - [Platform support and known limitations](docs/platforms.en.md)
 - [Development and generation](docs/development.md)
 - [Release and evidence maintenance](docs/releasing.en.md)
