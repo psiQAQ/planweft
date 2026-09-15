@@ -52,6 +52,21 @@ class PublicDocsTest(unittest.TestCase):
                 self.assertEqual(set(versions), {version})
                 self.assertIn(f'PlanWeft {version}', text)
 
+    def test_root_readmes_keep_a_bilingual_source_backed_inventory(self):
+        expected = {
+            'README.md': ('## 里面有什么', '受管分发', '静态 manifest/源码审计'),
+            'README.en.md': ("## What's inside", 'managed distributions', 'static manifest/source audit'),
+        }
+        for filename, markers in expected.items():
+            text = (ROOT / filename).read_text()
+            with self.subTest(filename=filename):
+                for marker in markers:
+                    self.assertIn(marker, text)
+                for source_path in ('bin/planweft.mjs', 'lib/installer.mjs',
+                                    'overlays/planweft/', 'dist/manifest.json',
+                                    'build-plugin.py', 'project-docs'):
+                    self.assertIn(source_path, text)
+
     def test_each_standalone_package_retains_both_readme_and_installation_languages(self):
         manifest = json.loads((ROOT / 'dist/manifest.json').read_text())
         for host, item in manifest['platforms'].items():
@@ -63,6 +78,33 @@ class PublicDocsTest(unittest.TestCase):
                 for readme in (package / 'README.md', package / 'README.en.md'):
                     self.assertIn('INSTALL.md', links(readme))
                     self.assertIn('INSTALL.en.md', links(readme))
+
+    def test_runtime_reference_covers_distributed_hosts_and_registered_hook_events(self):
+        manifest = json.loads((ROOT / 'dist/manifest.json').read_text())
+        hook_events = set()
+        for path in sorted((ROOT / 'dist').glob('*/planweft/**/*.json')):
+            payload = json.loads(path.read_text())
+            hooks = payload.get('hooks') if isinstance(payload, dict) else None
+            if isinstance(hooks, dict):
+                hook_events.update(hooks)
+        self.assertTrue(hook_events, 'the generated distributions register Hook events')
+
+        for filename in ('docs/reference/runtime-map.md',
+                         'docs/reference/runtime-map.en.md'):
+            text = (ROOT / filename).read_text()
+            with self.subTest(filename=filename):
+                for host in manifest['platforms']:
+                    self.assertIn(f'| `{host}` |', text,
+                                  f'{filename}: missing manifest host {host}')
+                for event in hook_events:
+                    self.assertIn(f'`{event}`', text,
+                                  f'{filename}: missing registered Hook event {event}')
+
+        for filename in ('docs/how-it-works.md', 'docs/how-it-works.en.md'):
+            text = (ROOT / filename).read_text()
+            with self.subTest(filename=filename):
+                self.assertIn('sequenceDiagram', text)
+                self.assertIn('PLANNING_DISABLED=1', text)
 
 
 if __name__ == '__main__':

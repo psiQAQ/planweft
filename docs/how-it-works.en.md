@@ -31,6 +31,75 @@ This is a source-level relationship diagram, not a trace of a live load or model
 
 The default mode is advisory. Gated behavior reuses an existing completion gate only when the user explicitly enables it and the original PWF conditions and host capability pass; it still does not replace code tests or human review.
 
+## Codex conversation loop (static source path)
+
+This diagram follows the Codex distribution's `codex-hooks.json` and `.codex/hooks/`. It shows the order in which events can participate; it does not prove that this machine installed, trusted, enabled, or actually read the Skill. Every “maintain” action remains subject to user authorization and project rules.
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant C as Codex host
+    participant H as PlanWeft Hook
+    participant M as Model and project-docs
+    participant P as Selected plan records
+    participant T as Tool
+
+    C->>H: SessionStart
+    alt PLANNING_DISABLED=1
+        H-->>C: Quiet; no planning context
+    else No valid root, unattached session, or binding required
+        H-->>C: No context, or binding notice only
+    else Valid attached plan
+        H->>P: Read task_plan.md / progress.md
+        H-->>C: additionalContext
+    end
+    U->>C: UserPromptSubmit
+    C->>H: Prompt Hook
+    alt Read-only task or Skill not selected
+        H-->>C: Do not create or edit project records
+    else Host selected the main Skill
+        C->>M: Provide Skill and Hook context
+        M->>P: Read/maintain task_plan, findings, progress within authorization
+    end
+
+    loop Tool calls
+        M->>H: PreToolUse (matched tool)
+        H-->>C: allow; legacy may attach a plan frame
+        alt Host asks for permission
+            C->>H: PermissionRequest
+            H-->>C: Read-only systemMessage
+            C->>U: Host permission UI
+        end
+        M->>T: Authorized tool call
+        T-->>M: Result
+        M->>H: PostToolUse (write-like tool)
+        H-->>C: Once-per-turn progress reminder
+        C->>M: Skill decides whether records/durable docs need updates
+    end
+
+    opt Host prepares context compaction
+        C->>H: PreCompact
+        H->>P: Read plan and optional attestation
+        H-->>C: systemMessage: preserve progress/phase first
+    end
+    C->>H: Stop
+    alt Explicit gated mode and every gate condition qualifies
+        H-->>C: decision:block plus fixed reason
+        C->>M: Continue; record progress then reconsider
+    else Ordinary advisory, read-only, or gate does not qualify
+        H-->>C: Status systemMessage or no output; stop allowed
+    end
+```
+
+`PLANNING_DISABLED=1` must be set before session startup; it cannot undo an invocation that already happened. With no valid attached plan, a Hook does not guess task intent, and a Skill does not gain write authority merely from a Hook reminder. Ordinary advisory behavior supplies context or reminders only; explicit gated behavior asks to continue only when Stop conditions qualify and the host protocol supports it.
+
+### Document-maintenance lifecycle
+
+1. `task_plan.md` is the current task's dynamic state: goal, phases, next action, blockers, evidence links, and its single `Documentation Handoff`.
+2. `findings.md` records sources, observations, assumptions, and candidate decisions; `progress.md` records actual actions, errors, and validation outcomes.
+3. The main Skill maintains these three records within authorized scope, and updates existing specs, ADRs, reproductions, or usage documents only when the task has real impact.
+4. A Documentation Map is human navigation only, not Hook input, cache, or a second state source. Language variants localize the main Skill; they are not parallel workflows.
+
 ## Two kinds of files—keep them separate
 
 ### Installer-owned files
