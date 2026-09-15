@@ -2,118 +2,99 @@
 
 # PlanWeft
 
-**Keep a coding task readable, resumable, and reviewable after its chat session ends.**
+Readable, resumable, and verifiable project records for coding-agent work.
 
-PlanWeft keeps a coding agent's task plan, findings, and validation record in the project, so a later session or collaborator can resume without relying on old chat. The current source version is **0.5.1** (published to `next` and `latest`). It uses a pinned planning-with-files (PWF) v3.17.0 source, with `project-docs` Skill-managed document handoff and optional document-role mapping; Hooks still only read and report state. The formal promotion record is [REP-0015](docs/reproduction/0015-planweft-0.5.1-formal-promotion.md).
+PlanWeft keeps task plans, findings, and validation results in project files. Later sessions and collaborators can continue from those records instead of relying on old chat.
 
-## Quick start
+## Why PlanWeft
 
-Node.js 22 or newer is required. Install and inspect the complete Codex integration with:
+An agent's conversation ends before the work necessarily does. PlanWeft uses project-owned records to preserve the work: the Skill guides how the agent uses those records, Hooks read state or provide reminders at lifecycle events supported by the host, and project files hold the information needed for continuation.
+
+## Install
+
+Node.js 22 or newer is required. For a complete Codex integration:
 
 ```bash
 npx planweft@0.5.1 add -a codex --global
 npx planweft@0.5.1 doctor -a codex --global
 ```
 
-In a new session, invoke `$project-docs` explicitly and confirm that the agent actually reads the Skill. Installation record, host discovery, trust/enablement, current-session loading, Hook firing, and actual Skill reading are separate checks; `doctor` checks managed installation state only. See the [installation guide](docs/installation.en.md) for scope and loading on other hosts.
+After installation, create a new session, explicitly invoke `$project-docs`, and confirm that the host discovered and enabled the expected resources. See the [installation guide](docs/installation.en.md) for other hosts, scopes, and Skill-only installation.
 
-## What's inside
+## What the agent gets after installation
 
-PlanWeft is one npm package: its installer deploys same-version resources in each host's layout, while task records always remain in the user's project. This tree is a guide to source and package layout, not evidence that a host loaded resources or a model read them.
+Paths vary by host. This is a simplified view of a self-contained plugin package:
 
 ```text
 planweft/
-├── bin/
-│   └── planweft.mjs              # add / update / remove / list / doctor CLI
-├── lib/
-│   └── installer.mjs             # managed installation, rollback, host registration
-├── overlays/planweft/            # reviewed shared source for generated output
-│   ├── workflow.md               # project-docs workflow and document-handoff rules
-│   ├── install/                  # bilingual install and host-specific guides
-│   └── native/                   # Cursor, Copilot, Gemini, DSH, and other adapters
-├── dist/
-│   ├── manifest.json             # 15 distribution targets and file inventory
-│   └── <host>/planweft/          # self-contained host package: Skill, assets, applicable bridge
-├── docs/
-│   ├── installation*.md          # install, update, rollback, removal
-│   ├── how-it-works*.md          # tasks, Skill, Hook, and control boundaries
-│   ├── platforms*.md             # support boundary and known limits
-│   └── reference/runtime-map*.md # resources, event-by-event Hooks, 15-host matrix
-├── scripts/
-│   └── build-plugin.py           # rebuild managed distributions from overlays
-├── tests/                        # installer, distribution, document, and adapter checks
-└── package.json                  # npm entrypoint, version, public-file allowlist
+├── skills/
+│   └── project-docs/
+│       ├── SKILL.md              # core working rules
+│       ├── references/           # detailed rules loaded as needed
+│       ├── scripts/              # plan, check, and handoff helpers
+│       └── templates/            # task-record templates
+├── hooks/                        # host lifecycle adapters
+├── extensions/ or commands/      # native host entry points, when applicable
+└── package metadata              # discovery and version information
 ```
 
-### When to use each part
+This tree describes package composition. It does not prove that a machine installed, trusted, or enabled the plugin, or that a model read the Skill.
 
-| You need to… | Start here | What it owns | What it does not prove |
-| --- | --- | --- | --- |
-| Install, update, remove, or diagnose | `bin/planweft.mjs` → `lib/installer.mjs` | Deploys managed resources, records installations, calls native registration | Does not execute a project task or verify model reading |
-| Run a complex project task | `skills/project-docs/SKILL.md` | Guides the model to create/maintain task records and affected documents within authorized scope | A Skill file does not prove the current session read it |
-| Use localized instructions | `skills/i18n/**` or portable language resources | Provides a language variant of the same main Skill | Not an independent or parallel workflow |
-| Receive event context/reminders | Hook, plugin, or Extension under `dist/<host>/planweft/` | Reads state, injects context, or returns host-supported control output at supported events | A packaged file or manifest does not mean trusted, enabled, or live-accepted |
-| Learn the model and boundaries | `docs/` | Public installation, runtime, platform, and evidence documentation | Documentation is not automatically injected runtime state |
-| Change a distribution | `overlays/planweft/`, then the builder | Keeps source and every managed `dist/` package aligned | Do not hand-edit `dist/**` or `plugins/planweft/**` |
-| Review a change | `tests/` and `npm run check` | Checks installer, distribution, and document contracts | Static tests do not replace live host loading or model-behavior acceptance |
-
-### What a task leaves behind
-
-A complex task normally uses these three project-owned records. They are not in the installation directory and are not removed by plugin updates or removal.
-
-| File | Records | When to maintain it |
-| --- | --- | --- |
-| `task_plan.md` | Goal, phases, next action, blockers, evidence links, and `Documentation Handoff` | Before and after each phase |
-| `findings.md` | Sources, observations, assumptions, and candidate decisions | During research, design, and evidence collection |
-| `progress.md` | Actual actions, errors, and `Passed` / `Failed` / `Not Run` | During implementation and validation |
-
-Durable requirements, architecture decisions, and reproduction materials stay in the project's existing specs, ADRs, and reproduction documents. A Documentation Map is human navigation only—not Hook input, cache, or a second state source.
-
-## See a task leave useful records
-
-This is an illustrative input, not a live host or model run from this repository:
-
-```text
-$project-docs
-Fix the crash caused by empty rows in CSV import, add a regression test, and update the affected usage guide.
-Keep the existing documentation layout and record actual validation results and unfinished work.
-```
+## How the Skill, Hooks, and project records connect
 
 ```mermaid
 flowchart LR
-    U[User asks for work] --> H[Host session]
-    H --> S[Host discovers and selects the project-docs Skill]
-    S --> M[Model works within authorized scope]
-    M --> P[task_plan.md\nfindings.md\nprogress.md]
-    M --> D[Updates existing project documents when needed]
-    P --> N[A later session or collaborator resumes]
-    H -. Full integration and relevant Hooks enabled .-> K[Context or state check]
-    K -. Read-only check; does not edit durable documents .-> H
+    U[User task] --> A[Agent host]
+    S[project-docs Skill] --> A
+    H[Lifecycle Hook] --> A
+    A --> P[task_plan.md]
+    A --> F[findings.md]
+    A --> G[progress.md]
+    P --> N[Later session or collaborator]
+    F --> N
+    G --> N
+    H -. read state / remind .-> P
 ```
 
-The Skill decides how to maintain project records and documents within authorized scope. At lifecycle points a host actually supports and enables, a Hook only reads state, injects context, or returns permitted control output. Neither bypasses project rules, user authorization, or host permissions. See [how it works](docs/how-it-works.en.md) and the [runtime reference](docs/reference/runtime-map.en.md).
+The Skill decides how the agent works with records within authorization. A Hook can read state, inject context, or return host-permitted control output only at an event the host actually supports and enables. The three project records provide persistent task state.
 
-## Support and verification boundary
+## What the key files do
 
-| Scope | Current meaning |
-| --- | --- |
-| Distribution | `dist/manifest.json` lists 15 targets; a complete distribution does not give every host the same events, continuation, or permission model |
-| Default behavior | Advisory; it does not guarantee task completion or correct documentation |
-| Optional gated mode | Requests continuation only after explicit user activation, qualifying PWF conditions, and a host protocol that supports it; it does not replace testing or human review |
-| Checks for every 0.5.x release | Rebuildable package, package static checks, Hook logic, Skill/Hook association, document-handoff marker, independent source review, and cold read |
-| Work not executed | Marked `Not Run`; static manifest/source audit does not prove live host loading, model reading, or task behavior |
+| File or component | When the agent encounters it | Role |
+| --- | --- | --- |
+| `skills/project-docs/SKILL.md` | After the host selects the Skill | Guides planning, investigation, implementation, verification, and handoff |
+| `references/*.md` | When the Skill needs task-specific detail | Provides plan-selection, evidence, control, and documentation-map rules |
+| `scripts/resolve-plan-dir.*` | When a complex task starts or resumes | Locates the task's plan directory |
+| `scripts/init-session.*` | When new task records are authorized | Initializes `task_plan.md`, `findings.md`, and `progress.md` |
+| `templates/*.md` | When records are initialized or extended | Provides record structure; it is not necessarily copied |
+| Host Hooks or native extensions | During session, prompt, tool, compaction, or stop events | Reads plan state and supplies context or reminders |
+| `task_plan.md` | Throughout the task | Holds the goal, phases, next step, blockers, and handoff decision |
+| `findings.md` | During investigation and design | Holds sources, observations, assumptions, and candidate decisions |
+| `progress.md` | During implementation and verification | Holds actions, errors, and `Passed` / `Failed` / `Not Run` results |
 
-Attestation checks whether file contents changed; it does not prove human approval. Completion gates check plan state; they do not prove implementation correctness. Enable only one planning Hook implementation per session. The installer reports detectable duplicates but does not automatically remove other plugins. See [platform support](docs/platforms.en.md) and [SPEC-0006](docs/specs/0006-skill-hook-document-handoff.md) for the complete boundary.
+## What a task leaves behind
 
-## Documentation and verification entry points
+A complex task normally leaves three records in the project. They belong to the user's project, not to the plugin installation; updating or removing PlanWeft does not delete them. Existing requirements, design, and reproduction documents remain owned by the project.
+
+```text
+your-project/
+├── <selected task directory>/
+│   ├── task_plan.md
+│   ├── findings.md
+│   └── progress.md
+└── <existing project documents>/
+```
+
+Read-only requests and small changes do not require a new plan. The Skill, Hooks, and documentation do not bypass project rules, user authorization, or host permissions.
+
+## Supported hosts
+
+The current npm package contains 15 host distribution targets, but distribution does not mean that a host loaded the package or that a model used it. See [host support and boundaries](docs/hosts.en.md) for events, native entry points, and capability limits.
+
+## Documentation
 
 - [Install, update, roll back, and remove](docs/installation.en.md)
-- [How it works, directories, and controls](docs/how-it-works.en.md)
-- [Runtime resources, Hooks, and document lifecycle](docs/reference/runtime-map.en.md)
-- [Platform support and known limits](docs/platforms.en.md)
-- [Development and generation](docs/development.md)
-- [Release and evidence maintenance](docs/releasing.en.md)
-- [Test entry points](tests/README.md)
-- [Design-reference ledger](docs/design-references.md)
+- [Architecture, lifecycle, and file responsibilities](docs/architecture.en.md)
+- [Host distribution and capability boundaries](docs/hosts.en.md)
 
-The project is distributed as one `planweft` npm package. The 0.4.0 release assets, exact archive digest, and acceptance records remain available from the [v0.4.0 GitHub Release](https://github.com/psiQAQ/planweft/releases/tag/v0.4.0).
+Maintainer material: [development and generation](docs/development.md) · [release and evidence maintenance](docs/releasing.en.md). Use the [documentation map](docs/README.md) to reach historical plans, reproductions, reviews, and references.

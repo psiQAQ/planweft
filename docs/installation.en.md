@@ -6,13 +6,13 @@ Project overview: [中文](../README.md) / [English](../README.en.md) · Cross-p
 
 # Install, update, roll back, and remove
 
-PlanWeft 0.5.1 is distributed as one `planweft` npm package. The installer selects the native layout for each host and records the files it manages. Do not merge `dist` directories made for different hosts.
+PlanWeft 0.5.1 is distributed as one `planweft` npm package. The installer selects the native layout for each host and records the files it manages. Do not merge `dist` directories made for different hosts. See the [host guide](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.en.md) for host capabilities and static events, and the [architecture guide](https://github.com/psiQAQ/planweft/blob/master/docs/architecture.en.md) for the runtime model.
 
 Node.js 22 or newer is required; Node.js 24 LTS is recommended. Some hosts also require Python 3, Bash, PowerShell, or their own package manager.
 
 ## Install
 
-Project scope is the default. Complete Codex, Copilot, Gemini, Hermes, and DSH integrations support user scope only and require `--global`; these hosts can still install Skill-only at project scope. These examples cover the five supported hosts:
+Project scope is the default. Complete Codex, Copilot, Gemini, Hermes, and DSH integrations support user scope only and require `--global`; these hosts can still install Skill-only at project scope. These examples cover the five hosts with historical formal-core acceptance evidence; see the host guide for current distribution targets and capability boundaries:
 
 ```bash
 npx planweft@0.5.1 add -a codex --global
@@ -128,4 +128,4 @@ When migrating from `program-design`, `personal`, or `program-design-local`, use
 
 The installer does not automatically remove an old plugin or the original PWF installation. Project plans, approved requirements, and user changes remain intact.
 
-See the repository's [platform support](https://github.com/psiQAQ/planweft/blob/master/docs/platforms.en.md) for capability levels and known limitations. Maintainers can find manual layouts, catalogs, and protocol details in the [development documentation](https://github.com/psiQAQ/planweft/blob/master/docs/development.md).
+See the repository's [host guide](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.en.md) for distribution, static events, and known limitations. Maintainers can find manual layouts, catalogs, and protocol details in the [development documentation](https://github.com/psiQAQ/planweft/blob/master/docs/development.md).

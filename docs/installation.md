@@ -6,13 +6,13 @@
 
 # 安装、更新、回退与卸载
 
-PlanWeft 0.5.1 通过一个 `planweft` npm 包分发。安装器会为每个宿主选择正确的原生布局，并记录它管理的文件；不要把不同宿主的 `dist` 目录合并安装。
+PlanWeft 0.5.1 通过一个 `planweft` npm 包分发。安装器会为每个宿主选择正确的原生布局，并记录它管理的文件；不要把不同宿主的 `dist` 目录合并安装。宿主能力和静态事件见[宿主说明](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.md)，运行模型见[架构说明](https://github.com/psiQAQ/planweft/blob/master/docs/architecture.md)。
 
 需要 Node.js 22 或更高版本，建议使用 Node.js 24 LTS。部分宿主还需要 Python 3、Bash、PowerShell 或自身的包管理器。
 
 ## 安装
 
-项目级是默认 scope。Codex、Copilot、Gemini、Hermes 和 DSH 的完整集成只支持用户级安装，必须使用 `--global`；这些宿主仍可按项目安装 Skill-only 版本。以下示例覆盖五个正式支持的宿主：
+项目级是默认 scope。Codex、Copilot、Gemini、Hermes 和 DSH 的完整集成只支持用户级安装，必须使用 `--global`；这些宿主仍可按项目安装 Skill-only 版本。以下示例覆盖五个有历史正式核心验收证据的宿主；当前版本的分发目标和能力边界见宿主说明：
 
 ```bash
 npx planweft@0.5.1 add -a codex --global
@@ -128,4 +128,4 @@ npx planweft@0.5.1 add -a codex --global --source /absolute/path/planweft-0.5.1.
 
 安装器不会自动卸载旧插件或原版 PWF。项目计划、批准需求和用户修改保持不变。
 
-平台支持级别和已知限制见仓库的[中文平台文档](https://github.com/psiQAQ/planweft/blob/master/docs/platforms.md)；维护者需要的手工布局、catalog 和协议细节见[开发文档](https://github.com/psiQAQ/planweft/blob/master/docs/development.md)。
+宿主分发、静态事件和已知限制见仓库的[中文宿主说明](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.md)；维护者需要的手工布局、catalog 和协议细节见[开发文档](https://github.com/psiQAQ/planweft/blob/master/docs/development.md)。

@@ -1,20 +1,41 @@
 # 文档导航
 
-本目录按职责组织，而不是按任务复制状态。以下为可选、人工可读的 Documentation Map；它只描述现有职责，不是解析器输入、缓存或任务状态。项目没有索引时不要求创建。
+本目录分为两层：先看面向用户的产品说明；需要维护、审查或追溯历史时，再进入工程资料。这里是人工导航，不是 Skill/Hook 的输入、缓存、审批记录或任务状态。
 
-| 职责 | 实际位置 | 适用范围 / 更新触发条件 | 生成来源 |
-| --- | --- | --- | --- |
-| 公开项目入口 | [`../README.md`](../README.md) | 公开能力、安装或版本入口变化 | 维护者编辑 |
-| 用户工作原理 | [how-it-works.md](how-it-works.md) | 用户需要理解任务记录、Skill/Hook 分工、目录或控制边界时 | 维护者编辑 |
-| 运行时调用参考 | [reference/runtime-map.md](reference/runtime-map.md) | Skill 资源、Codex 逐事件 Hook、15 宿主矩阵或生命周期边界变化 | 维护者编辑 |
-| 项目规则 | [`../AGENTS.md`](../AGENTS.md) | 协作、验证或发布约定变化 | 维护者编辑 |
-| 稳定需求 | [specs](specs/) | 已接受的需求或验收边界变化 | 需求与评审记录 |
-| 架构决定 | [adr](adr/) | 已采纳取舍或后果变化 | 决策记录 |
-| 实施计划 | [plans](plans/) | 跨步骤实施范围变化；动态任务状态以选中的 PWF `task_plan.md` 为准 | 计划记录 |
-| 验证证据 | [reproduction](reproduction/) 与 [`../release/evidence/`](../release/evidence/) | 可复现检查或版本化发布结果形成后 | 实际检查与发布记录 |
-| 独立审查 | [reviews](reviews/) | 依据审查或项目文件冷读完成后 | 独立审查记录 |
-| 设计依据 | [design-references.md](design-references.md) 与 [planweft-document-management-proposal.md](planweft-document-management-proposal.md) | 来源、覆盖范围或新增机制变化 | 研究台账与原始提案 |
+## 用户文档
 
-`commands/`、项目内 Skill 与 agent 描述只在任务或已有链接明确指向时作为模板或角色说明读取；它们不会因出现在目录中而成为已注册能力。配置、环境文件、自动执行脚本、可重建缓存和未选择日志不在此映射的权威文档范围内。
+| 目的 | 入口 | 内容 |
+| --- | --- | --- |
+| 安装和维护安装 | [installation.md](installation.md) | 安装、检查、更新、回退、卸载和故障排查 |
+| 理解运行方式 | [architecture.md](architecture.md) | 安装器、宿主、Skill、Hook、生命周期和项目记录 |
+| 选择宿主并判断能力 | [hosts.md](hosts.md) | 15 个分发目标、静态事件、能力差异和验证边界 |
+| 查看版本变化 | [`../CHANGELOG.md`](../CHANGELOG.md) | 面向用户的版本说明和必要迁移提示 |
 
-活动任务状态只由其选中的 `task_plan.md` 承担。不要在此索引复制阶段、下一步或批准状态。
+旧链接仍可访问，但下列页面只承担兼容导航，不再维护重复正文：
+
+- [how-it-works.md](https://github.com/psiQAQ/planweft/blob/master/docs/how-it-works.md) → [architecture.md](architecture.md)
+- [platforms.md](https://github.com/psiQAQ/planweft/blob/master/docs/platforms.md) → [hosts.md](hosts.md)
+- [reference/runtime-map.md](https://github.com/psiQAQ/planweft/blob/master/docs/reference/runtime-map.md) → [architecture.md](architecture.md) / [hosts.md](hosts.md)
+
+## 维护者文档
+
+| 目的 | 入口 | 内容 |
+| --- | --- | --- |
+| 修改、构建和验证 | [development.md](https://github.com/psiQAQ/planweft/blob/master/docs/development.md) | 源码层级、生成产物、测试和证据维护 |
+| 发布版本 | [releasing.md](https://github.com/psiQAQ/planweft/blob/master/docs/releasing.md) | 发布流程、门禁和外部发布记录 |
+| 设计与来源登记 | [design-references.md](https://github.com/psiQAQ/planweft/blob/master/docs/design-references.md) | 外部依据、固定来源和本地设计映射 |
+| 设计提案 | [planweft-document-management-proposal.md](https://github.com/psiQAQ/planweft/blob/master/docs/planweft-document-management-proposal.md) | 文档管理系统的设计背景与取舍 |
+| 上游与分发维护 | [upstream-maintenance.md](https://github.com/psiQAQ/planweft/blob/master/docs/upstream-maintenance.md) | 固定上游、补丁和宿主分发维护 |
+
+## 历史记录与研究资料
+
+以下目录原地保留，用于证据追溯和维护者研究，不作为普通用户的产品入口：
+
+- `plans/`：实施计划和范围记录；当前动态任务状态以选定的 PWF `task_plan.md` 为准。
+- `reproduction/`：复现步骤、实际结果和附件；既有 `Failed`、`Inconclusive`、`Not Run` 不因新版本改写。
+- `reviews/`：独立来源审查、冷读和反馈记录。
+- `specs/`：稳定需求和验收边界。
+- `adr/`：已采纳的架构决定及后果。
+- `reference/`：外部文章、规范、许可证和固定上游资料索引。
+
+历史文件可能包含当时的版本、命令或失败结果；阅读时以文件中的时间、版本和证据范围为准，不将其自动解释为当前能力。

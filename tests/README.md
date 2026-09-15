@@ -156,7 +156,7 @@ python3 tests/run-codex-hook-probe.py --cli /absolute/path/to/codex --output /tm
 
 `test_documentation_map_contract.py` 验证可选 Documentation Map 只作为 Skill 导航参考：所有生成 Skill 带同一 reference，目录缺席不要求脚手架，且文档交接 helper 不读取或改写映射、配置、环境、缓存、模板或未选择日志夹具。
 
-这些检查证明导航、命令与分发完整性；语义翻译、比较公平性和原创归属由独立 review 核查。安装正文只修改 overlays 的中英文源，再统一构建；仓库指南是生成镜像。公开入口：[项目介绍：中文](../README.md) / [English](../README.en.md)，[安装：中文](../docs/installation.md) / [English](../docs/installation.en.md)，[跨平台：中文](../docs/platforms.md) / [English](../docs/platforms.en.md)。
+这些检查证明导航、命令与分发完整性；语义翻译、比较公平性和原创归属由独立 review 核查。安装正文只修改 overlays 的中英文源，再统一构建；仓库指南是生成镜像。公开入口：[项目介绍：中文](../README.md) / [English](../README.en.md)，[安装：中文](../docs/installation.md) / [English](../docs/installation.en.md)，[宿主说明：中文](../docs/hosts.md) / [English](../docs/hosts.en.md)。
 
 ## Published npm candidate
 

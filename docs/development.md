@@ -1,6 +1,6 @@
 # 开发与证据维护
 
-本页面向 PlanWeft 维护者。用户安装和支持范围分别见[安装指南](installation.md)与[平台文档](platforms.md)。
+本页面向 PlanWeft 维护者。用户安装、运行模型和宿主范围分别见[安装指南](installation.md)、[架构说明](architecture.md)与[宿主说明](hosts.md)。
 
 ## 开始和接续工作
 
