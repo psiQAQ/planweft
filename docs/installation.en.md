@@ -6,7 +6,7 @@ Project overview: [中文](../README.md) / [English](../README.en.md) · Cross-p
 
 # Install, update, roll back, and remove
 
-PlanWeft 0.4.0 is distributed as one `planweft` npm package. The installer selects the native layout for each host and records the files it manages. Do not merge `dist` directories made for different hosts.
+PlanWeft 0.5.1 is distributed as one `planweft` npm package. The installer selects the native layout for each host and records the files it manages. Do not merge `dist` directories made for different hosts.
 
 Node.js 22 or newer is required; Node.js 24 LTS is recommended. Some hosts also require Python 3, Bash, PowerShell, or their own package manager.
 
@@ -15,11 +15,11 @@ Node.js 22 or newer is required; Node.js 24 LTS is recommended. Some hosts also 
 Project scope is the default. Complete Codex, Copilot, Gemini, Hermes, and DSH integrations support user scope only and require `--global`; these hosts can still install Skill-only at project scope. These examples cover the five supported hosts:
 
 ```bash
-npx planweft@0.4.0 add -a codex --global
-npx planweft@0.4.0 add -a claude
-npx planweft@0.4.0 add -a pi
-npx planweft@0.4.0 add -a opencode
-npx planweft@0.4.0 add -a dsh --global --dsh-profile headless
+npx planweft@0.5.1 add -a codex --global
+npx planweft@0.5.1 add -a claude
+npx planweft@0.5.1 add -a pi
+npx planweft@0.5.1 add -a opencode
+npx planweft@0.5.1 add -a dsh --global --dsh-profile headless
 ```
 
 Repeat `-a` to select several hosts in one command. Non-interactive use must provide a host ID.
@@ -40,8 +40,8 @@ Host IDs are `codex claude pi opencode hermes cursor gemini copilot mastracode k
 Use `--skill-only` explicitly when only the Skill is needed:
 
 ```bash
-npx planweft@0.4.0 add -a opencode --skill-only --symlink
-npx planweft@0.4.0 add -a dsh --skill-only
+npx planweft@0.5.1 add -a opencode --skill-only --symlink
+npx planweft@0.5.1 add -a dsh --skill-only
 ```
 
 Skill-only installation does not register plugin hooks or add lifecycle events that the host does not provide.
@@ -51,8 +51,8 @@ Skill-only installation does not register plugin hooks or add lifecycle events t
 Check the recorded and discoverable state after installation:
 
 ```bash
-npx planweft@0.4.0 list
-npx planweft@0.4.0 doctor
+npx planweft@0.5.1 list
+npx planweft@0.5.1 doctor
 ```
 
 Reload the host or start a new session, then invoke the main Skill explicitly:
@@ -72,10 +72,10 @@ Installation, host discovery, current-session loading, hook trust, and actual mo
 `update` uses the version of the CLI that is running. Running the same command from an older exact CLI version performs a rollback; replace `<version>` with the exact version to restore:
 
 ```bash
-npx planweft@0.4.0 update -a pi
+npx planweft@0.5.1 update -a pi
 npx planweft@<version> update -a pi
-npx planweft@0.4.0 remove -a pi
-npx planweft@0.4.0 doctor -a pi
+npx planweft@0.5.1 remove -a pi
+npx planweft@0.5.1 doctor -a pi
 ```
 
 Use the same host, scope, and DSH profile as the original installation. The installer restores copy/symlink and Skill-only choices from its record. To switch between a complete plugin and Skill-only installation, run `remove` before `add`.
@@ -119,7 +119,7 @@ Hermes remains an experimental distribution. Simplifying this guide does not cha
 **A local exact archive is required.** The CLI version and `--source` archive must have the same identity and version:
 
 ```bash
-npx planweft@0.4.0 add -a codex --global --source /absolute/path/planweft-0.4.0.tgz
+npx planweft@0.5.1 add -a codex --global --source /absolute/path/planweft-0.5.1.tgz
 ```
 
 ## Migrate from an old identity

@@ -1,0 +1,23 @@
+sequenceDiagram
+    participant U as 用户
+    participant H as Codex
+    participant B as run_sh.py
+    participant S as Shell Hook
+    participant M as 模型
+
+    U->>H: 提交提示词
+    H->>B: codex-hooks.json 注册的 UserPromptSubmit
+    B->>B: 解析项目、计划根目录与会话关联
+    alt 缺少有效根目录或会话未关联
+        B-->>H: 不注入内容
+    else 当前计划需要显式绑定
+        B-->>H: additionalContext 中的绑定提示
+    else 满足执行条件
+        B->>S: 执行 user-prompt-submit.sh
+        S-->>B: 脚本输出
+        opt 输出非空
+            B-->>H: hookSpecificOutput.additionalContext
+        end
+    end
+    H->>M: 提交用户输入与可用上下文
+    Note over H,M: project-docs 是否被加载与读取，仍需单独核对

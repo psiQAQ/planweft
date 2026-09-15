@@ -177,11 +177,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "ebba76c84beb8f16d35bb203f5df719d862dec6ae2f943f83fa19b2cbe33038d"
+          "sha256": "ea9256253e304f3a61bbc00e7372df4c5384ec7c3227f70b26ef5a926b892b83"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "913a5c4e162b87a9bad07959f7ee9cca06b28d338c9394ccd50583612e972715"
+          "sha256": "512410567aa87f0745236576f5950adbbc578d8974ada56502abb64e8ffb9af4"
         },
         "LICENSE": {
           "executable": false,
@@ -189,11 +189,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "da343764761249ff6a0db775598dfd47a36b1fb200e7ee125ffe20eb82d713e6"
+          "sha256": "44586418d1de40887e32c62e520a5c0c6a3ea02895398326b235083a80c692b1"
         },
         "README.md": {
           "executable": false,
-          "sha256": "9a5728241a7c7d63dd1a36973796c78f1a9d93db9379ef5e7bbd7b394f222f1c"
+          "sha256": "85c95c645a0633396641a0e56d822faf3ad82dffdab5a1f4bb901f5ba1576373"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -1353,7 +1353,7 @@
         }
       },
       "path": "agents/planweft",
-      "sha256": "dd4345d3bd2b054c3bf879ad01a53e1898d0d140c3941c24a8be511fc37a457a"
+      "sha256": "f8bf068cd3d4a2661543156a735829dc2e3243705898e8e1fd1826403731fee8"
     },
     "claude": {
       "file_count": 311,
@@ -1368,11 +1368,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "f390d2c2d4160de4704c72fa196b22f0eb9e3f2f41ebbf82cccbb84e0c5707aa"
+          "sha256": "b33c70a1a4e34b13ffd49292092966a1be9a62d490d57ce374747d84435d8c58"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "e5f9b7c1a34d025cfa47b5a73163ab232e317f9f7a8bd070515c16dba237ac3b"
+          "sha256": "4a46a79dfbaf118c7f2a3c7eecb5201481fa295d524e5a33c7101cac95c54d2b"
         },
         "LICENSE": {
           "executable": false,
@@ -1380,11 +1380,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "522b1ef2a44e28979acf240519ea91b728cc7978f8c8fc31e51d2da2f4436dd2"
+          "sha256": "38d95c3627f3a367b48516c53910c3006518a5279a2af931347974c4e041a9f0"
         },
         "README.md": {
           "executable": false,
-          "sha256": "2b0b739e59de4b7fda25763749ef1776029e773a4367a9767406cfbb51ed7345"
+          "sha256": "e63355e7ac65390d9eb9d93c5265b7ae6db1ca225f995c180488a6f48076eec9"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -2604,7 +2604,7 @@
         }
       },
       "path": "claude/planweft",
-      "sha256": "794fa88a1c35a300e996e8419b3c6788504850bafa6afc0ac6e708b122c5a9e2"
+      "sha256": "693f03808c18f4c2f0f2a9e30ffeebf6c09ce177fab01c2e0ae4ad615717dd71"
     },
     "codebuddy": {
       "file_count": 295,
@@ -2615,11 +2615,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "9d7c145f26372040519eb44f3b3e781edec1b94e98598141feff2c8b79e3eb80"
+          "sha256": "fc15094f7f22be5bd9bf844ce10b8ccb716706d2032371736bc24cd64a9a7771"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "f9815750b9e368e5473c7b72fdd1440e8779edde598b3cf05c7f89cbea0680e5"
+          "sha256": "e3f7de8bfd82472346ea099f041ee58df40427a8d676eac7bff38b029ab7a997"
         },
         "LICENSE": {
           "executable": false,
@@ -2627,11 +2627,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "0353dd265a2c1c3e1382d20dd55079fdeba6069f582e354184cce935f733a647"
+          "sha256": "12389d9b81d3387649d40ab9cc1c021d78d6058d972b0389e9497601c838e8ac"
         },
         "README.md": {
           "executable": false,
-          "sha256": "d16fed4350c89dc53a5114f8e4d180be6a761202939d6a3fc2238569f65fd889"
+          "sha256": "db5c5d363481d2302c76fd239f2a82115071b5d439a70bac9797e187ae5530f4"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -3791,7 +3791,7 @@
         }
       },
       "path": "codebuddy/planweft",
-      "sha256": "f5ae2b1ea325f485f70480825a69b1feafba20349dead739527f79f4895c8848"
+      "sha256": "8c944c9d48f574b26224f9e0e534bc93e38390375087031cc94690e5f2841eca"
     },
     "codex": {
       "file_count": 319,
@@ -3870,11 +3870,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "db1df03603fc5ad690cb2e2600465385a69744562b581dcbff6d5d292dfbe1b8"
+          "sha256": "0de23557247c8a264aab2091430cf43620556bfadecbbc4d0fcb51a298d4f050"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "066fc99e98f13d98ef7dcf5933f9e239bedaa38dcebc548f2308edf8b3b8ae8f"
+          "sha256": "090774fd8f69a704ac81fbe00ece97238c9f939f0c07ed2e76a78cf94fefdbc8"
         },
         "LICENSE": {
           "executable": false,
@@ -3882,11 +3882,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "3aff10efb13aafdffb10c9a7624d696dc1567ac3c91db634d6a117b80851edbf"
+          "sha256": "3368d3c4d5409616f185d67380a5f4a7a75ae6f2348fc7f5892a8124b6b9567f"
         },
         "README.md": {
           "executable": false,
-          "sha256": "83df1cccab4b6e958608e64a8628b4e572f61b84b9ccc4abcc11e4bf48ce9a5f"
+          "sha256": "ae2f89eb13d6496d73c4ece84f593733bb91fcc0a2a0009810bfb8e4e2387488"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -5074,7 +5074,7 @@
         }
       },
       "path": "codex/planweft",
-      "sha256": "f23da161feac449ac0b528e18ebd6390a804ecbc6117ed4a54da2be6083d6228"
+      "sha256": "f8d6f2e2fc73462994a15d3f4884ed46366308f449c20585179193fc8b123a25"
     },
     "continue": {
       "file_count": 338,
@@ -5257,11 +5257,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "8b8e8b7fb1420779ca75ef1432234a128e2124364b48aa5dbef31c8b7c9983ef"
+          "sha256": "6de04690cf4d38f23b5e436908a867cdcf4ab0684731130e54d8c9ae96538ad4"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "e3d1aede616af68626b2e7cfb7ea16aebdffa92023692614abb639444dd0c318"
+          "sha256": "2022d652bd72880eac26dad918fa139c5edaef396a3a0b0123b01b585f248182"
         },
         "LICENSE": {
           "executable": false,
@@ -5269,11 +5269,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "4c6cd22598415d978e710b1428c91f1cd9fc965fcc5e84d4c0e2e5bdb1877e38"
+          "sha256": "104b50a3e78a6929cd45bfcd33b81b3d9e3257602460654c3f3448d1a9ddb7f2"
         },
         "README.md": {
           "executable": false,
-          "sha256": "406edfc88160d39d55511ed1cc1d070e2d9413e70c23d0989d5c541665dac12e"
+          "sha256": "b39c100d504feb4599e78decd5a292b9dafe3fd223f21c245680883bd7a3282c"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -6433,18 +6433,18 @@
         }
       },
       "path": "continue/planweft",
-      "sha256": "d2af0318adf306c901ff015eadc16228cdef7ee1ebf2b3d22ab77b9cacba853f"
+      "sha256": "cfd65d9ffd722ec610e96dc0e561452f4f2557244388a808739f6178fcf0ea27"
     },
     "copilot": {
       "file_count": 297,
       "files": {
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "67579c843206b72d5873eec52c52f7a7b345d01748ac80e0d04994bcb60966a4"
+          "sha256": "8a0324ac4c3c7fc1fd088ef23f66070f00c9625d43f168a3794765e75af07ebe"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "7bfbf4092c668813fa7e9487a51827473a6c05ce8b345c20575c695c2d33d5e1"
+          "sha256": "17e1df82859af7dad36d3f3d062334ab2629a0d2129f1607aa07b017a5f87570"
         },
         "LICENSE": {
           "executable": false,
@@ -6452,11 +6452,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "7b7d0e55f56d225532ed844fa160b0b0b871f93502457f62f5dc37c7e2597039"
+          "sha256": "9a6b47615177d2420cdf02043cf255b9d5ac7f57d46b52923ed2932d54073dcf"
         },
         "README.md": {
           "executable": false,
-          "sha256": "8b5bffbbd506929629f5e27187591edfaf6936c36f28b14022882c50ea6afd45"
+          "sha256": "0b1ce12bbfb223d66bc78b860d7bb96eda576fdd85f628d7d3da311b516b7e6a"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -7628,7 +7628,7 @@
         }
       },
       "path": "copilot/planweft",
-      "sha256": "6ed6569d8e2a2753e9f7492f19c667adbfb7f4e321d8c609df25ca03aa48a20a"
+      "sha256": "a2ef22c2c96b8ac61e06a6dace108a40bcaa5d14dac168110b9c20b1cf84b925"
     },
     "cursor": {
       "file_count": 297,
@@ -7639,11 +7639,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "8cf9259f0cf3664e9fe220e577a67b2ff1663fd4feb0ff46c52f5dae973efbb4"
+          "sha256": "7bd263cf0a969b54d54fe8480acb6e1eaa93dbd39846860231341b9bcea0ac65"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "59d44981deabf76c39eebd8b00d48a157a123ac62cb2ac29e1ae8321a437b4a8"
+          "sha256": "2feb29512138cc8e6b4944b54556c9b4195d5005a6e784763657b21c5fdd6478"
         },
         "LICENSE": {
           "executable": false,
@@ -7651,11 +7651,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "5236e60c77d9fec3eaa006239b596ea656a5be57866a347d1a4860f1f311bde0"
+          "sha256": "b5503a938719ddab89daf653f9fcab9586e1f87809bcd918c22118415c18443c"
         },
         "README.md": {
           "executable": false,
-          "sha256": "faa487e22999b6b41f4fbc4b665037d6f965edca9bfa43ce58b9eea2a7768de3"
+          "sha256": "deafc11903af95a836dc88c35738b85c3d056cb24f9d9e91fb0f11af30f38e39"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -8823,18 +8823,18 @@
         }
       },
       "path": "cursor/planweft",
-      "sha256": "b8ea2ea3a15516f263975912c834104dedc8f4b8d7f891bda1dadd39df1ce2a5"
+      "sha256": "ec170a1a1d5a04c1fa17efdfb68235b77828501f35fbee7e89b437a503df72a2"
     },
     "dsh": {
       "file_count": 301,
       "files": {
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "dd7f2d4278c22f58eb6b22824bba25e3ab54268d853620f0aabf1eb91749a71e"
+          "sha256": "9872c18dd560afdb5f180e7b4066e94d136be506f2e666df9b1369f6c79272ac"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "afd5af552edba4b7a0f2a46050ce26f3ddaa38acdbd2d674c7d3c108d8769c9c"
+          "sha256": "ab8c785350630dd1e79aae1737bed70d978148b1f592f94888983e967ad98cd9"
         },
         "LICENSE": {
           "executable": false,
@@ -8842,11 +8842,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "2772d01a3181095683a8288b19f58958a824a87b1f457c5cfc1e17706d808897"
+          "sha256": "f863e38722f9f7716bc726afc2aa0705c6421fcccfa70ed9a0290cd8dab51896"
         },
         "README.md": {
           "executable": false,
-          "sha256": "6d9245bed78c63796c0608665049c758213203dd895a92b73e33a7e9cf824b97"
+          "sha256": "1299375c79468767eb3ad010174d5db8335046754dff958a46f0e5eb673b53c9"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -10034,7 +10034,7 @@
         }
       },
       "path": "dsh/planweft",
-      "sha256": "c6bd01f2e1106c382a96c95e333e827b2f76f6a1daf6d23f719a0dab3a27c2ff"
+      "sha256": "ed0f3c6a8d1e39092b7cd74d0ed04c65b7be14f2d424a1b4f5f52303ad48ec07"
     },
     "factory": {
       "file_count": 295,
@@ -10045,11 +10045,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "3e84d2f39924f052678bcbdc6601ff2104fcac9bf795c38bff2c1ac9d4d3d6c0"
+          "sha256": "2b6baa14de9f7002209672a12dbf19498f1bd2b56633e49dfd99901084a9abb3"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "971dcf82a2f884ff25939496c95ed7043aaaa7724e41bc78c180c25adb688420"
+          "sha256": "dd147e08028de37162a662ac1f3fdd0af9c4defae3724aeb197e158dd8d1e4c7"
         },
         "LICENSE": {
           "executable": false,
@@ -10057,11 +10057,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "5bdf1f477717e1e5b36d1543d6aba1a2d59ccf3c19f3426e62a5a3fe737de0e5"
+          "sha256": "a60e89ca7843c8c710f03d4192f2656da4dfff49b253ef5b86223d4931608c26"
         },
         "README.md": {
           "executable": false,
-          "sha256": "9231e7ca87862148e77a60643fb345afc9c14eb3b584da17ad53f37307e41696"
+          "sha256": "b89909fe0766cef15f8ada5a12f157855c6b3baf64b92e24c1b955bc6a8f2db5"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -11221,18 +11221,18 @@
         }
       },
       "path": "factory/planweft",
-      "sha256": "a1245ed1f6d943ccf313896097ce1c3dfdbe97022fcfbea40e6379df1f0799bd"
+      "sha256": "7aca4a695f5b631bac31ae6b32c57447a74b279141518efc7e7ea4db7fc67598"
     },
     "gemini": {
       "file_count": 299,
       "files": {
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "58d6e1d0c4db0e444590c3d28ce8e5ed18fce2f355bc3fcca08e61b718f69429"
+          "sha256": "6fc4050b3ef8895c09691ebcc8e593b36028d75d39c9356b9b288ff15edb6c8a"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "5afbc8c17e39e6bd3f96ef3eaf8fe3b1b61d063695ac0caa9b7b7957b03bf4d2"
+          "sha256": "940362ef5d41408ebea377216f25952405d4cbb3fdbc1818c3253bf575522234"
         },
         "LICENSE": {
           "executable": false,
@@ -11240,11 +11240,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "792f6a046328828f59926ce837cfeb59f350f9b57c5208768a5906388c9e38a2"
+          "sha256": "3858c037d4b779173ef29166cc6bf44b8ff8c681b5e33f4621027aa90a877c98"
         },
         "README.md": {
           "executable": false,
-          "sha256": "bec00636a183e969037a3ffee4afd165154e48a0e9647e686a282c7f1da4d5f5"
+          "sha256": "b4f10b49cf6f596211eb657047732f7088f5a97263799b15798e2c878c6f3643"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -12424,18 +12424,18 @@
         }
       },
       "path": "gemini/planweft",
-      "sha256": "b68ad2ef0da95e132b1c218444fb4c02c7be2bf952fcc179efb03effe0011b30"
+      "sha256": "81fcf2aefcb8373e20b3841dd1e034d5fc94292f0c4cf4ec033d89b6ad3a41b2"
     },
     "hermes": {
       "file_count": 304,
       "files": {
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "a3453fbda26c39c9a57e754c7bf10ac63c58b4993df8eb5dad6ba613b1bbff5e"
+          "sha256": "5bed698ee52fa340dfb08d359290b32a9daf04b3a4ffd6686d75b29c246fdef1"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "d6e61946dad3d9867ccebbbde62c56cec67dd55b82fb16d5f92d6b4738ff5e54"
+          "sha256": "ffa2704fc35240b6faa774cd421caa32b253f75bc9e9f20a179422149d0cb28b"
         },
         "LICENSE": {
           "executable": false,
@@ -12443,11 +12443,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "d528c48d76647ccecf1d76c1d8cde0095cb0b6a90b80effcdd90c4ccca8cb6a5"
+          "sha256": "139c2d7e3431bad3179d4d67730a477970e9a81f995dfc8aadcea29dd60e29dc"
         },
         "README.md": {
           "executable": false,
-          "sha256": "b5382aa96c3c3003aae034c833d0243c75eb0828c9a6d40f49d24e788005fd3f"
+          "sha256": "18f92884ecdee364c337b69e2e026fa903096b3f9b642dad77fb03afe953a6b8"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -13647,18 +13647,18 @@
         }
       },
       "path": "hermes/planweft",
-      "sha256": "7bc718971def5cd2660820b6c1c770e22f2195b56cbaa8df6deb8063bb29aa29"
+      "sha256": "606c2d610adbd513e93530f18536d765b00ede66e2f6ca7b74b998f2293a4421"
     },
     "kiro": {
       "file_count": 307,
       "files": {
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "99784574292f0d82d686347200d62f9d7c530938922ecb12c4d0b7569b9e962c"
+          "sha256": "df4c157069ea368cf5541f11f9c5a94bcafd31209764200efab60aa185c3ea32"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "fb39bd0181e227cb02feb0c8017a9f77021a5ceec1ef7aa26a53e037e8f051cb"
+          "sha256": "dc1321eefe722352309801d615105b37ef82cbcfcfab45f6b4a4ac869128f7bf"
         },
         "LICENSE": {
           "executable": false,
@@ -13666,11 +13666,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "0bf88f61b692cae65fd70d4709e2cd0f66bcd54676015eac6d1366db3952f74a"
+          "sha256": "51330f5ffa75826db7b33ab9ac4e15e072decd192e04e03d116e268b102b5668"
         },
         "README.md": {
           "executable": false,
-          "sha256": "549bb73e070b0b952e0fd0f6c853be06f6875bd763644da61a6b3f4bda25096e"
+          "sha256": "620a3fe49300b5b6c8680c32857fd35ae3ec28f27408b954bd9076c615805cfc"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -14882,7 +14882,7 @@
         }
       },
       "path": "kiro/planweft",
-      "sha256": "7099834f496ffcb4841e1cd0ffc19e7937cd88bb8a8c1415980df80d0bbae27c"
+      "sha256": "7049781bc1c8291926cadf8c2df46df58c060b68a05663d1f5f5128dc53c650f"
     },
     "mastracode": {
       "file_count": 340,
@@ -15073,11 +15073,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "9bf235d37d50ac74275c30f7a24f81a8613de872c10ee521d85313f4df7e0e75"
+          "sha256": "5d73b4ce4097fca789c7ee294b9ddc20735404aeaf566efa3d80255e3b237271"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "a9546a30e4375e5905ee34d43023360f91213fd0b483390fbfb6812852ebde4a"
+          "sha256": "592f024415e1b221af7396542ddfb4d1a6f00ca23832f3809342f28c2bd6032d"
         },
         "LICENSE": {
           "executable": false,
@@ -15085,11 +15085,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "c0cf3ad28c998e81991a3816fbd8c260b33baabdc0cdb0892a0b7b01a22c750a"
+          "sha256": "6a6f695c099b78b5e254cf78ae3ef046f0b033c936c392d6929781f7a9a76923"
         },
         "README.md": {
           "executable": false,
-          "sha256": "4e0ea0b6c08afcd5a3112fae66eb9b61b2714dedfc423b165193c2906321d14f"
+          "sha256": "924fdd52c461d11d82ae899f248bcf61fafd8d6c4680255928a2a6ae9ef20aa1"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -16249,7 +16249,7 @@
         }
       },
       "path": "mastracode/planweft",
-      "sha256": "d2c75deb6fc2315298d0e3f64a6e276ac470c9a35c136b74af61e2f15f7a2d21"
+      "sha256": "ad9692f37e3f15845187ee9156310ca38b63d916cdb638a9c956794185449527"
     },
     "opencode": {
       "file_count": 307,
@@ -16260,11 +16260,11 @@
         },
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "c41a9dfca3021174c55b09a5e8062421f9e337c9ce5d2823940b621e40d42080"
+          "sha256": "53194568e0f694e09a4c65b82b15e7858ae2ae16225d016e6dc19a67d042dec4"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "24377c597d1bb67ba627618f6e4dfa044f8691d889df4703cc71a9ece9de04f3"
+          "sha256": "2df9c4c9e6cd6800802bc51477e0fc6b1006ada265d0e0f7de6a8da8c596295e"
         },
         "LICENSE": {
           "executable": false,
@@ -16272,11 +16272,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "14b2b655447a4c9d9ade2ddd3cd0ee87308980e5416e81de48455e023a18f8f5"
+          "sha256": "54e9897947b92e5f21d4614a5ed1a720686172e6c7e20e4e2e514f02c3de415c"
         },
         "README.md": {
           "executable": false,
-          "sha256": "81af720c4ef50b12119c20f6b8d8614221a715c50a6a41961ef0eecd0b948764"
+          "sha256": "7200e418f9b0a1ec5f3f6daf540fea49c9cceaa9efa1aa46a0e409739794891b"
         },
         "UPSTREAM.json": {
           "executable": false,
@@ -17484,18 +17484,18 @@
         }
       },
       "path": "opencode/planweft",
-      "sha256": "42ab839326a30184e76d4f741e85f875013175037b499cd5e5fb2ef6686b6ad6"
+      "sha256": "6ff8bc5a974d740f09996e83211be0575893dd690b55b1529ad16f34c8134974"
     },
     "pi": {
       "file_count": 57,
       "files": {
         "INSTALL.en.md": {
           "executable": false,
-          "sha256": "dcf109f514aebd81604baedafc2297dd9a0d108c8e6804e8e07a10b79c228e9a"
+          "sha256": "f6a052d3ea7ae6177d552d3a7cbdd485835e27ef64df0ce66871f31704da6277"
         },
         "INSTALL.md": {
           "executable": false,
-          "sha256": "fae67b906d201dda931659f6fa4996466e38f7dfc9786b98a9c2a4c890ad6108"
+          "sha256": "a0293ac6576859b86b94980cd06d48abfc3d0df8001c0cf3b813943946efad91"
         },
         "LICENSE": {
           "executable": false,
@@ -17503,11 +17503,11 @@
         },
         "README.en.md": {
           "executable": false,
-          "sha256": "d0fe165327578f2c658b835de6325ab302007357f96cc24019516f5066f4d58d"
+          "sha256": "9297c6e5ae30af6cc036eb63c13806739b4d5e5f5196c9c2fa897e1a78e5570a"
         },
         "README.md": {
           "executable": false,
-          "sha256": "bbb4ec16ac4e9d2420a9e3df288cea957f1a8e507245213773f807ee62e5be7a"
+          "sha256": "e1b853bd67e0e2e0a5c11ea17a7c42e1688e8709f3f28aef276dd836671e81e9"
         },
         "SKILL.md": {
           "executable": false,
@@ -17719,7 +17719,7 @@
         }
       },
       "path": "pi/planweft",
-      "sha256": "6a03a7d82b5630ff8cf8435ec1ae269f5f0b45c28e3382668d7756577db8b9db"
+      "sha256": "94a70fef343dfdbd18b9113750c3badd24320dad91917a13043cc14521c9be8a"
     }
   },
   "product": "planweft",

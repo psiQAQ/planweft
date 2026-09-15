@@ -1,0 +1,10 @@
+flowchart LR
+    U["vendor：固定 PWF 快照"] --> B["scripts/build-plugin.py"]
+    W["overlays：workflow、references、templates"] --> B
+    A["overlays/native：宿主适配"] --> B
+    B --> D["dist / 各宿主产物"]
+    B --> C["plugins/planweft：Codex 兼容镜像"]
+    D --> N["planweft npm 包"]
+    N --> I["bin/planweft.mjs 与安装器"]
+    I --> V["版本存储与安装记录"]
+    I --> R["宿主注册与对应布局"]

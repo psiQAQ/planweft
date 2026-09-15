@@ -5,6 +5,8 @@
 | 职责 | 实际位置 | 适用范围 / 更新触发条件 | 生成来源 |
 | --- | --- | --- | --- |
 | 公开项目入口 | [`../README.md`](../README.md) | 公开能力、安装或版本入口变化 | 维护者编辑 |
+| 用户工作原理 | [how-it-works.md](how-it-works.md) | 用户需要理解任务记录、Skill/Hook 分工、目录或控制边界时 | 维护者编辑 |
+| 运行时调用参考 | [reference/runtime-map.md](reference/runtime-map.md) | Skill 资源、Codex 逐事件 Hook、15 宿主矩阵或生命周期边界变化 | 维护者编辑 |
 | 项目规则 | [`../AGENTS.md`](../AGENTS.md) | 协作、验证或发布约定变化 | 维护者编辑 |
 | 稳定需求 | [specs](specs/) | 已接受的需求或验收边界变化 | 需求与评审记录 |
 | 架构决定 | [adr](adr/) | 已采纳取舍或后果变化 | 决策记录 |
