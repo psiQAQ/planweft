@@ -2,34 +2,34 @@
 
 # Host distribution and capability boundaries
 
-PlanWeft 0.5.1 lists 15 host distribution targets in `dist/manifest.json`. A distribution target means that the package prepares resources for a host; it does not mean that the host discovered, trusted, enabled, or loaded those resources.
+PlanWeft 0.5.1 lists 15 host distribution targets in `dist/manifest.json`. At the product level, `codex`, `claude`, `pi`, `opencode`, and `dsh` are the primary supported integrations; the remaining targets are treated as experimental adapters. A distribution target means that the package prepares resources for a host; it does not mean that the host discovered, trusted, enabled, or loaded those resources.
 
 ## How to read this page
 
-- “Static events” come from the generated manifest, Hook configuration, or native adapter source.
-- “0.4.0 formal core (version-bound)” describes the historical acceptance scope of the exact 0.4.0 archive. It does not extend automatically to 0.5.1 model behavior.
-- The remaining targets are experimental distributions or Skill-only forms and must be checked separately under each host's rules.
-- The 0.5.1 release checks are defined by the [version policy file](https://github.com/psiQAQ/planweft/blob/master/release/support-policy-0.5.1.json); package static checks do not replace real host regression.
+- “Product status” tells you whether an integration is part of the current primary supported set or remains experimental.
+- “Static events” come from the current generated manifest, Hook configuration, or native adapter source and describe the entry points prepared by the package.
+- “Historical acceptance evidence” records validation completed for an exact prior version; it does not automatically establish current-version host behavior.
+- The current release checks are defined by the [version policy file](https://github.com/psiQAQ/planweft/blob/master/release/support-policy-0.5.1.json); package static checks do not replace real host regression.
 
 ## Host matrix
 
-| Host | Distribution form | Static events or native entry point | Status |
-| --- | --- | --- | --- |
-| `agents` | Portable `project-docs` Skill | No execution Hook | Experimental distribution |
-| `claude` | Claude plugin + Skill | `SessionStart`, `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, `PreCompact`, `Stop` | 0.4.0 formal core (version-bound) |
-| `codebuddy` | Plugin manifest + portable Skill | No execution Hook | Experimental distribution |
-| `codex` | Codex marketplace plugin + native Skill | `SessionStart`, `UserPromptSubmit`, `PreToolUse`, `PermissionRequest`, `PostToolUse`, `PreCompact`, `Stop` | 0.4.0 formal core (version-bound) |
-| `continue` | Portable Skill/prompt distribution | No execution Hook | Experimental distribution |
-| `copilot` | Native plugin + Skill | `sessionStart`, `postToolUse`, `agentStop` | Experimental distribution |
-| `cursor` | Cursor plugin + Skill | `sessionStart`, `postToolUse`, `stop` | Experimental distribution |
-| `dsh` | DSH profile bundle + Skill | `SessionStart`, `UserPromptSubmit`, `PostToolUse`, `Stop` | 0.4.0 formal core (version-bound) |
-| `factory` | Plugin manifest + portable Skill | No execution Hook | Experimental distribution |
-| `gemini` | Gemini extension + Skill | `SessionStart`, `BeforeAgent`, `AfterTool`, `PreCompress` | Experimental distribution |
-| `hermes` | Native plugin + Skill | `pre_llm_call`, `post_tool_call`, `pre_verify` | Experimental distribution |
-| `kiro` | Power/plugin manifest + Skill | No execution Hook | Experimental distribution |
-| `mastracode` | Portable Skill | No execution Hook | Experimental distribution |
-| `opencode` | V1 plugin + separate Skill | `chat.message`, `tool.execute.after`, `session.idle` | 0.4.0 formal core (version-bound) |
-| `pi` | Skill + TypeScript Extension | `session_start`, `input`, `before_agent_start`, `tool_call`, `tool_result`, `agent_end`, `session_before_compact` | 0.4.0 formal core (version-bound) |
+| Host | Distribution form | Static events or native entry point | Product status | Historical acceptance evidence |
+| --- | --- | --- | --- | --- |
+| `agents` | Portable `project-docs` Skill | No execution Hook | Experimental | — |
+| `claude` | Claude plugin + Skill | `SessionStart`, `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, `PreCompact`, `Stop` | Supported | 0.4.0 formal core |
+| `codebuddy` | Plugin manifest + portable Skill | No execution Hook | Experimental | — |
+| `codex` | Codex marketplace plugin + native Skill | `SessionStart`, `UserPromptSubmit`, `PreToolUse`, `PermissionRequest`, `PostToolUse`, `PreCompact`, `Stop` | Supported | 0.4.0 formal core |
+| `continue` | Portable Skill/prompt distribution | No execution Hook | Experimental | — |
+| `copilot` | Native plugin + Skill | `sessionStart`, `postToolUse`, `agentStop` | Experimental | — |
+| `cursor` | Cursor plugin + Skill | `sessionStart`, `postToolUse`, `stop` | Experimental | — |
+| `dsh` | DSH profile bundle + Skill | `SessionStart`, `UserPromptSubmit`, `PostToolUse`, `Stop` | Supported | 0.4.0 formal core |
+| `factory` | Plugin manifest + portable Skill | No execution Hook | Experimental | — |
+| `gemini` | Gemini extension + Skill | `SessionStart`, `BeforeAgent`, `AfterTool`, `PreCompress` | Experimental | — |
+| `hermes` | Native plugin + Skill | `pre_llm_call`, `post_tool_call`, `pre_verify` | Experimental | — |
+| `kiro` | Power/plugin manifest + Skill | No execution Hook | Experimental | — |
+| `mastracode` | Portable Skill | No execution Hook | Experimental | — |
+| `opencode` | V1 plugin + separate Skill | `chat.message`, `tool.execute.after`, `session.idle` | Supported | 0.4.0 formal core |
+| `pi` | Skill + TypeScript Extension | `session_start`, `input`, `before_agent_start`, `tool_call`, `tool_result`, `agent_end`, `session_before_compact` | Supported | 0.4.0 formal core |
 
 “No execution Hook” is a distribution fact, not an unfinished placeholder: the host may receive the Skill or resources, but this package does not add lifecycle events that the host does not provide.
 
@@ -50,6 +50,10 @@ To confirm that a task is actually active, check these separately:
 7. A later session can resume from the project records.
 
 `doctor` primarily checks managed installation state and cannot replace checks 4 through 7.
+
+## Acceptance evidence versus current support
+
+Product status and acceptance evidence are separate dimensions. “Supported” identifies the integrations targeted by the current primary installation and documentation path. “0.4.0 formal core” only says that the exact 0.4.0 archive completed that historical acceptance scope. Equivalent behavior in a real 0.5.1 environment requires current-version verification and cannot be inferred automatically from the historical result.
 
 ## Troubleshooting
 

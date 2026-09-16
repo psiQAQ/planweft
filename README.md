@@ -21,6 +21,28 @@ npx planweft@0.5.1 doctor -a codex --global
 
 安装后创建新会话，显式调用 `$project-docs`，再确认宿主已发现并启用了相应资源。其他宿主、scope 和 Skill-only 用法见[安装指南](docs/installation.md)。
 
+## 一次任务怎么使用
+
+例如，在新的 Codex 会话中：
+
+```text
+$project-docs
+修复 CSV 导入空行导致的崩溃，补回归测试，并更新受影响的使用说明。
+```
+
+对于需要持续规划的复杂任务，PlanWeft 会选择已有计划或在授权范围内初始化任务记录。命名计划通常位于：
+
+```text
+your-project/
+└── .planning/
+    └── <date>-fix-csv-import/
+        ├── task_plan.md
+        ├── findings.md
+        └── progress.md
+```
+
+Agent 在任务过程中维护这些记录；后续会话或协作者可以从目标、当前阶段、调查结果、实际验证和下一步继续工作。只读请求和简单修改不要求创建新计划。
+
 ## 安装后 Agent 得到什么
 
 各宿主的目录略有不同，下面是自包含插件包的简化示意：
@@ -85,11 +107,11 @@ your-project/
 └── <existing project documents>/
 ```
 
-只读请求和简单修改不需要新建计划。Skill、Hook 和文档都不会绕过项目规则、用户授权或宿主权限。
+Skill、Hook 和文档都不会绕过项目规则、用户授权或宿主权限。
 
 ## 支持的宿主
 
-当前 npm 包包含 15 个宿主分发目标，但分发存在不等于宿主已经加载或模型已经使用。事件、原生入口和能力边界见[宿主说明](docs/hosts.md)。
+当前 npm 包包含 15 个宿主分发目标。其中 `codex`、`claude`、`pi`、`opencode` 和 `dsh` 是主要支持集成，其余目标目前按实验性适配处理。分发存在不等于宿主已经加载或模型已经使用；事件、原生入口和能力边界见[宿主说明](docs/hosts.md)。
 
 ## 文档入口
 

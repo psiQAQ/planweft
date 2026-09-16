@@ -21,6 +21,28 @@ npx planweft@0.5.1 doctor -a codex --global
 
 After installation, create a new session, explicitly invoke `$project-docs`, and confirm that the host discovered and enabled the expected resources. See the [installation guide](docs/installation.en.md) for other hosts, scopes, and Skill-only installation.
 
+## What using it looks like
+
+For example, in a fresh Codex session:
+
+```text
+$project-docs
+Fix the crash caused by empty rows in CSV import, add a regression test, and update the affected usage guide.
+```
+
+For a complex task that needs persistent planning, PlanWeft selects an existing plan or initializes task records within the authorized scope. A named plan normally lives under:
+
+```text
+your-project/
+└── .planning/
+    └── <date>-fix-csv-import/
+        ├── task_plan.md
+        ├── findings.md
+        └── progress.md
+```
+
+The agent maintains these records during the task. A later session or collaborator can continue from the goal, current phase, findings, actual verification, and next action. Read-only requests and small changes do not require a new plan.
+
 ## What the agent gets after installation
 
 Paths vary by host. This is a simplified view of a self-contained plugin package:
@@ -85,11 +107,11 @@ your-project/
 └── <existing project documents>/
 ```
 
-Read-only requests and small changes do not require a new plan. The Skill, Hooks, and documentation do not bypass project rules, user authorization, or host permissions.
+The Skill, Hooks, and documentation do not bypass project rules, user authorization, or host permissions.
 
 ## Supported hosts
 
-The current npm package contains 15 host distribution targets, but distribution does not mean that a host loaded the package or that a model used it. See [host support and boundaries](docs/hosts.en.md) for events, native entry points, and capability limits.
+The current npm package contains 15 host distribution targets. `codex`, `claude`, `pi`, `opencode`, and `dsh` are the primary supported integrations; the remaining targets are currently experimental adapters. Distribution does not mean that a host loaded the package or that a model used it. See [host support and boundaries](docs/hosts.en.md) for events, native entry points, and capability limits.
 
 ## Documentation
 
