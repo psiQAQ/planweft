@@ -10,3 +10,9 @@
 - Isolated install from the downloaded archive reported `planweft@0.6.0`; `planweft state --help` exposed `init`, `record`, `verify`, `recall`, `doctor`, and `recover --dry-run`.
 
 The local `check-state-release-gate.py` pre-publication gate passed against the registry-downloaded archive, confirming that the public artifact still satisfies the P0 identity and evidence contract.
+
+## Post-promotion readback
+
+- After the stable dist-tag write, the public registry reports `latest=0.6.0` and `next=0.6.0`.
+- The package metadata still reports the same version, archive shasum, SHA-512 integrity, registry signatures, and SLSA provenance attestation.
+- The successful end state is independently recorded in `stable-promotion-readback.md`; the earlier `latest=0.5.1` state and `E401` failure remain historical evidence in their original attachments.

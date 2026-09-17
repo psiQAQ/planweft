@@ -48,12 +48,12 @@
     "registry_readback": {
       "status": "Passed",
       "evidence": "raw/registry-readback.md",
-      "sha256": "e2c86f2f1156a5916735dc420158eb73dbd089a9fc7824f0f6ee029b3140050b"
+      "sha256": "776109948c1dc1142b5092c8f8ea9ecf634ba47f82031051a61dff27f4892f84"
     },
     "independent_promotion_review": {
       "status": "Passed",
       "evidence": "raw/independent-promotion-review.md",
-      "sha256": "601cba03561cc5bf4e2a9ece1656cbb82c445cf63f3ce333e89aec6f06a6f7f1"
+      "sha256": "1a712a2743089d74ef479569699fc8f9a00a8c5991cdec758bf2312b8778dec9"
     },
     "git_tag_and_release_readback": {
       "status": "Passed",

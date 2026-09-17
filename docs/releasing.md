@@ -16,10 +16,16 @@
 ### 0.6.0 当前发布状态
 
 - candidate workflow：[35242327786](https://github.com/psiQAQ/planweft/actions/runs/35242327786)，`master@5c23fa3`，362 个离线 Python 测试和 candidate gate：Passed。
-- npm registry：`planweft@0.6.0` 已读回，`next=0.6.0`、`latest=0.5.1`；公开归档 SHA-256 为 `7e913d3c43e852aaf59dbb2fc7adb3b7aa275453cf3041ec1acdebea80be9c5e`。
+- npm registry：`planweft@0.6.0` 已完成发布后读回，`next=0.6.0`、`latest=0.6.0`；公开归档 SHA-256 为 `7e913d3c43e852aaf59dbb2fc7adb3b7aa275453cf3041ec1acdebea80be9c5e`。
 - annotated [`v0.6.0`](https://github.com/psiQAQ/planweft/releases/tag/v0.6.0) 和 GitHub Release 已创建并读回。
-- stable dist-tag promotion 尚未完成：本地及 guarded workflow [35243815030](https://github.com/psiQAQ/planweft/actions/runs/35243815030) 均因缺少 npm dist-tag 写权限返回 `E401`；`latest` 保持 `0.5.1`。证据见 `release/evidence/0.6.0/raw/stable-promotion-attempt.md` 和 [REV-0019](reviews/0019-sol-pi-state-management-stable-promotion-blocker.md)。
+- stable dist-tag promotion 已完成：配置 `release/NPM_TOKEN` 后，公开 registry 最终读回 `latest=0.6.0`、`next=0.6.0`。此前 [35243815030](https://github.com/psiQAQ/planweft/actions/runs/35243815030) 的 `E401` 失败证据仍保留在 `release/evidence/0.6.0/raw/stable-promotion-attempt.md` 和 [REV-0019](reviews/0019-sol-pi-state-management-stable-promotion-blocker.md)；成功读回见 `release/evidence/0.6.0/raw/stable-promotion-readback.md` 和 [REV-0020](reviews/0020-sol-pi-state-management-promotion-completion.md)。
 - 真实 Agent/model、tokens/cost 和真实不同 Agent 接续继续保持 `Not Run`。
+
+### 0.6.0 凭据与固定 workflow 边界
+
+- candidate 发布使用 npm Trusted Publisher/OIDC：`publish.yml` 固定使用 GitHub-hosted runner、`id-token: write`、`release` environment 和 `npm publish --tag next --provenance`，不依赖长期 npm token。
+- stable promotion 不是 `npm publish`，而是独立的 `npm dist-tag add planweft@<version> latest`。因此只为 `release` environment 配置 package-scoped `NPM_TOKEN`；`promote-stable.yml` 先运行 `npm whoami` 凭据预检，再核对准确归档、promotion gate、dist-tag 写入和最终 readback。
+- 本机 `~/.npmrc` 只服务本机命令，不替代 GitHub Actions secret；不在仓库、命令行参数、聊天或日志中保存真实 token。
 
 ## 0.5.x 静态/逻辑发布路径
 

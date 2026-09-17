@@ -30,6 +30,13 @@ jobs:
         with:
           python-version: '3.14'
       - run: npm install --global npm@11.11.0 --ignore-scripts
+      - name: Verify npm promotion credential
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$NODE_AUTH_TOKEN"
+          npm whoami --registry=https://registry.npmjs.org/ >/dev/null
       - name: Verify registry candidate and promotion evidence
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

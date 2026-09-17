@@ -12,3 +12,7 @@ This is an independent file/registry/packaging review of the promotion boundary.
 | Real Agent/model regression and tokens/cost | Not Run by explicit scope |
 
 Decision: the deterministic P0 artifact is eligible for stable npm promotion. This review is limited to source, generated artifacts, offline evidence, registry metadata, and package installation; it does not extend the support claim beyond that boundary.
+
+## Post-promotion follow-up
+
+The subsequent public readback reports `latest=0.6.0` and `next=0.6.0`, with the same archive identity, integrity, registry signatures, and SLSA provenance. The detailed result is attached as `stable-promotion-readback.md`. This follow-up does not rewrite the pre-promotion state; the earlier failed `E401` attempt remains in its separate historical attachment.

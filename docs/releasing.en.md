@@ -8,9 +8,15 @@ This page records the maintainer release process and the final 0.4.0 publication
 
 The 0.6.0 path uses the versioned [`support-policy-0.6.0.json`](../release/support-policy-0.6.0.json), `release/evidence/0.6.0/`, and [`check-state-release-gate.py`](../scripts/check-state-release-gate.py). It gates deterministic offline, generated-artifact, package-install, cold-read, and review evidence. Real Agent/model behavior, tokens/cost, and real different-Agent continuation remain explicit non-blocking `Not Run` items.
 
-The candidate workflow [35242327786](https://github.com/psiQAQ/planweft/actions/runs/35242327786) passed 362 offline Python tests and the candidate gate. The public registry reads back `planweft@0.6.0` with `next=0.6.0`, `latest=0.5.1`, and archive SHA-256 `7e913d3c43e852aaf59dbb2fc7adb3b7aa275453cf3041ec1acdebea80be9c5e`. Annotated [`v0.6.0`](https://github.com/psiQAQ/planweft/releases/tag/v0.6.0) and its GitHub Release were created and read back.
+The candidate workflow [35242327786](https://github.com/psiQAQ/planweft/actions/runs/35242327786) passed 362 offline Python tests and the candidate gate. The public registry reads back `planweft@0.6.0` with `next=0.6.0`, `latest=0.6.0`, and archive SHA-256 `7e913d3c43e852aaf59dbb2fc7adb3b7aa275453cf3041ec1acdebea80be9c5e`. Annotated [`v0.6.0`](https://github.com/psiQAQ/planweft/releases/tag/v0.6.0) and its GitHub Release were created and read back.
 
-Stable npm promotion is currently incomplete: the local attempt and guarded workflow [35243815030](https://github.com/psiQAQ/planweft/actions/runs/35243815030) both returned `E401` because no npm dist-tag write token is configured in the release environment. `latest` remains protected at `0.5.1`; see `release/evidence/0.6.0/raw/stable-promotion-attempt.md` and [REV-0019](reviews/0019-sol-pi-state-management-stable-promotion-blocker.md). After the credential is configured, rerun the guarded promotion workflow and read back both dist-tags.
+Stable npm promotion is complete: after configuring `release/NPM_TOKEN`, the public registry reads back `latest=0.6.0` and `next=0.6.0`. The earlier `E401` from [35243815030](https://github.com/psiQAQ/planweft/actions/runs/35243815030) remains preserved in `release/evidence/0.6.0/raw/stable-promotion-attempt.md` and [REV-0019](reviews/0019-sol-pi-state-management-stable-promotion-blocker.md); the successful readback is in `release/evidence/0.6.0/raw/stable-promotion-readback.md` and [REV-0020](reviews/0020-sol-pi-state-management-promotion-completion.md).
+
+### 0.6.0 credential and fixed workflow boundary
+
+- Candidate publication uses npm Trusted Publisher/OIDC through `publish.yml`: GitHub-hosted runner, `id-token: write`, the `release` environment, and `npm publish --tag next --provenance`; no long-lived npm publish token is required.
+- Stable promotion is a separate `npm dist-tag add planweft@<version> latest` operation. The workflow therefore uses a package-scoped `NPM_TOKEN` only in the `release` environment, preflights it with `npm whoami`, then verifies the exact archive, promotion gate, dist-tag write, and public readback.
+- A local `~/.npmrc` only serves commands on the local machine and does not replace the GitHub Actions secret. Never store the actual token in the repository, command-line arguments, chat, or logs.
 
 ## 0.5.x static/logic release path
 
