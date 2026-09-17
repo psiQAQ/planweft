@@ -477,6 +477,16 @@ esac
                     'never create a competing root plan.\n\n') + body.lstrip()
         result[target] = (text.encode('utf-8'), mode)
     if enhanced:
+        # The task evidence helper is shared source, not a host-specific
+        # adapter. Keep it in the transformed tree so every generated bundle
+        # receives identical bytes and the root npm CLI can copy the same
+        # implementation into lib/state/.
+        for source in sorted((OVERLAY / 'state').rglob('*')):
+            if source.is_file():
+                relative = source.relative_to(OVERLAY / 'state').as_posix()
+                result['state/' + relative] = (source.read_bytes(), 0o644)
+        helper = OVERLAY / 'scripts' / 'pw-state.mjs'
+        result['scripts/pw-state.mjs'] = (helper.read_bytes(), 0o755)
         helper = (OVERLAY / 'document-handoff-check.sh').read_bytes()
         for target, (data, mode) in list(result.items()):
             if b'HANDOFF_CHECK="${SCRIPT_DIR}/document-handoff-check.sh"' in data:
@@ -495,6 +505,13 @@ esac
                 result[base + '/references/plan-selection.md'] = ((OVERLAY / 'references/plan-selection.md').read_bytes(), 0o644)
                 result[base + '/references/plan-selection.zh.md'] = ((OVERLAY / 'references/plan-selection.zh.md').read_bytes(), 0o644)
                 result[base + '/references/documentation-map.md'] = ((OVERLAY / 'references/documentation-map.md').read_bytes(), 0o644)
+                for reference in ('state-evidence.md', 'state-evidence.zh.md'):
+                    result[base + '/references/' + reference] = ((OVERLAY / 'references' / reference).read_bytes(), 0o644)
+                for state_source in sorted((OVERLAY / 'state').rglob('*')):
+                    if state_source.is_file():
+                        relative = state_source.relative_to(OVERLAY / 'state').as_posix()
+                        result[base + '/state/' + relative] = (state_source.read_bytes(), 0o644)
+                result[base + '/scripts/pw-state.mjs'] = ((OVERLAY / 'scripts' / 'pw-state.mjs').read_bytes(), 0o755)
                 for reference in ('local-operations.md', 'local-operations.zh.md'):
                     result[base + '/references/' + reference] = ((OVERLAY / 'references' / reference).read_bytes(), 0o644)
                 # A standalone install copies the skill folder, not its repo.
@@ -513,7 +530,7 @@ def subset(tree, prefixes):
 
 
 def distributions(tree, upstream, compiled=True):
-    common = ['scripts', 'templates', 'skills']
+    common = ['scripts', 'templates', 'skills', 'state']
     result = {}
     result['codex'] = subset(tree, ['.codex/hooks', 'hooks/codex-hooks.json', *common])
     # Upstream standalone installs keep skills inside .codex; this plugin ships
@@ -558,6 +575,9 @@ def distributions(tree, upstream, compiled=True):
     result['claude'] = subset(tree, ['.claude-plugin', 'hooks/hooks.json', 'hooks/claude-hook.sh', 'commands', *common])
     pi_prefix = '.pi/skills/project-docs/'
     result['pi'] = {p[len(pi_prefix):]: v for p, v in tree.items() if p.startswith(pi_prefix)}
+    # Pi's package is the standalone Skill root, so explicitly carry the
+    # shared state module beside its copied helper script.
+    result['pi'].update({p: v for p, v in tree.items() if p.startswith('state/')})
     result['opencode'] = subset(tree, ['.opencode', *common])
     # The source tree keeps its development entry; installation loads the locked
     # local build, so users can copy the adapter without hand-writing a loader.
@@ -883,12 +903,16 @@ def main():
         print(json.dumps({'tree_files': len(tree), 'identity_only': args.identity_only}))
         return
     bundles = distributions(tree, upstream)
+    shared_state = {p[len('state/'):]: value for p, value in tree.items() if p.startswith('state/')}
+    if not shared_state:
+        raise ValueError('shared state module was not generated')
     retired = retired_archives()
     old_directories = legacy_directories()
     index = {'schema_version': 2, 'product': PRODUCT, 'version': VERSION,
              'upstream_commit': upstream['commit'], 'platforms': {}}
     catalogs = marketplace_files()
     differences = {'retired-directories': [str(p.relative_to(ROOT)) for p in old_directories]}
+    differences['shared-state'] = write_tree(shared_state, ROOT / 'lib' / 'state', args.verify)
     for host, files in bundles.items():
         relative = host + '/' + PRODUCT
         index['platforms'][host] = {'path': relative, 'sha256': tree_digest(files),

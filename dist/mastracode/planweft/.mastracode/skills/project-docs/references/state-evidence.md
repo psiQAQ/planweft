@@ -1,0 +1,29 @@
+# PlanWeft state evidence
+
+The optional task-side evidence store is separate from the installer store:
+`.planweft-state/` belongs below the selected PWF plan directory, while
+`.planweft/` remains installer-owned.
+
+Initialize it explicitly:
+
+```text
+planweft state init
+```
+
+Then pass a JSON data file to `record`:
+
+```text
+planweft state record --input evidence.json
+planweft state verify --receipt <receipt-id>
+planweft state recall --artifact <sha256> --start-byte 0 --length 120
+planweft state doctor
+planweft state recover --transaction <id> --dry-run
+```
+
+`record` never executes a command string from the JSON. It records the
+observed result separately from interpretation and criteria, stores regular
+files by streaming SHA-256, and rejects paths outside the authorized project,
+symlinks, changed markdown baselines, and idempotency-key conflicts. Recovery
+is read-only until `--apply` is explicitly supplied. The helper is local and
+offline; it does not replace host tools, enable remote reducers, or change the
+default advisory Hook.

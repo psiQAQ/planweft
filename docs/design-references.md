@@ -290,6 +290,14 @@ Pi 的实际 `0.84.3` 项目安装将 package source 写为相对 `.pi/settings.
 
 OpenCode 原生 `pw_init` 选择面原先只列 autonomous/gated，遗漏省略参数的默认路径。RC11 真实会话在未选择模式时传 autonomous；本地补丁只补选择说明，不改状态与运行逻辑，不声称强制授权。来源、精确 diff 及局限见 [模式入口独立复核](reviews/0010-rc12-opencode-mode-review.md)。完整 Skill 投递后的违规不能再笼统归因于未加载；后续模型行为修复须有新的因果证据，不以重复提示或无变化重试代替。
 
+## SoL-Pi 状态证据阶段（2026-09-17）
+
+| 本仓库目标文件 | 问题与设计点 | 实际来源及定位 | 借鉴、差异与需求 | 验证 / 审查入口 |
+| --- | --- | --- | --- | --- |
+| [状态证据规格](specs/0008-sol-pi-state-evidence.md) | 任务证据与安装器状态分离；Artifact、Receipt、引文、恢复边界 | 用户确认的 SoL-Pi 主计划第 16 节及 P0 S01–S13；现有安装器 `.planweft/` 契约 | 采用独立 `.planweft-state/`、标准库 Node 核心、默认关闭；不替换宿主、不执行记录命令、不启用远程 reducer | [ADR-0012](adr/0012-sol-pi-state-store.md)；[state-evidence tests](../tests/state-evidence.test.mjs) |
+| [状态核心与 CLI](../overlays/planweft/state/core.mjs) | 流式 SHA-256、Receipt、逐字节引文、幂等和 transaction journal | 用户冻结接口；Node 标准库 `fs`, `crypto`, `stream` 实现 | 内容寻址与写前 hash 用于可复核性；全局原子事务、checkpoint、remote reducer 明确不在 P0 | [distribution contract](../tests/test_state_evidence.py)；P0 review 状态见 [0016](reviews/0016-sol-pi-state-management-review.md) |
+| [生成器与 Skill 资源](../scripts/build-plugin.py) | 将同一份核心生成到 `lib/state/`、宿主 `state/` 和 Skill 包内 | 本仓库既有 builder/source-of-truth 规则；用户要求“不手改 dist/**” | 生成产物只由 builder 更新，根 CLI 与宿主 wrapper 共享实现；安装器 `.planweft/` 保持原边界 | `build-plugin.py --verify`；15 宿主 manifest/hash；独立发布门禁 |
+
 
 ## Codex 自有原生注册识别修复（RC13 准备）
 
