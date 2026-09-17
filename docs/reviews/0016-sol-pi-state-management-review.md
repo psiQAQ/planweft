@@ -1,6 +1,6 @@
 # REV-0016：SoL-Pi P0 状态管理源码审查
 
-日期：2026-09-17。状态：**独立源码审查 Failed；R0 阻塞**。
+日期：2026-09-17。状态：**初审 Failed；整改复核已通过离线源码/夹具门禁；R0 仍需 cold-read 与发布门禁**。
 
 ## 范围
 
@@ -60,4 +60,21 @@
 
 本轮 review 结论为 **Failed**，不是“仅因真实 Agent 未运行而 Inconclusive”。F-01 至 F-08 中任一 P0 问题都足以阻塞 R0；当前至少有完整性读取、路径绑定、恢复并发/持久性、Receipt 语义、doctor 和测试矩阵多个阻塞。保留现有功能分支和历史证据，不合并到 master，不创建或推送 `v0.6.0`，不发布 npm/GitHub Release。
 
-重新进入 R0 前至少需要：修复并测试 recall 完整性、来源/完整性/freshness schema、计划路径绑定、带 owner lock 的 recovery、写后验证和 doctor；补齐 S03/S04/S06–S13、固定 seed 故障注入及安装生命周期证据，然后重新运行 builder、全套离线门禁、项目 cold-read 和本 review。
+初审退出条件（整改前）：修复并测试 recall 完整性、来源/完整性/freshness schema、计划路径绑定、带 owner lock 的 recovery、写后验证和 doctor；补齐 S03/S04/S06–S13、固定 seed 故障注入及安装生命周期证据，然后重新运行 builder、全套离线门禁、项目 cold-read 和本 review。
+
+## 2026-09-17 整改复核
+
+本轮已在同一功能分支修复 F-01–F-08，并由 builder 重新生成所有产物；下表只记录可观察的源码/离线证据，不把真实 Agent 或模型回归写成 Passed。
+
+| 发现 | 整改结果 | 新证据 |
+| --- | --- | --- |
+| F-01 recall 未校验 Artifact | **Passed** | `recall` 在返回前后校验对象 SHA-256/字节数；篡改 recall 现在返回 exit 4。 |
+| F-02 来源、完整性、execution、freshness/criteria 语义过宽 | **Passed** | 增加枚举和 schema 校验；Artifact 写入完整性状态；Receipt 分离 `structure_check`、`source_check`、`execution_evidence`、`criteria_check`、`freshness_check`。 |
+| F-03 计划绑定可接受嵌套/越界候选 | **Passed** | 只接受 `.planning` 直接子计划，并限制选定 project 在命令工作目录内；nested/outside fixtures 均拒绝。 |
+| F-04 recovery 无 owner lock/写后校验 | **Passed** | recovery apply 取得 owner lock，校验 journal/Receipt/payload，重新计算目标 hash；固定中断状态和 lock 冲突用例通过。 |
+| F-05 缺少 flush/recheck | **Passed** | JSON、Artifact staging 和 Markdown 临时文件均 flush；最终发布和 recovery 后重新读取核对。 |
+| F-06 doctor 诊断不足 | **Passed** | doctor 只读报告 schema、预算、使用量、missing/damaged references、stale、local-only 和 lock；坏 schema/损坏对象/预算边界有夹具。 |
+| F-07 record 可发布错误 quote | **Passed** | record 在写 Receipt 前逐字节校验 quote；错误 quote 被 exit 2 拒绝。 |
+| F-08 场景与故障证据不足 | **Passed（离线范围）** | Node 状态夹具 12 Passed，含 CRLF/二进制/空/大文件、移动项目、包替换 smoke、10 个固定 seed 恢复矩阵；Python 生成一致性 2 Passed；完整 Python discover 360 Passed、1 skipped。 |
+
+整改复核仍保留两项边界：固定 seed 矩阵验证持久化中断状态和恢复路径，不等同于付费 Agent pilot；真实 Agent/model、tokens/cost 和 S12 的真实不同 Agent 接续仍为 `Not Run`。R0 还需要项目 cold-read、准确 candidate/readback 和独立 promotion review，不能因本轮离线全绿提前发布。

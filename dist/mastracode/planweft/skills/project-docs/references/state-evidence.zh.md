@@ -19,8 +19,9 @@ planweft state doctor
 planweft state recover --transaction <id> --dry-run
 ```
 
-`record` 永远不会执行 JSON 中的命令字符串；观测结果、解释和验收条件
-分别记录。普通文件以流式 SHA-256 保存，并拒绝越出授权项目的路径、符号
-链接、已变化的 Markdown 基线及幂等键冲突。恢复在显式提供 `--apply` 前只
-读。该 helper 本地离线运行，不替换宿主工具、不启用远程 reducer，也不改变
-默认 advisory Hook。
+`record` 永远不会执行 JSON 中的命令字符串；观测结果、解释、验收条件和
+freshness 分别记录。普通文件以流式 SHA-256 保存并在发布前复核，拒绝不支持
+的完整性/来源值、越出授权项目的路径、符号链接、已变化的 Markdown 基线及
+幂等键冲突。恢复在显式提供 `--apply` 前只读。该 helper 本地离线运行，不
+替换宿主工具、不启用远程 reducer，也不改变默认 advisory Hook。`doctor` 只
+读报告损坏/缺失引用、lock、预算和 local-only 证据。

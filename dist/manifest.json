@@ -57,11 +57,11 @@
         },
         ".agents/skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         ".agents/skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         ".agents/skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -161,11 +161,11 @@
         },
         ".agents/skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         ".agents/skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         ".agents/skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -373,11 +373,11 @@
         },
         "skills/i18n/project-docs-ar/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-ar/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-ar/scripts/attest-plan.ps1": {
           "executable": false,
@@ -477,11 +477,11 @@
         },
         "skills/i18n/project-docs-ar/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-ar/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-ar/templates/analytics_findings.md": {
           "executable": false,
@@ -565,11 +565,11 @@
         },
         "skills/i18n/project-docs-de/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-de/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-de/scripts/attest-plan.ps1": {
           "executable": false,
@@ -669,11 +669,11 @@
         },
         "skills/i18n/project-docs-de/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-de/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-de/templates/analytics_findings.md": {
           "executable": false,
@@ -757,11 +757,11 @@
         },
         "skills/i18n/project-docs-es/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-es/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-es/scripts/attest-plan.ps1": {
           "executable": false,
@@ -861,11 +861,11 @@
         },
         "skills/i18n/project-docs-es/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-es/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-es/templates/analytics_findings.md": {
           "executable": false,
@@ -949,11 +949,11 @@
         },
         "skills/i18n/project-docs-zh/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-zh/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-zh/scripts/attest-plan.ps1": {
           "executable": false,
@@ -1053,11 +1053,11 @@
         },
         "skills/i18n/project-docs-zh/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-zh/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-zh/templates/analytics_findings.md": {
           "executable": false,
@@ -1141,11 +1141,11 @@
         },
         "skills/i18n/project-docs-zht/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-zht/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-zht/scripts/attest-plan.ps1": {
           "executable": false,
@@ -1245,11 +1245,11 @@
         },
         "skills/i18n/project-docs-zht/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-zht/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-zht/templates/analytics_findings.md": {
           "executable": false,
@@ -1333,11 +1333,11 @@
         },
         "skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -1437,11 +1437,11 @@
         },
         "skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -1473,11 +1473,11 @@
         },
         "state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "templates/analytics_findings.md": {
           "executable": false,
@@ -1505,7 +1505,7 @@
         }
       },
       "path": "agents/planweft",
-      "sha256": "17d3cda4e6833c707e4ee29d7c083603a1976ddce196b9e4b79b6a7dd434f7a8"
+      "sha256": "9503d3dbc1582de0d53e878d8f7a6f1bb887bfb5b477ad79ac3991d1d9576c31"
     },
     "claude": {
       "file_count": 344,
@@ -1756,11 +1756,11 @@
         },
         "skills/i18n/project-docs-ar/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-ar/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-ar/scripts/attest-plan.ps1": {
           "executable": false,
@@ -1860,11 +1860,11 @@
         },
         "skills/i18n/project-docs-ar/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-ar/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-ar/templates/analytics_findings.md": {
           "executable": false,
@@ -1948,11 +1948,11 @@
         },
         "skills/i18n/project-docs-de/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-de/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-de/scripts/attest-plan.ps1": {
           "executable": false,
@@ -2052,11 +2052,11 @@
         },
         "skills/i18n/project-docs-de/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-de/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-de/templates/analytics_findings.md": {
           "executable": false,
@@ -2140,11 +2140,11 @@
         },
         "skills/i18n/project-docs-es/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-es/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-es/scripts/attest-plan.ps1": {
           "executable": false,
@@ -2244,11 +2244,11 @@
         },
         "skills/i18n/project-docs-es/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-es/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-es/templates/analytics_findings.md": {
           "executable": false,
@@ -2332,11 +2332,11 @@
         },
         "skills/i18n/project-docs-zh/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-zh/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-zh/scripts/attest-plan.ps1": {
           "executable": false,
@@ -2436,11 +2436,11 @@
         },
         "skills/i18n/project-docs-zh/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-zh/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-zh/templates/analytics_findings.md": {
           "executable": false,
@@ -2524,11 +2524,11 @@
         },
         "skills/i18n/project-docs-zht/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-zht/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-zht/scripts/attest-plan.ps1": {
           "executable": false,
@@ -2628,11 +2628,11 @@
         },
         "skills/i18n/project-docs-zht/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-zht/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-zht/templates/analytics_findings.md": {
           "executable": false,
@@ -2716,11 +2716,11 @@
         },
         "skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -2820,11 +2820,11 @@
         },
         "skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -2856,11 +2856,11 @@
         },
         "state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "templates/analytics_findings.md": {
           "executable": false,
@@ -2888,7 +2888,7 @@
         }
       },
       "path": "claude/planweft",
-      "sha256": "65d5757c1e8ff225adb32bb38a503e91b03588ce4d7a3a166af410584dfa2ecf"
+      "sha256": "486681b2731684f9da7f6200b7e968f73964814019a20cd12fe534e2040a0760"
     },
     "codebuddy": {
       "file_count": 326,
@@ -3107,11 +3107,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/scripts/attest-plan.ps1": {
           "executable": false,
@@ -3211,11 +3211,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/templates/analytics_findings.md": {
           "executable": false,
@@ -3299,11 +3299,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-de/scripts/attest-plan.ps1": {
           "executable": false,
@@ -3403,11 +3403,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-de/templates/analytics_findings.md": {
           "executable": false,
@@ -3491,11 +3491,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-es/scripts/attest-plan.ps1": {
           "executable": false,
@@ -3595,11 +3595,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-es/templates/analytics_findings.md": {
           "executable": false,
@@ -3683,11 +3683,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/scripts/attest-plan.ps1": {
           "executable": false,
@@ -3787,11 +3787,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/templates/analytics_findings.md": {
           "executable": false,
@@ -3875,11 +3875,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/scripts/attest-plan.ps1": {
           "executable": false,
@@ -3979,11 +3979,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/templates/analytics_findings.md": {
           "executable": false,
@@ -4035,11 +4035,11 @@
         },
         "skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -4139,11 +4139,11 @@
         },
         "skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -4199,7 +4199,7 @@
         }
       },
       "path": "codebuddy/planweft",
-      "sha256": "6a3965247471a67390278b695f1c154353d241a9b0eb51465480d8f7a9798713"
+      "sha256": "91c8e12b3f52635b142b565873e0067860571edfdc824591fea862ee431a8d60"
     },
     "codex": {
       "file_count": 352,
@@ -4462,11 +4462,11 @@
         },
         "skills/i18n/project-docs-ar/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-ar/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-ar/scripts/attest-plan.ps1": {
           "executable": false,
@@ -4566,11 +4566,11 @@
         },
         "skills/i18n/project-docs-ar/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-ar/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-ar/templates/analytics_findings.md": {
           "executable": false,
@@ -4658,11 +4658,11 @@
         },
         "skills/i18n/project-docs-de/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-de/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-de/scripts/attest-plan.ps1": {
           "executable": false,
@@ -4762,11 +4762,11 @@
         },
         "skills/i18n/project-docs-de/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-de/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-de/templates/analytics_findings.md": {
           "executable": false,
@@ -4854,11 +4854,11 @@
         },
         "skills/i18n/project-docs-es/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-es/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-es/scripts/attest-plan.ps1": {
           "executable": false,
@@ -4958,11 +4958,11 @@
         },
         "skills/i18n/project-docs-es/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-es/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-es/templates/analytics_findings.md": {
           "executable": false,
@@ -5050,11 +5050,11 @@
         },
         "skills/i18n/project-docs-zh/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-zh/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-zh/scripts/attest-plan.ps1": {
           "executable": false,
@@ -5154,11 +5154,11 @@
         },
         "skills/i18n/project-docs-zh/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-zh/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-zh/templates/analytics_findings.md": {
           "executable": false,
@@ -5246,11 +5246,11 @@
         },
         "skills/i18n/project-docs-zht/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-zht/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-zht/scripts/attest-plan.ps1": {
           "executable": false,
@@ -5350,11 +5350,11 @@
         },
         "skills/i18n/project-docs-zht/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-zht/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-zht/templates/analytics_findings.md": {
           "executable": false,
@@ -5442,11 +5442,11 @@
         },
         "skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -5546,11 +5546,11 @@
         },
         "skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -5582,11 +5582,11 @@
         },
         "state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "templates/analytics_findings.md": {
           "executable": false,
@@ -5614,7 +5614,7 @@
         }
       },
       "path": "codex/planweft",
-      "sha256": "5a7b61fbce4ecc54e910962a68bd135fb784a470d1c25a4db8da553f87c7450b"
+      "sha256": "1189689adfe1207870bd2b17986779687ef8d46d2b22cc8b1e664656863afb6d"
     },
     "continue": {
       "file_count": 376,
@@ -5677,11 +5677,11 @@
         },
         ".continue/skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         ".continue/skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         ".continue/skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -5781,11 +5781,11 @@
         },
         ".continue/skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         ".continue/skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         ".continue/skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -5993,11 +5993,11 @@
         },
         "skills/i18n/project-docs-ar/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-ar/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-ar/scripts/attest-plan.ps1": {
           "executable": false,
@@ -6097,11 +6097,11 @@
         },
         "skills/i18n/project-docs-ar/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-ar/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-ar/templates/analytics_findings.md": {
           "executable": false,
@@ -6185,11 +6185,11 @@
         },
         "skills/i18n/project-docs-de/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-de/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-de/scripts/attest-plan.ps1": {
           "executable": false,
@@ -6289,11 +6289,11 @@
         },
         "skills/i18n/project-docs-de/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-de/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-de/templates/analytics_findings.md": {
           "executable": false,
@@ -6377,11 +6377,11 @@
         },
         "skills/i18n/project-docs-es/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-es/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-es/scripts/attest-plan.ps1": {
           "executable": false,
@@ -6481,11 +6481,11 @@
         },
         "skills/i18n/project-docs-es/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-es/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-es/templates/analytics_findings.md": {
           "executable": false,
@@ -6569,11 +6569,11 @@
         },
         "skills/i18n/project-docs-zh/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-zh/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-zh/scripts/attest-plan.ps1": {
           "executable": false,
@@ -6673,11 +6673,11 @@
         },
         "skills/i18n/project-docs-zh/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-zh/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-zh/templates/analytics_findings.md": {
           "executable": false,
@@ -6761,11 +6761,11 @@
         },
         "skills/i18n/project-docs-zht/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-zht/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-zht/scripts/attest-plan.ps1": {
           "executable": false,
@@ -6865,11 +6865,11 @@
         },
         "skills/i18n/project-docs-zht/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-zht/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-zht/templates/analytics_findings.md": {
           "executable": false,
@@ -6953,11 +6953,11 @@
         },
         "skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -7057,11 +7057,11 @@
         },
         "skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -7093,11 +7093,11 @@
         },
         "state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "templates/analytics_findings.md": {
           "executable": false,
@@ -7125,7 +7125,7 @@
         }
       },
       "path": "continue/planweft",
-      "sha256": "8debb43bf32a3a2a877a5ede66030591c94eff6f05c886bd9ffce5c0548ce09e"
+      "sha256": "e8bd8c0edb9f6630d0d7b886df489781838f627b2f88e2211379f56d77851b9e"
     },
     "copilot": {
       "file_count": 328,
@@ -7352,11 +7352,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/scripts/attest-plan.ps1": {
           "executable": false,
@@ -7456,11 +7456,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/templates/analytics_findings.md": {
           "executable": false,
@@ -7544,11 +7544,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-de/scripts/attest-plan.ps1": {
           "executable": false,
@@ -7648,11 +7648,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-de/templates/analytics_findings.md": {
           "executable": false,
@@ -7736,11 +7736,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-es/scripts/attest-plan.ps1": {
           "executable": false,
@@ -7840,11 +7840,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-es/templates/analytics_findings.md": {
           "executable": false,
@@ -7928,11 +7928,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/scripts/attest-plan.ps1": {
           "executable": false,
@@ -8032,11 +8032,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/templates/analytics_findings.md": {
           "executable": false,
@@ -8120,11 +8120,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/scripts/attest-plan.ps1": {
           "executable": false,
@@ -8224,11 +8224,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/templates/analytics_findings.md": {
           "executable": false,
@@ -8280,11 +8280,11 @@
         },
         "skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -8384,11 +8384,11 @@
         },
         "skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -8444,7 +8444,7 @@
         }
       },
       "path": "copilot/planweft",
-      "sha256": "7dfd429bb554f79978301c8c2841e5a3f811c73b0b3f70c1764bfaf87dd733ed"
+      "sha256": "0853efbc1140e58f52b1f3cd4c2727af12a9887da9bacc2f9e670d8669dfc2ff"
     },
     "cursor": {
       "file_count": 328,
@@ -8671,11 +8671,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/scripts/attest-plan.ps1": {
           "executable": false,
@@ -8775,11 +8775,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/templates/analytics_findings.md": {
           "executable": false,
@@ -8863,11 +8863,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-de/scripts/attest-plan.ps1": {
           "executable": false,
@@ -8967,11 +8967,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-de/templates/analytics_findings.md": {
           "executable": false,
@@ -9055,11 +9055,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-es/scripts/attest-plan.ps1": {
           "executable": false,
@@ -9159,11 +9159,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-es/templates/analytics_findings.md": {
           "executable": false,
@@ -9247,11 +9247,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/scripts/attest-plan.ps1": {
           "executable": false,
@@ -9351,11 +9351,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/templates/analytics_findings.md": {
           "executable": false,
@@ -9439,11 +9439,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/scripts/attest-plan.ps1": {
           "executable": false,
@@ -9543,11 +9543,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/templates/analytics_findings.md": {
           "executable": false,
@@ -9599,11 +9599,11 @@
         },
         "skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -9703,11 +9703,11 @@
         },
         "skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -9763,7 +9763,7 @@
         }
       },
       "path": "cursor/planweft",
-      "sha256": "b654d58d1e045c520c94ed24b926e75faa7a6105500db9d53f3e6e1db40b44a1"
+      "sha256": "e3c515f1479e4d0ed0859930f1b79ab416144d4f912ae961eff7029b5bb8fa53"
     },
     "dsh": {
       "file_count": 332,
@@ -10006,11 +10006,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/scripts/attest-plan.ps1": {
           "executable": false,
@@ -10110,11 +10110,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/templates/analytics_findings.md": {
           "executable": false,
@@ -10198,11 +10198,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-de/scripts/attest-plan.ps1": {
           "executable": false,
@@ -10302,11 +10302,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-de/templates/analytics_findings.md": {
           "executable": false,
@@ -10390,11 +10390,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-es/scripts/attest-plan.ps1": {
           "executable": false,
@@ -10494,11 +10494,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-es/templates/analytics_findings.md": {
           "executable": false,
@@ -10582,11 +10582,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/scripts/attest-plan.ps1": {
           "executable": false,
@@ -10686,11 +10686,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/templates/analytics_findings.md": {
           "executable": false,
@@ -10774,11 +10774,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/scripts/attest-plan.ps1": {
           "executable": false,
@@ -10878,11 +10878,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/templates/analytics_findings.md": {
           "executable": false,
@@ -10934,11 +10934,11 @@
         },
         "skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -11038,11 +11038,11 @@
         },
         "skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -11098,7 +11098,7 @@
         }
       },
       "path": "dsh/planweft",
-      "sha256": "f9f9c3d12eb39daecf6451132ec1298058a9db61cd85ba900849ed4d7f2fc028"
+      "sha256": "08ee041cb33a28ed9b1c76e8a1135763408257f0f751b8ac733c97662b3fe54e"
     },
     "factory": {
       "file_count": 326,
@@ -11317,11 +11317,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/scripts/attest-plan.ps1": {
           "executable": false,
@@ -11421,11 +11421,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/templates/analytics_findings.md": {
           "executable": false,
@@ -11509,11 +11509,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-de/scripts/attest-plan.ps1": {
           "executable": false,
@@ -11613,11 +11613,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-de/templates/analytics_findings.md": {
           "executable": false,
@@ -11701,11 +11701,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-es/scripts/attest-plan.ps1": {
           "executable": false,
@@ -11805,11 +11805,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-es/templates/analytics_findings.md": {
           "executable": false,
@@ -11893,11 +11893,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/scripts/attest-plan.ps1": {
           "executable": false,
@@ -11997,11 +11997,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/templates/analytics_findings.md": {
           "executable": false,
@@ -12085,11 +12085,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/scripts/attest-plan.ps1": {
           "executable": false,
@@ -12189,11 +12189,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/templates/analytics_findings.md": {
           "executable": false,
@@ -12245,11 +12245,11 @@
         },
         "skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -12349,11 +12349,11 @@
         },
         "skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -12409,7 +12409,7 @@
         }
       },
       "path": "factory/planweft",
-      "sha256": "7c6523bcfef7461e42cbabc032c5af7bb48584c3906fbd6f5d11abbc227e24c5"
+      "sha256": "28d2f3f4904dcaa5a384981ea2fc6150007ded455cfddcc759efc2474837d813"
     },
     "gemini": {
       "file_count": 330,
@@ -12644,11 +12644,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/scripts/attest-plan.ps1": {
           "executable": false,
@@ -12748,11 +12748,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/templates/analytics_findings.md": {
           "executable": false,
@@ -12836,11 +12836,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-de/scripts/attest-plan.ps1": {
           "executable": false,
@@ -12940,11 +12940,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-de/templates/analytics_findings.md": {
           "executable": false,
@@ -13028,11 +13028,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-es/scripts/attest-plan.ps1": {
           "executable": false,
@@ -13132,11 +13132,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-es/templates/analytics_findings.md": {
           "executable": false,
@@ -13220,11 +13220,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/scripts/attest-plan.ps1": {
           "executable": false,
@@ -13324,11 +13324,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/templates/analytics_findings.md": {
           "executable": false,
@@ -13412,11 +13412,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/scripts/attest-plan.ps1": {
           "executable": false,
@@ -13516,11 +13516,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/templates/analytics_findings.md": {
           "executable": false,
@@ -13572,11 +13572,11 @@
         },
         "skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -13676,11 +13676,11 @@
         },
         "skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -13736,7 +13736,7 @@
         }
       },
       "path": "gemini/planweft",
-      "sha256": "f9cbbb1b2e009615380369b32a2ba41c8e8b5026cf2edc5aa5daae44f7430913"
+      "sha256": "df6162b0e92cfba6fe2897b499c569c29bcf55c62b564905d0eb6124d692dd19"
     },
     "hermes": {
       "file_count": 335,
@@ -13987,11 +13987,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/scripts/attest-plan.ps1": {
           "executable": false,
@@ -14091,11 +14091,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/templates/analytics_findings.md": {
           "executable": false,
@@ -14179,11 +14179,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-de/scripts/attest-plan.ps1": {
           "executable": false,
@@ -14283,11 +14283,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-de/templates/analytics_findings.md": {
           "executable": false,
@@ -14371,11 +14371,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-es/scripts/attest-plan.ps1": {
           "executable": false,
@@ -14475,11 +14475,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-es/templates/analytics_findings.md": {
           "executable": false,
@@ -14563,11 +14563,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/scripts/attest-plan.ps1": {
           "executable": false,
@@ -14667,11 +14667,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/templates/analytics_findings.md": {
           "executable": false,
@@ -14755,11 +14755,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/scripts/attest-plan.ps1": {
           "executable": false,
@@ -14859,11 +14859,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/templates/analytics_findings.md": {
           "executable": false,
@@ -14915,11 +14915,11 @@
         },
         "skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -15019,11 +15019,11 @@
         },
         "skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -15083,7 +15083,7 @@
         }
       },
       "path": "hermes/planweft",
-      "sha256": "4c302f27a9595fa75a6c2353893b693cc7fcb33e635b6fc05d9cff89772522eb"
+      "sha256": "2223b210a326400a7a9bd8df9abcfb10f1ab61287e7522fb4f216eab474f35b7"
     },
     "kiro": {
       "file_count": 338,
@@ -15338,11 +15338,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/scripts/attest-plan.ps1": {
           "executable": false,
@@ -15442,11 +15442,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/templates/analytics_findings.md": {
           "executable": false,
@@ -15530,11 +15530,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-de/scripts/attest-plan.ps1": {
           "executable": false,
@@ -15634,11 +15634,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-de/templates/analytics_findings.md": {
           "executable": false,
@@ -15722,11 +15722,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-es/scripts/attest-plan.ps1": {
           "executable": false,
@@ -15826,11 +15826,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-es/templates/analytics_findings.md": {
           "executable": false,
@@ -15914,11 +15914,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/scripts/attest-plan.ps1": {
           "executable": false,
@@ -16018,11 +16018,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/templates/analytics_findings.md": {
           "executable": false,
@@ -16106,11 +16106,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/scripts/attest-plan.ps1": {
           "executable": false,
@@ -16210,11 +16210,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/templates/analytics_findings.md": {
           "executable": false,
@@ -16278,11 +16278,11 @@
         },
         "skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -16382,11 +16382,11 @@
         },
         "skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -16442,7 +16442,7 @@
         }
       },
       "path": "kiro/planweft",
-      "sha256": "ea3533977d53340c417cc9d4b5874253ce41a4d755bcf3291e4afe77d41e7919"
+      "sha256": "d6f23f4d0b47dc845c25deaed7eda5385f8b7cce7fe3d126a7d205e4d9961e2b"
     },
     "mastracode": {
       "file_count": 378,
@@ -16513,11 +16513,11 @@
         },
         ".mastracode/skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         ".mastracode/skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         ".mastracode/skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -16617,11 +16617,11 @@
         },
         ".mastracode/skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         ".mastracode/skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         ".mastracode/skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -16829,11 +16829,11 @@
         },
         "skills/i18n/project-docs-ar/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-ar/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-ar/scripts/attest-plan.ps1": {
           "executable": false,
@@ -16933,11 +16933,11 @@
         },
         "skills/i18n/project-docs-ar/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-ar/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-ar/templates/analytics_findings.md": {
           "executable": false,
@@ -17021,11 +17021,11 @@
         },
         "skills/i18n/project-docs-de/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-de/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-de/scripts/attest-plan.ps1": {
           "executable": false,
@@ -17125,11 +17125,11 @@
         },
         "skills/i18n/project-docs-de/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-de/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-de/templates/analytics_findings.md": {
           "executable": false,
@@ -17213,11 +17213,11 @@
         },
         "skills/i18n/project-docs-es/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-es/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-es/scripts/attest-plan.ps1": {
           "executable": false,
@@ -17317,11 +17317,11 @@
         },
         "skills/i18n/project-docs-es/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-es/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-es/templates/analytics_findings.md": {
           "executable": false,
@@ -17405,11 +17405,11 @@
         },
         "skills/i18n/project-docs-zh/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-zh/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-zh/scripts/attest-plan.ps1": {
           "executable": false,
@@ -17509,11 +17509,11 @@
         },
         "skills/i18n/project-docs-zh/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-zh/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-zh/templates/analytics_findings.md": {
           "executable": false,
@@ -17597,11 +17597,11 @@
         },
         "skills/i18n/project-docs-zht/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/i18n/project-docs-zht/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/i18n/project-docs-zht/scripts/attest-plan.ps1": {
           "executable": false,
@@ -17701,11 +17701,11 @@
         },
         "skills/i18n/project-docs-zht/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/i18n/project-docs-zht/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/i18n/project-docs-zht/templates/analytics_findings.md": {
           "executable": false,
@@ -17789,11 +17789,11 @@
         },
         "skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -17893,11 +17893,11 @@
         },
         "skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -17929,11 +17929,11 @@
         },
         "state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "templates/analytics_findings.md": {
           "executable": false,
@@ -17961,7 +17961,7 @@
         }
       },
       "path": "mastracode/planweft",
-      "sha256": "0b848dec8c9ba0b497622f67517234e6c3d6942134f0411242199cb10ca0f621"
+      "sha256": "c4d9e5d9329a26ee2e1a71148803a01ff5c857e129c9f93cd6b6a7aa4f0e1c46"
     },
     "opencode": {
       "file_count": 338,
@@ -18216,11 +18216,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/scripts/attest-plan.ps1": {
           "executable": false,
@@ -18320,11 +18320,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-ar/templates/analytics_findings.md": {
           "executable": false,
@@ -18408,11 +18408,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-de/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-de/scripts/attest-plan.ps1": {
           "executable": false,
@@ -18512,11 +18512,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-de/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-de/templates/analytics_findings.md": {
           "executable": false,
@@ -18600,11 +18600,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-es/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-es/scripts/attest-plan.ps1": {
           "executable": false,
@@ -18704,11 +18704,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-es/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-es/templates/analytics_findings.md": {
           "executable": false,
@@ -18792,11 +18792,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/scripts/attest-plan.ps1": {
           "executable": false,
@@ -18896,11 +18896,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zh/templates/analytics_findings.md": {
           "executable": false,
@@ -18984,11 +18984,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/scripts/attest-plan.ps1": {
           "executable": false,
@@ -19088,11 +19088,11 @@
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/references/language-variants/project-docs-zht/templates/analytics_findings.md": {
           "executable": false,
@@ -19144,11 +19144,11 @@
         },
         "skills/project-docs/references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "skills/project-docs/references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "skills/project-docs/scripts/attest-plan.ps1": {
           "executable": false,
@@ -19248,11 +19248,11 @@
         },
         "skills/project-docs/state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "skills/project-docs/state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "skills/project-docs/templates/analytics_findings.md": {
           "executable": false,
@@ -19320,7 +19320,7 @@
         }
       },
       "path": "opencode/planweft",
-      "sha256": "248754eb476bb8246b50124e3a3bee469fc6f48dab281e4ad6393744b28908b1"
+      "sha256": "e83ea3c5ca92c34c648dab9d8c27cbcd861f0984d3804ee92d566eaa4de1ad73"
     },
     "pi": {
       "file_count": 62,
@@ -19431,11 +19431,11 @@
         },
         "references/state-evidence.md": {
           "executable": false,
-          "sha256": "d76f4b025e4be5f0ed31ee343730ecfaf09f3298517bd792494977ed39b2400d"
+          "sha256": "0c7b3f5c182d2cfdebc9a75a0cb6e6771b5054b8b06a280a5230008f556bcdd0"
         },
         "references/state-evidence.zh.md": {
           "executable": false,
-          "sha256": "4990b1df5e8cca2f34c0ae11af795e48b5d24bb3f6a240f60d200607d08a5a30"
+          "sha256": "3ed64e04c3899390f012fccc3f9606aaba9bc38db8941accc25ce597a3fec4b2"
         },
         "scripts/attest-plan.ps1": {
           "executable": false,
@@ -19539,11 +19539,11 @@
         },
         "state/cli.mjs": {
           "executable": false,
-          "sha256": "a67fb4794ff188ade23d8594fe04d453331672cdcfdf32e851c33d6b4e024d33"
+          "sha256": "d7604f9a720eead4490e75b9e9e956d83edbcb298c0cb9680619935ddd2ea21a"
         },
         "state/core.mjs": {
           "executable": false,
-          "sha256": "d11ee2905ee564f0166926220ce251085c634f9ea85ddc65313fb70faad35fcf"
+          "sha256": "798055045de5cb4a8cf4c1ce8b306f4b977b873321ed3f127e4ef7a169f33cdf"
         },
         "templates/analytics_findings.md": {
           "executable": false,
@@ -19575,7 +19575,7 @@
         }
       },
       "path": "pi/planweft",
-      "sha256": "6fd858534b5f18d3b48fb3e837310902839889868795968c4b562ed0123b781e"
+      "sha256": "d1ce73b4675a68aa9d51334f8073c1978cb9bd37969503648c5aa9c32b684252"
     }
   },
   "product": "planweft",

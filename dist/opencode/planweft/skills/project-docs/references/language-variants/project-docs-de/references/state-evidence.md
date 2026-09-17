@@ -21,9 +21,11 @@ planweft state recover --transaction <id> --dry-run
 ```
 
 `record` never executes a command string from the JSON. It records the
-observed result separately from interpretation and criteria, stores regular
-files by streaming SHA-256, and rejects paths outside the authorized project,
-symlinks, changed markdown baselines, and idempotency-key conflicts. Recovery
-is read-only until `--apply` is explicitly supplied. The helper is local and
-offline; it does not replace host tools, enable remote reducers, or change the
-default advisory Hook.
+observed result separately from interpretation, criteria, and freshness, stores
+regular files by streaming and rechecking SHA-256, and rejects unsupported
+capture/origin values, paths outside the authorized project, symlinks, changed
+markdown baselines, and idempotency-key conflicts. Recovery is read-only until
+`--apply` is explicitly supplied. The helper is local and offline; it does not
+replace host tools, enable remote reducers, or change the default advisory
+Hook. `doctor` reports damaged or missing references, lock state, budgets and
+local-only evidence without writing.

@@ -17,7 +17,7 @@ Usage:
   planweft state init [--plan-dir DIR] [--storage-budget-bytes N]
   planweft state record --input FILE [--plan-dir DIR]
   planweft state verify --receipt ID [--plan-dir DIR]
-  planweft state recall --artifact SHA256 --start-byte N --length N [--json]
+  planweft state recall --artifact SHA256 --start-byte N --length N [--plan-dir DIR] [--json]
   planweft state doctor [--plan-dir DIR]
   planweft state recover --transaction ID --dry-run [--plan-dir DIR]
 
@@ -44,6 +44,14 @@ function has(args, name) {
   return args.includes(name) || args.some(arg => arg.startsWith(`${name}=`));
 }
 
+function rejectUnknown(args, allowed) {
+  for (const arg of args) {
+    if (!arg.startsWith('--')) continue;
+    const name = arg.split('=', 1)[0];
+    if (!allowed.has(name)) throw new StateError(`unknown option: ${name}`, EXIT_CODES.INPUT);
+  }
+}
+
 function integerValue(args, name, {required = false, defaultValue} = {}) {
   const raw = valueFor(args, name, {required});
   if (raw === undefined) return defaultValue;
@@ -55,7 +63,8 @@ function integerValue(args, name, {required = false, defaultValue} = {}) {
 }
 
 function selectedPlanDir(args, env) {
-  if (valueFor(args, '--plan-dir') || env.PLAN_DIR) return valueFor(args, '--plan-dir') || env.PLAN_DIR;
+  const explicit = valueFor(args, '--plan-dir');
+  if (explicit || env.PLAN_DIR) return explicit || env.PLAN_DIR;
   if (env.PLAN_ID) {
     if (!/^[^/\\]+$/.test(env.PLAN_ID) || env.PLAN_ID === '.' || env.PLAN_ID === '..') {
       throw new StateError('PLAN_ID must be one safe .planning directory name', EXIT_CODES.INPUT);
@@ -113,16 +122,20 @@ export async function main(argv = process.argv.slice(2), {
     const planDir = selectedPlanDir(args, env);
     let value;
     if (action === 'init') {
+      rejectUnknown(args, new Set(['--plan-dir', '--storage-budget-bytes', '--json']));
       value = env.PLANNING_DISABLED === '1'
         ? disabledResult(action, env)
         : initStore(planDir, {cwd, storageBudgetBytes: integerValue(args, '--storage-budget-bytes', {defaultValue: null})});
     } else if (action === 'record') {
+      rejectUnknown(args, new Set(['--plan-dir', '--input', '--json']));
       value = env.PLANNING_DISABLED === '1'
         ? disabledResult(action, env)
         : await recordState(planDir, {cwd, inputPath: valueFor(args, '--input', {required: true})});
     } else if (action === 'verify') {
+      rejectUnknown(args, new Set(['--plan-dir', '--receipt', '--json']));
       value = await verifyReceipt(planDir, {cwd, receiptId: valueFor(args, '--receipt', {required: true})});
     } else if (action === 'recall') {
+      rejectUnknown(args, new Set(['--plan-dir', '--artifact', '--start-byte', '--length', '--json']));
       value = await recallArtifact(planDir, {
         cwd,
         digest: valueFor(args, '--artifact', {required: true}),
@@ -131,10 +144,13 @@ export async function main(argv = process.argv.slice(2), {
         asJSON: json,
       });
     } else if (action === 'doctor') {
+      rejectUnknown(args, new Set(['--plan-dir', '--json']));
       value = env.PLANNING_DISABLED === '1'
         ? disabledResult(action, env)
-        : doctor(planDir, {cwd});
+        : await doctor(planDir, {cwd});
     } else if (action === 'recover') {
+      rejectUnknown(args, new Set(['--plan-dir', '--transaction', '--dry-run', '--apply', '--json']));
+      if (has(args, '--dry-run') && has(args, '--apply')) throw new StateError('--dry-run and --apply cannot be combined', EXIT_CODES.INPUT);
       const dryRun = has(args, '--dry-run') || !has(args, '--apply');
       value = recoverTransaction(planDir, {
         cwd,
