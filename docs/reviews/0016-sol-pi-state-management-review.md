@@ -20,6 +20,8 @@
 - `node --test tests/state-evidence.test.mjs`：4 tests Passed。
 - `python3 -m unittest tests.test_state_evidence -v`：2 tests Passed。
 - `npm test`：124 Passed，1 skipped。
+- `PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_*.py'`：360 tests Passed，1 skipped。
+- `python3 -m unittest tests.test_public_docs`：10 tests Passed。
 - `build-plugin.py --verify`：15 个宿主和 shared-state 全部 0 differences，Passed。
 - 真实 Agent/model regression：Not Run，未用离线结果替代。
 
