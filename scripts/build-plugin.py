@@ -670,9 +670,9 @@ def public_installation_files():
         text = text.replace('](INSTALL.en.md)', '](installation.en.md)')
         navigation, _, body = text.partition('\n')
         context = ('Project overview: [中文](../README.md) / [English](../README.en.md) · '
-                   'Cross-platform design: [中文](platforms.md) / [English](platforms.en.md)'
+                   'Host support: [中文](hosts.md) / [English](hosts.en.md)'
                    if suffix else '项目介绍：[中文](../README.md) / [English](../README.en.md) · '
-                   '跨平台设计：[中文](platforms.md) / [English](platforms.en.md)')
+                   '宿主支持：[中文](hosts.md) / [English](hosts.en.md)')
         generated = '<!-- Generated from overlays/planweft/install/' + source.name + '; edit the source. -->'
         result['installation' + suffix + '.md'] = (
             (navigation + '\n\n' + context + '\n\n' + generated + '\n\n' + body.lstrip()).encode(), 0o644)

@@ -10,7 +10,7 @@ PlanWeft 0.5.1 通过一个 `planweft` npm 包分发。安装器会为每个宿�
 
 ## 安装
 
-项目级是默认 scope。Codex、Copilot、Gemini、Hermes 和 DSH 的完整集成只支持用户级安装，必须使用 `--global`；这些宿主仍可按项目安装 Skill-only 版本。以下示例覆盖五个有历史正式核心验收证据的宿主；当前版本的分发目标和能力边界见宿主说明：
+项目级是默认 scope。Codex、Copilot、Gemini、Hermes 和 DSH 的完整集成只支持用户级安装，必须使用 `--global`；这些宿主仍可按项目安装 Skill-only 版本。以下示例覆盖当前五个主要支持宿主：
 
 ```bash
 npx planweft@0.5.1 add -a codex --global
@@ -31,9 +31,9 @@ npx planweft@0.5.1 add -a dsh --global --dsh-profile headless
 | `--dsh-profile NAME` | `headless` | 选择 DSH 完整集成使用的 profile |
 | `--approve-pi-project` | 关闭 | 仅为本次 Pi 项目命令传入原生 `--approve` |
 | `--dry-run` | 关闭 | 显示选择和目标路径，不写入 |
-| `--source FILE.tgz` | 当前精确 npm 版本 | 使用与当前 CLI 身份和版本一致的本地验收包 |
+| `--source FILE.tgz` | 当前精确 npm 版本 | 使用与当前 CLI 身份和版本一致的本地包 |
 
-宿主标识为：`codex claude pi opencode hermes cursor gemini copilot mastracode kiro continue factory codebuddy agents dsh`。前五个正式支持的宿主是 `codex`、`claude`、`pi`、`opencode` 和 `dsh`；其余适配器为实验性。
+宿主标识为：`codex claude pi opencode hermes cursor gemini copilot mastracode kiro continue factory codebuddy agents dsh`。其中 `codex`、`claude`、`pi`、`opencode` 和 `dsh` 是主要支持集成，其余适配器目前为实验性。
 
 仅需要 Skill 时显式使用 `--skill-only`：
 
@@ -92,7 +92,7 @@ npx planweft@0.5.1 doctor -a pi
 - 安装记录、摘要或目标路径不一致；
 - 另一个安装操作持有 `.operation-lock`。
 
-更新或卸载不会删除 `task_plan.md`、`findings.md`、`progress.md`、`.planning/`、attestation、ledger、specs、ADR、reproduction 或用户笔记。插件回退也不会回退任务中已经修改的项目文档。
+更新、回退或卸载 PlanWeft 不会删除项目拥有的任务记录或项目文档，也不会回滚任务过程中已经修改的项目内容。
 
 ## 信任、禁用与宿主差异
 
@@ -102,11 +102,11 @@ npx planweft@0.5.1 doctor -a pi
 
 DSH 完整集成是用户级 profile 安装，更新和卸载必须使用相同的 `--dsh-profile`。GUI 平台或 Mastra hooks 合并可能由安装器标记为 manual，需要在宿主界面完成，不能把文件已复制当作加载成功。
 
-Hermes 当前仍为实验性分发。历史默认扫描拒绝记录不会因安装文档精简而变成通过；安装器不提供关闭扫描器的绕过开关。
+实验性宿主的当前能力和限制统一见[宿主说明](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.md)。
 
 ## 常见问题
 
-**`doctor` 报告重复 hooks。** 使用各宿主的列表命令确认真实注册 ID，按原安装渠道移除旧来源。不要直接删除未知缓存，也不要让完整插件与手工 Skill/hooks 同时执行。
+**`doctor` 报告重复 hooks。** 使用各宿主的列表命令确认真实注册 ID，按原安装渠道移除旧来源。不要直接删除未知缓存，也不要让完整插件与手工 Skill/hooks 同时执行。旧 `program-design`、`personal` 或 `program-design-local` 安装也应先通过原安装渠道移除执行 hooks，再安装 PlanWeft。
 
 **更新后仍看到旧行为。** 先确认 `update` 使用了目标版本，再按宿主要求刷新 marketplace、重载插件或启动新会话。来源刷新、文件替换和当前进程重载不是同一动作。
 
@@ -119,11 +119,5 @@ Hermes 当前仍为实验性分发。历史默认扫描拒绝记录不会因安�
 ```bash
 npx planweft@0.5.1 add -a codex --global --source /absolute/path/planweft-0.5.1.tgz
 ```
-
-## 从旧身份迁移
-
-从 `program-design`、`personal` 或 `program-design-local` 迁移时，先用原宿主的列表命令确认旧注册，再通过原安装渠道移除旧执行 hooks。随后安装 PlanWeft 并创建新会话。主 Skill 仍为 `project-docs`，辅助命令前缀从 `pd-` 改为 `pw-`，OpenCode 工具前缀从 `pd_` 改为 `pw_`。
-
-安装器不会自动卸载旧插件或原版 PWF。项目计划、批准需求和用户修改保持不变。
 
 宿主分发、静态事件和已知限制见仓库的[中文宿主说明](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.md)；维护者需要的手工布局、catalog 和协议细节见[开发文档](https://github.com/psiQAQ/planweft/blob/master/docs/development.md)。

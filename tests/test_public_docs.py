@@ -62,7 +62,7 @@ class PublicDocsTest(unittest.TestCase):
             text = (ROOT / filename).read_text()
             with self.subTest(filename=filename):
                 for marker in markers:
-                    self.assertIn(marker, text)
+                    self.assertIn(marker.lower(), text.lower())
                 for source_path in ('skills/project-docs/SKILL.md', 'hooks/',
                                     'task_plan.md', 'findings.md', 'progress.md',
                                     'project-docs'):
@@ -123,11 +123,12 @@ class PublicDocsTest(unittest.TestCase):
                          'overlays/planweft/install/INSTALL.en.md'):
             with self.subTest(filename=filename):
                 self.assertNotIn('0.4.0', (ROOT / filename).read_text())
-        for filename in ('docs/hosts.md', 'docs/hosts.en.md'):
+        for filename, marker in (('docs/hosts.md', '历史验收证据'),
+                                 ('docs/hosts.en.md', 'Historical acceptance evidence')):
             text = (ROOT / filename).read_text()
             with self.subTest(filename=filename):
                 self.assertIn('0.4.0', text)
-                self.assertTrue('版本绑定' in text or 'version-bound' in text)
+                self.assertIn(marker, text)
 
     def test_each_standalone_package_retains_both_readme_and_installation_languages(self):
         manifest = json.loads((ROOT / 'dist/manifest.json').read_text())

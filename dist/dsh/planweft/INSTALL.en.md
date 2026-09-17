@@ -10,7 +10,7 @@ Node.js 22 or newer is required; Node.js 24 LTS is recommended. Some hosts also 
 
 ## Install
 
-Project scope is the default. Complete Codex, Copilot, Gemini, Hermes, and DSH integrations support user scope only and require `--global`; these hosts can still install Skill-only at project scope. These examples cover the five hosts with historical formal-core acceptance evidence; see the host guide for current distribution targets and capability boundaries:
+Project scope is the default. Complete Codex, Copilot, Gemini, Hermes, and DSH integrations support user scope only and require `--global`; these hosts can still install Skill-only at project scope. The examples below cover the five primary supported hosts:
 
 ```bash
 npx planweft@0.5.1 add -a codex --global
@@ -31,9 +31,9 @@ Repeat `-a` to select several hosts in one command. Non-interactive use must pro
 | `--dsh-profile NAME` | `headless` | Select the profile for a complete DSH integration |
 | `--approve-pi-project` | Off | Pass native `--approve` only to this Pi project operation |
 | `--dry-run` | Off | Show selections and target paths without writing |
-| `--source FILE.tgz` | Current exact npm version | Use a local accepted archive matching the running CLI identity and version |
+| `--source FILE.tgz` | Current exact npm version | Use a local package matching the running CLI identity and version |
 
-Host IDs are `codex claude pi opencode hermes cursor gemini copilot mastracode kiro continue factory codebuddy agents dsh`. The five supported hosts are `codex`, `claude`, `pi`, `opencode`, and `dsh`; the other adapters are experimental.
+Host IDs are `codex claude pi opencode hermes cursor gemini copilot mastracode kiro continue factory codebuddy agents dsh`. `codex`, `claude`, `pi`, `opencode`, and `dsh` are the primary supported integrations; the other adapters are currently experimental.
 
 Use `--skill-only` explicitly when only the Skill is needed:
 
@@ -92,7 +92,7 @@ The installer overwrites only files whose ownership it recorded and can verify. 
 - the installation record, digest, or target path does not match;
 - another operation owns `.operation-lock`.
 
-Update and removal do not delete `task_plan.md`, `findings.md`, `progress.md`, `.planning/`, attestations, ledgers, specs, ADRs, reproduction records, or user notes. Rolling back the plugin does not roll back project documents changed during a task.
+Updating, rolling back, or removing PlanWeft does not delete project-owned task records or project documentation, and it does not roll back project content changed during a task.
 
 ## Trust, disable behavior, and host differences
 
@@ -102,11 +102,11 @@ The default runtime is advisory. To disable execution hooks on verified adapter 
 
 A complete DSH integration is installed in user scope for one profile. Update and removal must use the same `--dsh-profile`. GUI platforms and Mastra hook merging may be reported as manual and must be completed in the host UI; copied files do not prove loading.
 
-Hermes remains an experimental distribution. Simplifying this guide does not change the historical default-scanner rejection, and the installer does not provide a scanner-bypass switch.
+See the [host guide](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.en.md) for current capabilities and limitations of experimental hosts.
 
 ## Troubleshooting
 
-**`doctor` reports duplicate hooks.** Use the host's listing command to find the real registration ID, then remove the old source through its original installation channel. Do not delete unknown caches or run complete plugin hooks beside manual Skill/hooks copies.
+**`doctor` reports duplicate hooks.** Use the host's listing command to find the real registration ID, then remove the old source through its original installation channel. Do not delete unknown caches or run complete plugin hooks beside manual Skill/hooks copies. Old `program-design`, `personal`, or `program-design-local` installations should likewise have their execution hooks removed through the original channel before installing PlanWeft.
 
 **Old behavior remains after update.** Confirm that `update` ran from the target version, then refresh the host marketplace, reload plugins, or start a new session as required. Source refresh, file replacement, and process reload are separate operations.
 
@@ -119,11 +119,5 @@ Hermes remains an experimental distribution. Simplifying this guide does not cha
 ```bash
 npx planweft@0.5.1 add -a codex --global --source /absolute/path/planweft-0.5.1.tgz
 ```
-
-## Migrate from an old identity
-
-When migrating from `program-design`, `personal`, or `program-design-local`, use the host's listing command to identify the old registration and remove its execution hooks through the original channel. Install PlanWeft and start a new session. The main Skill remains `project-docs`; auxiliary commands change from `pd-` to `pw-`, and OpenCode tools change from `pd_` to `pw_`.
-
-The installer does not automatically remove an old plugin or the original PWF installation. Project plans, approved requirements, and user changes remain intact.
 
 See the repository's [host guide](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.en.md) for distribution, static events, and known limitations. Maintainers can find manual layouts, catalogs, and protocol details in the [development documentation](https://github.com/psiQAQ/planweft/blob/master/docs/development.md).
