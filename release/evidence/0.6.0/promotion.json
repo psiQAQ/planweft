@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "version": "0.6.0",
+  "policy_sha256": "3b975f25c928441c1c9e25dd2cdf7d6ec3b4e27e0fab775012c12fb6831e8e62",
+  "package_sha256": "7e913d3c43e852aaf59dbb2fc7adb3b7aa275453cf3041ec1acdebea80be9c5e",
+  "release_blocking": false,
+  "checks": {
+    "rebuildable_package": {
+      "status": "Passed",
+      "evidence": "raw/rebuildable-package.md",
+      "sha256": "935d9127a622bb9e03c6ecadaddb1577115b358d06a357783502e5e63cb13edf"
+    },
+    "offline_test_suite": {
+      "status": "Passed",
+      "evidence": "raw/offline-test-suite.md",
+      "sha256": "78f19e8a4c77644124a29528f626775190258b395633355377859cef816c115c"
+    },
+    "p0_state_evidence": {
+      "status": "Passed",
+      "evidence": "raw/p0-state-evidence.md",
+      "sha256": "6ea881d1ad7aebd39e08cde90322853498db028839f2187a4bda219d0483d212"
+    },
+    "public_documentation": {
+      "status": "Passed",
+      "evidence": "raw/public-documentation.md",
+      "sha256": "d871251f88e7583bf9881bf95f887e00ebab923812d27ef615e9cee6f848ff36"
+    },
+    "independent_source_review": {
+      "status": "Passed",
+      "evidence": "raw/independent-source-review.md",
+      "sha256": "1ae19c684b56789cd8443de03b697023aa80d5a572d2d53c7a092cb9e3400548"
+    },
+    "project_files_cold_read": {
+      "status": "Passed",
+      "evidence": "raw/project-files-cold-read.md",
+      "sha256": "3af91ebd6010bd3f1dff52d721d5a939a653895e3d0381220cbeaf3d5ada0433"
+    },
+    "isolated_install": {
+      "status": "Passed",
+      "evidence": "raw/isolated-install.md",
+      "sha256": "8dca8eb22dc0176b1c19067c1d23e4aa430aa0bcdebe097b10530a63bac56486"
+    },
+    "registry_archive_identity": {
+      "status": "Passed",
+      "evidence": "raw/registry-archive-identity.md",
+      "sha256": "70b0ca247abeeb47506f2c7b3e721989012855232d57efc12ec79c23551c3c75"
+    },
+    "registry_readback": {
+      "status": "Passed",
+      "evidence": "raw/registry-readback.md",
+      "sha256": "e2c86f2f1156a5916735dc420158eb73dbd089a9fc7824f0f6ee029b3140050b"
+    },
+    "independent_promotion_review": {
+      "status": "Passed",
+      "evidence": "raw/independent-promotion-review.md",
+      "sha256": "601cba03561cc5bf4e2a9ece1656cbb82c445cf63f3ce333e89aec6f06a6f7f1"
+    },
+    "git_tag_and_release_readback": {
+      "status": "Passed",
+      "evidence": "raw/git-tag-and-release-readback.md",
+      "sha256": "b2c233c1ec75317f0074dc67e338f2d568c196917f7e070a80355e9d4f57da53"
+    },
+    "real_agent_model": {
+      "status": "Not Run",
+      "reason": "outside 0.6.0 deterministic P0 release scope"
+    },
+    "tokens_cost": {
+      "status": "Not Run",
+      "reason": "outside 0.6.0 deterministic P0 release scope"
+    },
+    "real_different_agent_continuation": {
+      "status": "Not Run",
+      "reason": "outside 0.6.0 deterministic P0 release scope"
+    }
+  }
+}
