@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "version": "0.6.0",
+  "required_prepublication": [
+    "rebuildable_package",
+    "offline_test_suite",
+    "p0_state_evidence",
+    "public_documentation",
+    "independent_source_review",
+    "project_files_cold_read",
+    "isolated_install"
+  ],
+  "required_promotion": [
+    "registry_archive_identity",
+    "registry_readback",
+    "independent_promotion_review",
+    "git_tag_and_release_readback"
+  ],
+  "not_run": [
+    "real_agent_model",
+    "tokens_cost",
+    "real_different_agent_continuation"
+  ]
+}

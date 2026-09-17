@@ -2,7 +2,7 @@
 
 # Install, update, roll back, and remove
 
-PlanWeft 0.5.1 is distributed as one `planweft` npm package. The installer selects the native layout for each host and records the files it manages. Do not merge `dist` directories made for different hosts. See the [host guide](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.en.md) for host capabilities and static events, and the [architecture guide](https://github.com/psiQAQ/planweft/blob/master/docs/architecture.en.md) for the runtime model.
+PlanWeft 0.6.0 is distributed as one `planweft` npm package. The installer selects the native layout for each host and records the files it manages. Do not merge `dist` directories made for different hosts. See the [host guide](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.en.md) for host capabilities and static events, and the [architecture guide](https://github.com/psiQAQ/planweft/blob/master/docs/architecture.en.md) for the runtime model.
 
 Node.js 22 or newer is required; Node.js 24 LTS is recommended. Some hosts also require Python 3, Bash, PowerShell, or their own package manager.
 
@@ -11,11 +11,11 @@ Node.js 22 or newer is required; Node.js 24 LTS is recommended. Some hosts also 
 Project scope is the default. Complete Codex, Copilot, Gemini, Hermes, and DSH integrations support user scope only and require `--global`; these hosts can still install Skill-only at project scope. The examples below cover the five primary supported hosts:
 
 ```bash
-npx planweft@0.5.1 add -a codex --global
-npx planweft@0.5.1 add -a claude
-npx planweft@0.5.1 add -a pi
-npx planweft@0.5.1 add -a opencode
-npx planweft@0.5.1 add -a dsh --global --dsh-profile headless
+npx planweft@0.6.0 add -a codex --global
+npx planweft@0.6.0 add -a claude
+npx planweft@0.6.0 add -a pi
+npx planweft@0.6.0 add -a opencode
+npx planweft@0.6.0 add -a dsh --global --dsh-profile headless
 ```
 
 Repeat `-a` to select several hosts in one command. Non-interactive use must provide a host ID.
@@ -36,8 +36,8 @@ Host IDs are `codex claude pi opencode hermes cursor gemini copilot mastracode k
 Use `--skill-only` explicitly when only the Skill is needed:
 
 ```bash
-npx planweft@0.5.1 add -a opencode --skill-only --symlink
-npx planweft@0.5.1 add -a dsh --skill-only
+npx planweft@0.6.0 add -a opencode --skill-only --symlink
+npx planweft@0.6.0 add -a dsh --skill-only
 ```
 
 Skill-only installation does not register plugin hooks or add lifecycle events that the host does not provide.
@@ -47,8 +47,8 @@ Skill-only installation does not register plugin hooks or add lifecycle events t
 Check the recorded and discoverable state after installation:
 
 ```bash
-npx planweft@0.5.1 list
-npx planweft@0.5.1 doctor
+npx planweft@0.6.0 list
+npx planweft@0.6.0 doctor
 ```
 
 Reload the host or start a new session, then invoke the main Skill explicitly:
@@ -68,10 +68,10 @@ Installation, host discovery, current-session loading, hook trust, and actual mo
 `update` uses the version of the CLI that is running. Running the same command from an older exact CLI version performs a rollback; replace `<version>` with the exact version to restore:
 
 ```bash
-npx planweft@0.5.1 update -a pi
+npx planweft@0.6.0 update -a pi
 npx planweft@<version> update -a pi
-npx planweft@0.5.1 remove -a pi
-npx planweft@0.5.1 doctor -a pi
+npx planweft@0.6.0 remove -a pi
+npx planweft@0.6.0 doctor -a pi
 ```
 
 Use the same host, scope, and DSH profile as the original installation. The installer restores copy/symlink and Skill-only choices from its record. To switch between a complete plugin and Skill-only installation, run `remove` before `add`.
@@ -115,7 +115,7 @@ See the [host guide](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.e
 **A local exact archive is required.** The CLI version and `--source` archive must have the same identity and version:
 
 ```bash
-npx planweft@0.5.1 add -a codex --global --source /absolute/path/planweft-0.5.1.tgz
+npx planweft@0.6.0 add -a codex --global --source /absolute/path/planweft-0.6.0.tgz
 ```
 
 See the repository's [host guide](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.en.md) for distribution, static events, and known limitations. Maintainers can find manual layouts, catalogs, and protocol details in the [development documentation](https://github.com/psiQAQ/planweft/blob/master/docs/development.md).

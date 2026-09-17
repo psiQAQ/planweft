@@ -4,6 +4,15 @@
 
 本页记录维护者发布流程和 0.4.0 的最终发布事实。用户安装方法见[安装指南](installation.md)，公开支持声明见[平台文档](platforms.md)。
 
+## 0.6.0 P0 状态证据发布路径
+
+0.6.0 使用独立的 [`support-policy-0.6.0.json`](../release/support-policy-0.6.0.json)、`release/evidence/0.6.0/` 和
+[`check-state-release-gate.py`](../scripts/check-state-release-gate.py)。该 gate 只放行确定性 P0 的离线、生成、准确产物、隔离安装、项目文件冷读以及独立 review；真实 Agent/model、tokens/cost 和真实不同 Agent 接续明确记录为非阻塞 `Not Run`，不能用 fixture 或历史证据替代。
+
+候选发布顺序为：在同步且干净的 `master` 上生成唯一归档，运行 pre-publication gate，使用可信 workflow 发布到 `next`；从官方 registry 重新读取并核对 bytes/SHA-256/integrity，完成隔离安装，再由 promotion gate 和独立 promotion review 放行 `latest`。最后创建指向同一 `master` 提交的 annotated `v0.6.0` 和 GitHub Release。
+
+发布后执行项目 [`AGENTS.md`](../AGENTS.md) 的分支归档规则：其他本地/远程分支先创建并推送 `archive/<branch>-<date>` annotated tag，核对归档提交后再删除，最终只保留 `master`；不删除 release tag 或尚未由发布结果保护的证据分支。
+
 ## 0.5.x 静态/逻辑发布路径
 
 每个 0.5.x patch 使用与 `package.json` 同版本的 `release/support-policy-<version>.json`、
