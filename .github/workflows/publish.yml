@@ -58,6 +58,9 @@ jobs:
           npm pack --pack-destination "$RUNNER_TEMP" --json
           ARCHIVE="$RUNNER_TEMP/planweft-$VERSION.tgz"
           ACTUAL_NPM_SHA256=$(sha256sum "$ARCHIVE" | awk '{print $1}')
+          echo "Candidate archive SHA-256: $ACTUAL_NPM_SHA256"
+          echo "Expected archive SHA-256: $EXPECTED_NPM_SHA256"
+          stat --format='Candidate archive bytes: %s' "$ARCHIVE"
           test "$ACTUAL_NPM_SHA256" = "$EXPECTED_NPM_SHA256"
           python3 "$GATE" \
             --policy "$POLICY" --evidence "$EVIDENCE" --archive "$ARCHIVE"
