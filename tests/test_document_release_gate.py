@@ -166,7 +166,9 @@ class DocumentReleaseGateTest(unittest.TestCase):
 
     def test_publish_workflow_resolves_policy_and_evidence_from_checked_version(self):
         workflow = (ROOT / '.github/workflows/publish.yml').read_text()
-        self.assertIn("grep -Eq '^0\\.5\\.(0|[1-9][0-9]*)$'", workflow)
+        self.assertIn('0.5.*)', workflow)
+        self.assertIn('0.6.0)', workflow)
+        self.assertIn('GATE="scripts/check-state-release-gate.py"', workflow)
         self.assertIn('POLICY="release/support-policy-$VERSION.json"', workflow)
         self.assertIn('EVIDENCE="release/evidence/$VERSION/prepublication.json"', workflow)
         self.assertIn('--policy "$POLICY" --evidence "$EVIDENCE" --archive "$ARCHIVE"', workflow)

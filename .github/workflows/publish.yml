@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       expected_sha256:
-        description: SHA-256 of the exact 0.5.x archive admitted by the prepublication gate
+        description: SHA-256 of the exact archive admitted by the versioned prepublication gate
         type: string
         required: true
 permissions:
@@ -31,13 +31,27 @@ jobs:
       - run: node tests/installer.test.mjs
       - run: node tests/dsh-hook-shell.test.mjs
       - run: python3 -m unittest discover -s tests -p 'test_*.py'
-      - name: Gate and publish 0.5.x to next (never promotes latest)
+      - name: Gate and publish candidate to next (never promotes latest)
         env:
           EXPECTED_NPM_SHA256: ${{ inputs.expected_sha256 }}
         run: |
           VERSION=$(node -p "JSON.parse(require('fs').readFileSync('package.json')).version")
-          printf '%s' "$VERSION" | grep -Eq '^0\.5\.(0|[1-9][0-9]*)$'
-          POLICY="release/support-policy-$VERSION.json"
+          case "$VERSION" in
+            0.5.*)
+              POLICY="release/support-policy-$VERSION.json"
+              EVIDENCE="release/evidence/$VERSION/prepublication.json"
+              GATE="scripts/check-document-release-gate.py"
+              ;;
+            0.6.0)
+              POLICY="release/support-policy-0.6.0.json"
+              EVIDENCE="release/evidence/0.6.0/prepublication.json"
+              GATE="scripts/check-state-release-gate.py"
+              ;;
+            *)
+              echo "Unsupported publication version: $VERSION" >&2
+              exit 1
+              ;;
+          esac
           EVIDENCE="release/evidence/$VERSION/prepublication.json"
           test -f "$POLICY"
           test -f "$EVIDENCE"
@@ -45,6 +59,6 @@ jobs:
           ARCHIVE="$RUNNER_TEMP/planweft-$VERSION.tgz"
           ACTUAL_NPM_SHA256=$(sha256sum "$ARCHIVE" | awk '{print $1}')
           test "$ACTUAL_NPM_SHA256" = "$EXPECTED_NPM_SHA256"
-          python3 scripts/check-document-release-gate.py \
+          python3 "$GATE" \
             --policy "$POLICY" --evidence "$EVIDENCE" --archive "$ARCHIVE"
           npm publish "$ARCHIVE" --access public --tag next --provenance

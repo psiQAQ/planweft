@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.0 (formal P0 state-evidence release)
+
+- Added the default-off task-side `.planweft-state/` evidence store, separate from the installer `.planweft/` directory.
+- Added `planweft state init|record|verify|recall|doctor|recover --dry-run` with Artifact/Receipt records, SHA-256 integrity, separated provenance and completeness, quote verification, idempotency keys, pre-write hashes, a transaction journal, conflict rejection, and explicit recovery.
+- Recording and verification treat command strings as data and never re-execute a Receipt command; no remote reducer or default advisory Hook behavior was added.
+- The release gate covers deterministic offline behavior, generated consistency, exact artifacts, isolated installation, project-file cold read, and independent source/promotion review. Real Agent/model sessions, tokens/cost, and real cross-Agent continuation remain `Not Run`.
+
 ## 0.5.1 (published to `next` and `latest`; `v0.5.1` is the formal source tag)
 
 - Added the optional, human-readable `Documentation Map`: an existing documentation index can record roles, actual locations, update triggers, and generated sources without migration, scaffolding, or machine state.

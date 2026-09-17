@@ -2,14 +2,14 @@
 
 # Host distribution and capability boundaries
 
-PlanWeft 0.5.1 lists 15 host distribution targets in `dist/manifest.json`. At the product level, `codex`, `claude`, `pi`, `opencode`, and `dsh` are the primary supported integrations; the remaining targets are treated as experimental adapters. A distribution target means that the package prepares resources for a host; it does not mean that the host discovered, trusted, enabled, or loaded those resources.
+PlanWeft 0.6.0 lists 15 host distribution targets in `dist/manifest.json`. At the product level, `codex`, `claude`, `pi`, `opencode`, and `dsh` are the primary supported integrations; the remaining targets are treated as experimental adapters. A distribution target means that the package prepares resources for a host; it does not mean that the host discovered, trusted, enabled, or loaded those resources.
 
 ## How to read this page
 
 - “Product status” tells you whether an integration is part of the current primary supported set or remains experimental.
 - “Static events” come from the current generated manifest, Hook configuration, or native adapter source and describe the entry points prepared by the package.
 - “Historical acceptance evidence” records validation completed for an exact prior version; it does not automatically establish current-version host behavior.
-- The current release checks are defined by the [version policy file](https://github.com/psiQAQ/planweft/blob/master/release/support-policy-0.5.1.json); package static checks do not replace real host regression.
+- The current P0 release checks are defined by the [version policy file](https://github.com/psiQAQ/planweft/blob/master/release/support-policy-0.6.0.json); this deterministic static/logic scope does not replace real host or model regression, which remains `Not Run` for this release.
 
 ## Host matrix
 
@@ -53,7 +53,7 @@ To confirm that a task is actually active, check these separately:
 
 ## Acceptance evidence versus current support
 
-Product status and acceptance evidence are separate dimensions. “Supported” identifies the integrations targeted by the current primary installation and documentation path. “0.4.0 formal core” only says that the exact 0.4.0 archive completed that historical acceptance scope. Equivalent behavior in a real 0.5.1 environment requires current-version verification and cannot be inferred automatically from the historical result.
+Product status and acceptance evidence are separate dimensions. “Supported” identifies the integrations targeted by the current primary installation and documentation path. “0.4.0 formal core” only says that the exact 0.4.0 archive completed that historical acceptance scope. The deterministic P0 result for 0.6.0 does not prove equivalent behavior in a real host or model environment.
 
 ## Troubleshooting
 

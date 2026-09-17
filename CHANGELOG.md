@@ -1,5 +1,12 @@
 # 变更记录
 
+## 0.6.0（P0 状态证据正式发布）
+
+- 新增默认关闭、任务侧 `.planweft-state/` 与安装器 `.planweft/` 分离的状态证据存储。
+- 提供 `planweft state init|record|verify|recall|doctor|recover --dry-run`，支持 Artifact/Receipt、SHA-256、来源与完整性分层、逐字引用校验、幂等键、写前 hash、transaction journal、冲突拒绝和显式恢复。
+- 记录和验证只处理数据，不重新执行 Receipt 中的命令；不启用远程 reducer，也不改变默认 advisory Hook。
+- 本版发布门禁覆盖确定性离线、生成一致性、准确产物、隔离安装、项目文件冷读和独立源码/promotion review；真实 Agent/model、tokens/cost 和真实不同 Agent 接续保持 `Not Run`。
+
 ## 0.5.1（已发布至 `next` 和 `latest`；`v0.5.1` 为正式 source tag）
 
 - 新增可选、人工可读的 `Documentation Map`：在已有文档索引中记录职责、实际位置、更新触发条件和生成来源，不要求迁移、脚手架或机器状态。
