@@ -4,6 +4,14 @@
 
 This page records the maintainer release process and the final 0.4.0 publication facts. See the [installation guide](installation.en.md) for user commands and [platform support](platforms.en.md) for public capability claims.
 
+## 0.6.0 P0 state-evidence release path
+
+The 0.6.0 path uses the versioned [`support-policy-0.6.0.json`](../release/support-policy-0.6.0.json), `release/evidence/0.6.0/`, and [`check-state-release-gate.py`](../scripts/check-state-release-gate.py). It gates deterministic offline, generated-artifact, package-install, cold-read, and review evidence. Real Agent/model behavior, tokens/cost, and real different-Agent continuation remain explicit non-blocking `Not Run` items.
+
+The candidate workflow [35242327786](https://github.com/psiQAQ/planweft/actions/runs/35242327786) passed 362 offline Python tests and the candidate gate. The public registry reads back `planweft@0.6.0` with `next=0.6.0`, `latest=0.5.1`, and archive SHA-256 `7e913d3c43e852aaf59dbb2fc7adb3b7aa275453cf3041ec1acdebea80be9c5e`. Annotated [`v0.6.0`](https://github.com/psiQAQ/planweft/releases/tag/v0.6.0) and its GitHub Release were created and read back.
+
+Stable npm promotion is currently incomplete: the local attempt and guarded workflow [35243815030](https://github.com/psiQAQ/planweft/actions/runs/35243815030) both returned `E401` because no npm dist-tag write token is configured in the release environment. `latest` remains protected at `0.5.1`; see `release/evidence/0.6.0/raw/stable-promotion-attempt.md` and [REV-0019](reviews/0019-sol-pi-state-management-stable-promotion-blocker.md). After the credential is configured, rerun the guarded promotion workflow and read back both dist-tags.
+
 ## 0.5.x static/logic release path
 
 Each 0.5.x patch uses `release/support-policy-<version>.json`, `release/evidence/<version>/`, and

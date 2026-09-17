@@ -13,6 +13,14 @@
 
 发布后执行项目 [`AGENTS.md`](../AGENTS.md) 的分支归档规则：其他本地/远程分支先创建并推送 `archive/<branch>-<date>` annotated tag，核对归档提交后再删除，最终只保留 `master`；不删除 release tag 或尚未由发布结果保护的证据分支。
 
+### 0.6.0 当前发布状态
+
+- candidate workflow：[35242327786](https://github.com/psiQAQ/planweft/actions/runs/35242327786)，`master@5c23fa3`，362 个离线 Python 测试和 candidate gate：Passed。
+- npm registry：`planweft@0.6.0` 已读回，`next=0.6.0`、`latest=0.5.1`；公开归档 SHA-256 为 `7e913d3c43e852aaf59dbb2fc7adb3b7aa275453cf3041ec1acdebea80be9c5e`。
+- annotated [`v0.6.0`](https://github.com/psiQAQ/planweft/releases/tag/v0.6.0) 和 GitHub Release 已创建并读回。
+- stable dist-tag promotion 尚未完成：本地及 guarded workflow [35243815030](https://github.com/psiQAQ/planweft/actions/runs/35243815030) 均因缺少 npm dist-tag 写权限返回 `E401`；`latest` 保持 `0.5.1`。证据见 `release/evidence/0.6.0/raw/stable-promotion-attempt.md` 和 [REV-0019](reviews/0019-sol-pi-state-management-stable-promotion-blocker.md)。
+- 真实 Agent/model、tokens/cost 和真实不同 Agent 接续继续保持 `Not Run`。
+
 ## 0.5.x 静态/逻辑发布路径
 
 每个 0.5.x patch 使用与 `package.json` 同版本的 `release/support-policy-<version>.json`、
