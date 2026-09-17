@@ -23,6 +23,7 @@
 | --- | --- | --- |
 | 修改、构建和验证 | [development.md](https://github.com/psiQAQ/planweft/blob/master/docs/development.md) | 源码层级、生成产物、测试和证据维护 |
 | 发布版本 | [releasing.md](https://github.com/psiQAQ/planweft/blob/master/docs/releasing.md) | 发布流程、门禁和外部发布记录 |
+| 实施证据与长期状态改进 | [SoL-Pi 思想移植计划](plans/2026-09-17-sol-pi-state-management.md) | 待实现的 P0/P1 范围、数据契约、文件落点、恢复与评测、发布门禁及本地 Agent 启动指令 |
 | 设计与来源登记 | [design-references.md](https://github.com/psiQAQ/planweft/blob/master/docs/design-references.md) | 外部依据、固定来源和本地设计映射 |
 | 设计提案 | [planweft-document-management-proposal.md](https://github.com/psiQAQ/planweft/blob/master/docs/planweft-document-management-proposal.md) | 文档管理系统的设计背景与取舍 |
 | 上游与分发维护 | [upstream-maintenance.md](https://github.com/psiQAQ/planweft/blob/master/docs/upstream-maintenance.md) | 固定上游、补丁和宿主分发维护 |
