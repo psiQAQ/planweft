@@ -25,6 +25,7 @@
 
 - candidate 发布使用 npm Trusted Publisher/OIDC：`publish.yml` 固定使用 GitHub-hosted runner、`id-token: write`、`release` environment 和 `npm publish --tag next --provenance`，不依赖长期 npm token。
 - stable promotion 不是 `npm publish`，而是独立的 `npm dist-tag add planweft@<version> latest`。因此只为 `release` environment 配置 package-scoped `NPM_TOKEN`；`promote-stable.yml` 先运行 `npm whoami` 凭据预检，再核对准确归档、promotion gate、dist-tag 写入和最终 readback。
+- `release/NPM_TOKEN` 必须是允许非交互 dist-tag 写入的 npm automation/granular token（通常需启用 2FA bypass）。Trusted Publisher/OIDC 只覆盖 `npm publish`，不能为当前 `npm dist-tag add` 提供 OTP；若 token 触发 `EOTP`，工作流保留失败证据且不会改变 `latest`。
 - 本机 `~/.npmrc` 只服务本机命令，不替代 GitHub Actions secret；不在仓库、命令行参数、聊天或日志中保存真实 token。
 
 ## 0.7.0 P1 Checkpoint/Reducer 发布路径
@@ -40,6 +41,10 @@ gate，使用 Trusted Publisher/OIDC 发布到 `next`；从官方 registry 重�
 更新准确的 promotion evidence；再由 `release` environment 的 `NPM_TOKEN` 执行受保护的
 `npm dist-tag add planweft@0.7.0 latest`，最后核对 `latest=0.7.0`、`next=0.7.0`、tag、
 GitHub Release 和隔离安装。若版本已占用或任一 gate 失败，停止发布并保留证据。
+
+当前状态：candidate、registry readback、`v0.7.0` 和 GitHub Release 已通过；stable promotion workflow
+`35295422731` 在 `npm dist-tag add` 处因 `EOTP` 停止，`latest` 仍为 `0.6.0`。失败证据保存在
+[`stable-promotion-attempt.md`](../release/evidence/0.7.0/raw/stable-promotion-attempt.md)。
 
 ## 0.5.x 静态/逻辑发布路径
 

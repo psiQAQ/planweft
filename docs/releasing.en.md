@@ -34,6 +34,15 @@ the guarded `npm dist-tag add planweft@0.7.0 latest`. Finally read back `latest=
 the tag, GitHub Release, and an isolated installation. If the version is occupied or any gate fails,
 stop and preserve the evidence.
 
+`release/NPM_TOKEN` must be an npm automation/granular token that can perform the non-interactive dist-tag
+write (normally with 2FA bypass enabled). Trusted Publisher/OIDC covers `npm publish`, not the current
+`npm dist-tag add`; if npm returns `EOTP`, the workflow preserves the failed attempt and leaves `latest`
+unchanged.
+
+Current status: the candidate, registry readback, `v0.7.0`, and GitHub Release passed; stable-promotion
+workflow `35295422731` stopped at `npm dist-tag add` with `EOTP`, so `latest` remains `0.6.0`. The
+preserved failed evidence is [`stable-promotion-attempt.md`](../release/evidence/0.7.0/raw/stable-promotion-attempt.md).
+
 ## 0.5.x static/logic release path
 
 Each 0.5.x patch uses `release/support-policy-<version>.json`, `release/evidence/<version>/`, and
