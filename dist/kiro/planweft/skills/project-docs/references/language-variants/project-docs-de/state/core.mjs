@@ -12,7 +12,8 @@ export const EXIT_CODES = Object.freeze({
   IO: 5,
 });
 
-const STORE_SCHEMA = 1;
+const STORE_SCHEMA = 2;
+const LEGACY_STORE_SCHEMA = 1;
 const RECEIPT_SCHEMA = 1;
 const STORE_NAME = '.planweft-state';
 const PLAN_FILES = ['task_plan.md', 'findings.md', 'progress.md'];
@@ -23,7 +24,11 @@ const ARTIFACT_ORIGINS = new Set(['controlled_capture', 'imported', 'reported', 
 const INTEGRITY_STATES = new Set(['verified', 'unknown', 'corrupt', 'missing']);
 const EXECUTION_COLLECTION_METHODS = new Set(['controlled_capture', 'imported', 'reported', 'unknown']);
 const FRESHNESS_STATES = new Set(['fresh', 'stale', 'unknown']);
-const STORE_CAPABILITIES = Object.freeze({artifacts: true, receipts: true, records: true, checkpoints: false, remote_reducer: false});
+const LEGACY_STORE_CAPABILITIES = Object.freeze({artifacts: true, receipts: true, records: true, checkpoints: false, remote_reducer: false});
+const STORE_CAPABILITIES = Object.freeze({artifacts: true, receipts: true, records: true, checkpoints: true, reducer: true, remote_reducer: false});
+const STORE_CAPABILITIES_BY_SCHEMA = Object.freeze({[LEGACY_STORE_SCHEMA]: LEGACY_STORE_CAPABILITIES, [STORE_SCHEMA]: STORE_CAPABILITIES});
+const CHECKPOINT_SCHEMA = 1;
+const REDUCER_SCHEMA = 1;
 
 export class StateError extends Error {
   constructor(message, code = EXIT_CODES.IO, details = undefined) {
@@ -56,6 +61,20 @@ function writeJSON(file, value, mode = 0o600) {
   const temporary = `${file}.${process.pid}.${crypto.randomBytes(6).toString('hex')}.tmp`;
   try {
     fs.writeFileSync(temporary, JSON.stringify(value, null, 2) + '\n', {flag: 'wx', mode});
+    flushFile(temporary);
+    fs.renameSync(temporary, file);
+    flushDirectory(path.dirname(file));
+  } catch (error) {
+    try { fs.rmSync(temporary, {force: true}); } catch {}
+    fail(`Cannot write ${file}: ${error.message}`, EXIT_CODES.IO);
+  }
+}
+
+function writeBytes(file, data, mode = 0o600) {
+  fs.mkdirSync(path.dirname(file), {recursive: true, mode: 0o700});
+  const temporary = `${file}.${process.pid}.${crypto.randomBytes(6).toString('hex')}.tmp`;
+  try {
+    fs.writeFileSync(temporary, data, {flag: 'wx', mode});
     flushFile(temporary);
     fs.renameSync(temporary, file);
     flushDirectory(path.dirname(file));
@@ -179,22 +198,26 @@ function loadStore(info, {required = true} = {}) {
   }
   const store = readJSON(storeFile, 'store.json');
   assertKeys(store, new Set(['schema_version', 'store_id', 'plan_id', 'created_at', 'capabilities', 'storage_budget_bytes']), 'store.json');
-  if (store.schema_version !== STORE_SCHEMA || typeof store.store_id !== 'string' || !store.store_id ||
+  const capabilitiesForSchema = STORE_CAPABILITIES_BY_SCHEMA[store.schema_version];
+  if (!capabilitiesForSchema || typeof store.store_id !== 'string' || !store.store_id ||
       typeof store.plan_id !== 'string' || store.plan_id !== info.planId) {
     fail('state store binding or schema is invalid', EXIT_CODES.EVIDENCE);
   }
-  assertKeys(store.capabilities, new Set(Object.keys(STORE_CAPABILITIES)), 'store capabilities');
-  for (const [key, expected] of Object.entries(STORE_CAPABILITIES)) {
+  assertKeys(store.capabilities, new Set(Object.keys(capabilitiesForSchema)), 'store capabilities');
+  for (const [key, expected] of Object.entries(capabilitiesForSchema)) {
     if (store.capabilities[key] !== expected) fail(`store capability ${key} is invalid`, EXIT_CODES.EVIDENCE);
   }
   if (store.storage_budget_bytes !== null && (!Number.isSafeInteger(store.storage_budget_bytes) || store.storage_budget_bytes < 0)) {
     fail('storage_budget_bytes is invalid', EXIT_CODES.EVIDENCE);
   }
-  return {storeDir, store, damaged: false, reason: null};
+  return {storeDir, store, legacy: store.schema_version === LEGACY_STORE_SCHEMA, current: store.schema_version === STORE_SCHEMA, damaged: false, reason: null};
 }
 
-function ensureStoreDirectories(storeDir) {
-  for (const directory of ['artifacts/sha256', 'receipts', 'transactions']) {
+function ensureStoreDirectories(storeDir, {checkpoints = true, migrations = false} = {}) {
+  const directories = ['artifacts/sha256', 'receipts', 'transactions'];
+  if (checkpoints) directories.push('checkpoints');
+  if (migrations) directories.push('migrations');
+  for (const directory of directories) {
     const target = path.join(storeDir, directory);
     if (fs.existsSync(target)) {
       const stat = fs.lstatSync(target);
@@ -213,11 +236,11 @@ export function initStore(planDir, {cwd = process.cwd(), storageBudgetBytes = nu
   const target = path.join(info.planDir, STORE_NAME);
   if (fs.existsSync(target)) {
     const loaded = loadStore(info);
-    ensureStoreDirectories(loaded.storeDir);
+    ensureStoreDirectories(loaded.storeDir, {checkpoints: !loaded.legacy});
     return {created: false, ...info, ...loaded};
   }
   fs.mkdirSync(target, {mode: 0o700});
-  ensureStoreDirectories(target);
+  ensureStoreDirectories(target, {checkpoints: true});
   const gitignore = path.join(target, '.gitignore');
   fs.writeFileSync(gitignore, '*\n!.gitignore\n', {mode: 0o600, flag: 'wx'});
   flushFile(gitignore);
@@ -231,6 +254,56 @@ export function initStore(planDir, {cwd = process.cwd(), storageBudgetBytes = nu
   };
   writeJSON(path.join(target, 'store.json'), store);
   return {created: true, ...info, storeDir: target, store};
+}
+
+export function upgradeStore(planDir, {cwd = process.cwd()} = {}) {
+  const info = planInfo(planDir, cwd);
+  const loaded = loadStore(info);
+  if (!loaded.legacy) return {upgraded: false, ...info, store: loaded.store, schema_version: loaded.store.schema_version};
+  const lock = acquireLock(loaded.storeDir, `upgrade-${process.pid}-${crypto.randomUUID()}`);
+  try {
+    ensureStoreDirectories(loaded.storeDir, {checkpoints: true, migrations: true});
+    const storeFile = path.join(loaded.storeDir, 'store.json');
+    const before = fs.readFileSync(storeFile);
+    const migrationId = sha256(`${loaded.store.store_id}\n${loaded.store.schema_version}\n${STORE_SCHEMA}`).slice(0, 32);
+    const migrationDir = path.join(loaded.storeDir, 'migrations', migrationId);
+    rejectSymlinkPath(loaded.storeDir, migrationDir, 'migration directory');
+    fs.mkdirSync(migrationDir, {recursive: true, mode: 0o700});
+    const backupFile = path.join(migrationDir, 'store.before.json');
+    if (!fs.existsSync(backupFile)) writeBytes(backupFile, before);
+    const backup = hashFileSync(backupFile);
+    if (backup.sha256 !== sha256(before) || backup.bytes !== before.length) {
+      fail('legacy store backup verification failed', EXIT_CODES.EVIDENCE);
+    }
+    const manifestFile = path.join(migrationDir, 'manifest.json');
+    const migration = {
+      schema_version: 1,
+      migration_id: migrationId,
+      store_id: loaded.store.store_id,
+      plan_id: info.planId,
+      from_schema: LEGACY_STORE_SCHEMA,
+      to_schema: STORE_SCHEMA,
+      before_sha256: backup.sha256,
+      before_bytes: backup.bytes,
+      status: 'backup_created',
+    };
+    writeJSON(manifestFile, migration);
+    const next = {
+      ...loaded.store,
+      schema_version: STORE_SCHEMA,
+      capabilities: {...STORE_CAPABILITIES},
+    };
+    writeJSON(storeFile, next);
+    const verified = loadStore(info);
+    if (!verified.current) fail('upgraded store did not validate as current schema', EXIT_CODES.EVIDENCE);
+    migration.status = 'applied';
+    migration.after_sha256 = sha256(fs.readFileSync(storeFile));
+    migration.after_bytes = fs.statSync(storeFile).size;
+    writeJSON(manifestFile, migration);
+    return {upgraded: true, ...info, store: verified.store, schema_version: verified.store.schema_version, migration_id: migrationId};
+  } finally {
+    releaseLock(lock);
+  }
 }
 
 async function archiveFile(source, destination) {
@@ -478,6 +551,7 @@ function releaseLock(lock) {
 export async function recordState(planDir, {cwd = process.cwd(), inputPath} = {}) {
   const info = planInfo(planDir, cwd);
   const loaded = loadStore(info);
+  if (loaded.legacy) fail('state store schema 1 is read-only; run state upgrade explicitly', EXIT_CODES.EVIDENCE);
   const input = readInput(info, inputPath, cwd);
   let request;
   try { request = JSON.parse(input.raw.toString('utf8')); } catch (error) { fail(`record input is invalid JSON: ${error.message}`, EXIT_CODES.INPUT); }
@@ -525,7 +599,7 @@ export async function recordState(planDir, {cwd = process.cwd(), inputPath} = {}
       store_id: loaded.store.store_id,
       plan_id: info.planId,
       recorded_at: now(),
-      producer: {kind: 'planweft-state-helper', version: '0.6.0-dev'},
+      producer: {kind: 'planweft-state-helper', version: '0.7.0-dev'},
       operation_id: transactionId,
       idempotency_key: request.idempotency_key,
       input_sha256: inputDigest,
@@ -782,6 +856,7 @@ export async function doctor(planDir, {cwd = process.cwd()} = {}) {
 export function recoverTransaction(planDir, {cwd = process.cwd(), transactionId, dryRun = false, apply = false} = {}) {
   const info = planInfo(planDir, cwd);
   const loaded = loadStore(info);
+  if (loaded.legacy && apply) fail('state store schema 1 is read-only; run state upgrade explicitly', EXIT_CODES.EVIDENCE);
   if (typeof transactionId !== 'string' || !/^[0-9a-f-]{36}$/.test(transactionId)) fail('transaction id is invalid', EXIT_CODES.INPUT);
   const directory = path.join(loaded.storeDir, 'transactions', transactionId);
   const journalFile = path.join(directory, 'journal.json');
@@ -853,6 +928,459 @@ export function recoverTransaction(planDir, {cwd = process.cwd(), transactionId,
     releaseLock(lock);
   }
   return {transaction_id: transactionId, state: finalState, action: finalState === 'before' ? 'apply_after' : 'mark_committed', dry_run: false, writes: wrote};
+}
+
+function planImages(info) {
+  const images = {};
+  for (const name of PLAN_FILES) {
+    const file = path.join(info.planDir, name);
+    images[name] = fs.readFileSync(file);
+  }
+  return images;
+}
+
+function imageMetadata(images) {
+  return Object.fromEntries(PLAN_FILES.map(name => [name, {
+    sha256: sha256(images[name]),
+    bytes: images[name].length,
+  }]));
+}
+
+function splitLines(text) {
+  const lines = [];
+  const matcher = /[^\n]*(?:\n|$)/g;
+  let match;
+  while ((match = matcher.exec(text)) !== null) {
+    if (match[0]) lines.push(match[0]);
+    if (!match[0]) break;
+  }
+  return lines;
+}
+
+function phaseBlocks(text) {
+  const lines = splitLines(text);
+  const boundaries = [];
+  lines.forEach((line, index) => {
+    if (/^##(?!#)\s/.test(line) || /^### Phase\b/.test(line)) boundaries.push(index);
+  });
+  const starts = lines.map((line, index) => /^### Phase\b/.test(line) ? index : -1).filter(index => index >= 0);
+  return starts.map((start, index) => {
+    const next = boundaries.find(boundary => boundary > start) ?? lines.length;
+    const body = lines.slice(start, next);
+    const statusLine = body.find(line => /\*\*Status:\*\*/i.test(line));
+    const statusMatch = statusLine?.match(/\*\*Status:\*\*\s*([^\r\n*]+)/i);
+    return {
+      start,
+      end: next,
+      lines: body,
+      heading: body[0].trimEnd(),
+      status: statusMatch?.[1].trim() || null,
+      statusLine,
+    };
+  });
+}
+
+const PROTECTED_PHASE_CONTENT = /blocker|unresolved|未决|pending|failed|inconclusive|not run|skip|timeout|constraint|约束|限制|next step|下一步|待复验/i;
+
+function phaseSummary(text) {
+  return phaseBlocks(text).map(block => ({heading: block.heading, status: block.status}));
+}
+
+function validateCheckpointPair(before, after) {
+  const beforeText = before['task_plan.md'].toString('utf8');
+  const afterText = after['task_plan.md'].toString('utf8');
+  const beforeBlocks = phaseBlocks(beforeText);
+  const afterBlocks = phaseBlocks(afterText);
+  if (JSON.stringify(phaseSummary(beforeText)) !== JSON.stringify(phaseSummary(afterText))) {
+    fail('checkpoint candidate changed phase headings or statuses', EXIT_CODES.EVIDENCE);
+  }
+  const beforePrefix = splitLines(beforeText).slice(0, beforeBlocks[0]?.start || 0).join('');
+  const afterPrefix = splitLines(afterText).slice(0, afterBlocks[0]?.start || 0).join('');
+  if (beforePrefix !== afterPrefix) fail('checkpoint candidate changed the protected plan prelude', EXIT_CODES.EVIDENCE);
+  for (const [index, block] of beforeBlocks.entries()) {
+    const candidate = afterBlocks[index];
+    if (!candidate) fail('checkpoint candidate lost a phase', EXIT_CODES.EVIDENCE);
+    const beforeBody = block.lines.slice(1).join('');
+    const afterBody = candidate.lines.slice(1).join('');
+    if (block.status?.toLowerCase() !== 'complete' || PROTECTED_PHASE_CONTENT.test(beforeBody)) {
+      if (beforeBody !== afterBody) fail(`checkpoint candidate changed protected phase content: ${block.heading}`, EXIT_CODES.EVIDENCE);
+    }
+  }
+}
+
+function reduceTaskPlan(text, checkpointId) {
+  const blocks = phaseBlocks(text);
+  if (!blocks.length) return {text, archived: [], reason: 'no phase sections'};
+  const firstStart = blocks[0].start;
+  const lines = splitLines(text);
+  const output = lines.slice(0, firstStart);
+  const archived = [];
+  let cursor = firstStart;
+  for (const block of blocks) {
+    if (block.start > cursor) output.push(...lines.slice(cursor, block.start));
+    const content = block.lines.slice(1).join('');
+    if (block.status?.toLowerCase() === 'complete' && !PROTECTED_PHASE_CONTENT.test(content)) {
+      output.push(block.lines[0]);
+      output.push(`- checkpoint: ${checkpointId}\n`);
+      output.push(block.statusLine || '- **Status:** complete\n');
+      archived.push(block.heading);
+    } else {
+      output.push(...block.lines);
+    }
+    cursor = block.end;
+  }
+  if (cursor < lines.length) output.push(...lines.slice(cursor));
+  return {text: output.join(''), archived, reason: archived.length ? null : 'no safe completed phase'};
+}
+
+function checkpointCandidate(info, loaded) {
+  const before = planImages(info);
+  const beforeMeta = imageMetadata(before);
+  const checkpointId = sha256(`${loaded.store.store_id}\n${PLAN_FILES.map(name => beforeMeta[name].sha256).join('\n')}`).slice(0, 32);
+  const reduced = reduceTaskPlan(before['task_plan.md'].toString('utf8'), checkpointId);
+  const after = {...before, 'task_plan.md': Buffer.from(reduced.text, 'utf8')};
+  const afterMeta = imageMetadata(after);
+  const beforeTotal = PLAN_FILES.reduce((total, name) => total + beforeMeta[name].bytes, 0);
+  const afterTotal = PLAN_FILES.reduce((total, name) => total + afterMeta[name].bytes, 0);
+  validateCheckpointPair(before, after);
+  const beforePhases = phaseSummary(before['task_plan.md'].toString('utf8'));
+  return {
+    schema_version: CHECKPOINT_SCHEMA,
+    checkpoint_id: checkpointId,
+    store_id: loaded.store.store_id,
+    plan_id: info.planId,
+    status: 'applying',
+    before: beforeMeta,
+    after: afterMeta,
+    archived_phases: reduced.archived,
+    saved_bytes: beforeTotal - afterTotal,
+    saving_ratio: beforeTotal ? (beforeTotal - afterTotal) / beforeTotal : 0,
+    preserved_phase_count: beforePhases.length,
+    preserved_phase_statuses: beforePhases.map(item => item.status),
+    recovery: 'Re-run checkpoint --apply --checkpoint <id>; unrelated edits are rejected.',
+    _before: before,
+    _after: after,
+  };
+}
+
+function incompleteTransactions(loaded) {
+  const root = path.join(loaded.storeDir, 'transactions');
+  if (!fs.existsSync(root)) return [];
+  return fs.readdirSync(root).flatMap(id => {
+    const journalFile = path.join(root, id, 'journal.json');
+    if (!fs.existsSync(journalFile)) return [];
+    try {
+      const journal = readJSON(journalFile, `transaction ${id}`);
+      return journal.status === 'committed' ? [] : [journal];
+    } catch (error) {
+      return [{transaction_id: id, status: 'invalid', issue: error.message}];
+    }
+  });
+}
+
+function checkpointDir(storeDir, checkpointId) {
+  if (typeof checkpointId !== 'string' || !/^[0-9a-f]{32}$/.test(checkpointId)) {
+    fail('checkpoint id is invalid', EXIT_CODES.INPUT);
+  }
+  return path.join(storeDir, 'checkpoints', checkpointId);
+}
+
+function publicCheckpoint(manifest, {dryRun = false, writes = false} = {}) {
+  const value = {...manifest};
+  delete value._before;
+  delete value._after;
+  return {...value, dry_run: dryRun, writes};
+}
+
+function checkpointManifest(dir) {
+  const file = path.join(dir, 'manifest.json');
+  if (!fs.existsSync(file)) fail('checkpoint manifest is missing', EXIT_CODES.EVIDENCE);
+  const manifest = readJSON(file, 'checkpoint manifest');
+  try {
+    assertKeys(manifest, new Set(['schema_version', 'checkpoint_id', 'store_id', 'plan_id', 'status', 'before', 'after', 'archived_phases', 'saved_bytes', 'saving_ratio', 'preserved_phase_count', 'preserved_phase_statuses', 'recovery', 'applied_at']), 'checkpoint manifest');
+  } catch (error) { fail(error.message, EXIT_CODES.EVIDENCE); }
+  if (manifest.schema_version !== CHECKPOINT_SCHEMA || !/^[0-9a-f]{32}$/.test(manifest.checkpoint_id) ||
+      !['applying', 'applied'].includes(manifest.status) || !Array.isArray(manifest.archived_phases) ||
+      !Number.isSafeInteger(manifest.saved_bytes) || typeof manifest.saving_ratio !== 'number' ||
+      !Number.isSafeInteger(manifest.preserved_phase_count) || !Array.isArray(manifest.preserved_phase_statuses) ||
+      typeof manifest.recovery !== 'string') {
+    fail('checkpoint manifest schema is invalid', EXIT_CODES.EVIDENCE);
+  }
+  for (const kind of ['before', 'after']) {
+    if (!manifest[kind] || typeof manifest[kind] !== 'object') fail(`checkpoint ${kind} metadata is missing`, EXIT_CODES.EVIDENCE);
+    for (const name of PLAN_FILES) {
+      const metadata = manifest[kind][name];
+      if (!metadata || !isHash(metadata.sha256) || !Number.isSafeInteger(metadata.bytes) || metadata.bytes < 0) {
+        fail(`checkpoint ${kind} metadata is invalid: ${name}`, EXIT_CODES.EVIDENCE);
+      }
+    }
+  }
+  return manifest;
+}
+
+function verifyCheckpointSnapshot(dir, manifest, kind) {
+  const images = {};
+  for (const name of PLAN_FILES) {
+    const file = path.join(dir, kind, name);
+    if (!fs.existsSync(file)) fail(`checkpoint ${kind} snapshot is missing: ${name}`, EXIT_CODES.EVIDENCE);
+    const data = fs.readFileSync(file);
+    const metadata = manifest[kind][name];
+    if (data.length !== metadata.bytes || sha256(data) !== metadata.sha256) {
+      fail(`checkpoint ${kind} snapshot hash mismatch: ${name}`, EXIT_CODES.EVIDENCE);
+    }
+    images[name] = data;
+  }
+  return images;
+}
+
+function writeCheckpoint(dir, manifest, before, after) {
+  rejectSymlinkPath(path.dirname(path.dirname(dir)), dir, 'checkpoint directory');
+  fs.mkdirSync(path.join(dir, 'before'), {recursive: true, mode: 0o700});
+  fs.mkdirSync(path.join(dir, 'after'), {recursive: true, mode: 0o700});
+  for (const name of PLAN_FILES) {
+    writeBytes(path.join(dir, 'before', name), before[name]);
+    writeBytes(path.join(dir, 'after', name), after[name]);
+  }
+  const summary = [
+    `# Checkpoint ${manifest.checkpoint_id}`,
+    '',
+    `- Plan: ${manifest.plan_id}`,
+    `- Archived phases: ${manifest.archived_phases.length}`,
+    `- Saved active-document bytes: ${manifest.saved_bytes}`,
+    `- Saving ratio: ${manifest.saving_ratio}`,
+    '- Full before/after snapshots are retained for recovery.',
+    '- Reducer output and explanations are never substituted for these source snapshots.',
+    '',
+  ].join('\n');
+  writeBytes(path.join(dir, 'summary.md'), Buffer.from(summary, 'utf8'));
+  const persisted = {...manifest};
+  delete persisted._before;
+  delete persisted._after;
+  writeJSON(path.join(dir, 'manifest.json'), persisted);
+}
+
+function applyCheckpoint(info, loaded, dir, manifest, before, after) {
+  validateCheckpointPair(before, after);
+  const lock = acquireLock(loaded.storeDir, `checkpoint-${manifest.checkpoint_id}`);
+  let wrote = false;
+  try {
+    const current = planImages(info);
+    for (const name of PLAN_FILES) {
+      const currentHash = sha256(current[name]);
+      if (currentHash !== manifest.before[name].sha256 && currentHash !== manifest.after[name].sha256) {
+        fail(`checkpoint target has unrelated edits: ${name}`, EXIT_CODES.CONFLICT);
+      }
+    }
+    for (const name of PLAN_FILES) {
+      const currentBytes = fs.readFileSync(path.join(info.planDir, name));
+      const currentHash = sha256(currentBytes);
+      if (currentHash === manifest.after[name].sha256) continue;
+      if (currentHash !== manifest.before[name].sha256) fail(`checkpoint target changed during apply: ${name}`, EXIT_CODES.CONFLICT);
+      writeBytes(path.join(info.planDir, name), after[name], fs.statSync(path.join(info.planDir, name)).mode & 0o777);
+      if (sha256(fs.readFileSync(path.join(info.planDir, name))) !== manifest.after[name].sha256) {
+        fail(`checkpoint target hash mismatch after apply: ${name}`, EXIT_CODES.EVIDENCE);
+      }
+      wrote = true;
+    }
+    manifest.status = 'applied';
+    manifest.applied_at = now();
+    const persisted = {...manifest};
+    delete persisted._before;
+    delete persisted._after;
+    writeJSON(path.join(dir, 'manifest.json'), persisted);
+    return publicCheckpoint(manifest, {writes: wrote});
+  } finally {
+    releaseLock(lock);
+  }
+}
+
+export function checkpointState(planDir, {cwd = process.cwd(), dryRun = true, apply = false, checkpointId} = {}) {
+  const info = planInfo(planDir, cwd);
+  const loaded = loadStore(info);
+  if (loaded.legacy) fail('state store schema 1 is read-only; run state upgrade explicitly', EXIT_CODES.EVIDENCE);
+  const pending = incompleteTransactions(loaded);
+  if (pending.length) fail('checkpoint is blocked by incomplete state transactions', EXIT_CODES.CONFLICT, {transactions: pending});
+  if (checkpointId) {
+    const dir = checkpointDir(loaded.storeDir, checkpointId);
+    const manifest = checkpointManifest(dir);
+    if (manifest.store_id !== loaded.store.store_id || manifest.plan_id !== info.planId || manifest.checkpoint_id !== checkpointId) {
+      fail('checkpoint store or plan binding differs', EXIT_CODES.EVIDENCE);
+    }
+    const before = verifyCheckpointSnapshot(dir, manifest, 'before');
+    const after = verifyCheckpointSnapshot(dir, manifest, 'after');
+    if (!apply || dryRun) return publicCheckpoint(manifest, {dryRun: true});
+    if (manifest.status === 'applied') return publicCheckpoint(manifest, {writes: false});
+    return applyCheckpoint(info, loaded, dir, manifest, before, after);
+  }
+  const proposal = checkpointCandidate(info, loaded);
+  const publicProposal = publicCheckpoint(proposal, {dryRun: true});
+  if (!proposal.archived_phases.length || proposal.saved_bytes <= 0) {
+    return {...publicProposal, status: 'not_worthwhile', reason: proposal.archived_phases.length ? 'candidate is not smaller' : proposal.recovery};
+  }
+  if (!apply || dryRun) return publicProposal;
+  const dir = checkpointDir(loaded.storeDir, proposal.checkpoint_id);
+  if (fs.existsSync(dir)) {
+    const existing = checkpointManifest(dir);
+    if (existing.store_id !== loaded.store.store_id || existing.plan_id !== info.planId) fail('existing checkpoint binding differs', EXIT_CODES.EVIDENCE);
+    const before = verifyCheckpointSnapshot(dir, existing, 'before');
+    const after = verifyCheckpointSnapshot(dir, existing, 'after');
+    if (existing.status === 'applied') return publicCheckpoint(existing, {writes: false});
+    return applyCheckpoint(info, loaded, dir, existing, before, after);
+  }
+  const lock = acquireLock(loaded.storeDir, `checkpoint-${proposal.checkpoint_id}`);
+  try {
+    const current = planImages(info);
+    if (JSON.stringify(imageMetadata(current)) !== JSON.stringify(proposal.before)) {
+      fail('checkpoint source changed before snapshot publication', EXIT_CODES.CONFLICT);
+    }
+    writeCheckpoint(dir, proposal, current, proposal._after);
+  } finally {
+    releaseLock(lock);
+  }
+  return applyCheckpoint(info, loaded, dir, proposal, proposal._before, proposal._after);
+}
+
+function findArtifact(loaded, digest) {
+  let metadata = null;
+  for (const file of receiptFiles(loaded.storeDir)) {
+    const receipt = readJSON(file, `receipt ${path.basename(file)}`);
+    for (const artifact of Array.isArray(receipt.artifacts) ? receipt.artifacts : []) {
+      if (artifact?.sha256 === digest) {
+        if (metadata && JSON.stringify(metadata) !== JSON.stringify(artifact)) fail('artifact metadata conflicts across receipts', EXIT_CODES.EVIDENCE);
+        metadata = artifact;
+      }
+    }
+  }
+  if (!metadata) fail(`artifact is not referenced by a receipt: ${digest}`, EXIT_CODES.EVIDENCE);
+  const file = artifactDestination(loaded.storeDir, digest);
+  if (!fs.existsSync(file)) fail(`artifact is missing: ${digest}`, EXIT_CODES.EVIDENCE);
+  rejectSymlinkPath(loaded.storeDir, file, 'artifact object');
+  const stat = fs.lstatSync(file);
+  if (!stat.isFile() || stat.isSymbolicLink()) fail(`artifact object is unsafe: ${digest}`, EXIT_CODES.EVIDENCE);
+  const measured = hashFileSync(file);
+  if (measured.sha256 !== digest || measured.bytes !== metadata.bytes) fail(`artifact hash mismatch: ${digest}`, EXIT_CODES.EVIDENCE);
+  return {metadata, file, bytes: fs.readFileSync(file)};
+}
+
+function strictUtf8(data) {
+  try { return new TextDecoder('utf-8', {fatal: true}).decode(data); }
+  catch { return null; }
+}
+
+function quoteForArtifact(digest, data, text, lines) {
+  return {artifact_sha256: digest, start_byte: 0, end_byte: data.length, lines, quote: text};
+}
+
+function textLines(data, text) {
+  const result = [];
+  let offset = 0;
+  let line = 1;
+  while (offset < data.length) {
+    const newline = data.indexOf(0x0a, offset);
+    const end = newline < 0 ? data.length : newline + 1;
+    result.push({line, start: offset, end});
+    offset = end;
+    line += 1;
+  }
+  if (!data.length) return [];
+  return result.map(item => ({...item, text: data.subarray(item.start, item.end).toString('utf8')}));
+}
+
+function reducerFacts(data, text, digest) {
+  let parsed;
+  try { parsed = JSON.parse(text); } catch { parsed = null; }
+  const facts = [];
+  const warnings = [];
+  if (parsed && typeof parsed === 'object') {
+    const recognized = /^(status|result|passed|failed|skipped|timeout|timeouts|error|errors|exit_code|tests|failures)$/i;
+    const quote = quoteForArtifact(digest, data, text, textLines(data, text).map(item => item.line));
+    for (const key of Object.keys(parsed).sort()) {
+      if (!recognized.test(key)) continue;
+      const value = parsed[key];
+      if (['string', 'number', 'boolean'].includes(typeof value) || Array.isArray(value)) {
+        facts.push({kind: 'structured_field', field: key, value, quote});
+      }
+    }
+    if (facts.length) return {format: 'json', facts, warnings};
+  }
+  const lines = textLines(data, text);
+  for (const item of lines) {
+    const line = item.text.trimEnd();
+    let match = line.match(/\b(\d+)\s+(?:tests?\s+)?pass(?:ed|ing)?\b/i);
+    if (match) facts.push({kind: 'test_summary', field: 'passed_count', value: Number(match[1]), quote: {artifact_sha256: digest, start_byte: item.start, end_byte: item.end, lines: [item.line], quote: item.text}});
+    match = line.match(/\b(\d+)\s+(?:tests?\s+)?fail(?:ed|ing|ures?)\b/i);
+    if (match) facts.push({kind: 'test_summary', field: 'failed_count', value: Number(match[1]), quote: {artifact_sha256: digest, start_byte: item.start, end_byte: item.end, lines: [item.line], quote: item.text}});
+    match = line.match(/\b(\d+)\s+(?:tests?\s+)?skip(?:ped)?\b/i);
+    if (match) facts.push({kind: 'test_summary', field: 'skipped_count', value: Number(match[1]), quote: {artifact_sha256: digest, start_byte: item.start, end_byte: item.end, lines: [item.line], quote: item.text}});
+    if (/^\s*FAIL(?:ED)?\b/i.test(line)) facts.push({kind: 'failure', value: line, quote: {artifact_sha256: digest, start_byte: item.start, end_byte: item.end, lines: [item.line], quote: item.text}});
+    if (/\b(?:timeout|timed out)\b/i.test(line)) facts.push({kind: 'timeout', value: line, quote: {artifact_sha256: digest, start_byte: item.start, end_byte: item.end, lines: [item.line], quote: item.text}});
+    if (/\b(?:collection error|collect(?:ion)? failed|ERROR:)\b/i.test(line)) facts.push({kind: 'error', value: line, quote: {artifact_sha256: digest, start_byte: item.start, end_byte: item.end, lines: [item.line], quote: item.text}});
+  }
+  if (!facts.length) warnings.push('unsupported or unrecognized format');
+  return {format: 'text', facts, warnings};
+}
+
+export function reduceArtifact(planDir, {cwd = process.cwd(), digest} = {}) {
+  const info = planInfo(planDir, cwd);
+  const loaded = loadStore(info);
+  if (!isHash(digest)) fail('artifact SHA-256 is invalid', EXIT_CODES.INPUT);
+  const artifact = findArtifact(loaded, digest);
+  const text = strictUtf8(artifact.bytes);
+  if (text === null) {
+    return {
+      reducer_schema: REDUCER_SCHEMA,
+      artifact_sha256: digest,
+      source: {bytes: artifact.bytes.length, capture_completeness: artifact.metadata.capture_completeness, origin: artifact.metadata.origin, integrity: 'verified'},
+      format: 'binary',
+      status: 'unknown',
+      facts: [],
+      interpretation: [],
+      warnings: ['artifact is not valid UTF-8; format is unsupported'],
+    };
+  }
+  const reduced = reducerFacts(artifact.bytes, text, digest);
+  const result = {
+    reducer_schema: REDUCER_SCHEMA,
+    artifact_sha256: digest,
+    source: {
+      bytes: artifact.bytes.length,
+      capture_completeness: artifact.metadata.capture_completeness,
+      origin: artifact.metadata.origin,
+      integrity: 'verified',
+    },
+    format: reduced.format,
+    status: reduced.facts.length ? (artifact.metadata.capture_completeness === 'complete' ? 'reduced' : 'limited') : 'unknown',
+    facts: reduced.facts,
+    interpretation: [],
+    warnings: [...reduced.warnings, ...(artifact.metadata.capture_completeness === 'complete' ? [] : ['source artifact is not complete; no completeness claim is made'])],
+  };
+  return result;
+}
+
+export async function verifyReducedQuotes(planDir, {cwd = process.cwd(), reduction} = {}) {
+  const info = planInfo(planDir, cwd);
+  const loaded = loadStore(info);
+  if (!reduction || reduction.reducer_schema !== REDUCER_SCHEMA || !isHash(reduction.artifact_sha256) || !Array.isArray(reduction.facts)) {
+    fail('reducer result schema is invalid', EXIT_CODES.INPUT);
+  }
+  const artifact = findArtifact(loaded, reduction.artifact_sha256);
+  for (const fact of reduction.facts) {
+    if (!fact || typeof fact !== 'object' || !fact.quote) fail('reducer fact quote is missing', EXIT_CODES.INPUT);
+    const quote = fact.quote;
+    try { validateExcerpt(quote, [{sha256: reduction.artifact_sha256}]); }
+    catch (error) { fail(error.message, EXIT_CODES.INPUT); }
+    await verifyExcerptAgainstArtifact(loaded.storeDir, quote);
+  }
+  return {valid: true, artifact_sha256: reduction.artifact_sha256, checked_quotes: reduction.facts.length, bytes: artifact.bytes.length};
+}
+
+export async function verifyQuoteInput(planDir, {cwd = process.cwd(), inputPath} = {}) {
+  const info = planInfo(planDir, cwd);
+  const input = readInput(info, inputPath, cwd);
+  let reduction;
+  try { reduction = JSON.parse(input.raw.toString('utf8')); }
+  catch (error) { fail(`reducer result is invalid JSON: ${error.message}`, EXIT_CODES.INPUT); }
+  return verifyReducedQuotes(planDir, {cwd, reduction});
 }
 
 export function summarizeReceipt(receipt) {

@@ -15,8 +15,8 @@ An agent's conversation ends before the work necessarily does. PlanWeft uses pro
 Node.js 22 or newer is required. For a complete Codex integration:
 
 ```bash
-npx planweft@0.6.0 add -a codex --global
-npx planweft@0.6.0 doctor -a codex --global
+npx planweft@0.7.0 add -a codex --global
+npx planweft@0.7.0 doctor -a codex --global
 ```
 
 After installation, create a new session, explicitly invoke `$project-docs`, and confirm that the host discovered and enabled the expected resources. See the [installation guide](docs/installation.en.md) for other hosts, scopes, and Skill-only installation.
