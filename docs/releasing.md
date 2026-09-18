@@ -27,6 +27,20 @@
 - stable promotion 不是 `npm publish`，而是独立的 `npm dist-tag add planweft@<version> latest`。因此只为 `release` environment 配置 package-scoped `NPM_TOKEN`；`promote-stable.yml` 先运行 `npm whoami` 凭据预检，再核对准确归档、promotion gate、dist-tag 写入和最终 readback。
 - 本机 `~/.npmrc` 只服务本机命令，不替代 GitHub Actions secret；不在仓库、命令行参数、聊天或日志中保存真实 token。
 
+## 0.7.0 P1 Checkpoint/Reducer 发布路径
+
+`0.7.0` 使用独立的 [`support-policy-0.7.0.json`](../release/support-policy-0.7.0.json)、
+`release/evidence/0.7.0/` 和 [`check-state-p1-release-gate.py`](../scripts/check-state-p1-release-gate.py)。
+它在 `0.6.0` 基础上验收 schema 2 升级/回退与数据保护、checkpoint before/after 快照和恢复、
+确定性 reducer 的逐字引用、S14–S16、冷读、故障注入和离线四路消融。真实 Agent/model、
+tokens/cost 及真实不同 Agent 接续仍固定为 `Not Run`，不作为发布放行条件。
+
+发布顺序固定为：在同步且干净的 `master` 上由 builder 生成唯一 candidate，运行 P1 prepublication
+gate，使用 Trusted Publisher/OIDC 发布到 `next`；从官方 registry 重新读取归档字节和 SHA-256，
+更新准确的 promotion evidence；再由 `release` environment 的 `NPM_TOKEN` 执行受保护的
+`npm dist-tag add planweft@0.7.0 latest`，最后核对 `latest=0.7.0`、`next=0.7.0`、tag、
+GitHub Release 和隔离安装。若版本已占用或任一 gate 失败，停止发布并保留证据。
+
 ## 0.5.x 静态/逻辑发布路径
 
 每个 0.5.x patch 使用与 `package.json` 同版本的 `release/support-policy-<version>.json`、

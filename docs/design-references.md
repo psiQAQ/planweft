@@ -298,6 +298,14 @@ OpenCode 原生 `pw_init` 选择面原先只列 autonomous/gated，遗漏省略�
 | [状态核心与 CLI](../overlays/planweft/state/core.mjs) | 流式 SHA-256、Receipt、逐字节引文、幂等和 transaction journal | 用户冻结接口；Node 标准库 `fs`, `crypto`, `stream` 实现 | 内容寻址与写前 hash 用于可复核性；全局原子事务、checkpoint、remote reducer 明确不在 P0 | [distribution contract](../tests/test_state_evidence.py)；P0 review 状态见 [0016](reviews/0016-sol-pi-state-management-review.md) |
 | [生成器与 Skill 资源](../scripts/build-plugin.py) | 将同一份核心生成到 `lib/state/`、宿主 `state/` 和 Skill 包内 | 本仓库既有 builder/source-of-truth 规则；用户要求“不手改 dist/**” | 生成产物只由 builder 更新，根 CLI 与宿主 wrapper 共享实现；安装器 `.planweft/` 保持原边界 | `build-plugin.py --verify`；15 宿主 manifest/hash；独立发布门禁 |
 
+## SoL-Pi P1 checkpoint/reducer（2026-09-18）
+
+| 本仓库目标文件 | 实际依据与定位 | 本地选择与边界 | 验证 / 审查入口 |
+| --- | --- | --- | --- |
+| [P1 状态 checkpoint 规格](specs/0009-sol-pi-state-checkpoints.md)、[ADR-0013](adr/0013-sol-pi-p1-checkpoint-reducer.md) | 用户批准的 SoL-Pi 主计划 P1/R1；P0 的 `.planweft-state/`、Artifact/Receipt、transaction journal 契约 | schema 1 旧 store 只读，显式 `state upgrade` 后进入 schema 2；checkpoint 保留 phase 标题、状态、未决内容和 before/after 快照；reducer 只产生带字节引文的事实，不生成解释 | [P1 状态测试](../tests/state-p1.test.mjs)、[离线消融](../tests/state-p1-ablation.test.mjs)、[P1 独立源码审查](reviews/0021-sol-pi-p1-source-review.md) |
+| [state core](../overlays/planweft/state/core.mjs)、[state CLI](../overlays/planweft/state/cli.mjs) | 本仓库已有 Node 标准库状态核心与 builder 单一来源规则 | 不替换宿主工具、不执行 `record` 中的命令字符串、不启用远程 reducer；不宣称全局原子事务或模型语义判断 | `build-plugin.py --verify`、npm/Python 套件、schema/恢复/路径越界回归 |
+| [0.7.0 支持策略](../release/support-policy-0.7.0.json)、[P1 gate](../scripts/check-state-p1-release-gate.py) | 既有 0.6.0 分层发布门禁与用户要求的发布后 registry/tag/readback | 离线能力与发布读回分开；真实 Agent/model、tokens/cost、真实不同 Agent continuation 固定为 `Not Run` | [0.7.0 prepublication evidence](../release/evidence/0.7.0/prepublication.json)、promotion evidence 与发布后 readback |
+
 
 ## Codex 自有原生注册识别修复（RC13 准备）
 

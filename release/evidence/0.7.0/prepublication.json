@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "version": "0.7.0",
+  "policy_sha256": "43ba6080759109a91d24ac149ed6df21d2c6842ec9d03088c7fb36efbc83af6f",
+  "package_sha256": "a0461b75bc3e263fae444711ae68044361b5493fd00b52e58649d71cb83b7a73",
+  "release_blocking": false,
+  "checks": {
+    "rebuildable_package": {
+      "status": "Passed",
+      "evidence": "raw/rebuildable-package.md",
+      "sha256": "33588bbd07dec9a8de5f4ae434c4bb1f12cc69893219767e079662628cedaed3"
+    },
+    "offline_test_suite": {
+      "status": "Passed",
+      "evidence": "raw/offline-test-suite.md",
+      "sha256": "3ce1533e1d7e86213f5061459706086ef1d98e3f2358a99a223848cb29b6bea0"
+    },
+    "p1_state_evidence": {
+      "status": "Passed",
+      "evidence": "raw/p1-state-evidence.md",
+      "sha256": "45f663001f42a22c8ad0ae9d4cf6c21851a014c983527ea84974343cf3cea609"
+    },
+    "schema_upgrade_and_rollback": {
+      "status": "Passed",
+      "evidence": "raw/schema-upgrade-and-rollback.md",
+      "sha256": "3cd2e35c0541adc80c8a9d8c5224819cea9c0c20276d6a7e25044fd232ca91d1"
+    },
+    "data_protection": {
+      "status": "Passed",
+      "evidence": "raw/data-protection.md",
+      "sha256": "d193fd2b1c9035c105c883d7db0184df3190d583490e723303b3f5505a08c57a"
+    },
+    "public_documentation": {
+      "status": "Passed",
+      "evidence": "raw/public-documentation.md",
+      "sha256": "a70b6898d6ea11aca82a8b8c599ca59a7349ea1dca30937d11e1a048daab0022"
+    },
+    "independent_source_review": {
+      "status": "Passed",
+      "evidence": "raw/independent-source-review.md",
+      "sha256": "019319bf9ae56994239f9bc95273cd8ad18c1450b2b036fb1402b7bb17201a9f"
+    },
+    "project_files_cold_read": {
+      "status": "Passed",
+      "evidence": "raw/project-files-cold-read.md",
+      "sha256": "1d2e6ddf2d6f17103665d3378e882f6fb61a5c2b6c9514ef77f6900afcf35213"
+    },
+    "isolated_install": {
+      "status": "Passed",
+      "evidence": "raw/isolated-install.md",
+      "sha256": "0622a634294704f36ae15b3f174d68e4bbc7c4576587889cb8443d76defde769"
+    },
+    "offline_ablation": {
+      "status": "Passed",
+      "evidence": "raw/offline-ablation.md",
+      "sha256": "18d066b15674edaf313a6f03a75599e197148c8011b42e1ab94841dfd5de16e1"
+    },
+    "real_agent_model": {
+      "status": "Not Run",
+      "reason": "outside 0.7.0 deterministic P1 release scope"
+    },
+    "tokens_cost": {
+      "status": "Not Run",
+      "reason": "outside 0.7.0 deterministic P1 release scope"
+    },
+    "real_different_agent_continuation": {
+      "status": "Not Run",
+      "reason": "outside 0.7.0 deterministic P1 release scope"
+    }
+  }
+}

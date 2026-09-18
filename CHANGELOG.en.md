@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.7.0 (formal P1 checkpoint/reducer release)
+
+- Added explicit `planweft state upgrade`: schema 1 stores remain read-only, while upgrade preserves store identity, a pre-migration backup, and rollback evidence.
+- Added deterministic `state checkpoint --dry-run|--apply` with Phase title/status and unresolved-content preservation, before/after snapshots, conflict rejection, restart recovery, and idempotent replay.
+- Added the bounded `state reduce` and `state quote-verify` commands. They emit only SHA-256/byte-range-bound source facts and never generate interpretation or enable a remote reducer.
+- Added S14–S16, fault-injection, schema-upgrade, data-protection, four-way offline-ablation, and P1 release-gate evidence. Real Agent/model sessions, tokens/cost, and real cross-Agent continuation remain `Not Run`.
+
 ## 0.6.0 (formal P0 state-evidence release)
 
 - Added the default-off task-side `.planweft-state/` evidence store, separate from the installer `.planweft/` directory.

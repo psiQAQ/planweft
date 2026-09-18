@@ -2,7 +2,7 @@
 
 > Package: **kiro**. Use this host's installation section.
 
-# PlanWeft 0.6.0
+# PlanWeft 0.7.0
 
 PlanWeft keeps a coding agent's task plan, findings, and validation record in project files so later sessions can continue from confirmed state. This directory is a self-contained package for one host.
 

@@ -46,8 +46,17 @@ RC15 复核补充：初始入口集合自身先受用户明确读取范围筛选
 
 ## SoL-Pi 任务侧状态证据（2026-09-17）
 
-状态：P0 实施中，设计已登记，独立源码 review 在 R0 前必须完成；P1 checkpoint/reducer 尚未实现。
+状态：P0 已发布为 0.6.0；P1 checkpoint/reducer 已在 0.7.0 发布候选中实现。独立源码审查采用单独的静态审查轮次完成；没有调用第二个 Agent/model，因此真实不同 Agent continuation 仍为 `Not Run`。
 
 本地新增机制是将 Artifact、Receipt、逐字节引用校验、幂等键和有限事务恢复组合在独立 `.planweft-state/` 中，并通过 builder 生成到所有宿主包。检索与来源范围沿用本仓库已有的安装器状态、PWF 计划文件和证据治理资料；没有把内容寻址、写锁或 journal 宣称为原创算法。超出既有资料的本地取舍是“默认关闭、显式 init、命令字符串只作数据、exit code 不自动完成阶段、恢复必须显式 apply”。
 
-退出条件：S01–S13 离线测试、生成一致性、安装包检查和源码 review 全部记录；真实 Agent/模型回归、真实 tokens/cost 及 P1 消融没有可用授权或测量时保持 `Not Run`，不以离线结果替代。
+退出条件：S01–S13 与 S14–S16 离线测试、生成一致性、安装包检查、schema 升级/回退、数据保护、独立静态源码审查和四路离线消融均需有独立证据；真实 Agent/模型回归、真实 tokens/cost 及真实不同 Agent continuation 没有授权或测量时保持 `Not Run`，不以离线结果替代。
+
+### P1 新增组合设计（2026-09-18）
+
+本轮超出 P0 的机制只包括两项：
+
+- checkpoint：使用确定性 phase 状态解析，只压缩安全的已完成 phase；标题、状态、前置说明、未决/约束内容及 findings/progress 原文保持；before/after 快照、manifest、hash 和显式恢复步骤共同保留可回退路径。
+- reducer：只从已 Receipt 引用且 hash 已验证的 Artifact 提取有限格式事实；每个事实带原始字节范围和逐字引用，`interpretation` 固定为空。它不是远程 reducer、模型摘要或结论推断器。
+
+必要性结论：P0 已能记录可恢复证据，但无法在不改写当前计划的前提下保存完成 phase 的小型 checkpoint，也没有有限、可逐字核验的 Artifact 事实投影；因此两项是满足 P1 验收边界的最小增量。成本是 schema 2 升级、额外快照空间和更严格的冲突拒绝。来源、实现与限制登记在 [P1 设计台账](design-references.md#sol-pi-p1-checkpointreducer-2026-09-18)、[SPEC-0009](specs/0009-sol-pi-state-checkpoints.md) 和 [ADR-0013](adr/0013-sol-pi-p1-checkpoint-reducer.md)。

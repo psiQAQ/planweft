@@ -30,6 +30,9 @@ jobs:
       - run: npm ci --ignore-scripts --omit=dev --no-audit --no-fund --registry=https://registry.npmjs.org
       - run: node tests/installer.test.mjs
       - run: node tests/dsh-hook-shell.test.mjs
+      - run: node tests/state-evidence.test.mjs
+      - run: node tests/state-p1.test.mjs
+      - run: node tests/state-p1-ablation.test.mjs
       - run: python3 -m unittest discover -s tests -p 'test_*.py'
       - name: Gate and publish candidate to next (never promotes latest)
         env:
@@ -46,6 +49,11 @@ jobs:
               POLICY="release/support-policy-0.6.0.json"
               EVIDENCE="release/evidence/0.6.0/prepublication.json"
               GATE="scripts/check-state-release-gate.py"
+              ;;
+            0.7.0)
+              POLICY="release/support-policy-0.7.0.json"
+              EVIDENCE="release/evidence/0.7.0/prepublication.json"
+              GATE="scripts/check-state-p1-release-gate.py"
               ;;
             *)
               echo "Unsupported publication version: $VERSION" >&2
@@ -64,4 +72,11 @@ jobs:
           test "$ACTUAL_NPM_SHA256" = "$EXPECTED_NPM_SHA256"
           python3 "$GATE" \
             --policy "$POLICY" --evidence "$EVIDENCE" --archive "$ARCHIVE"
+          if npm view "planweft@$VERSION" version --registry=https://registry.npmjs.org >/dev/null 2>&1; then
+            echo "Refusing to publish an already occupied version: $VERSION" >&2
+            exit 1
+          else
+            status=$?
+            test "$status" -eq 1
+          fi
           npm publish "$ARCHIVE" --access public --tag next --provenance

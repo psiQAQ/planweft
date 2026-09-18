@@ -4,7 +4,7 @@
 
 # 安装、更新、回退与卸载
 
-PlanWeft 0.6.0 通过一个 `planweft` npm 包分发。安装器会为每个宿主选择正确的原生布局，并记录它管理的文件；不要把不同宿主的 `dist` 目录合并安装。宿主能力和静态事件见[宿主说明](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.md)，运行模型见[架构说明](https://github.com/psiQAQ/planweft/blob/master/docs/architecture.md)。
+PlanWeft 0.7.0 通过一个 `planweft` npm 包分发。安装器会为每个宿主选择正确的原生布局，并记录它管理的文件；不要把不同宿主的 `dist` 目录合并安装。宿主能力和静态事件见[宿主说明](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.md)，运行模型见[架构说明](https://github.com/psiQAQ/planweft/blob/master/docs/architecture.md)。
 
 需要 Node.js 22 或更高版本，建议使用 Node.js 24 LTS。部分宿主还需要 Python 3、Bash、PowerShell 或自身的包管理器。
 
@@ -13,11 +13,11 @@ PlanWeft 0.6.0 通过一个 `planweft` npm 包分发。安装器会为每个宿�
 项目级是默认 scope。Codex、Copilot、Gemini、Hermes 和 DSH 的完整集成只支持用户级安装，必须使用 `--global`；这些宿主仍可按项目安装 Skill-only 版本。以下示例覆盖当前五个主要支持宿主：
 
 ```bash
-npx planweft@0.6.0 add -a codex --global
-npx planweft@0.6.0 add -a claude
-npx planweft@0.6.0 add -a pi
-npx planweft@0.6.0 add -a opencode
-npx planweft@0.6.0 add -a dsh --global --dsh-profile headless
+npx planweft@0.7.0 add -a codex --global
+npx planweft@0.7.0 add -a claude
+npx planweft@0.7.0 add -a pi
+npx planweft@0.7.0 add -a opencode
+npx planweft@0.7.0 add -a dsh --global --dsh-profile headless
 ```
 
 可以在一条命令中重复 `-a`。非交互调用必须明确提供宿主标识。
@@ -38,8 +38,8 @@ npx planweft@0.6.0 add -a dsh --global --dsh-profile headless
 仅需要 Skill 时显式使用 `--skill-only`：
 
 ```bash
-npx planweft@0.6.0 add -a opencode --skill-only --symlink
-npx planweft@0.6.0 add -a dsh --skill-only
+npx planweft@0.7.0 add -a opencode --skill-only --symlink
+npx planweft@0.7.0 add -a dsh --skill-only
 ```
 
 Skill-only 不会注册插件 hooks，也不会增加宿主原本没有的生命周期事件。
@@ -49,8 +49,8 @@ Skill-only 不会注册插件 hooks，也不会增加宿主原本没有的生命
 安装后先检查记录与可发现状态：
 
 ```bash
-npx planweft@0.6.0 list
-npx planweft@0.6.0 doctor
+npx planweft@0.7.0 list
+npx planweft@0.7.0 doctor
 ```
 
 再按宿主要求重载或创建新会话，并显式调用主 Skill：
@@ -70,10 +70,10 @@ npx planweft@0.6.0 doctor
 `update` 使用当前执行的 CLI 版本。用目标旧版本的 CLI 执行同一命令就是回退；请将 `<version>` 换成需要恢复的准确版本号：
 
 ```bash
-npx planweft@0.6.0 update -a pi
+npx planweft@0.7.0 update -a pi
 npx planweft@<version> update -a pi
-npx planweft@0.6.0 remove -a pi
-npx planweft@0.6.0 doctor -a pi
+npx planweft@0.7.0 remove -a pi
+npx planweft@0.7.0 doctor -a pi
 ```
 
 更新和卸载必须沿用原安装的宿主、scope 与 DSH profile。copy/symlink 和 Skill-only 选择会从安装记录恢复；要在完整插件与 Skill-only 之间切换，先 `remove` 再 `add`。
@@ -117,7 +117,7 @@ DSH 完整集成是用户级 profile 安装，更新和卸载必须使用相同�
 **需要使用本地准确包。** CLI 版本和 `--source` 包必须具有相同身份与版本：
 
 ```bash
-npx planweft@0.6.0 add -a codex --global --source /absolute/path/planweft-0.6.0.tgz
+npx planweft@0.7.0 add -a codex --global --source /absolute/path/planweft-0.7.0.tgz
 ```
 
 宿主分发、静态事件和已知限制见仓库的[中文宿主说明](https://github.com/psiQAQ/planweft/blob/master/docs/hosts.md)；维护者需要的手工布局、catalog 和协议细节见[开发文档](https://github.com/psiQAQ/planweft/blob/master/docs/development.md)。

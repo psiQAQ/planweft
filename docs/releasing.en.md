@@ -18,6 +18,22 @@ Stable npm promotion is complete: after configuring `release/NPM_TOKEN`, the pub
 - Stable promotion is a separate `npm dist-tag add planweft@<version> latest` operation. The workflow therefore uses a package-scoped `NPM_TOKEN` only in the `release` environment, preflights it with `npm whoami`, then verifies the exact archive, promotion gate, dist-tag write, and public readback.
 - A local `~/.npmrc` only serves commands on the local machine and does not replace the GitHub Actions secret. Never store the actual token in the repository, command-line arguments, chat, or logs.
 
+## 0.7.0 P1 checkpoint/reducer release path
+
+`0.7.0` uses its own [`support-policy-0.7.0.json`](../release/support-policy-0.7.0.json),
+`release/evidence/0.7.0/`, and [`check-state-p1-release-gate.py`](../scripts/check-state-p1-release-gate.py).
+It adds schema-2 upgrade/rollback and data protection, checkpoint before/after snapshots and recovery,
+deterministic reducer quote verification, S14–S16, cold-read, fault-injection, and offline four-way
+ablation evidence. Real Agent/model traffic, tokens/cost, and real different-Agent continuation remain
+explicit `Not Run` items and are not release gates.
+
+The fixed sequence is: generate one candidate with the builder on a synchronized clean `master`, run the
+P1 prepublication gate, publish to `next` with Trusted Publisher/OIDC, read back the exact registry bytes
+and SHA-256, update accurate promotion evidence, then use `NPM_TOKEN` in the `release` environment for
+the guarded `npm dist-tag add planweft@0.7.0 latest`. Finally read back `latest=0.7.0`, `next=0.7.0`,
+the tag, GitHub Release, and an isolated installation. If the version is occupied or any gate fails,
+stop and preserve the evidence.
+
 ## 0.5.x static/logic release path
 
 Each 0.5.x patch uses `release/support-policy-<version>.json`, `release/evidence/<version>/`, and

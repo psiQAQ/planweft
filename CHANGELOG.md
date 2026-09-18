@@ -1,5 +1,12 @@
 # 变更记录
 
+## 0.7.0（P1 checkpoint/reducer 正式发布）
+
+- 新增显式 `planweft state upgrade`，schema 1 store 保持只读，升级保留 store identity、迁移前备份和回退证据。
+- 新增确定性 `state checkpoint --dry-run|--apply`，保留 Phase 标题、状态、未决事项、约束和 before/after 快照，支持冲突拒绝、重启恢复和幂等重放。
+- 新增有限格式 `state reduce` 与 `state quote-verify`，只输出带 SHA-256/字节范围逐字引用的源事实，不生成解释、不启用远程 reducer。
+- 新增 S14–S16、故障注入、schema 升级、数据保护、四路离线消融和 P1 发布门禁；真实 Agent/model、tokens/cost 和真实不同 Agent 接续保持 `Not Run`。
+
 ## 0.6.0（P0 状态证据正式发布）
 
 - 新增默认关闭、任务侧 `.planweft-state/` 与安装器 `.planweft/` 分离的状态证据存储。

@@ -17,7 +17,7 @@ import tarfile
 ROOT = Path(__file__).resolve().parents[1]
 VENDOR = ROOT / 'vendor/planning-with-files'
 OVERLAY = ROOT / 'overlays/planweft'
-VERSION = '0.6.0'
+VERSION = '0.7.0'
 PRODUCT = 'planweft'
 SKILL = 'project-docs'
 DOCUMENT_HANDOFF_ENTRY = '''
@@ -505,7 +505,8 @@ esac
                 result[base + '/references/plan-selection.md'] = ((OVERLAY / 'references/plan-selection.md').read_bytes(), 0o644)
                 result[base + '/references/plan-selection.zh.md'] = ((OVERLAY / 'references/plan-selection.zh.md').read_bytes(), 0o644)
                 result[base + '/references/documentation-map.md'] = ((OVERLAY / 'references/documentation-map.md').read_bytes(), 0o644)
-                for reference in ('state-evidence.md', 'state-evidence.zh.md'):
+                for reference in ('state-evidence.md', 'state-evidence.zh.md',
+                                  'state-checkpoints.md', 'state-checkpoints.zh.md'):
                     result[base + '/references/' + reference] = ((OVERLAY / 'references' / reference).read_bytes(), 0o644)
                 for state_source in sorted((OVERLAY / 'state').rglob('*')):
                     if state_source.is_file():

@@ -3,23 +3,31 @@ import {fileURLToPath} from 'node:url';
 import {
   EXIT_CODES,
   StateError,
+  checkpointState,
   doctor,
   initStore,
   recallArtifact,
   recordState,
   recoverTransaction,
+  reduceArtifact,
   verifyReceipt,
+  verifyQuoteInput,
+  upgradeStore,
 } from './core.mjs';
 
 const HELP = `PlanWeft task evidence state
 
 Usage:
   planweft state init [--plan-dir DIR] [--storage-budget-bytes N]
+  planweft state upgrade [--plan-dir DIR]
   planweft state record --input FILE [--plan-dir DIR]
   planweft state verify --receipt ID [--plan-dir DIR]
   planweft state recall --artifact SHA256 --start-byte N --length N [--plan-dir DIR] [--json]
   planweft state doctor [--plan-dir DIR]
   planweft state recover --transaction ID --dry-run [--plan-dir DIR]
+  planweft state checkpoint [--plan-dir DIR] [--dry-run|--apply] [--checkpoint ID] [--json]
+  planweft state reduce --artifact SHA256 [--plan-dir DIR] [--json]
+  planweft state quote-verify --input FILE [--plan-dir DIR] [--json]
 
 The selected plan defaults to .planning/$PLAN_ID when PLAN_ID is set. State
 records are disabled when PLANNING_DISABLED=1. record accepts data only and
@@ -126,6 +134,9 @@ export async function main(argv = process.argv.slice(2), {
       value = env.PLANNING_DISABLED === '1'
         ? disabledResult(action, env)
         : initStore(planDir, {cwd, storageBudgetBytes: integerValue(args, '--storage-budget-bytes', {defaultValue: null})});
+    } else if (action === 'upgrade') {
+      rejectUnknown(args, new Set(['--plan-dir', '--json']));
+      value = env.PLANNING_DISABLED === '1' ? disabledResult(action, env) : upgradeStore(planDir, {cwd});
     } else if (action === 'record') {
       rejectUnknown(args, new Set(['--plan-dir', '--input', '--json']));
       value = env.PLANNING_DISABLED === '1'
@@ -158,10 +169,28 @@ export async function main(argv = process.argv.slice(2), {
         dryRun,
         apply: has(args, '--apply'),
       });
+    } else if (action === 'checkpoint') {
+      rejectUnknown(args, new Set(['--plan-dir', '--dry-run', '--apply', '--checkpoint', '--json']));
+      if (has(args, '--dry-run') && has(args, '--apply')) throw new StateError('--dry-run and --apply cannot be combined', EXIT_CODES.INPUT);
+      const apply = has(args, '--apply');
+      value = env.PLANNING_DISABLED === '1'
+        ? disabledResult(action, env)
+        : checkpointState(planDir, {
+          cwd,
+          dryRun: !apply,
+          apply,
+          checkpointId: valueFor(args, '--checkpoint'),
+        });
+    } else if (action === 'reduce') {
+      rejectUnknown(args, new Set(['--plan-dir', '--artifact', '--json']));
+      value = reduceArtifact(planDir, {cwd, digest: valueFor(args, '--artifact', {required: true})});
+    } else if (action === 'quote-verify') {
+      rejectUnknown(args, new Set(['--plan-dir', '--input', '--json']));
+      value = await verifyQuoteInput(planDir, {cwd, inputPath: valueFor(args, '--input', {required: true})});
     } else {
       throw new StateError(`unknown state action: ${action}`, EXIT_CODES.INPUT);
     }
-    emit(value, {json: json || action === 'verify' || action === 'doctor' || action === 'recover', stdout});
+    emit(value, {json: json || ['verify', 'doctor', 'recover', 'upgrade', 'checkpoint', 'reduce', 'quote-verify'].includes(action), stdout});
     if (value && value.valid === false) return EXIT_CODES.EVIDENCE;
     return value?.exit_code ?? EXIT_CODES.OK;
   } catch (error) {
