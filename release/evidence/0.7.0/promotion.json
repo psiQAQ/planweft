@@ -68,7 +68,7 @@
     "independent_promotion_review": {
       "status": "Passed",
       "evidence": "raw/independent-promotion-review.md",
-      "sha256": "326005179cde290436534d4c77d51c959ecc3b5ea38effafdf17f89e0813bbb5"
+      "sha256": "cb7172c676943a56d379b78efdf59c7e7f5071092bd23d7fd37f1d926df15d51"
     },
     "git_tag_and_release_readback": {
       "status": "Passed",

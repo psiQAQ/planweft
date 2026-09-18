@@ -39,9 +39,13 @@ write (normally with 2FA bypass enabled). Trusted Publisher/OIDC covers `npm pub
 `npm dist-tag add`; if npm returns `EOTP`, the workflow preserves the failed attempt and leaves `latest`
 unchanged.
 
-Current status: the candidate, registry readback, `v0.7.0`, and GitHub Release passed; stable-promotion
-workflow `35295422731` stopped at `npm dist-tag add` with `EOTP`, so `latest` remains `0.6.0`. The
-preserved failed evidence is [`stable-promotion-attempt.md`](../release/evidence/0.7.0/raw/stable-promotion-attempt.md).
+Current status: the candidate, registry readback, stable promotion, `v0.7.0`, and GitHub Release all
+passed. Promotion workflow [35307560099](https://github.com/psiQAQ/planweft/actions/runs/35307560099)
+read back `latest=0.7.0` and `next=0.7.0`; the successful evidence is in
+[`stable-promotion-readback.md`](../release/evidence/0.7.0/raw/stable-promotion-readback.md) and
+[`REV-0022`](reviews/0022-sol-pi-state-management-promotion-completion.md). The earlier `EOTP` failures
+remain preserved in [`stable-promotion-attempt.md`](../release/evidence/0.7.0/raw/stable-promotion-attempt.md)
+and its retry attachment as historical evidence.
 
 ## 0.5.x static/logic release path
 

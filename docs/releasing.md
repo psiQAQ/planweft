@@ -42,9 +42,12 @@ gate，使用 Trusted Publisher/OIDC 发布到 `next`；从官方 registry 重�
 `npm dist-tag add planweft@0.7.0 latest`，最后核对 `latest=0.7.0`、`next=0.7.0`、tag、
 GitHub Release 和隔离安装。若版本已占用或任一 gate 失败，停止发布并保留证据。
 
-当前状态：candidate、registry readback、`v0.7.0` 和 GitHub Release 已通过；stable promotion workflow
-`35295422731` 在 `npm dist-tag add` 处因 `EOTP` 停止，`latest` 仍为 `0.6.0`。失败证据保存在
-[`stable-promotion-attempt.md`](../release/evidence/0.7.0/raw/stable-promotion-attempt.md)。
+当前状态：candidate、registry readback、stable promotion、`v0.7.0` 和 GitHub Release 均已通过。
+promotion workflow [35307560099](https://github.com/psiQAQ/planweft/actions/runs/35307560099) 已读回
+`latest=0.7.0`、`next=0.7.0`；成功证据保存在
+[`stable-promotion-readback.md`](../release/evidence/0.7.0/raw/stable-promotion-readback.md) 和
+[`REV-0022`](reviews/0022-sol-pi-state-management-promotion-completion.md)。此前的 `EOTP` 失败仍保存在
+[`stable-promotion-attempt.md`](../release/evidence/0.7.0/raw/stable-promotion-attempt.md) 及重试附件中，作为历史证据。
 
 ## 0.5.x 静态/逻辑发布路径
 
