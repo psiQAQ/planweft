@@ -2,13 +2,13 @@
   "schema_version": 1,
   "version": "0.7.0",
   "policy_sha256": "43ba6080759109a91d24ac149ed6df21d2c6842ec9d03088c7fb36efbc83af6f",
-  "package_sha256": "a0461b75bc3e263fae444711ae68044361b5493fd00b52e58649d71cb83b7a73",
+  "package_sha256": "ddbdc57572341aa912885102b36f8c0e13ea4e07312930380e74fbe790445745",
   "release_blocking": false,
   "checks": {
     "rebuildable_package": {
       "status": "Passed",
       "evidence": "raw/rebuildable-package.md",
-      "sha256": "33588bbd07dec9a8de5f4ae434c4bb1f12cc69893219767e079662628cedaed3"
+      "sha256": "2a28e9d3756de63d4eac798f169a7243ae7f239fdebfeb978ebfeafbcf584cd5"
     },
     "offline_test_suite": {
       "status": "Passed",
